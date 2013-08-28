@@ -1,7 +1,7 @@
 <?php
 echo'
-hiversion2
-version3
+Seite:<br/>
+'.$page.'
 ';
-
+print_r($_GET);
 ?>
