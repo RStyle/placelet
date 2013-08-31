@@ -19,6 +19,7 @@ echo'<!DOCTYPE HTML>
 </head>
 <body>
 ';
+echo $page; //zu Testzwecken
 include_once('./pages/'.$page.'.php');
 
 echo'</body>
