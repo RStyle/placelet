@@ -15,7 +15,7 @@ header {
 	background-color: #09F;
 	margin: 1em 0 0 0;
 	padding-left: 2em;
-	diplay: inline;
+	/*diplay: inline;*/
 }
 
 header img {
@@ -52,9 +52,9 @@ section nav {
 	background-color: #390;
 }
 
-section p {
+/*section p {
 	flot: left;
-}
+}*/
 
 footer {
 	background-color: #FCF;
