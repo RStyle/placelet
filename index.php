@@ -3,7 +3,7 @@ include_once('./other/functions.php'); //Einbinden einer Datei, welche verschied
 //Hier werden Cookies überprüft gesetzt usw.
 
 //--//
-$title = 'Pracelet';  // Kann von anderen Dateien geändert werden, z.B. in "Pracelet Shop"
+$title = 'Placelet';  // Kann von anderen Dateien geändert werden, z.B. in "Placelet Shop"
 
 
 
@@ -15,6 +15,7 @@ echo'<!DOCTYPE HTML>
 <meta name="description" content="Placelet shop and image service">
 <meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
 <meta name="author" content="Roman S., Danial S., Julian Z.">
+<link href="other/style.css" rel="stylesheet" type="text/css">
 <title>'.$title.'</title>
 </head>
 <body>
