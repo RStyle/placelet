@@ -3,7 +3,7 @@ include_once('./other/functions.php'); //Einbinden einer Datei, welche verschied
 //Hier werden Cookies überprüft gesetzt usw.
 
 //--//
-$title = 'Placelet';  // Kann von anderen Dateien geändert werden, z.B. in "Placelet Shop"
+//$title = 'Placelet';  // Kann von anderen Dateien geändert werden, z.B. in "Placelet Shop"
 
 
 
