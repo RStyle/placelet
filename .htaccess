@@ -13,4 +13,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-DirectoryIndex home.php
+DirectoryIndex home.php index.php index.htm index.html
