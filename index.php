@@ -24,5 +24,5 @@ echo $page; //zu Testzwecken
 include_once('./pages/'.$page.'.php');
 
 echo'</body>
-</html>';
+</html>';//KOMMENTARE MICH 2.9-18:22
 ?>
