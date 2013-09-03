@@ -3,7 +3,9 @@ include_once('./other/functions.php'); //Einbinden einer Datei, welche verschied
 //Hier werden Cookies überprüft gesetzt usw.
 
 //--//
-//$title = 'Placelet';  // Kann von anderen Dateien geändert werden, z.B. in "Placelet Shop"
+if (empty($title)) {
+    $title = 'Placelet - '.$page;
+}  // Wenn $title nicht gesetzt ist, wird sie zu 'Placelet - $title' geändert
 
 
 
@@ -24,5 +26,5 @@ echo $page; //zu Testzwecken
 include_once('./pages/'.$page.'.php');
 
 echo'</body>
-</html>';//KOMMENTARE MICH 2.9-18:22
+</html>';
 ?>
