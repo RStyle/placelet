@@ -14,3 +14,5 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
 DirectoryIndex home.php index.php index.htm index.html
+
+AddType 'text/html; charset=UTF-8' html

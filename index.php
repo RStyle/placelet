@@ -13,7 +13,7 @@ if (empty($title)) {
 echo'<!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Placelet shop and image service">
 <meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
 <meta name="author" content="Roman S., Danial S., Julian Z.">
@@ -25,6 +25,15 @@ echo'<!DOCTYPE HTML>
 echo $page; //zu Testzwecken
 include_once('./pages/'.$page.'.php');
 
-echo'</body>
+echo'
+<ul>
+<li><a href="/shop">Shop</a></li>
+<li><a href="/profil">Profil</a></li>
+<li><a href="/impressum">Impressum</a></li>
+<li><a href="/home">Startseite</a></li>
+<li><a href="/connect">Connect</a></li>
+<li><a href="/agb">AGB</a></li>
+<li><a href="/about-us">Über Uns</a></li></ul>
+</body>
 </html>';
 ?>
