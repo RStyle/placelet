@@ -21,7 +21,7 @@ if (empty($title)) {
 echo'<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html" charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 <meta name="description" content="Placelet shop and image service">
 <meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
 <meta name="author" content="Roman S., Danial S., Julian Z.">
@@ -30,7 +30,7 @@ echo'<!DOCTYPE HTML>
 </head>
 <body>
 ';
-echo $page; //zu Testzwecken
+echo $pagename[$page].'löl'; //zu Testzwecken
 include_once('./pages/'.$page.'.php');
 
 echo'
