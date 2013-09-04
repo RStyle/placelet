@@ -1,4 +1,4 @@
-Placelet wird von dem Institut der deuschen Wirtschaft überwacht.
+Placelet wird von dem Institut der deuschen Wirtschaft Ã¼berwacht.
 Roman Savrasov,<br>
-Daniel Schäfer<br>
+Daniel SchÃ¤fer<br>
 Julian Zimerlin
