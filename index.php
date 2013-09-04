@@ -35,13 +35,13 @@ include_once('./pages/'.$page.'.php');
 
 echo'
 <ul>
-<li><a href="/shop">Shop</a></li>
-<li><a href="/profil">Profil</a></li>
-<li><a href="/impressum">Impressum</a></li>
-<li><a href="/home">Startseite</a></li>
-<li><a href="/connect">Connect</a></li>
-<li><a href="/agb">AGB</a></li>
-<li><a href="/about-us">Über Uns</a></li></ul>
+<li><a href="shop">Shop</a></li>
+<li><a href="profil">Profil</a></li>
+<li><a href="impressum">Impressum</a></li>
+<li><a href="home">Startseite</a></li>
+<li><a href="connect">Connect</a></li>
+<li><a href="agb">AGB</a></li>
+<li><a href="about-us">Über Uns</a></li></ul>
 </body>
 </html>';
 ?>
