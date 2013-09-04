@@ -1,10 +1,18 @@
 <?php
 include_once('./other/functions.php'); //Einbinden einer Datei, welche verschiedene PHP-Funktionen bereitstellt, wie z.B. eine Überprüfung, ob die hochgeladene Datei wirklich ein Bild ist
 //Hier werden Cookies überprüft gesetzt usw.
-
+$pagename = array(//Dateinamen werden Titel zugeordnet
+	"shop" => "Shop",
+	"profil" => "Profil",
+	"impressum" => "Impressum",
+	"home" => "Startseite",
+	"connect" => "Connect",
+	"agb" => "AGB",
+	"about-us" => "&Uuml;ber Uns"
+	);
 //--//
 if (empty($title)) {
-    $title = 'Placelet - '.$page;
+    $title = 'Placelet - '.$pagename[$page];
 }  // Wenn $title nicht gesetzt ist, wird sie zu 'Placelet - $title' geändert
 
 
@@ -13,7 +21,7 @@ if (empty($title)) {
 echo'<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html" charset=utf-8">
 <meta name="description" content="Placelet shop and image service">
 <meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
 <meta name="author" content="Roman S., Danial S., Julian Z.">
