@@ -1,5 +1,5 @@
 #### Rule for Error Page - 404 ####
-ErrorDocument 404 http://rstyle.mania-server.net/jp/404.php
+#ErrorDocument 404 http://rstyle.mania-server.net/jp/404.php
 
 
 # Enable Rewrite Engine
