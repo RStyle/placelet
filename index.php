@@ -1,6 +1,43 @@
 <?php
 include_once('./other/functions.php'); //Einbinden einer Datei, welche verschiedene PHP-Funktionen bereitstellt, wie z.B. eine Überprüfung, ob die hochgeladene Datei wirklich ein Bild ist
+include_once('./start.php');
+
+
 //Hier werden Cookies überprüft gesetzt usw.
+// Erzwingen das Session-Cookies benutzt werden und die SID nicht per URL transportiert wird
+ini_set( 'session.use_only_cookies', '1' );
+ini_set( 'session.use_trans_sid', '0' );
+session_start(); //Session starten
+if (!isset( $_SESSION['server_SID'] ))
+{
+    // Möglichen Session Inhalt löschen
+    session_unset();
+    // Ganz sicher gehen das alle Inhalte der Session gelöscht sind
+    $_SESSION = array();
+    // Session zerstören
+    session_destroy();
+    // Session neu starten
+    session_start();
+    // Neue Server-generierte Session ID vergeben
+    session_regenerate_id();
+    // Status festhalten
+    $_SESSION['server_SID'] = true;
+}
+$_SESSION['login'] = false; //bereits eingeloggt wird vorgegeben und später bei bereits eingeloggt geändert
+
+if(isset($_POST['login']) && isset($_POST['password'])){
+	
+}
+if(tisset($_POST['reg_name']) && tisset($_POST['reg_first_name']) && tisset($_POST['reg_login']) && tisset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
+if(!empty($_POST['reg_password'])  && !empty($_POST['reg_password2'])){
+	
+}
+}
+
+
+
+//--//
+
 $pagename = array(//Dateinamen werden Titel zugeordnet
 	"shop" => "Shop",
 	"profil" => "Profil",
@@ -10,14 +47,13 @@ $pagename = array(//Dateinamen werden Titel zugeordnet
 	"agb" => "AGB",
 	"about-us" => "&Uuml;ber Uns"
 	);
-//--//
 if (empty($title)) {
     $title = 'Placelet - '.$pagename[$page];
 }  // Wenn $title nicht gesetzt ist, wird sie zu 'Placelet - $title' geändert
 
 
 
-//Ich denke, dass der Head immer gleich sein wird, auf Wunsch kann das aber geändert werden
+//Ich denke, dass der Head immer gleich sein wird, auf Wunsch kann das aber geändert werden//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 echo'
 <!DOCTYPE HTML>
 <html>
@@ -32,6 +68,26 @@ echo'
   </head>
   <body>
 ';
+
+//Wenn nicht eingeloggt
+if($_SESSION['login']==false){
+echo'
+<form name="login" id="form_login" action="'.$_SERVER['PHP_SELF'].'" method="post">
+	<label for="login">Username</label><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Username" required ><br>
+	<label for="password">Password</label><input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>
+	<input type="submit" value="Connect/Login">
+</form>
+<form name="reg" id="form_reg" action="'.$_SERVER['PHP_SELF'].'" method="post">
+	<label for="reg_name">Name</label><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Name" required ><br>
+	<label for="reg_first_name">First name</label><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="First name" required ><br>
+	<label for="reg_login">Username</label><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Username" required ><br>
+	<label for="reg_email">Email</label><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email" required ><br>
+	<label for="reg_password">Password</label><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>
+	<label for="reg_password2">Repeat password</label><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>
+	<input type="submit" value="Registrate">
+</form>
+';}
+
 echo $pagename[$page].' löl'; //zu Testzwecken
 include_once('./pages/'.$page.'.php');
 
@@ -44,6 +100,9 @@ echo'
     <li><a href="connect">Connect</a></li>
     <li><a href="agb">AGB</a></li>
     <li><a href="about-us">Über Uns</a></li></ul>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="./other/script.js?asda"></script>
   </body>
 </html>';
 ?>

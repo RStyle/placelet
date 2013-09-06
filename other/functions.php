@@ -6,6 +6,17 @@ function check_image(){
 
 }
 
+//Überprüft, ob der Wert leer, bzw. auch getrimmt leer ist
+function tisset($a){
+if(isset($a)){
+	$t = trim($a);
+	if(!empty($t)){
+		return true;
+	}
+}
+return false;
+}
+
 
 //Start - Hash Klasse um Passwörter zu verschlüsseln und zu überprüfen
 //Zum verschlüsseln eines Passworts "$pass_hash = PassHash::hash($_POST['password']);" verwenden
