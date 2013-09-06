@@ -18,30 +18,32 @@ if (empty($title)) {
 
 
 //Ich denke, dass der Head immer gleich sein wird, auf Wunsch kann das aber geändert werden
-echo'<!DOCTYPE HTML>
+echo'
+<!DOCTYPE HTML>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-<meta name="description" content="Placelet shop and image service">
-<meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
-<meta name="author" content="Roman S., Danial S., Julian Z.">
-<link href="other/style.css" rel="stylesheet" type="text/css">
-<title>'.$title.'</title>
-</head>
-<body>
+  <head>
+    <!--<meta http-equiv="Content-Type" content="text/html" charset="utf-8">-->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Placelet shop and image service">
+    <meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
+    <meta name="author" content="Roman S., Danial S., Julian Z.">
+    <link href="other/style_design3.css" rel="stylesheet" type="text/css">
+    <title>'.$title.'</title>
+  </head>
+  <body>
 ';
-echo $pagename[$page].'löl'; //zu Testzwecken
+echo $pagename[$page].' löl'; //zu Testzwecken
 include_once('./pages/'.$page.'.php');
 
 echo'
-<ul>
-<li><a href="shop">Shop</a></li>
-<li><a href="profil">Profil</a></li>
-<li><a href="impressum">Impressum</a></li>
-<li><a href="home">Startseite</a></li>
-<li><a href="connect">Connect</a></li>
-<li><a href="agb">AGB</a></li>
-<li><a href="about-us">Über Uns</a></li></ul>
-</body>
+    <ul>
+    <li><a href="shop">Shop</a></li>
+    <li><a href="profil">Profil</a></li>
+    <li><a href="impressum">Impressum</a></li>
+    <li><a href="home">Startseite</a></li>
+    <li><a href="connect">Connect</a></li>
+    <li><a href="agb">AGB</a></li>
+    <li><a href="about-us">Über Uns</a></li></ul>
+  </body>
 </html>';
 ?>

@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS Document */
+/* HTML5 tags für ältere Browser*/
+header, section, footer,
+aside, nav, article, figure {
+	display: block;
+}
+
+.floatleft {
+	float: left;
+}
+
+body {
+	border-top-color: #444;
+	border-top-style: solid;
+	border-top-width: 10px; 
+	margin: 0;
+}
+
+.header {
+	float: right;
+}
+
+#headnav {
+}
+
+.horizontallist {
+	list-style-type: none;
+}
+
+.horizontallist li{
+	float: left;	
+}
+
+#mainnav {	
+}
