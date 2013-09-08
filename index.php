@@ -1,6 +1,11 @@
 <?php
+error_reporting(E_ALL|E_STRICT); // php5 
+ini_set('display_errors', true);
+
 include_once('./other/functions.php'); //Einbinden einer Datei, welche verschiedene PHP-Funktionen bereitstellt, wie z.B. eine Überprüfung, ob die hochgeladene Datei wirklich ein Bild ist
 include_once('./start.php');
+include_once('./other/user.php');
+$test = new User('blabla');
 
 
 //Hier werden Cookies überprüft gesetzt usw.
@@ -28,10 +33,8 @@ $_SESSION['login'] = false; //bereits eingeloggt wird vorgegeben und später bei
 if(isset($_POST['login']) && isset($_POST['password'])){
 	
 }
-if(tisset($_POST['reg_name']) && tisset($_POST['reg_first_name']) && tisset($_POST['reg_login']) && tisset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
-if(!empty($_POST['reg_password'])  && !empty($_POST['reg_password2'])){
-	
-}
+if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
+
 }
 
 
@@ -68,7 +71,6 @@ echo'
   </head>
   <body>
 ';
-
 //Wenn nicht eingeloggt
 if($_SESSION['login']==false){
 echo'
