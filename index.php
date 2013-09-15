@@ -31,10 +31,11 @@ if (!isset( $_SESSION['server_SID'] ))
 $_SESSION['login'] = false; //bereits eingeloggt wird vorgegeben und später bei bereits eingeloggt geändert
 
 if(isset($_POST['login']) && isset($_POST['password'])){
-	
+$user = new User($_POST['login']);	
+$checklogin=$user->login($_POST['password']);
 }
 if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
-
+User::register($_POST, $db);
 }
 
 
@@ -71,6 +72,7 @@ echo'
   </head>
   <body>
 ';
+if($checklogin == true)echo "EINGELOGGT";
 //Wenn nicht eingeloggt
 if($_SESSION['login']==false){
 echo'
@@ -80,9 +82,9 @@ echo'
 	<input type="submit" value="Connect/Login">
 </form>
 <form name="reg" id="form_reg" action="'.$_SERVER['PHP_SELF'].'" method="post">
+	<label for="reg_login">Username</label><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Username" required ><br><br>
 	<label for="reg_name">Name</label><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Name" required ><br>
-	<label for="reg_first_name">First name</label><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="First name" required ><br>
-	<label for="reg_login">Username</label><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Username" required ><br>
+	<label for="reg_first_name">First name</label><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="First name" required ><br><br>
 	<label for="reg_email">Email</label><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email" required ><br>
 	<label for="reg_password">Password</label><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>
 	<label for="reg_password2">Repeat password</label><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>

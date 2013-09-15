@@ -29,7 +29,14 @@ class User
 		}
 	}
 	
-	public function register($reg){ //$reg ist ein array
+	public function login ($pw){
+		$stmt = $db->prepare('SELECT * FROM users WHERE user = :user');
+		$stmt->execute(array('user' =>$this->login));
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		if (PassHash::check_password($row['password'], $pw)) { return true; } else { return false; }
+	}
+	
+	public static function register($reg, $db){ //$reg ist ein array
 		//ist ein (getrimter) Wert leer?
 		if(tisset($reg['reg_name']) && tisset($reg['reg_first_name']) && tisset($reg['reg_login']) && tisset($reg['reg_email']) && !empty($reg['reg_password'])  && !empty($reg['reg_password2'])){
 			if($reg['reg_password'] != $reg['reg_password2']){
@@ -40,6 +47,14 @@ class User
 			if(check_email_address($reg['reg_email']) === false) return 'Your email address is not valid. Please check that.';
 			//$stmt = $db->prepare('... FROM dynamic_password WHERE user = :user');
 			//$stmt->execute(array('user' =>'blabla'));
+			$sql = "INSERT INTO users (user,email,password,status) VALUES (:user,:email,:password,:status)";
+			$q = $db->prepare($sql);
+			$q->execute(array(
+				':user'=>$reg['reg_login'],
+                ':email'=>$reg['reg_email'],
+				':password'=>PassHash::hash($reg['reg_password']),
+				':status'=>0)
+			);
 		
 			return true;
 			}
