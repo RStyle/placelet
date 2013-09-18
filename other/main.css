@@ -4,47 +4,79 @@ header, section, footer,
 aside, nav, article, figure {
 	display: block;
 }
+
 body {
 	border-top-color: #414141;
 	border-top-style: solid;
 	border-top-width: 11px;
 	margin: 0;
-	padding: 0;
+	padding: 0 15% 0 15%;
 }
+/*---HEADER---*/
 #header {
 	margin: 0;
-	padding: 0;
-	background-color: #0F3;
+	margin-left: auto;
+	height: 5em;
+	font-family: Tahoma, Geneva, sans-serif;
 }
 #headerlist {
 	list-style: none;
-	background-color: red;
 	margin: 0;
+	padding: 0;
+	float: right;
+	color: #9B9B9B;
+	margin-top: 1em;
 }
 #headerlist li {
 	float: left;
-	background-color: red;
+	margin-right: 0.5em;
 }
-#headerlist a:link {
+#headerlist a {
 	color: #9B9B9B;
 	text-decoration: none;
 }
-#headerlist a:visited {
+/*#headerlist a:visited {
 }
 #headerlist a:active {
-}
+}*/
 #headerlogin {
-	float: left;
+	float: right;
 	margin: 1px;
-	padding: 0.5em 1em 0.5em 1em;
+	padding: 1em 1em 0.75em 1em;
 	color: #FFF;
 	background-color: #9B9B9B;
 }
 #headerregisterbr{
-	float: left;
+	float: right;
 	background-color: #414141;
 	color: #FFF;
-	padding: 0.5em;
+	padding: 1em 1em 0.5em 1em;
 }
-#headerregisterbr form {
+/*#headerregisterbr form {
+}*/
+/*---NAV---*/
+#mainnav ul {
+}
+#mainnavlist {
+	list-style: none;
+	padding: 0;
+	margin-top: 2em;
+}
+#mainnavlist li {
+	float: left;
+	margin-right: 2em;
+	font-size: 1.75em;
+}
+.mainnavlinks:link {
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
+}
+.mainnavlinks:visited {
+	text-decoration: none;
+	color: #000;
+	font-weight: bold;
+}
+.mainnavlinks:hover {
+	border-bottom: 5px solid grey;/*#909090;*/
 }

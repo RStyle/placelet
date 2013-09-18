@@ -101,7 +101,8 @@ echo'
     <li><a href="home">Startseite</a></li>
     <li><a href="connect">Connect</a></li>
     <li><a href="agb">AGB</a></li>
-    <li><a href="about-us">Über Uns</a></li></ul>
+    <li><a href="about-us">Über Uns</a></li>
+	<li><a href="design.htm">Design</a></li></ul>
 	
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="./other/script.js?asda"></script>
