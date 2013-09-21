@@ -43,8 +43,13 @@ body {
 	float: right;
 	margin: 1px;
 	padding: 1em 1em 0.75em 1em;
-	color: #FFF;
 	background-color: #9B9B9B;
+	text-decoration: none;
+	color: #FFF;
+}
+#headerlogin:hover {
+	background-color: #FFF;
+	color: #9B9B9B;
 }
 #headerregisterbr{
 	float: right;
