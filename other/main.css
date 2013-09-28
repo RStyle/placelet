@@ -36,6 +36,12 @@ body {
 	float: left;
 	margin-left: 0.5em;
 }
+.headerlist_main_divider {
+	color: #000;
+}
+.headerlist_sub_divider {
+	font-size: small;
+}
 #headerlist a {
 	color: #9B9B9B;
 }
