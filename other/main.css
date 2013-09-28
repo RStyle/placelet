@@ -10,28 +10,31 @@ img {
 }
 /*---BODY---*/
 body {
+	color: #234754;
 	border-top-color: /*#414141*/#234754;
 	border-top-style: solid;
 	border-top-width: 11px;
 	margin: 0;
 	padding: 0 13% 0 13%;
-	color: #234754;
 }
 /*---HEADER---*/
 #header {
 	font-family: Tahoma, Geneva, sans-serif;
+	width: 100%;
 }
 #headerlist {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	float: right;
 	color: #9B9B9B;
-	margin-top: 1em;
+	background-color: #FFF;
+	float: right;
+	height: 2.9em;
+	margin: 1px 1px 0 0;
+	line-height: 2.9em;
+	list-style: none;
+	padding: 0 1em 0 0;
 }
 #headerlist li {
 	float: left;
-	margin-right: 0.5em;
+	margin-left: 0.5em;
 }
 #headerlist a {
 	color: #9B9B9B;
@@ -44,28 +47,28 @@ body {
 /*#headerlist a:active {
 }*/
 #headerlogin {
+	color: #FFF;
+	background-color: /*#9B9B9B*/ #56747C;
 	float: right;
-	margin: 1px 1px 0 1em;
+	height: 2.9em;
+	line-height: 2.9em;
+	margin: 1px 1px 0 0;
 	padding-right: 1em;
 	padding-left: 1em;
-	line-height: 2.9em;
-	vertical-align: middle;
-	background-color: /*#9B9B9B*/ #56747C;
 	text-decoration: none;
-	color: #FFF;
-	height: 2.9em;
+	vertical-align: middle;
 }
 #headerlogin:hover {
 	background-color: #BBB;
 }
 #headerregisterbr{
-	float: right;
-	background-color: /*#414141*/#234754;
 	color: #FFF;
-	padding-right: 1em;
-	padding-left: 1em;
+	background-color: /*#414141*/#234754;
+	float: right;
 	height: 3em;
 	line-height: 3em;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 /*---logo---*/
 #logo {
@@ -79,19 +82,19 @@ body {
 }
 #mainnavlist {
 	list-style: none;
-	padding: 0;
 	margin-top: 2em;
+	padding: 0;
 }
 #mainnavlist li {
 	float: left;
-	margin-right: 2em;
 	font-size: 1.75em;
+	margin-right: 2em;
 }
 .mainnavlinks:link, .mainnavlinks:visited {
-	text-decoration: none;
 	color: #000;
-	font-weight: bold;
 	border-bottom: 1px dashed grey;
+	font-weight: bold;
+	text-decoration: none;
 }
 .mainnavlinks:hover {
 	border-bottom: 5px solid grey;
@@ -100,76 +103,70 @@ body {
 section {
 }
 .mainarticles {
-	/*padding: 1%;*/
 	font-size: large;
+	/*padding: 1%;*/
 }
 .mainarticleheaders {
-	background-repeat: repeat-x;
 	background-position: center;
+	background-repeat: repeat-x;
 	display: block;
 	text-align: center;
 }
 .mainarticleheaders h1{
-	margin-top: 0;
 	background-color: #FFF;
 	display: inline;
+	margin-top: 0;
 	padding: 0 1em;
 }
 #reisearmband {
-	width: 35%;
 	float: left;
+	width: 35%;
 }
 #reisearmband_header {
 	background-image: url('../pictures/header_bg-blue.png');
 }
 #reisearmband_img {
-	width: 100%;
 	height: 300px;
+	width: 100%;
 }
 #kollektion {
-	width: 35%;
 	float: left;
 	margin-left: 3%;
-	margin-right: ;
+	width: 35%;
 }
 #kollektion_header {
 	background-image: url('../pictures/header_bg-green.png');
 }
-
 #kollektion_img {
-	width: 100%;
 	height: 300px;
+	width: 100%;
 }
 /*---JUNIOR---*/
-
 #junior {
-    float: right;
-	border-left: black solid 1px;
     /*background-color: #414141;*/
-    width: 20%;
+	border-left: black solid 1px;
+    float: right;
     padding: 1.25em;
 	margin-top: 1em;
+    width: 20%;
     
 }
-
 #junior h1{
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 1.5em;
-    font-family: Verdana;
-
     margin-top: 0px;
 
 }
-
 #junior p {
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 1em;
-    font-family: Verdana;
     padding: 0;
     margin: 0;
 }
 /*---FOOTER---*/
 #footer {
-	position: fixed;
-	bottom: 0;
 	background-color: #FFF;
+	bottom: 0;
+	position: fixed;
 	width: 100%
 }
