@@ -25,15 +25,15 @@
       </div>
       <a href="connect" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19">&nbsp;&nbsp;Login</a>
       <ul id="headerlist">
-        <li><a href="ger"><img src="pictures/de_flag.png" alt="Deutsche Flagge" width="15" height="9"></a></li>
+        <li><a href="ger"><img src="pictures/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 		<li class="headerlist_sub_divider">|</li>
-        <li><a href="eng"><img src="pictures/gb_flag.png" alt="British Flag" width="18" height="9"></a></li>
+        <li><a href="eng"><img src="pictures/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 		<li class="headerlist_main_divider">|</li>
         <li><a href="impressum">Impressum</a></li>
 		<li class="headerlist_sub_divider">|</li>
         <li><a href="kontakt">Kontakt</a></li>
 		<li class="headerlist_sub_divider">|</li>
-        <li><a href="junior">JUNIOR</a></li>
+        <li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
       </ul>
     </header>
     
@@ -41,19 +41,48 @@
     
     <nav id="mainnav">
       <ul id="mainnavlist">
-        <li><a href="connect" id="connect" class="mainnavlinks">Placelet</a></li>
-        <li><a href="about-us" id="about-us" class="mainnavlinks">Über uns</a></li>
-        <li><a href="shop" id="shop" class="mainnavlinks">Shop</a></li>
+        <li><a href="index.htm" class="mainnavlinks">Home</a></li>
+        <li><a href="about.htm"class="mainnavlinks">Über uns</a></li>
+        <li><a href="shop" class="mainnavlinks">Shop</a></li>
       </ul>
     </nav>
     
-    <section>
-      <!--<hgroup>
-        <img src="pictures/armband.png" alt="Armband" height="300" width="900">
-      </hgroup><br>-->
+    <section id="statistics">
+      <span class="statistic_elements green_border" style="font-size:large;">&nbsp;connect</span>
+      <div class="statistic_elements">
+        <img src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg" id="latest_pic" alt="Latest Pic">
+        <span style="float: left;">
+          <span id="latest_user">Anthony K.<br>//2 Placelets //13 Uploads</span>
+          -> 7. Station: <span class="greencolor">Thensan, China</span>
+          <br><img src="#" class="thumbnails" alt="Thumbnail1">&nbsp;
+          <img src="#" class="thumbnails" alt="Thumbnail2">&nbsp;
+          <img src="#" class="thumbnails" alt="Thumbnail3">
+        </span>
+      </div>   
+      <div class="statistic_elements">
+        <div id="most_active">
+          <span class="green_border">&nbspDie aktivsten User</span>
+          <ul id="most_active_users">
+            <li><img src="#" class="thumbnails" alt="Thumbnail1">&nbsp;<span class="greencolor">herp</span>&nbsp;//42 //32</li>
+            <li><img src="#" class="thumbnails" alt="Thumbnail1">&nbsp;<span class="greencolor">derp</span>&nbsp;//25 //13</li>
+            <li><img src="#" class="thumbnails" alt="Thumbnail1">&nbsp;<span class="greencolor">berp</span>&nbsp;//20 //10</li>
+          </ul>
+        </div>
+      </div>
+      <div class="statistic_elements">
+        <div class="statregister" id="stat_register_upper">
+          Werde Teil des Projekts!
+        </div>
+        <div class="statregister" id="stat_register_lower">
+          <a href="#">Jetzt Anmelden ></a>
+        </div>
+      </div>
+    </section>
+    
+    <section id="section">
       <article id="reisearmband" class="mainarticles">
-        <span id="reisearmband_header" class="mainarticleheaders"><h1>Reisearmband</h1></span>
-        <img id="reisearmband_img" alt="Reisearmband" src="#.jgp">
+        <div class="reisearmband_line mainarticleheaders"><h1>Reisearmband</h1></div>
+        <img id="reisearmband_img" alt="Reisearmband" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">
         <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
         Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
         
@@ -78,17 +107,19 @@
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
         et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
         Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <span class="reisearmband_line mainarticleheaders">&nbsp;</span><br>
       </article>
       
       <article id="kollektion" class="mainarticles">
-        <span id="kollektion_header" class="mainarticleheaders"><h1>feste Kollektion</h1></span>
-        <img id="kollektion_img" alt="feste Kollektion" src="#.jgp">
+        <div class="kollektion_line mainarticleheaders"><h1>feste Kollektion</h1></div>
+        <img id="kollektion_img" alt="feste Kollektion" src="http://img.geo.de/div/image/61566/01-armbaender.jpg">
         <p>Falls dir unser Reisearmband gefällt, du es aber nicht weitergeben möchtest,
         haben wir für dich die feste Kollektion. Ich hoffe euch gefällt mein Design.
         
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
         et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
         Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <span class="kollektion_line mainarticleheaders">&nbsp;</span>
       </article>
       <aside id="junior">
       <h1>JUNIOR</h1>
@@ -97,6 +128,14 @@ auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die
 Ex gefördert.</p>
       </aside>
     </section>
+    
+    <!--<div id="sidenav">-->
+      <ul id="sidenav">
+        <li>Erster Eintrag</li>
+        <li>Zweiter Eintrag</li>
+        <li>Dritter Eintrag</li>
+      </ul>
+    <!--</div>-->
     
     <footer id="footer">
     Placelet - by Daniel, Julian, Roman

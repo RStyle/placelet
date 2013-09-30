@@ -1,5 +1,5 @@
 #### Rule for Error Page - 404 ####
-#ErrorDocument 404 http://rstyle.mania-server.net/jp/404.php
+####ErrorDocument 404 http://rstyle.mania-server.net/jp/404.php
 
 
 # Enable Rewrite Engine
@@ -13,6 +13,15 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-DirectoryIndex home.php index.php index.htm index.html
+DirectoryIndex design.htm home.php index.php index.htm index.html
 
 AddType 'text/html; charset=UTF-8' html
+
+#Umleitung der www subdomain auf Hauptseite
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.placelet\.de$ [NC]
+RewriteRule ^(.*)$ http://placelet.de/$1 [L,R=301]
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.placelet\.net$ [NC]
+RewriteRule ^(.*)$ http://placelet.net/$1 [L,R=301]
