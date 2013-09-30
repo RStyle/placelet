@@ -5,7 +5,6 @@ ini_set('display_errors', true);
 include_once('./other/functions.php'); //Einbinden einer Datei, welche verschiedene PHP-Funktionen bereitstellt, wie z.B. eine Überprüfung, ob die hochgeladene Datei wirklich ein Bild ist
 include_once('./start.php');
 include_once('./other/user.php');
-//$test = new User('blabla', $db);
 
 
 //Hier werden Cookies überprüft gesetzt usw.
@@ -31,12 +30,20 @@ if (!isset( $_SESSION['server_SID'] ))
 $_SESSION['login'] = false; //bereits eingeloggt wird vorgegeben und später bei bereits eingeloggt geändert
 
 $checklogin = false;
+
+if(isset($_GET['logout']))
+	User::logout();
+
 if(isset($_POST['login']) && isset($_POST['password'])){
-$user = new User($_POST['login'], $db);	
-$checklogin=$user->login($_POST['password']);
+	$user = new User($_POST['login'], $db);	
+	$checklogin=$user->login($_POST['password']);
+}elseif(isset($_SESSION['user'])){
+	$user = new User('RSty', $db);
+	$checklogin = $user->logged;
+	echo $_SESSION['user'].'-'.$_SESSION['dynamic_password'];//Randnotiz
 }
 if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
-User::register($_POST, $db);
+	User::register($_POST, $db);
 }
 
 
@@ -76,6 +83,8 @@ echo'
 ';
 if($checklogin == true)echo "EINGELOGGT"; else echo "PECH";
 //Wenn nicht eingeloggt
+if(isset($user)){if($user->logged == true)echo "2EINGELOGGT2"; else echo "2PECH2";}
+if(isset($_SESSION['user']))echo'- USERISTDA';
 if($_SESSION['login']==false){
 echo'
 <form name="login" id="form_login" action="'.$_SERVER['PHP_SELF'].'" method="post">
