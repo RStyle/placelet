@@ -6,6 +6,13 @@ include_once('./other/functions.php'); //Einbinden einer Datei, welche verschied
 include_once('./start.php');
 include_once('./other/user.php');
 
+if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
+$user = new User($_GET['regstatuschange_user'], $db); //substr(md5 (uniqid (rand())), 0, 20)
+$user->regstatuschange($_GET['regstatuschange']);
+
+//header('Location: LINK');/*
+//break();
+}
 
 //Hier werden Cookies überprüft gesetzt usw.
 // Erzwingen das Session-Cookies benutzt werden und die SID nicht per URL transportiert wird
@@ -83,7 +90,7 @@ echo'
 ';
 if($checklogin == true)echo "EINGELOGGT"; else echo "PECH";
 //Wenn nicht eingeloggt
-if(isset($user)){if($user->logged == true)echo "2EINGELOGGT2"; else echo "2PECH2";}
+if(isset($user)){if($user->logged == true){echo "2EINGELOGGT2"; echo '<a href="?logout">LOGOUT</a>';} else echo "2PECH2";}
 if(isset($_SESSION['user']))echo'- USERISTDA';
 if($_SESSION['login']==false){
 echo'

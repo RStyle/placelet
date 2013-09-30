@@ -33,27 +33,30 @@ class User
 		$stmt->execute(array('user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if (PassHash::check_password($row['password'], $pw)) {
-		$dynamic_password = PassHash::hash($row['password']);
-		$_SESSION['dynamic_password'] = $dynamic_password;
-		$_SESSION['user'] = $this->login;
+			$dynamic_password = PassHash::hash($row['password']);
+			$_SESSION['dynamic_password'] = $dynamic_password;
+			$_SESSION['user'] = $this->login;
 		
-		$sql = "SELECT * FROM dynamic_password WHERE user = :user LIMIT 1"; 
+			$sql = "SELECT * FROM dynamic_password WHERE user = :user LIMIT 1"; 
             $q = $this->db->prepare($sql); 
             $q->execute(array(':user' => $this->login));
             $anz = $q->rowCount(); 
             if ($anz > 0)
-				{ $sql="UPDATE dynamic_password SET password=:password WHERE user = :user LIMIT 1"; } 
+				{ $sql= " UPDATE dynamic_password SET password=:password WHERE user = :user LIMIT 1"; } 
 			else
 				{ $sql = "INSERT INTO dynamic_password (user,password) VALUES (:user,:password)"; }
 		
-		$q = $this->db->prepare($sql);
-		$q->execute(array(
-			':user'=>$this->login,
-			':password'=>$dynamic_password)
-		);
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':user'=>$this->login,
+				':password'=>$dynamic_password)
+			);
+			$this->logged = true;
 		
-		return true; 
-		} else { return false; }
+			return true; 
+		} else { 
+			return false; 
+		}
 	}
 	
 	public static function logout (){
@@ -83,13 +86,40 @@ class User
 				':password'=>PassHash::hash($reg['reg_password']),
 				':status'=>0)
 			);
+			
+			$sql = "INSERT INTO user_status (user,code) VALUES (:user,:code)";
+			$q = $db->prepare($sql);
+			$q->execute(array(
+				':user'=>$reg['reg_login'],
+				':code'=>substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20)) // Ein 60 buchstabenlanger Zufallscode
+			);
 		
 			return true;
 			}
 		return false;
 	}
 	
-	
+	public function regstatuschange ($code){
+		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
+        $q = $this->db->prepare($sql); 
+        $q->execute(array(':user' => $this->login));
+        $anz = $q->rowCount();
+		$row = $q->fetch(PDO::FETCH_ASSOC);		
+        if ($anz > 0 && $row['status'] == 0){
+			$stmt = $this->db->prepare('SELECT * FROM user_status WHERE user = :user LIMIT 1');
+			$stmt->execute(array('user' => $this->login));
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($row['code'] == $code){
+		
+				$sql= "UPDATE users SET status = :status WHERE user = :user LIMIT 1";
+				$q = $this->db->prepare($sql); 
+				$q->execute(array(':status' => '1', ':user' => $this->login));
+		 
+			}
+		}
+		
+		
+	}
 	
 }
 
