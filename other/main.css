@@ -237,7 +237,7 @@ body {
 .line_header {
 	margin-bottom: 1em;
 }
-/*---Über uns SECTION*/
+/*---Über uns SECTION---*/
 #about-us {
 	float: left;
 	width: 73%;
@@ -245,6 +245,13 @@ body {
 #wir {
 	height: 200px;
 	width: 100%;
+}
+/*---Impressum SECTION---*/
+#impressum {
+}
+#disclaimer {
+	clear: both;
+	width: 73%;
 }
 /*---JUNIOR---*/
 #junior {
