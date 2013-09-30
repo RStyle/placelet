@@ -8,6 +8,10 @@ aside, nav, article, figure {
 img {
 	border: 0;
 }
+/*Scrollbalken für einheitliches Design erzwingen*/
+html {
+	overflow-y: scroll;
+}
 /*---BODY---*/
 body {
 	border-top-color: /*#414141*/#234754;
@@ -93,31 +97,6 @@ body {
 	position:  absolute;
 	left: 1%;
 }
-/*---NAV---*/
-#mainnav {
-	display: block;
-	margin-top: 5em;
-	margin-bottom: 10em;
-}
-#mainnavlist {
-	list-style: none;
-	margin-top: 2em;
-	padding: 0;
-}
-#mainnavlist li {
-	float: left;
-	font-size: 1.75em;
-	margin-right: 2em;
-}
-.mainnavlinks:link, .mainnavlinks:visited {
-	color: #000;
-	border-bottom: 1px dashed grey;
-	font-weight: bold;
-	text-decoration: none;
-}
-.mainnavlinks:hover {
-	border-bottom: 5px solid grey;
-}
 /*---STATISTICS---*/
 .greencolor {
 	color: #9AEA00;
@@ -187,6 +166,31 @@ body {
 #stat_register_lower a:link {
 	color: #FFF;
 }
+/*---NAV---*/
+#mainnav {
+	display: block;
+	margin-top: 5em;
+	margin-bottom: 10em;
+}
+#mainnavlist {
+	list-style: none;
+	margin-top: 2em;
+	padding: 0;
+}
+#mainnavlist li {
+	float: left;
+	font-size: 1.75em;
+	margin-right: 2em;
+}
+.mainnavlinks:link, .mainnavlinks:visited {
+	color: #000;
+	border-bottom: 1px dashed grey;
+	font-weight: bold;
+	text-decoration: none;
+}
+.mainnavlinks:hover {
+	border-bottom: 5px solid grey;
+}
 /*---SECTION---*/
 #section {
 	margin-top: 2em;
@@ -206,16 +210,16 @@ body {
 	margin-top: 0;
 	padding: 0 1em;
 }
+/*---Home SECTION---*/
 #reisearmband {
 	float: left;
 	width: 35%;
 }
-.reisearmband_line {
+.blue_line {
 	background-image: url('../pictures/header_bg-blue.png');
 }
 #reisearmband_img {
 /*	height: 300px;*/
-	margin-top: 1em;
 	width: 100%;
 }
 #kollektion {
@@ -223,12 +227,23 @@ body {
 	margin-left: 3%;
 	width: 35%;
 }
-.kollektion_line {
+.green_line {
 	background-image: url('../pictures/header_bg-green.png');
 }
 #kollektion_img {
 /*	height: 300px;*/
-	margin-top: 1em;
+	width: 100%;
+}
+.line_header {
+	margin-bottom: 1em;
+}
+/*---Über uns SECTION*/
+#about-us {
+	float: left;
+	width: 73%;
+}
+#wir {
+	height: 200px;
 	width: 100%;
 }
 /*---JUNIOR---*/
