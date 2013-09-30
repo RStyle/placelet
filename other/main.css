@@ -4,79 +4,272 @@ header, section, footer,
 aside, nav, article, figure {
 	display: block;
 }
-
+/*Internet-Explorer*/
+img {
+	border: 0;
+}
+/*---BODY---*/
 body {
-	border-top-color: #414141;
+	border-top-color: /*#414141*/#234754;
 	border-top-style: solid;
 	border-top-width: 11px;
+	color: #234754;
 	margin: 0;
-	padding: 0 15% 0 15%;
+	padding: 0 13% 0 13%;
 }
 /*---HEADER---*/
 #header {
-	margin: 0;
-	margin-left: auto;
-	height: 5em;
 	font-family: Tahoma, Geneva, sans-serif;
+	padding-right: 13%;
+	position: absolute;
+	right: 0;
+	width: 100%;
 }
 #headerlist {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	float: right;
 	color: #9B9B9B;
-	margin-top: 1em;
+	float: right;
+	height: 2.9em;
+	margin: 1px 1px 0 0;
+	line-height: 2.9em;
+	list-style: none;
+	padding: 0 1em 0 0;
 }
 #headerlist li {
 	float: left;
-	margin-right: 0.5em;
+	margin-left: 0.5em;
 }
 #headerlist a {
 	color: #9B9B9B;
+}
+#headerlist a:hover {
 	text-decoration: none;
 }
 /*#headerlist a:visited {
-}
-#headerlist a:active {
 }*/
+/*#headerlist a:active {
+}*/
+.headerlist_main_divider {
+	color: #000;
+}
+.headerlist_sub_divider {
+	font-size: small;
+}
+#de_flag {
+	width: 15px;
+	height: 9px;
+}
+#gb_flag {
+	width: 18px;
+	height: 9px;
+}
 #headerlogin {
-	float: right;
-	margin: 1px;
-	padding: 1em 1em 0.75em 1em;
 	color: #FFF;
-	background-color: #9B9B9B;
+	background-color: /*#9B9B9B*/ #56747C;
+	float: right;
+	height: 2.9em;
+	line-height: 2.9em;
+	margin: 1px 1px 0 0;
+	padding-right: 1em;
+	padding-left: 1em;
+	text-decoration: none;
+	vertical-align: middle;
+}
+#headerlogin:hover {
+	background-color: #BBB;
 }
 #headerregisterbr{
-	float: right;
-	background-color: #414141;
 	color: #FFF;
-	padding: 1em 1em 0.5em 1em;
+	background-color: /*#414141*/#234754;
+	float: right;
+	height: 3em;
+	line-height: 3em;
+	padding-left: 1em;
+	padding-right: 1em;
 }
-/*#headerregisterbr form {
-}*/
+/*---logo---*/
+#logo {
+	border: 0;
+	margin-top: 3em;
+	position:  absolute;
+	left: 1%;
+}
 /*---NAV---*/
-#mainnav ul {
+#mainnav {
+	display: block;
+	margin-top: 5em;
+	margin-bottom: 10em;
 }
 #mainnavlist {
 	list-style: none;
-	padding: 0;
 	margin-top: 2em;
+	padding: 0;
 }
 #mainnavlist li {
 	float: left;
-	margin-right: 2em;
 	font-size: 1.75em;
+	margin-right: 2em;
 }
-.mainnavlinks:link {
-	text-decoration: none;
+.mainnavlinks:link, .mainnavlinks:visited {
 	color: #000;
+	border-bottom: 1px dashed grey;
 	font-weight: bold;
-}
-.mainnavlinks:visited {
 	text-decoration: none;
-	color: #000;
-	font-weight: bold;
 }
 .mainnavlinks:hover {
-	border-bottom: 5px solid grey;/*#909090;*/
+	border-bottom: 5px solid grey;
+}
+/*---STATISTICS---*/
+.greencolor {
+	color: #9AEA00;
+}
+#statistics {
+	background-color: #577279;
+	color: #FFF;
+	display: none;
+	height: 100px;
+	padding: 1em;
+	width: 71%;
+}
+.statistic_elements {
+	float: left;
+	padding: 0 0.5em 0 0.5em;
+	height: 100%;
+	border-left: 2px solid #FFF;
+}
+.green_border {
+	border-left: 3px solid #9AEA00; 
+	height: 1em;
+	margin-right: 2em;
+}
+#latest_pic {
+	height: 100%;
+	width: 10em;
+	float: left;
+	margin-right: 0.5em;
+}
+#latest_user {
+	background-color: #404040;
+	display: block;
+	padding: 0.5em;
+}
+.thumbnails {
+	float: left;
+	height: 20px;
+	width: 20px;
+}
+#most_active {
+	background-color: #404040;
+	height: inherit;
+	padding: 0.25em;
+}
+#most_active_users {
+	color: #9B9B9B;
+	list-style: none;
+	padding-left: 0.5em;
+}
+.statregister {
+	font-size: large;
+	font-weight: bold;
+	height: 48%;
+	padding: 1%;
+	text-align: center;
+}
+#stat_register_upper {
+	background-color: #9AEA00;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+#stat_register_lower {
+	background-color: #8ED70F;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+#stat_register_lower a:link {
+	color: #FFF;
+}
+/*---SECTION---*/
+#section {
+	margin-top: 2em;
+}
+.mainarticles {
+	font-size: large;
+}
+.mainarticleheaders {
+	background-position: center;
+	background-repeat: repeat-x;
+	display: block;
+	text-align: center;
+}
+.mainarticleheaders h1{
+	background-color: #FFF;
+	display: inline;
+	margin-top: 0;
+	padding: 0 1em;
+}
+#reisearmband {
+	float: left;
+	width: 35%;
+}
+.reisearmband_line {
+	background-image: url('../pictures/header_bg-blue.png');
+}
+#reisearmband_img {
+/*	height: 300px;*/
+	margin-top: 1em;
+	width: 100%;
+}
+#kollektion {
+	float: left;
+	margin-left: 3%;
+	width: 35%;
+}
+.kollektion_line {
+	background-image: url('../pictures/header_bg-green.png');
+}
+#kollektion_img {
+/*	height: 300px;*/
+	margin-top: 1em;
+	width: 100%;
+}
+/*---JUNIOR---*/
+#junior {
+	border-left: black solid 1px;
+	background-color: lightgrey;
+    float: right;
+    padding: 1.25em;
+    width: 20%;
+    
+}
+#junior h1{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1.5em;
+    margin-top: 0px;
+
+}
+#junior p {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+}
+/*---SIDENAV---*/
+#sidenav {
+	border-right: 2px solid #817965;
+	color: #000;
+	display: none;
+	left: 1%;
+	list-style: none;
+	padding: 2em 1em 1em 2em;
+	position: fixed;
+}
+#sidenav li {
+	/*border-left: 4px double #414141;*/
+	margin-bottom: 1em;
+}
+/*---FOOTER---*/
+#footer {
+	background-color: #FFF;
+	bottom: 0;
+	position: fixed;
+	width: 100%
 }
