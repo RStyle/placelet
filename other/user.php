@@ -5,16 +5,16 @@ class User
 	protected $db;
 	public $login;
 	public $logged = false; //eingeloggt?;
-	public function __construct($login){
-		global $db;
+	public function __construct($login, $db){
 		$this->db = $db;
 		$this->login = $login;
 		if ($login !== false && isset($_SESSION['dynamic_password'])){ //prüfen ob eingeloggt
 			
 			try {
-				$stmt = $db->prepare('SELECT * FROM dynamic_password WHERE user = :user');
+				$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE user = :user');
 				$stmt->execute(array('user' =>'blabla'));
 				/*while($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+				
 					print_r($row);
 				}*/
 				
@@ -30,9 +30,11 @@ class User
 	}
 	
 	public function login ($pw){
-		$stmt = $db->prepare('SELECT * FROM users WHERE user = :user');
+		$stmt = $this->db->prepare('SELECT * FROM users WHERE user = :user');
 		$stmt->execute(array('user' =>$this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		print_r($row);
+		echo '---'.$pw;
 		if (PassHash::check_password($row['password'], $pw)) { return true; } else { return false; }
 	}
 	

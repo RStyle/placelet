@@ -5,7 +5,7 @@ ini_set('display_errors', true);
 include_once('./other/functions.php'); //Einbinden einer Datei, welche verschiedene PHP-Funktionen bereitstellt, wie z.B. eine Überprüfung, ob die hochgeladene Datei wirklich ein Bild ist
 include_once('./start.php');
 include_once('./other/user.php');
-$test = new User('blabla');
+//$test = new User('blabla', $db);
 
 
 //Hier werden Cookies überprüft gesetzt usw.
@@ -30,8 +30,9 @@ if (!isset( $_SESSION['server_SID'] ))
 }
 $_SESSION['login'] = false; //bereits eingeloggt wird vorgegeben und später bei bereits eingeloggt geändert
 
+$checklogin = false;
 if(isset($_POST['login']) && isset($_POST['password'])){
-$user = new User($_POST['login']);	
+$user = new User($_POST['login'], $db);	
 $checklogin=$user->login($_POST['password']);
 }
 if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
@@ -42,6 +43,7 @@ User::register($_POST, $db);
 
 //--//
 
+$page='home';
 $pagename = array(//Dateinamen werden Titel zugeordnet
 	"shop" => "Shop",
 	"profil" => "Profil",
@@ -72,7 +74,7 @@ echo'
   </head>
   <body>
 ';
-if($checklogin == true)echo "EINGELOGGT";
+if($checklogin == true)echo "EINGELOGGT"; else echo "PECH";
 //Wenn nicht eingeloggt
 if($_SESSION['login']==false){
 echo'
@@ -97,14 +99,15 @@ include_once('./pages/'.$page.'.php');
 
 echo'
     <ul>
-    <li><a href="shop">Shop</a></li>
-    <li><a href="profil">Profil</a></li>
-    <li><a href="impressum">Impressum</a></li>
-    <li><a href="home">Startseite</a></li>
-    <li><a href="connect">Connect</a></li>
-    <li><a href="agb">AGB</a></li>
-    <li><a href="about-us">Über Uns</a></li>
-	<li><a href="design.htm">Design</a></li></ul>
+      <li><a href="shop">Shop</a></li>
+      <li><a href="profil">Profil</a></li>
+      <li><a href="impressum">Impressum</a></li>
+      <li><a href="home">Startseite</a></li>
+      <li><a href="connect">Connect</a></li>
+      <li><a href="agb">AGB</a></li>
+      <li><a href="about-us">Über Uns</a></li>
+	  <li><a href="design.htm">Design</a></li>
+	</ul>
 	
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="./other/script.js?asda"></script>
