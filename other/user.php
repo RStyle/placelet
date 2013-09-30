@@ -93,6 +93,14 @@ class User
 				':user'=>$reg['reg_login'],
 				':code'=>substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20)) // Ein 60 buchstabenlanger Zufallscode
 			);
+			
+			$sql = "INSERT INTO addresses (user,last_name,first_name) VALUES (:user,:last_name,:first_name)";
+			$q = $db->prepare($sql);
+			$q->execute(array(
+				':user'=>$reg['reg_login'],
+				':last_name'=>$reg['reg_name'],
+				':first_name'=>$reg['reg_first_name'])
+			);
 		
 			return true;
 			}
