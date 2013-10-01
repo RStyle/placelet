@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	// starte wenn DOM geladen ist
+	/*
 var Input_password = $('input[name=password]');
 var default_password_value = Input_password.val();
 
@@ -49,5 +50,21 @@ $("#reg_password2").oninput(function() {
 		document.getElementById("reg_password2").setCustomValidity('');
 	}
 });*/
+
+//window.innerWidth
+function check_width(){
+	if(window.innerWidth < 1755){
+		//$("#logo"). =
+		$("#logo").attr("src", 'pictures/logo.svg');
+		$("#logo").attr("width", '93');
+	} else {
+		$("#logo").attr("src", 'pictures/logo_extended.svg');
+		$("#logo").attr("width", '206');
+	}
+}
+
+window.onresize = check_width;
+check_width();
+
 
 });
