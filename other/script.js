@@ -52,8 +52,9 @@ $("#reg_password2").oninput(function() {
 });*/
 
 //window.innerWidth
-function check_width(){
-	if(window.innerWidth < 1755){
+function check_width(){   
+    
+    if(window.innerWidth < 1480){
 		//$("#logo"). =
 		$("#logo").attr("src", 'pictures/logo.svg');
 		$("#logo").attr("width", '93');
@@ -61,6 +62,13 @@ function check_width(){
 		$("#logo").attr("src", 'pictures/logo_extended.svg');
 		$("#logo").attr("width", '206');
 	}
+	
+	if(window.innerWidth > 1230){
+		$("#logo").attr("style", 'top: 3em;');
+	}   
+	else {
+        $("#logo").attr("style", 'top: 11px;'); 
+    }
 }
 
 window.onresize = check_width;
