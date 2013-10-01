@@ -8,24 +8,30 @@ aside, nav, article, figure {
 img {
 	border: 0;
 }
-/*Scrollbalken für einheitliches Design erzwingen*/
 html {
 	border-top-color: /*#414141*/#234754;
 	border-top-style: solid;
 	border-top-width: 11px;
-	overflow-y: scroll;
+	overflow-y: scroll;/*Scrollbalken für einheitliches Design erzwingen*/
 }
 /*---BODY---*/
-head {
-	display: block;
-}
 body {
 	color: #234754;
 	width: 70%;
 	padding: 0 10px;
 	min-width: 1000px;
 	margin: 0 auto;
-}	
+}
+a {
+	color: #000;
+}
+a:hover {
+	text-decoration: none;
+}
+/*#headerlist a:visited {
+}*/
+/*#headerlist a:active {
+}*/
 /*---HEADER---*/
 #header {
 	font-family: Tahoma, Geneva, sans-serif;
@@ -44,20 +50,20 @@ body {
 	list-style: none;
 	padding: 0 1em 0 0;
 }
-#headerlist li {
-	float: left;
-	margin-left: 0.5em;
-}
 #headerlist a {
 	color: #9B9B9B;
 }
-#headerlist a:hover {
+/*#headerlist a:hover {
 	text-decoration: none;
-}
+}*/
 /*#headerlist a:visited {
 }*/
 /*#headerlist a:active {
 }*/
+#headerlist li {
+	float: left;
+	margin-left: 0.5em;
+}
 .headerlist_main_divider {
 	color: #000;
 }
@@ -253,15 +259,16 @@ body {
 	width: 73%;
 }
 #wir {
-	height: 200px;
 	width: 100%;
 }
 /*---Impressum SECTION---*/
 #impressum {
+	float: left;
+	margin-right: 3%;
+	width: 100%;
 }
 #disclaimer {
-	clear: both;
-	width: 73%;
+	float: right;
 }
 /*---JUNIOR---*/
 #junior {
