@@ -99,8 +99,8 @@ function check_width(){
 		$("#login-box").css({ 'left' : 540 });
 	}   
 	else {
-		if(window.innerWidth > 1445) {
-			$("#login-box").css({ 'left' : '56%' });//Der Wert stimmt nicht
+		if(window.innerWidth > 1530) {
+			$("#login-box").css({ 'right' : '30%' });
 		}
 		else {
 			

@@ -1,15 +1,14 @@
-      <article id="impressum" class="mainarticles" style="display: block; border-bottom: 5px solid green;">
+      <article id="impressum" class="mainarticles">
         <div class="green_line mainarticleheaders line_header"><h1>Impressum</h1></div>
+        <h3>Placelet, ein <a href="http://junior.de" targe="_blank">JUNIOR</a>-Unternehmen</h3>
         <div style="float: left;">
-          Placelet, ein <a href="http://junior.de" targe="_blank">JUNIOR</a>-Unternehmen<br>
-          <br>
           Sarah Baiker, Janik Rennollet<br>
           Gymnasium am Römerkastell<br>
           Heidenmauer 14<br>
           55543 Bad Kreuznach<br>
         </div>
-        <div style="float: left;">
-         Telefon: 0671 - 66464<br>
+        <div style="float: left; margin-left: 2em;">
+          Telefon: 0671 - 66464<br>
           Telefax: 0671 - 64119<br>
           <br>
           www.placelet.de<br>
@@ -19,7 +18,7 @@
           info@placelet.net
         </div>
       </article>
-      <article id="disclaimer" class="mainarticles" style="border-bottom: 5px solid purple;">
+      <article id="disclaimer" class="mainarticles">
         <div class="blue_line mainarticleheaders line_header"><h1>Disclaimer</h1></div>
         <h4>Haftung für Inhalte</h4>
         Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Ge-setzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informa-tionen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
