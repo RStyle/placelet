@@ -104,9 +104,9 @@ echo'
 	  <div id="login-box">
 	    <form name="login" id="form_login">
 		  <label for="login" id="label_login">Username</label>
-		  <input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Username" required>
+		  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" required>
 		  <label for="password" id="label_password">Password</label>
-		  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required>
+		  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%$$%\/%§$" required>
 		  <input type="submit" value="Login" id="submit_login">
 		</form>
 		<a href="register">Hier registrieren</a>
