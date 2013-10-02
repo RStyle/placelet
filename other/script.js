@@ -14,8 +14,12 @@ $("#headerlogin").click(function(){
 });
 
 jQuery(document).click(function(e) {
-    if (e.target != $("#login-box")) {
-        //alert(e.target);
+    if (e.target.id != 'login-box' && e.target.id != 'login' && e.target.id != 'password' && e.target.id != 'form_login' && e.target.id != 'headerlogin'
+		&& e.target.id != 'label_login' && e.target.id != 'label_password' && e.target.id != 'submit_login') {
+        if(show_login == true){
+			show_login = false;
+			$("#login-box").hide();
+		}
     }
 });
 
