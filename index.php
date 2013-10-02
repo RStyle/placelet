@@ -101,7 +101,7 @@ echo'
         </form>
       </div>
       <a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19">&nbsp;&nbsp;Login</a>
-	  <div id="login-box" class="login">
+	  <div id="login-box">
 	    <form name="login" id="form_login">
 		  <label for="login" id="label_login">Username</label>
 		  <input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Username" required>
