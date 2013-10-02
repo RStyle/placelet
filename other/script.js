@@ -4,6 +4,7 @@ $(document).ready(function() {
 var Input_password = $('input[name=password]');
 var default_password_value = Input_password.val();
 var show_login = false;
+var login_return = true;
 
 $("#headerlogin").click(function(){
 	show_login = !show_login;
@@ -39,6 +40,24 @@ $("#form_login").submit(function() {
 	setTimeout(function(){$("#password").select();},10); 
 		return false;
 	}
+	
+	if($("#login").val().length < 4 || $("#login").val().length > 15){
+		$("#login").css( "background-color", "rgb(255, 66, 66)" );
+		setTimeout(function() {
+			$("#login").css( "background-color", "#FFF" );
+		}, 800);
+		login_return = false;
+	}
+	
+	if($("#password").val().length < 6 || $("#login").val().length > 30){
+		$("#password").css( "background-color", "rgb(255, 66, 66)" );
+		setTimeout(function() {
+			$("#password").css( "background-color", "#FFF" );
+		}, 800);
+		login_return = false;
+	}
+	
+	return login_return;
 });
 
 $(".input_text").blur(function(){
