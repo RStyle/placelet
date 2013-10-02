@@ -1,8 +1,24 @@
 $(document).ready(function() {
 	// starte wenn DOM geladen ist
-	/*
+	
 var Input_password = $('input[name=password]');
 var default_password_value = Input_password.val();
+var show_login = false;
+
+$("#headerlogin").click(function(){
+	show_login = !show_login;
+	if(show_login == true)
+		$("#login-box").show();
+	else
+		$("#login-box").hide();
+});
+
+jQuery(document).click(function(e) {
+    if (e.target != $("#login-box")) {
+        //alert(e.target);
+    }
+});
+
 
 //Login
 $('.password').on({
@@ -21,10 +37,15 @@ $("#form_login").submit(function() {
 	}
 });
 
-$(".input_text").onblur(function(){
-		if(this.value != $.trim(this.value)) this.value = $.trim(this.value);
+$(".input_text").blur(function(){
+		if(this.value != $.trim(this.value)) this.value = $.trim(this.value);  //trimt Formualer - außer Passwörter - direkt per JS
     }
 );
+
+/*$(".input_4_20").blur(function(){
+		if(this.value != $.trim(this.value)) this.value = $.trim(this.value);  //trimt Formualer - außer Passwörter - direkt per JS
+    }
+);*/
 
 
 //Registration
@@ -69,6 +90,20 @@ function check_width(){
 	else {
         $("#logo").attr("style", 'top: 11px;'); 
     }
+	
+	if(window.innerWidth < 1038){
+		$("#login-box").css({ 'left' : 540 });
+	}   
+	else {
+		if(window.innerWidth > 1445) {
+			$("#login-box").css({ 'left' : '56%' });//Der Wert stimmt nicht
+		}
+		else {
+			
+			$("#login-box").css({ 'left' : '53%' });
+		}
+	}
+	
 }
 
 window.onresize = check_width;

@@ -13,15 +13,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
-DirectoryIndex index.htm home.php index.php index.html
+DirectoryIndex home.php index.php index.html
 
 AddType 'text/html; charset=UTF-8' html
 
 #Umleitung der www subdomain auf Hauptseite
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^www\.placelet\.de$ [NC]
-RewriteRule ^(.*)$ http://placelet.de/$1 [L,R=301]
+#RewriteCond %{HTTP_HOST} ^www\.placelet\.net$ [NC]
+#RewriteRule ^(.*)$ http://placelet.net/$1 [L,R=301]
 
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^www\.placelet\.net$ [NC]
-RewriteRule ^(.*)$ http://placelet.net/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.placelet\.det$ [NC]
+RewriteRule ^(.*)$ http://placelet.de/$1 [L,R=301]
