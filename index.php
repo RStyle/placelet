@@ -163,13 +163,11 @@ include_once('./pages/'.$page.'.php');
 
 echo'
     </section>
-    <div id="sidenav">
       <ul id="sidenav">
         <li>Erster Eintrag</li>
         <li>Zweiter Eintrag</li>
         <li>Dritter Eintrag</li>
       </ul>
-    </div>
     
     <footer id="footer">
     Placelet - by Daniel, Julian, Roman
