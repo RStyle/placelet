@@ -71,8 +71,8 @@ $pagename = array(//Dateinamen werden Titel zugeordnet
 	
 $navregister = "<li><a href='login' class='mainnavlinks'>Registrieren</a></li>";	
 	
-if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist lautet der Titel von login.php Login und nicht registrieren
-	$pagename['login'] = "Login";
+if(isset($_GET['registerbr'])) {//Wenn man nicht eingeloggt ist lautet der Titel von login.php Login und nicht registrieren
+	$pagename['login'] = "Armband registrieren";
 	$navregister = "";
 	
 }
@@ -90,8 +90,11 @@ echo'
     <meta name="description" content="Placelet Shop and Image Service">
     <meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
     <meta name="author" content="Roman S., Danial S., Julian Z.">
-    <link href="other/main.css" rel="stylesheet" type="text/css">
-    <link rel="apple-touch-icon" href="pictures/touchicon.png">
+    <link href="other/main.css" rel="stylesheet" type="text/css">';
+if(is_mobile($_SERVER['HTTP_USER_AGENT'])==TRUE) {
+	echo '<link href="other/mobile.css" rel="stylesheet" type="text/css">';
+}
+echo '<link rel="apple-touch-icon" href="pictures/touchicon.png">
     <link rel="icon" href="pictures/favicon-16.png" type="image/png" sizes="16x16">
     <link rel="icon" href="pictures/favicon-32.png" type="image/png" sizes="32x32">
     <!--[if IE]><link rel="shortcut icon" href="pictures/favicon.ico"><![endif]-->
@@ -103,11 +106,16 @@ echo'
   
     <header id="header">
       <div id="headerregisterbr">
-        <form name="registerbr" action="'.$_SERVER['PHP_SELF'].'" method="post">
-          <label for="registerbr">Band registrieren&nbsp;</label>
+        <form name="registerbr" action="login" method="get">
+          <label for="registerbr">Armband registrieren&nbsp;</label>
           <input name="registerbr" type="text" required="required" id="registerbr" placeholder="Placelet ID..." size="20" maxlength="30">
         </form>
-      </div>
+      </div>';
+if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist, wird nicht mehr Login, sondern Logout angezeigt
+	echo'<a href="?logout" id="headerlogin">Logout</a>';
+}
+else {
+	echo '
       <a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19">&nbsp;&nbsp;Login</a>
 	  <div id="login-box">
 	    <form name="login" id="form_login" action="'.$_SERVER['PHP_SELF'].'" method="post">
@@ -118,10 +126,12 @@ echo'
 		  <input type="submit" value="Login" id="submit_login">
 		</form><br>
 		<a href="login">Hier registrieren</a>
-      </div>
-      <ul id="headerlist">
+      </div>';
+}
+
+echo '<ul id="headerlist">
         <li><a href="ger"><img src="pictures/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
-		<li class="headerlist_sub_divider">|</li>
+	    <li class="headerlist_sub_divider">|</li>
         <li><a href="eng"><img src="pictures/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 		<li class="headerlist_main_divider">|</li>
         <li><a href="impressum">Impressum</a></li>

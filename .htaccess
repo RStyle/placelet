@@ -4,11 +4,11 @@
 
 # Enable Rewrite Engine
 RewriteEngine on
+RewriteBase /
 
 #Create friendly URL
-RewriteRule ^site$ site.html [L]
+RewriteRule ^site$ site.php [R]
 
-RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
@@ -21,5 +21,5 @@ AddType 'text/html; charset=UTF-8' html
 #RewriteCond %{HTTP_HOST} ^www\.placelet\.net$ [NC]
 #RewriteRule ^(.*)$ http://placelet.net/$1 [L,R=301]
 
-RewriteCond %{HTTP_HOST} ^www\.placelet\.det$ [NC]
-RewriteRule ^(.*)$ http://placelet.de/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.placelet\.det$ [NC] [R]
+RewriteRule ^(.*)$ http://placelet.de/$1 [L,R=301] [R]
