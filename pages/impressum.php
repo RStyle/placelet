@@ -1,6 +1,6 @@
       <article id="impressum" class="mainarticles">
         <div class="green_line mainarticleheaders line_header"><h1>Impressum</h1></div>
-        <h3>Placelet, ein <a href="http://junior.de" targe="_blank">JUNIOR</a>-Unternehmen</h3>
+        <h3>Placelet, ein <a href="http://juniorprojekt.de" target="_blank">JUNIOR</a>-Unternehmen</h3>
         <div style="float: left;">
           Sarah Baiker, Janik Rennollet<br>
           Gymnasium am Römerkastell<br>

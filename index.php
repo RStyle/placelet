@@ -103,10 +103,10 @@ echo'
       <a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19">&nbsp;&nbsp;Login</a>
 	  <div id="login-box">
 	    <form name="login" id="form_login">
-		  <label for="login" id="label_login">Username</label>
-		  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" required>
-		  <label for="password" id="label_password">Password</label>
-		  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%$$%\/%§$" required>
+		  <label for="login" id="label_login">Username</label><br>
+		  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" required><br>
+		  <label for="password" id="label_password">Password</label><br>
+		  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%$$%\/%§$" required><br>
 		  <input type="submit" value="Login" id="submit_login">
 		</form>
 		<a href="register">Hier registrieren</a>
