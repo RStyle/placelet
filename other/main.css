@@ -276,6 +276,10 @@ a:hover {
 		border-bottom: 5px solid #7E74E1;
 		float: left;
 	}
+/*---Kontakt SECTION---*/
+	#kontakt {
+		border-bottom: 5px solid #B7D300;
+	}
 /*---JUNIOR---*/
 #junior {
 	border-left: black solid 1px;

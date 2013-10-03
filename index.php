@@ -65,13 +65,21 @@ $pagename = array(//Dateinamen werden Titel zugeordnet
 	"connect" => "Connect",
 	"agb" => "AGB",
 	"about" => "&Uuml;ber Uns",
-	"kontakt" => "Konkakt"
+	"kontakt" => "Konkakt",
+	"login" =>"Registrieren"
 	);
+	
+$navregister = "<li><a href='login' class='mainnavlinks'>Registrieren</a></li>";	
+	
+if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist lautet der Titel von login.php Login und nicht registrieren
+	$pagename['login'] = "Login";
+	$navregister = "";
+	
+}
+
 if (empty($title)) {
-    $title = 'Placelet - '.$pagename[$page];
+    $title = "Placelet - ".$pagename[$page];
 }  // Wenn $title nicht gesetzt ist, wird sie zu 'Placelet - $title' geändert
-
-
 
 //Ich denke, dass der Head immer gleich sein wird, auf Wunsch kann das aber geändert werden//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 echo'
@@ -102,14 +110,14 @@ echo'
       </div>
       <a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19">&nbsp;&nbsp;Login</a>
 	  <div id="login-box">
-	    <form name="login" id="form_login">
-		  <label for="login" id="label_login">Username</label><br>
+	    <form name="login" id="form_login" action="'.$_SERVER['PHP_SELF'].'" method="post">
+		  <label for="login" id="label_login">Benutzername</label><br>
 		  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" required><br>
-		  <label for="password" id="label_password">Password</label><br>
+		  <label for="password" id="label_password">Passwort</label><br>
 		  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%$$%\/%§$" required><br>
 		  <input type="submit" value="Login" id="submit_login">
-		</form>
-		<a href="register">Hier registrieren</a>
+		</form><br>
+		<a href="login">Hier registrieren</a>
       </div>
       <ul id="headerlist">
         <li><a href="ger"><img src="pictures/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
@@ -131,34 +139,12 @@ echo'
         <li><a href="home" class="mainnavlinks">Home</a></li>
         <li><a href="about" class="mainnavlinks">Über uns</a></li>
         <li><a href="shop" class="mainnavlinks">Shop</a></li>
+        '.$navregister.'
       </ul>
     </nav>
 	
 	<section id="section">
 ';
-/*if($checklogin == true)echo "EINGELOGGT"; else echo "PECH";
-//Wenn nicht eingeloggt
-if(isset($user)){if($user->logged == true){echo "2EINGELOGGT2"; echo '<a href="?logout">LOGOUT</a>';} else echo "2PECH2";}
-if(isset($_SESSION['user']))echo'- USERISTDA';
-if($_SESSION['login']==false){
-echo'
-<form name="login" id="form_login" action="'.$_SERVER['PHP_SELF'].'" method="post">
-	<label for="login">Username</label><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Username" required ><br>
-	<label for="password">Password</label><input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>
-	<input type="submit" value="Connect/Login">
-</form>
-<form name="reg" id="form_reg" action="'.$_SERVER['PHP_SELF'].'" method="post">
-	<label for="reg_login">Username</label><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Username" required ><br><br>
-	<label for="reg_name">Name</label><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Name" required ><br>
-	<label for="reg_first_name">First name</label><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="First name" required ><br><br>
-	<label for="reg_email">Email</label><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email" required ><br>
-	<label for="reg_password">Password</label><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>
-	<label for="reg_password2">Repeat password</label><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30"  value="!§%&$%&/%§$" required ><br>
-	<input type="submit" value="Registrate">
-</form>
-';}
-
-echo $pagename[$page].' löl'; //zu Testzwecken*/
 include_once('./pages/'.$page.'.php');
 
 echo'
