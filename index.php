@@ -116,7 +116,7 @@ if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist, wird nicht mehr L
 }
 else {
 	echo '
-      <a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19">&nbsp;&nbsp;Login</a>
+      <a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 	  <div id="login-box">
 	    <form name="login" id="form_login" action="'.$_SERVER['PHP_SELF'].'" method="post">
 		  <label for="login" id="label_login">Benutzername</label><br>

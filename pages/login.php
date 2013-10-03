@@ -12,7 +12,7 @@ if(isset($_GET['registerbr'])) {//Wenn man eine Armband ID eingegeben hat, kann 
   <table style="border: 1px solid black">
 	  <tr>
 	    <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-		<td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Username" required></td>
+		<td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" required></td>
       </tr>
 	  <tr>
 	    <td><label for="password">Passwort</label></td>
@@ -29,19 +29,19 @@ echo '</form>
   <table style="border: 1px solid black">
     <tr>
 	  <td><label for="reg_login">Benutzername</label></td>
-	  <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Username" required></td>
-	</tr>
-	<tr>
-	  <td><label for="reg_name">Nachname</label></td>
-	  <td><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Name" required></td>
+	  <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" required></td>
 	</tr>
 	<tr>
 	  <td><label for="reg_first_name">Vorname</label>
-	  <td><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="First name" required></td>
+	  <td><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="Vorname" required></td>
+	</tr>
+	<tr>
+	  <td><label for="reg_name">Nachname</label></td>
+	  <td><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Nachname" required></td>
 	</tr>
 	<tr>
 	  <td><label for="reg_email">Email-Adresse</label>
-	  <td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email" required></td>
+	  <td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
 	</tr>
 	<tr>
 	  <td><label for="reg_password">Passwort</label>

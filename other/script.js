@@ -15,7 +15,7 @@ $("#headerlogin").click(function(){
 });
 
 jQuery(document).click(function(e) {
-    if (e.target.id != 'login-box' && e.target.id != 'login' && e.target.id != 'password' && e.target.id != 'form_login' && e.target.id != 'headerlogin'
+    if (e.target.id != 'login-box' && e.target.id != 'login' && e.target.id != 'password' && e.target.id != 'form_login' && e.target.id != 'headerlogin' && e.target.id != 'login_icon'
 		&& e.target.id != 'label_login' && e.target.id != 'label_password' && e.target.id != 'submit_login') {
         if(show_login == true){
 			show_login = false;
