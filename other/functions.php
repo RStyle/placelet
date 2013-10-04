@@ -1,6 +1,4 @@
 <?php
-//Funktionen - kann gut aufgeteilt werden - demnächst füge ich noch zukünfitg in Gebrauch werdende Funktionen hinzu
-
 //Start der Überprüfung ob die hochgeladene Datei überhaupt ein Bild ist und nicht zu groß ist
 function check_image(){
 
@@ -23,7 +21,6 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 return false;
 }
 
-
 //Start - Hash Klasse um Passwörter zu verschlüsseln und zu überprüfen
 //Zum verschlüsseln eines Passworts "$pass_hash = PassHash::hash($_POST['password']);" verwenden
 //Zum überprüfen eines Passworts "if (PassHash::check_password($user['pass_hash'], $_POST['password'])) { eingeloggt } else { falsches Passwort }"
@@ -40,7 +37,6 @@ class PassHash {
     public static function unique_salt() {  
         return substr(sha1(mt_rand()),0,22);  
     }  
-  
     // this will be used to generate a hash  
     public static function hash($password) {  
   
@@ -48,7 +44,6 @@ class PassHash {
                     self::$algo .  
                     self::$cost .  
                     '$' . self::unique_salt());  
-  
     }  
     // this will be used to compare a password against a hash  
     public static function check_password($hash, $password) {  
@@ -58,15 +53,13 @@ class PassHash {
         $new_hash = crypt($password, $full_salt);  
   
         return ($hash == $new_hash);  
-  
     }  
-  
 }  
 
 
 
 
-//Start - der Funktion is_mobile, welche ermittelt, ob der Besucher ein Smartphone und eventuell Tablet (muss noch getestet werden) verwendet
+//Start - der Funktion is_mobile, welche ermittelt, ob der Besucher ein mobiles Endgerät verwendet
 function is_mobile($useragentmobile){
 $is_t=0;
         $userAgent = strtolower($useragentmobile);  
@@ -253,6 +246,4 @@ $is_t++;
 		return true;
  
 }
-
-
 ?>

@@ -1,8 +1,9 @@
 <?php
-error_reporting(E_ALL|E_STRICT); // php5 
+// Alle Fehlermeldungen werden angezeigt
+error_reporting(E_ALL|E_STRICT); 
 ini_set('display_errors', true);
-
-include_once('./other/functions.php'); //Einbinden einer Datei, welche verschiedene PHP-Funktionen bereitstellt, wie z.B. eine Überprüfung, ob die hochgeladene Datei wirklich ein Bild ist
+//Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
+include_once('./other/functions.php'); 
 include_once('./start.php');
 include_once('./other/user.php');
 
@@ -14,7 +15,7 @@ $user->regstatuschange($_GET['regstatuschange']);
 //break();
 }
 
-//Hier werden Cookies überprüft gesetzt usw.
+// Hier werden Cookies überprüft gesetzt usw.
 // Erzwingen das Session-Cookies benutzt werden und die SID nicht per URL transportiert wird
 ini_set( 'session.use_only_cookies', '1' );
 ini_set( 'session.use_trans_sid', '0' );
@@ -53,11 +54,11 @@ if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST[
 	User::register($_POST, $db);
 }
 
-
-
 //--//
 
-$pagename = array(//Dateinamen werden Titel zugeordnet
+
+//Dateinamen werden Titel zugeordnet
+$pagename = array(
 	"shop" => "Shop",
 	"profil" => "Profil",
 	"impressum" => "Impressum",
@@ -71,8 +72,10 @@ $pagename = array(//Dateinamen werden Titel zugeordnet
 	
 $navregister = "<li><a href='login' class='mainnavlinks'>Registrieren</a></li>";	
 	
-if(isset($_GET['registerbr'])) {//Wenn man nicht eingeloggt ist lautet der Titel von login.php Login und nicht registrieren
-	$pagename['login'] = "Armband registrieren";
+if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'
+	$pagename['login'] = "Armband registrieren";	
+}
+if($checklogin == true) {//Wenn man eingeloggt ist erscheint 'Registrieren' nicht mehr im mainnav
 	$navregister = "";
 	
 }
@@ -91,7 +94,7 @@ echo'
     <meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
     <meta name="author" content="Roman S., Danial S., Julian Z.">
     <link href="other/main.css" rel="stylesheet" type="text/css">';
-if(is_mobile($_SERVER['HTTP_USER_AGENT'])==TRUE) {
+if(is_mobile($_SERVER['HTTP_USER_AGENT'])==TRUE) {//moblie.css für Mobile Clients
 	echo '<link href="other/mobile.css" rel="stylesheet" type="text/css">';
 }
 echo '<link rel="apple-touch-icon" href="pictures/touchicon.png">
@@ -152,8 +155,8 @@ echo '<ul id="headerlist">
         '.$navregister.'
       </ul>
     </nav>
-	
-	<section id="section">
+
+    <section id="section">
 ';
 include_once('./pages/'.$page.'.php');
 
