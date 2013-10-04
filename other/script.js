@@ -2,7 +2,10 @@ $(document).ready(function() {
 	// starte wenn DOM geladen ist
 	
 var Input_password = $('input[name=password]');
+var default_reg_password_value = $('input[name=reg_password]').val();
 var default_password_value = Input_password.val();
+if (default_password_value == '')
+	default_password_value = default_reg_password_value;
 var show_login = false;
 var login_return = true;
 
@@ -28,7 +31,7 @@ jQuery(document).click(function(e) {
 //Login
 $('.password').on({
     focus:function(){                   
-		if(this.value == default_password_value) this.value = '';
+		if(this.value == default_password_value || this.value == default_reg_password_value) this.value = '';
     },
     blur:function(){
 		if(this.value == '') this.value = default_password_value;
