@@ -48,12 +48,16 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 }elseif(isset($_SESSION['user'])){
 	$user = new User('RSty', $db);
 	$checklogin = $user->logged;
-	echo $_SESSION['user'].'-'.$_SESSION['dynamic_password'];//Randnotiz
+	//echo $_SESSION['user'].'-'.$_SESSION['dynamic_password'];//Das nervt!!
 }
 if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
 	User::register($_POST, $db);
 }
-
+//Armband registrieren
+if (isset($_POST['reg_br']) && isset($_SESSION['user']) && isset($_POST['submit'])) {
+	User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
+	echo 'ja';
+}
 //--//
 
 

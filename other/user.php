@@ -128,6 +128,26 @@ class User
 		
 		
 	}
+	//Armband registrieren
+	public static function registerbr ($brid, $user, $db) {
+		$query = $db->query("SELECT bracelets . id FROM bracelets");//Dieser
+		$rows = $query->fetchAll(PDO::FETCH_ASSOC);                 //Teil
+		while ($row = $query->fetch(PDO::FETCH_ASSOC)) {            //funktioniert
+			$braces['id'] = $row['id'];                             //nicht!
+		}                                                           //
+		if (!isset($braces[$brid])) {
+			$sql = "INSERT INTO bracelets (users, id) VALUES (:user, :id)";
+			$q = $db->prepare($sql);
+			$q->execute(array(
+				':user'=>$user,
+				':id'=>$brid)
+			);
+			echo 'Das Armband wurde erfolgreich registriert.';
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 }
 
