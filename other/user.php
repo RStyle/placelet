@@ -130,11 +130,8 @@ class User
 	}
 	//Armband registrieren
 	public static function registerbr ($brid, $user, $db) {
-		$query = $db->query("SELECT bracelets . id FROM bracelets");//Dieser
-		$rows = $query->fetchAll(PDO::FETCH_ASSOC);                 //Teil
-		while ($row = $query->fetch(PDO::FETCH_ASSOC)) {            //funktioniert
-			$braces['id'] = $row['id'];                             //nicht!
-		}                                                           //
+//		$stmt = $db->prepare('SELECT * FROM bracelets WHERE ');
+		
 		if (!isset($braces[$brid])) {
 			$sql = "INSERT INTO bracelets (users, id) VALUES (:user, :id)";
 			$q = $db->prepare($sql);

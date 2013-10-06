@@ -4,7 +4,7 @@ error_reporting(E_ALL|E_STRICT);
 ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
 include_once('./other/functions.php'); 
-include_once('./start.php');
+include_once('./connection.php');
 include_once('./other/user.php');
 
 if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
@@ -35,7 +35,6 @@ if (!isset( $_SESSION['server_SID'] ))
     // Status festhalten
     $_SESSION['server_SID'] = true;
 }
-$_SESSION['login'] = false; //bereits eingeloggt wird vorgegeben und später bei bereits eingeloggt geändert
 
 $checklogin = false;
 
@@ -54,33 +53,35 @@ if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST[
 	User::register($_POST, $db);
 }
 //Armband registrieren
-if (isset($_POST['reg_br']) && isset($_SESSION['user']) && isset($_POST['submit'])) {
+if (isset($_POST['reg_br']) && isset($_SESSION['user']) && $_POST['submit'] == "Armband registrieren") {
 	User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
-	echo 'ja';
+	echo 'isset';
 }
 //--//
 
 
 //Dateinamen werden Titel zugeordnet
 $pagename = array(
-	"shop" => "Shop",
-	"profil" => "Profil",
-	"impressum" => "Impressum",
-	"home" => "Global Placelet. Travel & Connect",
-	"connect" => "Connect",
-	"agb" => "AGB",
 	"about" => "&Uuml;ber Uns",
+	"connect" => "Connect",
+	"home" => "Global Placelet. Travel & Connect",
+	"impressum" => "Impressum",
 	"kontakt" => "Konkakt",
-	"login" =>"Registrieren"
+	"login" =>"Registrieren",
+	"profil" => "Profil",
+	"shop" => "Shop",
+	"start" => "Start"
 	);
 	
-$navregister = "<li><a href='login' class='mainnavlinks'>Registrieren</a></li>";	
+$navregister['href'] = "login";	
+$navregister['value'] = "Registrieren";
 	
 if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'
 	$pagename['login'] = "Armband registrieren";	
 }
-if($checklogin == true) {//Wenn man eingeloggt ist erscheint 'Registrieren' nicht mehr im mainnav
-	$navregister = "";
+if(isset($_SESSION['user'])) {//Wenn man eingeloggt ist erscheint 'Registrieren' nicht mehr im mainnav
+	$navregister['href'] = "start";
+	$navregister['value'] = "Start";
 	
 }
 
@@ -156,7 +157,7 @@ echo '<ul id="headerlist">
         <li><a href="home" class="mainnavlinks">Home</a></li>
         <li><a href="about" class="mainnavlinks">Über uns</a></li>
         <li><a href="shop" class="mainnavlinks">Shop</a></li>
-        '.$navregister.'
+        <li><a href='.$navregister['href'].' class="mainnavlinks">'.$navregister['value'].'</a></li>
       </ul>
     </nav>
 
