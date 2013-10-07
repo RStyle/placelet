@@ -1,25 +1,29 @@
 #### Rule for Error Page - 404 ####
 ####ErrorDocument 404 http://rstyle.mania-server.net/jp/404.php
 
-
-# Enable Rewrite Engine
-RewriteEngine on
-RewriteBase /
-
-#Create friendly URL
-RewriteRule ^site$ site.php [R]
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php
-
+#default page set
 DirectoryIndex home.php index.php index.html
 
+#characterset specified
 AddType 'text/html; charset=UTF-8' html
 
-#Umleitung der www subdomain auf Hauptseite
-#RewriteCond %{HTTP_HOST} ^www\.placelet\.net$ [NC]
-#RewriteRule ^(.*)$ http://placelet.net/$1 [L,R=301]
+#enable mod_rewrite
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+RewriteBase /htdocs
 
-RewriteCond %{HTTP_HOST} ^www\.placelet\.det$ [NC] [R]
-RewriteRule ^(.*)$ http://placelet.de/$1 [L,R=301] [R]
+# remove trailing slash
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+#create friendly URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*?)/?$ /$1.php [L]
+
+#redirect subdomains to maindomain
+RewriteCond %{HTTP_HOST} ^www.placelet.de$ [NC]
+RewriteRule ^(.*)$ http://placelet.de/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www.placelet.net$ [NC]
+RewriteRule ^(.*)$ http://placelet.net/$1 [R=301,L]
+#composed by Daniel Schäfer
