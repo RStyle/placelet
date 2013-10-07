@@ -280,6 +280,12 @@ a:hover {
 	#kontakt {
 		border-bottom: 5px solid #B7D300;
 	}
+/*---Armband SECTION---*/
+	#armband {
+		border-bottom: 5px solid #B7D300;
+		float: left;
+		width: 73%;		
+	}
 /*---JUNIOR---*/
 #junior {
 	border-left: black solid 1px;
@@ -304,11 +310,11 @@ a:hover {
 	#sidenav {
 		border-right: 2px solid #817965;
 		color: #000;
-		display: none;
 		left: 1%;
 		list-style: none;
-		padding: 2em 1em 1em 2em;
+		padding: 1em 1em 1em 2em;
 		position: fixed;
+		top: 20%;
 	}
 	#sidenav li {
 		/*border-left: 4px double #414141;*/
