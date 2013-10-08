@@ -140,7 +140,13 @@ check_width();
 
 //Show/Hide Comments
 $(document).ready(function(){
-  $("#toggle_comments").click(function(){
-    $("#comments").toggle();
+  $("#toggle_comment1").click(function(){
+    $("#comment1").toggle();
+  });
+});
+
+$(document).ready(function(){
+  $("#toggle_comment2").click(function(){
+    $("#comment2").toggle();
   });
 });

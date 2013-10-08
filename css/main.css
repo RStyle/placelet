@@ -34,6 +34,19 @@ a:hover {
 }*/.greencolor {
 	color: #9AEA00;
 }
+hr {
+	border-bottom: 0;
+	border-style: solid;
+	margin: 2em 0 2em 0;
+	height: 0px;
+}
+/*---allgemeine Styles---*/
+.bottom_border_green {
+		border-bottom: 5px solid #B7D300;
+}
+.bottom_border_blue {
+		border-bottom: 5px solid #7E74E1;
+}
 /*---HEADER---*/
 #header {
 	font-family: Tahoma, Geneva, sans-serif;
@@ -288,16 +301,23 @@ a:hover {
 	}
 /*---Start SECTION---*/
 	#placelet_stats {
-		background-color: #9b59b6;
+		background-color: #9B59B6;
 		border: 1px dotted white;
-		color: rgba(256,256,256, 1);
+		color: #FFF;
 		margin-top: 4em;
 		padding: 1em;
 		/*text-shadow: 1px 1px 0px #bad3ed;*/
 		text-shadow: 0px 2px 3px #555;
 	}
-/*---JUNIOR---*/
-#junior {
+		#placelet_stats a {
+			color: #FFF;
+		}
+	#recent_pics {
+	}
+	#bracelet_props {
+	}
+/*---Side Container ASIDE---*/
+.side_container {
 	border-left: black solid 1px;
 	background-color: lightgrey;
     float: right;
@@ -305,30 +325,30 @@ a:hover {
     width: 20%;
     
 }
-	#junior h1{
+	.side_container h1{
 		font-family: Verdana, Geneva, sans-serif;
 		font-size: 1.5em;
 		margin-top: 0px;
 	
 	}
-	#junior p {
+	.side_container p {
 		font-family: Verdana, Geneva, sans-serif;
 		padding: 0;
 		margin: 0;
 	}
-	/*---SIDENAV---*/
-	#sidenav {
-		border-right: 2px solid #817965;
-		color: #000;
-		left: 1%;
-		list-style: none;
-		padding: 1em 1em 1em 2em;
-		position: fixed;
-		top: 20%;
-	}
-	#sidenav li {
-		/*border-left: 4px double #414141;*/
-		margin-bottom: 1em;
+/*---SIDENAV---*/
+#sidenav {
+	border-right: 2px solid #817965;
+	color: #000;
+	left: 1%;
+	list-style: none;
+	padding: 1em 1em 1em 2em;
+	position: fixed;
+	top: 20%;
+}
+#sidenav li {
+	/*border-left: 4px double #414141;*/
+	margin-bottom: 1em;
 	}
 /*---FOOTER---*/
 #footer {

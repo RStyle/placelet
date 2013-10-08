@@ -39,7 +39,7 @@
 			Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 			<span class="green_line mainarticleheaders">&nbsp;</span>
 		</article>
-		<aside id="junior">
+		<aside class="side_container">
 			<h1>JUNIOR</h1>
 			<p>JUNIOR ist ein Projekt der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 
 			auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank, Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed 

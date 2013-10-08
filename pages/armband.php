@@ -74,7 +74,7 @@
                 </div>
 			</div>
 		</article>
-		<aside id="junior">
+		<aside class="side_container">
 			<h1>Armband Statistik</h1>
 			<table style="width: 100%;">
 				<tr>

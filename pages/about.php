@@ -6,7 +6,7 @@
 			Wir wollen mithilfe unserer Reisearmbändern eine Community gründen, indem Sie von Euch an reisende Freunde und Verwandte oder auch zufällig getroffene Menschen weitergeben werden.</p>
 			<span class="blue_line mainarticleheaders">&nbsp;</span><br>
 		</article>
-		<aside id="junior">
+		<aside class="side_container">
 			<h1>JUNIOR</h1>
 			<p>JUNIOR ist ein Projekt der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 
 			auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank, Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed 
