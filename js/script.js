@@ -137,3 +137,10 @@ check_width();
 
 
 });
+
+//Show/Hide Comments
+$(document).ready(function(){
+  $("#toggle_comments").click(function(){
+    $("#comments").toggle();
+  });
+});
