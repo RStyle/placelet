@@ -3,9 +3,9 @@
 error_reporting(E_ALL|E_STRICT); 
 ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
-include_once('./other/functions.php'); 
-include_once('./connection.php');
-include_once('./other/user.php');
+include_once('./scripts/functions.php'); 
+include_once('./scripts/connection.php');
+include_once('./scripts/user.php');
 
 if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 $user = new User($_GET['regstatuschange_user'], $db); //substr(md5 (uniqid (rand())), 0, 20)
@@ -76,14 +76,14 @@ $pagename = array(
 	
 $navregister['href'] = "login";	
 $navregister['value'] = "Registrieren";
+
+if(isset($_SESSION['user'])) {//Wenn man eingeloggt ist erscheint 'Registrieren' nicht mehr im mainnav
+	$navregister['href'] = "";
+	$navregister['value'] = "";
+}
 	
 if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'
 	$pagename['login'] = "Armband registrieren";	
-}
-if(isset($_SESSION['user'])) {//Wenn man eingeloggt ist erscheint 'Registrieren' nicht mehr im mainnav
-	$navregister['href'] = "start";
-	$navregister['value'] = "Start";
-	
 }
 
 if (empty($title)) {
@@ -92,7 +92,7 @@ if (empty($title)) {
 $friendly_self = $_SERVER['PHP_SELF'];
 $friendly_self = str_replace(".php", "", $friendly_self);
 //Ich denke, dass der Head immer gleich sein wird, auf Wunsch kann das aber geändert werden//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
-echo'
+?>
 <!DOCTYPE HTML>
 <html lang="de">
 	<head>
@@ -100,34 +100,43 @@ echo'
 		<meta name="description" content="Placelet Shop and Image Service">
 		<meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
 		<meta name="author" content="Roman S., Danial S., Julian Z.">
-		<link href="other/main.css" rel="stylesheet" type="text/css">';
+		<link href="css/main.css" rel="stylesheet" type="text/css">
+		<link href="css/lightbox.css" rel="stylesheet">
+<?php
 if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Clients
-	echo '		<link href="other/mobile.css" rel="stylesheet" type="text/css">';
+?>
+		<link href="css/mobile.css" rel="stylesheet" type="text/css">
+<?php
 }
-echo '		<link rel="apple-touch-icon" href="pictures/touchicon.png">
+?>
+		<link rel="apple-touch-icon" href="pictures/touchicon.png">
 		<link rel="icon" href="pictures/favicon-16.png" type="image/png" sizes="16x16">
 		<link rel="icon" href="pictures/favicon-32.png" type="image/png" sizes="32x32">
 		<!--[if IE]><link rel="shortcut icon" href="pictures/favicon.ico"><![endif]-->
 		<meta name="msapplication-TileColor" content="#FFF">
 		<meta name="msapplication-TileImage" content="pictures/tileicon.png">
-		<title>'.$title.'</title>
+		<title><?php echo $title; ?></title>
 	</head>
 	<body> 
-	
+<!-----HEADER TAG----->
 		<header id="header">
 			<div id="headerregisterbr">
 				<form name="registerbr" action="login" method="get">
 					<label for="registerbr">Armband registrieren&nbsp;</label>
 					<input name="registerbr" type="text" required="required" id="registerbr" placeholder="Placelet ID..." size="20" maxlength="30">
 				</form>
-			</div>';
-if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist, wird nicht mehr Login, sondern Logout angezeigt
-	echo'			<a href="?logout" id="headerlogin">Logout</a>';
+			</div>
+<?php
+if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
+?>
+			<a href="?logout" id="headerlogin">Logout</a>
+<?php
 }
-else {
-	echo '			<a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
+else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
+?>
+			<a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
-				<form name="login" id="form_login" action="'.$friendly_self.'" method="post">
+				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
 					  <label for="login" id="label_login">Benutzername</label><br>
 					  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" required><br>
 					  <label for="password" id="label_password">Passwort</label><br>
@@ -135,52 +144,58 @@ else {
 					  <input type="submit" value="Login" id="submit_login">
 				</form><br>
 				<a href="login">Hier registrieren</a>
-			</div>';
+			</div>
+<?php
 }
-
-echo '			<ul id="headerlist">
-				<li><a href="http://placelet.de'.$friendly_self.'"><img src="pictures/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
+?>
+            <ul id="headerlist">
+				<li><a href="http://placelet.de<?php echo $friendly_self; ?>"><img src="pictures/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="http://placelet.net'.$friendly_self.'"><img src="pictures/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
+				<li><a href="http://placelet.net<?php echo $friendly_self; ?>"><img src="pictures/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 				<li class="headerlist_main_divider">|</li>
 				<li><a href="impressum">Impressum</a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="kontakt">Kontakt</a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
-			</ul>
+            </ul>
 		</header>	
-				
+<!-----LOGO----->
 		<a href="http://placelet.de"><img id="logo" src="pictures/logo_extended.svg" alt="Placelet"></a>
-				
+<!-----NAV TAG----->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
 				<li><a href="home" class="mainnavlinks">Home</a></li>
 				<li><a href="about" class="mainnavlinks">Über uns</a></li>
 				<li><a href="shop" class="mainnavlinks">Shop</a></li>
-				<li><a href='.$navregister['href'].' class="mainnavlinks">'.$navregister['value'].'</a></li>
+				<li><a href="start" class="mainnavlinks">Start</a></li>
+				<li><a href="<?php echo $navregister['href']; ?>" class="mainnavlinks"><?php echo $navregister['value']; ?></a></li>
 			</ul>
 		</nav>
-				
-		<section id="section">
-';
+<!-----SECTION TAG----->
+        <section id="section">
+<?php
 include_once('./pages/'.$page.'.php');
 
 if ($checklogin == true) {
-	echo '
+?>
 		<ul id="sidenav">
 			<li><a href="start">Start</a></li>
 			<li><a href="profil">Mein Profil</a></li>
 			<li>Dritter Eintrag</li>
-		</ul>';
+		</ul>
+<?php
 }
-echo '
+?>
+
 		</section>
+<!-----FOOTER TAG----->
 		<footer id="footer">
 			Placelet - by Daniel, Julian, Roman
 		</footer>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="./other/script.js?asda"></script>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+		<script type="text/javascript" src="./js/script.js?asda"></script>
+		<script src="js/lightbox-2.6.min.js"></script>
 	</body>
-</html>';
-?>
+</html>
