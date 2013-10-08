@@ -2,8 +2,8 @@
 			<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID;?></h1></div>
 			<div>
 				<h3>Berlin, Deutschland</h3>
-				<a href="bracelets/image-1.jpg" data-lightbox="pictures" title="Berlin, Deutschland">
-					<img src="bracelets/thumb-1.jpg" alt="Berlin, Deutschland" style="width: 40%; height: 300px; float: left; margin-right: 1em; margin-bottom: 1em;">
+				<a href="pictures/bracelets/image-1.jpg" data-lightbox="pictures" title="Berlin, Deutschland">
+					<img src="pictures/bracelets/thumb-1.jpg" alt="Berlin, Deutschland" style="width: 40%; height: 300px; float: left; margin-right: 1em; margin-bottom: 1em;">
 				</a>
 				01. Oktober2013
 				<h4>Beschreibung</h4>
@@ -35,8 +35,8 @@
 			<hr style="border-style: solid; height: 0px; border-bottom: 0;">
 			<div>
 				<h3>London, England</h3>
-				<a href="bracelets/image-2.jpg" data-lightbox="pictures" title="London, England">
-					<img src="bracelets/thumb-2.jpg" alt="London, England" style="width: 40%; height: 300px; float: left; margin-right: 1em; margin-bottom: 1em;">
+				<a href="pictures/bracelets/image-2.jpg" data-lightbox="pictures" title="London, England">
+					<img src="pictures/bracelets/thumb-2.jpg" alt="London, England" style="width: 40%; height: 300px; float: left; margin-right: 1em; margin-bottom: 1em;">
 				</a>
 				<h4>Beschreibung</h4>
 				<p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.

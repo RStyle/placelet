@@ -109,12 +109,12 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 <?php
 }
 ?>
-		<link rel="apple-touch-icon" href="pictures/touchicon.png">
-		<link rel="icon" href="pictures/favicon-16.png" type="image/png" sizes="16x16">
-		<link rel="icon" href="pictures/favicon-32.png" type="image/png" sizes="32x32">
-		<!--[if IE]><link rel="shortcut icon" href="pictures/favicon.ico"><![endif]-->
+		<link rel="apple-touch-icon" href="img/touchicon.png">
+		<link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16">
+		<link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+		<!--[if IE]><link rel="shortcut icon" href="img/favicon.ico"><![endif]-->
 		<meta name="msapplication-TileColor" content="#FFF">
-		<meta name="msapplication-TileImage" content="pictures/tileicon.png">
+		<meta name="msapplication-TileImage" content="img/tileicon.png">
 		<title><?php echo $title; ?></title>
 	</head>
 	<body> 
@@ -134,7 +134,7 @@ if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist, wird Logout angez
 }
 else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 ?>
-			<a href="#" id="headerlogin"><img src="pictures/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
+			<a href="#" id="headerlogin"><img src="img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
 				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
 					  <label for="login" id="label_login">Benutzername</label><br>
@@ -149,9 +149,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 }
 ?>
             <ul id="headerlist">
-				<li><a href="http://placelet.de<?php echo $friendly_self; ?>"><img src="pictures/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
+				<li><a href="http://placelet.de<?php echo $friendly_self; ?>"><img src="img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="http://placelet.net<?php echo $friendly_self; ?>"><img src="pictures/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
+				<li><a href="http://placelet.net<?php echo $friendly_self; ?>"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 				<li class="headerlist_main_divider">|</li>
 				<li><a href="impressum">Impressum</a></li>
 				<li class="headerlist_sub_divider">|</li>
@@ -161,7 +161,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
             </ul>
 		</header>	
 <!-----LOGO----->
-		<a href="http://placelet.de"><img id="logo" src="pictures/logo_extended.svg" alt="Placelet"></a>
+		<a href="http://placelet.de"><img id="logo" src="img/logo_extended.svg" alt="Placelet"></a>
 <!-----NAV TAG----->
 		<nav id="mainnav">
 			<ul id="mainnavlist">

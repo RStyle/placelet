@@ -91,7 +91,7 @@ a:hover {
 		}
 		#login-box {
 			background-color: #E1E1E1;
-			background-image: url('../pictures/login-box.png');
+			background-image: url('../img/login-box.png');
 			background-position: top;
 			background-repeat: no-repeat;
 			display: none;
@@ -239,7 +239,7 @@ a:hover {
 		width: 35%;
 	}
 	.blue_line {
-		background-image: url('../pictures/header_bg-blue.png');
+		background-image: url('../img/header_bg-blue.png');
 	}
 	#reisearmband_img {
 		width: 100%;
@@ -250,7 +250,7 @@ a:hover {
 		width: 35%;
 	}
 	.green_line {
-		background-image: url('../pictures/header_bg-green.png');
+		background-image: url('../img/header_bg-green.png');
 	}
 	#kollektion_img {
 		width: 100%;

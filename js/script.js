@@ -103,10 +103,10 @@ function check_width(){
     
     if(window.innerWidth < 1480){
 		//$("#logo"). =
-		$("#logo").attr("src", 'pictures/logo.svg');
+		$("#logo").attr("src", 'img/logo.svg');
 		$("#logo").attr("width", '93');
 	} else {
-		$("#logo").attr("src", 'pictures/logo_extended.svg');
+		$("#logo").attr("src", 'img/logo_extended.svg');
 		$("#logo").attr("width", '206');
 	}
 	
