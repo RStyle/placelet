@@ -1,4 +1,4 @@
-        <article id="kontakt" class="mainarticles">
+        <article id="kontakt" class="mainarticles bottom_border_green">
             <div class="green_line mainarticleheaders line_header"><h1>Start</h1></div>
             Deine Armbänder:
             <table border="1">

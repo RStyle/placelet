@@ -281,21 +281,17 @@ hr {
 	}
 /*---Impressum SECTION---*/
 	#impressum {
-		border-bottom: 5px solid #B7D300;
 		float: left;
 		width: 100%;
 	}
 	#disclaimer {
-		border-bottom: 5px solid #7E74E1;
 		float: left;
 	}
 /*---Kontakt SECTION---*/
 	#kontakt {
-		border-bottom: 5px solid #B7D300;
 	}
 /*---Armband SECTION---*/
 	#armband {
-		border-bottom: 5px solid #B7D300;
 		float: left;
 		width: 73%;		
 	}

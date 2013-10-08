@@ -45,7 +45,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td><strong>Armband ID</strong></td>
-                            <td><strong>4815162342</strong></td>
+                            <td><strong><a href="armband?id=4815162342">4815162342</a></strong></td>
                         </tr>
                         <tr>
                             <td>Käufer</td>
@@ -62,21 +62,21 @@
                     </table>
                 </aside>
 			</div>
-                <div style="clear: both; display: none; color: black;" id="comment1">
-                    <strong>Sam Johnsson</strong>, vor drei Tagen (18:00 05.10.2013)
-                    <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                    Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-                    
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                    <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                    Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-                    
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                </div>
+            <div style="clear: both; display: none; color: black;" id="comment1">
+                <strong>Sam Johnsson</strong>, vor drei Tagen (18:00 05.10.2013)
+                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
 			<hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
         	<div style="width: 100%;">
                 <div style="width: 73%; float: left;">
@@ -99,7 +99,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td><strong>Armband ID</strong></td>
-                            <td><strong>3141592653</strong></td>
+                            <td><strong><a href="armband?id=3141592653">3141592653</a></strong></td>
                         </tr>
                         <tr>
                             <td>Käufer</td>
@@ -116,19 +116,19 @@
                     </table>
                 </aside>
 			</div>
-                <div style="clear: both; display: none; color: black;" id="comment2">
-                    <strong>John Zoidberg</strong>, vor drei Tagen (18:00 05.10.2013)
-                    <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                    Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-                    
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                    <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                    Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-                    
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                </div>
+            <div style="clear: both; display: none; color: black;" id="comment2">
+                <strong>John Zoidberg</strong>, vor drei Tagen (18:00 05.10.2013)
+                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
 		</article>

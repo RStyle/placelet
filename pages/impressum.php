@@ -1,4 +1,4 @@
-        <article id="impressum" class="mainarticles">
+        <article id="impressum" class="mainarticles bottom_border_green">
 			<div class="green_line mainarticleheaders line_header"><h1>Impressum</h1></div>
 			<h3 style="text-align: center;">Placelet, ein <a href="http://juniorprojekt.de" target="_blank">JUNIOR</a>-Unternehmen</h3>
 			<p style="float: left;">
@@ -39,7 +39,7 @@
 				</p>
 			</div>
 		</article>
-		<article id="disclaimer" class="mainarticles">
+		<article id="disclaimer" class="mainarticles bottom_border_blue">
 			<div class="blue_line mainarticleheaders line_header"><h1>Disclaimer</h1></div>
 			<h4>Haftung für Inhalte</h4>
 			<p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Ge-setzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informa-tionen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>

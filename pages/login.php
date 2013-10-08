@@ -1,4 +1,4 @@
-        <article id="kontakt" class="mainarticles">
+        <article id="kontakt" class="mainarticles bottom_border_green">
             <div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename['login'];?></h1></div>
 <?php
 //if($checklogin == true)echo "EINGELOGGT"; else echo "PECH";
