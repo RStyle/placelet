@@ -98,7 +98,7 @@ $("#reg_password2").oninput(function() {
 	}
 });*/
 
-//window.innerWidth
+
 function check_width(){   
     
     if(window.innerWidth < 1480){
