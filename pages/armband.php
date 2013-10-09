@@ -49,7 +49,7 @@
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
                 et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <a href="#" id="toggle_comment1">Kommentare zeigen</a>
+                <span class="toggle_comments pseudo_link" id="toggle_comment1">Kommentare zeigen</span>
             </div>
             <div style="clear: both; display: none; color: black;" id="comment1">
                 <strong>Sam Johnsson</strong>, vor drei Tagen (18:00 05.10.2013)
@@ -80,7 +80,7 @@
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
                 et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <a href="#" id="toggle_comment2">Kommentare zeigen</a>
+                <span class="toggle_comments pseudo_link" id="toggle_comment2">Kommentare zeigen</span>
             </div>
             <div style="clear: both; display: none; color: black;" id="comment2">
                 <strong>John Zoidberg</strong>, vor drei Tagen (18:00 05.10.2013)

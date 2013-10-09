@@ -17,10 +17,10 @@ html {
 /*---allgemeine Tags---*/
 body {
 	color: #234754;
-	width: 70%;
-	padding: 0 10px;
-	min-width: 1000px;
 	margin: 0 auto;
+	min-width: 1000px;
+	padding: 0 10px;
+	width: 70%;
 }
 a {
 	color: #000;
@@ -46,6 +46,14 @@ hr {
 }
 .bottom_border_blue {
 		border-bottom: 5px solid #7E74E1;
+}
+.pseudo_link {
+	cursor: pointer;
+	color: #000;
+	text-decoration: underline;
+}
+.pseudo_link:hover {
+	text-decoration: none;
 }
 /*---HEADER---*/
 #header {
@@ -80,7 +88,7 @@ hr {
 			color: #000;
 		}
 		.headerlist_sub_divider {
-			font-size: small;
+			font-size: 0.8em;
 		}
 		#de_flag {
 			width: 15px;
@@ -178,7 +186,7 @@ hr {
 		padding-left: 0.5em;
 	}
 	.statregister {
-		font-size: large;
+		font-size: 1.2em;
 		font-weight: bold;
 		height: 48%;
 		padding: 1%;
@@ -226,10 +234,10 @@ hr {
 	}
 /*---SECTION---*/
 #section {
+	font-size: 1.15em;
 	margin-top: 2em;
 }
 	.mainarticles {
-		font-size: large;
 		padding-bottom: 1em;
 		margin-bottom: 1em;
 	}
