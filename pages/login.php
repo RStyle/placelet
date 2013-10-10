@@ -54,7 +54,7 @@ if($checklogin == false){
               <td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
             </tr>
             <tr>
-              <td><input type="submit" value="Registrieren"></td>
+              <td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
               <td>&nbsp;</td>
             </tr>
         </form>

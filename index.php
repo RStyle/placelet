@@ -63,6 +63,7 @@ if (!isset($braceID)) { $braceID = ""; }
 //Dateinamen werden Titel zugeordnet
 $pagename = array(
 	"about" => "&Uuml;ber Uns",
+	"armband" => "Armband ID: ".$braceID,
 	"connect" => "Connect",
 	"home" => "Global Placelet. Travel & Connect",
 	"impressum" => "Impressum",
@@ -70,8 +71,7 @@ $pagename = array(
 	"login" =>"Registrieren",
 	"profil" => "Profil",
 	"shop" => "Shop",
-	"start" => "Start",
-	"armband" => "Armband ID: ".$braceID
+	"start" => "Start"
 	);
 	
 $navregister['href'] = "login";	
@@ -118,7 +118,7 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 		<title><?php echo $title; ?></title>
 	</head>
 	<body> 
-<!-----HEADER TAG----->
+<!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">
 				<form name="registerbr" action="login" method="get">
@@ -160,9 +160,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
             </ul>
 		</header>	
-<!-----LOGO----->
+<!--###LOGO###-->
 		<a href="http://placelet.de"><img id="logo" src="img/logo_extended.svg" alt="Placelet"></a>
-<!-----NAV TAG----->
+<!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
 				<li><a href="home" class="mainnavlinks">Home</a></li>
@@ -172,7 +172,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li><a href="<?php echo $navregister['href']; ?>" class="mainnavlinks"><?php echo $navregister['value']; ?></a></li>
 			</ul>
 		</nav>
-<!-----SECTION TAG----->
+<!--###SECTION TAG###-->
         <section id="section">
 <?php
 include_once('./pages/'.$page.'.php');
@@ -189,7 +189,7 @@ if ($checklogin == true) {
 ?>
 
 		</section>
-<!-----FOOTER TAG----->
+<!--###FOOTER TAG###-->
 		<footer id="footer">
 			Placelet - by Daniel, Julian, Roman
 		</footer>
