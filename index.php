@@ -45,10 +45,13 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 	$user = new User($_POST['login'], $db);	
 	$checklogin=$user->login($_POST['password']);
 }elseif(isset($_SESSION['user'])){
-	$user = new User('RSty', $db);
+	$user = new User($_SESSION['user'], $db);
 	$checklogin = $user->logged;
 	//echo $_SESSION['user'].'-'.$_SESSION['dynamic_password'];//Das nervt!!
+}else{
+$user = new User(false, $db);
 }
+
 if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
 	User::register($_POST, $db);
 }

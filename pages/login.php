@@ -1,4 +1,5 @@
 <?php
+if (isset($_SESSION['user'])) {
 	$user->userdetails($_SESSION['user'], $db);
 	$user_details =  $user->userdetails($_SESSION['user'], $db);
 	$user_details['users'] = $user_details[0][0];
@@ -9,9 +10,10 @@
 	}
 	$user_details['bracelets'] = $brids;
 	$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
+}
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
-            <div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename['login'];?></h1></div>
+            <div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page];?></h1></div>
 <?php
 //if($checklogin == true)echo "EINGELOGGT"; else echo "PECH";
 //Wenn nicht eingeloggt
@@ -81,13 +83,15 @@ else {
             </form>
             <?php
 			if (isset($_POST['reg_br'])) {
-				if ($_POST['reg_br'] == $userdetails['brid']) {
+				if ($_POST['reg_br'] == $userdetails['brid'][1]) {
 					echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert';
 				}
 				echo $_POST['reg_br'];
-				echo $userdetails['brid'];
+				print_r ($userdetails['brid']);
 			}
-			echo $userdetails['brid'];
+			echo '<br><br>';
+			print_r ($userdetails['brid']);
+			echo '<br><br>';
 			print_r ($userdetails);
 }
 ?>
