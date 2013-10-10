@@ -3,7 +3,11 @@
 	$user_details =  $user->userdetails($_SESSION['user'], $db);
 	$user_details['users'] = $user_details[0][0];
 	$user_details['addresses'] = $user_details[1][0];
-	static $userdetails = 1;
+	$brids = array();
+	foreach ($user_details[2] as $key => $val) {
+		$brids = array_merge_recursive($val, $brids);
+	}
+	$user_details['bracelets'] = $brids;
 	$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
@@ -83,28 +87,8 @@ else {
 				echo $_POST['reg_br'];
 				echo $userdetails['brid'];
 			}
-				echo $userdetails['brid'];
-				print_r ($userdetails);
-			}echo $user->registerbr_succ;
-			echo '<br><br><br>';
-			print_r ($user_details[2]);
-			$user_details[2];
-			echo '<br><br><br>';
-			print_r ($user_details[2]);
-			echo '<br><br><br>';
-			foreach ($user_details[2] as $key => $val) {
-				//foreach($val as $key => $val) {
-				for ($i = 0; $i <= count($val); $i++) {
-					//if ($key != '0') {//WARUM funktioniert "== 'brid'" nicht?
-						//print_r ($val);
-						
-						$userdetails['bracelets'][$i] = $val[$i];
-						//echo $key.' -- '.$val;
-						print_r ($userdetails['bracelets'][$i]);
-						echo '<br><br>';
-					//}
-				}
-			}
-			print_r ($userdetails['bracelets']);
+			echo $userdetails['brid'];
+			print_r ($userdetails);
+}
 ?>
       </article>

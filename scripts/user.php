@@ -4,7 +4,6 @@ class User
 {
 	protected $db;
 	public $login;
-	public $registerbr_succ = false;
 	public $logged = false; //eingeloggt?;
 	public function __construct($login, $db){
 		$this->db = $db;
@@ -138,7 +137,6 @@ class User
 				':user' => $user,
 				':brid' => $brid)
 			);
-			static $registerbr_succ = true;
 			return true;
 		}else {
 			return false;

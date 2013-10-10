@@ -1,6 +1,10 @@
 <?php
 if (isset($_SESSION['user'])) {
-	getUserDetails ();
+	$user->userdetails($_SESSION['user'], $db);
+	$user_details =  $user->userdetails($_SESSION['user'], $db);
+	$user_details['users'] = $user_details[0][0];
+	$user_details['addresses'] = $user_details[1][0];
+	$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
             <div class="green_line mainarticleheaders line_header"><h1>Profil, <?php echo $_SESSION['user'] ?></h1></div>
