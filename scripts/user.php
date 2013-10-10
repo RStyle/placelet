@@ -4,6 +4,7 @@ class User
 {
 	protected $db;
 	public $login;
+	public $registerbr_succ = false;
 	public $logged = false; //eingeloggt?;
 	public function __construct($login, $db){
 		$this->db = $db;
@@ -81,10 +82,10 @@ class User
 			$sql = "INSERT INTO users (user,email,password,status) VALUES (:user,:email,:password,:status)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user'=>$reg['reg_login'],
-                ':email'=>$reg['reg_email'],
-				':password'=>PassHash::hash($reg['reg_password']),
-				':status'=>0)
+				':user' => $reg['reg_login'],
+                ':email' => $reg['reg_email'],
+				':password' => PassHash::hash($reg['reg_password']),
+				':status' => 0)
 			);
 			
 			$sql = "INSERT INTO user_status (user,code) VALUES (:user,:code)";
@@ -97,9 +98,9 @@ class User
 			$sql = "INSERT INTO addresses (user,last_name,first_name) VALUES (:user,:last_name,:first_name)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user'=>$reg['reg_login'],
-				':last_name'=>$reg['reg_name'],
-				':first_name'=>$reg['reg_first_name'])
+				':user' => $reg['reg_login'],
+				':last_name' => $reg['reg_name'],
+				':first_name' => $reg['reg_first_name'])
 			);
 		
 			return true;
@@ -129,21 +130,33 @@ class User
 		
 	}
 	//Armband registrieren
-	public static function registerbr ($brid, $user, $db) {
-//		$stmt = $db->prepare('SELECT * FROM bracelets WHERE ');
-		
+	public static function registerbr ($brid, $user, $db) {		
 		if (!isset($braces[$brid])) {
-			$sql = "INSERT INTO bracelets (users, id) VALUES (:user, :id)";
+			$sql = "INSERT INTO bracelets (user, brid) VALUES (:user, :brid)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user'=>$user,
-				':id'=>$brid)
+				':user' => $user,
+				':brid' => $brid)
 			);
-			echo 'Das Armband wurde erfolgreich registriert.';
+			static $registerbr_succ = true;
 			return true;
 		}else {
 			return false;
 		}
+	}
+	//Userdetails abfragen
+	public static function userdetails($username, $db) {
+		$sql = "SELECT user, email, status FROM users WHERE user = '".$username."'";
+		$stmt = $db->query($sql);
+		$result[0] = $stmt->fetchAll();
+		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country, status FROM addresses WHERE user = '".$username."'";
+		$stmt = $db->query($sql);
+		$result[1] = $stmt->fetchAll();
+		$sql = "SELECT brid FROM bracelets WHERE user = '".$username."'";
+		$stmt = $db->query($sql);
+		$result[2] = $stmt->fetchAll();
+		return $result;
+		
 	}
 	
 }

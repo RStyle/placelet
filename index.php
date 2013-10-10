@@ -55,7 +55,6 @@ if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST[
 //Armband registrieren
 if (isset($_POST['reg_br']) && isset($_SESSION['user']) && $_POST['submit'] == "Armband registrieren") {
 	User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
-	echo 'isset';
 }
 //--//
 
@@ -136,7 +135,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 ?>
 			<a href="#" id="headerlogin"><img src="img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
-				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
+				<form name="login" id="form_login" action="start" method="post">
 					  <label for="login" id="label_login">Benutzername</label><br>
 					  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" required><br>
 					  <label for="password" id="label_password">Passwort</label><br>

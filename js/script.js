@@ -150,3 +150,9 @@ $(document).ready(function(){
     $("#comment2").toggle();
   });
 });
+
+$(document).ready(function(){
+  $("#toggle_comment3").click(function(){
+    $("#comment3").toggle();
+  });
+});

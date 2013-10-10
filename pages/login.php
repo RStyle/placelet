@@ -1,3 +1,11 @@
+<?php
+	$user->userdetails($_SESSION['user'], $db);
+	$user_details =  $user->userdetails($_SESSION['user'], $db);
+	$user_details['users'] = $user_details[0][0];
+	$user_details['addresses'] = $user_details[1][0];
+	static $userdetails = 1;
+	$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
+?>
         <article id="kontakt" class="mainarticles bottom_border_green">
             <div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename['login'];?></h1></div>
 <?php
@@ -67,7 +75,36 @@ else {
                 <input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
                 <input type="submit" name="submit" value="Armband registrieren">
             </form>
-<?php
-}
+            <?php
+			if (isset($_POST['reg_br'])) {
+				if ($_POST['reg_br'] == $userdetails['brid']) {
+					echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert';
+				}
+				echo $_POST['reg_br'];
+				echo $userdetails['brid'];
+			}
+				echo $userdetails['brid'];
+				print_r ($userdetails);
+			}echo $user->registerbr_succ;
+			echo '<br><br><br>';
+			print_r ($user_details[2]);
+			$user_details[2];
+			echo '<br><br><br>';
+			print_r ($user_details[2]);
+			echo '<br><br><br>';
+			foreach ($user_details[2] as $key => $val) {
+				//foreach($val as $key => $val) {
+				for ($i = 0; $i <= count($val); $i++) {
+					//if ($key != '0') {//WARUM funktioniert "== 'brid'" nicht?
+						//print_r ($val);
+						
+						$userdetails['bracelets'][$i] = $val[$i];
+						//echo $key.' -- '.$val;
+						print_r ($userdetails['bracelets'][$i]);
+						echo '<br><br>';
+					//}
+				}
+			}
+			print_r ($userdetails['bracelets']);
 ?>
       </article>

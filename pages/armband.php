@@ -61,6 +61,37 @@
                 et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             </div>
+<!----HR---><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
+            <div style="float: left;">
+                <h3>Berlin, Deutschland</h3>
+                <a href="pictures/bracelets/image-2.jpg" data-lightbox="pictures" title="London, England">
+                    <img src="pictures/bracelets/thumb-2.jpg" alt="London, England" style="width: 40%; height: 300px; float: left; margin-right: 1em; margin-bottom: 1em;">
+                </a>
+                25 Dezember 2013
+                <h4>Beschreibung</h4>
+                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <span class="toggle_comments pseudo_link" id="toggle_comment3">Kommentare zeigen</span>
+            </div>
+            <div style="clear: both; display: none; color: black;" id="comment3">
+                <strong>John Locke</strong>, in 2 Monaten (18:00 26.12.2013)
+                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
 		</article>
         <aside class="side_container" id="bracelet_props">
             <h1>Statistik</h1>

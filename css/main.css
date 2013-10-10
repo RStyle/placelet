@@ -40,6 +40,9 @@ hr {
 	margin: 2em 0 2em 0;
 	height: 0px;
 }
+th {
+	text-align: left;
+}
 /*---allgemeine Styles---*/
 .bottom_border_green {
 		border-bottom: 5px solid #B7D300;
