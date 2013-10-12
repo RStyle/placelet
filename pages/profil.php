@@ -48,21 +48,26 @@ if (isset($_SESSION['user'])) {
                         <th>registriert am</th>
                         <th>Anzahl Besitzer</th>
                     </tr>
-                    <tr>
-                        <td><a href="armband?id=1">Armband 1</a></td>
-                        <td>01.10.2013</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td><a href="armband?id=1">Armband 2</a></td>
-                        <td>10.10.2013</td>
-                        <td>31</td>
-                    </tr>
+                    <?php
+						foreach ($userdetails['brid'] as $val => $key) {
+							$armbaender['id'][$val] = $key;
+						}
+						foreach ($userdetails['date'] as $val => $key) {
+							$armbaender['date'][$val] = $key;
+						}
+						for ($i = 0; $i < count($armbaender['id']); $i++) {
+							echo '
+							<tr>
+								<td><a href="armband?id='.$armbaender['id'][$i].'">Armband '.$armbaender['id'][$i].'</a></td>
+								<td>'.$armbaender['date'][$i].'</td>
+								<td>31</td>
+							</tr>';
+						}
+					?>
                 </table>
             </div>
             <div style="clear: both;">
             	&nbsp;
-                <?php $user->userdetails('test314', $db) ?>
             </div>
         </article>
 <?php 

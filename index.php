@@ -43,7 +43,7 @@ if(isset($_GET['logout']))
 
 if(isset($_POST['login']) && isset($_POST['password'])){
 	$user = new User($_POST['login'], $db);	
-	$checklogin=$user->login($_POST['password']);
+	$checklogin = $user->login($_POST['password']);
 }elseif(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
 	$checklogin = $user->logged;

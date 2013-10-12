@@ -94,7 +94,7 @@ class User
 				':code'=>substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20)) // Ein 60 buchstabenlanger Zufallscode
 			);
 			
-			$sql = "INSERT INTO addresses (user,last_name,first_name) VALUES (:user,:last_name,:first_name)";
+			$sql = "INSERT INTO addresses (user, last_name, first_name) VALUES (:user,:last_name,:first_name)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
 				':user' => $reg['reg_login'],
@@ -131,15 +131,14 @@ class User
 	//Armband registrieren
 	public static function registerbr ($brid, $user, $db) {		
 		if (!isset($braces[$brid])) {
-			if (true) {
-				$sql = "INSERT INTO bracelets (user, brid) VALUES (:user, :brid)";
+				$sql = "INSERT INTO bracelets (user, brid, date) VALUES (:user, :brid, :date)";
 				$q = $db->prepare($sql);
 				$q->execute(array(
 					':user' => $user,
-					':brid' => $brid)
+					':brid' => $brid,
+					':date' => date("Y-m-d"))
 				);
 				return true;
-			}
 		}else {
 			return false;
 		}
@@ -152,10 +151,10 @@ class User
 		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country, status FROM addresses WHERE user = '".$username."'";
 		$stmt = $db->query($sql);
 		$result[1] = $stmt->fetchAll();
-		$sql = "SELECT brid FROM bracelets WHERE user = '".$username."'";
+		$sql = "SELECT brid, date FROM bracelets WHERE user = '".$username."'";
 		$stmt = $db->query($sql);
 		$result[2] = $stmt->fetchAll();
-		
+
 		$user_details = $result;
 		$user_details['users'] = $user_details[0][0];
 		$user_details['addresses'] = $user_details[1][0];
@@ -165,6 +164,7 @@ class User
 		}
 		$user_details['bracelets'] = $brids;
 		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
+		print_r ($userdetails);
 		return $userdetails;
 	}
 	

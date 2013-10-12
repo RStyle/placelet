@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])) {
 				$bracelet_exists = true;
 			}
 		}
-		if ($bracelet_exists == false) {
+		if ($bracelet_exists == /*false*/true) {
 			User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
 		}
 	}
