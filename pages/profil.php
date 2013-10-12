@@ -60,7 +60,7 @@ if (isset($_SESSION['user'])) {
 							<tr>
 								<td><a href="armband?id='.$armbaender['id'][$i].'">Armband '.$armbaender['id'][$i].'</a></td>
 								<td>'.$armbaender['date'][$i].'</td>
-								<td>31</td>
+								<td>noch nicht implementiert</td>
 							</tr>';
 						}
 					?>

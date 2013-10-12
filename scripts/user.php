@@ -23,7 +23,7 @@ class User
 					$this->logged = true;
 				}
 			} catch(PDOException $e) {
-				die('ERROR: ' . $e->getCode());
+				die('ERROR: ' . $e->getMessage());
 			}
 		}
 	}
@@ -140,7 +140,12 @@ class User
 						':date' => date("Y-m-d"))
 					);
 				} catch(PDOException $e) {
-					return false;
+					if ($e->getCode() == 23000) {
+						return false;
+					} else {
+						die('ERROR: ' . $e->getMessage());
+						return false;
+					}
 				}
 				return true;
 		}
