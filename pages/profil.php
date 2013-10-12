@@ -1,15 +1,6 @@
 <?php
 if (isset($_SESSION['user'])) {
-	$user->userdetails($_SESSION['user'], $db);
-	$user_details =  $user->userdetails($_SESSION['user'], $db);
-	$user_details['users'] = $user_details[0][0];
-	$user_details['addresses'] = $user_details[1][0];
-	$brids = array();
-	foreach ($user_details[2] as $key => $val) {
-		$brids = array_merge_recursive($val, $brids);
-	}
-	$user_details['bracelets'] = $brids;
-	$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
+	$userdetails = $user->userdetails($_SESSION['user'], $db);
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
             <div class="green_line mainarticleheaders line_header"><h1>Profil, <?php echo $_SESSION['user'] ?></h1></div>

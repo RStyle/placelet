@@ -153,8 +153,18 @@ class User
 		$sql = "SELECT brid FROM bracelets WHERE user = '".$username."'";
 		$stmt = $db->query($sql);
 		$result[2] = $stmt->fetchAll();
-		return $result;
+		//return $result;
 		
+		$user_details = $result;
+		$user_details['users'] = $user_details[0][0];
+		$user_details['addresses'] = $user_details[1][0];
+		$brids = array();
+		foreach ($user_details[2] as $key => $val) {
+			$brids = array_merge_recursive($val, $brids);
+		}
+		$user_details['bracelets'] = $brids;
+		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
+		return $userdetails;
 	}
 	
 }
