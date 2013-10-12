@@ -23,7 +23,7 @@ class User
 					$this->logged = true;
 				}
 			} catch(PDOException $e) {
-				die('ERROR: ' . $e->getMessage());
+				die('ERROR: ' . $e->getCode());
 			}
 		}
 	}
@@ -131,16 +131,18 @@ class User
 	//Armband registrieren
 	public static function registerbr ($brid, $user, $db) {		
 		if (!isset($braces[$brid])) {
-				$sql = "INSERT INTO bracelets (user, brid, date) VALUES (:user, :brid, :date)";
-				$q = $db->prepare($sql);
-				$q->execute(array(
-					':user' => $user,
-					':brid' => $brid,
-					':date' => date("Y-m-d"))
-				);
+				try {
+					$sql = "INSERT INTO bracelets (user, brid, date) VALUES (:user, :brid, :date)";
+					$q = $db->prepare($sql);
+					$q->execute(array(
+						':user' => $user,
+						':brid' => $brid,
+						':date' => date("Y-m-d"))
+					);
+				} catch(PDOException $e) {
+					return false;
+				}
 				return true;
-		}else {
-			return false;
 		}
 	}
 	//Userdetails abfragen
@@ -151,7 +153,7 @@ class User
 		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country, status FROM addresses WHERE user = '".$username."'";
 		$stmt = $db->query($sql);
 		$result[1] = $stmt->fetchAll();
-		$sql = "SELECT brid, date FROM bracelets WHERE user = '".$username."'";
+		$sql = "SELECT brid, date FROM bracelets WHERE user = '".$username."' ORDER BY  `bracelets`.`date` ASC ";
 		$stmt = $db->query($sql);
 		$result[2] = $stmt->fetchAll();
 
@@ -164,7 +166,6 @@ class User
 		}
 		$user_details['bracelets'] = $brids;
 		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
-		print_r ($userdetails);
 		return $userdetails;
 	}
 	

@@ -3,15 +3,7 @@ if (isset($_SESSION['user'])) {
 	$userdetails = $user->userdetails($_SESSION['user'], $db);
 	//Armband registrieren
 	if (isset($_POST['reg_br']) && $_POST['submit'] == "Armband registrieren") {
-		$bracelet_exists = false;
-		foreach ($userdetails['brid'] as $key => $value) {
-			if ($value == $_POST['reg_br']) {
-				$bracelet_exists = true;
-			}
-		}
-		if ($bracelet_exists == /*false*/true) {
-			User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
-		}
+			$bracelet_registered = User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
 	}
 }
 ?>
@@ -78,10 +70,10 @@ if($checklogin == false){
 <?php
 } else {
 	if (isset($_POST['reg_br'])) {
-		if ($bracelet_exists == false) {
+		if ($bracelet_registered == true) {
 			echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert<br><br>';
 		} else {
-			echo 'Armband '.$_POST['reg_br'].' wurde schon registriert';
+			echo 'Armband '.$_POST['reg_br'].' wurde schon registriert<br><br>';
 		}
 	}
 ?>
