@@ -84,11 +84,13 @@ if($checklogin == false){
 			echo 'Armband '.$_POST['reg_br'].' wurde schon registriert';
 		}
 	}
-}
 ?>
             <form name="registerbr" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <label for="reg_br">Armband registrieren</label>
                 <input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
                 <input type="submit" name="submit" value="Armband registrieren">
             </form>
+<?php
+}
+?>
       </article>
