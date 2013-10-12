@@ -131,13 +131,15 @@ class User
 	//Armband registrieren
 	public static function registerbr ($brid, $user, $db) {		
 		if (!isset($braces[$brid])) {
-			$sql = "INSERT INTO bracelets (user, brid) VALUES (:user, :brid)";
-			$q = $db->prepare($sql);
-			$q->execute(array(
-				':user' => $user,
-				':brid' => $brid)
-			);
-			return true;
+			if (true) {
+				$sql = "INSERT INTO bracelets (user, brid) VALUES (:user, :brid)";
+				$q = $db->prepare($sql);
+				$q->execute(array(
+					':user' => $user,
+					':brid' => $brid)
+				);
+				return true;
+			}
 		}else {
 			return false;
 		}
@@ -153,7 +155,6 @@ class User
 		$sql = "SELECT brid FROM bracelets WHERE user = '".$username."'";
 		$stmt = $db->query($sql);
 		$result[2] = $stmt->fetchAll();
-		//return $result;
 		
 		$user_details = $result;
 		$user_details['users'] = $user_details[0][0];

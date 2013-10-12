@@ -1,6 +1,18 @@
 <?php
 if (isset($_SESSION['user'])) {
 	$userdetails = $user->userdetails($_SESSION['user'], $db);
+	//Armband registrieren
+	if (isset($_POST['reg_br']) && $_POST['submit'] == "Armband registrieren") {
+		$bracelet_exists = false;
+		foreach ($userdetails['brid'] as $key => $value) {
+			if ($value == $_POST['reg_br']) {
+				$bracelet_exists = true;
+			}
+		}
+		if ($bracelet_exists == false) {
+			User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
+		}
+	}
 }
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
@@ -64,26 +76,19 @@ if($checklogin == false){
             </tr>
         </form>
 <?php
+} else {
+	if (isset($_POST['reg_br'])) {
+		if ($bracelet_exists == false) {
+			echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert<br><br>';
+		} else {
+			echo 'Armband '.$_POST['reg_br'].' wurde schon registriert';
+		}
+	}
 }
-else {
 ?>
             <form name="registerbr" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                 <label for="reg_br">Armband registrieren</label>
                 <input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
                 <input type="submit" name="submit" value="Armband registrieren">
             </form>
-            <?php
-			if (isset($_POST['reg_br'])) {
-				if ($_POST['reg_br'] == $userdetails['brid'][1]) {
-					echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert';
-				}
-				echo $_POST['reg_br'];
-				print_r ($userdetails['brid']);
-			}
-			echo '<br><br>';
-			print_r ($userdetails['brid']);
-			echo '<br><br>';
-			print_r ($userdetails);
-}
-?>
       </article>

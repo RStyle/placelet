@@ -55,10 +55,6 @@ $user = new User(false, $db);
 if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
 	User::register($_POST, $db);
 }
-//Armband registrieren
-if (isset($_POST['reg_br']) && isset($_SESSION['user']) && $_POST['submit'] == "Armband registrieren") {
-	User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
-}
 //--//
 
 if (!isset($braceID)) { $braceID = ""; }
