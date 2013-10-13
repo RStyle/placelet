@@ -1,9 +1,9 @@
 <?php
 if (isset($_SESSION['user'])) {
-	$userdetails = $user->userdetails($_SESSION['user'], $db);
+	$userdetails = $user->userdetails();
 	//Armband registrieren
 	if (isset($_POST['reg_br']) && $_POST['submit'] == "Armband registrieren") {
-			$bracelet_registered = User::registerbr($_POST['reg_br'], $_SESSION['user'], $db);
+			$bracelet_registered = $user->registerbr($_POST['reg_br']);
 	}
 }
 ?>

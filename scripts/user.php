@@ -129,13 +129,13 @@ class User
 		
 	}
 	//Armband registrieren
-	public static function registerbr ($brid, $user, $db) {		
+	public function registerbr ($brid) {		
 		if (!isset($braces[$brid])) {
 				try {
 					$sql = "INSERT INTO bracelets (user, brid, date) VALUES (:user, :brid, :date)";
-					$q = $db->prepare($sql);
+					$q = $this->db->prepare($sql);
 					$q->execute(array(
-						':user' => $user,
+						':user' => $this->login,
 						':brid' => $brid,
 						':date' => date("Y-m-d"))
 					);
@@ -151,15 +151,15 @@ class User
 		}
 	}
 	//Userdetails abfragen
-	public static function userdetails($username, $db) {
-		$sql = "SELECT user, email, status FROM users WHERE user = '".$username."'";
-		$stmt = $db->query($sql);
+	public function userdetails() {
+		$sql = "SELECT user, email, status FROM users WHERE user = '".$this->login."'";
+		$stmt = $this->db->query($sql);
 		$result[0] = $stmt->fetchAll();
-		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country, status FROM addresses WHERE user = '".$username."'";
-		$stmt = $db->query($sql);
+		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country, status FROM addresses WHERE user = '".$this->login."'";
+		$stmt = $this->db->query($sql);
 		$result[1] = $stmt->fetchAll();
-		$sql = "SELECT brid, date FROM bracelets WHERE user = '".$username."' ORDER BY  `bracelets`.`date` ASC ";
-		$stmt = $db->query($sql);
+		$sql = "SELECT brid, date FROM bracelets WHERE user = '".$this->login."' ORDER BY  `bracelets`.`date` ASC ";
+		$stmt = $this->db->query($sql);
 		$result[2] = $stmt->fetchAll();
 
 		$user_details = $result;

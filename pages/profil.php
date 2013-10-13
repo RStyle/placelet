@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['user'])) {
-	$userdetails = $user->userdetails($_SESSION['user'], $db);
+	$userdetails = $user->userdetails();
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
             <div class="green_line mainarticleheaders line_header"><h1>Profil, <?php echo $_SESSION['user'] ?></h1></div>
