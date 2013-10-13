@@ -340,34 +340,16 @@ th {
     }
     .start-info th {
         color: #B7D300;
-        font-family: Verdana, Times New Roman;
+        font-family: Verdana, Geneva, sans-serif;
         font-size: 1em;                             
         font-weight: bolder;
     }
     
 	.bracelet-props{
-	   background-color: #4C4C4C;
-       border: none;
+	   background-color: #4C4C4C !important;
+       border: none !important;
 	   color: #FFF;
-       float: right;
-       padding: 1.25em;
-       width: 20%;
-	}
-	   
-	   .bracelet-props h1 {
-            font-family: Verdana, Geneva, sans-serif;
-    		font-size: 1.5em;
-    		margin-top: 0px;    
-        }
-        
-        .bracelet-props td {
-            font-family: Verdana, Geneva, sans-serif;
-    		font-size: 0.8em;
-    		margin: 0;
-    		padding: 4px;
-    		
-        }
-        
+	}        
     .start-desc {
         float: left;
         font-size: 1em;
@@ -379,15 +361,15 @@ th {
     }
         .desc-header {
             color: #B7D300;
-            font-family: Verdana, Times New Roman;
+            font-family: Verdana, Geneva, sans-serif;;
             font-size: 1em;
             font-weight: bolder;
         }
         
         .toggle_comments {
-            background-color: #4C4C4C;    
+            background-color: #4C4C4C;   
             color: #FFF;
-            font-family: Verdana, Times;
+            font-family: Verdana, Geneva, sans-serif;
             padding: 2px 4px;
             text-decoration: none;
         }
@@ -397,21 +379,25 @@ th {
 	border-left: black solid 1px;
 	background-color: lightgrey;
     float: right;
+	font-family: Verdana, Geneva, sans-serif;
     padding: 1.25em;
     width: 20%;
     
 }
 	.side_container h1{
-		font-family: Verdana, Geneva, sans-serif;
 		font-size: 1.5em;
 		margin-top: 0px;
 	
 	}
 	.side_container p {
-		font-family: Verdana, Geneva, sans-serif;
 		font-size: 0.85em;
 		padding: 0;
 		margin: 0;
+	}        
+	.side_container td {
+		font-size: 0.8em;
+		margin: 0;
+		padding: 4px;
 	}
 /*---SIDENAV---*/
 #sidenav {

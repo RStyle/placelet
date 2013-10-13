@@ -37,11 +37,11 @@
                     
                     <table class="start-info">
                    		<tr>
-                       		<th>Uploader:</th>
-							<td>Daniel S.</td>
+                            <th>Uploader:</th>
+                            <td>Daniel S.</td>
                         </tr>
                     	<tr>
-                        	<th>Datum</th>
+                            <th>Datum</th>
                             <td>13.10.2013</td>
                         </tr>
                     	<tr>
@@ -62,7 +62,7 @@
                     </p>
                     
                 </div>
-                <aside class="bracelet-props">
+                <aside class="bracelet-props side_container">
                     <h1>Statistik</h1>
                     <table style="width: 100%;">
                         <tr>
@@ -79,7 +79,7 @@
                         </tr>
                         <tr>
                             <td>Letzter Ort</td>
-                            <td>Sydney, Australia</td>
+							<td>Sydney, Australia</td>
                         </tr>
                     </table>
                 </aside>
@@ -137,7 +137,7 @@
                         <span class="pseudo_link toggle_comments" id="toggle_comment2">Kommentare zeigen</span>
                     </p>
                 </div>
-                <aside class="bracelet-props">
+                <aside class="bracelet-props side_container">
                     <h1>Statistik</h1>
                     <table style="width: 100%;">
                         <tr>
