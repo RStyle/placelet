@@ -1,7 +1,7 @@
 		<article id="placelet_stats" class="mainarticles">
         	<table>
             	<tr>
-                	<td>registrierter Armbänder</td>
+                	<td>registrierte Armbänder</td>
                 	<td>351</td>
                 </tr>
                 <tr>
@@ -15,32 +15,42 @@
                 <tr>
                     <td>Benutzer mit den meisten Armbändern</td>
                     <td>JohnZoidberg</td>
-                </tr>
-                <tr>
+                </tr>                                                       <tr>
                 	<td>am weitesten gereistes Armband</td>
                     <td><a href="armband?id=516515">516515</a></td>
                 </tr>
             </table>
         </article>
+        
+<!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
+        
         <h1 style="text-decoration: underline;">Neueste Bilder</h1>
         <article id="recent_pics" class="mainarticles">
         	<div style="width: 100%;">
                 <div style="width: 73%; float: left;">
-                    <h3>Sydney, Australia</h3>
-                    <a href="pictures/bracelets/image-1.jpg" data-lightbox="pictures" title="Sydney, Australia">
-                        <img src="pictures/bracelets/thumb-1.jpg" alt="Sydney, Australia" style="width: 40%; height: 300px; float: left; margin-right: 1em; margin-bottom: 1em;">
+
+                    <a href="pictures/bracelets/image-1.jpg" data-lightbox="pictures" title="Sydney, Australia" >
+                        <img src="pictures/bracelets/thumb-1.jpg" alt="Sydney, Australia" class="start-picture">
+                        <img src="img/triangle.png" alt="" style="margin-top: 10px; float: left">
                     </a>
-                    22 September 2004
-                    <h4>Beschreibung</h4>
-                    <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                    Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
                     
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                    <span class="toggle_comments pseudo_link" id="toggle_comment1">Kommentare zeigen</span>
+                    <p class="start-info"><span>Uploader:</span> Daniel S.   <br/>
+                    <span>Datum:</span> 13.10.2013       <br/>
+                    <span>Ort:</span> Sydney, Australia</p>  
+                    
+                    <p class="start-desc">
+                        <span class="desc-header">Beschreibung:</span><br/>
+                        Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                        Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+        
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                        et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.      
+                        <br/> <br/>
+                        <span class="pseudo_link toggle_comments" id="toggle_comment1">Kommentare zeigen</span>
+                    </p>
+                    
                 </div>
-                <aside class="side_container" id="bracelet_props">
+                <aside class="bracelet-props">
                     <h1>Statistik</h1>
                     <table style="width: 100%;">
                         <tr>
@@ -78,23 +88,33 @@
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             </div>
 			<hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
-        	<div style="width: 100%;">
+				
+<!-- NÄCHSTER UPLOAD ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->			
+			
+            <div style="width: 100%;">
                 <div style="width: 73%; float: left;">
-                    <h3>Berlin, Deutschland</h3>
-                    <a href="pictures/bracelets/image-2.jpg" data-lightbox="pictures" title="London, England">
-                        <img src="pictures/bracelets/thumb-2.jpg" alt="London, England" style="width: 40%; height: 300px; float: left; margin-right: 1em; margin-bottom: 1em;">
-                    </a>
-                    01 Oktober 2013
-                    <h4>Beschreibung</h4>
-                    <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                    Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
                     
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                    et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                    <span class="toggle_comments pseudo_link" id="toggle_comment2">Kommentare zeigen</span>
+                    <a href="pictures/bracelets/image-2.jpg" data-lightbox="pictures" title="Sydney, Australia" >
+                        <img src="pictures/bracelets/thumb-2.jpg" alt="London, England" class="start-picture">
+                        <img src="img/triangle.png" alt="" style="margin-top: 10px; float: left">
+                    </a>
+                    
+                    <p class="start-info"><span>Uploader:</span> Julian Z.   <br/>
+                    <span>Datum:</span> 13.10.2013       <br/>
+                    <span>Ort:</span> London, England</p>
+
+                    <p class="start-desc">
+                        <span class="desc-header">Beschreibung:</span><br/>
+                        Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                        Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
+
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                        et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                        <br/> <br/>
+                        <span class="pseudo_link toggle_comments" id="toggle_comment2">Kommentare zeigen</span>
+                    </p>
                 </div>
-                <aside class="side_container" id="bracelet_props">
+                <aside class="bracelet-props">
                     <h1>Statistik</h1>
                     <table style="width: 100%;">
                         <tr>

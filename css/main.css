@@ -258,6 +258,8 @@ th {
 				padding: 0 1em;
 			}
 /*---Home SECTION---*/
+
+
 	#reisearmband {
 		float: left;
 		width: 35%;
@@ -319,10 +321,80 @@ th {
 		#placelet_stats a {
 			color: #FFF;
 		}
-	#recent_pics {
+		
+	.start-picture {
+	   width: 400px;
+       height: 300px; 
+       float: left; 
+       margin-right: 0em; 
+       margin-bottom: 1em;
+	   border: 8px solid #CDCDCD;
 	}
-	#bracelet_props {
+	
+	.start-info {
+        float: left; 
+        margin: 0px;
+        width: 400px;
+        
+        padding: 0px 10px;
+        font-size: 1.25em;
+    }
+    .start-info span {
+        font-size: 1em;                             
+        font-weight: bolder;
+        font-family: Verdana, Times New Roman;
+        color: #B7D300;
+    }
+    
+	.bracelet-props{
+
+        float: right;
+        padding: 1.25em;
+        width: 20%;
+       border: none;
+	   background-color: #4C4C4C;
+	   color: #FFF;
 	}
+	   
+	   .bracelet-props h1 {
+            font-family: Verdana, Geneva, sans-serif;
+    		font-size: 1.5em;
+    		margin-top: 0px;    
+        }
+        
+        .bracelet-props td {
+            font-family: Verdana, Geneva, sans-serif;
+    		font-size: 0.8em;
+    		padding: 4px;
+    		margin: 0;
+    		
+        }
+        
+    .start-desc {
+        float: left;
+        margin-left: 20px;
+        margin-top: 15px;
+        width: 400px;
+
+        padding: 10px;
+        padding-top: 0px;
+        font-size: 1em;
+    }
+        .desc-header {
+            font-size: 1em;
+            font-weight: bolder;
+            font-family: Verdana, Times New Roman;
+            color: #B7D300;
+        }
+        
+        .toggle_comments {
+            background-color: #4C4C4C;    
+            color: #FFF;
+            padding: 2px 4px;
+            text-decoration: none;
+            font-family: Verdana, Times;
+        }
+        
 /*---Side Container ASIDE---*/
 .side_container {
 	border-left: black solid 1px;
