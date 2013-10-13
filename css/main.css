@@ -323,37 +323,35 @@ th {
 		}
 		
 	.start-picture {
-	   width: 400px;
-       height: 300px; 
-       float: left; 
-       margin-right: 0em; 
-       margin-bottom: 1em;
 	   border: 8px solid #CDCDCD;
+       float: left; 
+       height: 300px; 
+       margin-bottom: 1em;
+       margin-right: 0em; 
+	   width: 400px;
 	}
 	
 	.start-info {
         float: left; 
-        margin: 0px;
-        width: 400px;
-        
-        padding: 0px 10px;
         font-size: 1.25em;
+        margin: 0px;
+        padding: 0px 10px;
+        width: 400px;
     }
-    .start-info span {
+    .start-info th {
+        color: #B7D300;
+        font-family: Verdana, Times New Roman;
         font-size: 1em;                             
         font-weight: bolder;
-        font-family: Verdana, Times New Roman;
-        color: #B7D300;
     }
     
 	.bracelet-props{
-
-        float: right;
-        padding: 1.25em;
-        width: 20%;
-       border: none;
 	   background-color: #4C4C4C;
+       border: none;
 	   color: #FFF;
+       float: right;
+       padding: 1.25em;
+       width: 20%;
 	}
 	   
 	   .bracelet-props h1 {
@@ -365,34 +363,33 @@ th {
         .bracelet-props td {
             font-family: Verdana, Geneva, sans-serif;
     		font-size: 0.8em;
-    		padding: 4px;
     		margin: 0;
+    		padding: 4px;
     		
         }
         
     .start-desc {
         float: left;
+        font-size: 1em;
         margin-left: 20px;
         margin-top: 15px;
-        width: 400px;
-
         padding: 10px;
         padding-top: 0px;
-        font-size: 1em;
+        width: 400px;
     }
         .desc-header {
+            color: #B7D300;
+            font-family: Verdana, Times New Roman;
             font-size: 1em;
             font-weight: bolder;
-            font-family: Verdana, Times New Roman;
-            color: #B7D300;
         }
         
         .toggle_comments {
             background-color: #4C4C4C;    
             color: #FFF;
+            font-family: Verdana, Times;
             padding: 2px 4px;
             text-decoration: none;
-            font-family: Verdana, Times;
         }
         
 /*---Side Container ASIDE---*/

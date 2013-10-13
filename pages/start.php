@@ -15,7 +15,8 @@
                 <tr>
                     <td>Benutzer mit den meisten Armbändern</td>
                     <td>JohnZoidberg</td>
-                </tr>                                                       <tr>
+                </tr> 
+                <tr>
                 	<td>am weitesten gereistes Armband</td>
                     <td><a href="armband?id=516515">516515</a></td>
                 </tr>
@@ -34,9 +35,20 @@
                         <img src="img/triangle.png" alt="" style="margin-top: 10px; float: left">
                     </a>
                     
-                    <p class="start-info"><span>Uploader:</span> Daniel S.   <br/>
-                    <span>Datum:</span> 13.10.2013       <br/>
-                    <span>Ort:</span> Sydney, Australia</p>  
+                    <table class="start-info">
+                   		<tr>
+                       		<th>Uploader:</th>
+							<td>Daniel S.</td>
+                        </tr>
+                    	<tr>
+                        	<th>Datum</th>
+                            <td>13.10.2013</td>
+                        </tr>
+                    	<tr>
+                            <th>Ort:</th>
+                            <td>Sydney, Australia</td>
+                        </tr>
+                    </table> 
                     
                     <p class="start-desc">
                         <span class="desc-header">Beschreibung:</span><br/>
@@ -99,9 +111,20 @@
                         <img src="img/triangle.png" alt="" style="margin-top: 10px; float: left">
                     </a>
                     
-                    <p class="start-info"><span>Uploader:</span> Julian Z.   <br/>
-                    <span>Datum:</span> 13.10.2013       <br/>
-                    <span>Ort:</span> London, England</p>
+                    <table class="start-info">
+                   		<tr>
+                       		<th>Uploader:</th>
+							<td>John L.</td>
+                        </tr>
+                    	<tr>
+                        	<th>Datum</th>
+                            <td>13.10.2013</td>
+                        </tr>
+                    	<tr>
+                            <th>Ort:</th>
+                            <td>London, England</td>
+                        </tr>
+                    </table> 
 
                     <p class="start-desc">
                         <span class="desc-header">Beschreibung:</span><br/>

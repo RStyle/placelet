@@ -158,7 +158,7 @@ class User
 			$bracelet = $stmt->fetchAll();
 			if ($bracelet == NULL) {
 				return '0';
-			} elseif ($bracelet[0]['user'] == 'none') {
+			} elseif ($bracelet[0]['user'] == NULL ) {
 				$sql = "UPDATE bracelets SET user=:user, date=:date WHERE brid=:brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
