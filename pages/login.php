@@ -70,11 +70,24 @@ if($checklogin == false){
 <?php
 } else {
 	if (isset($_POST['reg_br'])) {
-		if ($bracelet_registered == true) {
-			echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert<br><br>';
-		} else {
-			echo 'Armband '.$_POST['reg_br'].' wurde schon registriert<br><br>';
+		switch ($bracelet_registered) {
+			case '0':
+				echo 'Dieses Armband gibt es nicht!';
+				break;
+			case 1:
+				echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert.';
+				break;
+			case 2:
+				echo 'Armband '.$_POST['reg_br'].' wurde schon auf dich registriert.';
+				break;
+			case 3:
+				echo 'Dieses Armband wurde schon auf einen anderen Benutzer registriert.';
+				break;
+			default:
+				echo '$bracelet_registered hat einen unbekannten Wert<br>
+				bitte melde diesen Fall dem <a href="mailto:support@placelet.de">Support</a>.';
 		}
+		echo '<br><br>';
 	}
 ?>
             <form name="registerbr" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">

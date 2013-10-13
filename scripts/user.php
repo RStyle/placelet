@@ -128,7 +128,7 @@ class User
 		
 		
 	}
-	//Armband registrieren
+/*	//Armband neu registrieren
 	public function registerbr ($brid) {		
 		if (!isset($braces[$brid])) {
 				try {
@@ -149,7 +149,35 @@ class User
 				}
 				return true;
 		}
+	}*/
+	//Armband registrieren
+	public function registerbr ($brid) {
+		try {
+			$sql = "SELECT user FROM bracelets WHERE brid = ".$brid;
+			$stmt = $this->db->query($sql);
+			$bracelet = $stmt->fetchAll();
+			if ($bracelet == NULL) {
+				return '0';
+			} elseif ($bracelet[0]['user'] == 'none') {
+				$sql = "UPDATE bracelets SET user=:user, date=:date WHERE brid=:brid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':user' => $this->login,
+					':brid' => $brid,
+					':date' => date("Y-m-d"))//time() wäre einfacher umzuwandeln
+				);
+				return 1;
+			}elseif ($bracelet[0]['user'] == $this->login) {
+				return 2;
+			}else {
+				return 3;
+			}
+		} catch (PDOException $e) {
+				die('ERROR: ' . $e->getMessage());
+				return false;
+		}
 	}
+	
 	//Userdetails abfragen
 	public function userdetails() {
 		$sql = "SELECT user, email, status FROM users WHERE user = '".$this->login."'";
