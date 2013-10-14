@@ -25,8 +25,8 @@
         
 <!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
         
-        <h1 style="text-decoration: underline;">Neueste Bilder</h1>
-        <article id="recent_pics" class="mainarticles">
+        <div class="blue_line mainarticleheaders line_header"><h2>Neueste Bilder</h2></div>
+        <article id="recent_pics" class="mainarticles bottom_border_blue">
         	<div style="width: 100%;">
                 <div style="width: 73%; float: left;">
 
@@ -84,18 +84,12 @@
                     </table>
                 </aside>
 			</div>
-            <div style="clear: both; display: none; color: black;" id="comment1">
+            <div class="comments" id="comment1">
                 <strong>Sam Johnsson</strong>, vor drei Tagen (18:00 05.10.2013)
                 <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-                
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-                et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-                
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+                Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband                
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.   <br/>
+                Sed diam nonumy eirmod tempor invidunt ut labore
                 et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             </div>
@@ -159,19 +153,22 @@
                     </table>
                 </aside>
 			</div>
-            <div style="clear: both; display: none; color: black;" id="comment2">
+            <div class="comments" id="comment2">
                 <strong>John Zoidberg</strong>, vor drei Tagen (18:00 05.10.2013)
                 <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
                 Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
                 
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
                 et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
+                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.      <br/> <br/>
+                Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
                 Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
                 
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
                 et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div style="clear: both; height: 0px;">
+            	&nbsp;
             </div>
 		</article>

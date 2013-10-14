@@ -257,6 +257,14 @@ th {
 				margin-top: 0;
 				padding: 0 1em;
 			}
+			
+			.mainarticleheaders h2{
+				background-color: #FFF;
+				display: inline;
+				font-size: 1.8em;
+				margin-top: 0;
+				padding: 0 1em;
+			}
 /*---Home SECTION---*/
 
 
@@ -325,10 +333,11 @@ th {
 	.start-picture {
 	   border: 8px solid #CDCDCD;
        float: left; 
-       height: 300px; 
+       height: auto; 
        margin-bottom: 1em;
        margin-right: 0em; 
-	   width: 400px;
+	   width: 35%;
+	   max-width: 300px;
 	}
 	
 	.start-info {
@@ -336,7 +345,7 @@ th {
         font-size: 1.25em;
         margin: 0px;
         padding: 0px 10px;
-        width: 400px;
+        width: 50%;
     }
     .start-info th {
         color: #B7D300;
@@ -357,7 +366,7 @@ th {
         margin-top: 15px;
         padding: 10px;
         padding-top: 0px;
-        width: 400px;
+        width: 56%;
     }
         .desc-header {
             color: #B7D300;
@@ -373,6 +382,26 @@ th {
             padding: 2px 4px;
             text-decoration: none;
         }
+    
+    .comments {
+        clear: both;
+        display: none; 
+        color: black;
+        background-color:  #EBEBEB;
+        padding:  20px;
+        padding-bottom: 2px;
+    }      
+        .comments strong {
+            color: #B7D300;
+            font-family: Verdana;
+        }
+        
+        .comments p {
+            margin-top: 10px;
+            padding-left: 20px; 
+            border-left: 4px #B7D300 solid;   
+        }
+        
         
 /*---Side Container ASIDE---*/
 .side_container {
