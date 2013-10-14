@@ -202,6 +202,50 @@ class User
 		return $userdetails;
 	}
 	
+	//
+	public function bracelet_stats($brid) {
+		$sql = "SELECT user, date FROM bracelets WHERE brid = '".$brid."'";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['owner'] = $q[0]['user'];
+		$stats['date'] = $q[0]['date'];
+		
+		$sql = "SELECT user FROM pictures WHERE brid = '".$brid."'";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['owners'] = count($q[0]);
+
+		return $stats;
+	}
+	public function picture_details ($brid) {
+		$sql = "SELECT user, description, picid, city, country, date, title FROM pictures WHERE brid = '".$brid."'";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		foreach ($q as $key => $val) {
+			$details[$val['picid']] = $val;
+		}
+		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = '".$brid."'";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		foreach ($q as $key => $val) {
+			$details[$val['picid']] [$val['commid']] = array();
+			$details[$val['picid']] [$val['commid']] ['commid'] = $val['commid'];
+			$details[$val['picid']] [$val['commid']] ['picid'] = $val['picid'];
+			$details[$val['picid']] [$val['commid']] ['user'] = $val['user'];
+			$details[$val['picid']] [$val['commid']] ['comment'] = $val['comment'];
+			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
+		}		
+		return $details;
+		
+	}
+	
+	public function add_picture ($brid) {
+		
+	}
+	
+	public function write_comment ($brid) {
+		
+	}
 }
 
 ?>

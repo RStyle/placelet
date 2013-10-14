@@ -370,7 +370,7 @@ th {
     }
         .desc-header {
             color: #B7D300;
-            font-family: Verdana, Geneva, sans-serif;;
+            font-family: Verdana, Geneva, sans-serif;
             font-size: 1em;
             font-weight: bolder;
         }
@@ -385,7 +385,7 @@ th {
     
     .comments {
         clear: both;
-        display: none; 
+        display: none;
         color: black;
         background-color:  #EBEBEB;
         padding:  20px;
