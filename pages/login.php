@@ -14,87 +14,109 @@ if (isset($_SESSION['user'])) {
 //Wenn nicht eingeloggt
 //if(isset($user)){if($user->logged == true){echo "2EINGELOGGT2"; echo '<a href="?logout">LOGOUT</a>';} else echo "2PECH2";}
 //if(isset($_SESSION['user']))echo'- USERISTDA';
-if($checklogin == false){
-	if(isset($_GET['registerbr'])) {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen?>
-        Bitte Logge dich ein oder erstelle dir einen neuen Account, um dein Armband zu registrieren<br>Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $_GET['registerbr']; ?></span> registrieren:<br>
-        <form name="login" id="form_login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-          <table style="border: 1px solid black">
-            <tr>
-              <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-              <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" required></td>
-            </tr>
-            <tr>
-              <td><label for="password">Passwort</label></td>
-              <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
-            </tr>
-            <tr>
-              <td><input type="submit" value="Login"></td>
-              <td>&nbsp;</td>
-            </tr>
-          </table>
-        </form><br>
+if (!isset($_GET['loginattempt'])) {
+	if($checklogin == false){
+		if(isset($_GET['registerbr'])) {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen?>
+			Bitte Logge dich ein oder erstelle dir einen neuen Account, um dein Armband zu registrieren<br>Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $_GET['registerbr']; ?></span> registrieren:<br>
+			<form name="login" id="form_login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			  <table style="border: 1px solid black">
+				<tr>
+				  <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+				  <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" required></td>
+				</tr>
+				<tr>
+				  <td><label for="password">Passwort</label></td>
+				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				</tr>
+				<tr>
+				  <td><input type="submit" value="Login"></td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+			</form><br>
 <?php
-	}
-?>
-        <form name="reg" id="form_reg" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-          <table style="border: 1px solid black">
-            <tr>
-              <td><label for="reg_login">Benutzername</label></td>
-              <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" required></td>
-            </tr>
-            <tr>
-              <td><label for="reg_first_name">Vorname</label></td>
-              <td><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="Vorname" required></td>
-            </tr>
-            <tr>
-              <td><label for="reg_name">Nachname</label></td>
-              <td><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Nachname" required></td>
-            </tr>
-            <tr>
-              <td><label for="reg_email">Email-Adresse</label></td>
-              <td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
-            </tr>
-            <tr>
-              <td><label for="reg_password">Passwort</label></td>
-              <td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
-            </tr>
-            <tr>
-              <td><label for="reg_password2">Passwort wiederholen</label></td>
-              <td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
-            </tr>
-            <tr>
-              <td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
-              <td>&nbsp;</td>
-            </tr>
-        </form>
-<?php
-} else {
-	if (isset($_POST['reg_br'])) {
-		switch ($bracelet_registered) {
-			case '0':
-				echo 'Dieses Armband gibt es nicht!';
-				break;
-			case 1:
-				echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert.';
-				break;
-			case 2:
-				echo 'Armband '.$_POST['reg_br'].' wurde schon auf dich registriert.';
-				break;
-			case 3:
-				echo 'Dieses Armband wurde schon auf einen anderen Benutzer registriert.';
-				break;
-			default:
-				echo '$bracelet_registered hat einen unbekannten Wert<br>
-				bitte melde diesen Fall dem <a href="mailto:support@placelet.de">Support</a>.';
 		}
-		echo '<br><br>';
-	}
 ?>
-            <form name="registerbr" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <label for="reg_br">Armband registrieren</label>
-                <input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
-                <input type="submit" name="submit" value="Armband registrieren">
-            </form>
+			<form name="reg" id="form_reg" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			  <table style="border: 1px solid black">
+				<tr>
+				  <td><label for="reg_login">Benutzername</label></td>
+				  <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" required></td>
+				</tr>
+				<tr>
+				  <td><label for="reg_first_name">Vorname</label></td>
+				  <td><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="Vorname" required></td>
+				</tr>
+				<tr>
+				  <td><label for="reg_name">Nachname</label></td>
+				  <td><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Nachname" required></td>
+				</tr>
+				<tr>
+				  <td><label for="reg_email">Email-Adresse</label></td>
+				  <td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
+				</tr>
+				<tr>
+				  <td><label for="reg_password">Passwort</label></td>
+				  <td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				</tr>
+				<tr>
+				  <td><label for="reg_password2">Passwort wiederholen</label></td>
+				  <td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				</tr>
+				<tr>
+				  <td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
+				  <td>&nbsp;</td>
+				</tr>
+			</form>
+<?php
+	}else {
+		if (isset($_POST['reg_br'])) {
+			switch ($bracelet_registered) {
+				case '0':
+					echo 'Dieses Armband gibt es nicht!';
+					break;
+				case 1:
+					echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert.';
+					break;
+				case 2:
+					echo 'Armband '.$_POST['reg_br'].' wurde schon auf dich registriert.';
+					break;
+				case 3:
+					echo 'Dieses Armband wurde schon auf einen anderen Benutzer registriert.';
+					break;
+				default:
+					echo '$bracelet_registered hat einen unbekannten Wert<br>
+					bitte melde diesen Fall dem <a href="mailto:support@placelet.de">Support</a>.';
+			}
+			echo '<br><br>';
+		}
+?>
+				<form name="registerbr" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+					<label for="reg_br">Armband registrieren</label>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
+					<input type="submit" name="submit" value="Armband registrieren">
+				</form>
+	<?php
+	}
+} else {
+?>
+			Der eingegebene Benutzername oder das Passwort waren falsch.<br><br>
+			<form name="login" id="form_login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			  <table style="border: 1px solid black">
+				<tr>
+				  <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+				  <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" required></td>
+				</tr>
+				<tr>
+				  <td><label for="password">Passwort</label></td>
+				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				</tr>
+				<tr>
+				  <td><input type="submit" value="Login"></td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+			</form><br>
 <?php
 }
 ?>

@@ -164,7 +164,7 @@ class User
 				$q->execute(array(
 					':user' => $this->login,
 					':brid' => $brid,
-					':date' => date("Y-m-d"))//time() wäre einfacher umzuwandeln
+					':date' => time())//time() wäre einfacher umzuwandeln
 				);
 				return 1;
 			}elseif ($bracelet[0]['user'] == $this->login) {

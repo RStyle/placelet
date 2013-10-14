@@ -21,17 +21,6 @@ if (isset($_SESSION['user'])) {
             <div style="float: left;">
             	Dein Account:
                 <table border="0">
-                	<?php /*
-						foreach ($userdetails as $key => $val) {
-							echo '
-							<tr>
-								<th>'.$key.'</th>
-								<td>'.$val.'</td>
-							</tr>
-							';
-						}*/
-						//print_r ($userdetails);
-					?>
                     <tr>
                         <th>Benutzername:</th>
                         <td><?php echo $userdetails['user']; ?></td>
@@ -70,7 +59,7 @@ if (isset($_SESSION['user'])) {
 								echo '
 								<tr>
 									<td><a href="armband?id='.$armbaender['brid'][$i].'">Armband '.$armbaender['brid'][$i].'</a></td>
-									<td>'.$armbaender['date'][$i].'</td>
+									<td>'.date('d.m.Y', $armbaender['date'][$i]).'</td>
 									<td>noch nicht implementiert</td>
 								</tr>';
 							}

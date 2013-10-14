@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Europe/Berlin");
 // Alle Fehlermeldungen werden angezeigt
 error_reporting(E_ALL|E_STRICT); 
 ini_set('display_errors', true);
@@ -44,6 +45,10 @@ if(isset($_GET['logout']))
 if(isset($_POST['login']) && isset($_POST['password'])){
 	$user = new User($_POST['login'], $db);	
 	$checklogin = $user->login($_POST['password']);
+	if ($checklogin == false) {
+		header('Location: login?loginattempt=false');
+		exit;
+	}
 }elseif(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
 	$checklogin = $user->logged;

@@ -99,8 +99,8 @@
                 et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             </div>
+            
 			<hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
-				
 <!-- NÄCHSTER UPLOAD ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->			
 			
             <div style="width: 100%;">
