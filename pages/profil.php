@@ -1,6 +1,20 @@
 <?php
 if (isset($_SESSION['user'])) {
 	$userdetails = $user->userdetails();
+	
+	if (isset($userdetails['brid'])) {
+		if (is_array($userdetails['brid'])) {
+			foreach ($userdetails['brid'] as $val => $key) {
+				$armbaender['brid'][$val] = $key;
+			}
+			foreach ($userdetails['date'] as $val => $key) {
+				$armbaender['date'][$val] = $key;
+			}
+		} else {
+			$armbaender['brid'][0] = $userdetails['brid'];
+			$armbaender['date'][0] = $userdetails['date'];
+		}
+	}
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
             <div class="green_line mainarticleheaders line_header"><h1>Profil, <?php echo $_SESSION['user'] ?></h1></div>
@@ -41,27 +55,27 @@ if (isset($_SESSION['user'])) {
                 </table>
             </div>
             <div style="float: left; margin-left: 2em;">
-                Deine Armbänder:
-                <table border="1">
-                    <tr>
-                        <th>Armband ID</th>
-                        <th>registriert am</th>
-                        <th>Anzahl Besitzer</th>
-                    </tr>
                     <?php
-						foreach ($userdetails['brid'] as $val => $key) {
-							$armbaender['id'][$val] = $key;
-						}
-						foreach ($userdetails['date'] as $val => $key) {
-							$armbaender['date'][$val] = $key;
-						}
-						for ($i = 0; $i < count($armbaender['id']); $i++) {
-							echo '
-							<tr>
-								<td><a href="armband?id='.$armbaender['id'][$i].'">Armband '.$armbaender['id'][$i].'</a></td>
-								<td>'.$armbaender['date'][$i].'</td>
-								<td>noch nicht implementiert</td>
-							</tr>';
+						if (isset($userdetails['brid'])) {
+							?>
+				Deine Armbänder:
+				<table border="1">
+					<tr>
+						<th>Armband ID</th>
+						<th>registriert am</th>
+						<th>Anzahl Besitzer</th>
+					</tr>
+					<?php
+							for ($i = 0; $i < count($armbaender['brid']); $i++) {
+								echo '
+								<tr>
+									<td><a href="armband?id='.$armbaender['brid'][$i].'">Armband '.$armbaender['brid'][$i].'</a></td>
+									<td>'.$armbaender['date'][$i].'</td>
+									<td>noch nicht implementiert</td>
+								</tr>';
+							}
+						} else {
+							echo 'Du besitzt leider noch kein Armband.';
 						}
 					?>
                 </table>
