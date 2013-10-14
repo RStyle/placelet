@@ -1,5 +1,4 @@
 <?php
-	//$stats = $user->bracelet_details($_GET['id']);
 	$stats = array_merge($user->bracelet_stats($_GET['id']), $user->picture_details($_GET['id']));
 ?>
         <article id="armband" class="mainarticles bottom_border_green">
