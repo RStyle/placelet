@@ -385,11 +385,11 @@ th {
     
     .comments {
         clear: both;
-        display: none;
+        display: block;
         color: black;
         background-color:  #EBEBEB;
         padding:  20px;
-        padding-bottom: 2px;
+        padding-bottom: 20px;
     }      
         .comments strong {
             color: #B7D300;
@@ -401,6 +401,21 @@ th {
             padding-left: 20px; 
             border-left: 4px #B7D300 solid;   
         }
+        
+        .comment_form {
+            margin-top: 20px;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 4px #B7D300 solid;
+            
+        }
+        
+            .comment_text {
+                font-family: Times;
+                font-size: 1em;
+                padding: 5px;
+                
+            }
         
         
 /*---Side Container ASIDE---*/

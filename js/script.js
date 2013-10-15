@@ -138,21 +138,7 @@ check_width();
 
 });
 
-//Show/Hide Comments
-$(document).ready(function(){
-  $("#toggle_comment1").click(function(){
-    $("#comment1").toggle();
-  });
-});
-
-$(document).ready(function(){
-  $("#toggle_comment2").click(function(){
-    $("#comment2").toggle();
-  });
-});
-
-$(document).ready(function(){
-  $("#toggle_comment3").click(function(){
-    $("#comment3").toggle();
-  });
-});
+$(".toggle_comments").click(function(){
+$number = $(this).attr('id');
+$number = $number.replace('toggle_comment','');
+$("#comment" + $number).toggle(); });

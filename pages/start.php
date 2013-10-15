@@ -94,8 +94,18 @@
 			</div>
             <div class="comments" id="comment<?php echo $i;?>">
                 <strong><?php echo $stats[$i][0][1]['user']; ?></strong>, <?php echo 'vor x Tagen ('.date('H:i d.m.Y', $stats[$i][0][1]['date']).')'; ?>
-                <p><?php echo $stats[$i][0][1]['comment']; ?></p>
+                <p><?php echo $stats[$i][0][1]['comment']; ?></p>      
+                      <form name="comment_form" class="comment_form" action="start" method="post">
+                        <label style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</label>   <br/><br/>
+        				  <label for="comment_name" id="label_comment_name">Name: </label>
+        				  <input type="text" name="comment_name" id="comment_name" size="20" maxlength="15" placeholder="Name"><br>  
+        				  <label for="comment_text" id="label_comment_text">Dein Kommentar:</label><br>
+        				  <textarea name="comment_text" class="comment_text" rows="6" cols="130" maxlength="1000"></textarea><br>  <br>
+        				  <input type="submit" value="Kommentar abschicken" id="submit_comment">
+        		   	  </form> 
+                    
             </div>
+                 
             <?php
 					if ($i < count($bracelets_displayed)) {
 			?><!----HR----><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;"><?php	
