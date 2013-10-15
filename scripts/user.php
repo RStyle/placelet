@@ -202,7 +202,7 @@ class User
 		return $userdetails;
 	}
 	
-	//
+	//Statistik vom Armband abfragen
 	public function bracelet_stats($brid) {
 		$sql = "SELECT user, date FROM bracelets WHERE brid = '".$brid."'";
 		$stmt = $this->db->query($sql);
@@ -246,6 +246,37 @@ class User
 	public function write_comment ($brid) {
 		
 	}
+	
+	public static function systemStats($db) {
+		$sql = "SELECT brid FROM bracelets WHERE user != ''";
+		$stmt = $db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['total_registered'] = count($q);
+		
+		$sql = "SELECT COUNT(DISTINCT city)  FROM pictures";
+		$stmt = $db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['city_count'] = $q[0][0];
+		
+		$sql = "SELECT COUNT(*) AS number,city FROM pictures GROUP BY city ORDER BY number DESC";
+		$stmt = $db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['most_popular_city']['city'] = $q[0]['city'];//$q[0]['city'] ist die am häufigsten registrierte Stadt mit $q[0]['number'] Armbändern
+		$stats['most_popular_city']['number'] = $q[0]['number'];
+		
+		$sql = "SELECT COUNT(*) AS number,user FROM bracelets GROUP BY user ORDER BY number DESC";
+		$stmt = $db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['user_most_bracelets']['user'] = $q[1]['user'];//$q[0]['user'] sind die unregistrierten Armbänder, also ist $q[1]['user'] der Benutzer mit den meisten($q[0]['number']) Armbändern
+		$stats['user_most_bracelets']['number'] = $q[1]['number'];
+
+		$sql = "SELECT COUNT(*) AS number,brid FROM pictures GROUP BY brid ORDER BY number DESC";
+		$stmt = $db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['bracelet_most_cities']['brid'] = $q[0]['brid'];
+		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
+		return $stats;
+}
 }
 
 ?>
