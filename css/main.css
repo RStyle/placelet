@@ -385,7 +385,7 @@ th {
     
     .comments {
         clear: both;
-        display: block;
+        display: none;
         color: black;
         background-color:  #EBEBEB;
         padding:  20px;
@@ -393,7 +393,7 @@ th {
     }      
         .comments strong {
             color: #B7D300;
-            font-family: Verdana;
+            font-family: Verdana, Geneva, Times;
         }
         
         .comments p {
