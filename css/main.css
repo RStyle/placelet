@@ -343,15 +343,14 @@ th {
 	.start-info {
         float: left; 
         font-size: 1.25em;
-        margin: 0px;
-        padding: 0px 10px;
         width: 50%;
     }
     .start-info th {
-        color: #B7D300;
-        font-family: Verdana, Geneva, sans-serif;
-        font-size: 1em;                             
-        font-weight: bolder;
+        /*color: #B7D300;*/
+        /*font-family: Verdana, Geneva, sans-serif;
+        font-weight: bold;*/
+		padding: 0;
+		text-decoration: underline;
     }
     
 	.bracelet-props{
@@ -385,7 +384,7 @@ th {
     
     .comments {
         clear: both;
-        display: block;
+        display: none;
         color: black;
         background-color:  #EBEBEB;
         padding:  20px;
@@ -393,7 +392,7 @@ th {
     }      
         .comments strong {
             color: #B7D300;
-            font-family: Verdana;
+			font-family: Verdana, Geneva, sans-serif;
         }
         
         .comments p {
@@ -411,7 +410,6 @@ th {
         }
         
             .comment_text {
-                font-family: Times;
                 font-size: 1em;
                 padding: 5px;
                 
