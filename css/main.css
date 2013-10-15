@@ -392,7 +392,11 @@ th {
     }      
         .comments strong {
             color: #B7D300;
+<<<<<<< HEAD
 			font-family: Verdana, Geneva, sans-serif;
+=======
+            font-family: Verdana, Geneva, Times;
+>>>>>>> df210e873d63742c3fe93b77f5961c3bcc1175f3
         }
         
         .comments p {
