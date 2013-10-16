@@ -16,29 +16,56 @@ $stats[1] = array_merge($user->bracelet_stats($bracelets_displayed[1]), $user->p
 $bracelets_displayed[2] = 222;
 $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->picture_details($bracelets_displayed[2]));
 ?>
-		<article id="placelet_stats" class="mainarticles">
-        	<table>
+		<article id="placelet_stats">
+		    <h1>Community-Statistiken</h1>  
+        	<ul><li>
+            <table style="clear: both">
             	<tr>
-                	<td>registrierte Armbänder</td>
+                	<th>registrierte Armbänder</th>
                 	<td><?php echo $systemStats['total_registered'].' von '.$systemStats['total']; ?></td>
                 </tr>
                 <tr>
-                    <td>verschiedene Städte</td>
+                    <th>verschiedene Städte</th>
                     <td><?php echo $systemStats['city_count']; ?></td>
                 </tr>
                 <tr>
-                    <td>beliebteste Stadt</td>
+                    <th>beliebteste Stadt</th>
                     <td><?php echo $systemStats['most_popular_city']['city'].' ('.$systemStats['most_popular_city']['number'].')'; ?></td>
                 </tr>
-                <tr>
-                    <td>Benutzer mit den meisten Armbändern</td>
+                <!--<tr>
+                    <th>Benutzer mit den meisten Armbändern</th>
                     <td><?php echo $systemStats['user_most_bracelets']['user'].' ('.$systemStats['user_most_bracelets']['number'].')'; ?></td>
-                </tr> 
+                </tr>  -->
                 <tr>
-                	<td>Armband mit den meisten Bildern</td>
+                	<th>Armband mit den meisten Bildern</th>
                     <td><a href="armband?id=<?php echo $systemStats['bracelet_most_cities']['brid']; ?>"><?php echo $systemStats['bracelet_most_cities']['brid'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
                 </tr>
-            </table>
+            </table></li>
+            <li><table style="float: right; clear: both">
+            	<tr>
+                    <th rowspan="4">Topusers</th>
+                    <td style="border-bottom: 1px solid #000;">Benutzername |</td>
+                    <td style="border-bottom: 1px solid #000;">Armb&auml;nder |</td>
+                    <td style="border-bottom: 1px solid #000;">Uploads</td>
+                </tr>
+                <tr>
+                    <td>Rstyle</td>
+                    <td>3</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Derp</td>
+                    <td>4</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>test1</td>
+                    <td>3</td>
+                    <td>10</td>
+                </tr>
+            </table> 
+            </li></ul>
+            <hr style="border: none; height: 0px; border-bottom: 0; clear: both;">
         </article>
         
 <!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        

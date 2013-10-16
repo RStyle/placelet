@@ -256,7 +256,6 @@ class User
 		$q = $stmt->fetchAll();
 		$q = array_reverse($q);
 		$commid = $q[0]['commid'] + 1;
-		echo '<br><br>';
 		
 		$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
 		$q = $db->prepare($sql);
