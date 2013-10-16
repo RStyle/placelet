@@ -267,6 +267,23 @@ th {
 			}
 /*---Home SECTION---*/
 
+.hint {
+    padding: 20px;
+    background-color: #EBEBEB;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.hint h1 {
+    margin: 0px;
+    color: red;
+    font-family: Verdana, Geneva, Times;
+}
+
+.hint p {
+    margin: 0px;
+    margin-top: 10px;
+}
 
 	#reisearmband {
 		float: left;
