@@ -222,7 +222,14 @@ class User
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
-			$details[$val['picid']] = $val;
+			//$details[$val['picid']] = $val;
+			$details[$val['picid']]['user'] = $val['user'];
+			$details[$val['picid']]['description'] = $val['description'];
+			$details[$val['picid']]['picid'] = $val['picid'];
+			$details[$val['picid']]['city'] = $val['city'];
+			$details[$val['picid']]['country'] = $val['country'];
+			$details[$val['picid']]['date'] = $val['date'];
+			$details[$val['picid']]['title'] = $val['title'];
 		}
 		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = '".$brid."'";
 		$stmt = $this->db->query($sql);
@@ -234,7 +241,7 @@ class User
 			$details[$val['picid']] [$val['commid']] ['user'] = $val['user'];
 			$details[$val['picid']] [$val['commid']] ['comment'] = $val['comment'];
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
-		}		
+		}
 		return $details;
 		
 	}
@@ -243,9 +250,35 @@ class User
 		
 	}
 	
-	public function write_comment ($brid) {
+	public static function write_comment ($brid, $user, $comment, $picid, $db) {
+		$sql = "SELECT commid FROM comments WHERE brid = ".$brid." AND picid = ".$picid;
+		$stmt = $db->query($sql);
+		$q = $stmt->fetchAll();
+		$q = array_reverse($q);
+		$commid = $q[0]['commid'] + 1;
+		echo '<br><br>';
 		
+		$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
+		$q = $db->prepare($sql);
+		$q->execute(array(
+			':brid' => $brid,
+			':commid' => $commid,
+			':picid' => $picid,
+			':user' => $user,
+			'comment' => $comment,
+			':date' => time())
+		);
+		print_r($brid);
+		echo '<br>';
+		print_r($picid);
+		echo '<br>';
+		print_r($user);
+		echo '<br>';
+		print_r($comment);
+		echo '<br>';
+		print_r($commid);
 	}
+	
 	//Zeigt die allgemeine Statistik an
 	public static function systemStats($db) {
 		//Arnzahl registrierter Armbänder
