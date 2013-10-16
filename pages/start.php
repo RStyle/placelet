@@ -58,7 +58,7 @@ $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->p
                     
                     <table class="start-info">
                    		<tr>
-                            <th>Uploader:</th>
+                            <th>Uploader</th>
                             <td><?php echo $stats[$i][0][1]['user']; ?></td>
                         </tr>
                     	<tr>
@@ -66,11 +66,11 @@ $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->p
                             <td><?php echo date('d.m.Y', $stats[$i][0]['date']); ?></td>
                         </tr>
                     	<tr>
-                            <th>Ort:</th>
+                            <th>Ort</th>
                             <td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
                         </tr>
                     	<tr>
-                            <th>Station Nr.:</th>
+                            <th>Station Nr.</th>
                             <td><?php echo $stats[$i][0]['picid']; ?></td>
                         </tr>
                     </table> 

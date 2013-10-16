@@ -268,15 +268,6 @@ class User
 			'comment' => $comment,
 			':date' => time())
 		);
-		print_r($brid);
-		echo '<br>';
-		print_r($picid);
-		echo '<br>';
-		print_r($user);
-		echo '<br>';
-		print_r($comment);
-		echo '<br>';
-		print_r($commid);
 	}
 	
 	//Zeigt die allgemeine Statistik an

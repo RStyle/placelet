@@ -359,15 +359,12 @@ th {
 	.start-info {
         float: left; 
         font-size: 1.25em;
-        width: 50%;
     }
-    .start-info th {
-        /*color: #B7D300;*/
-        /*font-family: Verdana, Geneva, sans-serif;
-        font-weight: bold;*/
-		padding: 0;
-		text-decoration: underline;
-    }
+		.start-info th {
+			padding: 0;
+			padding-right: 1em;
+			text-decoration: underline;
+		}
     
 	.bracelet-props{
 	   background-color: #4C4C4C !important;
