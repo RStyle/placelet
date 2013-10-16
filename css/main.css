@@ -37,7 +37,7 @@ a:hover {
 hr {
 	border-bottom: 0;
 	border-style: solid;
-	margin: 2em 0 2em 0;
+	margin: 1.5em 0s;
 	height: 0px;
 }
 th {
@@ -425,9 +425,10 @@ th {
             
         }
         
-            .comment_text {
+            .comment_content {
                 font-size: 1em;
                 padding: 5px;
+				width: 45%;
                 
             }
         

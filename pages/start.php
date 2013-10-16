@@ -1,11 +1,4 @@
 <?php
-$systemStats = User::systemStats($db);
-//hier werden die Armbänder bestimmt, die angezeigt werden
-$bracelets_displayed[1] = 111;
-$stats[1] = array_merge($user->bracelet_stats($bracelets_displayed[1]), $user->picture_details($bracelets_displayed[1]));
-
-$bracelets_displayed[2] = 222;
-$stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->picture_details($bracelets_displayed[2]));
 	
 //Kommentare schreiben
 if (isset($_POST['comment_submit'])) {
@@ -15,6 +8,13 @@ if (isset($_POST['comment_submit'])) {
 						 $_POST['comment_picid'][$_POST['comment_form']],
 						 $db);
 }
+$systemStats = User::systemStats($db);
+//hier werden die Armbänder bestimmt, die angezeigt werden
+$bracelets_displayed[1] = 111;
+$stats[1] = array_merge($user->bracelet_stats($bracelets_displayed[1]), $user->picture_details($bracelets_displayed[1]));
+
+$bracelets_displayed[2] = 222;
+$stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->picture_details($bracelets_displayed[2]));
 ?>
 		<article id="placelet_stats" class="mainarticles">
         	<table>
@@ -45,9 +45,9 @@ if (isset($_POST['comment_submit'])) {
         
         <div class="blue_line mainarticleheaders line_header"><h2>Neueste Bilder</h2></div>
         <article id="recent_pics" class="mainarticles bottom_border_blue">
-        <?php
+<?php
 			for ($i = 1; $i <= count($bracelets_displayed); $i++) {
-		?>
+?>
         	<div style="width: 100%;">
                 <div style="width: 73%; float: left;">
 
@@ -106,20 +106,21 @@ if (isset($_POST['comment_submit'])) {
                 </aside>
 			</div>
             <div class="comments" id="comment<?php echo $i;?>">
-            	<?php
+<?php
 				for ($j = 1; $j <= count($stats[$i][0])-7; $j++) {
-				?>
+?>
                     <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo 'vor x Tagen ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
-                    <p><?php echo $stats[$i][0][$j]['comment']; ?></p>   
-                <?php 
+                    <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
+                    <hr style="border: 1px solid white;">  
+<?php 
 				}
-				?>   
-                <form name="comment[<?php echo $i; ?>]" class="comment_form" action="start" method="post">
+?>   
+                <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self; ?>" method="post">
                     <span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
                     <label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
                     <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name"><br>  
-                    <label for="comment_content[<?php echo $i; ?>]" class="label_comment_text">Dein Kommentar:</label><br>
-                    <textarea name="comment_content[<?php echo $i; ?>]" class="comment_text" rows="6" cols="130" maxlength="1000"></textarea><br><br>
+                    <label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
+                    <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000"></textarea><br><br>
                     <input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
                     <input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][0]['picid']; ?>">
                     <input type="hidden" name="comment_form" value="<?php echo $i; ?>">
@@ -127,12 +128,12 @@ if (isset($_POST['comment_submit'])) {
                 </form>
             </div>
                  
-            <?php
+<?php
 					if ($i < count($bracelets_displayed)) {
-			?><!----HR----><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;"><?php	
+?><!----HR----><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;"><?php	
 					}
 				}
-			?>
+?>
 
             <div style="clear: both; height: 0px;">
             	&nbsp;
