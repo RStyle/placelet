@@ -2,12 +2,21 @@
 	
 //Kommentare schreiben
 if (isset($_POST['comment_submit'])) {
-	User::write_comment ($_POST['comment_brid'][$_POST['comment_form']],
+	$write_comment = User::write_comment ($_POST['comment_brid'][$_POST['comment_form']],
 						 $_POST['comment_user'][$_POST['comment_form']],
 						 $_POST['comment_content'][$_POST['comment_form']],
 						 $_POST['comment_picid'][$_POST['comment_form']],
-						 $db);
+						 $db,
+						 $user);
 }
+if (isset($write_comment)) {
+	echo '<script type="text/javascript">
+			//$(document).ready(function(){
+				alert("'.$write_comment.'");
+			//});
+		  </script>';
+}
+
 $systemStats = User::systemStats($db);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed[1] = 111;
@@ -17,9 +26,8 @@ $bracelets_displayed[2] = 222;
 $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->picture_details($bracelets_displayed[2]));
 ?>
 		<article id="placelet_stats">
-		    <h1>Community-Statistiken</h1>  
-        	<ul><li>
-            <table style="clear: both">
+		    <h1 style="clear: both">Community-Statistiken</h1>  
+            <table>
             	<tr>
                 	<th>registrierte Armbänder</th>
                 	<td><?php echo $systemStats['total_registered'].' von '.$systemStats['total']; ?></td>
@@ -40,12 +48,12 @@ $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->p
                 	<th>Armband mit den meisten Bildern</th>
                     <td><a href="armband?id=<?php echo $systemStats['bracelet_most_cities']['brid']; ?>"><?php echo $systemStats['bracelet_most_cities']['brid'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
                 </tr>
-            </table></li>
-            <li><table style="float: right; clear: both">
+            </table>
+            <table>
             	<tr>
                     <th rowspan="4">Topusers</th>
                     <td style="border-bottom: 1px solid #000;">Benutzername |</td>
-                    <td style="border-bottom: 1px solid #000;">Armb&auml;nder |</td>
+                    <td style="border-bottom: 1px solid #000;">Armbänder |</td>
                     <td style="border-bottom: 1px solid #000;">Uploads</td>
                 </tr>
                 <tr>
@@ -64,7 +72,6 @@ $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->p
                     <td>10</td>
                 </tr>
             </table> 
-            </li></ul>
             <hr style="border: none; height: 0px; border-bottom: 0; clear: both;">
         </article>
         
@@ -145,9 +152,9 @@ $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->p
                 <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self; ?>" method="post">
                     <span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
                     <label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
-                    <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name"><br>  
+                    <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
                     <label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
-                    <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000"></textarea><br><br>
+                    <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
                     <input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
                     <input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][0]['picid']; ?>">
                     <input type="hidden" name="comment_form" value="<?php echo $i; ?>">

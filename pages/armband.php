@@ -1,11 +1,20 @@
 <?php
+
 //Kommentare schreiben
 if (isset($_POST['comment_submit'])) {
-	User::write_comment ($_GET['id'],
+	$write_comment = User::write_comment ($_GET['id'],
 						 $_POST['comment_user'][$_POST['comment_form']],
 						 $_POST['comment_content'][$_POST['comment_form']],
 						 $_POST['comment_picid'][$_POST['comment_form']],
-						 $db);
+						 $db,
+						 $user);
+}
+if (isset($write_comment)) {
+	echo '<script type="text/javascript">
+			//$(document).ready(function(){
+				alert("'.$write_comment.'");
+			//});
+		  </script>';
 }
 
 $stats = array_merge($user->bracelet_stats($_GET['id']), $user->picture_details($_GET['id']));
@@ -38,9 +47,9 @@ $stats = array_merge($user->bracelet_stats($_GET['id']), $user->picture_details(
                 <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?id='.$_GET['id']; ?>" method="post">
                     <span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
                     <label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
-                    <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name"><br>  
+                    <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
                     <label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
-                    <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000"></textarea><br><br>
+                    <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
                     <input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $_GET['id'];?>">
                     <input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
                     <input type="hidden" name="comment_form" value="<?php echo $i; ?>">

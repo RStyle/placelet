@@ -249,24 +249,54 @@ class User
 	public function add_picture ($brid) {
 		
 	}
-	
-	public static function write_comment ($brid, $user, $comment, $picid, $db) {
-		$sql = "SELECT commid FROM comments WHERE brid = ".$brid." AND picid = ".$picid;
-		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll();
-		$q = array_reverse($q);
-		$commid = $q[0]['commid'] + 1;
-		
-		$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
-		$q = $db->prepare($sql);
-		$q->execute(array(
-			':brid' => $brid,
-			':commid' => $commid,
-			':picid' => $picid,
-			':user' => $user,
-			'comment' => $comment,
-			':date' => time())
-		);
+//Kommentar schreiben
+	public static function write_comment ($brid, $username, $comment, $picid, $db, $user) {
+		$submissions_valid = true;
+		if (isset($user->login)) {
+			if ($user->login != $username) {
+				$userexists = User::userexists($username, $db);
+			} else $userexists = false;
+		} else {
+			$userexists = User::userexists($username, $db);
+			
+		}
+		if ($userexists) {
+			return 'Diesen Benutzer gibt es schon';
+			$submissions_valid = false;
+		}
+		if(strlen($username) < 4) {
+			$submissions_valid = false;
+			return 'Benutzername zu kurz, mindestens 4 Zeichen';
+		}
+		if(strlen($comment) < 2) {
+			$submissions_valid = false;
+			return 'Kommentar zu kurz, mindestens 2 Zeichen';
+		}
+		if ($submissions_valid) {
+			try {
+				$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid";
+				$q = $db->prepare($sql);
+				$q->execute(array(':brid' => $brid, ':picid' => $picid));
+				$row = $q->fetchAll(PDO::FETCH_ASSOC);	
+				$row = array_reverse($row);
+				$commid = $row[0]['commid'] + 1;
+				
+				$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
+				$q = $db->prepare($sql);
+				$q->execute(array(
+					':brid' => $brid,
+					':commid' => $commid,
+					':picid' => $picid,
+					':user' => $username,
+					'comment' => $comment,
+					':date' => time())
+				);
+				return 'Kommentar erfolgreich gesendet.';
+			} catch (PDOException $e) {
+					die('ERROR: ' . $e->getMessage());
+					return false;
+			}
+		}
 	}
 	
 	//Zeigt die allgemeine Statistik an
@@ -305,6 +335,17 @@ class User
 		$stats['bracelet_most_cities']['brid'] = $q[0]['brid'];
 		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
 		return $stats;
+	}
+	public static function userexists ($user, $db) {
+		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
+        $q = $db->prepare($sql); 
+        $q->execute(array(':user' => $user));
+        $anz = $q->rowCount();
+        if ($anz > 0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 

@@ -58,6 +58,12 @@ th {
 .pseudo_link:hover {
 	text-decoration: none;
 }
+.blue_line {
+	background-image: url('../img/header_bg-blue.png');
+}
+.green_line {
+	background-image: url('../img/header_bg-green.png');
+}
 /*---HEADER---*/
 #header {
 	font-family: Tahoma, Geneva, sans-serif;
@@ -265,31 +271,24 @@ th {
 				margin-top: 0;
 				padding: 0 1em;
 			}
-/*---Home SECTION---*/
-
-.hint {
-    padding: 20px;
-    background-color: #EBEBEB;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.hint h1 {
-    margin: 0px;
-    color: red;
-    font-family: Verdana, Geneva, Times;
-}
-
-.hint p {
-    margin: 10px 0px;
-}
-
+	/*---Home SECTION---*/
+	.hint {
+		padding: 20px;
+		background-color: #EBEBEB;
+		margin-bottom: 20px;
+		margin-top: 10px;
+	}
+	.hint h1 {
+		margin: 0px;
+		color: red;
+		font-family: Verdana, Geneva, Times;
+	}
+	.hint p {
+		margin: 10px 0px;
+	}
 	#reisearmband {
 		float: left;
 		width: 35%;
-	}
-	.blue_line {
-		background-image: url('../img/header_bg-blue.png');
 	}
 	#reisearmband_img {
 		width: 100%;
@@ -299,16 +298,13 @@ th {
 		margin-left: 3%;
 		width: 35%;
 	}
-	.green_line {
-		background-image: url('../img/header_bg-green.png');
-	}
 	#kollektion_img {
 		width: 100%;
 	}
 	.line_header {
 		margin-bottom: 1em;
 	}
-/*---Über uns SECTION---*/
+	/*---Über uns SECTION---*/
 	#about-us {
 		float: left;
 		width: 73%;
@@ -316,7 +312,7 @@ th {
 	#wir {
 		width: 100%;
 	}
-/*---Impressum SECTION---*/
+	/*---Impressum SECTION---*/
 	#impressum {
 		float: left;
 		width: 100%;
@@ -324,59 +320,41 @@ th {
 	#disclaimer {
 		float: left;
 	}
-/*---Kontakt SECTION---*/
+	/*---Kontakt SECTION---*/
 	#kontakt {
 	}
-/*---Armband SECTION---*/
+	/*---Armband SECTION---*/
 	#armband {
 		float: left;
 		width: 73%;		
 	}
-/*---Start SECTION---*/
+	/*---Start SECTION---*/
 	#placelet_stats {
 		background-color: #EBEBEB;
 		border: 1px dotted white;
+		color: 000;
 		margin-top: 4em;
 		padding: 1em;
-		/*text-shadow: 1px 1px 0px #bad3ed;*/
-		/*text-shadow: 0px 2px 3px #555;  */
+		text-shadow: 1px 1px 0px #bad3ed;
+		/*text-shadow: 0px 1px 1px #555;*/
 		margin-bottom: 1em;
-		display: block;
 	}
-		#placelet_stats a {
-			color: #000;
-		}
-		
 		#placelet_stats h1 {
 			color: #B7D300;
+            font-family: Verdana, Geneva, sans-serif;
 			margin-top: 0px;
-			font-family: Verdana;
-			text-shadow: none;
 			
 		}
-		
 		#placelet_stats table {
-            padding-left: 20px;
             border-left: 4px #B7D300 solid;
+			float: left;
+            padding-left: 20px;
             padding-right: 20px;
 
 		}
-		
     		#placelet_stats th {
     			padding-right: 1em;
-    
     		}
-    		
-    	#placelet_stats ul{
-            list-style: none;
-            display: block;
-		}
-		
-    		  #placelet_stats ul li{
-                float: left;
-    		}
-
-		
 	.start-picture {
 	   border: 8px solid #CDCDCD;
        float: left; 
@@ -386,7 +364,6 @@ th {
 	   width: 35%;
 	   max-width: 300px;
 	}
-	
 	.start-info {
         float: left; 
         font-size: 1.25em;
@@ -396,7 +373,6 @@ th {
 			padding-right: 1em;
 			text-decoration: underline;
 		}
-    
 	.bracelet-props{
 	   background-color: #4C4C4C !important;
        border: none !important;
@@ -417,7 +393,6 @@ th {
             font-size: 1em;
             font-weight: bolder;
         }
-        
         .toggle_comments {
             background-color: #4C4C4C;   
             color: #FFF;
@@ -425,7 +400,6 @@ th {
             padding: 2px 4px;
             text-decoration: none;
         }
-    
     .comments {
         clear: both;
         display: none;
@@ -438,29 +412,23 @@ th {
             color: #B7D300;
 			font-family: Verdana, Geneva, sans-serif;
         }
-        
         .comments p {
             margin-top: 10px;
             padding-left: 20px; 
             border-left: 4px #B7D300 solid;   
         }
-        
         .comment_form {
             margin-top: 20px;
             margin-left: 20px;
             padding-left: 20px;
             border-left: 4px #B7D300 solid;
-            
         }
-        
             .comment_content {
                 font-size: 1em;
                 padding: 5px;
 				width: 45%;
-                
             }
-        
-        
+     
 /*---Side Container ASIDE---*/
 .side_container {
 	border-left: black solid 1px;
