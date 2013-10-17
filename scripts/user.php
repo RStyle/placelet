@@ -218,7 +218,7 @@ class User
 		return $stats;
 	}
 	public function picture_details ($brid) {
-		$sql = "SELECT user, description, picid, city, country, date, title FROM pictures WHERE brid = '".$brid."'";
+		$sql = "SELECT user, description, picid, city, country, date, title, fileext FROM pictures WHERE brid = '".$brid."'";
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
@@ -230,6 +230,7 @@ class User
 			$details[$val['picid']]['country'] = $val['country'];
 			$details[$val['picid']]['date'] = $val['date'];
 			$details[$val['picid']]['title'] = $val['title'];
+			$details[$val['picid']]['fileext'] = $val['fileext'];
 		}
 		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = '".$brid."'";
 		$stmt = $this->db->query($sql);
@@ -288,7 +289,7 @@ class User
 					':commid' => $commid,
 					':picid' => $picid,
 					':user' => $username,
-					'comment' => $comment,
+					':comment' => $comment,
 					':date' => time())
 				);
 				return 'Kommentar erfolgreich gesendet.';
@@ -346,6 +347,7 @@ class User
 		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
 		return $stats;
 	}
+	//Überprüft, ob ein bestimmter Benutzer $user in der Datenbank eingetragen ist
 	public static function userexists ($user, $db) {
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
         $q = $db->prepare($sql); 
@@ -355,6 +357,69 @@ class User
 			return true;
 		} else {
 			return false;
+		}
+	}
+	//Postet ein Bild
+	public function registerpic ($brid, $description, $city, $country, $title, $picture_file, $max_file_size) {
+		$submissions_valid = true;
+		if(strlen($country) < 4) {
+			$submissions_valid = false;
+			return 'Es gibt kein Land, dessen Name kürzer als 4 Buchstaben ist.';
+		}
+		if(strlen($description) < 2) {
+			$submissions_valid = false;
+			return 'Beschreibung zu kurz, mindestens 2 Zeichen';
+		}
+		if ($submissions_valid) {
+			try {
+				$sql = "SELECT picid FROM pictures WHERE brid = :brid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(':brid' => $brid));
+				$row = $q->fetchAll(PDO::FETCH_ASSOC);	
+				$row = array_reverse($row);
+				$picid = $row[0]['picid'] + 1;
+				
+				if (isset($picture_file)) {
+					switch($picture_file['type']) {
+						case 'image/jpeg':
+							$fileext = 'jpg';
+							break;
+						case 'image/tiff':
+							$fileext = 'tiff';
+							break;
+						case 'image/bmp':
+							$fileext = 'bmp';
+							break;
+						case 'image/gif':
+							$fileext = 'gif';
+							break;
+						case 'image/png':
+							$fileext = 'png';
+							break;
+					}
+					if ($picture_file['size'] < $max_file_size) {
+						move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
+					}
+				}
+				
+				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext)";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':picid' => $picid,
+					':brid' => $brid,
+					':user' => $this->login,
+					':description' => $description,
+					':date' => time(),
+					'city' => $city,
+					'country' => $country,
+					'title' => $title,
+					'fileext' => $fileext
+				));
+				return 'Bild erfolgreich gepostet.';
+			} catch (PDOException $e) {
+					die('ERROR: ' . $e->getMessage());
+					return false;
+			}
 		}
 	}
 }
