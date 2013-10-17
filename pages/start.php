@@ -81,16 +81,16 @@ for ($i = 1; $i <= $banz; $i++) {
         	<div style="width: 100%;">
                 <div style="width: 73%; float: left;">
 
-                    <a href="pictures/bracelets/image-1.jpg" data-lightbox="pictures" title="Sydney, Australia" >
-                        <img src="pictures/bracelets/thumb-1.jpg" alt="Sydney, Australia" class="start-picture">
+                    <a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="Sydney, Australia" >
+                        <img src="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" alt="Sydney, Australia" class="start-picture">
                         <img src="img/triangle.png" alt="" style="margin-top: 10px; float: left">
                     </a>
                     
                     <table class="start-info">
-                   		<tr>
+                   		<!--<tr>
                             <th>Uploader</th>
-                            <td><?php echo $stats[$i][0][1]['user']; ?></td>
-                        </tr>
+                            <td><?php echo $stats[$i][0]['user']; ?></td>
+                        </tr>-->
                     	<tr>
                             <th>Datum</th>
                             <td><?php echo date('d.m.Y', $stats[$i][0]['date']); ?></td>
@@ -137,7 +137,7 @@ for ($i = 1; $i <= $banz; $i++) {
 			</div>
             <div class="comments" id="comment<?php echo $i;?>">
 <?php
-				for ($j = 1; $j <= count($stats[$i][0])-7; $j++) {
+				for ($j = 1; $j <= count($stats[$i][0])-8; $j++) {
 ?>
                     <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo 'vor x Tagen ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 

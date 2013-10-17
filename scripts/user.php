@@ -243,6 +243,7 @@ class User
 			$details[$val['picid']] [$val['commid']] ['comment'] = $val['comment'];
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
 		}
+		$details = array_reverse($details);
 		return $details;
 		
 	}
@@ -362,13 +363,13 @@ class User
 	//Postet ein Bild
 	public function registerpic ($brid, $description, $city, $country, $title, $picture_file, $max_file_size) {
 		$submissions_valid = true;
-		if(strlen($country) < 4) {
+		if(strlen($country) < 2) {
 			$submissions_valid = false;
-			return 'Es gibt kein Land, dessen Name kürzer als 4 Buchstaben ist.';
+			return 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
 		}
 		if(strlen($description) < 2) {
 			$submissions_valid = false;
-			return 'Beschreibung zu kurz, mindestens 2 Zeichen';
+			return 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
 		}
 		if ($submissions_valid) {
 			try {

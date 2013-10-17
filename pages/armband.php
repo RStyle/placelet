@@ -20,7 +20,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 	if($_GET['registerpic'] == 1) {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green">
-					<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?> registrieren</h1></div>
+					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceID; ?> posten</h1></div>
 					<form name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$_GET['id']; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
                         
@@ -70,6 +70,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 	}
 	
 	$stats = array_merge($user->bracelet_stats($_GET['id']), $user->picture_details($_GET['id']));
+	//print_r($stats);
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></div>
@@ -79,8 +80,8 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 ?>
                     <div>
                         <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-                        <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.($i+1).'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="Sydney, Australia">
-                            <img src="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.($i+1).'.'.$stats[$i]['fileext']; ?>" alt="Sydney, Australia" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
+                        <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="Sydney, Australia">
+                            <img src="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="Sydney, Australia" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
                         </a>
                         <?php echo date('d.m.Y', $stats[$i]['date']); ?>
                         <h4><?php echo $stats[$i]['title']; ?></h4>
