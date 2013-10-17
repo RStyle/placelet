@@ -101,7 +101,7 @@ $("#reg_password2").oninput(function() {
 
 function check_width(){   
     
-    if(window.innerWidth < 1480){
+    if(window.innerWidth < 1480 && window.innerWidth > 1230){
 		//$("#logo"). =
 		$("#logo").attr("src", 'img/logo.svg');
 		$("#logo").attr("width", '93');
