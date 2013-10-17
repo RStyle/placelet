@@ -16,8 +16,8 @@ if (isset($write_comment)) {
 			//});
 		  </script>';
 }
-
-$systemStats = User::systemStats($db);
+$banz = 3;
+$systemStats = User::systemStats($db, $banz);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed[1] = 111;
 $stats[1] = array_merge($user->bracelet_stats($bracelets_displayed[1]), $user->picture_details($bracelets_displayed[1]));
@@ -56,22 +56,18 @@ $stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->p
                     <td style="border-bottom: 1px solid #000;">Armbänder |</td>
                     <td style="border-bottom: 1px solid #000;">Uploads</td>
                 </tr>
+<?php
+for ($i = 1; $i <= $banz; $i++) {
+?>
                 <tr>
-                    <td>Rstyle</td>
-                    <td>3</td>
-                    <td>10</td>
+                    <td><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></td>
+                    <td><?php echo $systemStats['user_most_bracelets']['number'][$i]; ?></td>
+                    <td><?php echo $systemStats['user_most_bracelets']['uploads'][$i]; ?></td>
                 </tr>
-                <tr>
-                    <td>Derp</td>
-                    <td>4</td>
-                    <td>13</td>
-                </tr>
-                <tr>
-                    <td>test1</td>
-                    <td>3</td>
-                    <td>10</td>
-                </tr>
-            </table> 
+<?php
+}
+?>
+            </table>
             <hr style="border: none; height: 0px; border-bottom: 0; clear: both;">
         </article>
         
