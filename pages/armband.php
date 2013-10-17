@@ -70,7 +70,6 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 	}
 	
 	$stats = array_merge($user->bracelet_stats($_GET['id']), $user->picture_details($_GET['id']));
-	//print_r($stats);
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></div>
@@ -80,8 +79,8 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 ?>
                     <div>
                         <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-                        <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="Sydney, Australia">
-                            <img src="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="Sydney, Australia" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
+                        <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
+                            <img src="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
                         </a>
                         <?php echo date('d.m.Y', $stats[$i]['date']); ?>
                         <h4><?php echo $stats[$i]['title']; ?></h4>

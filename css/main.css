@@ -16,6 +16,7 @@ html {
 }
 /*---allgemeine Tags---*/
 body {
+	background-color: #FFF;              /*background-color: #CCCCFF;*/
 	color: #234754;
 	margin: 0 auto;
 	min-width: 1000px;
@@ -257,7 +258,7 @@ th {
 			text-align: center;
 		}
 			.mainarticleheaders h1{
-				background-color: #FFF;
+				background-color: #FFF;               /*background-color: #CCCCFF;*/
 				display: inline;
 				font-size: 1.15em;
 				margin-top: 0;
@@ -458,6 +459,7 @@ th {
 #sidenav {
 	border-right: 2px solid #817965;
 	color: #000;
+	display: none;
 	left: 1%;
 	list-style: none;
 	padding: 1em 1em 1em 2em;

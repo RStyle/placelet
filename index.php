@@ -80,9 +80,9 @@ $pagename = array(
 $navregister['href'] = "login";	
 $navregister['value'] = "Registrieren";
 
-if(isset($_SESSION['user'])) {//Wenn man eingeloggt ist erscheint 'Registrieren' nicht mehr im mainnav
-	$navregister['href'] = "";
-	$navregister['value'] = "";
+if(isset($_SESSION['user'])) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'Mein Profil'
+	$navregister['href'] = "profil";
+	$navregister['value'] = "Mein Profil";
 }
 	
 if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'
