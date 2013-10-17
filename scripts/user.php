@@ -183,7 +183,7 @@ class User
 		$sql = "SELECT user, email, status FROM users WHERE user = '".$this->login."'";
 		$stmt = $this->db->query($sql);
 		$result[0] = $stmt->fetchAll();
-		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country, status FROM addresses WHERE user = '".$this->login."'";
+		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = '".$this->login."'";
 		$stmt = $this->db->query($sql);
 		$result[1] = $stmt->fetchAll();
 		$sql = "SELECT brid, date FROM bracelets WHERE user = '".$this->login."' ORDER BY  `bracelets`.`date` ASC ";
