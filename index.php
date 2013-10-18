@@ -196,9 +196,9 @@ if ($checklogin == true) {
 		<footer id="footer">
 			Placelet - by Daniel, Julian, Roman
 		</footer>
-		<script src="js/jquery-1.10.2.min.js"></script>
-		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
-		<script type="text/javascript" src="./js/script.js?asda"></script>
+		<!--<script src="js/jquery-1.10.2.min.js"></script>-->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/script.js"></script>
 		<script src="js/lightbox-2.6.min.js"></script>
 	</body>
 </html>
