@@ -55,8 +55,9 @@ if (isset($_SESSION['user'])) {
 						<th>registriert am</th>
 						<th>Anzahl Besitzer</th>
 					</tr>
-					<?php
+<?php
 							for ($i = 0; $i < count($armbaender['brid']); $i++) {
+								if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
 								echo '
 								<tr>
 									<td><a href="armband?id='.$armbaender['brid'][$i].'">Armband '.$armbaender['brid'][$i].'</a></td>
@@ -67,7 +68,7 @@ if (isset($_SESSION['user'])) {
 						} else {
 							echo 'Du besitzt leider noch kein Armband.';
 						}
-					?>
+?>
                 </table>
             </div>
             <div style="clear: both;">
