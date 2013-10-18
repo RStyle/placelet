@@ -1,4 +1,5 @@
 <?php
+$captcha = 'captcha';
 $max_file_size = 1000000;
 if (isset($_POST['registerpic_submit'])) {
 	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
@@ -6,6 +7,8 @@ if (isset($_POST['registerpic_submit'])) {
 										 $_POST['registerpic_city'],
 										 $_POST['registerpic_country'],
 										 $_POST['registerpic_title'],
+										 $_POST['registerpic_captcha'],
+										 $captcha,
 										 $_FILES['registerpic_file'],
 										 $max_file_size);
 }
@@ -16,7 +19,7 @@ if (isset($pic_registered)) {
 			//});
 		  </script>';
 }
-if (isset($_GET['id']) && isset($_GET['registerpic']) && $user->logged) {
+if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green">
@@ -36,21 +39,17 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && $user->logged) {
                         <label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
                         <textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required></textarea><br> 
                         
-                        <input type="file" name="registerpic_file" maxlength="$max_file_size" required><br><br>
-                        <input type="hidden" name="MAX_FILE_SIZE" value="$max_file_size">
+                        <label for="registerpic_captcha" class="label_registerpic_captcha">Captcha:</label><br>
+						<input type="text" name="registerpic_captcha" class="registerpic_captcha" size="20" maxlength="5" placeholder="Captcha" value="captcha" required><br>
+                        
+                        <input type="file" name="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br><br>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 						<input type="hidden" name="registerpic_brid" value="<?php echo $_GET['id'];?>">
 						<input type="submit" name="registerpic_submit" value="Bild posten">
 					</form>
 				</article>
 <?php
 	}
-} elseif (isset($_GET['id']) && isset($_GET['registerpic']) && !$user->logged) {
-?>
-				<article id="armband" class="mainarticles bottom_border_green">
-					<div class="green_line mainarticleheaders line_header"><h1>Nicht eingeloggt</h1></div>
-                    <p>Bilder kannst du nur posten, wenn du eingeloggt bist.</p>
-				</article>	
-<?php
 } elseif (isset($_GET['id'])) {
 	//Kommentare schreiben
 	if (isset($_POST['comment_submit'])) {
@@ -124,7 +123,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && $user->logged) {
 ?>
 				</div>
 <?php
-		if (isset($bracelet_stats['owners'])) {
+		if (!isset($bracelet_stats['owners']) ) {
 			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
 		}
 ?>
@@ -158,7 +157,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && $user->logged) {
 <?php
 } else {
 ?>
-				<article id="armband" class="mainarticles bottom_border_green">
+				<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
 					<div class="green_line mainarticleheaders line_header"><h1>Falsche Seite</h1></div>
                     <p>Du solltest nicht hier sein. Gehe einfach eine Seite zurück.</p>
 				</article>

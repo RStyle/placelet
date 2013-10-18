@@ -368,8 +368,12 @@ class User
 		}
 	}
 	//Postet ein Bild
-	public function registerpic ($brid, $description, $city, $country, $title, $picture_file, $max_file_size) {
+	public function registerpic ($brid, $description, $city, $country, $title, $captcha, $captcha_entered, $picture_file, $max_file_size) {
 		$submissions_valid = true;
+		if($captcha != $captcha_entered) {
+			$submissions_valid = false;
+			return 'Captcha ist leider falsch.';
+		}
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
 			return 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
