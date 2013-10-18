@@ -224,8 +224,9 @@ class User
 		$sql = "SELECT user FROM pictures WHERE brid = '".$brid."'";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
-		$stats['owners'] = count($q[0]);
-
+		if($q != NULL) {
+			$stats['owners'] = count($q[0]);
+		}
 		return $stats;
 	}
 	public static function picture_details ($brid, $db) {

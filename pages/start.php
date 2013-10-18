@@ -78,7 +78,7 @@ for ($i = 1; $i <= $banz; $i++) {
 			for ($i = 1; $i <= count($bracelets_displayed); $i++) {
 ?>
         	<div style="width: 100%;">
-                <div style="width: 73%; float: left;">
+                <div style="width: 70%; float: left;">
 
                     <a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" >
                         <img src="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="start-picture">
@@ -86,10 +86,6 @@ for ($i = 1; $i <= $banz; $i++) {
                     </a>
                     
                     <table class="start-info">
-                   		<!--<tr>
-                            <th>Uploader</th>
-                            <td><?php echo $stats[$i][0]['user']; ?></td>
-                        </tr>-->
                     	<tr>
                             <th>Datum</th>
                             <td><?php echo date('d.m.Y', $stats[$i][0]['date']); ?></td>
@@ -97,10 +93,6 @@ for ($i = 1; $i <= $banz; $i++) {
                     	<tr>
                             <th>Ort</th>
                             <td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
-                        </tr>
-                    	<tr>
-                            <th>Station Nr.</th>
-                            <td><?php echo $stats[$i][0]['picid']; ?></td>
                         </tr>
                     </table> 
                     
@@ -113,8 +105,7 @@ for ($i = 1; $i <= $banz; $i++) {
                     
                 </div>
                 <aside class="bracelet-props side_container">
-                    <h1>Statistik</h1>
-                    <table style="width: 100%;">
+                    <table>
                         <tr>
                             <td><strong>Armband ID</strong></td>
                             <td><strong><?php echo '<a href="armband?id='.$bracelets_displayed[$i].'">'.$bracelets_displayed[$i].'</a>'; ?></strong></td>
@@ -130,6 +121,10 @@ for ($i = 1; $i <= $banz; $i++) {
                         <tr>
                             <td>Letzter Ort</td>
 							<td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
+                        </tr>
+                    	<tr>
+                            <td>Station Nr.</td>
+                            <td><?php echo $stats[$i][0]['picid']; ?></td>
                         </tr>
                     </table>
                 </aside>

@@ -16,7 +16,7 @@ if (isset($pic_registered)) {
 			//});
 		  </script>';
 }
-if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user'])) {
+if (isset($_GET['id']) && isset($_GET['registerpic']) && $user->logged) {
 	if($_GET['registerpic'] == 1) {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green">
@@ -44,7 +44,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 				</article>
 <?php
 	}
-} elseif (isset($_GET['id']) && isset($_GET['registerpic']) && !isset($_SESSION['user'])) {
+} elseif (isset($_GET['id']) && isset($_GET['registerpic']) && !$user->logged) {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green">
 					<div class="green_line mainarticleheaders line_header"><h1>Nicht eingeloggt</h1></div>
@@ -69,7 +69,14 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 			  </script>';
 	}
 	
-	$stats = array_merge(User::bracelet_stats($_GET['id'], $db), User::picture_details($_GET['id'], $db));
+	$bracelet_stats = User::bracelet_stats($_GET['id'], $db);
+	if (isset($bracelet_stats['owners'])) {
+		$picture_details = User::picture_details($_GET['id'], $db);
+		$stats = array_merge($bracelet_stats, $picture_details);
+	} else {
+		$bracelet_stats['owners'] = 0;
+		$stats = $bracelet_stats;
+	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></div>
@@ -116,6 +123,11 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 					}
 ?>
 				</div>
+<?php
+		if (isset($bracelet_stats['owners'])) {
+			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
+		}
+?>
 				<a href="<?php echo $friendly_self.'?id='.$_GET['id'].'&registerpic=1'; ?>">Ein neues Bild zu diesem Armband posten</a>
 			</article>
 			<aside class="side_container" id="bracelet_props">
