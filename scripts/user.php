@@ -215,10 +215,8 @@ class User
 		$q = $stmt->fetchAll();
 		if($q != NULL) {
 			$stats['owners'] = count($q[0]);
-			return $stats;
-		} else {
-			return false;
 		}
+		return $stats;
 	}
 	public static function picture_details ($brid, $db) {
 		$sql = "SELECT user, description, picid, city, country, date, title, fileext FROM pictures WHERE brid = '".$brid."'";

@@ -70,9 +70,12 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && $user->logged) {
 	}
 	
 	$bracelet_stats = User::bracelet_stats($_GET['id'], $db);
-	$picture_details = User::picture_details($_GET['id'], $db);
-	if ($picture_details != false) {
+	if (isset($bracelet_stats['owners'])) {
+		$picture_details = User::picture_details($_GET['id'], $db);
 		$stats = array_merge($bracelet_stats, $picture_details);
+	} else {
+		$bracelet_stats['owners'] = 0;
+		$stats = $bracelet_stats;
 	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
@@ -120,6 +123,11 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && $user->logged) {
 					}
 ?>
 				</div>
+<?php
+		if (isset($bracelet_stats['owners'])) {
+			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
+		}
+?>
 				<a href="<?php echo $friendly_self.'?id='.$_GET['id'].'&registerpic=1'; ?>">Ein neues Bild zu diesem Armband posten</a>
 			</article>
 			<aside class="side_container" id="bracelet_props">
