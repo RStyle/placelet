@@ -68,11 +68,6 @@ $(".input_text").blur(function(){
     }
 );
 
-/*$(".input_4_20").blur(function(){
-		if(this.value != $.trim(this.value)) this.value = $.trim(this.value);  //trimt Formualer - außer Passwörter - direkt per JS
-    }
-);*/
-
 
 //Registration
 $("#form_reg").submit(function() {
@@ -97,6 +92,35 @@ $("#reg_password2").oninput(function() {
 		document.getElementById("reg_password2").setCustomValidity('');
 	}
 });*/
+
+
+
+
+//
+$('#holder').on(
+    'dragover',
+    function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+)
+$('#holder').on(
+    'dragenter',
+    function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+)
+
+//Uploadvorschau
+$('#registerpic_file').change(function() {
+var oFReader = new FileReader();
+oFReader.readAsDataURL(document.getElementById("registerpic_file").files[0]);
+
+oFReader.onload = function (oFREvent) {
+	$('#holder').css("background-image", "url(" + oFREvent.target.result + ")");  
+};
+});
 
 
 function check_width(){   

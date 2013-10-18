@@ -24,7 +24,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green">
 					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceID; ?> posten</h1></div>
-					<form name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$_GET['id']; ?>" method="post" enctype="multipart/form-data">
+					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$_GET['id']; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
                         
                         <label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
@@ -42,7 +42,8 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
                         <label for="registerpic_captcha" class="label_registerpic_captcha">Captcha:</label><br>
 						<input type="text" name="registerpic_captcha" class="registerpic_captcha" size="20" maxlength="5" placeholder="Captcha" value="captcha" required><br>
                         
-                        <input type="file" name="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br><br>
+                        <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br><br>
+						<div id="holder" style="width:200px; height:100px; background-color:red;background-repeat: no-repeat;background-position: center"></div><br><br>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 						<input type="hidden" name="registerpic_brid" value="<?php echo $_GET['id'];?>">
 						<input type="submit" name="registerpic_submit" value="Bild posten">
