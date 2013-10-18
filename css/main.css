@@ -377,7 +377,9 @@ th {
 	.bracelet-props{
 	   background-color: #4C4C4C !important;
        border: none !important;
-	   color: #FFF;
+	   color: #FFF !important;
+	   padding: 1em !important;
+	   width: 22% !important;
 	}        
     .start-desc {
         float: left;

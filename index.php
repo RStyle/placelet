@@ -80,7 +80,7 @@ $pagename = array(
 $navregister['href'] = "login";	
 $navregister['value'] = "Registrieren";
 
-if(isset($_SESSION['user'])) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'Mein Profil'
+if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'Mein Profil'
 	$navregister['href'] = "profil";
 	$navregister['value'] = "Mein Profil";
 }
@@ -130,7 +130,7 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 				</form>
 			</div>
 <?php
-if(isset($_SESSION['user'])) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
+if($user->logged) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
 ?>
 			<a href="?logout" id="headerlogin">Logout</a>
 <?php
