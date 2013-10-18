@@ -153,12 +153,15 @@ class User
 	//Armband registrieren
 	public function registerbr ($brid) {
 		try {
-			$sql = "SELECT user FROM bracelets WHERE brid = ".$brid;
-			$stmt = $this->db->query($sql);
-			$bracelet = $stmt->fetchAll();
-			if ($bracelet == NULL) {
+			//$sql = "SELECT user FROM bracelets WHERE brid = ".$brid. " LIMIT 1";
+			//$stmt = $this->db->query($sql);
+			$stmt = $this->db->prepare('SELECT user FROM bracelets WHERE brid = :brid LIMIT 1');
+			$stmt->execute(array('brid' => $brid));
+			$anz = $stmt->rowCount(); 
+			$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($anz == 0) {
 				return '0';
-			} elseif ($bracelet[0]['user'] == NULL ) {
+			} elseif ($bracelet['user'] == NULL ) {
 				$sql = "UPDATE bracelets SET user=:user, date=:date WHERE brid=:brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
@@ -167,7 +170,7 @@ class User
 					':date' => time())//time() wäre einfacher umzuwandeln
 				);
 				return 1;
-			}elseif ($bracelet[0]['user'] == $this->login) {
+			}elseif ($bracelet['user'] == $this->login) {
 				return 2;
 			}else {
 				return 3;
@@ -180,19 +183,27 @@ class User
 	
 	//Userdetails abfragen
 	public function userdetails() {
-		$sql = "SELECT user, email, status FROM users WHERE user = '".$this->login."'";
-		$stmt = $this->db->query($sql);
-		$result[0] = $stmt->fetchAll();
-		$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = '".$this->login."'";
-		$stmt = $this->db->query($sql);
-		$result[1] = $stmt->fetchAll();
-		$sql = "SELECT brid, date FROM bracelets WHERE user = '".$this->login."' ORDER BY  `bracelets`.`date` ASC ";
-		$stmt = $this->db->query($sql);
-		$result[2] = $stmt->fetchAll();
+		$result = array();
+	
+		//$sql = "SELECT user, email, status FROM users WHERE user = '".$this->login."' LIMIT 1";
+		//$stmt = $this->db->query($sql);
+		$stmt = $this->db->prepare("SELECT user, email, status FROM users WHERE user = :user LIMIT 1");
+		$stmt->execute(array('user' => $this->login));
+		$result[0] = $stmt->fetch(PDO::FETCH_ASSOC);
+		//$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = '".$this->login."'";
+		//$stmt = $this->db->query($sql);
+		$stmt = $this->db->prepare("SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = :user");
+		$stmt->execute(array('user' => $this->login));
+		$result[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		//$sql = "SELECT brid, date FROM bracelets WHERE user = '".$this->login."' ORDER BY  `bracelets`.`date` ASC ";
+		//$stmt = $this->db->query($sql);
+		$stmt = $this->db->prepare("SELECT brid, date FROM bracelets WHERE user = :user ORDER BY  `bracelets`.`date` ASC ");
+		$stmt->execute(array('user' => $this->login));
+		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$user_details = $result;
-		$user_details['users'] = $user_details[0][0];
-		$user_details['addresses'] = $user_details[1][0];
+		$user_details['users'] = $user_details[0];
+		$user_details['addresses'] = $user_details[1][0]; //<--- Nur eine Adresse wird ausgegeben, aber Benutzer können eventuell mehrere haben!
 		$brids = array();
 		foreach ($user_details[2] as $key => $val) {
 			$brids = array_merge_recursive($val, $brids);
