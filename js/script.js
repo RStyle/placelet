@@ -40,7 +40,7 @@ $('.password').on({
 
 $("#form_login").submit(function() {
 	if ($("#password").val() == default_password_value) {
-	setTimeout(function(){$("#password").select();},10); 
+	$("#password").select(); 
 		return false;
 	}
 	
@@ -72,11 +72,19 @@ $(".input_text").blur(function(){
 //Registration
 $("#form_reg").submit(function() {
 	if ($("#reg_password").val() == default_password_value) {
-	setTimeout(function(){$("#reg_password").select();},10); 
+	$("#reg_password").select();
 		return false;
 	}
 	if ($("#reg_password2").val() == default_password_value) {
-	setTimeout(function(){$("#reg_password2").select();},10); 
+	$("#reg_password2").select();
+		return false;
+	}
+	
+	if ($("#reg_password").val() != $("#reg_password2").val()) {
+		$('#reg_password, #reg_password2').each(function() {
+			this.setCustomValidity("Die Passwörter passen nicht zueinander.") //Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide
+			
+		});
 		return false;
 	}
 });

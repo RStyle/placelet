@@ -22,11 +22,11 @@ if (!isset($_GET['loginattempt'])) {
 			  <table style="border: 1px solid black">
 				<tr>
 				  <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-				  <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" required></td>
+				  <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" pattern=".{6,30}" title="Min.4 - Max.15" required></td>
 				</tr>
 				<tr>
 				  <td><label for="password">Passwort</label></td>
-				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
 				</tr>
 				<tr>
 				  <td><input type="submit" value="Login"></td>
@@ -41,7 +41,7 @@ if (!isset($_GET['loginattempt'])) {
 			  <table style="border: 1px solid black">
 				<tr>
 				  <td><label for="reg_login">Benutzername</label></td>
-				  <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" required></td>
+				  <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
 				</tr>
 				<tr>
 				  <td><label for="reg_first_name">Vorname</label></td>
@@ -57,11 +57,11 @@ if (!isset($_GET['loginattempt'])) {
 				</tr>
 				<tr>
 				  <td><label for="reg_password">Passwort</label></td>
-				  <td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				  <td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
 				</tr>
 				<tr>
 				  <td><label for="reg_password2">Passwort wiederholen</label></td>
-				  <td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				  <td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
 				</tr>
 				<tr>
 				  <td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
@@ -105,11 +105,11 @@ if (!isset($_GET['loginattempt'])) {
 			  <table style="border: 1px solid black">
 				<tr>
 				  <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-				  <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" required></td>
+				  <td><input type="text" name="login" id="login" size="20" maxlength="30" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Benutzername" required></td>
 				</tr>
 				<tr>
 				  <td><label for="password">Passwort</label></td>
-				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%&$%&/%§$" required></td>
+				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
 				</tr>
 				<tr>
 				  <td><input type="submit" value="Login"></td>

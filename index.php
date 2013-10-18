@@ -141,9 +141,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			<div id="login-box">
 				<form name="login" id="form_login" action="start" method="post">
 					  <label for="login" id="label_login">Benutzername</label><br>
-					  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" required><br>
+					  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
 					  <label for="password" id="label_password">Passwort</label><br>
-					  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30"  value="!§%$$%\/%§$" required><br>
+					  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
 					  <input type="submit" value="Login" id="submit_login">
 				</form><br>
 				<a href="login">Hier registrieren</a>
