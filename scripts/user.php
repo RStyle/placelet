@@ -184,19 +184,12 @@ class User
 	//Userdetails abfragen
 	public function userdetails() {
 		$result = array();
-	
-		//$sql = "SELECT user, email, status FROM users WHERE user = '".$this->login."' LIMIT 1";
-		//$stmt = $this->db->query($sql);
 		$stmt = $this->db->prepare("SELECT user, email, status FROM users WHERE user = :user LIMIT 1");
 		$stmt->execute(array('user' => $this->login));
 		$result[0] = $stmt->fetch(PDO::FETCH_ASSOC);
-		//$sql = "SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = '".$this->login."'";
-		//$stmt = $this->db->query($sql);
 		$stmt = $this->db->prepare("SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = :user");
 		$stmt->execute(array('user' => $this->login));
 		$result[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		//$sql = "SELECT brid, date FROM bracelets WHERE user = '".$this->login."' ORDER BY  `bracelets`.`date` ASC ";
-		//$stmt = $this->db->query($sql);
 		$stmt = $this->db->prepare("SELECT brid, date FROM bracelets WHERE user = :user ORDER BY  `bracelets`.`date` ASC ");
 		$stmt->execute(array('user' => $this->login));
 		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -207,9 +200,14 @@ class User
 		$brids = array();
 		foreach ($user_details[2] as $key => $val) {
 			$brids = array_merge_recursive($val, $brids);
+			$stmt = $this->db->prepare("SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1");
+			$stmt->execute(array('brid' => $val['brid']));
+			$result[3][$val['brid']] = $stmt->fetch(PDO::FETCH_ASSOC);
 		}
 		$user_details['bracelets'] = $brids;
+		
 		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
+		$userdetails['picture_count'] = $result[3];
 		return $userdetails;
 	}
 	

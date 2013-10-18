@@ -10,6 +10,7 @@ if (isset($_SESSION['user'])) {
 			foreach ($userdetails['date'] as $val => $key) {
 				$armbaender['date'][$val] = $key;
 			}
+			$armbaender['picture_count'] = $userdetails['picture_count'];
 		} else {
 			$armbaender['brid'][0] = $userdetails['brid'];
 			$armbaender['date'][0] = $userdetails['date'];
@@ -60,7 +61,7 @@ if (isset($_SESSION['user'])) {
 								<tr>
 									<td><a href="armband?id='.$armbaender['brid'][$i].'">Armband '.$armbaender['brid'][$i].'</a></td>
 									<td>'.date('d.m.Y', $armbaender['date'][$i]).'</td>
-									<td>noch nicht implementiert</td>
+									<td>'.$armbaender['picture_count'][$armbaender['brid'][$i]]['picid'].'</td>
 								</tr>';
 							}
 						} else {
