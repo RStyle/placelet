@@ -203,23 +203,23 @@ class User
 	}
 	
 	//Statistik vom Armband abfragen
-	public function bracelet_stats($brid) {
+	public static function bracelet_stats($brid, $db) {
 		$sql = "SELECT user, date FROM bracelets WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
+		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['owner'] = $q[0]['user'];
 		$stats['date'] = $q[0]['date'];
 		
 		$sql = "SELECT user FROM pictures WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
+		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['owners'] = count($q[0]);
 
 		return $stats;
 	}
-	public function picture_details ($brid) {
+	public static function picture_details ($brid, $db) {
 		$sql = "SELECT user, description, picid, city, country, date, title, fileext FROM pictures WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
+		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
 			//$details[$val['picid']] = $val;
@@ -233,7 +233,7 @@ class User
 			$details[$val['picid']]['fileext'] = $val['fileext'];
 		}
 		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
+		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
 			$details[$val['picid']] [$val['commid']] = array();
@@ -247,12 +247,8 @@ class User
 		return $details;
 		
 	}
-	
-	public function add_picture ($brid) {
-		
-	}
 //Kommentar schreiben
-	public static function write_comment ($brid, $username, $comment, $picid, $db, $user) {
+	public static function write_comment ($brid, $username, $comment, $picid, $user, $db) {
 		$submissions_valid = true;
 		if (isset($user->login)) {
 			if ($user->login != $username) {
@@ -300,9 +296,8 @@ class User
 			}
 		}
 	}
-	
 	//Zeigt die allgemeine Statistik an
-	public static function systemStats($db, $banz) {
+	public static function systemStats($banz, $db) {
 		//Arnzahl registrierter Armbänder
 		$sql = "SELECT brid FROM bracelets WHERE user != ''";
 		$stmt = $db->query($sql);
@@ -371,6 +366,25 @@ class User
 			$submissions_valid = false;
 			return 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
 		}
+		if (isset($picture_file)) {
+			switch($picture_file['type']) {
+				case 'image/jpeg':
+					$fileext = 'jpg';
+					break;
+				case 'image/bmp':
+					$fileext = 'bmp';
+					break;
+				case 'image/gif':
+					$fileext = 'gif';
+					break;
+				case 'image/png':
+					$fileext = 'png';
+					break;
+				default:
+					$submissions_valid = false;
+					return "Dieses Format wird nicht unterstützt. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
+			}
+		}
 		if ($submissions_valid) {
 			try {
 				$sql = "SELECT picid FROM pictures WHERE brid = :brid";
@@ -380,27 +394,8 @@ class User
 				$row = array_reverse($row);
 				$picid = $row[0]['picid'] + 1;
 				
-				if (isset($picture_file)) {
-					switch($picture_file['type']) {
-						case 'image/jpeg':
-							$fileext = 'jpg';
-							break;
-						case 'image/tiff':
-							$fileext = 'tiff';
-							break;
-						case 'image/bmp':
-							$fileext = 'bmp';
-							break;
-						case 'image/gif':
-							$fileext = 'gif';
-							break;
-						case 'image/png':
-							$fileext = 'png';
-							break;
-					}
-					if ($picture_file['size'] < $max_file_size) {
-						move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
-					}
+				if ($picture_file['size'] < $max_file_size) {
+					move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
 				}
 				
 				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext)";

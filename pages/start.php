@@ -6,8 +6,8 @@ if (isset($_POST['comment_submit'])) {
 						 $_POST['comment_user'][$_POST['comment_form']],
 						 $_POST['comment_content'][$_POST['comment_form']],
 						 $_POST['comment_picid'][$_POST['comment_form']],
-						 $db,
-						 $user);
+						 $user,
+						 $db);
 }
 if (isset($write_comment)) {
 	echo '<script type="text/javascript">
@@ -17,13 +17,12 @@ if (isset($write_comment)) {
 		  </script>';
 }
 $banz = 3;
-$systemStats = User::systemStats($db, $banz);
+$systemStats = User::systemStats($banz, $db);
 //hier werden die Armbänder bestimmt, die angezeigt werden
-$bracelets_displayed[1] = 111;
-$stats[1] = array_merge($user->bracelet_stats($bracelets_displayed[1]), $user->picture_details($bracelets_displayed[1]));
-
-$bracelets_displayed[2] = 222;
-$stats[2] = array_merge($user->bracelet_stats($bracelets_displayed[2]), $user->picture_details($bracelets_displayed[2]));
+$bracelets_displayed = array(1 => 111, 222);
+foreach($bracelets_displayed as $key => $val) {
+	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
+}
 ?>
 		<article id="placelet_stats">
 		    <h1 style="clear: both">Community-Statistiken</h1>  

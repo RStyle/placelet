@@ -1,5 +1,5 @@
 <?php
-$max_file_size = 100000;
+$max_file_size = 1000000;
 if (isset($_POST['registerpic_submit'])) {
 	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
 										 $_POST['registerpic_description'],
@@ -58,8 +58,8 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 							 $_POST['comment_user'][$_POST['comment_form']],
 							 $_POST['comment_content'][$_POST['comment_form']],
 							 $_POST['comment_picid'][$_POST['comment_form']],
-							 $db,
-							 $user);
+							 $user,
+							 $db);
 	}
 	if (isset($write_comment)) {
 		echo '<script type="text/javascript">
@@ -69,7 +69,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic']) && isset($_SESSION['user']
 			  </script>';
 	}
 	
-	$stats = array_merge($user->bracelet_stats($_GET['id']), $user->picture_details($_GET['id']));
+	$stats = array_merge(User::bracelet_stats($_GET['id'], $db), User::picture_details($_GET['id'], $db));
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></div>
