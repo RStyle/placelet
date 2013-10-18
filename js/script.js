@@ -113,13 +113,31 @@ $('#holder').on(
 )
 
 //Uploadvorschau
-$('#registerpic_file').change(function() {
+
+$('input[name=registerpic_file]').change(function() {
+var active = false;
+var i_height = 1000; 
+window.clearInterval(active);
+$('#image_preview').css("max-height", "0%");
 var oFReader = new FileReader();
-oFReader.readAsDataURL(document.getElementById("registerpic_file").files[0]);
+//oFReader.readAsDataURL(document.getElementById("registerpic_file").files[0]);
+oFReader.readAsDataURL($('input[name=registerpic_file]').prop("files")[0]);
 
 oFReader.onload = function (oFREvent) {
-	$('#holder').css("background-image", "url(" + oFREvent.target.result + ")");  
-};
+	//$('#image_preview').css("background-image", "url(" + oFREvent.target.result + ")");  
+
+	i_height = 0; 
+	active = window.setInterval( function() {
+		if(i_height > 50){
+			window.clearInterval(active);
+		}
+		//$("#image_preview").height( i_height  + "%");
+		$('#image_preview').css("max-height", i_height  + "%");  
+		i_height += 1.25;
+	}, 40);
+	
+	$("#image_preview").attr("src",oFREvent.target.result);
+	};
 });
 
 

@@ -42,8 +42,8 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
                         <label for="registerpic_captcha" class="label_registerpic_captcha">Captcha:</label><br>
 						<input type="text" name="registerpic_captcha" class="registerpic_captcha" size="20" maxlength="5" placeholder="Captcha" value="captcha" required><br>
                         
-                        <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br><br>
-						<div id="holder" style="width:200px; height:100px; background-color:red;background-repeat: no-repeat;background-position: center"></div><br><br>
+                        <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
+							<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat;background-position: center;max-height:0px"><br>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 						<input type="hidden" name="registerpic_brid" value="<?php echo $_GET['id'];?>">
 						<input type="submit" name="registerpic_submit" value="Bild posten">
