@@ -385,9 +385,6 @@ class User
 				case 'image/jpeg':
 					$fileext = 'jpg';
 					break;
-				case 'image/bmp':
-					$fileext = 'bmp';
-					break;
 				case 'image/gif':
 					$fileext = 'gif';
 					break;
@@ -400,18 +397,51 @@ class User
 			}
 		}
 		if ($submissions_valid) {
-			try {
-				$sql = "SELECT picid FROM pictures WHERE brid = :brid";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(':brid' => $brid));
-				$row = $q->fetchAll(PDO::FETCH_ASSOC);	
-				$row = array_reverse($row);
-				$picid = $row[0]['picid'] + 1;
-				
-				if ($picture_file['size'] < $max_file_size) {
-					move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
+			$sql = "SELECT picid FROM pictures WHERE brid = :brid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(':brid' => $brid));
+			$row = $q->fetchAll(PDO::FETCH_ASSOC);	
+			$row = array_reverse($row);
+			$picid = $row[0]['picid'] + 1;
+			if ($picture_file['size'] < $max_file_size) {
+				$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
+			} else {
+				return 'Das Bild ist leider zu groß.';
+			}
+			if($file_uploaded == true) {
+				///////////////////////////
+				//Hier werdendie hochgeladenen Dateien modifiziert.
+				//Datei-Pfad:
+				$img_path = 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext;
+				//Bild-Instanz erstellen
+				switch($fileext) {
+					case 'jpg':
+						$img = imagecreatefromjpeg($img_path);
+						break;
+					case 'gif':
+						$img = imagecreatefromgif($img_path);
+						break;
+					case 'png':
+						$img = imagecreatefrompng($img_path);
+						break;
 				}
-				
+				//Interlacing aktivieren
+				imageinterlace($img, true);
+				//Geändertes Bild speichern(altes ersetzen)
+				switch($fileext) {
+					case 'jpg':
+						imagejpeg($img, $img_path);
+						break;
+					case 'gif':
+						imagegif($img, $img_path);
+						break;
+					case 'png':
+						imagepng($img, $img_path);
+						break;
+				}
+				imagedestroy($img);
+				///////////////////////////
+			
 				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext)";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
@@ -426,9 +456,8 @@ class User
 					'fileext' => $fileext
 				));
 				return 'Bild erfolgreich gepostet.';
-			} catch (PDOException $e) {
-					die('ERROR: ' . $e->getMessage());
-					return false;
+			} else {
+				return 'Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.';
 			}
 		}
 	}

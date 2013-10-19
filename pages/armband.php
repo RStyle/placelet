@@ -1,6 +1,6 @@
 <?php
 $captcha = 'captcha';
-$max_file_size = 1000000;
+$max_file_size = 10485760;
 if (isset($_POST['registerpic_submit'])) {
 	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
 										 $_POST['registerpic_description'],
