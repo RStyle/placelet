@@ -3,6 +3,52 @@
 function check_image(){
 
 }
+//Erstellt ein Thumbnail vom Bild
+//$target ist der Pfad vom Ausgangsbild; $thumb der unter dem das Thumbnail gespeichert wird; $w die maximale Breite des Thumbnails; $h die maximale Höhe des Thumbnails; $ext die Endung des Bildes
+function create_thumbnail($target, $thumb, $w, $h, $ext) {
+	list($w_orig, $h_orig) = getimagesize($target);
+	$scale_ratio = $w_orig/$h_orig;
+	if(($w / $h) > $scale_ratio) {
+		$w = $h * $scale_ratio;
+	} else {
+		$h = $w / $scale_ratio;
+	}
+	$ext = strtolower($ext);
+	switch($ext) {
+		case 'jpeg';
+		case 'jpg';
+			$img = imagecreatefromjpeg($target);
+			break;
+		case 'gif';
+			$img = imagecreatefromgif($target);
+			break;
+		case 'png';
+			$img = imagecreatefrompng($target);
+			break;
+		default:
+			echo 'Fehler';
+			return false;
+	}
+	$tci = imagecreatetruecolor($w, $h);
+	imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
+	switch($ext) {
+		case 'jpeg';
+		case 'jpg';
+			imagejpeg($tci, $thumb, 80);
+			break;
+		case 'gif';
+			imagegif($tci, $thumb, 80);
+			break;
+		case 'png';
+			imagepng($tci, $thumb, 80);
+			break;
+		default:
+			echo 'Fehler';
+			return false;
+	}
+	
+	
+}
 
 //Überprüft, ob der Wert leer, bzw. auch getrimmt leer ist
 function tisset($a){

@@ -381,20 +381,26 @@ class User
 			return 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
 		}
 		if (isset($picture_file)) {
-			switch($picture_file['type']) {
-				case 'image/jpeg':
+			$filename_props = explode(".", $picture_file['name']);
+			switch(end($filename_props)) {
+				case 'jpeg':
+					$fileext = 'jpeg';
+					break;
+				case 'jpg':
 					$fileext = 'jpg';
 					break;
-				case 'image/gif':
+				case 'gif':
 					$fileext = 'gif';
 					break;
-				case 'image/png':
+				case 'png':
 					$fileext = 'png';
 					break;
 				default:
 					$submissions_valid = false;
-					return "Dieses Format wird nicht unterstützt. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
+					return "Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
 			}
+		} else {
+			return 'Kein Bild ausgewählt, versuch es noch ein Mal.';
 		}
 		if ($submissions_valid) {
 			$sql = "SELECT picid FROM pictures WHERE brid = :brid";
@@ -406,7 +412,7 @@ class User
 			if ($picture_file['size'] < $max_file_size) {
 				$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
 			} else {
-				return 'Das Bild ist leider zu groß.';
+				return 'Wir unterstützen nur Bilder bis 10MB Größe';
 			}
 			if($file_uploaded == true) {
 				///////////////////////////
@@ -415,6 +421,7 @@ class User
 				$img_path = 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext;
 				//Bild-Instanz erstellen
 				switch($fileext) {
+					case 'jpeg':
 					case 'jpg':
 						$img = imagecreatefromjpeg($img_path);
 						break;
@@ -429,6 +436,7 @@ class User
 				imageinterlace($img, true);
 				//Geändertes Bild speichern(altes ersetzen)
 				switch($fileext) {
+					case 'jpeg':
 					case 'jpg':
 						imagejpeg($img, $img_path);
 						break;
@@ -440,6 +448,11 @@ class User
 						break;
 				}
 				imagedestroy($img);
+				//Thumbnail von dem hochgeladenen Bild erstellen
+				//Die Funktion wird in scripts/functions.php definiert
+				//create_thumbnail($target, $thumb, $w, $h, $ext)
+				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.'.$fileext;
+				create_thumbnail($img_path, $thumb_path, 300, 500, $fileext);
 				///////////////////////////
 			
 				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext)";

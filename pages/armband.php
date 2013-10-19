@@ -43,10 +43,10 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 						<input type="text" name="registerpic_captcha" class="registerpic_captcha" size="20" maxlength="5" placeholder="Captcha" value="captcha" required><br>
                         
                         <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
-							<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat;background-position: center;max-height:0px"><br>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 						<input type="hidden" name="registerpic_brid" value="<?php echo $_GET['id'];?>">
-						<input type="submit" name="registerpic_submit" value="Bild posten">
+						<input type="submit" name="registerpic_submit" value="Bild posten"><br>
+						<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat;background-position: center;max-height:0px">
 					</form>
 				</article>
 <?php
@@ -87,7 +87,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
                     <div>
                         <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
                         <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
-                            <img src="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
+                            <img src="pictures/bracelets/thumb<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
                         </a>
                         <?php echo date('d.m.Y', $stats[$i]['date']); ?>
                         <h4><?php echo $stats[$i]['title']; ?></h4>
