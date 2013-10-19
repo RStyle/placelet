@@ -218,7 +218,6 @@ class User
 		$q = $stmt->fetchAll();
 		$stats['owner'] = $q[0]['user'];
 		$stats['date'] = $q[0]['date'];
-		
 		$sql = "SELECT user FROM pictures WHERE brid = '".$brid."'";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();

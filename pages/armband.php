@@ -1,6 +1,6 @@
 <?php
 $captcha = 'captcha';
-$max_file_size = 8388608;
+$max_file_size = 8000000;
 if (isset($_POST['registerpic_submit'])) {
 	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
 										 $_POST['registerpic_description'],
@@ -147,7 +147,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 					</tr>
 					<tr>
 						<td>Letzter Ort</td>
-						<td>Sydney, Australia</td>
+						<td><?php echo $stats[0]['city'].', '.$stats[0]['country']; ?></td>
 					</tr>
 				</table>
 			</aside>

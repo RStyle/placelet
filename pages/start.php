@@ -19,7 +19,7 @@ if (isset($write_comment)) {
 $banz = 3;
 $systemStats = User::systemStats($banz, $db);
 //hier werden die Armbänder bestimmt, die angezeigt werden
-$bracelets_displayed = array(1 => 111, 222);
+$bracelets_displayed = array(1 => 111, 222, 768);
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
 }

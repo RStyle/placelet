@@ -17,8 +17,9 @@ if (isset($_SESSION['user'])) {
 if (!isset($_GET['loginattempt'])) {
 	if($checklogin == false){
 		if(isset($_GET['registerbr'])) {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen?>
-			Bitte Logge dich ein oder erstelle dir einen neuen Account, um dein Armband zu registrieren<br>Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $_GET['registerbr']; ?></span> registrieren:<br>
-			<form name="login" id="form_login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
+            um dein Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $_GET['registerbr']; ?></span> registrieren:<br>
+			<form name="login" id="form_login" action="<?php echo $friendly_self.'?registerbr='.$_GET['registerbr']; ?>" method="post">
 			  <table style="border: 1px solid black">
 				<tr>
 				  <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -37,7 +38,7 @@ if (!isset($_GET['loginattempt'])) {
 <?php
 		}
 ?>
-			<form name="reg" id="form_reg" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+			<form name="reg" id="form_reg" action="<?php echo $friendly_self; ?>" method="post">
 			  <table style="border: 1px solid black">
 				<tr>
 				  <td><label for="reg_login">Benutzername</label></td>
