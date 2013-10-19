@@ -65,6 +65,12 @@ th {
 .green_line {
 	background-image: url('../img/header_bg-green.png');
 }
+.float_left {
+	float: left;
+}
+.float_right {
+	float: right;
+}
 /*---HEADER---*/
 #header {
 	font-family: Tahoma, Geneva, sans-serif;
@@ -431,7 +437,19 @@ th {
                 padding: 5px;
 				width: 45%;
             }
-     
+	/*---Login SECTION---*/
+	#register_pic {
+		float: left;		
+		width: 49%;
+		margin-right: 3%;
+	}
+		#register_pic form{
+			margin: 0 auto;
+		}
+	#register_br {
+		float: left;
+		width: 48%
+	}
 /*---Side Container ASIDE---*/
 .side_container {
 	border-left: black solid 1px;
@@ -457,26 +475,3 @@ th {
 		margin: 0;
 		padding: 4px;
 	}
-/*---SIDENAV---*/
-#sidenav {
-	border-right: 2px solid #817965;
-	color: #000;
-	display: none;
-	left: 1%;
-	list-style: none;
-	padding: 1em 1em 1em 2em;
-	position: fixed;
-	top: 20%;
-}
-#sidenav li {
-	/*border-left: 4px double #414141;*/
-	margin-bottom: 1em;
-	}
-/*---FOOTER---*/
-#footer {
-	background-color: #FFF;
-	bottom: 0;
-	display: none;
-	position: fixed;
-	width: 100%
-}

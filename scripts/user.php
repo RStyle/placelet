@@ -128,33 +128,9 @@ class User
 		
 		
 	}
-/*	//Armband neu registrieren
-	public function registerbr ($brid) {		
-		if (!isset($braces[$brid])) {
-				try {
-					$sql = "INSERT INTO bracelets (user, brid, date) VALUES (:user, :brid, :date)";
-					$q = $this->db->prepare($sql);
-					$q->execute(array(
-						':user' => $this->login,
-						':brid' => $brid,
-						':date' => date("Y-m-d"))
-					);
-				} catch(PDOException $e) {
-					if ($e->getCode() == 23000) {
-						return false;
-					} else {
-						die('ERROR: ' . $e->getMessage());
-						return false;
-					}
-				}
-				return true;
-		}
-	}*/
 	//Armband registrieren
 	public function registerbr ($brid) {
 		try {
-			//$sql = "SELECT user FROM bracelets WHERE brid = ".$brid. " LIMIT 1";
-			//$stmt = $this->db->query($sql);
 			$stmt = $this->db->prepare('SELECT user FROM bracelets WHERE brid = :brid LIMIT 1');
 			$stmt->execute(array('brid' => $brid));
 			$anz = $stmt->rowCount(); 
@@ -469,6 +445,20 @@ class User
 				//return 'Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.';
 				return $picture_file['error'];
 			}
+		}
+	}
+	//Prüft, ob ein Armband schon registriert wurde
+	public static function bracelet_status($brid, $db) {
+		$stmt = $db->prepare('SELECT user FROM bracelets WHERE brid = :brid LIMIT 1');
+		$stmt->execute(array('brid' => $brid));
+		$anz = $stmt->rowCount();
+		$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
+		if ($anz == 0) {
+			return '0';
+		} elseif ($bracelet['user'] == NULL ) {
+			return 1;
+		} else {
+			return 2;
 		}
 	}
 }

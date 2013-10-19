@@ -1,6 +1,5 @@
 <?php
 $captcha = 'captcha';
-$max_file_size = 8000000;
 if (isset($_POST['registerpic_submit'])) {
 	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
 										 $_POST['registerpic_description'],
@@ -40,7 +39,7 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
                         <textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required></textarea><br> 
                         
                         <label for="registerpic_captcha" class="label_registerpic_captcha">Captcha:</label><br>
-						<input type="text" name="registerpic_captcha" class="registerpic_captcha" size="20" maxlength="5" placeholder="Captcha" value="captcha" required><br>
+						<input type="text" name="registerpic_captcha" class="registerpic_captcha" size="20" maxlength="5" placeholder="Captcha" value="<?php echo $captcha;?>" required><br>
                         
                         <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
@@ -152,6 +151,8 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 				</table>
 			</aside>
 <?php
+} elseif(isset($_POST['registerpic_submit'])){
+	header('Location: armband?id='.$_POST['registerpic_brid']);
 } else {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">

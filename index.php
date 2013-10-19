@@ -57,6 +57,9 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 $user = new User(false, $db);
 }
 
+//Maximale Größe für hochgeladene Bilder
+$max_file_size = 8000000;
+
 if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
 	User::register($_POST, $db);
 }
@@ -125,8 +128,8 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 		<header id="header">
 			<div id="headerregisterbr">
 				<form name="registerbr" action="login" method="get">
-					<label for="registerbr">Armband registrieren&nbsp;</label>
-					<input name="registerbr" type="text" required="required" id="registerbr" placeholder="Placelet ID..." size="20" maxlength="30">
+					<label for="registerbr">Armband registrieren/Bild posten </label>
+					<input name="registerbr" type="text" required="required" id="registerbr" placeholder="Armband ID..." size="20" maxlength="30">
 				</form>
 			</div>
 <?php
@@ -179,23 +182,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
         <section id="section">
 <?php
 include_once('./pages/'.$page.'.php');
-
-if ($checklogin == true) {
-?>
-		<ul id="sidenav">
-			<li><a href="start">Start</a></li>
-			<li><a href="profil">Mein Profil</a></li>
-			<li>Dritter Eintrag</li>
-		</ul>
-<?php
-}
 ?>
 
 		</section>
-<!--###FOOTER TAG###-->
-		<footer id="footer">
-			Placelet - by Daniel, Julian, Roman
-		</footer>
 		<!--<script src="js/jquery-1.10.2.min.js"></script>-->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
