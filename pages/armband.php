@@ -1,6 +1,6 @@
 <?php
 $captcha = 'captcha';
-$max_file_size = 10485760;
+$max_file_size = 8388608;
 if (isset($_POST['registerpic_submit'])) {
 	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
 										 $_POST['registerpic_description'],
@@ -79,21 +79,19 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></div>
-				<div style="float: left;">
+				<span class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></span>
+				<a href="<?php echo $friendly_self.'?id='.$_GET['id'].'&registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
 <?php
 					for ($i = 0; $i < count($stats)-3; $i++) {
 ?>
-                    <div>
-                        <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-                        <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
-                            <img src="pictures/bracelets/thumb<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
-                        </a>
-                        <?php echo date('d.m.Y', $stats[$i]['date']); ?>
-                        <h4><?php echo $stats[$i]['title']; ?></h4>
-                        <p><?php echo $stats[$i]['description']; ?></p>
-                        <span class="toggle_comments pseudo_link" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
-                    </div>
+                    <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+                    <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
+                        <img src="pictures/bracelets/thumb<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
+                    </a>
+                    <?php echo date('d.m.Y', $stats[$i]['date']); ?>
+                    <h4><?php echo $stats[$i]['title']; ?></h4>
+                    <p><?php echo $stats[$i]['description']; ?></p>
+                    <span class="toggle_comments pseudo_link" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
                     <div class="comments" id="comment<?php echo $i;?>">
 <?php
 					for ($j = 1; $j <= count($stats[$i])-8; $j++) {
@@ -122,13 +120,11 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 						}
 					}
 ?>
-				</div>
 <?php
-		if (!isset($bracelet_stats['owners']) ) {
+		if ($bracelet_stats['owners'] == 0 ) {
 			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
 		}
 ?>
-				<a href="<?php echo $friendly_self.'?id='.$_GET['id'].'&registerpic=1'; ?>">Ein neues Bild zu diesem Armband posten</a>
 			</article>
 			<aside class="side_container" id="bracelet_props">
 				<h1>Statistik</h1>

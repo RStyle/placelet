@@ -40,7 +40,7 @@ function create_thumbnail($target, $thumb, $w, $h, $ext) {
 			imagegif($tci, $thumb, 80);
 			break;
 		case 'png';
-			imagepng($tci, $thumb, 80);
+			imagepng($tci, $thumb, 8);
 			break;
 		default:
 			echo 'Fehler';

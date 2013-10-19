@@ -343,7 +343,11 @@ class User
 			$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
 			$stmt = $db->query($sql);
 			$q = $stmt->fetchAll();
-			$stats['user_most_bracelets']['uploads'][$i] = $q[0]['number'];
+			if(isset($q[0]['number'])) {
+				$stats['user_most_bracelets']['uploads'][$i] = $q[0]['number'];
+			} else {
+				$stats['user_most_bracelets']['uploads'][$i] = 0;
+			}
 		}
 		//Armband, das Bilder in den meisten Städten hat(mit Anzahl)
 		$sql = "SELECT COUNT(*) AS number,brid FROM pictures GROUP BY brid ORDER BY number DESC";
@@ -382,22 +386,11 @@ class User
 		}
 		if (isset($picture_file)) {
 			$filename_props = explode(".", $picture_file['name']);
-			switch(end($filename_props)) {
-				case 'jpeg':
-					$fileext = 'jpeg';
-					break;
-				case 'jpg':
-					$fileext = 'jpg';
-					break;
-				case 'gif':
-					$fileext = 'gif';
-					break;
-				case 'png':
-					$fileext = 'png';
-					break;
-				default:
-					$submissions_valid = false;
-					return "Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
+			$fileext = strtolower(end($filename_props));
+			if($fileext != 'jpeg' && $fileext != 'jpg' && $fileext != 'gif' && $fileext != 'png') {
+				unset($fileext);
+				$submissions_valid = false;
+				return "Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
 			}
 		} else {
 			return 'Kein Bild ausgewählt, versuch es noch ein Mal.';
@@ -408,11 +401,15 @@ class User
 			$q->execute(array(':brid' => $brid));
 			$row = $q->fetchAll(PDO::FETCH_ASSOC);	
 			$row = array_reverse($row);
-			$picid = $row[0]['picid'] + 1;
+			if(isset($row[0]['picid'])) {
+				$picid = $row[0]['picid'] + 1;
+			} else {
+				$picid = 1;
+			}
 			if ($picture_file['size'] < $max_file_size) {
 				$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
 			} else {
-				return 'Wir unterstützen nur Bilder bis 10MB Größe';
+				return 'Wir unterstützen nur Bilder bis 8MB Größe';
 			}
 			if($file_uploaded == true) {
 				///////////////////////////
@@ -452,7 +449,7 @@ class User
 				//Die Funktion wird in scripts/functions.php definiert
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
 				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.'.$fileext;
-				create_thumbnail($img_path, $thumb_path, 300, 500, $fileext);
+				create_thumbnail($img_path, $thumb_path, 400, 800, $fileext);
 				///////////////////////////
 			
 				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext)";
@@ -469,8 +466,9 @@ class User
 					'fileext' => $fileext
 				));
 				return 'Bild erfolgreich gepostet.';
-			} else {
-				return 'Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.';
+			} elseif ($file_uploaded == false) {
+				//return 'Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.';
+				return $picture_file['error'];
 			}
 		}
 	}
