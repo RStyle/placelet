@@ -1,4 +1,27 @@
 <?php
+$captcha = 'captcha';
+if (isset($_POST['registerpic_submit'])) {
+	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
+										 $_POST['registerpic_description'],
+										 $_POST['registerpic_city'],
+										 $_POST['registerpic_country'],
+										 $_POST['registerpic_title'],
+										 $_POST['registerpic_captcha'],
+										 $captcha,
+										 $_FILES['registerpic_file'],
+										 $max_file_size);
+}
+if (isset($pic_registered)) {
+	if($pic_registered == 'Bild erfolgreich gepostet.') {
+		header('Location: armband?id='.$_POST['registerpic_brid']);
+	}else {
+		echo '<script type="text/javascript">
+				//$(document).ready(function(){
+					alert("'.$pic_registered.'");
+				//});
+			  </script>';
+	}
+}
 if (isset($_SESSION['user'])) {
 	$userdetails = $user->userdetails();
 	//Armband registrieren
@@ -13,10 +36,11 @@ if(isset($_GET['registerbr'])) {
 <?php
 if(!isset($_GET['loginattempt'])) {
 	$captcha = 'captcha';
+	if(isset($_GET['registerbr'])) {
 ?>
         <article id="register_pic" class="mainarticles bottom_border_blue">
             <div class="blue_line mainarticleheaders line_header"><h1>Bild posten</h1></div>
-            <form id="registerpic" name="registerpic" class="registerpic" action="<?php echo 'armband'; ?>" method="post" enctype="multipart/form-data">
+            <form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self; ?>" method="post" enctype="multipart/form-data">
                 <span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
                 
                 <label for="registerpic_brid" class="label_registerpic_brid">Armband Nr.:</label><br>
@@ -44,6 +68,13 @@ if(!isset($_GET['loginattempt'])) {
             </form>
         </article>
         <article id="register_br" class="mainarticles bottom_border_green">
+<?php
+	} else {
+?>
+		<article class="mainarticles bottom_border_green">
+<?php
+	}
+?>
             <div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page];?></h1></div>
 <?php
 	if($checklogin == false){

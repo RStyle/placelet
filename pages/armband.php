@@ -157,8 +157,6 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 				</table>
 			</aside>
 <?php
-} elseif(isset($_POST['registerpic_submit'])){
-	header('Location: armband?id='.$_POST['registerpic_brid']);
 } else {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">

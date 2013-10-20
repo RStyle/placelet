@@ -374,6 +374,15 @@ class User
 	//Postet ein Bild
 	public function registerpic ($brid, $description, $city, $country, $title, $captcha, $captcha_entered, $picture_file, $max_file_size) {
 		$submissions_valid = true;
+		//Prüft, ob das Armband schon registriert wurde
+		$sql = "SELECT user FROM bracelets WHERE brid = :brid";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(':brid' => $brid));
+		$row = $q->fetch(PDO::FETCH_ASSOC);	
+		if($row == '') {
+			$submissions_valid = false;
+			return 'Dieses Armband wurde noch nicht registriert.';
+		}
 		if($captcha != $captcha_entered) {
 			$submissions_valid = false;
 			return 'Captcha ist leider falsch.';
