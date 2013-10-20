@@ -143,7 +143,7 @@ class User
 				$q->execute(array(
 					':user' => $this->login,
 					':brid' => $brid,
-					':date' => time())//time() wäre einfacher umzuwandeln
+					':date' => time())
 				);
 				return 1;
 			}elseif ($bracelet['user'] == $this->login) {
@@ -282,39 +282,44 @@ class User
 		}
 	}
 	//Zeigt die allgemeine Statistik an
-	public static function systemStats($banz, $db) {
+	public static function systemStats($user_anz, $brid_anz, $db) {
 		//Arnzahl registrierter Armbänder
 		$sql = "SELECT brid FROM bracelets WHERE user != ''";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['total_registered'] = count($q);
+		
 		//Armbänder insgesamt
 		$sql = "SELECT brid FROM bracelets";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['total'] = count($q);
+		
 		//Anzahl der verschiedenen Städte
 		$sql = "SELECT COUNT(DISTINCT city)  FROM pictures";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['city_count'] = $q[0][0];
+		
 		//Stadt auf die die meisten Armbänder registriert wurden(mit Anzahl)
 		$sql = "SELECT COUNT(*) AS number,city FROM pictures GROUP BY city ORDER BY number DESC";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['most_popular_city']['city'] = $q[0]['city'];
 		$stats['most_popular_city']['number'] = $q[0]['number'];
+		
 		//Benutzer, die die meisten Armbänder auf sich registriert haben(mit Anzahl)
 		//Die Anzahl der Benutzer, die Ausgegeben werden, $banz festgelegt
 		$sql = "SELECT COUNT(*) AS number,user FROM bracelets GROUP BY user ORDER BY number DESC";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
-		for ($i = 1; $i <= $banz; $i++) {
+		for ($i = 1; $i <= $user_anz; $i++) {
 			$stats['user_most_bracelets']['user'][$i] = $q[$i]['user'];
 			$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 		}
 		//Uploads der Top-Benutzer
-		for ($i = 1; $i <= $banz; $i++) {
+		
+		for ($i = 1; $i <= $user_anz; $i++) {
 			$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
 			$stmt = $db->query($sql);
 			$q = $stmt->fetchAll();
@@ -324,12 +329,21 @@ class User
 				$stats['user_most_bracelets']['uploads'][$i] = 0;
 			}
 		}
+		
 		//Armband, das Bilder in den meisten Städten hat(mit Anzahl)
 		$sql = "SELECT COUNT(*) AS number,brid FROM pictures GROUP BY brid ORDER BY number DESC";
 		$stmt = $db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['bracelet_most_cities']['brid'] = $q[0]['brid'];
 		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
+		
+		//Ermittelt die IDs der neuesten $brid_anz Bilder
+		$sql = "SELECT brid FROM pictures ORDER BY  `pictures`.`date` DESC LIMIT ".$brid_anz;
+		$stmt = $db->query($sql);
+		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		for($i = 0; $i < $brid_anz; $i++) {
+			$stats['recent_brids'][$i+1] = $q[$i]['brid'];
+		}
 		return $stats;
 	}
 	//Überprüft, ob ein bestimmter Benutzer $user in der Datenbank eingetragen ist

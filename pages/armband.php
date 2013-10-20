@@ -18,12 +18,12 @@ if (isset($pic_registered)) {
 			//});
 		  </script>';
 }
-if (isset($_GET['id']) && isset($_GET['registerpic'])) {
+if (isset($braceID) && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
 ?>
 				<article id="armband" class="mainarticles bottom_border_green">
 					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceID; ?> posten</h1></div>
-					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$_GET['id']; ?>" method="post" enctype="multipart/form-data">
+					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$braceID; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
                         
                         <label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
@@ -43,17 +43,17 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
                         
                         <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
-						<input type="hidden" name="registerpic_brid" value="<?php echo $_GET['id'];?>">
+						<input type="hidden" name="registerpic_brid" value="<?php echo $braceID;?>">
 						<input type="submit" name="registerpic_submit" value="Bild posten"><br>
 						<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat;background-position: center;max-height:0px">
 					</form>
 				</article>
 <?php
 	}
-} elseif (isset($_GET['id'])) {
+} elseif (isset($braceID)) {
 	//Kommentare schreiben
 	if (isset($_POST['comment_submit'])) {
-		$write_comment = User::write_comment ($_GET['id'],
+		$write_comment = User::write_comment ($braceID,
 							 $_POST['comment_user'][$_POST['comment_form']],
 							 $_POST['comment_content'][$_POST['comment_form']],
 							 $_POST['comment_picid'][$_POST['comment_form']],
@@ -68,9 +68,9 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 			  </script>';
 	}
 	
-	$bracelet_stats = User::bracelet_stats($_GET['id'], $db);
+	$bracelet_stats = User::bracelet_stats($braceID, $db);
 	if (isset($bracelet_stats['owners'])) {
-		$picture_details = User::picture_details($_GET['id'], $db);
+		$picture_details = User::picture_details($braceID, $db);
 		$stats = array_merge($bracelet_stats, $picture_details);
 	} else {
 		$bracelet_stats['owners'] = 0;
@@ -79,13 +79,13 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<span class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></span>
-				<a href="<?php echo $friendly_self.'?id='.$_GET['id'].'&registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
+				<a href="<?php echo $friendly_self.'?id='.$braceID.'&registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
 <?php
 					for ($i = 0; $i < count($stats)-3; $i++) {
 ?>
                     <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-                    <a href="pictures/bracelets/pic<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
-                        <img src="pictures/bracelets/thumb<?php echo '-'.$_GET['id'].'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
+                    <a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
+                        <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
                     </a>
                     <?php echo date('d.m.Y', $stats[$i]['date']); ?>
                     <h4><?php echo $stats[$i]['title']; ?></h4>
@@ -101,13 +101,13 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 <?php 
 					}
 ?>   
-                        <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?id='.$_GET['id']; ?>" method="post">
+                        <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?id='.$braceID; ?>" method="post">
                             <span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
                             <label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
                             <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
                             <label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
                             <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-                            <input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $_GET['id'];?>">
+                            <input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
                             <input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
                             <input type="hidden" name="comment_form" value="<?php echo $i; ?>">
                             <input type="submit" name="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
@@ -144,10 +144,16 @@ if (isset($_GET['id']) && isset($_GET['registerpic'])) {
 						<td>Anzahl Besitzer</td>
 						<td><?php echo $stats['owners']; ?></td>
 					</tr>
+<?php
+		if ($bracelet_stats['owners'] != 0 ) {
+?>
 					<tr>
 						<td>Letzter Ort</td>
 						<td><?php echo $stats[0]['city'].', '.$stats[0]['country']; ?></td>
 					</tr>
+<?php
+		}
+?>
 				</table>
 			</aside>
 <?php
