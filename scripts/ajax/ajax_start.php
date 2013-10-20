@@ -3,14 +3,17 @@
 include_once('../connection.php');
 include_once('../user.php');
 
-$systemStats = User::systemStats($user_anz, 3, $db);
+$systemStats = User::systemStats(3, $_GET['q'], $db);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
 }
+if(isset($stats[$_GET['q'] - 2]))
 echo'<hr style="clear: both;"><!--HR über dem 1. nachgeladenen Bild-->';
-			for ($i = 3; $i <= 3; $i++) {
+			for ($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
+				if(!isset($stats[$i])){
+					break;}
 ?>
         	<div style="width: 100%;">
                 <div style="width: 70%; float: left;">
@@ -98,7 +101,7 @@ echo'<hr style="clear: both;"><!--HR über dem 1. nachgeladenen Bild-->';
             </div>
                  
 <?php
-					if ($i < count($bracelets_displayed)) {
+					if (isset($stats[$i+1])) {
 ?><!----HR----><hr style="clear: both;"><?php	
 					}
 				}

@@ -17,7 +17,7 @@ if (isset($write_comment)) {
 		  </script>';
 }
 $user_anz = 3;
-$systemStats = User::systemStats($user_anz, 2, $db);
+$systemStats = User::systemStats($user_anz, 3, $db);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
@@ -168,5 +168,5 @@ for ($i = 1; $i <= $user_anz; $i++) {
 					}
 				}
 ?>
-			<div class="pseudo_link" id="start_reload" style="clear: both;" >Mehr anzeigen</div>
+			<div class="pseudo_link" id="start_reload" onClick="reload_func();"  style="clear: both;" >Mehr anzeigen</div>
 		</article>

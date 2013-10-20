@@ -151,18 +151,7 @@ oFReader.onload = function (oFREvent) {
 
 
 //Neuste Bilder Nachladen
-$( "#start_reload" ).click(function() {
-var nachlad = $.ajax( "./scripts/ajax/ajax_start.php" )
-  .done(function( data ) {
-  $("#start_reload").remove();
-  htmlcode = $("#recent_pics").html();
-  $("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" style="clear: both;" >Mehr anzeigen</div>');
-  })
-  .fail(function() {
-    alert( "error" );
-  });
-  
-});
+
 //---
 
 //Kommentare Ein/Ausblenden
@@ -212,3 +201,19 @@ check_width();
 
 
 });
+
+var reload_q = 6;
+
+function reload_func() {
+var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
+  .done(function( data ) {
+  $("#start_reload").remove();
+  htmlcode = $("#recent_pics").html();
+  $("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_func();" style="clear: both;" >Mehr anzeigen</div>');
+  reload_q += 3;
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+  
+}
