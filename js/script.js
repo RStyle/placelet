@@ -165,6 +165,14 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_start.php" )
 });
 //---
 
+//Kommentare Ein/Ausblenden
+$('body').on('click', '.toggle_comments', function (){
+	number = $(this).attr('id');
+	number = number.replace('toggle_comment','');
+	$("#comment" + number).toggle(); 
+});
+//---
+
 
 function check_width(){   
     
@@ -204,8 +212,3 @@ check_width();
 
 
 });
-
-$(".toggle_comments").click(function(){
-$number = $(this).attr('id');
-$number = $number.replace('toggle_comment','');
-$("#comment" + $number).toggle(); });

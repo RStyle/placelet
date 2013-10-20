@@ -9,7 +9,7 @@ $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
 }
-echo'<hr style="clear: both;">';
+echo'<hr style="clear: both;"><!--HR über dem 1. nachgeladenen Bild-->';
 			for ($i = 3; $i <= 3; $i++) {
 ?>
         	<div style="width: 100%;">
