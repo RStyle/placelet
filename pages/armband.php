@@ -21,7 +21,7 @@ if (isset($pic_registered)) {
 if (isset($braceID) && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
 ?>
-				<article id="armband" class="mainarticles bottom_border_green">
+				<article style="float: left; width: 100%;" class="mainarticles bottom_border_green">
 					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceID; ?> posten</h1></div>
 					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$braceID; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>

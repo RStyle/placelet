@@ -343,8 +343,7 @@ class User
 		//Ermittelt die IDs der neuesten $brid_anz Bilder
 		$sql = "SELECT brid
 				FROM pictures
-				ORDER BY  `date` DESC
-				LIMIT ".$stats['total'];
+				ORDER BY  `date` DESC";
 		$stmt = $db->query($sql);
 		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$q2 = array();
