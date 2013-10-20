@@ -85,7 +85,7 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 ?>
                     <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
                     <a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
-                        <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="width: 40%; float: left; margin-right: 1em; margin-bottom: 1em;">
+                        <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="max-width: 40%; max-height: 500px; float: left; margin-right: 1em; margin-bottom: 1em;">
                     </a>
                     <?php echo date('d.m.Y', $stats[$i]['date']); ?>
                     <h4><?php echo $stats[$i]['title']; ?></h4>

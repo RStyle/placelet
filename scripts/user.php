@@ -262,7 +262,11 @@ class User
 				$q->execute(array(':brid' => $brid, ':picid' => $picid));
 				$row = $q->fetchAll(PDO::FETCH_ASSOC);	
 				$row = array_reverse($row);
-				$commid = $row[0]['commid'] + 1;
+				if(isset($row[0]['commid'])) {
+					$commid = $row[0]['commid'] + 1;
+				} else {
+					$commid = 1;
+				}
 				
 				$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
 				$q = $db->prepare($sql);
@@ -318,7 +322,6 @@ class User
 			$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 		}
 		//Uploads der Top-Benutzer
-		
 		for ($i = 1; $i <= $user_anz; $i++) {
 			$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
 			$stmt = $db->query($sql);
@@ -338,9 +341,20 @@ class User
 		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
 		
 		//Ermittelt die IDs der neuesten $brid_anz Bilder
-		$sql = "SELECT brid FROM pictures ORDER BY  `pictures`.`date` DESC LIMIT ".$brid_anz;
+		$sql = "SELECT brid
+				FROM pictures
+				ORDER BY  `date` DESC
+				LIMIT ".$stats['total'];
 		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$q2 = array();
+		$q = array();
+		foreach ($q1 as $i){
+			if(!isset($q2[$i['brid']])){
+				$q2[$i['brid']] = true;
+				$q[] = array( 'brid' => $i['brid']);
+			}
+		}
 		for($i = 0; $i < $brid_anz; $i++) {
 			$stats['recent_brids'][$i+1] = $q[$i]['brid'];
 		}
@@ -404,8 +418,8 @@ class User
 				///////////////////////////
 				//Hier werdendie hochgeladenen Dateien modifiziert.
 				//Datei-Pfad:
-				$img_path = 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext;
-				//Bild-Instanz erstellen
+			    $img_path = 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext;
+				/*//Bild-Instanz erstellen
 				switch($fileext) {
 					case 'jpeg':
 					case 'jpg':
@@ -433,12 +447,12 @@ class User
 						imagepng($img, $img_path);
 						break;
 				}
-				imagedestroy($img);
+				imagedestroy($img);*/
 				//Thumbnail von dem hochgeladenen Bild erstellen
 				//Die Funktion wird in scripts/functions.php definiert
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
 				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.'.$fileext;
-				create_thumbnail($img_path, $thumb_path, 400, 800, $fileext);
+				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
 				///////////////////////////
 			
 				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext)";

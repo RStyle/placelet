@@ -88,12 +88,22 @@ for ($i = 1; $i <= $banz; $i++) {
                     <table class="start-info">
                     	<tr>
                             <th>Datum</th>
-                            <td><?php echo date('d.m.Y', $stats[$i][0]['date']); ?></td>
+                            <td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?></td>
                         </tr>
                     	<tr>
                             <th>Ort</th>
                             <td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
                         </tr>
+<?php
+				if($stats[$i][0]['user'] != NULL) {
+?>
+                        <tr>
+                        	<th>Uploader</th>
+                            <td><?php echo $stats[$i][0]['user']; ?></td>
+                        </tr>
+<?php
+                 }
+?>
                     </table> 
                     
                     <p class="start-desc">
