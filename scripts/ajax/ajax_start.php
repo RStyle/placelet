@@ -1,81 +1,16 @@
 <?php
-	
-//Kommentare schreiben
-if (isset($_POST['comment_submit'])) {
-	$write_comment = User::write_comment ($_POST['comment_brid'][$_POST['comment_form']],
-						 $_POST['comment_user'][$_POST['comment_form']],
-						 $_POST['comment_content'][$_POST['comment_form']],
-						 $_POST['comment_picid'][$_POST['comment_form']],
-						 $user,
-						 $db);
-}
-if (isset($write_comment)) {
-	echo '<script type="text/javascript">
-			//$(document).ready(function(){
-				alert("'.$write_comment.'");
-			//});
-		  </script>';
-}
-$user_anz = 3;
-$systemStats = User::systemStats($user_anz, 2, $db);
+
+include_once('../connection.php');
+include_once('../user.php');
+
+$systemStats = User::systemStats($user_anz, 3, $db);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
 }
-?>
-		<article id="placelet_stats">
-		    <h1 style="clear: both">Community-Statistiken</h1>  
-            <table>
-            	<tr>
-                	<th>registrierte Armbänder</th>
-                	<td><?php echo $systemStats['total_registered'].' von '.$systemStats['total']; ?></td>
-                </tr>
-                <tr>
-                    <th>verschiedene Städte</th>
-                    <td><?php echo $systemStats['city_count']; ?></td>
-                </tr>
-                <tr>
-                    <th>beliebteste Stadt</th>
-                    <td><?php echo $systemStats['most_popular_city']['city'].' ('.$systemStats['most_popular_city']['number'].')'; ?></td>
-                </tr>
-                <!--<tr>
-                    <th>Benutzer mit den meisten Armbändern</th>
-                    <td><?php echo $systemStats['user_most_bracelets']['user'].' ('.$systemStats['user_most_bracelets']['number'].')'; ?></td>
-                </tr>  -->
-                <tr>
-                	<th>Armband mit den meisten Bildern</th>
-                    <td><a href="armband?id=<?php echo $systemStats['bracelet_most_cities']['brid']; ?>"><?php echo $systemStats['bracelet_most_cities']['brid'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
-                </tr>
-            </table>
-            <table>
-            	<tr>
-                    <th rowspan="4">Topusers</th>
-                    <td style="border-bottom: 1px solid #000;">Benutzername |</td>
-                    <td style="border-bottom: 1px solid #000;">Armbänder |</td>
-                    <td style="border-bottom: 1px solid #000;">Uploads</td>
-                </tr>
-<?php
-for ($i = 1; $i <= $user_anz; $i++) {
-?>
-                <tr>
-                    <td><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></td>
-                    <td><?php echo $systemStats['user_most_bracelets']['number'][$i]; ?></td>
-                    <td><?php echo $systemStats['user_most_bracelets']['uploads'][$i]; ?></td>
-                </tr>
-<?php
-}
-?>
-            </table>
-            <hr style="border: none; height: 0px; border-bottom: 0; clear: both;">
-        </article>
-        
-<!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
-        
-        <div class="blue_line mainarticleheaders line_header"><h2>Neueste Bilder</h2></div>
-        <article id="recent_pics" class="mainarticles bottom_border_blue">
-<?php
-			for ($i = 1; $i <= count($bracelets_displayed); $i++) {
+echo'<hr style="clear: both;">';
+			for ($i = 3; $i <= 3; $i++) {
 ?>
         	<div style="width: 100%;">
                 <div style="width: 70%; float: left;">
@@ -167,6 +102,8 @@ for ($i = 1; $i <= $user_anz; $i++) {
 ?><!----HR----><hr style="clear: both;"><?php	
 					}
 				}
+				
+				
+				
+				
 ?>
-			<div class="pseudo_link" id="start_reload" style="clear: both;" >Mehr anzeigen</div>
-		</article>

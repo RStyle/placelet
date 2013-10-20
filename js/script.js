@@ -149,6 +149,23 @@ oFReader.onload = function (oFREvent) {
 });
 
 
+
+//Neuste Bilder Nachladen
+$( "#start_reload" ).click(function() {
+var nachlad = $.ajax( "./scripts/ajax/ajax_start.php" )
+  .done(function( data ) {
+  $("#start_reload").remove();
+  htmlcode = $("#recent_pics").html();
+  $("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" style="clear: both;" >Mehr anzeigen</div>');
+  })
+  .fail(function() {
+    alert( "error" );
+  });
+  
+});
+//---
+
+
 function check_width(){   
     
     if(window.innerWidth < 1480 && window.innerWidth > 1230){
