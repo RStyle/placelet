@@ -78,8 +78,8 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
-				<span class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></span>
-				<a href="<?php echo $friendly_self.'?id='.$braceID.'&registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
+				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></div>
+				<a href="<?php echo $friendly_self.'?id='.$braceID.'&amp;registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
 <?php
 					for ($i = 0; $i < count($stats)-3; $i++) {
 ?>

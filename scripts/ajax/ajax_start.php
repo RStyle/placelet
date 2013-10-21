@@ -10,7 +10,7 @@ foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
 }
 if(isset($stats[$_GET['q'] - 2]))
-echo'<hr style="clear: both;"><!--HR über dem 1. nachgeladenen Bild-->';
+echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 			for ($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
 				if(!isset($stats[$i])){
 					break;}
@@ -90,9 +90,9 @@ echo'<hr style="clear: both;"><!--HR über dem 1. nachgeladenen Bild-->';
                 <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self; ?>" method="post">
                     <span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
                     <label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
-                    <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
+                    <input type="text" name="comment_user[<?php echo $i; ?>]" id="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
                     <label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
-                    <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
+                    <textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
                     <input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
                     <input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][0]['picid']; ?>">
                     <input type="hidden" name="comment_form" value="<?php echo $i; ?>">
@@ -102,7 +102,7 @@ echo'<hr style="clear: both;"><!--HR über dem 1. nachgeladenen Bild-->';
                  
 <?php
 					if (isset($stats[$i+1])) {
-?><!----HR----><hr style="clear: both;"><?php	
+?><!--~~HR~~--><hr style="clear: both;"><?php	
 					}
 				}
 				
