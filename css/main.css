@@ -364,7 +364,7 @@ th {
     		#placelet_stats th {
     			padding-right: 1em;
     		}
-	.start-picture {
+	.thumbnail {
 	   border: 8px solid #CDCDCD;
        float: left; 
        height: auto; 
@@ -373,11 +373,15 @@ th {
 	   max-width: 35%;
 	   max-height: 400px;
 	}
-	.start-info {
+	.thumb_triangle {
+		margin-top: 10px;
+		float: left
+	}
+	.pic-info {
         float: left; 
         font-size: 1.25em;
     }
-		.start-info th {
+		.pic-info th {
 			padding: 0;
 			padding-right: 1em;
 			text-decoration: underline;
@@ -389,7 +393,7 @@ th {
 	   padding: 1em !important;
 	   width: 22% !important;
 	}        
-    .start-desc {
+    .pic-desc {
         float: left;
         font-size: 1em;
         margin-left: 20px;

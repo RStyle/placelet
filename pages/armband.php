@@ -85,12 +85,41 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 ?>
                     <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
                     <a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
-                        <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" style="max-width: 40%; max-height: 500px; float: left; margin-right: 1em; margin-bottom: 1em;">
+                        <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail" style="/*max-width: 40%; max-height: 500px; float: left; margin-right: 1em; margin-bottom: 1em;*/">
+                        <img src="img/triangle.png" alt="" class="thumb_triangle">
                     </a>
-                    <?php echo date('d.m.Y', $stats[$i]['date']); ?>
-                    <h4><?php echo $stats[$i]['title']; ?></h4>
-                    <p><?php echo $stats[$i]['description']; ?></p>
-                    <span class="toggle_comments pseudo_link" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
+                    <table class="pic-info">
+                        <tr>
+                        	<th>Titel</th>
+                            <td><?php echo $stats[$i]['title']; ?></td>
+                        </tr>
+                    	<tr>
+                            <th>Datum</th>
+                            <td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
+                        </tr>
+                    	<tr>
+                            <th>Ort</th>
+                            <td><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></td>
+                        </tr>
+<?php
+				if($stats[$i]['user'] != NULL) {
+?>
+                        <tr>
+                        	<th>Uploader</th>
+                            <td><?php echo $stats[$i]['user']; ?></td>
+                        </tr>
+<?php
+                 }
+?>
+                    </table> 
+                    
+                    <p class="pic-desc">
+                        <span class="desc-header">Beschreibung:</span><br>
+                        <?php echo $stats[$i]['description']; ?>      
+                        <br><br>
+                        <span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
+                    </p>
+                    
                     <div class="comments" id="comment<?php echo $i;?>">
 <?php
 					for ($j = 1; $j <= count($stats[$i])-8; $j++) {
