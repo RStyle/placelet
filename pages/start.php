@@ -24,7 +24,7 @@ foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
 }
 ?>
-		<article id="placelet_stats">
+		<aside id="placelet_stats">
 		    <h1 style="clear: both">Community-Statistiken</h1>  
             <table>
             	<tr>
@@ -48,11 +48,11 @@ foreach($bracelets_displayed as $key => $val) {
                     <td><a href="armband?id=<?php echo $systemStats['bracelet_most_cities']['brid']; ?>"><?php echo $systemStats['bracelet_most_cities']['brid'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
                 </tr>
             </table>
-            <table>
+            <table id="topusers">
             	<tr>
                     <th rowspan="4">Topusers</th>
-                    <td style="border-bottom: 1px solid #000;">Benutzername |</td>
-                    <td style="border-bottom: 1px solid #000;">Armbänder |</td>
+                    <td style="border-bottom: 1px solid #000;">Benutzername</td>
+                    <td style="border-bottom: 1px solid #000;">Armbänder</td>
                     <td style="border-bottom: 1px solid #000;">Uploads</td>
                 </tr>
 <?php
@@ -68,7 +68,7 @@ for ($i = 1; $i <= $user_anz; $i++) {
 ?>
             </table>
             <hr style="border: none; height: 0px; border-bottom: 0; clear: both;">
-        </article>
+        </aside>
         
 <!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
         

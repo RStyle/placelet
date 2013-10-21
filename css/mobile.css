@@ -1,10 +1,14 @@
 @charset "utf-8";
 /* HTML5 tags für ältere Browser*/
 html {
-	border-top: 0;
+	border-top: 0 !important;
 }
 body {
-	border-top-color: #234754;
-	border-top-style: solid;
-	border-top-width: 11px;
+	border-top-color: #234754 !important;
+	border-top-style: solid !important;
+	border-top-width: 11px !important;
 }
+		#topusers {
+			margin-left: 0 !important;
+			float: right !important;
+		}

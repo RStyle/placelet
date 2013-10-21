@@ -83,54 +83,55 @@ if(!isset($_GET['loginattempt'])) {
 			Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
             um dein Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $_GET['registerbr']; ?></span> registrieren:<br>
 			<form name="login" id="form_login" action="<?php echo $friendly_self.'?registerbr='.$_GET['registerbr']; ?>" method="post">
-			  <table style="border: 1px solid black">
-				<tr>
-				  <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-				  <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" pattern=".{6,30}" title="Min.4 - Max.15" required></td>
-				</tr>
-				<tr>
-				  <td><label for="password">Passwort</label></td>
-				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
-				</tr>
-				<tr>
-				  <td><input type="submit" value="Login"></td>
-				  <td>&nbsp;</td>
-				</tr>
-			  </table>
+                <table style="border: 1px solid black">
+                    <tr>
+                        <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                        <td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" pattern=".{6,30}" title="Min.4 - Max.15" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Passwort</label></td>
+                        <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Login"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
 			</form><br>
 <?php
 		}
 ?>
 			<form name="reg" id="form_reg" action="<?php echo $friendly_self; ?>" method="post">
-			  <table style="border: 1px solid black">
-				<tr>
-				  <td><label for="reg_login">Benutzername</label></td>
-				  <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
-				</tr>
-				<tr>
-				  <td><label for="reg_first_name">Vorname</label></td>
-				  <td><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="Vorname" required></td>
-				</tr>
-				<tr>
-				  <td><label for="reg_name">Nachname</label></td>
-				  <td><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Nachname" required></td>
-				</tr>
-				<tr>
-				  <td><label for="reg_email">Email-Adresse</label></td>
-				  <td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
-				</tr>
-				<tr>
-				  <td><label for="reg_password">Passwort</label></td>
-				  <td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
-				</tr>
-				<tr>
-				  <td><label for="reg_password2">Passwort wiederholen</label></td>
-				  <td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
-				</tr>
-				<tr>
-				  <td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
-				  <td>&nbsp;</td>
-				</tr>
+                <table style="border: 1px solid black">
+                    <tr>
+                        <td><label for="reg_login">Benutzername</label></td>
+                        <td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="reg_first_name">Vorname</label></td>
+                        <td><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="Vorname" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="reg_name">Nachname</label></td>
+                        <td><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Nachname" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="reg_email">Email-Adresse</label></td>
+                        <td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="reg_password">Passwort</label></td>
+                        <td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="reg_password2">Passwort wiederholen</label></td>
+                        <td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
 			</form>
 <?php
 	}else {
@@ -155,32 +156,32 @@ if(!isset($_GET['loginattempt'])) {
 			echo '<br><br>';
 		}
 ?>
-				<form name="registerbr" action="<?php echo $friendly_self; ?>" method="POST">
-					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
-					<input type="submit" name="submit" value="Armband registrieren">
-				</form>
+            <form name="registerbr" action="<?php echo $friendly_self; ?>" method="POST">
+                <label for="reg_br">Armband registrieren</label>
+                <input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
+                <input type="submit" name="submit" value="Armband registrieren">
+            </form>
 	<?php
 	}
 } else {
 ?>
-			Der eingegebene Benutzername oder das Passwort waren falsch.<br><br>
-			<form name="login" id="form_login" action="<?php echo $friendly_self; ?>" method="post">
-			  <table style="border: 1px solid black">
-				<tr>
-				  <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-				  <td><input type="text" name="login" id="login" size="20" maxlength="30" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Benutzername" required></td>
-				</tr>
-				<tr>
-				  <td><label for="password">Passwort</label></td>
-				  <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
-				</tr>
-				<tr>
-				  <td><input type="submit" value="Login"></td>
-				  <td>&nbsp;</td>
-				</tr>
-			  </table>
-			</form><br>
+            Der eingegebene Benutzername oder das Passwort waren falsch.<br><br>
+            <form name="login" id="form_login" action="<?php echo $friendly_self; ?>" method="post">
+                <table style="border: 1px solid black">
+                    <tr>
+                        <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                        <td><input type="text" name="login" id="login" size="20" maxlength="30" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Benutzername" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Passwort</label></td>
+                        <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Login"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </form><br>
 <?php
 }
 ?>

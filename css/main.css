@@ -355,9 +355,11 @@ th {
 		#placelet_stats table {
             border-left: 4px #B7D300 solid;
 			float: left;
-            padding-left: 20px;
-            padding-right: 20px;
-
+            padding-left: 1.5em;
+			max-width: 48%;
+		}
+		#topusers {
+			margin-left: 1em;
 		}
     		#placelet_stats th {
     			padding-right: 1em;
