@@ -121,6 +121,7 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 		<!--[if IE]><link rel="shortcut icon" href="img/favicon.ico"><![endif]-->
 		<meta name="msapplication-TileColor" content="#FFF">
 		<meta name="msapplication-TileImage" content="img/tileicon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title><?php echo $title; ?></title>
 	</head>
 	<body> 
