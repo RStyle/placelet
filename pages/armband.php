@@ -89,10 +89,6 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
                         <img src="img/triangle.png" alt="" class="thumb_triangle">
                     </a>
                     <table class="pic-info">
-                        <tr>
-                        	<th>Titel</th>
-                            <td><?php echo $stats[$i]['title']; ?></td>
-                        </tr>
                     	<tr>
                             <th>Datum</th>
                             <td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
@@ -114,7 +110,7 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
                     </table> 
                     
                     <p class="pic-desc">
-                        <span class="desc-header">Beschreibung:</span><br>
+                        <span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
                         <?php echo $stats[$i]['description']; ?>      
                         <br><br>
                         <span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>

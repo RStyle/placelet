@@ -150,9 +150,7 @@ oFReader.onload = function (oFREvent) {
 
 
 
-//Neuste Bilder Nachladen
 
-//---
 
 //Kommentare Ein/Ausblenden
 $('body').on('click', '.toggle_comments', function (){
@@ -202,6 +200,7 @@ check_width();
 
 });
 
+//Neuste Bilder Nachladen
 var reload_q = 6;
 
 function reload_func() {
@@ -217,3 +216,4 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
   });
   
 }
+//---

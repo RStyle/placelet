@@ -107,7 +107,7 @@ for ($i = 1; $i <= $user_anz; $i++) {
                     </table> 
                     
                     <p class="pic-desc">
-                        <span class="desc-header">Beschreibung:</span><br>
+                        <span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
                         <?php echo $stats[$i][0]['description']; ?>      
                         <br><br>
                         <span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
