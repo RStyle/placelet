@@ -15,7 +15,7 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 				if(!isset($stats[$i])){
 					break;}
 ?>
-        	<div style="width: 100%;">
+        	<div style="width: 100%; overflow: auto;">
                 <div style="width: 70%; float: left;">
 
                     <a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumb_link">
