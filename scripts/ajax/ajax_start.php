@@ -19,11 +19,11 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
                 <div style="width: 70%; float: left;">
 
                     <a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" >
-                        <img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="start-picture">
-                        <img src="img/triangle.png" alt="" style="margin-top: 10px; float: left">
+                        <img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumbnail">
+                        <img src="img/triangle.png" alt="" class="thumb_triangle">
                     </a>
                     
-                    <table class="start-info">
+                    <table class="pic-info">
                     	<tr>
                             <th>Datum</th>
                             <td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?></td>
@@ -44,8 +44,8 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 ?>
                     </table> 
                     
-                    <p class="start-desc">
-                        <span class="desc-header">Beschreibung:</span><br>
+                    <p class="pic-desc">
+                        <span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
                         <?php echo $stats[$i][0]['description']; ?>      
                         <br><br>
                         <span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
