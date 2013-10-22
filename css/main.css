@@ -364,19 +364,24 @@ th {
     		#placelet_stats th {
     			padding-right: 1em;
     		}
-	.thumbnail {
-	   border: 8px solid #CDCDCD;
-       float: left; 
-       height: auto; 
-       margin-bottom: 1em;
-       margin-right: 0em; 
-	   max-width: 35%;
-	   max-height: 400px;
+	.thumb_link {
+		float: left;
+		max-width: 40%;
+		width: 390px;
 	}
-	.thumb_triangle {
-		margin-top: 10px;
-		float: left
-	}
+		.thumbnail {
+		   border: 8px solid #CDCDCD;
+		   float: right; 
+		   height: auto; 
+		   margin-bottom: 1em;
+		   max-height: 400px;
+		   margin-right: 0em; 
+		   max-width: calc(100% - 50px);
+		}
+		.thumb_triangle {
+			float: right;
+			margin-top: 10px;
+		}
 	.pic-info {
         float: left; 
         font-size: 1.25em;
@@ -385,6 +390,7 @@ th {
 			padding: 0;
 			padding-right: 1em;
 			text-decoration: underline;
+			width: 4em;
 		}
 	.bracelet-props{
 	   background-color: #4C4C4C !important;
@@ -396,10 +402,8 @@ th {
     .pic-desc {
         float: left;
         font-size: 1em;
-        margin-left: 20px;
         margin-top: 15px;
-        padding: 10px;
-        padding-top: 0px;
+        padding: 0;
         width: 56%;
     }
         .desc-header {

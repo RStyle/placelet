@@ -84,9 +84,9 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 					for ($i = 0; $i < count($stats)-3; $i++) {
 ?>
                     <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-                    <a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>">
-                        <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail" style="/*max-width: 40%; max-height: 500px; float: left; margin-right: 1em; margin-bottom: 1em;*/">
+                    <a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
                         <img src="img/triangle.png" alt="" class="thumb_triangle">
+                        <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
                     </a>
                     <table class="pic-info">
                     	<tr>
@@ -140,10 +140,11 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
                     </div>
 <?php
 						if ($i < count($stats)-4) {
-?><!----HR----><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;"><?php	
+?><!--~~HR~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;"><?php	
 						}
 					}
 ?>
+				<div class="pseudo_link" style="clear: both;" >Mehr anzeigen</div>
 <?php
 		if ($bracelet_stats['owners'] == 0 ) {
 			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
