@@ -370,13 +370,21 @@ th {
 		width: 390px;
 	}
 		.thumbnail {
-		   border: 8px solid #CDCDCD;
-		   float: right; 
-		   height: auto; 
-		   margin-bottom: 1em;
-		   max-height: 400px;
-		   margin-right: 0em; 
-		   max-width: calc(100% - 50px);
+		border: 8px solid #CDCDCD;
+		float: right; 
+		height: auto; 
+		margin-bottom: 1em;
+		max-height: 400px;
+		margin-right: 0em;
+		max-width: 85%;
+		/* Firefox */
+		max-width: -moz-calc(100% - 50px);
+		/* WebKit */
+		max-width: -webkit-calc(100% - 50px);
+		/* Opera */
+		max-width: -o-calc(100% - 50px);
+		/* Standard */
+		max-width: calc(100% - 50px);
 		}
 		.thumb_triangle {
 			float: right;
