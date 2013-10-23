@@ -1,7 +1,19 @@
 <?php
-//Start der Überprüfung ob die hochgeladene Datei überhaupt ein Bild ist und nicht zu groß ist
-function check_image(){
-
+//
+function clean_input($input) {
+	if(!empty($input)) {
+		//HTML- und PHP-Code entfernen
+		//$input = strip_tags($input);
+		//Umlaute und Sonderzeichen in HTML-Schreibweise umwandeln
+		$input = htmlentities($input);
+		//Überflüssige Zeichen entfernen
+		$input = trim($input);
+		//Backslashes entfernen
+		$input = stripslashes($input);
+		return $input;
+	} else {
+		return false;
+	}
 }
 //Erstellt ein Thumbnail vom Bild
 //$target ist der Pfad vom Ausgangsbild; $thumb der unter dem das Thumbnail gespeichert wird; $w die maximale Breite des Thumbnails; $h die maximale Höhe des Thumbnails; $ext die Endung des Bildes

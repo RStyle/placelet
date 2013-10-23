@@ -1,4 +1,7 @@
 <?php
+foreach($_GET as $key => $val) {
+	$_GET[$key] = clean_input($val);
+}
 $captcha = 'captcha';
 if (isset($_POST['registerpic_submit'])) {
 	$pic_registered = $user->registerpic($_POST['registerpic_brid'],

@@ -1,5 +1,7 @@
 <?php
-	
+foreach($_GET as $key => $val) {
+	$_GET[$key] = clean_input($val);
+}
 //Kommentare schreiben
 if (isset($_POST['comment_submit'])) {
 	$write_comment = User::write_comment ($_POST['comment_brid'][$_POST['comment_form']],

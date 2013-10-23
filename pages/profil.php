@@ -1,4 +1,7 @@
 <?php
+foreach($_GET as $key => $val) {
+	$_GET[$key] = clean_input($val);
+}
 if (isset($_SESSION['user'])) {
 	$userdetails = $user->userdetails();
 	
