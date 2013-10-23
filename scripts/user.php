@@ -459,7 +459,7 @@ class User
 				//Thumbnail von dem hochgeladenen Bild erstellen
 				//Die Funktion wird in scripts/functions.php definiert
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
-				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.'.$fileext;
+				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg';
 				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
 				///////////////////////////
 			

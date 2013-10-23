@@ -43,23 +43,7 @@ function create_thumbnail($target, $thumb, $w, $h, $ext) {
 	}
 	$tci = imagecreatetruecolor($w, $h);
 	imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
-	switch($ext) {
-		case 'jpeg';
-		case 'jpg';
-			imagejpeg($tci, $thumb, 80);
-			break;
-		case 'gif';
-			imagegif($tci, $thumb, 80);
-			break;
-		case 'png';
-			imagepng($tci, $thumb, 8);
-			break;
-		default:
-			echo 'Fehler';
-			return false;
-	}
-	
-	
+	imagejpeg($tci, $thumb, 80);	
 }
 
 //Überprüft, ob der Wert leer, bzw. auch getrimmt leer ist

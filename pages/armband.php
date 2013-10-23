@@ -90,7 +90,7 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
                         <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
                         <a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
                             <img src="img/triangle.png" alt="" class="thumb_triangle">
-                            <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
+                            <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
                         </a>
                         <table class="pic-info">
                             <tr>
