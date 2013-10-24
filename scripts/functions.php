@@ -1,5 +1,39 @@
 <?php
-//
+//Sendet E-Mails von $sender mit dem Betreff $subject und Inhalt $content an $recipient
+function send_email($sender, $subject, $content, $mailer = '', $recipient = 'info@placelet.de') {
+	$mail_sender  = clean_input($sender);
+	$mail_subject = clean_input($subject);
+	$mail_content = clean_input($content);
+	if(check_email_address($mail_sender)) {
+		if($mail_mailer = 'contact') {
+			switch($subject) {
+				case 'support':
+					$mail_subject = 'Unsere Website';
+					$mail_recipient = 'support@placelet.de';
+					break;
+				case 'misc':
+					$mail_subject = 'Anderes';
+					$mail_recipient = 'info@placelet.de';
+					break;
+				case 'info':
+					$mail_subject = 'Unser Produkt';
+					$mail_recipient = 'info@placelet.de';
+					break;
+			}
+		}
+		/*@*/mail($mail_recipient, $mail_subject, $mail_content.'\n\n', 'Von: '.$sender);
+		//Bestätigung an den Sender
+		$datei = 'text/kontakt_bestaetigung.txt';
+		$fp = fopen($datei, 'r');
+		$inhalt = fread($fp, filesize($datei));
+		fclose($fp);
+		/*@*/mail($mail_sender, 'Placelet - Danke für Ihre Anfrage', $inhalt.'\n\n', 'Von: info@placelet.de');
+		return 'Anfrage erfolgreich gesendet.';
+	}else {
+		return 'Das ist keine E-Mail!';				
+	}
+}
+//Benutzereingaben von ungewünschten Zeichen säubern
 function clean_input($input) {
 	if(!empty($input)) {
 		//HTML- und PHP-Code entfernen

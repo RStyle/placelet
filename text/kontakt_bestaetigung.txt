@@ -1,0 +1,1 @@
+Dies ist die Kontaktformularbestätigung, die ein Benutzer enthält, wenn er in unserem Kontaktformular eine Anfrage absendet.
