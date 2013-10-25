@@ -1,1 +1,2 @@
-Dies ist die Kontaktformularbest‰tigung, die ein Benutzer enth‰lt, wenn er in unserem Kontaktformular eine Anfrage absendet.
+Dies ist die Kontaktformularbest√§tigung, die ein Benutzer enth√§lt,
+wenn er in unserem Kontaktformular eine Anfrage absendet.

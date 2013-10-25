@@ -2,6 +2,7 @@
 //Sendet E-Mails von $sender mit dem Betreff $subject und Inhalt $content an $recipient
 function send_email($sender, $subject, $content, $mailer = '', $recipient = 'info@placelet.de') {
 	$mail_sender  = clean_input($sender);
+	$mail_sender  = filter_var($mail_sender, FILTER_SANITIZE_EMAIL);
 	$mail_subject = clean_input($subject);
 	$mail_content = clean_input($content);
 	if(check_email_address($mail_sender)) {
@@ -21,13 +22,18 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 					break;
 			}
 		}
-		/*@*/mail($mail_recipient, $mail_subject, $mail_content.'\n\n', 'Von: '.$sender);
+		mail($mail_recipient, $mail_subject, $mail_content, 'From: '.$sender);
 		//Bestätigung an den Sender
-		$datei = 'text/kontakt_bestaetigung.txt';
-		$fp = fopen($datei, 'r');
-		$inhalt = fread($fp, filesize($datei));
-		fclose($fp);
-		/*@*/mail($mail_sender, 'Placelet - Danke für Ihre Anfrage', $inhalt.'\n\n', 'Von: info@placelet.de');
+			$mail_header = 'From: Placelet <info@placelet.de>';
+			/*$mail_header = 'From: Placelet <info@placelet.de>\n';
+			$mail_header .= "Content-Type: text/html\n";
+			$mail_header .= "Content-Transfer-Encoding: 8bit\n";*/
+			
+			$datei = 'text/kontakt_bestaetigung.txt';
+			$fp = fopen($datei, 'r');
+			$inhalt = fread($fp, filesize($datei));
+			fclose($fp);
+			mail($mail_sender, 'Placelet - Danke für Ihre Anfrage', $inhalt, $mail_header);
 		return 'Anfrage erfolgreich gesendet.';
 	}else {
 		return 'Das ist keine E-Mail!';				
