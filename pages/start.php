@@ -4,12 +4,11 @@ foreach($_GET as $key => $val) {
 }
 //Kommentare schreiben
 if (isset($_POST['comment_submit'])) {
-	$write_comment = User::write_comment ($_POST['comment_brid'][$_POST['comment_form']],
+	$write_comment = $statistics->write_comment ($_POST['comment_brid'][$_POST['comment_form']],
 						 $_POST['comment_user'][$_POST['comment_form']],
 						 $_POST['comment_content'][$_POST['comment_form']],
 						 $_POST['comment_picid'][$_POST['comment_form']],
-						 $user,
-						 $db);
+						 $user);
 }
 if (isset($write_comment)) {
 	echo '<script type="text/javascript">
@@ -19,11 +18,11 @@ if (isset($write_comment)) {
 		  </script>';
 }
 $user_anz = 3;
-$systemStats = User::systemStats($user_anz, 3, $db);
+$systemStats = $statistics->systemStats($user_anz, 3);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
-	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
+	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
 ?>
 		<aside id="placelet_stats">
@@ -47,7 +46,7 @@ foreach($bracelets_displayed as $key => $val) {
                 </tr>  -->
                 <tr>
                 	<th>Armband mit den meisten Bildern</th>
-                    <td><a href="armband?id=<?php echo $systemStats['bracelet_most_cities']['brid']; ?>"><?php echo $systemStats['bracelet_most_cities']['brid'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
+                    <td><a href="armband?name=<?php echo urlencode($systemStats['bracelet_most_cities']['name']); ?>"><?php echo $systemStats['bracelet_most_cities']['name'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
                 </tr>
             </table>
             <table id="topusers">
@@ -119,8 +118,8 @@ for ($i = 1; $i <= $user_anz; $i++) {
                 <aside class="bracelet-props side_container">
                     <table>
                         <tr>
-                            <td><strong>Armband ID</strong></td>
-                            <td><strong><?php echo '<a href="armband?id='.$bracelets_displayed[$i].'">'.$bracelets_displayed[$i].'</a>'; ?></strong></td>
+                            <td><strong>Armband</strong></td>
+                            <td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.$statistics->brid2name($bracelets_displayed[$i]).'</a>'; ?></strong></td>
                         </tr>
                         <tr>
                             <td>Käufer</td>

@@ -12,9 +12,6 @@ include_once('./scripts/user.php');
 if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 $user = new User($_GET['regstatuschange_user'], $db); //substr(md5 (uniqid (rand())), 0, 20)
 $user->regstatuschange($_GET['regstatuschange']);
-
-//header('Location: LINK');/*
-//break();
 }
 
 // Hier werden Cookies überprüft gesetzt usw.
@@ -55,8 +52,10 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 	$checklogin = $user->logged;
 	//echo $_SESSION['user'].'-'.$_SESSION['dynamic_password'];//Das nervt!!
 }else{
-$user = new User(false, $db);
+	$user = new User(false, $db);
 }
+
+$statistics = new Statistics($db, $user);
 
 //Maximale Größe für hochgeladene Bilder
 $max_file_size = 8000000;

@@ -1,5 +1,4 @@
 <?php
-
 class User
 {
 	protected $db;
@@ -186,25 +185,140 @@ class User
 		$userdetails['picture_count'] = $result[3];
 		return $userdetails;
 	}
-	
+}
+?>
+<?php
+class Statistics {
+	protected $db;
+	public function __construct($db, $user){
+		$this->db = $db;
+		$this->user = $user;
+	}
+	//Zeigt die allgemeine Statistik an
+	public function systemStats($user_anz, $brid_anz) {
+		//Arnzahl registrierter Armbänder
+		$sql = "SELECT brid FROM bracelets WHERE user != ''";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['total_registered'] = count($q);
+		
+		//Armbänder insgesamt
+		$sql = "SELECT brid FROM bracelets";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['total'] = count($q);
+		
+		//Anzahl der verschiedenen Städte
+		$sql = "SELECT COUNT(DISTINCT city)  FROM pictures";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['city_count'] = $q[0][0];
+		
+		//Stadt auf die die meisten Armbänder registriert wurden(mit Anzahl)
+		$sql = "SELECT COUNT(*) AS number,city FROM pictures GROUP BY city ORDER BY number DESC";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['most_popular_city']['city'] = $q[0]['city'];
+		$stats['most_popular_city']['number'] = $q[0]['number'];
+		
+		//Benutzer, die die meisten Armbänder auf sich registriert haben(mit Anzahl)
+		//Die Anzahl der Benutzer, die Ausgegeben werden, $banz festgelegt
+		$sql = "SELECT COUNT(*) AS number,user FROM bracelets GROUP BY user ORDER BY number DESC";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		for ($i = 1; $i <= $user_anz; $i++) {
+			$stats['user_most_bracelets']['user'][$i] = $q[$i]['user'];
+			$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
+		}
+		
+		//Uploads der Top-Benutzer
+		for ($i = 1; $i <= $user_anz; $i++) {
+			$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
+			$stmt = $this->db->query($sql);
+			$q = $stmt->fetchAll();
+			if(isset($q[0]['number'])) {
+				$stats['user_most_bracelets']['uploads'][$i] = $q[0]['number'];
+			} else {
+				$stats['user_most_bracelets']['uploads'][$i] = 0;
+			}
+		}
+		
+		//Armband, das Bilder in den meisten Städten hat(mit Anzahl)
+		$sql = "SELECT COUNT(*) AS number,brid FROM pictures GROUP BY brid ORDER BY number DESC";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['bracelet_most_cities']['brid'] = $q[0]['brid'];
+		$stats['bracelet_most_cities']['name'] = $this->brid2name($q[0]['brid']);
+		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
+		
+		//Ermittelt die IDs der neuesten $brid_anz Bilder
+		$sql = "SELECT brid
+				FROM pictures
+				ORDER BY  `date` DESC";
+		$stmt = $this->db->query($sql);
+		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$q2 = array();
+		$q = array();
+		foreach ($q1 as $i){
+			if(!isset($q2[$i['brid']])){
+				$q2[$i['brid']] = true;
+				$q[] = array( 'brid' => $i['brid']);
+			}
+		}
+		for($i = 0; $i < $brid_anz; $i++) {
+			$stats['recent_brids'][$i+1] = $q[$i]['brid'];
+		}
+		return $stats;
+	}
+	//Name von Armband ermitteln
+	public function brid2name($brid) {
+		$stmt = $this->db->prepare('SELECT name, user, date FROM bracelets WHERE brid = :brid');
+		$stmt->execute(array('brid' => $brid));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);	
+		if($q['name'] == NULL) {
+			$stmt = $this->db->prepare('SELECT COUNT(*) FROM bracelets WHERE user = :user AND `date` < :date');
+			$stmt->execute(array('user' => $q['user'], 'date' => $q['date']));
+			$q2 = $stmt->fetch(PDO::FETCH_ASSOC);
+			$number = $q2['COUNT(*)'] + 1;
+			return $q['user'].'#'.$number;
+		}else {
+			return $q['name'];
+		}
+	}
+	public function name2brid($name) {
+		$stmt = $this->db->prepare('SELECT brid FROM bracelets WHERE name = :name');
+		$stmt->execute(array('name' => $name));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($q['brid'] == NULL) {
+			$user = explode('#', $name);
+			$stmt = $this->db->prepare('SELECT brid FROM bracelets WHERE user = :user');
+			$stmt->execute(array('user' => $user[0]));
+			$q = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $q['brid'];
+		} else {
+			return $q['brid'];
+		}
+	}
 	//Statistik vom Armband abfragen
-	public static function bracelet_stats($brid, $db) {
+	public function bracelet_stats($brid) {
 		$sql = "SELECT user, date FROM bracelets WHERE brid = '".$brid."'";
-		$stmt = $db->query($sql);
+		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['owner'] = $q[0]['user'];
 		$stats['date'] = $q[0]['date'];
 		$sql = "SELECT user FROM pictures WHERE brid = '".$brid."'";
-		$stmt = $db->query($sql);
+		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		if($q != NULL) {
 			$stats['owners'] = count($q[0]);
 		}
+		$stats['name'] = $this->brid2name($brid);
 		return $stats;
 	}
-	public static function picture_details ($brid, $db) {
+	//Bilderdetails
+	public function picture_details ($brid) {
 		$sql = "SELECT user, description, picid, city, country, date, title, fileext FROM pictures WHERE brid = '".$brid."'";
-		$stmt = $db->query($sql);
+		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
 			//$details[$val['picid']] = $val;
@@ -218,7 +332,7 @@ class User
 			$details[$val['picid']]['fileext'] = $val['fileext'];
 		}
 		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = '".$brid."'";
-		$stmt = $db->query($sql);
+		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
 			$details[$val['picid']] [$val['commid']] = array();
@@ -232,15 +346,15 @@ class User
 		return $details;
 		
 	}
-//Kommentar schreiben
-	public static function write_comment ($brid, $username, $comment, $picid, $user, $db) {
+	//Kommentar schreiben
+	public function write_comment ($brid, $username, $comment, $picid, $user) {
 		$submissions_valid = true;
-		if (isset($user->login)) {
-			if ($user->login != $username) {
-				$userexists = User::userexists($username, $db);
+		if (isset($this->user->login)) {
+			if ($this->user->login != $username) {
+				$userexists = $this->userexists($username);
 			} else $userexists = false;
 		} else {
-			$userexists = User::userexists($username, $db);
+			$userexists = $this->userexists($username);
 			
 		}
 		if ($userexists) {
@@ -258,7 +372,7 @@ class User
 		if ($submissions_valid) {
 			try {
 				$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid";
-				$q = $db->prepare($sql);
+				$q = $this->db->prepare($sql);
 				$q->execute(array(':brid' => $brid, ':picid' => $picid));
 				$row = $q->fetchAll(PDO::FETCH_ASSOC);	
 				$row = array_reverse($row);
@@ -269,7 +383,7 @@ class User
 				}
 				
 				$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
-				$q = $db->prepare($sql);
+				$q = $this->db->prepare($sql);
 				$q->execute(array(
 					':brid' => $brid,
 					':commid' => $commid,
@@ -285,90 +399,30 @@ class User
 			}
 		}
 	}
-	//Zeigt die allgemeine Statistik an
-	public static function systemStats($user_anz, $brid_anz, $db) {
-		//Arnzahl registrierter Armbänder
-		$sql = "SELECT brid FROM bracelets WHERE user != ''";
-		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll();
-		$stats['total_registered'] = count($q);
-		
-		//Armbänder insgesamt
-		$sql = "SELECT brid FROM bracelets";
-		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll();
-		$stats['total'] = count($q);
-		
-		//Anzahl der verschiedenen Städte
-		$sql = "SELECT COUNT(DISTINCT city)  FROM pictures";
-		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll();
-		$stats['city_count'] = $q[0][0];
-		
-		//Stadt auf die die meisten Armbänder registriert wurden(mit Anzahl)
-		$sql = "SELECT COUNT(*) AS number,city FROM pictures GROUP BY city ORDER BY number DESC";
-		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll();
-		$stats['most_popular_city']['city'] = $q[0]['city'];
-		$stats['most_popular_city']['number'] = $q[0]['number'];
-		
-		//Benutzer, die die meisten Armbänder auf sich registriert haben(mit Anzahl)
-		//Die Anzahl der Benutzer, die Ausgegeben werden, $banz festgelegt
-		$sql = "SELECT COUNT(*) AS number,user FROM bracelets GROUP BY user ORDER BY number DESC";
-		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll();
-		for ($i = 1; $i <= $user_anz; $i++) {
-			$stats['user_most_bracelets']['user'][$i] = $q[$i]['user'];
-			$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
-		}
-		//Uploads der Top-Benutzer
-		for ($i = 1; $i <= $user_anz; $i++) {
-			$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
-			$stmt = $db->query($sql);
-			$q = $stmt->fetchAll();
-			if(isset($q[0]['number'])) {
-				$stats['user_most_bracelets']['uploads'][$i] = $q[0]['number'];
-			} else {
-				$stats['user_most_bracelets']['uploads'][$i] = 0;
-			}
-		}
-		
-		//Armband, das Bilder in den meisten Städten hat(mit Anzahl)
-		$sql = "SELECT COUNT(*) AS number,brid FROM pictures GROUP BY brid ORDER BY number DESC";
-		$stmt = $db->query($sql);
-		$q = $stmt->fetchAll();
-		$stats['bracelet_most_cities']['brid'] = $q[0]['brid'];
-		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
-		
-		//Ermittelt die IDs der neuesten $brid_anz Bilder
-		$sql = "SELECT brid
-				FROM pictures
-				ORDER BY  `date` DESC";
-		$stmt = $db->query($sql);
-		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$q2 = array();
-		$q = array();
-		foreach ($q1 as $i){
-			if(!isset($q2[$i['brid']])){
-				$q2[$i['brid']] = true;
-				$q[] = array( 'brid' => $i['brid']);
-			}
-		}
-		for($i = 0; $i < $brid_anz; $i++) {
-			$stats['recent_brids'][$i+1] = $q[$i]['brid'];
-		}
-		return $stats;
-	}
 	//Überprüft, ob ein bestimmter Benutzer $user in der Datenbank eingetragen ist
-	public static function userexists ($user, $db) {
+	public function userexists ($user) {
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
-        $q = $db->prepare($sql); 
+        $q = $this->db->prepare($sql); 
         $q->execute(array(':user' => $user));
         $anz = $q->rowCount();
         if ($anz > 0){
 			return true;
 		} else {
 			return false;
+		}
+	}
+	//Prüft, ob ein Armband schon registriert wurde
+	public static function bracelet_status($brid) {
+		$stmt = $this->db->prepare('SELECT user FROM bracelets WHERE brid = :brid LIMIT 1');
+		$stmt->execute(array('brid' => $brid));
+		$anz = $stmt->rowCount();
+		$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
+		if ($anz == 0) {
+			return '0';
+		} elseif ($bracelet['user'] == NULL ) {
+			return 1;
+		} else {
+			return 2;
 		}
 	}
 	//Postet ein Bild
@@ -464,7 +518,7 @@ class User
 				$q->execute(array(
 					':picid' => $picid,
 					':brid' => $brid,
-					':user' => $this->login,
+					':user' => $this->user->login,
 					':description' => $description,
 					':date' => time(),
 					'city' => $city,
@@ -479,20 +533,5 @@ class User
 			}
 		}
 	}
-	//Prüft, ob ein Armband schon registriert wurde
-	public static function bracelet_status($brid, $db) {
-		$stmt = $db->prepare('SELECT user FROM bracelets WHERE brid = :brid LIMIT 1');
-		$stmt->execute(array('brid' => $brid));
-		$anz = $stmt->rowCount();
-		$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
-		if ($anz == 0) {
-			return '0';
-		} elseif ($bracelet['user'] == NULL ) {
-			return 1;
-		} else {
-			return 2;
-		}
-	}
 }
-
 ?>

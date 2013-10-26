@@ -1,11 +1,14 @@
 <?php
+if (isset($braceName)) {
+	$braceID = $statistics->name2brid($braceName);
+}
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
 if (isset($_POST['registerpic_submit'])) {
 	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
 	if($captcha_valid) {
-		$pic_registered = $user->registerpic($_POST['registerpic_brid'],
+		$pic_registered = $statistics->registerpic($_POST['registerpic_brid'],
 											 $_POST['registerpic_description'],
 											 $_POST['registerpic_city'],
 											 $_POST['registerpic_country'],
@@ -39,11 +42,11 @@ if (isset($pic_registered)) {
 			  </script>';
 	}
 }
-if (isset($braceID) && isset($_GET['registerpic'])) {
+if (isset($braceName) && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
 ?>
 				<article style="float: left; width: 100%;" class="mainarticles bottom_border_green">
-					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceID; ?> posten</h1></div>
+					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceName; ?> posten</h1></div>
 					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$braceID; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
                 
@@ -72,10 +75,10 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 				</article>
 <?php
 	}
-} elseif (isset($braceID)) {
+} elseif (isset($braceName)) {
 	//Kommentare schreiben
 	if (isset($_POST['comment_submit'])) {
-		$write_comment = User::write_comment ($braceID,
+		$write_comment = $statistics->write_comment ($braceID,
 							 $_POST['comment_user'][$_POST['comment_form']],
 							 $_POST['comment_content'][$_POST['comment_form']],
 							 $_POST['comment_picid'][$_POST['comment_form']],
@@ -90,9 +93,9 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 			  </script>';
 	}
 	
-	$bracelet_stats = User::bracelet_stats($braceID, $db);
+	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
 	if (isset($bracelet_stats['owners'])) {
-		$picture_details = User::picture_details($braceID, $db);
+		$picture_details = $statistics->picture_details($braceID, $db);
 		$stats = array_merge($bracelet_stats, $picture_details);
 	} else {
 		$bracelet_stats['owners'] = 0;
@@ -100,10 +103,10 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceID; ?></h1></div>
-				<a href="<?php echo $friendly_self.'?id='.$braceID.'&amp;registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
+				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
+				<a href="<?php echo $friendly_self.'?name='.$braceName.'&amp;registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
 <?php
-					for ($i = 0; $i < count($stats)-3; $i++) {
+					for ($i = 0; $i < count($stats)-4; $i++) {
 ?>
 					<div style="width: 100%; overflow: auto;">
                         <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
@@ -141,7 +144,7 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
                     
                         <div class="comments" id="comment<?php echo $i;?>">
 <?php
-					for ($j = 1; $j <= count($stats[$i])-8; $j++) {
+					for ($j = 1; $j <= count($stats[$i])-9; $j++) {
 ?>
                             <strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo 'vor x Tagen ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
@@ -163,7 +166,7 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
                         </div>
                     </div>
 <?php
-						if ($i < count($stats)-4) {
+						if ($i < count($stats)-5) {
 ?><!--~~HR~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;"><?php	
 						}
 					}
@@ -179,8 +182,8 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 				<h1>Statistik</h1>
 				<table style="width: 100%;">
 					<tr>
-						<td><strong>Armband ID</strong></td>
-						<td><strong><?php echo $braceID; ?></strong></td>
+						<td><strong>Armband Name</strong></td>
+						<td><strong><?php echo $stats['name']; ?></strong></td>
 					</tr>
 					<tr>
 						<td>Käufer</td>

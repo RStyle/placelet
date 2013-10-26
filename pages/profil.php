@@ -21,7 +21,7 @@ if (isset($_SESSION['user'])) {
 	}
 ?>
         <article id="kontakt" class="mainarticles bottom_border_green">
-            <div class="green_line mainarticleheaders line_header"><h1>Profil, <?php echo $_SESSION['user'] ?></h1></div>
+            <div class="green_line mainarticleheaders line_header"><h1>Profil, <?php echo $user->login ?></h1></div>
             <div style="float: left;">
             	Dein Account:
                 <table border="0">
@@ -54,6 +54,7 @@ if (isset($_SESSION['user'])) {
 				Deine Armbänder:
 				<table border="1">
 					<tr>
+						<th>Armband Name</th>
 						<th>Armband ID</th>
 						<th>registriert am</th>
 						<th>Anzahl Besitzer</th>
@@ -63,7 +64,8 @@ if (isset($_SESSION['user'])) {
 								if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
 								echo '
 								<tr>
-									<td><a href="armband?id='.$armbaender['brid'][$i].'">Armband '.$armbaender['brid'][$i].'</a></td>
+									<td><a href="armband?name='.urlencode($statistics->brid2name($armbaender['brid'][$i])).'">'.$statistics->brid2name($armbaender['brid'][$i]).'</a></td>
+									<td>'.$armbaender['brid'][$i].'</a></td>
 									<td>'.date('d.m.Y', $armbaender['date'][$i]).'</td>
 									<td>'.$armbaender['picture_count'][$armbaender['brid'][$i]]['picid'].'</td>
 								</tr>';
@@ -85,7 +87,7 @@ if (isset($_SESSION['user'])) {
             <div class="green_line mainarticleheaders line_header"><h1>Profil</h1></div>
             Dein Profil kann nur angezeigt werden, wenn du eingeloggt bist.<br />
             Bitte logge dich ein:
-            <form name="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form name="login" action="<?php echo $friendly_self; ?>" method="post">
                 <table style="border: 1px solid black">
                     <tr>
                         <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>

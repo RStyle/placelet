@@ -2,12 +2,12 @@
 
 include_once('../connection.php');
 include_once('../user.php');
-
-$systemStats = User::systemStats(3, $_GET['q'], $db);
+$statistics = new Statistics($db, $user);
+$systemStats = $statistics->systemStats(3, $_GET['q']);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
-	$stats[$key] = array_merge(User::bracelet_stats($val, $db), User::picture_details($val, $db));
+	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
 if(isset($stats[$_GET['q'] - 2]))
 echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
@@ -55,8 +55,8 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
                 <aside class="bracelet-props side_container">
                     <table>
                         <tr>
-                            <td><strong>Armband ID</strong></td>
-                            <td><strong><?php echo '<a href="armband?id='.$bracelets_displayed[$i].'">'.$bracelets_displayed[$i].'</a>'; ?></strong></td>
+                            <td><strong>Armband</strong></td>
+                            <td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.$statistics->brid2name($bracelets_displayed[$i]).'</a>'; ?></strong></td>
                         </tr>
                         <tr>
                             <td>Käufer</td>
