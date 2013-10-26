@@ -372,7 +372,7 @@ class User
 		}
 	}
 	//Postet ein Bild
-	public function registerpic ($brid, $description, $city, $country, $title, $captcha, $captcha_entered, $picture_file, $max_file_size) {
+	public function registerpic ($brid, $description, $city, $country, $title, $captcha, $captcha_entered, $picture_file, $max_file_size, $remote_address) {
 		$submissions_valid = true;
 		//Prüft, ob das Armband schon registriert wurde
 		$sql = "SELECT user FROM bracelets WHERE brid = :brid";
@@ -382,10 +382,6 @@ class User
 		if($row == '') {
 			$submissions_valid = false;
 			return 'Dieses Armband wurde noch nicht registriert.';
-		}
-		if($captcha != $captcha_entered) {
-			$submissions_valid = false;
-			return 'Captcha ist leider falsch.';
 		}
 		if(strlen($country) < 2) {
 			$submissions_valid = false;

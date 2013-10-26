@@ -1,4 +1,18 @@
 <?php
+function captcha_valid($captcha, $captcha_entered) {
+	//Überprüfung vom Captcha
+	$privatekey = "6LfIVekSAAAAAD0cAiYIaUHY2iKSMkyWevTAhTkb";
+	$resp = recaptcha_check_answer ($privatekey,
+									$_SERVER["REMOTE_ADDR"],
+									$captcha,
+									$captcha_entered);
+	
+	if (!$resp->is_valid) {
+		return false;
+	} else {
+		return true;
+	}
+}
 //Sendet E-Mails von $sender mit dem Betreff $subject und Inhalt $content an $recipient
 function send_email($sender, $subject, $content, $mailer = '', $recipient = 'info@placelet.de') {
 	$mail_sender  = clean_input($sender);

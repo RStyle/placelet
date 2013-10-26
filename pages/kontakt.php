@@ -1,4 +1,5 @@
 <?php
+//mail('support@placelet.de', 'SUBJECT', 'CONTENT CONTENT<br>CONTENT', 'From: ds@struckmeierfliesen.de');
 if(isset($_POST['submit'])) {
 	$send_email = send_email($_POST['sender'], $_POST['subject'], $_POST['content'], $_POST['mailer']);
 }

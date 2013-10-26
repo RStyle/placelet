@@ -2,24 +2,42 @@
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
-$captcha = 'captcha';
 if (isset($_POST['registerpic_submit'])) {
-	$pic_registered = $user->registerpic($_POST['registerpic_brid'],
-										 $_POST['registerpic_description'],
-										 $_POST['registerpic_city'],
-										 $_POST['registerpic_country'],
-										 $_POST['registerpic_title'],
-										 $_POST['registerpic_captcha'],
-										 $captcha,
-										 $_FILES['registerpic_file'],
-										 $max_file_size);
+	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
+	if($captcha_valid) {
+		$pic_registered = $user->registerpic($_POST['registerpic_brid'],
+											 $_POST['registerpic_description'],
+											 $_POST['registerpic_city'],
+											 $_POST['registerpic_country'],
+											 $_POST['registerpic_title'],
+											 $_POST['recaptcha_challenge_field'],
+											 $_POST['recaptcha_response_field'],
+											 $_FILES['registerpic_file'],
+											 $max_file_size,
+											 $_SERVER["REMOTE_ADDR"]);
+	} else {
+		header('Location: '.$friendly_self.'?id='.$_POST['registerpic_brid'].'&registerpic=1&captcha=false
+				&descr='.str_replace("\r\n", "ujhztg", $_POST['registerpic_description']).'
+				&city='.$_POST['registerpic_city'].'
+				&country='.$_POST['registerpic_country'].'
+				&title='.$_POST['registerpic_title']);
+	}
+}
+if(isset($_GET['captcha'])) {
+	if($_GET['captcha'] == 'false') {
+			$pic_registered = 'Das Captcha wurde falsch eingegeben.';	
+	}
 }
 if (isset($pic_registered)) {
-	echo '<script type="text/javascript">
-			//$(document).ready(function(){
-				alert("'.$pic_registered.'");
-			//});
-		  </script>';
+	if($pic_registered == 'Bild erfolgreich gepostet.') {
+		header('Location: armband?id='.$_POST['registerpic_brid']);
+	}else {
+		echo '<script type="text/javascript">
+				//$(document).ready(function(){
+					alert("'.$pic_registered.'");
+				//});
+			  </script>';
+	}
 }
 if (isset($braceID) && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
@@ -28,23 +46,24 @@ if (isset($braceID) && isset($_GET['registerpic'])) {
 					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceID; ?> posten</h1></div>
 					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$braceID; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
-                        
-                        <label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="20" placeholder="Titel" required><br>
-                        
-                        <label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-						<input type="text" name="registerpic_city" class="registerpic_city" size="20" maxlength="20" placeholder="Stadt" required><br>
-                        
-                        <label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-						<input type="text" name="registerpic_country" class="registerpic_country" size="20" maxlength="20" placeholder="Land" required><br>
-                        
-                        <label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
-                        <textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required></textarea><br> 
-                        
-                        <label for="registerpic_captcha" class="label_registerpic_captcha">Captcha:</label><br>
-						<input type="text" name="registerpic_captcha" class="registerpic_captcha" size="20" maxlength="5" placeholder="Captcha" value="<?php echo $captcha;?>" required><br>
+                
+						<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
+						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="20" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo $_GET['title'];?>"required><br>
+						
+						<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
+						<input type="text" name="registerpic_city" class="registerpic_city" size="20" maxlength="20" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo $_GET['city'];?>" required><br>
+						
+						<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
+						<input type="text" name="registerpic_country" class="registerpic_country" size="20" maxlength="20" placeholder="Land" value="<?php if(isset($_GET['country'])) echo $_GET['country'];?>" required><br>
+						
+						<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
+						<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($_GET['descr'])) echo str_replace("ujhztg", "\r\n", $_GET['descr']);?></textarea><br> 
                         
                         <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
+<?php
+						$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
+						echo recaptcha_get_html($publickey);
+?>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 						<input type="hidden" name="registerpic_brid" value="<?php echo $braceID;?>">
 						<input type="submit" name="registerpic_submit" value="Bild posten"><br>

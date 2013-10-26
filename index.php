@@ -4,6 +4,7 @@ date_default_timezone_set("Europe/Berlin");
 error_reporting(E_ALL|E_STRICT); 
 ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
+require_once('./scripts/recaptchalib.php');
 include_once('./scripts/functions.php'); 
 include_once('./scripts/connection.php');
 include_once('./scripts/user.php');
