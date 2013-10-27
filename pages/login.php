@@ -1,11 +1,15 @@
 <?php
+function display_login_post_pic() {
+}
+?>
+<?php
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
 if (isset($_POST['registerpic_submit'])) {
 	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
 	if($captcha_valid) {
-		$pic_registered = $user->registerpic($_POST['registerpic_brid'],
+		$pic_registered = $statistics->registerpic($_POST['registerpic_brid'],
 											 $_POST['registerpic_description'],
 											 $_POST['registerpic_city'],
 											 $_POST['registerpic_country'],
@@ -30,7 +34,7 @@ if(isset($_GET['captcha'])) {
 }
 if (isset($pic_registered)) {
 	if($pic_registered == 'Bild erfolgreich gepostet.') {
-		header('Location: armband?id='.$_POST['registerpic_brid']);
+		header('Location: armband?name='.$statistics->brid2name($_POST['registerpic_brid']));
 	}else {
 		echo '<script type="text/javascript">
 				//$(document).ready(function(){
@@ -39,20 +43,19 @@ if (isset($pic_registered)) {
 			  </script>';
 	}
 }
-if (isset($_SESSION['user'])) {
-	$userdetails = $user->userdetails();
+if ($user->login) {
+	$userdetails = $statistics->userdetails($user->login);
 	//Armband registrieren
 	if (isset($_POST['reg_br']) && $_POST['submit'] == "Armband registrieren") {
 			$bracelet_registered = $user->registerbr($_POST['reg_br']);
 	}
 }
 if(isset($_GET['registerbr'])) {
-	$bracelet_status = User::bracelet_status($_GET['registerbr'], $db);
+	$bracelet_status = $statistics->bracelet_status($_GET['registerbr']);
 }
 ?>
 <?php
 if(!isset($_GET['loginattempt'])) {
-	$captcha = 'captcha';
 	if(isset($_GET['registerbr'])) {
 ?>
         <article id="register_pic" class="mainarticles bottom_border_blue">
@@ -94,7 +97,7 @@ if(!isset($_GET['loginattempt'])) {
 ?>
             <div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page];?></h1></div>
 <?php
-	if($checklogin == false){
+	if(!$user->login){
 		if(isset($_GET['registerbr'])) {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen
 ?>
 			Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>

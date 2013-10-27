@@ -8,7 +8,7 @@ if(isset($_GET['user'])) {
 }elseif($user->login) {
 	$username = $user->login;
 }
-if(isset($username)) {
+if(isset($username) && $statistics->userexists($username)) {
 	$userdetails = $statistics->userdetails($username);
 	$armbaender = profile_stats($userdetails);
 }
@@ -98,7 +98,7 @@ if(!isset($_GET['user'])) {
             </form>
 <?php
 	}
-} else {
+} elseif($statistics->userexists($username)){
 ?>
             <div class="green_line mainarticleheaders line_header"><h1>Profil von <?php echo $username; ?></h1></div>
 <?php
@@ -126,6 +126,11 @@ if(!isset($_GET['user'])) {
 							}
 ?>
 			</table>
+<?php
+}else {
+?>
+            <div class="green_line mainarticleheaders line_header"><h1>Benutzer existiert nicht</h1></div>
+			<p>Dieser Benutzer existiert nicht.</p>
 <?php
 }
 ?>

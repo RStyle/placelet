@@ -415,7 +415,7 @@ class Statistics {
 		}
 	}
 	//Prüft, ob ein Armband schon registriert wurde
-	public static function bracelet_status($brid) {
+	public function bracelet_status($brid) {
 		$stmt = $this->db->prepare('SELECT user FROM bracelets WHERE brid = :brid LIMIT 1');
 		$stmt->execute(array('brid' => $brid));
 		$anz = $stmt->rowCount();
