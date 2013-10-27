@@ -301,24 +301,27 @@ class Statistics {
 	}
 	//Statistik vom Armband abfragen
 	public function bracelet_stats($brid) {
-		$sql = "SELECT user, date FROM bracelets WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
+		$sql = "SELECT user, date FROM bracelets WHERE brid = :brid";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		$stats['owner'] = $q[0]['user'];
 		$stats['date'] = $q[0]['date'];
-		$sql = "SELECT user FROM pictures WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
-		$q = $stmt->fetchAll();
+		$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array('brid' => $brid));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
 		if($q != NULL) {
-			$stats['owners'] = count($q[0]);
+			$stats['owners'] = $q['picid'];
 		}
 		$stats['name'] = $this->brid2name($brid);
 		return $stats;
 	}
 	//Bilderdetails
 	public function picture_details ($brid) {
-		$sql = "SELECT user, description, picid, city, country, date, title, fileext FROM pictures WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
+		$sql = "SELECT user, description, picid, city, country, date, title, fileext FROM pictures WHERE brid = :brid";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
 			//$details[$val['picid']] = $val;
@@ -331,8 +334,9 @@ class Statistics {
 			$details[$val['picid']]['title'] = $val['title'];
 			$details[$val['picid']]['fileext'] = $val['fileext'];
 		}
-		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = '".$brid."'";
-		$stmt = $this->db->query($sql);
+		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
 			$details[$val['picid']] [$val['commid']] = array();
