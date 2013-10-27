@@ -155,18 +155,26 @@ class User
 				return false;
 		}
 	}
-	
+}
+?>
+<?php
+class Statistics {
+	protected $db;
+	public function __construct($db, $user){
+		$this->db = $db;
+		$this->user = $user;
+	}
 	//Userdetails abfragen
-	public function userdetails() {
+	public function userdetails($user) {
 		$result = array();
 		$stmt = $this->db->prepare("SELECT user, email, status FROM users WHERE user = :user LIMIT 1");
-		$stmt->execute(array('user' => $this->login));
+		$stmt->execute(array('user' => $user));
 		$result[0] = $stmt->fetch(PDO::FETCH_ASSOC);
 		$stmt = $this->db->prepare("SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = :user");
-		$stmt->execute(array('user' => $this->login));
+		$stmt->execute(array('user' => $user));
 		$result[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$stmt = $this->db->prepare("SELECT brid, date FROM bracelets WHERE user = :user ORDER BY  `bracelets`.`date` ASC ");
-		$stmt->execute(array('user' => $this->login));
+		$stmt->execute(array('user' => $user));
 		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$user_details = $result;
@@ -184,15 +192,6 @@ class User
 		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
 		$userdetails['picture_count'] = $result[3];
 		return $userdetails;
-	}
-}
-?>
-<?php
-class Statistics {
-	protected $db;
-	public function __construct($db, $user){
-		$this->db = $db;
-		$this->user = $user;
 	}
 	//Zeigt die allgemeine Statistik an
 	public function systemStats($user_anz, $brid_anz) {

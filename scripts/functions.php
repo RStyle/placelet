@@ -1,6 +1,24 @@
 <?php
+//Verarbeitet die Profildaten
+function profile_stats($userdetails) {
+	if (isset($userdetails['brid'])) {
+		if (is_array($userdetails['brid'])) {
+			foreach ($userdetails['brid'] as $val => $key) {
+				$armbaender['brid'][$val] = $key;
+			}
+			foreach ($userdetails['date'] as $val => $key) {
+				$armbaender['date'][$val] = $key;
+			}
+			$armbaender['picture_count'] = $userdetails['picture_count'];
+		} else {
+			$armbaender['brid'][0] = $userdetails['brid'];
+			$armbaender['date'][0] = $userdetails['date'];
+		}
+		return $armbaender;
+	}
+}
+//Prüft, ob das Captcha richtig eingegeben wurde.
 function captcha_valid($captcha, $captcha_entered) {
-	//Überprüfung vom Captcha
 	$privatekey = "6LfIVekSAAAAAD0cAiYIaUHY2iKSMkyWevTAhTkb";
 	$resp = recaptcha_check_answer ($privatekey,
 									$_SERVER["REMOTE_ADDR"],
