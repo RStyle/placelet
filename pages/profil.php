@@ -78,24 +78,40 @@ if(!isset($_GET['user'])) {
 	} else {
 ?>
             <div class="green_line mainarticleheaders line_header"><h1>Profil</h1></div>
-            Dein Profil kann nur angezeigt werden, wenn du eingeloggt bist.<br />
-            Bitte logge dich ein:
-            <form name="login" action="<?php echo $friendly_self; ?>" method="post">
-                <table style="border: 1px solid black">
-                    <tr>
-                        <td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-                        <td><input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
-                    </tr>
-                    <tr>
-                        <td><label for="password">Passwort</label></td>
-                        <td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
-                    </tr>
-                    <tr>
-                        <td><input type="submit" value="Login"></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </form>
+			<div style="float: left; margin-right: 2em;">
+				Dein Profil kann nur angezeigt werden, wenn du eingeloggt bist.<br>
+				Bitte logge dich ein:
+				<form name="login" action="<?php echo $friendly_self; ?>" method="post">
+					<table style="border: 1px solid black">
+						<tr>
+							<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+							<td><input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+						</tr>
+						<tr>
+							<td><label for="password">Passwort</label></td>
+							<td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
+						</tr>
+						<tr>
+							<td><input type="submit" value="Login"></td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div>
+				Oder suche nach dem Profil von jemand anderem:
+				<form action="<?php echo $friendly_self; ?>" method="get">
+					<table style="border: 1px solid black; overflow: auto;">
+						<tr>
+							<td><input type="text" name="user" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+							<td><input type="submit" value="Suchen"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+            <div style="clear: both;">
+            	&nbsp;
+            </div>
 <?php
 	}
 } elseif($statistics->userexists($username)){
