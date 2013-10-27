@@ -3,6 +3,9 @@ error_reporting(E_ALL|E_STRICT);
 ini_set('display_errors', true);
 include_once('./scripts/connection.php');
 if(isset($_GET['number'])) {
+	if($_GET['number'] > 100) {
+		die('Man kann maximal 100 Armb&auml;nder auf einmal registrieren.');
+	}
 	$anzahl = $_GET['number'];
 	for($i = 0; $i < $anzahl; $i++) {
 		$brid = mt_rand(100000, 999999);

@@ -8,18 +8,18 @@ foreach($_GET as $key => $val) {
 if (isset($_POST['registerpic_submit'])) {
 	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
 	if($captcha_valid) {
-		$pic_registered = $statistics->registerpic($_POST['registerpic_brid'],
-											 $_POST['registerpic_description'],
-											 $_POST['registerpic_city'],
-											 $_POST['registerpic_country'],
-											 $_POST['registerpic_title'],
-											 $_POST['recaptcha_challenge_field'],
-											 $_POST['recaptcha_response_field'],
-											 $_FILES['registerpic_file'],
-											 $max_file_size,
-											 $_SERVER["REMOTE_ADDR"]);
+		$pic_registered = $statistics->registerpic($braceID,
+												$_POST['registerpic_description'],
+												$_POST['registerpic_city'],
+												$_POST['registerpic_country'],
+												$_POST['registerpic_title'],
+												$_POST['recaptcha_challenge_field'],
+												$_POST['recaptcha_response_field'],
+												$_FILES['registerpic_file'],
+												$max_file_size,
+												$_SERVER["REMOTE_ADDR"]);
 	} else {
-		header('Location: '.$friendly_self.'?id='.$_POST['registerpic_brid'].'&registerpic=1&captcha=false
+		header('Location: '.$friendly_self.'?name='.$braceName.'&registerpic=1&captcha=false
 				&descr='.str_replace("\r\n", "ujhztg", $_POST['registerpic_description']).'
 				&city='.$_POST['registerpic_city'].'
 				&country='.$_POST['registerpic_country'].'
@@ -33,21 +33,20 @@ if(isset($_GET['captcha'])) {
 }
 if (isset($pic_registered)) {
 	if($pic_registered == 'Bild erfolgreich gepostet.') {
-		header('Location: armband?id='.$_POST['registerpic_brid']);
-	}else {
-		echo '<script type="text/javascript">
-				//$(document).ready(function(){
-					alert("'.$pic_registered.'");
-				//});
-			  </script>';
+		header('Location: armband?name='.$braceName);
 	}
+	echo '<script type="text/javascript">
+			//$(document).ready(function(){
+				alert("'.$pic_registered.'");
+			//});
+		  </script>';
 }
 if (isset($braceName) && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
 ?>
 				<article style="float: left; width: 100%;" class="mainarticles bottom_border_green">
 					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceName; ?> posten</h1></div>
-					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?id='.$braceID; ?>" method="post" enctype="multipart/form-data">
+					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?name='.$braceName; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
                 
 						<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
@@ -68,7 +67,6 @@ if (isset($braceName) && isset($_GET['registerpic'])) {
 						echo recaptcha_get_html($publickey);
 ?>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
-						<input type="hidden" name="registerpic_brid" value="<?php echo $braceID;?>">
 						<input type="submit" name="registerpic_submit" value="Bild posten"><br>
 						<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat;background-position: center;max-height:0px">
 					</form>
@@ -152,7 +150,7 @@ if (isset($braceName) && isset($_GET['registerpic'])) {
 <?php 
 					}
 ?>   
-                            <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?id='.$braceID; ?>" method="post">
+                            <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?name='.$braceName; ?>" method="post">
                                 <span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
                                 <label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
                                 <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  

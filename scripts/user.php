@@ -8,7 +8,6 @@ class User
 		$this->db = $db;
 		$this->login = $login;
 		if ($login !== false && isset($_SESSION['dynamic_password']) && isset($_SESSION['user'])){ //prüfen ob eingeloggt
-			
 			try {
 				$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE user = :user');
 				$stmt->execute(array('user' =>$_SESSION['user']));
@@ -16,7 +15,6 @@ class User
 				
 					print_r($row);
 				}*/
-				
 				$row = $stmt->fetch(PDO::FETCH_ASSOC);
 				if ($row['password'] == $_SESSION['dynamic_password']){
 					$this->logged = true;
