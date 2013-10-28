@@ -185,6 +185,8 @@ if(!isset($_GET['loginattempt'])) {
 	}
 } else {
 ?>
+		<article class="mainarticles bottom_border_green">
+            <div class="green_line mainarticleheaders line_header"><h1>Login-Daten inkorrekt</h1></div>
             Der eingegebene Benutzername oder das Passwort waren falsch.<br><br>
             <form name="login" id="form_login" action="<?php echo $friendly_self; ?>" method="post">
                 <table style="border: 1px solid black">
