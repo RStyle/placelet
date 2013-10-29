@@ -61,7 +61,6 @@ class User
 		unset($_SESSION['dynamic_password']);
 	}
 	
-	
 	public static function register($reg, $db){ //$reg ist ein array
 		//ist ein (getrimter) Wert leer?
 		if(tisset($reg['reg_name']) && tisset($reg['reg_first_name']) && tisset($reg['reg_login']) && tisset($reg['reg_email']) && !empty($reg['reg_password'])  && !empty($reg['reg_password2'])){
@@ -152,6 +151,17 @@ class User
 				die('ERROR: ' . $e->getMessage());
 				return false;
 		}
+	}
+	//Accountdetails ändern
+	public function change_details($firstname, $lastname, $email, $old_pw, $new_pw, $username) {
+		$inputs_sql = '';
+		//if(isset($firstname)) $inputs_sql .= ':'.$firstname.' = :firstname';
+		//if(isset($lastname)) $inputs_sql .= ':'.$lastname.' = :lastname';
+		if(isset($email)) $inputs_sql .= ':email = :email';
+		if(isset($old_pw) && isset($new_pw)) $inputs_sql .= ':password = :new_pw';
+		$sql = "UPDATE users SET ".$inputs_sql." WHERE user= :username";
+		$q = $this->db->prepare($sql);
+		$q->execute($inputs);
 	}
 }
 ?>

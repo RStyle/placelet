@@ -65,11 +65,13 @@ if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST[
 }
 //--//
 
-if (!isset($braceID)) { $braceID = ""; }
+//if (!isset($braceID)) { $braceID = ""; }       <---- Bei Auftreten von Bugs wieder aktivieren
+if (!isset($braceName)) { $braceName = ""; }
 //Dateinamen werden Titel zugeordnet
 $pagename = array(
 	"about" => "&Uuml;ber Uns",
-	"armband" => "Armband ID: ".$braceID,
+	"account" => "Account Einstellungen",
+	"armband" => "Armband: ".$braceName,
 	"connect" => "Connect",
 	"home" => "Global Placelet. Travel & Connect",
 	"impressum" => "Impressum",
@@ -95,8 +97,22 @@ if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Ti
 if (empty($title)) {
     $title = "Placelet - ".$pagename[$page];
 }  // Wenn $title nicht gesetzt ist, wird sie zu 'Placelet - $title' geändert
+//freundlichere Version von $_SERVER['PHP_SELF']
 $friendly_self = $_SERVER['PHP_SELF'];
 $friendly_self = str_replace(".php", "", $friendly_self);
+if(isset($_GET)) {
+	$first = true;
+	$friendly_self_get = $friendly_self.'?';
+	foreach($_GET as $key => $val) {
+		if(!$first) {
+			$friendly_self_get .= '&'.$key.'='.$val;
+		}else {
+			$friendly_self_get .= $key.'='.$val;
+		}
+	}
+}else {
+	$friendly_self_get = false;
+}
 //Ich denke, dass der Head immer gleich sein wird, auf Wunsch kann das aber geändert werden//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 ?>
 <!DOCTYPE HTML>
