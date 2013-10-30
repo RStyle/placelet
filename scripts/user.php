@@ -153,15 +153,58 @@ class User
 		}
 	}
 	//Accountdetails ändern
-	public function change_details($firstname, $lastname, $email, $old_pw, $new_pw, $username) {
-		$inputs_sql = '';
-		//if(isset($firstname)) $inputs_sql .= ':'.$firstname.' = :firstname';
-		//if(isset($lastname)) $inputs_sql .= ':'.$lastname.' = :lastname';
-		if(isset($email)) $inputs_sql .= ':email = :email';
-		if(isset($old_pw) && isset($new_pw)) $inputs_sql .= ':password = :new_pw';
-		$sql = "UPDATE users SET ".$inputs_sql." WHERE user= :username";
-		$q = $this->db->prepare($sql);
-		$q->execute($inputs);
+	public function change_details($firstname, $lastname, $email, $old_pwd, $new_pwd, $username) {
+		//Vorname ändern
+		if($firstname != NULL) {
+			$sql = "UPDATE addresses SET first_name = :firstname WHERE user = :user";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+						':firstname' => $firstname,
+						':user' => $username
+						));
+			return 'Vorname erfolgreich geändert.';
+		}
+		//Nachname ändern
+		if($lastname != NULL) {
+			$sql = "UPDATE addresses SET last_name = :lastname WHERE user = :user";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+						':lastname' => $lastname,
+						':user' => $username
+						));
+			return 'Nachname erfolgreich geändert.';
+		}
+		//Passwort ändern
+		if($old_pwd != NULL && $new_pwd != NULL) {
+			$stmt = $this->db->prepare('SELECT password FROM users WHERE user = :user');
+			$stmt->execute(array('user' => $this->login));
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			if (PassHash::check_password($result['password'], $old_pwd)) {
+				$sql = "UPDATE users SET password = :password WHERE user = :user";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+							':password' => PassHash::hash($new_pwd),
+							':user' => $username
+							));
+				return 'Passwort erfolgreich geändert.';
+			}else {
+				return 'Falsches Passwort';
+			}
+		}
+		//E-Mail ändern
+		if($email != NULL) {
+			if(check_email_address($email)) {
+				$sql = "UPDATE users SET email = :email WHERE user = :user";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+							':email' => $email,
+							':user' => $username
+							));
+				return 'E-Mail erfolgreich geändert.';
+			}else {
+				return 'Das ist keine gültige E-Mail.';
+			}
+		}
 	}
 }
 ?>
@@ -196,7 +239,6 @@ class Statistics {
 			$result[3][$val['brid']] = $stmt->fetch(PDO::FETCH_ASSOC);
 		}
 		$user_details['bracelets'] = $brids;
-		
 		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
 		$userdetails['picture_count'] = $result[3];
 		return $userdetails;
