@@ -36,7 +36,8 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 	$mail_sender  = clean_input($sender);
 	$mail_sender  = filter_var($mail_sender, FILTER_SANITIZE_EMAIL);
 	$mail_subject = clean_input($subject);
-	$mail_content = clean_input($content);
+	//$mail_content = clean_input($content); - Keine Sonderzeichen :'(
+	$mail_content = $content;
 	if(check_email_address($mail_sender)) {
 		if($mail_mailer = 'contact') {
 			switch($subject) {
@@ -54,7 +55,11 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 					break;
 			}
 		}
-		mail($mail_recipient, $mail_subject, $mail_content, 'From: '.$sender);
+		$header = 'From:' . $sender . "\n";
+		$header .= "MIME-Version: 1.0" . "\n";
+		$header .= "Content-type: text/plain; charset=utf-8" . "\n";
+		$header .= "Content-transfer-encoding: 8bit";
+		mail($mail_recipient, $mail_subject, $mail_content, $header);
 		//Bestätigung an den Sender
 			$mail_header = 'From: Placelet <info@placelet.de>';
 			/*$mail_header = 'From: Placelet <info@placelet.de>\n';
