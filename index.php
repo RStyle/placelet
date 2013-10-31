@@ -65,7 +65,6 @@ if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST[
 }
 //--//
 
-//if (!isset($braceID)) { $braceID = ""; }       <---- Bei Auftreten von Bugs wieder aktivieren
 if (!isset($braceName)) { $braceName = ""; }
 //Dateinamen werden Titel zugeordnet
 $pagename = array(
@@ -152,7 +151,7 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 <?php
 if($user->logged) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
 ?>
-			<a href="?logout" id="headerlogin">Logout</a>
+			<a href="<?php echo $friendly_self_get; ?>logout" id="headerlogin">Logout</a>
 <?php
 }
 else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
@@ -160,18 +159,18 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			<a href="#" id="headerlogin"><img src="img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
 				<form name="login" id="form_login" action="start" method="post">
-					  <label for="login" id="label_login">Benutzername</label><br>
-					  <input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
-					  <label for="password" id="label_password">Passwort</label><br>
-					  <input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
-					  <input type="submit" value="Login" id="submit_login">
+					<label for="login" id="label_login">Benutzername</label><br>
+					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
+					<label for="password" id="label_password">Passwort</label><br>
+					<input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
+					<input type="submit" value="Login" id="submit_login">
 				</form><br>
 				<a href="login">Hier registrieren</a>
 			</div>
 <?php
 }
 ?>
-            <ul id="headerlist">
+			<ul id="headerlist">
 				<li><a href="http://placelet.de<?php echo $friendly_self; ?>"><img src="img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="http://placelet.net<?php echo $friendly_self; ?>"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
@@ -181,8 +180,8 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li><a href="kontakt">Kontakt</a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
-            </ul>
-		</header>	
+			</ul>
+		</header>
 <!--###LOGO###-->
 		<a href="http://placelet.de"><img id="logo" src="img/logo_extended.svg" alt="Placelet"></a>
 <!--###NAV TAG###-->
@@ -196,7 +195,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			</ul>
 		</nav>
 <!--###SECTION TAG###-->
-        <section id="section">
+		<section id="section">
 <?php
 include_once('./pages/'.$page.'.php');
 ?>

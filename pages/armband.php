@@ -13,11 +13,8 @@ if (isset($_POST['registerpic_submit'])) {
 												$_POST['registerpic_city'],
 												$_POST['registerpic_country'],
 												$_POST['registerpic_title'],
-												$_POST['recaptcha_challenge_field'],
-												$_POST['recaptcha_response_field'],
 												$_FILES['registerpic_file'],
-												$max_file_size,
-												$_SERVER["REMOTE_ADDR"]);
+												$max_file_size);
 	} else {
 		header('Location: '.$friendly_self.'?name='.$braceName.'&registerpic=1&captcha=false
 				&descr='.str_replace("\r\n", "ujhztg", $_POST['registerpic_description']).'
@@ -41,7 +38,7 @@ if (isset($pic_registered)) {
 			//});
 		  </script>';
 }
-if (isset($braceName) && isset($_GET['registerpic'])) {
+if ($braceName != NULL && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
 ?>
 				<article style="float: left; width: 100%;" class="mainarticles bottom_border_green">
@@ -73,7 +70,7 @@ if (isset($braceName) && isset($_GET['registerpic'])) {
 				</article>
 <?php
 	}
-} elseif (isset($braceName)) {
+} elseif ($braceName != NULL) {
 	//Kommentare schreiben
 	if (isset($_POST['comment_submit'])) {
 		$write_comment = $statistics->write_comment ($braceID,
@@ -106,41 +103,41 @@ if (isset($braceName) && isset($_GET['registerpic'])) {
 <?php
 					for ($i = 0; $i < count($stats)-4; $i++) {
 ?>
-					<div style="width: 100%; overflow: auto;">
-                        <h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-                        <a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
-                            <img src="img/triangle.png" alt="" class="thumb_triangle">
-                            <img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
-                        </a>
-                        <table class="pic-info">
-                            <tr>
-                                <th>Datum</th>
-                                <td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
-                            </tr>
-                            <tr>
-                                <th>Ort</th>
-                                <td><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></td>
-                            </tr>
+				<div style="width: 100%; overflow: auto;">
+					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+					<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
+						<img src="img/triangle.png" alt="" class="thumb_triangle">
+						<img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
+					</a>
+					<table class="pic-info">
+						<tr>
+							<th>Datum</th>
+							<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
+						</tr>
+						<tr>
+							<th>Ort</th>
+							<td><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></td>
+						</tr>
 <?php
 				if($stats[$i]['user'] != NULL) {
 ?>
-                            <tr>
-                                <th>Uploader</th>
-                                <td><?php echo $stats[$i]['user']; ?></td>
-                            </tr>
+						<tr>
+							<th>Uploader</th>
+							<td><?php echo $stats[$i]['user']; ?></td>
+						</tr>
 <?php
                  }
 ?>
-                        </table> 
+					</table>
+						
+					<p class="pic-desc">
+						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
+						<?php echo $stats[$i]['description']; ?>      
+						<br><br>
+						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
+					</p>
                     
-                        <p class="pic-desc">
-                            <span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
-                            <?php echo $stats[$i]['description']; ?>      
-                            <br><br>
-                            <span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
-                        </p>
-                    
-                        <div class="comments" id="comment<?php echo $i;?>">
+					<div class="comments" id="comment<?php echo $i;?>">
 <?php
 					for ($j = 1; $j <= count($stats[$i])-9; $j++) {
 ?>
@@ -150,22 +147,24 @@ if (isset($braceName) && isset($_GET['registerpic'])) {
 <?php 
 					}
 ?>   
-                            <form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?name='.$braceName; ?>" method="post">
-                                <span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
-                                <label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
-                                <input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
-                                <label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
-                                <textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-                                <input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
-                                <input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
-                                <input type="hidden" name="comment_form" value="<?php echo $i; ?>">
-                                <input type="submit" name="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
-                            </form>
-                        </div>
-                    </div>
+						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?name='.$braceName; ?>" method="post">
+							<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
+							<label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
+							<input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
+							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
+							<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
+							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
+							<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
+							<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
+							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
+						</form>
+					</div>
+				</div>
 <?php
 						if ($i < count($stats)-5) {
-?><!--~~HR~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;"><?php	
+?>
+<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
+<?php	
 						}
 					}
 ?>
@@ -210,10 +209,10 @@ if (isset($braceName) && isset($_GET['registerpic'])) {
 <?php
 } else {
 ?>
-				<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
-					<div class="green_line mainarticleheaders line_header"><h1>Falsche Seite</h1></div>
-                    <p>Du solltest nicht hier sein. Gehe einfach eine Seite zurück.</p>
-				</article>
+			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
+				<div class="green_line mainarticleheaders line_header"><h1>Falsche Seite</h1></div>
+				<p>Du solltest nicht hier sein. Gehe einfach eine Seite zurück.</p>
+			</article>
 <?php
 }
 ?>

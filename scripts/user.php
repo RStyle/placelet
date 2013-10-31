@@ -378,7 +378,7 @@ class Statistics {
 		foreach ($q as $key => $val) {
 			//$details[$val['picid']] = $val;
 			$details[$val['picid']]['user'] = $val['user'];
-			$details[$val['picid']]['description'] = nl2br($val['description']);
+			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];
 			$details[$val['picid']]['city'] = $val['city'];
 			$details[$val['picid']]['country'] = $val['country'];
@@ -395,7 +395,7 @@ class Statistics {
 			$details[$val['picid']] [$val['commid']] ['commid'] = $val['commid'];
 			$details[$val['picid']] [$val['commid']] ['picid'] = $val['picid'];
 			$details[$val['picid']] [$val['commid']] ['user'] = $val['user'];
-			$details[$val['picid']] [$val['commid']] ['comment'] = nl2br($val['comment']);
+			$details[$val['picid']] [$val['commid']] ['comment'] = nl2br($val['comment'], 0);
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
 		}
 		$details = array_reverse($details);
@@ -485,7 +485,7 @@ class Statistics {
 		}
 	}
 	//Postet ein Bild
-	public function registerpic ($brid, $description, $city, $country, $title, $captcha, $captcha_entered, $picture_file, $max_file_size) {
+	public function registerpic ($brid, $description, $city, $country, $title, $picture_file, $max_file_size) {
 		$submissions_valid = true;
 		//Prüft, ob das Armband schon registriert wurde
 		$sql = "SELECT user FROM bracelets WHERE brid = :brid";
