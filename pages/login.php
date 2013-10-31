@@ -1,8 +1,4 @@
 <?php
-function display_login_post_pic() {
-}
-?>
-<?php
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
@@ -14,11 +10,10 @@ if (isset($_POST['registerpic_submit'])) {
 											 $_POST['registerpic_city'],
 											 $_POST['registerpic_country'],
 											 $_POST['registerpic_title'],
-											 $_POST['recaptcha_challenge_field'],
-											 $_POST['recaptcha_response_field'],
+											 0,
+											 0,
 											 $_FILES['registerpic_file'],
-											 $max_file_size,
-											 $_SERVER["REMOTE_ADDR"]);
+											 $max_file_size);
 	} else {
 		header('Location: '.$friendly_self.'?registerbr='.$_POST['registerpic_brid'].'&captcha=false
 				&descr='.str_replace("\r\n", "ujhztg", $_POST['registerpic_description']).'

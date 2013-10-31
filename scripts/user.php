@@ -77,8 +77,8 @@ class User
 			$sql = "INSERT INTO users (user,email,password,status) VALUES (:user,:email,:password,:status)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user' => $reg['reg_login'],
-                ':email' => $reg['reg_email'],
+				':user' => clean_input($reg['reg_login']),
+                ':email' => clean_input($reg['reg_email']),
 				':password' => PassHash::hash($reg['reg_password']),
 				':status' => 0)
 			);
@@ -86,16 +86,16 @@ class User
 			$sql = "INSERT INTO user_status (user,code) VALUES (:user,:code)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user'=>$reg['reg_login'],
-				':code'=>substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20)) // Ein 60 buchstabenlanger Zufallscode
+				':user' => clean_input($reg['reg_login']),
+				':code' => substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20)) // Ein 60 buchstabenlanger Zufallscode
 			);
 			
 			$sql = "INSERT INTO addresses (user, last_name, first_name) VALUES (:user,:last_name,:first_name)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user' => $reg['reg_login'],
-				':last_name' => $reg['reg_name'],
-				':first_name' => $reg['reg_first_name'])
+				':user' => clean_input($reg['reg_login']),
+				':last_name' => clean_input($reg['reg_name']),
+				':first_name' => clean_input($reg['reg_first_name']))
 			);
 		
 			return true;
@@ -156,6 +156,7 @@ class User
 	public function change_details($firstname, $lastname, $email, $old_pwd, $new_pwd, $username) {
 		//Vorname ändern
 		if($firstname != NULL) {
+			$firstname = clean_input($firstname);
 			$sql = "UPDATE addresses SET first_name = :firstname WHERE user = :user";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
@@ -166,6 +167,7 @@ class User
 		}
 		//Nachname ändern
 		if($lastname != NULL) {
+			$lastname = clean_input($lastname);
 			$sql = "UPDATE addresses SET last_name = :lastname WHERE user = :user";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
@@ -193,6 +195,7 @@ class User
 		}
 		//E-Mail ändern
 		if($email != NULL) {
+			$email = clean_input($email);
 			if(check_email_address($email)) {
 				$sql = "UPDATE users SET email = :email WHERE user = :user";
 				$q = $this->db->prepare($sql);
@@ -423,6 +426,9 @@ class Statistics {
 			return 'Kommentar zu kurz, mindestens 2 Zeichen';
 		}
 		if ($submissions_valid) {
+			$comment = clean_input($comment);
+			$username = clean_input($username);
+			$brid = clean_input($brid);
 			try {
 				$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid";
 				$q = $this->db->prepare($sql);
@@ -479,7 +485,7 @@ class Statistics {
 		}
 	}
 	//Postet ein Bild
-	public function registerpic ($brid, $description, $city, $country, $title, $captcha, $captcha_entered, $picture_file, $max_file_size, $remote_address) {
+	public function registerpic ($brid, $description, $city, $country, $title, $captcha, $captcha_entered, $picture_file, $max_file_size) {
 		$submissions_valid = true;
 		//Prüft, ob das Armband schon registriert wurde
 		$sql = "SELECT user FROM bracelets WHERE brid = :brid";
@@ -510,6 +516,10 @@ class Statistics {
 			return 'Kein Bild ausgewählt, versuch es noch ein Mal.';
 		}
 		if ($submissions_valid) {
+			$description = clean_input($description);
+			$city = clean_input($city);
+			$country = clean_input($country);
+			$title = clean_input($title);
 			$sql = "SELECT picid FROM pictures WHERE brid = :brid";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(':brid' => $brid));

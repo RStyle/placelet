@@ -1,7 +1,14 @@
 <?php
-//mail('support@placelet.de', 'SUBJECT', 'CONTENT CONTENT<br>CONTENT', 'From: ds@struckmeierfliesen.de');
 if(isset($_POST['submit'])) {
-	$send_email = send_email($_POST['sender'], $_POST['subject'], $_POST['content'], $_POST['mailer']);
+	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
+	if($captcha_valid) {
+		$send_email = send_email($_POST['sender'], $_POST['subject'], $_POST['content'], $_POST['mailer']);
+	}
+}
+if(isset($_GET['captcha'])) {
+	if($_GET['captcha'] == 'false') {
+			$send_email = 'Das Captcha wurde falsch eingegeben.';	
+	}
 }
 if (isset($send_email)) {
 	echo '<script type="text/javascript">
@@ -27,11 +34,11 @@ if (isset($send_email)) {
                   </p>
                   
                   <label for="content">Ihre Nachricht:</label><br>
-                  <textarea name="content" id="content" cols="120" rows="10"></textarea><br><br> 
-                  
-                  <label for="captcha">Captcha</label>
-                  <input type="text" name="captcha" placeholder="Captcha" value="captcha"><br><br>
-                  
+                  <textarea name="content" id="content" cols="120" rows="10"></textarea><br><br>      
+<?php
+				$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
+				echo recaptcha_get_html($publickey);
+?>                  
                   <input type="hidden" name="mailer" value="contact">
                   <input type="submit" name="submit" value="Abschicken">
             </form>

@@ -78,13 +78,9 @@ function clean_input($input) {
 		//$input = strip_tags($input);
 		//Umlaute und Sonderzeichen in HTML-Schreibweise umwandeln
 		$input = htmlentities($input);
-		//Überflüssige Zeichen entfernen
+		//Überflüssige Leerzeichen entfernen
 		$input = trim($input);
-		//Backslashes entfernen
-		$input = stripslashes($input);
 		return $input;
-	} else {
-		return false;
 	}
 }
 //Erstellt ein Thumbnail vom Bild
