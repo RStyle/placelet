@@ -38,8 +38,10 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 	$mail_subject = clean_input($subject);
 	//$mail_content = clean_input($content); - Keine Sonderzeichen :'(
 	$mail_content = $content;
+	
 	if(check_email_address($mail_sender)) {
-		if($mail_mailer = 'contact') {
+		if($mailer == 'contact') {
+			$betreff = 'Placelet - Danke für Ihre Anfrage';
 			switch($subject) {
 				case 'support':
 					$mail_subject = 'Unsere Website';
@@ -70,7 +72,7 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 			$fp = fopen($datei, 'r');
 			$inhalt = fread($fp, filesize($datei));
 			fclose($fp);
-			mail($mail_sender, 'Placelet - Danke für Ihre Anfrage', $inhalt, $mail_header);
+			mail($mail_sender, $betreff, $inhalt, $mail_header);
 		return 'Anfrage erfolgreich gesendet.';
 	}else {
 		return 'Das ist keine E-Mail!';				

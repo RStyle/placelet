@@ -85,10 +85,17 @@ class User
 			
 			$sql = "INSERT INTO user_status (user,code) VALUES (:user,:code)";
 			$q = $db->prepare($sql);
+			$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
 			$q->execute(array(
 				':user' => clean_input($reg['reg_login']),
-				':code' => substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20)) // Ein 60 buchstabenlanger Zufallscode
+				':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 			);
+			$content = "Bitte klicke auf diesen Link, um dich zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='. $reg['reg_login'].'&regstatuschange='. $code;
+			$mail_header = "From: Placelet <info@placelet.de>\n";
+			$mail_header .= "MIME-Version: 1.0" . "\n";
+			$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
+			$mail_header .= "Content-transfer-encoding: 8bit";
+			mail($reg['reg_email'], 'Bestätigungsemail', $content, $mail_header);
 			
 			$sql = "INSERT INTO addresses (user, last_name, first_name) VALUES (:user,:last_name,:first_name)";
 			$q = $db->prepare($sql);
@@ -243,7 +250,10 @@ class Statistics {
 		}
 		$user_details['bracelets'] = $brids;
 		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
-		$userdetails['picture_count'] = $result[3];
+		if(isset($result[3]))
+			$userdetails['picture_count'] = $result[3];
+		else
+			$userdetails['picture_count'] = 0;
 		return $userdetails;
 	}
 	//Zeigt die allgemeine Statistik an
