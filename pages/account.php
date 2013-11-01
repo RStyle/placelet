@@ -6,15 +6,39 @@ foreach($_GET as $key => $val) {
 if($user->login) {
 	$username = $user->login;
 }
-//Userdetails ändern
+//Passwortlink überprüfen
+if(isset($_GET['passwordCode'])) {
+	$password_recovered = $user->recover_password($_GET['passwordCode']);
+}
 if(isset($_POST['submit'])) {
-	if($_POST['submit'] == 'Änderungen speichern' && $user->login) {
-		$change_details = $user->change_details($_POST['change_firstname'], $_POST['change_lastname'], $_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
-		echo '<script type="text/javascript">
-				//$(document).ready(function(){
-					alert("'.$change_details.'");
-				//});
-			  </script>';
+	switch($_POST['submit']) {
+		//Link zum Passwort wiederherstellen senden
+		case 'Neues Passwort zuschicken':
+			$password_reset = $user->reset_password($_POST['recover_email'], $_POST['recover_email']);
+			break;
+		//Userdetails ändern
+		case 'Änderungen speichern':
+			if($user->login) {
+				$change_details = $user->change_details($_POST['change_firstname'], $_POST['change_lastname'], $_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
+				echo '<script type="text/javascript">
+						//$(document).ready(function(){
+							alert("'.$change_details.'");
+						//});
+					  </script>';
+			}
+			break;
+		case 'Passwort ändern':
+			if($password_recovered) {
+				$change_details = $user->change_details('', '', '', '1resetPassword1', $_POST['new_pwd'], $password_recovered);
+				echo '<script type="text/javascript">
+						//$(document).ready(function(){
+							alert("'.$change_details.'");
+						//});
+					  </script>';
+				echo $password_recovered.'<br>';
+				echo $_POST['change_old_pwd'];
+			}
+			break;
 	}
 }
 //Userdetails abrufen
@@ -64,8 +88,32 @@ if ($user->login) {
 				</div>
 <?php 
 } else {
+	if(isset($_GET['recoverPassword'])) {
+		if($_GET['recoverPassword'] == 'yes') {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1>Profil</h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1>Passwort vergessen?</h1></div>
+				<p>
+					Für den Fall, dass Sie Ihr Passwort vergessen haben sollten, tragen Sie bitte in das nachfolgende Eingabefeld die E-Mailadresse ein, auf welche Ihr Account bei placelet.de registriert ist.<br>
+					In Kürze werden Sie eine E-Mail erhalten in der ein Link ist, mit dem Sie Ihr Passwort zurücksetzen können.
+				</p>
+
+				<form name="recover_password" action"<?php echo $friendly_self; ?>" method="post">
+					E-Mail Adresse <input type="text" name="recover_email" placeholder="E-Mail Adresse"><br>
+					<input type="submit" name="submit" value="Neues Passwort zuschicken">
+				</form>
+<?php
+		}
+	}elseif($password_recovered) {
+?>
+				<div class="green_line mainarticleheaders line_header"><h1>Neuese Passwort eingeben</h1></div>
+				<form name="change" action="<?php echo $friendly_self_get; ?>" method="post">
+					<input type="password" name="new_pwd" placeholder="neues Passwort">
+					<input type="submit" name="submit" value="Passwort ändern">
+				</form>
+<?php
+	}else {
+?>
+				<div class="green_line mainarticleheaders line_header"><h1>Account</h1></div>
 					Du kannst deine Accounteinstellungen nur ändern, wenn du eingeloggt bist.<br>
 					Bitte logge dich ein:
 					<form name="login" action="<?php echo $friendly_self; ?>" method="post">
@@ -85,6 +133,7 @@ if ($user->login) {
 						</table>
 					</form>
 <?php
+	}
 }
 ?>
 			</article>

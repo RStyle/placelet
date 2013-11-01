@@ -216,6 +216,49 @@ class User
 			}
 		}
 	}
+	public function reset_password($email, $username) {
+		$submissions_valid = false;
+		if($email != NULL) {
+			$stmt = $this->db->prepare('SELECT user FROM users WHERE email = :email');
+			$stmt->execute(array('email' => $email));
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($result != NULL) {
+				$submissions_valid = true;
+				$username = $result['user'];
+			}
+		}
+		if($email != NULL && $submissions_valid) {
+			$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
+			$sql = "UPDATE user_status SET pass_code = :pass_code WHERE user = :user";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+						':pass_code' => $code,
+						':user' => $username
+						));
+			$sql = "UPDATE users SET password = :pwd WHERE user = :user";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+						':pwd' => PassHash::hash('1resetPassword1'),
+						':user' => $username
+						));
+			$mail_header = "From: Placelet <support@placelet.de>\n";
+			$mail_header .= "MIME-Version: 1.0" . "\n";
+			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+			$mail_header .= "Content-transfer-encoding: 8bit";
+			$content = '<a href="http://placelet.de/account?paswordCode='.$code.'">Hier Klicken</a>';
+			mail($email, 'Placelet - Passwort zurücksetzen', $content, $mail_header);
+		}
+	}
+	public function recover_password($code) {
+		$stmt = $this->db->prepare("SELECT user FROM user_status WHERE pass_code = :code");
+		$stmt->execute(array('code' => $code));
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($result != NULL) {
+			return $result['user'];
+		}else {
+			return false;
+		}
+	}
 }
 ?>
 <?php

@@ -50,7 +50,6 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 }elseif(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
 	$checklogin = $user->logged;
-	//echo $_SESSION['user'].'-'.$_SESSION['dynamic_password'];//Das nervt!!
 }else{
 	$user = new User(false, $db);
 }
@@ -166,7 +165,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 					<input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
 					<input type="submit" value="Login" id="submit_login">
 				</form><br>
-				<a href="login">Hier registrieren</a>
+				<a href="account?recoverPassword=yes">Passwort vergessen?</a>
 			</div>
 <?php
 }

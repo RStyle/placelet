@@ -1,7 +1,12 @@
 <?php
-
 include_once('../connection.php');
 include_once('../user.php');
+if(isset($_SESSION['user'])){
+	$user = new User($_SESSION['user'], $db);
+	$checklogin = $user->logged;
+}else{
+	$user = new User(false, $db);
+}
 $statistics = new Statistics($db, $user);
 $systemStats = $statistics->systemStats(3, $_GET['q']);
 //hier werden die Armbänder bestimmt, die angezeigt werden
@@ -76,8 +81,20 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 				<div class="comments" id="comment<?php echo $i;?>">
 <?php
 				for ($j = 1; $j <= count($stats[$i][0])-8; $j++) {
+					//Vergangene Zeit seit dem Kommentar berechnen
+					$x_days_ago = floor((time() - ($stats[$i][0][$j]['date'] - (time() - strtotime("00:00")))) / 86400);
+					switch($x_days_ago) {
+						case 0:
+							$x_days_ago = 'heute';
+							break;
+						case 1:
+							$x_days_ago = 'gestern';
+							break;
+						default:
+							$x_days_ago = 'vor '.$x_days_ago.' Tagen';
+					}
 ?>
-                    <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo 'vor x Tagen ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
+                    <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
 <?php 
@@ -94,7 +111,7 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 						<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
 					</form>
-				</div>
+					</div>
                  
 <?php
 					if (isset($stats[$i+1])) {
