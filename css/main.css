@@ -305,9 +305,26 @@ th {
 		margin-left: 3%;
 		width: 35%;
 	}
-	#kollektion_img {
-		width: 100%;
-	}
+    	#kollektion_img {
+    		width: 100%;
+    	}
+    	#kollektion span {
+            font-size: 3em;
+            float: left;
+            vertical-align: middle;
+            text-shadow: 2px 2px 0 #fff, 4px 4px 0 #8ED70F;
+            padding-right: 10px;
+            font-family: sans-serif;
+            color: #555;
+        }
+    	#kollektion p {
+            padding: 10px;
+            border: 1px black solid;
+            margin: 0.5em 0;
+        }
+        #kollektion img.arrow {
+            margin-left: 38%;
+        }
 	.line_header {
 		margin-bottom: 1em;
 	}

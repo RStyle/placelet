@@ -36,15 +36,18 @@
 			</article>                                                                                                        
 			
 			<article id="kollektion" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>feste Kollektion</h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1>Wie funktioniert's?</h1></div>
 				<img id="kollektion_img" alt="feste Kollektion" src="http://img.geo.de/div/image/61566/01-armbaender.jpg">
-				<p>Falls dir unser Reisearmband gefällt, du es aber nicht weitergeben möchtest,
-				haben wir für dich die feste Kollektion. Ich hoffe euch gefällt mein Design.
-				
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+				<p><span><strong>1</strong></span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+				et dolore magna aliquyam er. </p>
+				<img class="arrow" src="img/arrow.png" alt="arrow">
+				<p><span><strong>2</strong></span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+				et dolore magna aliquyam er, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. </p>
+				<img class="arrow" src="img/arrow.png" alt="arrow">
+				<p><span><strong>3</strong></span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+				et dolore magna aliquyam er. </p>
 			</article>
+			
 			<aside class="side_container">
 				<h1>JUNIOR</h1>
 				<p>Das Unternehmen Placelet entstand durch das Projekt JUNIOR der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 
