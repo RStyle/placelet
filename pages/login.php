@@ -120,14 +120,14 @@ if(!isset($_GET['loginattempt'])) {
 							<td><label for="reg_login">Benutzername</label></td>
 							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
-						<tr>
+						<!--<tr>
 							<td><label for="reg_first_name">Vorname</label></td>
 							<td><input type="text" name="reg_first_name" id="reg_first_name" class="input_text" size="20" maxlength="30" placeholder="Vorname" required></td>
 						</tr>
 						<tr>
 							<td><label for="reg_name">Nachname</label></td>
 							<td><input type="text" name="reg_name" id="reg_name" class="input_text" size="20" maxlength="30" placeholder="Nachname" required></td>
-						</tr>
+						</tr>   -->
 						<tr>
 							<td><label for="reg_email">Email-Adresse</label></td>
 							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
@@ -145,6 +145,7 @@ if(!isset($_GET['loginattempt'])) {
 							<td>&nbsp;</td>
 						</tr>
 					</table>
+				<p>Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.</p>
 				</form>
 <?php
 	}else {
