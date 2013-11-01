@@ -135,8 +135,20 @@ for ($i = 1; $i <= $user_anz; $i++) {
 				<div class="comments" id="comment<?php echo $i;?>">
 <?php
 				for ($j = 1; $j <= count($stats[$i][0])-8; $j++) {
+					//Vergangene Zeit seit dem Kommentar berechnen
+					$x_days_ago = floor((time() - ($stats[$i][0][$j]['date'] - (time() - strtotime("00:00")))) / 86400);
+					switch($x_days_ago) {
+						case 0:
+							$x_days_ago = 'heute';
+							break;
+						case 1:
+							$x_days_ago = 'gestern';
+							break;
+						default:
+							$x_days_ago = 'vor '.$x_days_ago.' Tagen';
+					}
 ?>
-                    <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo 'vor x Tagen ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
+                    <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
 <?php 
