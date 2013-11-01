@@ -162,9 +162,6 @@ if(!isset($_GET['loginattempt'])) {
 				case 3:
 					echo 'Dieses Armband wurde schon auf einen anderen Benutzer registriert.';
 					break;
-				default:
-					echo '$bracelet_registered hat einen unbekannten Wert<br>
-					bitte melde diesen Fall dem <a href="mailto:support@placelet.de">Support</a>.';
 			}
 			echo '<br><br>';
 		}

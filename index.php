@@ -75,8 +75,9 @@ $pagename = array(
 	"home" => "Global Placelet. Travel & Connect",
 	"impressum" => "Impressum",
 	"kontakt" => "Konkakt",
-	"login" =>"Registrieren",
+	"login" => "Registrieren",
 	"profil" => "Profil",
+	"search" => "Suchergebnis",
 	"shop" => "Shop",
 	"start" => "Start"
 	);
@@ -143,9 +144,9 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 <!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">
-				<form name="registerbr" action="login" method="get">
-					<label for="registerbr">Armband registrieren/Bild posten </label>
-					<input name="registerbr" type="text" required="required" id="registerbr" placeholder="Armband ID..." size="20" maxlength="30">
+				<form name="registerbr" action="search" method="get">
+					<label for="squery">Benutzer/Armband suchen </label>
+					<input name="squery" type="text" required="required" id="squery" placeholder="Suchen..." size="20" maxlength="30">
 				</form>
 			</div>
 <?php
