@@ -159,6 +159,25 @@ class User
 				return false;
 		}
 	}
+	//Passwort ändern
+	public function change_password($old_pwd, $new_pwd, $username) {
+		if($old_pwd != NULL && $new_pwd != NULL) {
+			$stmt = $this->db->prepare('SELECT password FROM users WHERE user = :user');
+			$stmt->execute(array('user' => $this->login));
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			if (PassHash::check_password($result['password'], $old_pwd)) {
+				$sql = "UPDATE users SET password = :password WHERE user = :user";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+							':password' => PassHash::hash($new_pwd),
+							':user' => $username
+							));
+				return 'Passwort erfolgreich geändert.';
+			}else {
+				return 'Falsches Passwort';
+			}
+		}
+	}
 	//Accountdetails ändern
 	public function change_details($firstname, $lastname, $email, $old_pwd, $new_pwd, $username) {
 		//Vorname ändern
@@ -184,22 +203,7 @@ class User
 			return 'Nachname erfolgreich geändert.';
 		}
 		//Passwort ändern
-		if($old_pwd != NULL && $new_pwd != NULL) {
-			$stmt = $this->db->prepare('SELECT password FROM users WHERE user = :user');
-			$stmt->execute(array('user' => $this->login));
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			if (PassHash::check_password($result['password'], $old_pwd)) {
-				$sql = "UPDATE users SET password = :password WHERE user = :user";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(
-							':password' => PassHash::hash($new_pwd),
-							':user' => $username
-							));
-				return 'Passwort erfolgreich geändert.';
-			}else {
-				return 'Falsches Passwort';
-			}
-		}
+		return $this->change_password($old_pwd, $new_pwd, $username);
 		//E-Mail ändern
 		if($email != NULL) {
 			$email = clean_input($email);
@@ -219,37 +223,37 @@ class User
 	public function reset_password($email, $username) {
 		$submissions_valid = false;
 		if($email != NULL) {
-			$stmt = $this->db->prepare('SELECT user FROM users WHERE email = :email');
-			$stmt->execute(array('email' => $email));
-			$result = $stmt->fetch(PDO::FETCH_ASSOC);
-			if($result != NULL) {
-				$submissions_valid = true;
-				$username = $result['user'];
-			}
+		  $stmt = $this->db->prepare('SELECT user FROM users WHERE email = :email');
+		  $stmt->execute(array('email' => $email));
+		  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+		  if($result != NULL) {
+			$submissions_valid = true;
+			$username = $result['user'];
+		  }
 		}
 		if($email != NULL && $submissions_valid) {
-			$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
-			$sql = "UPDATE user_status SET pass_code = :pass_code WHERE user = :user";
-			$q = $this->db->prepare($sql);
-			$q->execute(array(
-						':pass_code' => $code,
-						':user' => $username
-						));
-			$sql = "UPDATE users SET password = :pwd WHERE user = :user";
-			$q = $this->db->prepare($sql);
-			$q->execute(array(
-						':pwd' => PassHash::hash('1resetPassword1'),
-						':user' => $username
-						));
-			$mail_header = "From: Placelet <support@placelet.de>\n";
-			$mail_header .= "MIME-Version: 1.0" . "\n";
-			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-			$mail_header .= "Content-transfer-encoding: 8bit";
-			$content = '<a href="http://placelet.de/account?paswordCode='.$code.'">Hier Klicken</a>';
-			mail($email, 'Placelet - Passwort zurücksetzen', $content, $mail_header);
+		  $code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
+		  $sql = "UPDATE user_status SET pass_code = :pass_code WHERE user = :user";
+		  $q = $this->db->prepare($sql);
+		  $q->execute(array(
+				':pass_code' => $code,
+				':user' => $username
+				));
+		  $sql = "UPDATE users SET password = :pwd WHERE user = :user";
+		  $q = $this->db->prepare($sql);
+		  $q->execute(array(
+				':pwd' => PassHash::hash('1resetPassword1'),
+				':user' => $username
+				));
+		  $mail_header = "From: Placelet <support@placelet.de>\n";
+		  $mail_header .= "MIME-Version: 1.0" . "\n";
+		  $mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
+		  $mail_header .= "Content-transfer-encoding: 8bit";
+		  $content = 'Bitte klicken sie auf diesen Link, um das Passwort von Ihrem Placelet.de Account zurückzusetzen.\n http://placelet.de/account?passwordCode='.$code;
+		  mail($email, 'Placelet - Passwort zurücksetzen', $content, $mail_header);
 		}
 	}
-	public function recover_password($code) {
+	public function check_recover_code($code) {
 		$stmt = $this->db->prepare("SELECT user FROM user_status WHERE pass_code = :code");
 		$stmt->execute(array('code' => $code));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -258,6 +262,24 @@ class User
 		}else {
 			return false;
 		}
+	}
+	public function new_password($username, $new_pwd) {
+		//return $this->change_password('1resetPassword1', $new_pwd, $username);
+		$sql = "UPDATE users SET password = :password WHERE user = :user";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+					':password' => PassHash::hash($new_pwd),
+					':user' => $username
+					));
+		//Code wieder löschen
+		$sql = "UPDATE user_status SET pass_code = :pass_code WHERE user = :user";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+			':pass_code' => '',
+			':user' => $username
+			));
+
+		return 'Passwort erfolgreich geändert.';
 	}
 }
 ?>

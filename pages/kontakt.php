@@ -16,7 +16,7 @@ if (isset($send_email)) {
 }
 ?>
 		<article id="kontakt" class="mainarticles bottom_border_green">
-			<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename; ?></h1></div>
+			<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page]; ?></h1></div>
 			<p>Dieses Formular können Sie benutzen, wenn sie Fragen zu unseren Produkten oder Anliegen bezüglich unserer Webseite haben.<br>
 			Wir bemühen uns, Ihnen schnellstmöglich eine Antwort per E-Mail zukommen zu lassen.</p>
 			<form style="padding-left: 20px; border-left: 4px #BEBEBE solid;" method="post" action="<?php echo $friendly_self;?>">

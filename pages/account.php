@@ -8,7 +8,7 @@ if($user->login) {
 }
 //Passwortlink überprüfen
 if(isset($_GET['passwordCode'])) {
-	$password_recovered = $user->recover_password($_GET['passwordCode']);
+	$recover_code = $user->check_recover_code($_GET['passwordCode']);
 }
 if(isset($_POST['submit'])) {
 	switch($_POST['submit']) {
@@ -28,15 +28,13 @@ if(isset($_POST['submit'])) {
 			}
 			break;
 		case 'Passwort ändern':
-			if($password_recovered) {
-				$change_details = $user->change_details('', '', '', '1resetPassword1', $_POST['new_pwd'], $password_recovered);
+			if($recover_code) {
+				$new_password = $user->new_password($recover_code, $_POST['new_pwd']);
 				echo '<script type="text/javascript">
 						//$(document).ready(function(){
-							alert("'.$change_details.'");
+							alert("'.$new_password.'");
 						//});
 					  </script>';
-				echo $password_recovered.'<br>';
-				echo $_POST['change_old_pwd'];
 			}
 			break;
 	}
@@ -103,14 +101,22 @@ if ($user->login) {
 				</form>
 <?php
 		}
-	}elseif($password_recovered) {
+	}elseif(isset($recover_code)) {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Neuese Passwort eingeben</h1></div>
+<?php
+		if($recover_code) {
+?>
 				<form name="change" action="<?php echo $friendly_self_get; ?>" method="post">
 					<input type="password" name="new_pwd" placeholder="neues Passwort">
 					<input type="submit" name="submit" value="Passwort ändern">
 				</form>
 <?php
+		}else {
+?>
+				Dies ist kein gültiger Code, um dein Passwort zurückzusetzen.
+<?php
+		}
 	}else {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Account</h1></div>
