@@ -5,7 +5,7 @@
 				</p> 
 				<span class="pseudo_link toggle_comments" onclick="document.getElementById('hint1').style.display='none';">Hinweis ausblenden</span>  
 			</div>
-			
+
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
 				<div class="blue_line mainarticleheaders line_header"><h1>Reisearmband</h1></div>
 				<img id="reisearmband_img" alt="Reisearmband" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">
@@ -34,20 +34,26 @@
 				et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 			</article>                                                                                                        
-			
+
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Wie funktioniert's?</h1></div>
 				<img id="kollektion_img" alt="feste Kollektion" src="http://img.geo.de/div/image/61566/01-armbaender.jpg">
-				<p><span><strong>1</strong></span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam er. </p>
-				<img class="arrow" src="img/arrow.png" alt="arrow">
-				<p><span><strong>2</strong></span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam er, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. </p>
-				<img class="arrow" src="img/arrow.png" alt="arrow">
-				<p><span><strong>3</strong></span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam er. </p>
+				<p>
+					<span class="highlighted kollektion_numbers">1</span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+					et dolore magna aliquyam er.
+				</p>
+				<span class="arrow highlighted">&#11015;</span>
+				<p>
+					<span class="highlighted kollektion_numbers">2</span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+					et dolore magna aliquyam er, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
+				</p>
+				<span class="arrow highlighted">&#11015;</span>
+				<p>
+					<span class="highlighted kollektion_numbers">3</span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+					et dolore magna aliquyam er.
+				</p>
 			</article>
-			
+
 			<aside class="side_container">
 				<h1>JUNIOR</h1>
 				<p>Das Unternehmen Placelet entstand durch das Projekt JUNIOR der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 

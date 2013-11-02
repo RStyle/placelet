@@ -71,6 +71,13 @@ th {
 .float_right {
 	float: right;
 }
+.highlighted {
+	color: #555;
+	font-family: sans-serif;
+	font-size: 3em;
+	font-weight: bold;
+	text-shadow: 2px 2px 0 #fff, 4px 4px 0 #8ED70F;
+}
 /*---HEADER---*/
 #header {
 	font-family: Tahoma, Geneva, sans-serif;
@@ -308,21 +315,16 @@ th {
     	#kollektion_img {
     		width: 100%;
     	}
-    	#kollektion span {
-            font-size: 3em;
+		.kollektion_numbers{
             float: left;
-            vertical-align: middle;
-            text-shadow: 2px 2px 0 #fff, 4px 4px 0 #8ED70F;
             padding-right: 10px;
-            font-family: sans-serif;
-            color: #555;
-        }
+		}
     	#kollektion p {
-            padding: 10px;
             border: 1px black solid;
             margin: 0.5em 0;
+            padding: 10px;
         }
-        #kollektion img.arrow {
+        .arrow {
             margin-left: 38%;
         }
 	.line_header {

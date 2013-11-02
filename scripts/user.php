@@ -421,12 +421,8 @@ class Statistics {
 			$stmt = $this->db->prepare('SELECT brid FROM bracelets WHERE user = :user AND name != :name ORDER BY `date` DESC');
 			$stmt->execute(array('user' => $user[0], ':name' => $name));
 			$q = $stmt->fetch(PDO::FETCH_ASSOC);
-			if(isset($q['brid'][end($user)])) {
-				return $q['brid'][end($user)];
-			}
-		} else {
-			return $q['brid'];
 		}
+		return $q['brid'];
 	}
 	//Statistik vom Armband abfragen
 	public function bracelet_stats($brid) {
