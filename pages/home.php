@@ -12,10 +12,13 @@
                     <h1>neueste uploads</h1>    
                 </div>
                 <div class="connect_box" id="submit_box">
-                    <h1>bild posten</h1> 
+                    <h1>+1 bild</h1>
+                    <br><br><br><hr>
+                    <h1>+1 armband</h1> 
                 </div>
                 <div class="connect_box" id="facebook_box">
-                    <h1>facebook</h1> 
+                    <h1>facebook</h1>
+                    <div class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
                 </div>
             </div>
 

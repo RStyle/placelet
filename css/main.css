@@ -15,6 +15,12 @@ html {
 	overflow-y: scroll;/*Scrollbalken für einheitliches Design erzwingen*/
 }
 /*---allgemeine Tags---*/
+/*Responsives FB Plugin*/
+.fb-like-box, .fb-like-box span, .fb-like-box.fb_iframe_widget span iframe {
+    width: 100% !important;
+
+}
+
 body {
 	background-color: #FFF;              /*background-color: #CCCCFF;*/
 	color: #234754;
@@ -308,7 +314,7 @@ th {
     }
         .connect_box {
            background-color: #DBDBDB;
-           height: 200px;
+           height: 245px;
            float: left;
            padding: 1%;
         }
@@ -317,6 +323,7 @@ th {
             font-size: 2em;
             color: #CCCCCC;
             margin: 0;
+            margin-bottom: 0.25em;
             font-family: tahoma;
         }
             #uploads_box {
@@ -327,6 +334,10 @@ th {
                 width: 23%;
                 margin-right: 1%;
             }
+                #submit_box hr{
+                margin: 0;
+                color: #999;
+                }
             #facebook_box {
                 width: 22%;   
             }

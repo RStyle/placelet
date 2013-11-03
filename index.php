@@ -36,6 +36,7 @@ if (!isset( $_SESSION['server_SID'] ))
 }
 
 $checklogin = false;
+$js = '<script type="text/javascript">$(document).ready(function(){';
 
 if(isset($_GET['logout']))
 	User::logout();
@@ -140,6 +141,15 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 		<title><?php echo $title; ?></title>
 	</head>
 	<body> 
+	<div id="fb-root"></div>
+	<!---FB-Plugin-->
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/de_DE/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 <!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">
@@ -204,6 +214,7 @@ include_once('./pages/'.$page.'.php');
 		<!--<script src="js/jquery-1.10.2.min.js"></script>-->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
+		<?php if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
 		<script src="js/lightbox-2.6.min.js"></script>
 	</body>
 </html>
