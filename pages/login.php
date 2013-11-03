@@ -29,11 +29,7 @@ if (isset($pic_registered)) {
 	if($pic_registered == 'Bild erfolgreich gepostet.') {
 		header('Location: armband?name='.$statistics->brid2name($_POST['registerpic_brid']));
 	}else {
-		echo '<script type="text/javascript">
-				//$(document).ready(function(){
-					alert("'.$pic_registered.'");
-				//});
-			  </script>';
+		$js .= 'alert("'.$pic_registered.'");';
 	}
 }
 if ($user->login) {

@@ -11,10 +11,6 @@ class User
 			try {
 				$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE user = :user');
 				$stmt->execute(array('user' =>$_SESSION['user']));
-				/*while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				
-					print_r($row);
-				}*/
 				$row = $stmt->fetch(PDO::FETCH_ASSOC);
 				if ($row['password'] == $_SESSION['dynamic_password']){
 					$this->logged = true;
@@ -180,6 +176,7 @@ class User
 	}
 	//Accountdetails ändern
 	public function change_details($firstname, $lastname, $email, $old_pwd, $new_pwd, $username) {
+		$return = '';
 		//Vorname ändern
 		if($firstname != NULL) {
 			$firstname = clean_input($firstname);
@@ -189,7 +186,7 @@ class User
 						':firstname' => $firstname,
 						':user' => $username
 						));
-			return 'Vorname erfolgreich geändert.';
+			$return .= "Vorname erfolgreich geändert.\\n";
 		}
 		//Nachname ändern
 		if($lastname != NULL) {
@@ -200,10 +197,10 @@ class User
 						':lastname' => $lastname,
 						':user' => $username
 						));
-			return 'Nachname erfolgreich geändert.';
+			$return .= "Nachname erfolgreich geändert.\\n";
 		}
 		//Passwort ändern
-		return $this->change_password($old_pwd, $new_pwd, $username);
+		$return .= $this->change_password($old_pwd, $new_pwd, $username)."\\n";
 		//E-Mail ändern
 		if($email != NULL) {
 			$email = clean_input($email);
@@ -214,11 +211,12 @@ class User
 							':email' => $email,
 							':user' => $username
 							));
-				return 'E-Mail erfolgreich geändert.';
+				$return .= 'E-Mail erfolgreich geändert.';
 			}else {
-				return 'Das ist keine gültige E-Mail.';
+				$return .= 'Das ist keine gültige E-Mail.';
 			}
 		}
+		return $return;
 	}
 	public function reset_password($email, $username) {
 		$submissions_valid = false;
@@ -249,7 +247,7 @@ class User
 		  $mail_header .= "MIME-Version: 1.0" . "\n";
 		  $mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
 		  $mail_header .= "Content-transfer-encoding: 8bit";
-		  $content = 'Bitte klicken sie auf diesen Link, um das Passwort von Ihrem Placelet.de Account zurückzusetzen.\n http://placelet.de/account?passwordCode='.$code;
+		  $content = "Bitte klicken sie auf diesen Link, um das Passwort von Ihrem Placelet.de Account zurückzusetzen.\n http://placelet.de/account?passwordCode=".$code;
 		  mail($email, 'Placelet - Passwort zurücksetzen', $content, $mail_header);
 		}
 	}
@@ -350,16 +348,16 @@ class Statistics {
 		
 		//Benutzer, die die meisten Armbänder auf sich registriert haben(mit Anzahl)
 		//Die Anzahl der Benutzer, die Ausgegeben werden, $banz festgelegt
-		$sql = "SELECT COUNT(*) AS number,user FROM bracelets GROUP BY user ORDER BY number DESC";
+		$sql = "SELECT COUNT(*) AS number,user FROM bracelets WHERE user IS NOT NULL GROUP BY user ORDER BY number DESC";
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
-		for ($i = 1; $i <= $user_anz; $i++) {
+		for ($i = 0; $i < $user_anz; $i++) {
 			$stats['user_most_bracelets']['user'][$i] = $q[$i]['user'];
 			$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 		}
 		
 		//Uploads der Top-Benutzer
-		for ($i = 1; $i <= $user_anz; $i++) {
+		for ($i = 0; $i < $user_anz; $i++) {
 			$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
 			$stmt = $this->db->query($sql);
 			$q = $stmt->fetchAll();
