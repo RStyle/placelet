@@ -20,21 +20,13 @@ if(isset($_POST['submit'])) {
 		case 'Änderungen speichern':
 			if($user->login) {
 				$change_details = $user->change_details($_POST['change_firstname'], $_POST['change_lastname'], $_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
-				echo '<script type="text/javascript">
-						//$(document).ready(function(){
-							alert("'.$change_details.'");
-						//});
-					  </script>';
+				$js .= 'alert("'.$change_details.'");';
 			}
 			break;
 		case 'Passwort ändern':
 			if($recover_code) {
 				$new_password = $user->new_password($recover_code, $_POST['new_pwd']);
-				echo '<script type="text/javascript">
-						//$(document).ready(function(){
-							alert("'.$new_password.'");
-						//});
-					  </script>';
+				$js .= 'alert("'.$new_password.'");';
 			}
 			break;
 	}

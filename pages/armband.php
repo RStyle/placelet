@@ -32,11 +32,7 @@ if (isset($pic_registered)) {
 	if($pic_registered == 'Bild erfolgreich gepostet.') {
 		header('Location: armband?name='.$braceName);
 	}
-	echo '<script type="text/javascript">
-			//$(document).ready(function(){
-				alert("'.$pic_registered.'");
-			//});
-		  </script>';
+	$js .=  'alert("'.$pic_registered.'");';
 }
 if ($braceName != NULL && isset($_GET['registerpic'])) {
 	if($_GET['registerpic'] == 1) {
@@ -141,7 +137,7 @@ if ($braceName != NULL && isset($_GET['registerpic'])) {
 <?php
 					for ($j = 1; $j <= count($stats[$i])-8; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
-					$x_days_ago = floor((time() - ($stats[$i][$j]['date'] - (time() - strtotime("00:00")))) / 86400);
+					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
 					switch($x_days_ago) {
 						case 0:
 							$x_days_ago = 'heute';

@@ -36,6 +36,7 @@ if (!isset( $_SESSION['server_SID'] ))
 }
 
 $checklogin = false;
+$js = '<script type="text/javascript">$(document).ready(function(){';
 
 if(isset($_GET['logout']))
 	User::logout();
@@ -204,6 +205,7 @@ include_once('./pages/'.$page.'.php');
 		<!--<script src="js/jquery-1.10.2.min.js"></script>-->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
+<?php if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
 		<script src="js/lightbox-2.6.min.js"></script>
 	</body>
 </html>

@@ -11,11 +11,7 @@ if (isset($_POST['comment_submit'])) {
 						 $user);
 }
 if (isset($write_comment)) {
-	echo '<script type="text/javascript">
-			//$(document).ready(function(){
-				alert("'.$write_comment.'");
-			//});
-		  </script>';
+	$js .= 'alert("'.$write_comment.'");';
 }
 $user_anz = 3;
 $systemStats = $statistics->systemStats($user_anz, 3);
@@ -53,7 +49,7 @@ foreach($bracelets_displayed as $key => $val) {
 						<td style="border-bottom: 1px solid #000;">Uploads</td>
 					</tr>
 <?php
-for ($i = 1; $i <= $user_anz; $i++) {
+for ($i = 0; $i < $user_anz; $i++) {
 ?>
 					<tr>
 						<td><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></td>
@@ -136,7 +132,7 @@ for ($i = 1; $i <= $user_anz; $i++) {
 <?php
 				for ($j = 1; $j <= count($stats[$i][0])-8; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
-					$x_days_ago = floor((time() - ($stats[$i][0][$j]['date'] - (time() - strtotime("00:00")))) / 86400);
+					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][0][$j]['date']) / 86400);
 					switch($x_days_ago) {
 						case 0:
 							$x_days_ago = 'heute';
