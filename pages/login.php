@@ -2,7 +2,7 @@
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
-if (isset($_POST['registerpic_submit'])) {
+if(isset($_POST['registerpic_submit'])) {
 	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
 	if($captcha_valid) {
 		$pic_registered = $statistics->registerpic($statistics->name2brid($_POST['registerpic_name']),
@@ -12,7 +12,7 @@ if (isset($_POST['registerpic_submit'])) {
 											 $_POST['registerpic_title'],
 											 $_FILES['registerpic_file'],
 											 $max_file_size);
-	} else {
+	}else {
 		header('Location: '.$friendly_self.'?postpic='.$_POST['registerpic_name'].'&captcha=false
 				&descr='.urlencode(str_replace("\r\n", "ujhztg", $_POST['registerpic_description'])).'
 				&city='.urlencode($_POST['registerpic_city']).'
@@ -21,7 +21,7 @@ if (isset($_POST['registerpic_submit'])) {
 	}
 }
 
-if (isset($pic_registered)) {
+if(isset($pic_registered)) {
         if($pic_registered == 5) {
                 header('Location: armband?name='.$_POST['registerpic_name'].'&picposted='.$pic_registered);
         }elseif(isset($_GET['captcha'])) {
@@ -30,7 +30,7 @@ if (isset($pic_registered)) {
 			}
         }
 }
-if ($user->login) {
+if($user->login) {
 	$userdetails = $statistics->userdetails($user->login);
 	//Armband registrieren
 	if (isset($_POST['reg_br']) && $_POST['submit'] == "Armband registrieren") {
@@ -39,6 +39,8 @@ if ($user->login) {
 }
 if(isset($_GET['registerbr'])) {
 	$bracelet_status = $statistics->bracelet_status($_GET['registerbr']);
+}else {
+	$bracelet_status = NULL;
 }
 ?>
 			<article class="mainarticles bottom_border_green">

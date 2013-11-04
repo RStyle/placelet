@@ -63,13 +63,11 @@ class User
 			if($reg['reg_password'] != $reg['reg_password2']){
 				return 'Passwords are not the same.';
 			}
-			if(strlen($reg['reg_login']) < 4) return 'Login to short. Min. 4';
-			if(strlen($reg['reg_login']) > 15) return 'Login to long. Max. 15';
-			if(strlen($reg['reg_password']) < 6) return 'Password to short. Min. 6';
-			if(strlen($reg['reg_password']) > 30) return 'Password to short. Max. 30';
-			if(check_email_address($reg['reg_email']) === false) return 'Your email address is not valid. Please check that.';
-			//$stmt = $db->prepare('... FROM dynamic_password WHERE user = :user');
-			//$stmt->execute(array('user' =>'blabla'));
+			if(strlen($reg['reg_login']) < 4) return 'Benutzername zu kurz. Min. 4';
+			if(strlen($reg['reg_login']) > 15) return 'Benutzername zu lang. Max. 15';
+			if(strlen($reg['reg_password']) < 6) return 'Passwort zu kurz. Min. 6';
+			if(strlen($reg['reg_password']) > 30) return 'Passwort zu lang. Max. 30';
+			if(check_email_address($reg['reg_email']) === false) return 'Das ist keine gültige E-Mail Adresse';
 			$sql = "INSERT INTO users (user,email,password,status) VALUES (:user,:email,:password,:status)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
@@ -136,13 +134,19 @@ class User
 			$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
 			if ($anz == 0) {
 				return '0';
-			} elseif ($bracelet['user'] == NULL ) {
-				$sql = "UPDATE bracelets SET user=:user, date=:date WHERE brid=:brid";
+			} elseif ($bracelet['user'] == NULL ) {	
+				$stmt = $this->db->prepare('SELECT COUNT(*) FROM bracelets WHERE user = :user');
+				$stmt->execute(array('user' => $this->login));
+				$q2 = $stmt->fetch(PDO::FETCH_ASSOC);
+				$number = $q2['COUNT(*)'] + 1;
+				
+				$sql = "UPDATE bracelets SET user = :user, date = :date, name = :name WHERE brid=:brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
 					':user' => $this->login,
 					':brid' => $brid,
-					':date' => time())
+					':date' => time(),
+					':name' => $this->login.'#'.$number)
 				);
 				return 1;
 			}elseif ($bracelet['user'] == $this->login) {
@@ -399,27 +403,13 @@ class Statistics {
 	public function brid2name($brid) {
 		$stmt = $this->db->prepare('SELECT name, user, date FROM bracelets WHERE brid = :brid');
 		$stmt->execute(array('brid' => $brid));
-		$q = $stmt->fetch(PDO::FETCH_ASSOC);	
-		if($q['name'] == NULL) {
-			$stmt = $this->db->prepare('SELECT COUNT(*) FROM bracelets WHERE user = :user AND `date` < :date');
-			$stmt->execute(array('user' => $q['user'], 'date' => $q['date']));
-			$q2 = $stmt->fetch(PDO::FETCH_ASSOC);
-			$number = $q2['COUNT(*)'] + 1;
-			return $q['user'].'#'.$number;
-		}else {
-			return $q['name'];
-		}
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $q['name'];
 	}
 	public function name2brid($name) {
 		$stmt = $this->db->prepare('SELECT brid FROM bracelets WHERE name = :name');
 		$stmt->execute(array('name' => $name));
 		$q = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($q['brid'] == NULL) {
-			$user = explode('#', $name);
-			$stmt = $this->db->prepare('SELECT brid FROM bracelets WHERE user = :user AND name != :name ORDER BY `date` DESC');
-			$stmt->execute(array('user' => $user[0], ':name' => $name));
-			$q = $stmt->fetch(PDO::FETCH_ASSOC);
-		}
 		return $q['brid'];
 	}
 	//Statistik vom Armband abfragen

@@ -150,7 +150,10 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title><?php echo $title; ?></title>
 	</head>
-	<body> 
+	<body>
+<?php
+if($page == 'home') {
+?>
 	<div id="fb-root"></div>
 	<!---FB-Plugin-->
     <script>(function(d, s, id) {
@@ -160,6 +163,9 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
       js.src = "//connect.facebook.net/de_DE/all.js#xfbml=1";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
+<?php
+}
+?>
 <!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">
