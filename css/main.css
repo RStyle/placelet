@@ -268,13 +268,17 @@ th {
                 width: 23%;
                 margin-right: 1%;
             }
-                #submit_box hr{
-                margin: 0;
-                color: #999;
+                #submit_box hr {
+                    margin: 0;
+                    color: #999;
+                }
+                #submit_box p {
+                   margin: 0.5em 0;
                 }
             #facebook_box {
                 width: 22%;   
             }
+        
 	
 	#reisearmband {
 		float: left;
