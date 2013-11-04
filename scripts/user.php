@@ -565,15 +565,18 @@ class Statistics {
 		$row = $q->fetch(PDO::FETCH_ASSOC);	
 		if($row == '') {
 			$submissions_valid = false;
-			return 'Dieses Armband wurde noch nicht registriert.';
+			//return 'Dieses Armband wurde noch nicht registriert.';
+			return 0;
 		}
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
-			return 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
+			//return 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
+			return 1;
 		}
 		if(strlen($description) < 2) {
 			$submissions_valid = false;
-			return 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
+			//return 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
+			return 2;
 		}
 		if (isset($picture_file)) {
 			$filename_props = explode(".", $picture_file['name']);
@@ -581,10 +584,12 @@ class Statistics {
 			if($fileext != 'jpeg' && $fileext != 'jpg' && $fileext != 'gif' && $fileext != 'png') {
 				unset($fileext);
 				$submissions_valid = false;
-				return "Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
+				//return "Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
+				return 3;
 			}
 		} else {
-			return 'Kein Bild ausgewählt, versuch es noch ein Mal.';
+			//return 'Kein Bild ausgewählt, versuch es noch ein Mal.';
+			return 4;
 		}
 		if ($submissions_valid) {
 			$description = clean_input($description);
@@ -660,7 +665,8 @@ class Statistics {
 					'title' => $title,
 					'fileext' => $fileext
 				));
-				return 'Bild erfolgreich gepostet.';
+				//return 'Bild erfolgreich gepostet.';
+				return 5;
 			} elseif ($file_uploaded == false) {
 				//return 'Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.';
 				return $picture_file['error'];

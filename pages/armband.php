@@ -5,68 +5,31 @@ if (isset($braceName)) {
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
-if (isset($_POST['registerpic_submit'])) {
-	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
-	if($captcha_valid) {
-		$pic_registered = $statistics->registerpic($braceID,
-												$_POST['registerpic_description'],
-												$_POST['registerpic_city'],
-												$_POST['registerpic_country'],
-												$_POST['registerpic_title'],
-												$_FILES['registerpic_file'],
-												$max_file_size);
-	} else {
-		header('Location: '.$friendly_self.'?name='.$braceName.'&registerpic=1&captcha=false
-				&descr='.str_replace("\r\n", "ujhztg", $_POST['registerpic_description']).'
-				&city='.$_POST['registerpic_city'].'
-				&country='.$_POST['registerpic_country'].'
-				&title='.$_POST['registerpic_title']);
+if(isset($_GET['picposted'])) {
+	switch($_GET['picposted']) {
+		case 0:
+			$js .= 'Dieses Armband wurde noch nicht registriert.';
+			break;
+		case 1:
+			$js .= 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
+			break;
+		case 2:
+			$js .= 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
+			break;
+		case 3:
+			$js .= 'Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.';
+			break;
+		case 4:
+			$js .= 'Kein Bild ausgewählt, versuch es noch ein Mal.';
+			break;
+		case 5:
+			$js .= 'Bild erfolgreich gepostet.';
+			break;
+		default:
+			$js .= $_GET['picposted'];
 	}
 }
-if(isset($_GET['captcha'])) {
-	if($_GET['captcha'] == 'false') {
-			$pic_registered = 'Das Captcha wurde falsch eingegeben.';	
-	}
-}
-if (isset($pic_registered)) {
-	if($pic_registered == 'Bild erfolgreich gepostet.') {
-		header('Location: armband?name='.$braceName);
-	}
-	$js .=  'alert("'.$pic_registered.'");';
-}
-if ($braceName != NULL && isset($_GET['registerpic'])) {
-	if($_GET['registerpic'] == 1) {
-?>
-				<article style="float: left; width: 100%;" class="mainarticles bottom_border_green">
-					<div class="green_line mainarticleheaders line_header"><h1>Bild zu Armband <?php echo $braceName; ?> posten</h1></div>
-					<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self.'?name='.$braceName; ?>" method="post" enctype="multipart/form-data">
-						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
-                
-						<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="20" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo $_GET['title'];?>"required><br>
-						
-						<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-						<input type="text" name="registerpic_city" class="registerpic_city" size="20" maxlength="20" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo $_GET['city'];?>" required><br>
-						
-						<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-						<input type="text" name="registerpic_country" class="registerpic_country" size="20" maxlength="20" placeholder="Land" value="<?php if(isset($_GET['country'])) echo $_GET['country'];?>" required><br>
-						
-						<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
-						<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($_GET['descr'])) echo str_replace("ujhztg", "\r\n", $_GET['descr']);?></textarea><br> 
-                        
-                        <input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
-<?php
-						$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
-						echo recaptcha_get_html($publickey);
-?>
-                        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
-						<input type="submit" name="registerpic_submit" value="Bild posten"><br>
-						<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat;background-position: center;max-height:0px">
-					</form>
-				</article>
-<?php
-	}
-} elseif ($braceName != NULL) {
+if ($braceName != NULL) {
 	//Kommentare schreiben
 	if (isset($_POST['comment_submit'])) {
 		$write_comment = $statistics->write_comment ($braceID,
@@ -77,11 +40,7 @@ if ($braceName != NULL && isset($_GET['registerpic'])) {
 							 $db);
 	}
 	if (isset($write_comment)) {
-		echo '<script type="text/javascript">
-				//$(document).ready(function(){
-					alert("'.$write_comment.'");
-				//});
-			  </script>';
+		$js .= 'alert("'.$write_comment.'");';
 	}
 	
 	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
@@ -95,7 +54,8 @@ if ($braceName != NULL && isset($_GET['registerpic'])) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
-				<a href="<?php echo $friendly_self.'?name='.urlencode($braceName).'&amp;registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>
+				<!--<a href="<?php echo $friendly_self.'?name='.urlencode($braceName).'&amp;registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>-->
+				<a href="login?postpic=<?php echo urlencode($braceName);?>">Ein neues Bild zu diesem Armband posten</a>
 <?php
 					for ($i = 0; $i < count($stats)-4; $i++) {
 ?>

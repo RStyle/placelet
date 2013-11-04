@@ -89,9 +89,16 @@ if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'M
 	$navregister['href'] = "profil";
 	$navregister['value'] = "Mein Profil";
 }
-	
-if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'
-	$pagename['login'] = "Armband registrieren";	
+if($page == 'login') {
+	if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'
+		$pagename['login'] = "Armband registrieren";	
+	}
+	if(isset($_GET['loginattempt'])) {
+		$pagename['login'] = 'Login-Daten inkorrekt';
+	}
+	if(isset($_GET['postpic'])) {
+		$pagename['login'] = 'Bild posten';
+	}
 }
 
 if (empty($title)) {
@@ -103,11 +110,14 @@ $friendly_self = str_replace(".php", "", $friendly_self);
 if(isset($_GET)) {
 	$first = true;
 	$friendly_self_get = $friendly_self.'?';
+	$gets = '';
 	foreach($_GET as $key => $val) {
 		if(!$first) {
 			$friendly_self_get .= '&'.$key.'='.$val;
+			$gets .= '&'.$key.'='.$val;
 		}else {
 			$friendly_self_get .= $key.'='.$val;
+			$gets .= $key.'='.$val;
 		}
 	}
 }else {
@@ -161,7 +171,7 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 <?php
 if($user->logged) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
 ?>
-			<a href="<?php echo $friendly_self_get; ?>logout" id="headerlogin">Logout</a>
+			<a href="<?php echo $friendly_self.'?logout&'.$gets; ?>" id="headerlogin">Logout</a>
 <?php
 }
 else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
