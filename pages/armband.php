@@ -55,7 +55,7 @@ if ($braceName != NULL) {
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
 				<!--<a href="<?php echo $friendly_self.'?name='.urlencode($braceName).'&amp;registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>-->
-				<a href="login?postpic=<?php echo urlencode($braceName);?>">Ein neues Bild zu diesem Armband posten</a>
+				<a href="login?postpic">Ein neues Bild zu diesem Armband posten</a>
 <?php
 					for ($i = 0; $i < count($stats)-4; $i++) {
 ?>

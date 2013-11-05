@@ -5,7 +5,7 @@ foreach($_GET as $key => $val) {
 if(isset($_POST['registerpic_submit'])) {
 	$captcha_valid = captcha_valid($_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
 	if($captcha_valid) {
-		$pic_registered = $statistics->registerpic($statistics->name2brid($_POST['registerpic_name']),
+		$pic_registered = $statistics->registerpic($_POST['registerpic_brid'],
 											 $_POST['registerpic_description'],
 											 $_POST['registerpic_city'],
 											 $_POST['registerpic_country'],
@@ -13,7 +13,7 @@ if(isset($_POST['registerpic_submit'])) {
 											 $_FILES['registerpic_file'],
 											 $max_file_size);
 	}else {
-		header('Location: '.$friendly_self.'?postpic='.$_POST['registerpic_name'].'&captcha=false
+		header('Location: '.$friendly_self.'?postpic='.$_POST['registerpic_brid'].'&captcha=false
 				&descr='.urlencode(str_replace("\r\n", "ujhztg", $_POST['registerpic_description'])).'
 				&city='.urlencode($_POST['registerpic_city']).'
 				&country='.urlencode($_POST['registerpic_country']).'
@@ -23,7 +23,7 @@ if(isset($_POST['registerpic_submit'])) {
 
 if(isset($pic_registered)) {
         if($pic_registered == 5) {
-                header('Location: armband?name='.$_POST['registerpic_name'].'&picposted='.$pic_registered);
+                header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
         }elseif(isset($_GET['captcha'])) {
 			if($_GET['captcha'] == 'false') {	
                 $js .= 'alert("Das Captcha wurde falsch eingegeben.");';
@@ -72,8 +72,8 @@ if(isset($_GET['loginattempt'])) {
 				<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self; ?>" method="post" enctype="multipart/form-data">
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
-					<label for="registerpic_name" class="label_registerpic_name">Armband Nr.:</label><br>
-					<input type="text" name="registerpic_name" value="<?php if(isset($_GET['postpic'])) echo urldecode($_GET['postpic']);?>"><br>
+					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
+					<input type="text" name="registerpic_brid" value="<?php if(isset($_GET['postpic'])) echo urldecode($_GET['postpic']);?>"><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
 					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="20" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>

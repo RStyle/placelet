@@ -14,16 +14,16 @@
                 <div class="connect_box" id="submit_box">
                     <h1>+1 bild</h1>
                     <p>Gib deine <b>Armband-ID</b> an:
-                    <form>
-                        <input type="text" maxlength="6" size="6"> <input type="submit" value="Zur Bildauswahl">
+                    <form action="login" method="get">
+                        <input name="postpic" type="text" maxlength="6" size="6"> <input type="submit" value="Zur Bildauswahl">
                     </form>
                     </p>
                     <hr>
                     
                     <h1>+1 armband</h1>
                     <p>Gib deine <b>Armband-ID</b> an:
-                    <form>
-                        <input type="text" maxlength="6" size="6"> <input type="submit" value="Armband registrieren">
+                    <form action="login" method="get">
+                        <input name="registerbr" type="text" maxlength="6" size="6"> <input type="submit" value="Armband registrieren">
                     </form> 
                 </div>
                 <div class="connect_box" id="facebook_box">
