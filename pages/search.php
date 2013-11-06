@@ -5,7 +5,7 @@ foreach($_GET as $key => $val) {
 if(isset($_GET['squery'])) {
 	$squery = $_GET['squery'];
 	$braceID = $statistics->name2brid($squery);
-	if($statistics->userexists($_GET['squery'])) {
+	if(Statistics::userexists($_GET['squery'])) {
 		$squery_result['user'] = 0;
 	}else {
 		$squery_result['user'] = 1;

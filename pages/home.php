@@ -35,49 +35,29 @@
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
 				<div class="blue_line mainarticleheaders line_header"><h1>Reisearmband</h1></div>
-				<img id="reisearmband_img" alt="Reisearmband" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">
-				<p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-				Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-				
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-				<p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-				Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-				
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-				<p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-				Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-				
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-				<p>Das Reisearmband kannst du an nette Freunde oder Reisende verschenken.
-				Das Ziel ist es, das Armband so weit wie möglich reisen zu lassen. Wo ein Armband
-				
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-				et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-				Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+				<img id="reisearmband_img" alt="kein Bild von uns verfügbar"><!-- src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">-->
+				<p>
+					Unser Armband besteht aus einem Ledermaterial, welches mit einer Art Knottechnik geschlossen wird.
+					Das Armband ist mit einem Mettalblättchen versehen, worauf unser Logo gelasert ist.
+					Außerdem wirst Du auf Deinem Armband hinten eine ID-Nummer finden, 
+					mit der du dich auf dieser Homepage einloggen und dein Armband verfolgen kannst. 
+					Unsere Idee ist, dass es schlicht und doch trotzdem modisch sein soll und wir hoffen hierbei genau auf Deinen Geschmack zu treffen!
+				</p>
 			</article>                                                                                                        
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Wie funktioniert's?</h1></div>
-				<img id="kollektion_img" alt="feste Kollektion" src="http://img.geo.de/div/image/61566/01-armbaender.jpg">
+				<img id="kollektion_img" alt="kein Bild von uns verfügbar"><!--src="http://img.geo.de/div/image/61566/01-armbaender.jpg">-->
 				<p>
-					<span class="highlighted kollektion_numbers">1</span>Kaufe dir eines unserer Armbänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-					et dolore magna aliquyam er.
+					<span class="highlighted kollektion_numbers">1</span>Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">2</span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-					et dolore magna aliquyam er, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
+					<span class="highlighted kollektion_numbers">2</span>Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">3</span>Kaufe dir eines unserer Armänder in unserem Shop, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-					et dolore magna aliquyam er.
+					<span class="highlighted kollektion_numbers">3</span>Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.
 				</p>
 			</article>
 <!--SIDEBAR-->

@@ -180,15 +180,15 @@ function check_width(){
     }
 	
 	if(window.innerWidth < 1038){
-		$("#login-box").css({ 'left' : 540 });
+		$("#login-box").css({ 'left' : 500 });
 	}   
 	else {
-		if(window.innerWidth > 1530) {
-			$("#login-box").css({ 'right' : '30%' });
+		if(window.innerWidth > 1560) {
+			$("#login-box").css({ 'right' : '34%' });
 		}
 		else {
 			
-			$("#login-box").css({ 'left' : '53%' });
+			$("#login-box").css({ 'left' : '51%' });
 		}
 	}
 	

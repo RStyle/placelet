@@ -22,7 +22,8 @@ html {
 }
 
 body {
-	background-color: #FFF;              /*background-color: #CCCCFF;*/
+	/*background-image:url(../bg.png);
+	background-repeat:repeat;*/background-color: #FFF;              /*background-color: #CCCCFF;*/
 	color: #234754;
 	margin: 0 auto;
 	min-width: 1000px;
@@ -172,7 +173,8 @@ th {
 #mainnav {
 	clear: both;
 	margin-top: 2em;
-	overflow: hidden;
+	overflow: auto;
+	height: 37px;
 	
 }
 	#mainnavlist {

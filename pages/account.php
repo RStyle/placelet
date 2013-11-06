@@ -32,7 +32,7 @@ if(isset($_POST['submit'])) {
 	}
 }
 //Userdetails abrufen
-if(isset($username) && $statistics->userexists($username)) {
+if(isset($username) && Statistics::userexists($username)) {
 	$userdetails = $statistics->userdetails($username);
 	$armbaender = profile_stats($userdetails);
 }

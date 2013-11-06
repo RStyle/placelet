@@ -48,10 +48,10 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 		header('Location: login?loginattempt=false');
 		exit;
 	}
-}elseif(isset($_SESSION['user'])){
+} elseif(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
 	$checklogin = $user->logged;
-}else{
+} else{
 	$user = new User(false, $db);
 }
 
@@ -60,9 +60,6 @@ $statistics = new Statistics($db, $user);
 //Maximale Größe für hochgeladene Bilder
 $max_file_size = 8000000;
 
-if(isset($_POST['reg_name']) && isset($_POST['reg_first_name']) && isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
-	User::register($_POST, $db);
-}
 //--//
 
 if (!isset($braceName)) { $braceName = ""; }
@@ -215,9 +212,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			<ul id="mainnavlist">
 				<li><a href="home" class="mainnavlinks">Home</a></li>
 				<li><a href="about" class="mainnavlinks">Über uns</a></li>
-				<li><a href="shop" class="mainnavlinks">Shop</a></li>
 				<li><a href="start" class="mainnavlinks">Start</a></li>
 				<li><a href="<?php echo $navregister['href']; ?>" class="mainnavlinks"><?php echo $navregister['value']; ?></a></li>
+				<li><a href="shop" class="mainnavlinks">Shop</a></li>
 			</ul>
 		</nav>
 <!--###SECTION TAG###-->

@@ -8,7 +8,7 @@ if(isset($_GET['user'])) {
 }elseif($user->login) {
 	$username = $user->login;
 }
-if(isset($username) && $statistics->userexists($username)) {
+if(isset($username) && Statistics::userexists($username)) {
 	$userdetails = $statistics->userdetails($username);
 	$armbaender = profile_stats($userdetails);
 }
@@ -115,7 +115,7 @@ if(!isset($_GET['user'])) {
 				</div>
 <?php
 	}
-} elseif($statistics->userexists($username)){
+} elseif(Statistics::userexists($username)){
 ?>
             <div class="green_line mainarticleheaders line_header"><h1>Profil von <?php echo $username; ?></h1></div>
 <?php

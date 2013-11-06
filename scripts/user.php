@@ -59,9 +59,12 @@ class User
 	
 	public static function register($reg, $db){ //$reg ist ein array
 		//ist ein (getrimter) Wert leer?
-		if(tisset($reg['reg_name']) && tisset($reg['reg_first_name']) && tisset($reg['reg_login']) && tisset($reg['reg_email']) && !empty($reg['reg_password'])  && !empty($reg['reg_password2'])){
+		if(tisset($reg['reg_login']) && tisset($reg['reg_email']) && !empty($reg['reg_password'])  && !empty($reg['reg_password2'])){
 			if($reg['reg_password'] != $reg['reg_password2']){
-				return 'Passwords are not the same.';
+				return 'Die Passwörter sind nicht dieselben.';
+			}
+			if(Statistics::userexists($reg['reg_login'])){
+				return 'Dieser Benutzer existiert schon';
 			}
 			if(strlen($reg['reg_login']) < 4) return 'Benutzername zu kurz. Min. 4';
 			if(strlen($reg['reg_login']) > 15) return 'Benutzername zu lang. Max. 15';
@@ -72,11 +75,10 @@ class User
 			$q = $db->prepare($sql);
 			$q->execute(array(
 				':user' => clean_input($reg['reg_login']),
-                ':email' => clean_input($reg['reg_email']),
+				':email' => clean_input($reg['reg_email']),
 				':password' => PassHash::hash($reg['reg_password']),
 				':status' => 0)
 			);
-			
 			$sql = "INSERT INTO user_status (user,code) VALUES (:user,:code)";
 			$q = $db->prepare($sql);
 			$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
@@ -84,24 +86,19 @@ class User
 				':user' => clean_input($reg['reg_login']),
 				':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 			);
-			$content = "Bitte klicke auf diesen Link, um dich zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='. $reg['reg_login'].'&regstatuschange='. $code;
+			$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='. $reg['reg_login'].'&regstatuschange='. $code;
 			$mail_header = "From: Placelet <info@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
 			$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
 			mail($reg['reg_email'], 'Bestätigungsemail', $content, $mail_header);
-			
-			$sql = "INSERT INTO addresses (user, last_name, first_name) VALUES (:user,:last_name,:first_name)";
+			$sql = "INSERT INTO addresses (user) VALUES (:user)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user' => clean_input($reg['reg_login']),
-				':last_name' => clean_input($reg['reg_name']),
-				':first_name' => clean_input($reg['reg_first_name']))
+				':user' => clean_input($reg['reg_login']))
 			);
-		
-			return true;
-			}
-		return false;
+		}
+		return 'Die beiden Passwörter sind nicht gleich.';
 	}
 	
 	public function regstatuschange ($code){
@@ -468,10 +465,10 @@ class Statistics {
 		$submissions_valid = true;
 		if (isset($this->user->login)) {
 			if ($this->user->login != $username) {
-				$userexists = $this->userexists($username);
+				$userexists = Statistics::userexists($username);
 			} else $userexists = false;
 		} else {
-			$userexists = $this->userexists($username);
+			$userexists = Statistics::userexists($username);
 			
 		}
 		if ($userexists) {
@@ -520,9 +517,9 @@ class Statistics {
 		}
 	}
 	//Überprüft, ob ein bestimmter Benutzer $user in der Datenbank eingetragen ist
-	public function userexists ($user) {
+	public static function userexists($user) {
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
-        $q = $this->db->prepare($sql); 
+        $q = $GLOBALS['db']->prepare($sql); 
         $q->execute(array(':user' => $user));
         $anz = $q->rowCount();
         if ($anz > 0){
