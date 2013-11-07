@@ -23,7 +23,7 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
                 </div>
                 <div class="connect_box" id="submit_box">
                     <h1>+1 bild</h1>
-                    <p>Gib deine <b>Armband-ID</b> an:
+                    <p>Gib deine <span>Armband-ID</span> an:
                     <form action="login" method="get">
                         <input name="postpic" type="text" maxlength="6" size="6"> <input type="submit" value="Zur Bildauswahl">
                     </form>
@@ -31,21 +31,21 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
                     <hr>
                     
                     <h1>+1 armband</h1>
-                    <p>Gib deine <b>Armband-ID</b> an:
+                    <p>Gib deine <span>Armband-ID</span> an:
                     <form action="login" method="get">
                         <input name="registerbr" type="text" maxlength="6" size="6"> <input type="submit" value="Armband registrieren">
                     </form> 
                 </div>
                 <div class="connect_box" id="facebook_box">
                     <h1>facebook</h1>
-                    <div class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+                    <div class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
                 </div>
             </div>
 
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
 				<div class="blue_line mainarticleheaders line_header"><h1>Reisearmband</h1></div>
-				<img id="reisearmband_img" alt="kein Bild von uns verfügbar"><!-- src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">-->
+				<img id="reisearmband_img" alt="kein Bild von uns verfügbar" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">
 				<p>
 					Unser Armband besteht aus einem Ledermaterial, welches mit einer Art Knottechnik geschlossen wird.
 					Das Armband ist mit einem Mettalblättchen versehen, worauf unser Logo gelasert ist.
@@ -57,7 +57,7 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Wie funktioniert's?</h1></div>
-				<img id="kollektion_img" alt="kein Bild von uns verfügbar"><!--src="http://img.geo.de/div/image/61566/01-armbaender.jpg">-->
+				<img id="kollektion_img" alt="kein Bild von uns verfügbar" src="http://img.geo.de/div/image/61566/01-armbaender.jpg">
 				<p>
 					<span class="highlighted kollektion_numbers">1</span>Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.
 				</p>
