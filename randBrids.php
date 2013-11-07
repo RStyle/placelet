@@ -8,7 +8,8 @@ if(isset($_GET['number'])) {
 	}
 	$anzahl = $_GET['number'];
 	for($i = 0; $i < $anzahl; $i++) {
-		$brid = mt_rand(100000, 999999);
+		$rand = mt_rand(100000, 999999);
+		$brid = $rand;
 		$sql = "SELECT brid FROM bracelets WHERE brid = :brid";
 		$stmt = $db->prepare($sql);
 		$stmt->execute(array(
@@ -21,7 +22,7 @@ if(isset($_GET['number'])) {
 				$stmt->execute(array(
 						':brid' => $brid)
 				);
-				echo 'Armband Nr. '.$brid.' erfolgreich registriert.<br>';
+				echo $brid.'<br>';
 			} catch(PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
 			}

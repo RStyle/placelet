@@ -1,3 +1,13 @@
+<?php
+if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
+	$regstatus_change = $user->regstatuschange($_GET['regstatuschange'], $_GET['regstatuschange_user']);
+	if($regstatus_change) {
+		$js .= 'alert("Deine E-Mail wurde erfolgreich bestätigt.");';
+	}elseif(!$regstatus_change) {
+		echo 'NEINNNN';
+	}
+}
+?>
 <!--HINWEIS-->
             <div class="hint" id="hint1">
 				<h1>Hinweis:</h1>

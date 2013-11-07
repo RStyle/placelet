@@ -5,30 +5,6 @@ if (isset($braceName)) {
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
-if(isset($_GET['picposted'])) {
-	switch($_GET['picposted']) {
-		case 0:
-			$js .= 'Dieses Armband wurde noch nicht registriert.';
-			break;
-		case 1:
-			$js .= 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
-			break;
-		case 2:
-			$js .= 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
-			break;
-		case 3:
-			$js .= 'Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.';
-			break;
-		case 4:
-			$js .= 'Kein Bild ausgewählt, versuch es noch ein Mal.';
-			break;
-		case 5:
-			$js .= 'Bild erfolgreich gepostet.';
-			break;
-		default:
-			$js .= $_GET['picposted'];
-	}
-}
 if ($braceName != NULL) {
 	//Kommentare schreiben
 	if (isset($_POST['comment_submit'])) {
@@ -54,8 +30,7 @@ if ($braceName != NULL) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
-				<!--<a href="<?php echo $friendly_self.'?name='.urlencode($braceName).'&amp;registerpic=1'; ?>" style="clear: both;">Ein neues Bild zu diesem Armband posten</a>-->
-				<a href="login?postpic">Ein neues Bild zu diesem Armband posten</a>
+				<a href="<?php echo 'login?postpic='.urlencode($braceName); ?>">Ein neues Bild zu diesem Armband posten</a>
 <?php
 					for ($i = 0; $i < count($stats)-4; $i++) {
 ?>
@@ -136,10 +111,13 @@ if ($braceName != NULL) {
 						}
 					}
 ?>
-				<div class="pseudo_link" style="clear: both;" >Mehr anzeigen</div>
 <?php
 		if ($bracelet_stats['owners'] == 0 ) {
 			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
+		} else{
+?>
+				<div class="pseudo_link" style="clear: both;" >Mehr anzeigen</div>
+<?php
 		}
 ?>
 			</article>
