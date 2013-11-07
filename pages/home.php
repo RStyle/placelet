@@ -4,7 +4,7 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 	if($regstatus_change) {
 		$js .= 'alert("Deine E-Mail wurde erfolgreich bestätigt.");';
 	}elseif(!$regstatus_change) {
-		echo 'NEINNNN';
+		$js .= 'alert("Die Bestätigung deiner Email ist gescheitert.");';
 	}
 }
 ?>

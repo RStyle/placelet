@@ -12,8 +12,17 @@ class User
 				$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE user = :user');
 				$stmt->execute(array('user' =>$_SESSION['user']));
 				$row = $stmt->fetch(PDO::FETCH_ASSOC);
-				if ($row['password'] == $_SESSION['dynamic_password']){
+				if (PassHash::check_password(substr($_SESSION['dynamic_password'], 0, 60), substr($row['password'], 0, 15)) 
+					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 60, 60), substr($row['password'], 15, 15)) 
+					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 120, 60), substr($row['password'], 30, 15)) 
+					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 180, 60), substr($row['password'], 45, 15))
+					//Überprüfung des 4-fachen Hashs des Hashes - müsste unschlagbare Sicherheit bieten ;)
+				){
 					$this->logged = true;
+				} else {
+					echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15);
+					$this->login = false;	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
+					$this->logout();	//Um zukünftige fehlschlagende Versuche des automatischen Logins zu vermeiden
 				}
 			} catch(PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -27,7 +36,8 @@ class User
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if (PassHash::check_password($row['password'], $pw)) {
 			$dynamic_password = PassHash::hash($row['password']);
-			$_SESSION['dynamic_password'] = $dynamic_password;
+			$_SESSION['dynamic_password'] = PassHash::hash(substr($dynamic_password, 0, 15)).PassHash::hash(substr($dynamic_password, 15, 15)).PassHash::hash(substr($dynamic_password, 30, 15)).PassHash::hash(substr($dynamic_password, 45, 15));
+			//4-facher Hash des Hashes - da der Hash ab einer bestimmten Anzahl von Buchstaben das Passwort abschneidet.
 			$_SESSION['user'] = $this->login;
 		
 			$sql = "SELECT * FROM dynamic_password WHERE user = :user LIMIT 1"; 
