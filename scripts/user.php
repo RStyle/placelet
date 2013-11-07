@@ -66,6 +66,11 @@ class User
 			if(Statistics::userexists($reg['reg_login'])){
 				return 'Dieser Benutzer existiert schon';
 			}
+			//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
+			$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
+			$stmt->execute(array('email' => $reg['reg_email']));
+			$anz = $stmt->rowCount();
+			if($anz != 0) return 'Auf diese E-Mail Adresse wurde schon ein Benutzer registriert.';
 			if(strlen($reg['reg_login']) < 4) return 'Benutzername zu kurz. Min. 4';
 			if(strlen($reg['reg_login']) > 15) return 'Benutzername zu lang. Max. 15';
 			if(strlen($reg['reg_password']) < 6) return 'Passwort zu kurz. Min. 6';
@@ -97,26 +102,33 @@ class User
 			$q->execute(array(
 				':user' => clean_input($reg['reg_login']))
 			);
+			return 'Erfolgreich registriert.';
+		} else{
+			return 'Die beiden Passwörter sind nicht gleich.';
 		}
-		return 'Die beiden Passwörter sind nicht gleich.';
 	}
 	
-	public function regstatuschange ($code){
+	public function regstatuschange ($code, $username){
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
         $q = $this->db->prepare($sql); 
-        $q->execute(array(':user' => $this->login));
+        $q->execute(array(':user' => $username));
         $anz = $q->rowCount();
 		$row = $q->fetch(PDO::FETCH_ASSOC);		
         if ($anz > 0 && $row['status'] == 0){
 			$stmt = $this->db->prepare('SELECT * FROM user_status WHERE user = :user LIMIT 1');
-			$stmt->execute(array('user' => $this->login));
+			$stmt->execute(array('user' => $username));
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			if($row['code'] == $code){
-		
 				$sql= "UPDATE users SET status = :status WHERE user = :user LIMIT 1";
 				$q = $this->db->prepare($sql); 
-				$q->execute(array(':status' => '1', ':user' => $this->login));
-		 
+				$q->execute(array(':status' => '1', ':user' => $username));
+				//Code löschen
+				$sql= "UPDATE user_status SET code = :code WHERE user = :user LIMIT 1";
+				$q = $this->db->prepare($sql); 
+				$q->execute(array(':code' => NULL, ':user' => $username));
+				return true;
+			}else {
+				return false;
 			}
 		}
 		
@@ -530,7 +542,7 @@ class Statistics {
 	}
 	//Prüft, ob ein Armband schon registriert wurde
 	public function bracelet_status($brid) {
-		$stmt = $this->db->prepare('SELECT user FROM bracelets WHERE brid = :brid LIMIT 1');
+		$stmt = $this->db->prepare('SELECT user FROM bracelets WHERE brid = :brid');
 		$stmt->execute(array('brid' => $brid));
 		$anz = $stmt->rowCount();
 		$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);

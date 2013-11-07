@@ -9,11 +9,6 @@ include_once('./scripts/functions.php');
 include_once('./scripts/connection.php');
 include_once('./scripts/user.php');
 
-if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
-$user = new User($_GET['regstatuschange_user'], $db); //substr(md5 (uniqid (rand())), 0, 20)
-$user->regstatuschange($_GET['regstatuschange']);
-}
-
 // Hier werden Cookies überprüft gesetzt usw.
 // Erzwingen das Session-Cookies benutzt werden und die SID nicht per URL transportiert wird
 ini_set( 'session.use_only_cookies', '1' );
@@ -194,9 +189,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 }
 ?>
 			<ul id="headerlist">
-				<li><a href="http://placelet.de<?php echo $friendly_self; ?>"><img src="img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
+				<li><a href="http://placelet.de<?php echo $friendly_self_get; ?>"><img src="img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="http://placelet.net<?php echo $friendly_self; ?>"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
+				<li><a href="http://placelet.net<?php echo $friendly_self_get; ?>"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 				<li class="headerlist_main_divider">|</li>
 				<li><a href="impressum">Impressum</a></li>
 				<li class="headerlist_sub_divider">|</li>

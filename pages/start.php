@@ -52,7 +52,7 @@ foreach($bracelets_displayed as $key => $val) {
 for ($i = 0; $i < $user_anz; $i++) {
 ?>
 					<tr>
-						<td><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></td>
+						<td><a href="profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$i]; ?>"><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></a></td>
 						<td><?php echo $systemStats['user_most_bracelets']['number'][$i]; ?></td>
 						<td><?php echo $systemStats['user_most_bracelets']['uploads'][$i]; ?></td>
 					</tr>

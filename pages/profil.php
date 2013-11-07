@@ -12,9 +12,10 @@ if(isset($username) && Statistics::userexists($username)) {
 	$userdetails = $statistics->userdetails($username);
 	$armbaender = profile_stats($userdetails);
 }
-
 if(!isset($_GET['user'])) {
 	if ($user->login) {
+		if($userdetails['status'] == 0) $userdetails['status'] = 'E-Mail nicht bestätigt';
+		if($userdetails['status'] == 1) $userdetails['status'] = 'E-Mail bestätigt';
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Dein Profil, <?php echo $user->login ?></h1></div>
 				<div style="float: left;">
@@ -24,20 +25,20 @@ if(!isset($_GET['user'])) {
 							<th>Benutzername:</th>
 							<td><?php echo $userdetails['user']; ?></td>
 						</tr>
-						<tr>
+						<!--<tr>
 							<th>Vorname:</th>
 							<td><?php echo $userdetails['first_name']; ?></td>
 						</tr>
 						<tr>
 							<th>Nachname:</th>
 							<td><?php echo $userdetails['last_name']; ?></td>
-						</tr>
+						</tr>-->
 						<tr>
 							<th>E-Mail Adresse</th>
 							<td><?php echo $userdetails['email']; ?></td>
 						</tr>
 						<tr>
-							<th>Status</th>
+							<th>&nbsp;</th>
 							<td><?php echo $userdetails['status']; ?></td>
 						</tr>
 					</table>

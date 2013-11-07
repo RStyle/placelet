@@ -249,7 +249,7 @@ th {
          overflow: hidden; 
     }
         .connect_box {
-           background-color: #DBDBDB;
+           background-color: #757575;/*#DBDBDB;*/
            height: 245px;
            float: left;
            padding: 1%;

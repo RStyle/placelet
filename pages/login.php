@@ -90,8 +90,8 @@ if(isset($_GET['loginattempt'])) {
 					<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
 					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($_GET['descr'])) echo urldecode(str_replace("ujhztg", "\r\n", $_GET['descr']));?></textarea><br>
 <?php
-		$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
-		echo recaptcha_get_html($publickey);
+		//$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
+		//echo recaptcha_get_html($publickey);
 ?>
 					<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
 					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">

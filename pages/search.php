@@ -12,14 +12,26 @@ if(isset($_GET['squery'])) {
 	}
 	switch ($statistics->bracelet_status($braceID)) {
 		case '0':
-			$squery_result['bracelet'] = 0;
+			$squery_result['bracelet_name'] = 0;
 			break;
 		case 1:
-			$squery_result['bracelet'] = 1;
+			$squery_result['bracelet_name'] = 1;
 			break;
 		case 2:
 			$braceOwner = $statistics->bracelet_stats($braceID);
-			$squery_result['bracelet'] = 2;
+			$squery_result['bracelet_name'] = 2;
+			break;
+	}
+	switch ($statistics->bracelet_status($squery)) {
+		case '0':
+			$squery_result['bracelet_id'] = 0;
+			break;
+		case 1:
+			$squery_result['bracelet_id'] = 1;
+			break;
+		case 2:
+			$braceOwner = $statistics->bracelet_stats($squery);
+			$squery_result['bracelet_id'] = 2;
 			break;
 	}
 ?>
@@ -30,31 +42,36 @@ if(isset($_GET['squery'])) {
 	switch($squery_result['user']) {
 		case 0:
 ?>
-					<li>Es gibt einen Benutzer mit dem Namen <a href="profil?user=<?php echo $squery;?>"><?php echo $squery;?></a></li>
+					<li>Es gibt einen Benutzer mit dem Namen <a href="profil?user=<?php echo $squery;?>"><strong><?php echo $squery;?></strong></a></li>
 <?php
 			break;
 		case 1:
 ?>
-					<li>Es gibt keinen Benutzer mit dem Namen <?php echo $squery;?></li>
+					<li>Es gibt keinen Benutzer mit dem Namen <strong><?php echo $squery;?></strong></li>
 <?php
 			break;
 	}
-?>
-<?php
-	switch($squery_result['bracelet']) {
+	switch($squery_result['bracelet_name']) {
 		case 0:
 ?>
-					<li>Es gibt kein Armband mit dem Namen <?php echo $squery;?></li>
-<?php
-			break;
-		case 1:
-?>
-					<li>Armband <?php echo $squery;?> ist noch nicht registriert worden.</li>
+					<li>Es gibt kein Armband mit dem Namen <strong><?php echo $squery;?></strong></li>
 <?php
 			break;
 		case 2:
 ?>
-					<li>Armband <a href="armband?name=<?php echo $squery;?>"><?php echo $squery;?></a> ist auf <a href="profil?user=<?php echo $braceOwner['owner']; ?>"><?php echo $braceOwner['owner']; ?></a> registriert.</li>
+					<li>Armband <a href="armband?name=<?php echo $squery;?>"><strong><?php echo $squery;?></strong></a> ist auf <a href="profil?user=<?php echo $braceOwner['owner']; ?>"><strong><?php echo $braceOwner['owner']; ?></strong></a> registriert.</li>
+<?php
+			break;
+	}
+	switch($squery_result['bracelet_id']) {
+		case 0:
+?>
+					<li>Armband mit der ID <strong><?php echo $squery;?></strong> ist noch nicht registriert worden. <a href="login?registerbr=<?php echo $squery;?>">Hier registrieren</a></li>
+<?php
+			break;
+		case 2:
+?>
+					<li>Armband <a href="armband?name=<?php echo $squery;?>"><strong><?php echo $squery;?></strong></a> ist auf <a href="profil?user=<?php echo $braceOwner['owner']; ?>"><strong><?php echo $braceOwner['owner']; ?></strong></a> registriert.</li>
 <?php
 			break;
 	}
