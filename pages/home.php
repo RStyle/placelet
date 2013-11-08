@@ -38,7 +38,7 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
                 </div>
                 <div class="connect_box" id="facebook_box">
                     <h1>facebook</h1>
-                    <div class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="dark" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+                    <div class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
                 </div>
             </div>
 

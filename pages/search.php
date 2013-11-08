@@ -66,12 +66,20 @@ if(isset($_GET['squery'])) {
 	switch($squery_result['bracelet_id']) {
 		case 0:
 ?>
+					<li>Es gibt kein Armband mit der ID <strong><?php echo $squery;?></strong></li>
+<?php
+			break;
+		case 1:
+?>
 					<li>Armband mit der ID <strong><?php echo $squery;?></strong> ist noch nicht registriert worden. <a href="login?registerbr=<?php echo $squery;?>">Hier registrieren</a></li>
 <?php
 			break;
 		case 2:
 ?>
-					<li>Armband <a href="armband?name=<?php echo $squery;?>"><strong><?php echo $squery;?></strong></a> ist auf <a href="profil?user=<?php echo $braceOwner['owner']; ?>"><strong><?php echo $braceOwner['owner']; ?></strong></a> registriert.</li>
+					<li>
+						Armband <a href="armband?name=<?php echo urlencode($statistics->brid2name($squery));?>"><strong><?php echo $squery;?></strong></a> ist auf <a href="profil?user=<?php echo $braceOwner['owner']; ?>"><strong><?php echo $braceOwner['owner']; ?></strong></a> registriert.
+						Poste <a href="login?postpic=<?php echo $squery;?>">hier</a> ein Bild 
+					</li>
 <?php
 			break;
 	}

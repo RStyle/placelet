@@ -18,12 +18,11 @@ html {
 /*Responsives FB Plugin*/
 .fb-like-box, .fb-like-box span, .fb-like-box.fb_iframe_widget span iframe {
     width: 100% !important;
-    background-color: #333;
+    background-color: white;
 }
 
 body {
-	/*background-image:url(../bg.png);
-	background-repeat:repeat;*/background-color: #FFF;              /*background-color: #CCCCFF;*/
+	background-color: #FFF;
 	color: #234754;
 	margin: 0 auto;
 	min-width: 1000px;
@@ -53,7 +52,7 @@ th {
 }
 /*---allgemeine Styles---*/
 .bottom_border_green {
-		border-bottom: 5px solid #B7D300;
+		border-bottom: 5px solid #F00/*B7D300*/;
 }
 .bottom_border_blue {
 		border-bottom: 5px solid #7E74E1;
@@ -249,28 +248,28 @@ th {
          overflow: auto; 
     }
         .connect_box {
-            background-color: #555;
+            background-color: #FC0;
             height: auto;
             float: left;
             padding: 1%;
             border-radius: 0.5em;
         }
         .connect_box h1 {
-            text-shadow: 0px 2px 2px #000;
+            text-shadow: 0px 2px 2px #9B9B9B;
             font-size: 2em;
-            color: #CCCCCC;
+            color: #FFF;
             margin: 0;
             padding-left: 0.25em;
             margin-bottom: 0.25em;
             font-family: tahoma;
-            border-left: 4px #B7D300 solid;
+            border-left: 4px #0800D3 solid;
             
         }
-        .connect_box p {
+        /*.connect_box p {
             color: #Bbb;
-        }
+        }*/
         .connect_box span {
-            color: #B7D300;
+            color: #0800D3;
             font-weight: bold;
         }
             #uploads_box {

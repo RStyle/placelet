@@ -39,7 +39,11 @@ if(isset($_GET['logout']))
 if(isset($_POST['login']) && isset($_POST['password'])){
 	$user = new User($_POST['login'], $db);	
 	$checklogin = $user->login($_POST['password']);
-	if ($checklogin == false) {
+	if($checklogin === true) {
+		header('Location: start');
+	}elseif($checklogin == 2) {
+		$js .= 'alert("Deine E-Mail Adresse wurde noch nicht bestätigt.")';
+	}elseif ($checklogin == false) {
 		header('Location: login?loginattempt=false');
 		exit;
 	}
@@ -169,14 +173,14 @@ if($page == 'home') {
 <?php
 if($user->logged) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
 ?>
-			<a href="<?php echo $friendly_self.'?logout&'.$gets; ?>" id="headerlogin">Logout</a>
+			<a href="<?php echo $friendly_self.'?logout'; ?>" id="headerlogin">Logout</a>
 <?php
 }
 else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 ?>
 			<a href="#" id="headerlogin"><img src="img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
-				<form name="login" id="form_login" action="start" method="post">
+				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
 					<label for="login" id="label_login">Benutzername</label><br>
 					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
 					<label for="password" id="label_password">Passwort</label><br>

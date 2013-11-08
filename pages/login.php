@@ -23,13 +23,25 @@ if(isset($_POST['registerpic_submit'])) {
 }
 //Rückmeldung zu Bild-Posten anzeigen
 if(isset($pic_registered)) {
-        if($pic_registered == 5) {
-                header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
-        }elseif(isset($_GET['captcha'])) {
-			if($_GET['captcha'] == 'false') {	
-                $js .= 'alert("Das Captcha wurde falsch eingegeben.");';
-			}
-        }
+	switch ($pic_registered) {
+		case 2:
+			$js .= 'alert("Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.");';
+			break;
+		case 4:
+			$js .= 'alert("Dieses Armband wurde noch nicht registriert.");';
+			break;
+		case 5:
+			$js .= 'alert("Dieses Armband gibt es nicht.");';
+			break;
+		case 6:
+			$js .= 'alert("Das erste Bild kann nur der Käufer hochladen.");';
+			break;
+        case 7:
+			header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
+			break;
+		default:
+			$js .= 'alert("'.$pic_registered.'");';
+	}
 }
 //Armband registrieren Funktion aufrufen
 if($user->login) {
