@@ -7,6 +7,12 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 		$js .= 'alert("Die Bestätigung deiner Email ist gescheitert.");';
 	}
 }
+$systemStats = $statistics->systemStats(0, 1);
+//hier werden die Armbänder bestimmt, die angezeigt werden
+$bracelets_displayed = $systemStats['recent_brids'];
+foreach($bracelets_displayed as $key => $val) {
+	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
+}
 ?>
 <!--HINWEIS-->
             <div class="hint" id="hint1">
@@ -19,7 +25,35 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 <!--CONNECT-LEISTE-->
             <div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
-                    <h1>neueste uploads</h1>    
+                    <h1>neuester upload</h1>
+					<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.'.$stats[1][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="thumb_link">
+						<img src="img/triangle.png" alt="" class="thumb_triangle">
+						<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="thumbnail">
+					</a>
+					<table class="pic-info">
+						<tr>
+							<th>Datum</th>
+							<td><?php echo date('d.m.Y H:i', $stats[1][0]['date']); ?> Uhr</td>
+						</tr>
+						<tr>
+							<th>Ort</th>
+							<td><?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?></td>
+						</tr>
+<?php
+			if($stats[1][0]['user'] != NULL) {
+?>
+						<tr>
+							<th>Uploader</th>
+							<td><?php echo $stats[1][0]['user']; ?></td>
+						</tr>
+<?php
+			 }
+?>
+					</table> 
+					<p class="pic-desc">
+						<span class="desc-header"><?php echo $stats[1][0]['title']; ?></span><br>
+						<?php echo $stats[1][0]['description']; ?>
+					</p>
                 </div>
                 <div class="connect_box" id="submit_box">
                     <h1>+1 bild</h1>
