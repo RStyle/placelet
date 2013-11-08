@@ -112,7 +112,7 @@ class User
 			$q->execute(array(
 				':user' => clean_input($reg['reg_login']))
 			);
-			return 'Erfolgreich registriert.';
+			return 'Erfolgreich registriert.\\nDu hast per E-Mail einen Link bekommen, mit dem du deinen Account freischalten kannst.';
 		} else{
 			return 'Die beiden Passwörter sind nicht gleich.';
 		}
