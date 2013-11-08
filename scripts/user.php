@@ -371,12 +371,12 @@ class Statistics {
 		
 		//Benutzer, die die meisten Armbänder auf sich registriert haben(mit Anzahl)
 		//Die Anzahl der Benutzer, die Ausgegeben werden, $banz festgelegt
-		$sql = "SELECT COUNT(*) AS number,user FROM bracelets WHERE user IS NOT NULL GROUP BY user ORDER BY number DESC";
+		$sql = "SELECT COUNT(*) AS number,user FROM bracelets WHERE user IS NOT NULL GROUP BY user ORDER BY number DESC";//GROUP BY user ORDER BY number DESC
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		for ($i = 0; $i < $user_anz; $i++) {
-			$stats['user_most_bracelets']['user'][$i] = $q[$i]['user'];
-			$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
+				$stats['user_most_bracelets']['user'][$i] = $q[$i]['user'];
+				$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 		}
 		
 		//Uploads der Top-Benutzer
