@@ -35,6 +35,7 @@ class User
 		$stmt->execute(array('user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if (PassHash::check_password($row['password'], $pw)) {
+			if($row['status'] == 0) return 2;
 			$dynamic_password = PassHash::hash($row['password']);
 			$_SESSION['dynamic_password'] = PassHash::hash(substr($dynamic_password, 0, 15)).PassHash::hash(substr($dynamic_password, 15, 15)).PassHash::hash(substr($dynamic_password, 30, 15)).PassHash::hash(substr($dynamic_password, 45, 15));
 			//4-facher Hash des Hashes - da der Hash ab einer bestimmten Anzahl von Buchstaben das Passwort abschneidet.
@@ -55,9 +56,8 @@ class User
 				':password'=>$dynamic_password)
 			);
 			$this->logged = true;
-		
-			return true; 
-		} else { 
+			return true;
+		}else { 
 			return false; 
 		}
 	}
@@ -567,25 +567,15 @@ class Statistics {
 	//Postet ein Bild
 	public function registerpic ($brid, $description, $city, $country, $title, $picture_file, $max_file_size) {
 		$submissions_valid = true;
-		//Prüft, ob das Armband schon registriert wurde
-		$sql = "SELECT user FROM bracelets WHERE brid = :brid";
-		$q = $this->db->prepare($sql);
-		$q->execute(array(':brid' => $brid));
-		$row = $q->fetch(PDO::FETCH_ASSOC);	
-		if($row == '') {
-			$submissions_valid = false;
-			//return 'Dieses Armband wurde noch nicht registriert.';
-			return 0;
-		}
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
 			//return 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
-			return 1;
+			return 0;
 		}
 		if(strlen($description) < 2) {
 			$submissions_valid = false;
 			//return 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
-			return 2;
+			return 1;
 		}
 		if (isset($picture_file)) {
 			$filename_props = explode(".", $picture_file['name']);
@@ -594,12 +584,20 @@ class Statistics {
 				unset($fileext);
 				$submissions_valid = false;
 				//return "Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
-				return 3;
+				return 2;
 			}
 		} else {
 			//return 'Kein Bild ausgewählt, versuch es noch ein Mal.';
-			return 4;
+			return 3;
 		}
+		//Prüft, ob das Armband schon registriert wurde
+		$bracelet_status = $this->bracelet_status($brid);
+		if($bracelet_status == 1) return 4;
+		elseif($bracelet_status == 0) return 5;
+		//Prüft, wenn es das erste Bild ist, ob der Poster der Besitzer ist
+		$bracelet_stats = $this->bracelet_stats($brid);
+		if($bracelet_stats['owner'] != $this->user->login && !isset($bracelet_stats['owners'])) return 6;
+		//Lädt das Bild hoch und trägt es in die Datenbank ein
 		if ($submissions_valid) {
 			$description = clean_input($description);
 			$city = clean_input($city);
@@ -675,7 +673,7 @@ class Statistics {
 					'fileext' => $fileext
 				));
 				//return 'Bild erfolgreich gepostet.';
-				return 5;
+				return 7;
 			} elseif ($file_uploaded == false) {
 				//return 'Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.';
 				return $picture_file['error'];
