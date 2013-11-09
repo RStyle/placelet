@@ -88,14 +88,14 @@ foreach($bracelets_displayed as $key => $val) {
 
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
-				<div class="blue_line mainarticleheaders line_header"><h1>Reisearmband</h1></div>
+				<div class="blue_line mainarticleheaders line_header"><h1>Das Reisearmband</h1></div>
 				<img id="reisearmband_img" alt="kein Bild von uns verfügbar" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">
 				<p>
-					Unser Armband besteht aus einem Ledermaterial, welches mit einer Art Knottechnik geschlossen wird.
-					Das Armband ist mit einem Mettalblättchen versehen, worauf unser Logo gelasert ist.
-					Außerdem wirst Du auf Deinem Armband hinten eine ID-Nummer finden, 
-					mit der du dich auf dieser Homepage einloggen und dein Armband verfolgen kannst. 
-					Unsere Idee ist, dass es schlicht und doch trotzdem modisch sein soll und wir hoffen hierbei genau auf Deinen Geschmack zu treffen!
+                    Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
+                    Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
+                    Mithilfe eines Namens, den du selbst für dein Armband festlegst, kann jeder, dem du den Namen mitteilst, dein Armband mithilfe unserer Suchleiste finden und seinen Weg nachverfolgen.<br><br>
+                    <b>Hast du Lust, bei unserem sozialen Experiment mitzumachen?</b> In unserem Shop geht es weiter.
+                     
 				</p>
 			</article>                                                                                                        
 <!--ZWEITER ARTIKEL-->
@@ -103,15 +103,23 @@ foreach($bracelets_displayed as $key => $val) {
 				<div class="green_line mainarticleheaders line_header"><h1>Wie funktioniert's?</h1></div>
 				<img id="kollektion_img" alt="kein Bild von uns verfügbar" src="http://img.geo.de/div/image/61566/01-armbaender.jpg">
 				<p>
-					<span class="highlighted kollektion_numbers">1</span>Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.
+					<span class="highlighted kollektion_numbers">1</span> Kaufe Dir ein Armband in unserem Shop. Du erhältst eine einmalige Armband-ID, die du auf der Rückseite des Metallplättchens am Armband findest. Damit kannst du dein Armband in der grünen Box auf unserer Startseite registrieren.
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">2</span>Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.
+					<span class="highlighted kollektion_numbers">2</span> Trage das Armband solange du möchtest. Wenn du Lust hast, lade ein Foto mit Dir und Deinem Armband (zum Beispiel vor einer Sehenswürdigkeit) in der grünen Box auf unserer Webseite hoch. Achte darauf, dass man auf dem Bild die ID des Armbandes nicht sehen kann, da sie wie ein Passwort funktioniert.
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">3</span>Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.Leider ist kein Text verfügbar.
+					<span class="highlighted kollektion_numbers">3</span> Gib dein Armband an einen Freund, Bekannten oder auch zufällig getroffenen Menschen deiner Wahl weiter, wobei du ihm das Grundprinzip des Reisearmbandes erklärst.
+				</p>
+				<span class="arrow highlighted">&#11015;</span>
+				<p>
+					<span class="highlighted kollektion_numbers">4</span>  Der nächste Armbandträger kann dann ebenfalls mit der ID ein Bild hochladen und das Armband weitergeben. Hierzu ist keine Registrierung auf unserer Webseite erforderlich.
+				</p>
+				<span class="arrow highlighted">&#11015;</span>
+				<p>
+					<span class="highlighted kollektion_numbers">5</span>  Verfolge den Weg deines Armbandes um die Welt und kommentiere nach Lust und Laune die Bilder zu deinem oder auch anderen Armbändern.
 				</p>
 			</article>
 <!--SIDEBAR-->

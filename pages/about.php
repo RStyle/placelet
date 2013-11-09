@@ -4,9 +4,9 @@
 				<h1>Global Bracelet. Travel&amp;Connect</h1>
 				<p>
 					Wir sind eine Gruppe engagierter Schüler der MSS 11, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen und für ein Jahr lang ein Unternehmen führen.
-					Das Juniorprojekt bietet die Möglichkeit 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.
+					Das Juniorprojekt bietet die Möglichkeit, 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.
 					Unsere Geschäftsidee besteht darin, Reisearmbänder herzustellen die von Freund zu Freund um die Welt weitergegeben werden und die persönlichen Fotos,
-					auf dem das Armband deutlich zu erkennen ist, auf unserer Homepage hochzuladen und eine Community zu gründen.
+					auf dem das Armband zu erkennen ist, auf unserer Homepage hochzuladen und auf diesem Weg eine Community zu gründen.
 				</p>
 			</article>
 			<aside class="side_container">
