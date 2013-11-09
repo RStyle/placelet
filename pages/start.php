@@ -171,5 +171,5 @@ for ($i = 0; $i < $user_anz; $i++) {
 					}
 				}
 ?>
-			<div class="pseudo_link" id="start_reload" onClick="reload_func();"  style="clear: both;" >Mehr anzeigen</div>
+			<div class="pseudo_link" id="start_reload" onClick="reload_start();"  style="clear: both;" >Mehr anzeigen</div>
 		</article>

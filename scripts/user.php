@@ -483,7 +483,7 @@ class Statistics {
 		
 	}
 	//Kommentar schreiben
-	public function write_comment ($brid, $username, $comment, $picid, $user) {
+	public function write_comment ($brid, $username, $comment, $picid) {
 		$submissions_valid = true;
 		if (isset($this->user->login)) {
 			if ($this->user->login != $username) {

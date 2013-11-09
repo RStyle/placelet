@@ -1,22 +1,18 @@
 <?php
-if (isset($braceName)) {
-	$braceID = $statistics->name2brid($braceName);
+session_start(); //Session starten
+include_once('../connection.php');
+include_once('../user.php');
+if(isset($_SESSION['user'])){
+	$user = new User($_SESSION['user'], $db);
+	$checklogin = $user->logged;
+}else{
+	$user = new User(false, $db);
+	$checklogin = false;
 }
-foreach($_GET as $key => $val) {
-	$_GET[$key] = clean_input($val);
-}
-if ($braceName != NULL) {
-	//Kommentare schreiben
-	if (isset($_POST['comment_submit'])) {
-		$write_comment = $statistics->write_comment ($braceID,
-							 $_POST['comment_user'][$_POST['comment_form']],
-							 $_POST['comment_content'][$_POST['comment_form']],
-							 $_POST['comment_picid'][$_POST['comment_form']]);
-	}
-	if (isset($write_comment)) {
-		$js .= 'alert("'.$write_comment.'");';
-	}
-	
+$statistics = new Statistics($db, $user);
+$braceName = urldecode($_GET['braceName']);
+$braceID = $statistics->name2brid($braceName);
+if ($braceID != NULL) {
 	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
 	if (isset($bracelet_stats['owners'])) {
 		$picture_details = $statistics->picture_details($braceID, $db);
@@ -26,11 +22,15 @@ if ($braceName != NULL) {
 		$stats = $bracelet_stats;
 	}
 ?>
-			<article id="armband" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
-				<a href="<?php echo 'login?postpic='.urlencode($braceName); ?>">Ein neues Bild zu diesem Armband posten</a>
+<!--HR über dem 1. nachgeladenen Bild<hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">-->
 <?php
-					for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
+	for ($i = $_GET['q'] - 3; $i < $_GET['q']; $i++) {
+		if(!isset($stats[$i])) break;
+			if($i < $_GET['q']) {
+?>
+<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
+<?php
+	}
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
@@ -48,14 +48,14 @@ if ($braceName != NULL) {
 							<td><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></td>
 						</tr>
 <?php
-				if($stats[$i]['user'] != NULL) {
+		if($stats[$i]['user'] != NULL) {
 ?>
 						<tr>
 							<th>Uploader</th>
 							<td><?php echo $stats[$i]['user']; ?></td>
 						</tr>
 <?php
-                 }
+		 }
 ?>
 					</table>
 						
@@ -68,25 +68,25 @@ if ($braceName != NULL) {
                     
 					<div class="comments" id="comment<?php echo $i;?>">
 <?php
-					for ($j = 1; $j <= count($stats[$i])-8; $j++) {
-					//Vergangene Zeit seit dem Kommentar berechnen
-					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
-					switch($x_days_ago) {
-						case 0:
-							$x_days_ago = 'heute';
-							break;
-						case 1:
-							$x_days_ago = 'gestern';
-							break;
-						default:
-							$x_days_ago = 'vor '.$x_days_ago.' Tagen';
-					}
+		for ($j = 1; $j <= count($stats[$i])-8; $j++) {
+			//Vergangene Zeit seit dem Kommentar berechnen
+			$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
+			switch($x_days_ago) {
+				case 0:
+					$x_days_ago = 'heute';
+					break;
+				case 1:
+					$x_days_ago = 'gestern';
+					break;
+				default:
+					$x_days_ago = 'vor '.$x_days_ago.' Tagen';
+			}
 ?>
                             <strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  
 <?php 
-					}
+		}
 ?>   
 						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?name='.urlencode($braceName); ?>" method="post">
 							<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
@@ -102,61 +102,5 @@ if ($braceName != NULL) {
 					</div>
 				</div>
 <?php
-						if ($i < count($stats) - 6 && $i < 2) {
-?>
-<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
-<?php	
-						}
-					}
-?>
-<?php
-		if ($bracelet_stats['owners'] == 0 ) {
-			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
-		}else {
-?>
-			<div class="pseudo_link" id="armband_reload" onClick="reload_armband('<?php echo urlencode($braceName); ?>');"  style="clear: both;" >Mehr anzeigen</div>
-<?php
-		}
-?>
-			</article>
-			<aside class="side_container" id="bracelet_props">
-				<h1>Statistik</h1>
-				<table style="width: 100%;">
-					<tr>
-						<td><strong>Armband Name</strong></td>
-						<td><strong><?php echo $stats['name']; ?></strong></td>
-					</tr>
-					<tr>
-						<td>Käufer</td>
-						<td><?php echo $stats['owner']; ?></td>
-					</tr>
-					<tr>
-						<td>Registriert am</td>
-						<td><?php echo date('d.m.Y', $stats['date']); ?></td>
-					</tr>
-					<tr>
-						<td>Anzahl Besitzer</td>
-						<td><?php echo $stats['owners']; ?></td>
-					</tr>
-<?php
-		if ($bracelet_stats['owners'] != 0 ) {
-?>
-					<tr>
-						<td>Letzter Ort</td>
-						<td><?php echo $stats[0]['city'].', '.$stats[0]['country']; ?></td>
-					</tr>
-<?php
-		}
-?>
-				</table>
-			</aside>
-<?php
-} else {
-?>
-			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
-				<div class="green_line mainarticleheaders line_header"><h1>Falsche Seite</h1></div>
-				<p>Du solltest nicht hier sein. Gehe einfach eine Seite zurück.</p>
-			</article>
-<?php
+	}
 }
-?>

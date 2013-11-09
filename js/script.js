@@ -200,21 +200,34 @@ check_width();
 
 });
 
-//Neuste Bilder Nachladen
+//Neuste Bilder Nachladen -start.php
 var reload_q = 6;
 
-function reload_func() {
+function reload_start() {
 var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
-  .done(function( data ) {
-  $("#start_reload").remove();
-  htmlcode = $("#recent_pics").html();
-  $("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_func();" style="clear: both;" >Mehr anzeigen</div>');
-  reload_q += 3;
-  })
-  .fail(function() {
-    alert( "error" );
-  });
-  
+	.done(function( data ) {
+	$("#start_reload").remove();
+	htmlcode = $("#recent_pics").html();
+	$("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_func();" style="clear: both;" >Mehr anzeigen</div>');
+	reload_q += 3;
+	})
+	.fail(function() {
+		alert( "error" );
+	});
+}
+//Neuste Bilder Nachladen -armband.php
+var reload_q2 = 6;
+function reload_armband(braceName) {
+var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName)
+	.done(function( data ) {
+	$("#armband_reload").remove();
+	htmlcode = $("#armband").html();
+	$("#armband").html( htmlcode + data + '<div class="pseudo_link" id="armband_reload" onclick="reload_armband(\''+braceName+'\');" style="clear: both;" >Mehr anzeigen</div>');
+	reload_q2 += 3;
+	})
+	.fail(function() {
+		alert( "error" );
+	}); 
 }
 //Nächstes/Vorheriges Bild
 function change_pic(cv, sv) {

@@ -19,8 +19,7 @@ foreach($bracelets_displayed as $key => $val) {
 if(isset($stats[$_GET['q'] - 2]))
 echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 			for ($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
-				if(!isset($stats[$i])){
-					break;}
+				if(!isset($stats[$i])) break;
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
@@ -122,9 +121,5 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 <!--~~~HR~~~~--><hr style="clear: both;">
 <?php	
 					}
-				}
-				
-				
-				
-				
+				}				
 ?>
