@@ -41,31 +41,34 @@ if(isset($stats[$i + 1][0]['picid'])) {
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
 							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumbnail">
 						</a>
-						<table class="pic-info">
-							<tr>
-								<th>Armband</th>
-								<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.$statistics->brid2name($bracelets_displayed[$i]).'</a>'; ?></strong></td>
-							</tr>
-							<tr>
-								<th>Datum</th>
-								<td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?> Uhr</td>
-							</tr>
-							<tr>
-								<th>Ort</th>
-								<td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
-							</tr>
+						<div>
+							<table class="pic-info">
+								<tr>
+									<th>Armband</th>
+									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.$statistics->brid2name($bracelets_displayed[$i]).'</a>'; ?></strong></td>
+								</tr>
+								<tr>
+									<th>Datum</th>
+									<td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?> Uhr</td>
+								</tr>
+								<tr>
+									<th>Ort</th>
+									<td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
+								</tr>
 	<?php
 				if($stats[$i][0]['user'] != NULL) {
 	?>
-							<tr>
-								<th>Uploader</th>
-								<td><?php echo $stats[$i][0]['user']; ?></td>
-							</tr>
+								<tr>
+									<th>Uploader</th>
+									<td><?php echo $stats[$i][0]['user']; ?></td>
+								</tr>
 	<?php
 				 }
 	?>
-						</table> 
-						<p class="pic-desc">
-							<span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
-							<?php echo $stats[$i][0]['description']; ?>
-						</p>
+							</table> 
+							<p class="pic-desc">
+								<span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
+								<?php echo $stats[$i][0]['description']; ?>
+							</p>
+						</div>
+						<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; position: relative; right: 25.5%;">

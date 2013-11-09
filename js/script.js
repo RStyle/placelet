@@ -218,8 +218,8 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
 }
 //Nächstes/Vorheriges Bild
 function change_pic(cv, sv) {
-	//$("#newest_pic").html("animated .gif here").show();
+	$("#loading").toggle();
 	$.post("scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv}, function(data) {
-		$("#newest_pic").html(data).show();
+		$("#newest_pic").html(data);
 		});
 }

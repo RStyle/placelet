@@ -447,12 +447,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9eeb3', end
 			margin-top: 10px;
 		}
 	.pic-info {
-        float: left; 
         font-size: 1.25em;
     }
 		.pic-info th {
-			padding: 0;
-			padding-right: 1em;
+			padding: 0 1em 0 0;
 			text-decoration: underline;
 			width: 4em;
 		}
