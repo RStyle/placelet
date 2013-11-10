@@ -130,6 +130,8 @@ if(isset($_GET)) {
 		<meta name="author" content="Roman S., Danial S., Julian Z.">
 		<link href="css/main.css" rel="stylesheet" type="text/css">
 		<link href="css/lightbox.css" rel="stylesheet">
+		<!--Google Fonts-->
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Fredericka+the+Great|Open+Sans">
 <?php
 if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Clients
 ?>
