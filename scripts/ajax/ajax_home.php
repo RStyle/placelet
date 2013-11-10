@@ -1,6 +1,7 @@
 <?php
 session_start(); //Session starten
 include_once('../connection.php');
+include_once('../functions.php');
 include_once('../user.php');
 if(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
