@@ -201,15 +201,24 @@ check_width();
 });
 
 //Neuste Bilder Nachladen -start.php
-var reload_q = 6;
+var reload_q = 3;
 
-function reload_start() {
+function reload_start(plus) {
+//var plus = plus || 1;
+reload_q += plus;
+if(reload_q < 3)
+	reload_q = 3;
+console.log(reload_q);
 var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
 	.done(function( data ) {
+	if(data != ""){
 	$("#start_reload").remove();
 	htmlcode = $("#recent_pics").html();
-	$("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_start();" style="clear: both;" >Mehr anzeigen</div>');
-	reload_q += 3;
+	//$("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_start();" style="clear: both;" >Mehr anzeigen</div>');
+	$("#recent_pics").html( data + '<div class="pseudo_link" id="start_reload" onClick="reload_start(-3);"  style="clear: both;" >Vorherige Seite</div><div class="pseudo_link" id="start_reload" onClick="reload_start(3);"  style="clear: both;" >Nächste Seite</div>');
+	} else {
+	reload_q -= 3;
+	}
 	})
 	.fail(function() {
 		alert( "error" );
@@ -235,4 +244,8 @@ function change_pic(cv, sv) {
 	$.post("scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv}, function(data) {
 		$("#newest_pic").html(data);
 		});
+	$.fail(function() {
+		$("#loading").toggle();
+		alert( "error" );
+	}); 
 }
