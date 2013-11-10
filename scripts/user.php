@@ -80,7 +80,7 @@ class User
 			$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
 			$stmt->execute(array('email' => $reg['reg_email']));
 			$anz = $stmt->rowCount();
-			if($anz != 0) return 'Auf diese E-Mail Adresse wurde schon ein Benutzer registriert.';
+			if($anz != 0) return 'Auf diese E-Mail Adresse wurde schon ein anderer Benutzer registriert.';
 			if(strlen($reg['reg_login']) < 4) return 'Benutzername zu kurz. Min. 4';
 			if(strlen($reg['reg_login']) > 15) return 'Benutzername zu lang. Max. 15';
 			if(strlen($reg['reg_password']) < 6) return 'Passwort zu kurz. Min. 6';
@@ -112,7 +112,7 @@ class User
 			$q->execute(array(
 				':user' => clean_input($reg['reg_login']))
 			);
-			return 'Erfolgreich registriert.\\nDu hast per E-Mail einen Link bekommen, mit dem du deinen Account freischalten kannst.';
+			return 'Erfolgreich registriert.\\nDu bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.';
 		} else{
 			return 'Die beiden Passwörter sind nicht gleich.';
 		}

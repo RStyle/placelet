@@ -88,7 +88,7 @@ if(isset($_GET['loginattempt'])) {
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
-					<input type="text" name="registerpic_brid" value="<?php if(isset($_GET['postpic'])) echo urldecode($_GET['postpic']);?>"><br>
+					<input type="text" name="registerpic_brid" value="<?php if(isset($_GET['postpic'])) if($_GET['postpic'] != 'true') echo urldecode($_GET['postpic']);?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
 					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="20" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>

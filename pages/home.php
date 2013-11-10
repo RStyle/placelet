@@ -62,7 +62,7 @@ foreach($bracelets_displayed as $key => $val) {
 								<?php echo $stats[1][0]['description']; ?>
 							</p>
 						</div>
-						<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; position: relative; right: 25.5%;">
+						<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">
 					</div>
                 </div>
                 <div class="connect_box" id="submit_box">

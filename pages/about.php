@@ -3,7 +3,7 @@
 				<a href="pictures/staff.jpg" data-lightbox="wir"><img src="pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet" id="wir"></a>
 				<h1>Global Bracelet. Travel&amp;Connect</h1>
 				<p>
-					Wir sind eine Gruppe engagierter Schüler der MSS 11, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen und für ein Jahr lang ein Unternehmen führen.
+					Wir sind eine Gruppe engagierter Schüler der MSS 11 des Gymnasiums am Römerkastell Bad Kreuznach, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen und für ein Jahr lang ein Unternehmen führen.
 					Das Juniorprojekt bietet die Möglichkeit, 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.
 					Unsere Geschäftsidee besteht darin, Reisearmbänder herzustellen die von Freund zu Freund um die Welt weitergegeben werden und die persönlichen Fotos,
 					auf dem das Armband zu erkennen ist, auf unserer Homepage hochzuladen und auf diesem Weg eine Community zu gründen.
