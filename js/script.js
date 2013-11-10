@@ -173,7 +173,7 @@ function check_width(){
 	}
 	
 	if(window.innerWidth > 1230){
-		$("#logo").attr("style", 'top: 3em;');
+		$("#logo").attr("style", 'top: 4em;');
 	}   
 	else {
         $("#logo").attr("style", 'top: 11px;'); 
@@ -208,7 +208,7 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
 	.done(function( data ) {
 	$("#start_reload").remove();
 	htmlcode = $("#recent_pics").html();
-	$("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_func();" style="clear: both;" >Mehr anzeigen</div>');
+	$("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_start();" style="clear: both;" >Mehr anzeigen</div>');
 	reload_q += 3;
 	})
 	.fail(function() {
