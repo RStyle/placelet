@@ -26,7 +26,7 @@ body {
 	color: #234754;
 	margin: 0 auto;
 	min-width: 1000px;
-	padding: 0 10px;
+	padding: 0 0;
 	width: 70%;
 	font-family: 'Open Sans', Verdana;
 }
@@ -39,7 +39,8 @@ a:hover {
 /*#headerlist a:visited {
 }*/
 /*#headerlist a:active {
-}*/.greencolor {
+}*/
+.greencolor {
 	color: #9AEA00;
 }
 hr {

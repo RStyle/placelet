@@ -18,21 +18,13 @@ if(!isset($_GET['user'])) {
 		if($userdetails['status'] == 1) $userdetails['status'] = 'E-Mail bestätigt';
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Dein Profil, <?php echo $user->login ?></h1></div>
-				<div style="float: left;">
+				<div style="float: left; margin-right: 2em;">
 					Dein Account:
 					<table border="0">
 						<tr>
 							<th>Benutzername:</th>
 							<td><?php echo $userdetails['user']; ?></td>
 						</tr>
-						<!--<tr>
-							<th>Vorname:</th>
-							<td><?php echo $userdetails['first_name']; ?></td>
-						</tr>
-						<tr>
-							<th>Nachname:</th>
-							<td><?php echo $userdetails['last_name']; ?></td>
-						</tr>-->
 						<tr>
 							<th>E-Mail Adresse</th>
 							<td><?php echo $userdetails['email']; ?></td>
@@ -42,9 +34,9 @@ if(!isset($_GET['user'])) {
 							<td><?php echo $userdetails['status']; ?></td>
 						</tr>
 					</table>
-					<p><a href="account">Accounteinstellungen ändern</a></p>
+					<p><a href="account">Accountdetails ändern</a></p>
 				</div>
-				<div style="float: left; margin-left: 2em;">
+				<div style="float: left;">
 <?php
 							if (isset($userdetails['brid'])) {
 ?>

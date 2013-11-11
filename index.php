@@ -68,7 +68,7 @@ $pagename = array(
 	"account" => "Account Einstellungen",
 	"armband" => "Armband: ".$braceName,
 	"connect" => "Connect",
-	"home" => "Global Placelet. Travel & Connect",
+	"home" => "Global Bracelet. Travel & Connect",
 	"impressum" => "Impressum",
 	"kontakt" => "Konkakt",
 	"login" => "Registrieren",
@@ -148,7 +148,7 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title><?php echo $title; ?></title>
 	</head>
-	<body>
+	<body id="body">
 <?php
 if($page == 'home') {
 ?>

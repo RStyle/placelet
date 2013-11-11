@@ -164,10 +164,11 @@ $('body').on('click', '.toggle_comments', function (){
 function check_width(){   
     
     if(window.innerWidth < 1480 && window.innerWidth > 1230){
-		//$("#logo"). =
 		$("#logo").attr("src", 'img/logo.svg');
 		$("#logo").attr("width", '93');
-	} else {
+	}else if(window.innerWidth > 1500) {
+		$("#body").css({ 'width' : 'calc(100% - 500px)' });
+	}else {
 		$("#logo").attr("src", 'img/logo_extended.svg');
 		$("#logo").attr("width", '206');
 	}
