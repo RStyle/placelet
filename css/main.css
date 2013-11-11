@@ -22,7 +22,10 @@ html {
 }
 
 body {
-	background-color: #FFF;
+	/*background-color: #FFF;*/
+	background-image: url(earth.jpg);
+	background-repeat: no-repeat;
+	background-position: 0 200px;
 	color: #234754;
 	margin: 0 auto;
 	min-width: 1000px;
@@ -187,7 +190,7 @@ th {
 		#mainnavlist li {
 			float: left;
 			font-size: 1.75em;
-			margin-right: 2em;
+			margin-right: 1.8em;
 		}
 	.mainnavlinks:link, .mainnavlinks:visited {
 		color: #000;

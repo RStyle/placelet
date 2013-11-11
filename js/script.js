@@ -171,6 +171,7 @@ function check_width(){
 	}else {
 		$("#logo").attr("src", 'img/logo_extended.svg');
 		$("#logo").attr("width", '206');
+		$("#body").css({ 'width' : '70%' });
 	}
 	
 	if(window.innerWidth > 1230){
