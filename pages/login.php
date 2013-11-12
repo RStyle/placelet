@@ -108,7 +108,7 @@ if(isset($_GET['loginattempt'])) {
 					<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
 					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 					<input type="submit" name="registerpic_submit" value="Bild posten"><br>
-					<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat;background-position: center;max-height:0px">
+					<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat; background-position: center; max-height:0px">
 				</form>
 			</article>
 <?php
@@ -134,7 +134,15 @@ if(isset($_GET['loginattempt'])) {
 					</table>
 				</form><br>
 <?php
-		}
+		}else {
+?>
+				<form name="registerbr" action="<?php echo $friendly_self; ?>" method="post">
+					<label for="reg_br">Armband registrieren</label>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
+					<input type="submit" name="submit" value="Armband registrieren">
+				</form>
+<?php
+	}
 ?>
 				<form name="reg" id="form_reg" action="<?php echo $friendly_self; ?>" method="post">
 					<table style="border: 1px solid black">
@@ -160,33 +168,6 @@ if(isset($_GET['loginattempt'])) {
 						</tr>
 					</table>
 				<p>Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.</p>
-				</form>
-<?php
-	}else {
-		if($bracelet_status == 0) {
-			if (isset($_POST['reg_br'])) {
-				switch ($bracelet_registered) {
-					case '0':
-						echo 'Dieses Armband gibt es nicht!';
-						break;
-					case 1:
-						echo 'Armband '.$_POST['reg_br'].' erfolgreich registriert.';
-						break;
-					case 2:
-						echo 'Armband '.$_POST['reg_br'].' wurde schon auf dich registriert.';
-						break;
-					case 3:
-						echo 'Dieses Armband wurde schon auf einen anderen Benutzer registriert.';
-						break;
-				}
-				echo '<br><br>';
-			}
-		}
-?>
-				<form name="registerbr" action="<?php echo $friendly_self; ?>" method="post">
-					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
-					<input type="submit" name="submit" value="Armband registrieren">
 				</form>
 <?php
 	}

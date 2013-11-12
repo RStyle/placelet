@@ -22,9 +22,7 @@ html {
 }
 
 body {
-	/*background-color: #FFF;*/
-	background-image: url(earth.jpg);
-	background-repeat: no-repeat;
+	background-color: #FFF;
 	background-position: 0 200px;
 	color: #234754;
 	margin: 0 auto;

@@ -51,13 +51,21 @@ if(!isset($_GET['user'])) {
 <?php
 								for ($i = 0; $i < count($armbaender['brid']); $i++) {
 									if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
-										echo '						<tr>
-							<td><a href="armband?name='.urlencode($statistics->brid2name($armbaender['brid'][$i])).'">'.$statistics->brid2name($armbaender['brid'][$i]).'</a></td>
-							<td>'.$armbaender['brid'][$i].'</a></td>
-							<td>'.date('d.m.Y', $armbaender['date'][$i]).'</td>
-							<td>'.$armbaender['picture_count'][$armbaender['brid'][$i]]['picid'].'</td>
+?>
+						<tr>
+							<td><a href="armband?name='<?php echo urlencode($statistics->brid2name($armbaender['brid'][$i])).'">'.$statistics->brid2name($armbaender['brid'][$i]); ?></a></td>
+							<td><?php echo $armbaender['brid'][$i]; ?></a></td>
+							<td><?php echo date('d.m.Y', $armbaender['date'][$i]); ?></td>
+							<td><?php echo $armbaender['picture_count'][$armbaender['brid'][$i]]['picid']; ?></td>
+<?php
+										if($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] == 0) {
+?>
+							<td><a href="login?postpic='.$armbaender['brid'][$i].'">Bild posten</a></td>
+<?php
+										}
+?>
 						</tr>
-';
+<?php
 								}
 							} else {
 								echo 'Du besitzt leider noch kein Armband.';

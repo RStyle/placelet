@@ -102,7 +102,7 @@ class User
 				':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 			);
 			$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='. $reg['reg_login'].'&regstatuschange='. $code;
-			$mail_header = "From: Placelet <info@placelet.de>\n";
+			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
 			$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
