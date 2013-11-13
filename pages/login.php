@@ -91,13 +91,13 @@ if(isset($_GET['loginattempt'])) {
 					<input type="text" name="registerpic_brid" value="<?php if(isset($_GET['postpic'])) if($_GET['postpic'] != 'true') echo urldecode($_GET['postpic']);?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="20" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
+					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="35" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
 					
 					<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-					<input type="text" name="registerpic_city" class="registerpic_city" size="20" maxlength="20" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo urldecode($_GET['city']);?>" required><br>
+					<input type="text" name="registerpic_city" class="registerpic_city" size="20" maxlength="30" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo urldecode($_GET['city']);?>" required><br>
 					
 					<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-					<input type="text" name="registerpic_country" class="registerpic_country" size="20" maxlength="20" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
+					<input type="text" name="registerpic_country" class="registerpic_country" size="20" maxlength="30" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
 					
 					<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
 					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($_GET['descr'])) echo urldecode(str_replace("ujhztg", "\r\n", $_GET['descr']));?></textarea><br>
