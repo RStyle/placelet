@@ -53,14 +53,14 @@ if(!isset($_GET['user'])) {
 									if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
 ?>
 						<tr>
-							<td><a href="armband?name='<?php echo urlencode($statistics->brid2name($armbaender['brid'][$i])).'">'.$statistics->brid2name($armbaender['brid'][$i]); ?></a></td>
+							<td><a href="armband?name=<?php echo urlencode($statistics->brid2name($armbaender['brid'][$i])); ?>"><?php echo $statistics->brid2name($armbaender['brid'][$i]); ?></a></td>
 							<td><?php echo $armbaender['brid'][$i]; ?></a></td>
 							<td><?php echo date('d.m.Y', $armbaender['date'][$i]); ?></td>
 							<td><?php echo $armbaender['picture_count'][$armbaender['brid'][$i]]['picid']; ?></td>
 <?php
 										if($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] == 0) {
 ?>
-							<td><a href="login?postpic='.$armbaender['brid'][$i].'">Bild posten</a></td>
+							<td><a href="login?postpic=<?php echo $armbaender['brid'][$i]; ?>">Bild posten</a></td>
 <?php
 										}
 ?>

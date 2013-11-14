@@ -152,7 +152,7 @@ class User
 			$anz = $stmt->rowCount(); 
 			$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
 			if ($anz == 0) {
-				return '0';
+				return 0;
 			} elseif ($bracelet['user'] == NULL ) {	
 				$stmt = $this->db->prepare('SELECT COUNT(*) FROM bracelets WHERE user = :user');
 				$stmt->execute(array('user' => $this->login));
@@ -285,7 +285,6 @@ class User
 		}
 	}
 	public function new_password($username, $new_pwd) {
-		//return $this->change_password('1resetPassword1', $new_pwd, $username);
 		$sql = "UPDATE users SET password = :password WHERE user = :user";
 		$q = $this->db->prepare($sql);
 		$q->execute(array(

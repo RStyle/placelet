@@ -130,7 +130,6 @@ th {
 		#gb_flag {
 			width: 18px;
 			height: 9px;
-			display: none;
 		}
 	#headerlogin {
 		color: #FFF;
@@ -166,6 +165,10 @@ th {
 			padding-left: 1em;
 			padding-right: 1em;
 		}
+	#squery {
+		border: none;
+		padding: 3px;
+	}
 /*---logo---*/
 #logo {
 	height: 70px;

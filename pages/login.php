@@ -1,4 +1,7 @@
 <?php
+@$registerbr = $_GET['registerbr'];
+@$postpic = $_GET['postpic'];
+@$loginattempt = $_GET['loginattempt'];
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
@@ -20,35 +23,53 @@ if(isset($_POST['registerpic_submit'])) {
 											 $_POST['registerpic_title'],
 											 $_FILES['registerpic_file'],
 											 $max_file_size);
-}
-//Rückmeldung zu Bild-Posten anzeigen
-if(isset($pic_registered)) {
-	switch ($pic_registered) {
-		case 2:
-			$js .= 'alert("Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.");';
-			break;
-		case 4:
-			$js .= 'alert("Dieses Armband wurde noch nicht registriert.");';
-			break;
-		case 5:
-			$js .= 'alert("Dieses Armband gibt es nicht.");';
-			break;
-		case 6:
-			$js .= 'alert("Das erste Bild kann nur der Käufer hochladen.");';
-			break;
-        case 7:
-			header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
-			break;
-		default:
-			$js .= 'alert("'.$pic_registered.'");';
+	//Rückmeldung zu Bild-Posten anzeigen
+	if(isset($pic_registered)) {
+		switch ($pic_registered) {
+			case 2:
+				$js .= 'alert("Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.");';
+				break;
+			case 4:
+				$js .= 'alert("Dieses Armband wurde noch nicht registriert.");';
+				break;
+			case 5:
+				$js .= 'alert("Dieses Armband gibt es nicht.");';
+				break;
+			case 6:
+				$js .= 'alert("Das erste Bild kann nur der Käufer hochladen.");';
+				break;
+			case 7:
+				header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
+				break;
+			default:
+				$js .= 'alert("'.$pic_registered.'");';
+		}
 	}
 }
 //Armband registrieren Funktion aufrufen
 if($user->login) {
 	$userdetails = $statistics->userdetails($user->login);
 	//Armband registrieren
-	if (isset($_POST['reg_br']) && $_POST['submit'] == "Armband registrieren") {
+	if (isset($_POST['reg_br']) && $_POST['registerbr_submit'] == "Armband registrieren") {
 			$bracelet_registered = $user->registerbr($_POST['reg_br']);
+			//Rückmeldung zu Armband-registrieren anzeigen
+			if(isset($bracelet_registered)) {
+				switch ($bracelet_registered) {
+					case 0:
+						$js .= 'alert("Dieses Armband gibt es nicht.");';
+						break;
+					case 1:
+						//$js .= 'alert("Armband erfolgreich registriert.");';
+						header('Location: profil');
+						break;
+					case 2:
+						$js .= 'alert("Dieses Armband wurde schon auf dich registriert.");';
+						break;
+					case 3:
+						$js .= 'alert("Es ist ein Fehler aufgetreten, bitte kontaktiere den Support(support@placelet.de).");';
+						break;
+				}
+			}
 	}
 }
 //Registrationsstatus von Armband aufrufen
@@ -61,7 +82,7 @@ if(isset($_GET['registerbr'])) {
 			<article class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page];?></h1></div>
 <?php
-if(isset($_GET['loginattempt'])) {
+if(isset($loginattempt)) {
 ?>
 				Der eingegebene Benutzername oder das Passwort waren falsch.<br><br>
 				<form name="login" id="form_login" action="<?php echo $friendly_self; ?>" method="post">
@@ -81,14 +102,13 @@ if(isset($_GET['loginattempt'])) {
 					</table>
 				</form><br>
 <?php
-}else {
-	if(isset($_GET['postpic'])) {
+}elseif(isset($postpic)) {
 ?>
 				<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self; ?>" method="post" enctype="multipart/form-data">
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
-					<input type="text" name="registerpic_brid" value="<?php if(isset($_GET['postpic'])) if($_GET['postpic'] != 'true') echo urldecode($_GET['postpic']);?>" required><br>
+					<input type="text" name="registerpic_brid" value="<?php if(isset($postpic)) if($postpic != 'true') echo urldecode($postpic);?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
 					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="35" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
@@ -112,12 +132,20 @@ if(isset($_GET['loginattempt'])) {
 				</form>
 			</article>
 <?php
-	}elseif(!$user->login) {
-		if(isset($_GET['registerbr'])) {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen
+}elseif(isset($registerbr)) {
+	if($user->login) {
+?>
+				<form name="registerbr" action="<?php echo $friendly_self; ?>" method="post">
+					<label for="reg_br">Armband registrieren</label>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
+					<input type="submit" name="registerbr_submit" value="Armband registrieren">
+				</form>
+<?php
+	}else {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen
 ?>
 				Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
-				um dein Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $_GET['registerbr']; ?></span> registrieren:<br>
-				<form name="login" id="form_login" action="<?php echo $friendly_self.'?registerbr='.$_GET['registerbr']; ?>" method="post">
+				um dein Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $registerbr; ?></span> registrieren:<br>
+				<form name="login" id="form_login" action="<?php echo $friendly_self.'?registerbr='.$registerbr; ?>" method="post">
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -134,15 +162,8 @@ if(isset($_GET['loginattempt'])) {
 					</table>
 				</form><br>
 <?php
-		}else {
-?>
-				<form name="registerbr" action="<?php echo $friendly_self; ?>" method="post">
-					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
-					<input type="submit" name="submit" value="Armband registrieren">
-				</form>
-<?php
 	}
+}elseif(!$user->login) {
 ?>
 				<form name="reg" id="form_reg" action="<?php echo $friendly_self; ?>" method="post">
 					<table style="border: 1px solid black">
@@ -170,7 +191,6 @@ if(isset($_GET['loginattempt'])) {
 				<p>Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.</p>
 				</form>
 <?php
-	}
 }
 ?>
 		</article>
