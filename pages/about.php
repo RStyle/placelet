@@ -12,6 +12,7 @@
 				<div class="tree">
 					<ul>
 						<li>
+<<<<<<< HEAD
 							<a href="#">Vorstandsvorsitzende: Sarah Baiker & Janik Rennollet</a>
 							<ul>
 								<li>
@@ -19,11 +20,24 @@
 									<ul>
 										<li>
 											<a href="#">Eloisa Marzell</a>
+=======
+							<a href="#">Vorstandsvorsitzende: Sarah Baiker & Janik Renollet</a>
+							<ul>
+								<li>
+									<a href="#">Verwaltungs-Vorstand: Patrick Piroth</a>
+									<ul>
+										<li>
+											<a href="#">Alicia Braun</a>
+>>>>>>> ebc2536c2e9720dd480df27e33c54dca1ff8f86b
 										</li>
 									</ul>
 								</li>
 								<li>
+<<<<<<< HEAD
 									<a href="#">Sebastian Gänz</a>
+=======
+									<a href="#">Finanz-Vorstand: Sebastian Gänz</a>
+>>>>>>> ebc2536c2e9720dd480df27e33c54dca1ff8f86b
 									<ul>
 										<li>
 											<a href="#">Moritz Junkermann</a>
@@ -31,12 +45,18 @@
 									</ul>
 								</li>
 								<li>
+<<<<<<< HEAD
 									<a href="#">Celine Müller-Späth</a>
 									<ul>
 										<li>
 											<a href="#">Alicia Braun</a>
 										</li>
 										<li>
+=======
+									<a href="#">Marketing-Vorstand: Celine Müller-Späth</a>
+									<ul>
+										<li>
+>>>>>>> ebc2536c2e9720dd480df27e33c54dca1ff8f86b
 											<a href="#">Kai Zurmöhle</a>
 										</li>
 										<li>
@@ -45,6 +65,7 @@
 										<li>
 											<a href="#">Lea Reinke</a>
 										</li>
+<<<<<<< HEAD
 										<li>
 											<a href="#">Collin Meffert</a>
 										</li>
@@ -76,6 +97,8 @@
 										<li>
 											<a href="#">Julian Zimmerlin</a>
 										</li>
+=======
+>>>>>>> ebc2536c2e9720dd480df27e33c54dca1ff8f86b
 									</ul>
 								</li>
 							</ul>
@@ -83,7 +106,14 @@
 					</ul>
 				</div>
 			</article>
+<<<<<<< HEAD
 			<!--<aside class="side_container">
+=======
+			
+			
+			
+			<aside class="side_container">
+>>>>>>> ebc2536c2e9720dd480df27e33c54dca1ff8f86b
 				<h1>JUNIOR</h1>
 				<p>JUNIOR ist ein Projekt der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 
 				auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank, Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed 
