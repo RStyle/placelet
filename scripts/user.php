@@ -568,13 +568,11 @@ class Statistics {
 		$submissions_valid = true;
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
-			//return 'Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.';
-			return 0;
+			return 0;//Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.
 		}
 		if(strlen($description) < 2) {
 			$submissions_valid = false;
-			//return 'Beschreibung zu kurz, mindestens 2 Zeichen, bitte.';
-			return 1;
+			return 1;//Beschreibung zu kurz, mindestens 2 Zeichen, bitte.
 		}
 		if (isset($picture_file)) {
 			$filename_props = explode(".", $picture_file['name']);
@@ -582,12 +580,10 @@ class Statistics {
 			if($fileext != 'jpeg' && $fileext != 'jpg' && $fileext != 'gif' && $fileext != 'png') {
 				unset($fileext);
 				$submissions_valid = false;
-				//return "Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.";
-				return 2;
+				return 2;//Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.
 			}
 		} else {
-			//return 'Kein Bild ausgewählt, versuch es noch ein Mal.';
-			return 3;
+			return 3;//Kein Bild ausgewählt, versuch es noch ein Mal.
 		}
 		//Prüft, ob das Armband schon registriert wurde
 		$bracelet_status = $this->bracelet_status($brid);
@@ -671,13 +667,65 @@ class Statistics {
 					'title' => $title,
 					'fileext' => $fileext
 				));
-				//return 'Bild erfolgreich gepostet.';
-				return 7;
+				/*echo 'WTF am I not being displayed????';
+				//E-Mail an die Personen senden, die das Armband abboniert haben
+				$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(':brid' => $brid));
+				$row = $q->fetchAll(PDO::FETCH_ASSOC);
+				print_r($row);
+				echo '<h1>'.$row.'<h1>';
+				$content = "Zu dem Armband <a href='".$this->brid2name($brid)."'>".$this->brid2name($brid)."</a> wurde ein neues Bild gepostet.";
+				$mail_header = "From: Placelet <support@placelet.de>\n";
+				$mail_header .= "MIME-Version: 1.0" . "\n";
+				$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+				$mail_header .= "Content-transfer-encoding: 8bit";
+				//foreach() {}
+				mail($reg['reg_email'], 'Neues Bild für Armband '.$this->brid2name($brid), $content, $mail_header);*/
+				return 7;//Bild erfolgreich gepostet.
 			} elseif ($file_uploaded == false) {
-				//return 'Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.';
-				return $picture_file['error'];
+				return $picture_file['error'];//Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.
 			}
 		}
 	}
+	public function manage_subscription($input, $brid, $email) {
+		switch($input) {
+			case 'true':
+				$sql = "INSERT INTO subscriptions (user, brid, email, status) VALUES (:user, :brid, :email, status)";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':user' => $this->user->login,
+					':brid' => $brid,
+					':email' => $email,
+					':status' => 'false'
+				));
+				break;
+			case 'email':
+				$sql = "INSERT INTO subscriptions (user, brid, email, status) VALUES (:user, :brid, :email, status)";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':user' => $this->user->login,
+					':brid' => $brid,
+					':email' => $email,
+					':' => 'true'
+				));
+				break;
+			case 'false':
+				$sql = "DELETE subscriptions WHERE email = :email";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':picid' => $picid,
+					':brid' => $brid,
+					':user' => $this->user->login,
+					':description' => $description,
+					':date' => time(),
+					'city' => $city,
+					'country' => $country,
+					'title' => $title,
+					'fileext' => $fileext
+				));				
+		}
+	}
+	
 }
 ?>

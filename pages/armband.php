@@ -25,9 +25,13 @@ if ($braceName != NULL) {
 		$bracelet_stats['owners'] = 0;
 		$stats = $bracelet_stats;
 	}
+	if(isset($_GET['sub'])) {
+		$statistics->manage_subscription($_GET['sub'], $braceID);
+	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
+				<a href="<?php echo $friendly_self; ?>?sub=true" style="float: right;">Armband abbonieren</a>
 				<a href="<?php echo 'login?postpic=true'; ?>">Ein neues Bild zu diesem Armband posten</a>
 <?php
 					for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
@@ -102,7 +106,7 @@ if ($braceName != NULL) {
 					</div>
 				</div>
 <?php
-						if ($i < count($stats) - 6 && $i < 2) {
+						if ($i < count($stats) - 5 && $i < 2) {
 ?>
 <!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
 <?php	
@@ -143,7 +147,11 @@ if ($braceName != NULL) {
 ?>
 					<tr>
 						<td>Letzter Ort</td>
-						<td><?php echo $stats[0]['city'].', '.$stats[0]['country']; ?></td>
+						<td><?php echo $stats[0]['city']; ?>,</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td><?php echo $stats[0]['country']; ?></td>
 					</tr>
 <?php
 		}

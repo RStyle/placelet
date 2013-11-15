@@ -126,7 +126,8 @@ foreach($bracelets_displayed as $key => $val) {
 			</article>
 <!--SIDEBAR-->
 			<aside class="side_container">
-				<h1>JUNIOR</h1>
+				<!--<h1>JUNIOR</h1>-->
+				<img src="img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 100%; height: auto;">
 				<p>Das Unternehmen Placelet entstand durch das Projekt JUNIOR der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 
 				auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank, Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed 
 				Ex gefördert.</p>
