@@ -1,647 +1,658 @@
 @charset "utf-8";
-/* HTML5 tags für ältere Browser*/
-header, section, footer,
-aside, nav, article, figure {
-	display: block;
-}
-/*Internet-Explorer*/
-img {
-	border: 0;
-}
-html {
-	border-top-color: #234754;
-	border-top-style: solid;
-	border-top-width: 11px;
-	overflow-y: scroll;/*Scrollbalken für einheitliches Design erzwingen*/
-}
+/*+++HTML5 tags für ältere Browser+++*/
+	header, section, footer,
+	aside, nav, article, figure {
+		display: block;
+	}
+/*---HTML5 tags für ältere Browser---*/
+/*+++Styles für Internet-Explorer+++*/
+	img {
+		border: 0;
+	}
+/*---Styles für Internet-Explorer---*/
+/*+++allgemeine Tags+++*/
+	html {
+		border-top-color: #234754;
+		border-top-style: solid;
+		border-top-width: 11px;
+		overflow-y: scroll;/*Scrollbalken für einheitliches Design erzwingen*/
+	}
+	/*+++Responsives FB Plugin+++*/
+		.fb-like-box, .fb-like-box span, .fb-like-box.fb_iframe_widget span iframe {
+			width: 100% !important;
+			background-color: white;
+		}
+	/*---Responsives FB Plugin---*/
+	body {
+		background-color: #FFF;
+		background-position: 0 200px;
+		color: #234754;
+		margin: 0 auto;
+		min-width: 1000px;
+		padding: 0 0;
+		width: 70%;
+		font-family: 'Open Sans', Verdana;
+	}
+	a {
+		color: #000;
+	}
+	a:hover {
+		text-decoration: none;
+	}
+	hr {
+		border-bottom: 0;
+		border-style: solid;
+		margin: 1em 0;
+		height: 0px;
+	}
+	th {
+		text-align: left;
+	}
 /*---allgemeine Tags---*/
-/*Responsives FB Plugin*/
-.fb-like-box, .fb-like-box span, .fb-like-box.fb_iframe_widget span iframe {
-    width: 100% !important;
-    background-color: white;
-}
-
-body {
-	background-color: #FFF;
-	background-position: 0 200px;
-	color: #234754;
-	margin: 0 auto;
-	min-width: 1000px;
-	padding: 0 0;
-	width: 70%;
-	font-family: 'Open Sans', Verdana;
-}
-a {
-	color: #000;
-}
-a:hover {
-	text-decoration: none;
-}
-/*#headerlist a:visited {
-}*/
-/*#headerlist a:active {
-}*/
-.greencolor {
-	color: #9AEA00;
-}
-hr {
-	border-bottom: 0;
-	border-style: solid;
-	margin: 1em 0;
-	height: 0px;
-}
-th {
-	text-align: left;
-}
+/*+++allgemeine Styles+++*/
+	.greencolor {
+		color: #9AEA00;
+	}
+	.bottom_border_green {
+			border-bottom: 5px solid #B7D300;
+	}
+	.bottom_border_blue {
+			border-bottom: 5px solid #7E74E1;
+	}
+	.pseudo_link {
+		cursor: pointer;
+		color: #000;
+		text-decoration: underline;
+	}
+	.pseudo_link:hover {
+		text-decoration: none;
+	}
+	.blue_line {
+		background-image: url('../img/header_bg-blue.png');
+	}
+	.green_line {
+		background-image: url('../img/header_bg-green.png');
+	}
+	.float_left {
+		float: left;
+	}
+	.float_right {
+		float: right;
+	}
+	.highlighted {
+		color: #555;
+		font-family: sans-serif;
+		font-size: 3em;
+		font-weight: bold;
+		text-shadow: 2px 2px 0 #fff, 4px 4px 0 #8ED70F;
+	}
 /*---allgemeine Styles---*/
-.bottom_border_green {
-		border-bottom: 5px solid #B7D300;
-}
-.bottom_border_blue {
-		border-bottom: 5px solid #7E74E1;
-}
-.pseudo_link {
-	cursor: pointer;
-	color: #000;
-	text-decoration: underline;
-}
-.pseudo_link:hover {
-	text-decoration: none;
-}
-.blue_line {
-	background-image: url('../img/header_bg-blue.png');
-}
-.green_line {
-	background-image: url('../img/header_bg-green.png');
-}
-.float_left {
-	float: left;
-}
-.float_right {
-	float: right;
-}
-.highlighted {
-	color: #555;
-	font-family: sans-serif;
-	font-size: 3em;
-	font-weight: bold;
-	text-shadow: 2px 2px 0 #fff, 4px 4px 0 #8ED70F;
-}
-/*---HEADER---*/
-#header {
-	font-family: 'Open Sans', sans-serif;
-	margin-top: 0;
-	overflow: auto;
-	width: 100%;
-}
-	#headerlist {
-		color: #9B9B9B;
-		float: right;
-		height: 2.9em;
-		margin: 1px 1px 0 0;
-		line-height: 2.9em;
-		list-style: none;
-		padding: 0 1em 0 0;
+/*+++Baumdiagramm+++*/
+	.tree ul {
+		padding-top: 20px; position: relative;
+		
+		transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
 	}
-		#headerlist a {
+	
+	.tree li {
+		float: left; text-align: center;
+		list-style-type: none;
+		position: relative;
+		padding: 20px 5px 0 5px;
+		
+		transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+	}
+	
+	/*We will use ::before and ::after to draw the connectors*/
+	
+	.tree li::before, .tree li::after{
+		content: '';
+		position: absolute; top: 0; right: 50%;
+		border-top: 1px solid #ccc;
+		width: 50%; height: 20px;
+	}
+	.tree li::after{
+		right: auto; left: 50%;
+		border-left: 1px solid #ccc;
+	}
+	
+	/*We need to remove left-right connectors from elements without 
+	any siblings*/
+	.tree li:only-child::after, .tree li:only-child::before {
+		display: none;
+	}
+	
+	/*Remove space from the top of single children*/
+	.tree li:only-child{ padding-top: 0;}
+	
+	/*Remove left connector from first child and 
+	right connector from last child*/
+	.tree li:first-child::before, .tree li:last-child::after{
+		border: 0 none;
+	}
+	/*Adding back the vertical connector to the last nodes*/
+	.tree li:last-child::before{
+		border-right: 1px solid #ccc;
+		border-radius: 0 5px 0 0;
+		-webkit-border-radius: 0 5px 0 0;
+		-moz-border-radius: 0 5px 0 0;
+	}
+	.tree li:first-child::after{
+		border-radius: 5px 0 0 0;
+		-webkit-border-radius: 5px 0 0 0;
+		-moz-border-radius: 5px 0 0 0;
+	}
+	
+	/*Time to add downward connectors from parents*/
+	.tree ul ul::before{
+		content: '';
+		position: absolute; top: 0; left: 50%;
+		border-left: 1px solid #ccc;
+		width: 0; height: 20px;
+	}
+	
+	.tree li a{
+		border: 1px solid #ccc;
+		padding: 5px 10px;
+		text-decoration: none;
+		color: #666;
+		font-family: arial, verdana, tahoma;
+		font-size: 11px;
+		display: inline-block;
+		
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		
+		transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+	}
+	
+	/*Time for some hover effects*/
+	/*We will apply the hover effect the the lineage of the element also*/
+	.tree li a:hover, .tree li a:hover+ul li a {
+		background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
+	}
+	/*Connector styles on hover*/
+	.tree li a:hover+ul li::after, 
+	.tree li a:hover+ul li::before, 
+	.tree li a:hover+ul::before, 
+	.tree li a:hover+ul ul::before{
+		border-color:  #94a0b4;
+	}
+/*---Baumdiagramm---*/
+/*+++HEADER+++*/
+	#header {
+		font-family: 'Open Sans', sans-serif;
+		margin-top: 0;
+		overflow: auto;
+		width: 100%;
+	}
+		#headerlist {
 			color: #9B9B9B;
+			float: right;
+			height: 2.9em;
+			margin: 1px 1px 0 0;
+			line-height: 2.9em;
+			list-style: none;
+			padding: 0 1em 0 0;
 		}
-		/*#headerlist a:hover {
-			text-decoration: none;
-		}*/
-		/*#headerlist a:visited {
-		}*/
-		/*#headerlist a:active {
-		}*/
-		#headerlist li {
-			float: left;
-			margin-left: 0.5em;
-		}
-		.headerlist_main_divider {
-			color: #000;
-		}
-		.headerlist_sub_divider {
-			font-size: 0.8em;
-		}
-		#de_flag {
-			width: 15px;
-			height: 9px;
-		}
-		#gb_flag {
-			width: 18px;
-			height: 9px;
-		}
-	#headerlogin {
-		color: #FFF;
-		background-color: #56747C;
-		float: right;
-		height: 2.9em;
-		line-height: 2.9em;
-		margin: 1px 1px 0 0;
-		padding-right: 1em;
-		padding-left: 1em;
-		text-decoration: none;
-		vertical-align: middle;
-		}
-		#login-box {
-			background-color: #E1E1E1;
-			background-image: url('../img/login-box.png');
-			background-position: top;
-			background-repeat: no-repeat;
-			display: none;
-			padding: 30px 1em 1em 1em;
-			position: absolute;
-			top: 4em;
-		}
-		#headerlogin:hover {
-			background-color: #BBB;
-		}
-		#headerregisterbr{
+			#headerlist a {
+				color: #9B9B9B;
+			}
+			/*#headerlist a:hover {
+				text-decoration: none;
+			}*/
+			/*#headerlist a:visited {
+			}*/
+			/*#headerlist a:active {
+			}*/
+			#headerlist li {
+				float: left;
+				margin-left: 0.5em;
+			}
+			.headerlist_main_divider {
+				color: #000;
+			}
+			.headerlist_sub_divider {
+				font-size: 0.8em;
+			}
+			#de_flag {
+				width: 15px;
+				height: 9px;
+			}
+			#gb_flag {
+				width: 18px;
+				height: 9px;
+			}
+		#headerlogin {
 			color: #FFF;
-			background-color: #234754;
+			background-color: #56747C;
 			float: right;
-			height: 3em;
-			line-height: 3em;
-			padding-left: 1em;
+			height: 2.9em;
+			line-height: 2.9em;
+			margin: 1px 1px 0 0;
 			padding-right: 1em;
+			padding-left: 1em;
+			text-decoration: none;
+			vertical-align: middle;
+			}
+			#login-box {
+				background-color: #E1E1E1;
+				background-image: url('../img/login-box.png');
+				background-position: top;
+				background-repeat: no-repeat;
+				display: none;
+				padding: 30px 1em 1em 1em;
+				position: absolute;
+				top: 4em;
+			}
+			#headerlogin:hover {
+				background-color: #BBB;
+			}
+			#headerregisterbr{
+				color: #FFF;
+				background-color: #234754;
+				float: right;
+				height: 3em;
+				line-height: 3em;
+				padding-left: 1em;
+				padding-right: 1em;
+			}
+		#squery {
+			border: none;
+			padding: 3px;
 		}
-	#squery {
-		border: none;
-		padding: 3px;
+/*---HEADER---*/
+/*+++LOGO+++*/
+	#logo {
+		height: 70px;
+		left: 1%;
+		position:  absolute;
+		top: 10px;
 	}
-/*---logo---*/
-#logo {
-	height: 70px;
-	left: 1%;
-	position:  absolute;
-	top: 10px;
-}
-/*---NAV---*/
-#mainnav {
-	clear: both;
-	margin-top: 2em;
-    overflow: auto;
-	height: 3.3em;	
-}
-	#mainnavlist {
-		list-style: none;
+/*---LOGO---*/
+/*+++NAV+++*/
+	#mainnav {
+		clear: both;
 		margin-top: 2em;
-		padding: 0;
-		display: inline;
+		overflow: auto;
+		height: 55px;	
 	}
-		#mainnavlist li {
-			float: left;
-			margin-right: 3em;
+		#mainnavlist {
+			list-style: none;
+			margin-top: 2em;
+			padding: 0;
+			display: inline;
 		}
-	.mainnavlinks:link, .mainnavlinks:visited {
-		color: #000;
-		border-bottom: 1px dashed grey;
-		text-decoration: none;
-		font-family: 'Fredericka the Great', Times;
-		font-size: 42px;
-	}
-	.mainnavlinks:hover {
-		border-bottom: 2px solid grey;
-	}
-/*---SECTION---*/
-#section {
-	font-size: 1.15em;
-	margin-top: 1em;
-}
-	.mainarticles {
-		padding-bottom: 1em;
-		margin-bottom: 1em;
-	}
-		.mainarticleheaders {
-			background-position: center;
-			background-repeat: repeat-x;
-			display: block;
-			text-align: center;
-		}
-			.mainarticleheaders h1{
-				background-color: #FFF;               /*background-color: #CCCCFF;*/
-				display: inline;
-				font-size: 1.4em;
-				margin-top: 0;
-				padding: 0 1em;
+			#mainnavlist li {
+				float: left;
+				margin-right: 3em;
 			}
-			
-			.mainarticleheaders h2{
-				background-color: #FFF;
-				display: inline;
-				font-size: 1.8em;
-				margin-top: 0;
-				padding: 0 1em;
+		.mainnavlinks:link, .mainnavlinks:visited {
+			color: #000;
+			border-bottom: 1px dashed grey;
+			text-decoration: none;
+			font-family: 'Fredericka the Great', Times;
+			font-size: 42px;
+		}
+		.mainnavlinks:hover {
+			border-bottom: 2px solid grey;
+		}
+/*---NAV---*/
+/*+++SECTION+++*/
+/*++++Allgemeine SECTION Styles++*/
+	#section {
+		font-size: 1.15em;
+		margin-top: 1em;
+	}
+		.mainarticles {
+			padding-bottom: 1em;
+			margin-bottom: 1em;
+		}
+			.mainarticleheaders {
+				background-position: center;
+				background-repeat: repeat-x;
+				display: block;
+				text-align: center;
 			}
-	/*---Home SECTION---*/
-	.hint {
-		padding: 20px;
-		background-color: #EBEBEB;
-		margin-bottom: 20px;
-		margin-top: 10px;
-	}
-	.hint h1 {
-		margin: 0px;
-		color: red;
-	}
-	.hint p {
-		margin: 10px 0px;
-	}
-	
-	#connect_leiste {
-         margin-bottom: 0.5em;
-         margin-top: 0.5em;
-         overflow: auto;
-         padding-bottom: 1em; 
-    }
-        .connect_box {
-  
-            height: auto;
-            float: left;
-            padding: 1%;
-            border-radius: 0.5em;
-            box-shadow: 0px 3px 3px #000;
-        }
-        .connect_box h1 {
-            text-shadow: 0px 2px 2px #777;
-            font-size: 2em;
-            font-family: tahoma;
-            color: #FFF;
-            margin: 0;
-            padding-left: 0.25em;
-            margin-bottom: 0.25em;
-            border-left: 4px #0092FF solid;
-            
-        }
-        /*.connect_box p {
-            color: #Bbb;
-        }*/
-            #uploads_box {
-                width: 47%;   
-                margin-right: 1%;  
-                
-                background: #f9eeb3; /* Old browsers */
-                background: -moz-linear-gradient(top, #f9eeb3 0%, #f79800 85%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9eeb3), color-stop(85%,#f79800)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* IE10+ */
-                background: linear-gradient(to bottom, #f9eeb3 0%,#f79800 85%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9eeb3', endColorstr='#f79800',GradientType=0 ); /* IE6-9 */
-            }
-                #uploads_box h1 {
-                    border-left: 4px #CF7C00 solid;
-                }
-                #uploads_box span {
-                    color: #A14E00;
-                    font-size: 1.2em;
-                    font-weight: bold;
-                }
-            #submit_box {
-                width: 23%;
-                margin-right: 1%;
-                
-                background: #a1db72; /* Old browsers */
-                background: -moz-linear-gradient(top, #a1db72 1%, #2e9622 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#a1db72), color-stop(100%,#2e9622)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* IE10+ */
-                background: linear-gradient(to bottom, #a1db72 1%,#2e9622 100%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1db72', endColorstr='#2e9622',GradientType=0 ); /* IE6-9 */
-            }
-                #submit_box hr {
-                    margin: 0 0 0.1em 0;
-                    color: #444;
-                }
-                #submit_box p {
-                   margin: 0.5em 0;
-                }
-                #submit_box h1 {
-                    border-left: 4px #0B5D0B solid;
-                }
-                #submit_box span {
-                    color: #0B5D0B; 
-                    font-weight: bold;   
-                }
-            #facebook_box {
-                width: 22%; 
-                height: 100%; 
-                
-                background: #a9e4f7; /* Old browsers */
-                background: -moz-linear-gradient(top, #a9e4f7 0%, #0fb4e7 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e4f7), color-stop(100%,#0fb4e7)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top, #a9e4f7 0%,#0fb4e7 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top, #a9e4f7 0%,#0fb4e7 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top, #a9e4f7 0%,#0fb4e7 100%); /* IE10+ */
-                background: linear-gradient(to bottom, #a9e4f7 0%,#0fb4e7 100%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=0 ); /* IE6-9 */  
-            }
-        
-	
-	#reisearmband {
-		float: left;
-		width: 35%;
-	}
-	#reisearmband_img {
-		width: 100%;
-	}
-	#kollektion {
-		float: left;
-		margin-left: 3%;
-		width: 35%;
-	}
-    	#kollektion_img {
-    		width: 100%;
-    	}
-		.kollektion_numbers{
-            float: left;
-            padding-right: 10px;
-		}
-    	#kollektion p {
-            border: 1px black solid;
-            margin: 0.5em 0;
-            padding: 10px;
-        }
-        .arrow {
-            /* Firefox */
-    		margin-left: -moz-calc(50% - 20px);
-    		/* WebKit */
-    		margin-left: -webkit-calc(50% - 20px);
-    		/* Opera */
-    		margin-left: -o-calc(50% - 20px);
-    		/* Standard */
-    		margin-left: calc(50% - 20px);
-        }
-	.line_header {
-		margin-bottom: 1em;
-	}
-	/*---Über uns SECTION---*/
-	#about-us {
-		float: left;
-		width: 73%;
-	}
-	#wir {
-		width: 100%;
-	}
-	/*---Impressum SECTION---*/
-	#impressum {
-		float: left;
-		width: 100%;
-	}
-	#disclaimer {
-		float: left;
-	}
-	/*---Kontakt SECTION---*/
-	#kontakt {
-	}
-	/*---Armband SECTION---*/
-	#armband {
-		float: left;
-		width: 73%;		
-	}
-	/*---Start SECTION---*/
-	#placelet_stats {
-		background-color: #EBEBEB;
-		border: 1px dotted white;
-		color: #000;
-		padding: 1em;
-		text-shadow: 1px 1px 0px #bad3ed;
-		/*text-shadow: 0px 1px 1px #555;*/
-		margin-bottom: 1em;
-	}
-		#placelet_stats h1 {
-			color: #B7D300;
-			margin-top: 0px;
-			
-		}
-		#placelet_stats table {
-            border-left: 4px #B7D300 solid;
-			float: left;
-            padding-left: 1.5em;
-			max-width: 48%;
-		}
-		#topusers {
-			margin-left: 1em;
-		}
-    		#placelet_stats th {
-    			padding-right: 1em;
-    		}
-	.thumb_link {
-		float: left;
-		max-width: 40%;
-		width: 390px;
-	}
-		.thumbnail {
-		border: 8px solid #CDCDCD;
-		float: right; 
-		height: auto; 
-		margin-bottom: 1em;
-		max-height: 400px;
-		margin-right: 0em;
-		max-width: 85%;
-		/* Firefox */
-		max-width: -moz-calc(100% - 50px);
-		/* WebKit */
-		max-width: -webkit-calc(100% - 50px);
-		/* Opera */
-		max-width: -o-calc(100% - 50px);
-		/* Standard */
-		max-width: calc(100% - 50px);
-		}
-		.thumb_triangle {
-			float: right;
+				.mainarticleheaders h1{
+					background-color: #FFF;               /*background-color: #CCCCFF;*/
+					display: inline;
+					font-size: 1.4em;
+					margin-top: 0;
+					padding: 0 1em;
+				}
+				
+				.mainarticleheaders h2{
+					background-color: #FFF;
+					display: inline;
+					font-size: 1.8em;
+					margin-top: 0;
+					padding: 0 1em;
+				}
+/*---allgemeine SECTION Styles---*/
+	/*+++Home SECTION+++*/
+		.hint {
+			padding: 20px;
+			background-color: #EBEBEB;
+			margin-bottom: 20px;
 			margin-top: 10px;
 		}
-	.pic-info {
-        font-size: 1.2em;
-    }
-		.pic-info th {
-			padding: 0 1em 0 0;
-			width: 4em;
+		.hint h1 {
+			margin: 0px;
+			color: red;
 		}
-	.bracelet-props{
-	   background-color: #4C4C4C !important;
-       border: none !important;
-	   color: #FFF !important;
-	   padding: 1em !important;
-	   width: 22% !important;
-	}        
-    .pic-desc {
-        float: left;
-        margin-top: 15px;
-        padding: 0;
-        width: 56%;
-    }
-        .desc-header {
-            color: #B7D300;
-            font-weight: bold;
-        }
-        .toggle_comments {
-            background-color: #4C4C4C;   
-            color: #FFF;
-            font-family: 'Open Sans', Verdana, sans-serif;
-            padding: 2px 4px;
-            text-decoration: none;
-        }
-    .comments {
-        clear: both;
-        display: none;
-        color: black;
-        background-color:  #EBEBEB;
-        padding:  20px;
-        padding-bottom: 20px;
-    }      
-        .comments strong {
-            color: #B7D300;
-			font-family: 'Open Sans', Verdana, sans-serif;
-        }
-        .comments p {
-            margin-top: 10px;
-            padding-left: 20px; 
-            border-left: 4px #B7D300 solid;   
-        }
-        .comment_form {
-            margin-top: 20px;
-            margin-left: 20px;
-            padding-left: 20px;
-            border-left: 4px #B7D300 solid;
-        }
-            .comment_content {
-                padding: 5px;
-				width: 45%;
-            }
+		.hint p {
+			margin: 10px 0px;
+		}
+		
+		#connect_leiste {
+			 margin-bottom: 0.5em;
+			 margin-top: 0.5em;
+			 overflow: auto;
+			 padding-bottom: 1em; 
+		}
+			.connect_box {
+	  
+				height: auto;
+				float: left;
+				padding: 1%;
+				border-radius: 0.5em;
+				box-shadow: 0px 3px 3px #000;
+			}
+			.connect_box h1 {
+				text-shadow: 0px 2px 2px #777;
+				font-size: 2em;
+				font-family: tahoma;
+				color: #FFF;
+				margin: 0;
+				padding-left: 0.25em;
+				margin-bottom: 0.25em;
+				border-left: 4px #0092FF solid;
+				
+			}
+			/*.connect_box p {
+				color: #Bbb;
+			}*/
+				#uploads_box {
+					width: 47%;   
+					margin-right: 1%;  
+					
+					background: #f9eeb3; /* Old browsers */
+					background: -moz-linear-gradient(top, #f9eeb3 0%, #f79800 85%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9eeb3), color-stop(85%,#f79800)); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* IE10+ */
+					background: linear-gradient(to bottom, #f9eeb3 0%,#f79800 85%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9eeb3', endColorstr='#f79800',GradientType=0 ); /* IE6-9 */
+				}
+					#uploads_box h1 {
+						border-left: 4px #CF7C00 solid;
+					}
+					#uploads_box span {
+						color: #A14E00;
+						font-size: 1.2em;
+						font-weight: bold;
+					}
+				#submit_box {
+					width: 23%;
+					margin-right: 1%;
+					
+					background: #a1db72; /* Old browsers */
+					background: -moz-linear-gradient(top, #a1db72 1%, #2e9622 100%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#a1db72), color-stop(100%,#2e9622)); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* IE10+ */
+					background: linear-gradient(to bottom, #a1db72 1%,#2e9622 100%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1db72', endColorstr='#2e9622',GradientType=0 ); /* IE6-9 */
+				}
+					#submit_box hr {
+						margin: 0 0 0.1em 0;
+						color: #444;
+					}
+					#submit_box p {
+					   margin: 0.5em 0;
+					}
+					#submit_box h1 {
+						border-left: 4px #0B5D0B solid;
+					}
+					#submit_box span {
+						color: #0B5D0B; 
+						font-weight: bold;   
+					}
+				#facebook_box {
+					width: 22%; 
+					height: 100%; 
+					
+					background: #a9e4f7; /* Old browsers */
+					background: -moz-linear-gradient(top, #a9e4f7 0%, #0fb4e7 100%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e4f7), color-stop(100%,#0fb4e7)); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(top, #a9e4f7 0%,#0fb4e7 100%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(top, #a9e4f7 0%,#0fb4e7 100%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(top, #a9e4f7 0%,#0fb4e7 100%); /* IE10+ */
+					background: linear-gradient(to bottom, #a9e4f7 0%,#0fb4e7 100%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=0 ); /* IE6-9 */  
+				}
+		#reisearmband {
+			float: left;
+			width: 35%;
+		}
+		#reisearmband_img {
+			width: 100%;
+		}
+		#kollektion {
+			float: left;
+			margin-left: 3%;
+			width: 35%;
+		}
+			#kollektion_img {
+				width: 100%;
+			}
+			.kollektion_numbers{
+				float: left;
+				padding-right: 10px;
+			}
+			#kollektion p {
+				border: 1px black solid;
+				margin: 0.5em 0;
+				padding: 10px;
+			}
+			.arrow {
+				/* Firefox */
+				margin-left: -moz-calc(50% - 20px);
+				/* WebKit */
+				margin-left: -webkit-calc(50% - 20px);
+				/* Opera */
+				margin-left: -o-calc(50% - 20px);
+				/* Standard */
+				margin-left: calc(50% - 20px);
+			}
+		.line_header {
+			margin-bottom: 1em;
+		}
+	/*---Home SECTION---*/
+	/*+++Über uns SECTION+++*/
+		#about-us {
+			float: left;
+			width: 73%;
+		}
+		#wir {
+			width: 100%;
+		}
+	/*---Über uns SECTION---*/
+	/*+++Impressum SECTION+++*/
+		#impressum {
+			float: left;
+			width: 100%;
+		}
+		#disclaimer {
+			float: left;
+		}
+	/*---Impressum SECTION---*/
+	/*+++Kontakt SECTION+++*/
+		#kontakt {
+		}
+	/*---Kontakt SECTION---*/
+	/*+++Armband SECTION+++*/
+		#armband {
+			float: left;
+			width: 73%;		
+		}
+	/*---Armband SECTION---*/
+	/*+++Start SECTION+++*/
+		#placelet_stats {
+			background-color: #EBEBEB;
+			border: 1px dotted white;
+			color: #000;
+			padding: 1em;
+			text-shadow: 1px 1px 0px #bad3ed;
+			/*text-shadow: 0px 1px 1px #555;*/
+			margin-bottom: 1em;
+		}
+			#placelet_stats h1 {
+				color: #B7D300;
+				margin-top: 0px;
+				
+			}
+			#placelet_stats table {
+				border-left: 4px #B7D300 solid;
+				float: left;
+				padding-left: 1.5em;
+				max-width: 48%;
+			}
+			#topusers {
+				margin-left: 1em;
+			}
+				#placelet_stats th {
+					padding-right: 1em;
+				}
+		.thumb_link {
+			float: left;
+			max-width: 40%;
+			width: 390px;
+		}
+			.thumbnail {
+			border: 8px solid #CDCDCD;
+			float: right; 
+			height: auto; 
+			margin-bottom: 1em;
+			max-height: 400px;
+			margin-right: 0em;
+			max-width: 85%;
+			/* Firefox */
+			max-width: -moz-calc(100% - 50px);
+			/* WebKit */
+			max-width: -webkit-calc(100% - 50px);
+			/* Opera */
+			max-width: -o-calc(100% - 50px);
+			/* Standard */
+			max-width: calc(100% - 50px);
+			}
+			.thumb_triangle {
+				float: right;
+				margin-top: 10px;
+			}
+		.pic-info {
+			font-size: 1.2em;
+		}
+			.pic-info th {
+				padding: 0 1em 0 0;
+				width: 4em;
+			}
+		.bracelet-props{
+		   background-color: #4C4C4C !important;
+		   border: none !important;
+		   color: #FFF !important;
+		   padding: 1em !important;
+		   width: 22% !important;
+		}        
+		.pic-desc {
+			float: left;
+			margin-top: 15px;
+			padding: 0;
+			width: 56%;
+		}
+			.desc-header {
+				color: #B7D300;
+				font-weight: bold;
+			}
+			.toggle_comments {
+				background-color: #4C4C4C;   
+				color: #FFF;
+				font-family: 'Open Sans', Verdana, sans-serif;
+				padding: 2px 4px;
+				text-decoration: none;
+			}
+		.comments {
+			clear: both;
+			display: none;
+			color: black;
+			background-color:  #EBEBEB;
+			padding:  20px;
+			padding-bottom: 20px;
+		}      
+			.comments strong {
+				color: #B7D300;
+				font-family: 'Open Sans', Verdana, sans-serif;
+			}
+			.comments p {
+				margin-top: 10px;
+				padding-left: 20px; 
+				border-left: 4px #B7D300 solid;   
+			}
+			.comment_form {
+				margin-top: 20px;
+				margin-left: 20px;
+				padding-left: 20px;
+				border-left: 4px #B7D300 solid;
+			}
+				.comment_content {
+					padding: 5px;
+					width: 45%;
+				}
+	/*---Start SECTION---*/
+	/*+++Login SECTION+++*/
+		#register_pic {
+			float: left;		
+			width: 49%;
+			margin-right: 3%;
+		}
+			#register_pic form{
+				margin: 0 auto;
+			}
+		#register_br {
+			float: left;
+			width: 48%
+		}
 	/*---Login SECTION---*/
-	#register_pic {
-		float: left;		
-		width: 49%;
-		margin-right: 3%;
+/*---SECTION---*/
+/*+++Side Container ASIDE+++*/
+	.side_container {
+		border-left: black solid 1px;
+		background-color: #DBDBDB;
+		float: right;
+		padding: 1.25em;
+		width: 21%;    
 	}
-		#register_pic form{
-			margin: 0 auto;
+		.side_container h1{
+			font-size: 1.5em;
+			margin-top: 0px;
+		
 		}
-	#register_br {
-		float: left;
-		width: 48%
-	}
+		.side_container p {
+			padding: 0;
+			margin: 0;
+		}        
+		.side_container td {
+			margin: 0;
+			padding: 4px;
+		}
 /*---Side Container ASIDE---*/
-.side_container {
-	border-left: black solid 1px;
-	background-color: #DBDBDB;
-    float: right;
-    padding: 1.25em;
-    width: 21%;    
-}
-	.side_container h1{
-		font-size: 1.5em;
-		margin-top: 0px;
-	
-	}
-	.side_container p {
-		padding: 0;
-		margin: 0;
-	}        
-	.side_container td {
-		margin: 0;
-		padding: 4px;
-	}
-	
-	
-	
-.tree ul {
-	padding-top: 20px; position: relative;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-}
-
-.tree li {
-	float: left; text-align: center;
-	list-style-type: none;
-	position: relative;
-	padding: 20px 5px 0 5px;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-}
-
-/*We will use ::before and ::after to draw the connectors*/
-
-.tree li::before, .tree li::after{
-	content: '';
-	position: absolute; top: 0; right: 50%;
-	border-top: 1px solid #ccc;
-	width: 50%; height: 20px;
-}
-.tree li::after{
-	right: auto; left: 50%;
-	border-left: 1px solid #ccc;
-}
-
-/*We need to remove left-right connectors from elements without 
-any siblings*/
-.tree li:only-child::after, .tree li:only-child::before {
-	display: none;
-}
-
-/*Remove space from the top of single children*/
-.tree li:only-child{ padding-top: 0;}
-
-/*Remove left connector from first child and 
-right connector from last child*/
-.tree li:first-child::before, .tree li:last-child::after{
-	border: 0 none;
-}
-/*Adding back the vertical connector to the last nodes*/
-.tree li:last-child::before{
-	border-right: 1px solid #ccc;
-	border-radius: 0 5px 0 0;
-	-webkit-border-radius: 0 5px 0 0;
-	-moz-border-radius: 0 5px 0 0;
-}
-.tree li:first-child::after{
-	border-radius: 5px 0 0 0;
-	-webkit-border-radius: 5px 0 0 0;
-	-moz-border-radius: 5px 0 0 0;
-}
-
-/*Time to add downward connectors from parents*/
-.tree ul ul::before{
-	content: '';
-	position: absolute; top: 0; left: 50%;
-	border-left: 1px solid #ccc;
-	width: 0; height: 20px;
-}
-
-.tree li a{
-	border: 1px solid #ccc;
-	padding: 5px 10px;
-	text-decoration: none;
-	color: #666;
-	font-family: arial, verdana, tahoma;
-	font-size: 11px;
-	display: inline-block;
-	
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-}
-
-/*Time for some hover effects*/
-/*We will apply the hover effect the the lineage of the element also*/
-.tree li a:hover, .tree li a:hover+ul li a {
-	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
-}
-/*Connector styles on hover*/
-.tree li a:hover+ul li::after, 
-.tree li a:hover+ul li::before, 
-.tree li a:hover+ul::before, 
-.tree li a:hover+ul ul::before{
-	border-color:  #94a0b4;
-}
