@@ -35,6 +35,7 @@ class User
 		$stmt->execute(array('user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if (PassHash::check_password($row['password'], $pw)) {
+			$this->login = $row['user'];
 			if($row['status'] == 0) return 2;
 			$dynamic_password = PassHash::hash($row['password']);
 			$_SESSION['dynamic_password'] = PassHash::hash(substr($dynamic_password, 0, 15)).PassHash::hash(substr($dynamic_password, 15, 15)).PassHash::hash(substr($dynamic_password, 30, 15)).PassHash::hash(substr($dynamic_password, 45, 15));
