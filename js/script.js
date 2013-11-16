@@ -162,7 +162,7 @@ $('body').on('click', '.toggle_comments', function (){
 
 
 function check_width(){   
-    
+//Logo Positionierung    
     if(window.innerWidth < 1480 && window.innerWidth > 1230){
 		$("#logo").attr("src", 'img/logo.svg');
 		$("#logo").attr("width", '93');
@@ -180,7 +180,7 @@ function check_width(){
 	else {
         $("#logo").attr("style", 'top: 11px;'); 
     }
-	
+//Login-Box-Positionierung	
 	if(window.innerWidth < 1038){
 		$("#login-box").css({ 'left' : 500 });
 	}   
@@ -193,6 +193,13 @@ function check_width(){
 			$("#login-box").css({ 'left' : '51%' });
 		}
 	}
+//FB-Plugin-Höhe
+    if(window.innerWidth < 1587) {
+        $("#fb_plugin").attr("data-height", '200');
+    }
+    else {
+        $("#fb_plugin").attr("data-height", '190');
+    }
 	
 }
 

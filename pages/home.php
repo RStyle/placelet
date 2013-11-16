@@ -82,10 +82,6 @@ foreach($bracelets_displayed as $key => $val) {
 						<input type="submit" value="Armband registrieren">
                     </form> 
                 </div>
-                <div class="connect_box" id="facebook_box">
-                    <h1>facebook</h1>
-                    <div class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
-                </div>
             </div>
 
 <!--ERSTER ARTIKEL-->
@@ -127,8 +123,12 @@ foreach($bracelets_displayed as $key => $val) {
 <!--SIDEBAR-->
 			<aside class="side_container">
 				<!--<h1>JUNIOR</h1>-->
-				<img src="img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 100%; height: auto;">
+				<img src="img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
 				<p>Das Unternehmen Placelet entstand durch das Projekt JUNIOR der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 
 				auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank, Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed 
 				Ex gefördert.</p>
+			</aside>
+			<aside class="side_container" style="margin-top: 20px;">
+				<h1>facebook</h1>
+				<div id="fb_plugin" class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
 			</aside>
