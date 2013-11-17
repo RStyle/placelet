@@ -280,19 +280,18 @@ if($page == 'login' && isset($postpic)) {
 									if (val['long_name']!="") {
 										city = val['long_name'];
 									}
-									console.log(i+", " + val['long_name']);
-									console.log(i+", " + val['types']);
 								}
 								if (val['types'] == "country,political") {
 									if (val['long_name']!="") {
 										country = val['long_name'];
 									}
-									console.log(i+", " + val['long_name']);
-									console.log(i+", " + val['types']);
 								}
-								if (val['types'].indexOf("administrative_area_level_1") >= 0) {
+								//if (val['types'].indexOf("administrative_area_level_1") >= 0) {
+								if (val['types'] == "administrative_area_level_1,political") {
 									if (val['long_name']!="") {
 										bundesland = val['long_name'];
+									//console.log(i+", " + val['long_name']);
+									//console.log(i+", " + val['types']);
 									}
 								}
 							});
@@ -308,68 +307,74 @@ if($page == 'login' && isset($postpic)) {
 				var myOptions = {
 					zoom: 8,
 					center: latlng,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					tilt: 0
 				};
-				var map = new google.maps.Map(document.getElementById("pos"), myOptions);
 				
-				var marker = new google.maps.Marker({
-					position: latlng, 
-					map: map, 
-					title: "Hier bist du :)",
-					draggable: true
-				}); 
-				map.setCenter(marker.position);
-				google.maps.event.addListener(marker, 'dragend', function(evt) {
-					map.setCenter(marker.position);
+				if(mapset == true){
+					marker.setPosition(latlng);
+					console.log("moved the marker");
+				} else {
+					map = new google.maps.Map(document.getElementById("pos"), myOptions);
+					mapset = true;
+						console.log("newmap");
 					
-					lat = evt.latLng.lat().toFixed(6);
-					long = evt.latLng.lng().toFixed(6);
-					
-					$.ajax({
-						type: 'GET',
-						dataType: "json",
-						url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false",
-						data: {},
-						success: function(data) {
-							city = "";
-							bundesland = "";
-							country = "";
-							$('#registerpic_city').val("");
-							$('#registerpic_country').val("");
-							$.each( data['results'],function(i, val) {
-								$.each( val['address_components'],function(i, val) {
-									if (val['types'] == "locality,political") {
-										if (val['long_name']!="") {
-											city = val['long_name'];
-											//return;
-										}
-										console.log(i+", " + val['long_name']);
-										console.log(i+", " + val['types']);
-									}
-									if (val['types'] == "country,political") {
-										if (val['long_name']!="") {
-											country = val['long_name'];
-										}
-										console.log(i+", " + val['long_name']);
-										console.log(i+", " + val['types']);
-									}
-									if (val['types'].indexOf("administrative_area_level_1") >= 0) {
-										if (val['long_name']!="") {
-											bundesland = val['long_name'];
-										}
-										console.log(i+", " + val['long_name']);
-										console.log(i+", " + val['types']);
-									}
-								});
-							});
-							$('#registerpic_city').val(city);
-							$('#registerpic_state').val(bundesland);
-							$('#registerpic_country').val(country);
-							console.log('Success');
-						},
-						error: function () { console.log('error'); } 
+					marker = new google.maps.Marker({
+						position: latlng, 
+						map: map, 
+						title: "Hier bist du :)",
+						draggable: true
 					}); 
-				});
+					
+					//map.setCenter(marker.position);
+					google.maps.event.addListener(marker, 'dragend', function(evt) {
+						map.setCenter(marker.position);
+						
+						lat = evt.latLng.lat().toFixed(6);
+						long = evt.latLng.lng().toFixed(6);
+						
+						$.ajax({
+							type: 'GET',
+							dataType: "json",
+							url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false",
+							data: {},
+							success: function(data) {
+								city = "";
+								bundesland = "";
+								country = "";
+								$('#registerpic_city').val("");
+								$('#registerpic_country').val("");
+								$.each( data['results'],function(i, val) {
+									$.each( val['address_components'],function(i, val) {
+										if (val['types'] == "locality,political") {
+											if (val['long_name']!="") {
+												city = val['long_name'];
+												//return;
+											}
+										}
+										if (val['types'] == "country,political") {
+											if (val['long_name']!="") {
+												country = val['long_name'];
+											}
+										}
+										if (val['types'] == "administrative_area_level_1,political") {
+											if (val['long_name']!="") {
+												bundesland = val['long_name'];
+											}
+										}
+									});
+								});
+								$('#registerpic_city').val(city);
+								$('#registerpic_state').val(bundesland);
+								$('#registerpic_country').val(country);
+								console.log('Success');
+							},
+							error: function () { console.log('error'); } 
+						}); 
+					});
+				}
+				
+				map.setCenter(marker.position);
 				
 			}
 			
@@ -379,7 +384,7 @@ if($page == 'login' && isset($postpic)) {
 				long = position.coords.longitude;
 				$("longitude").val(long);
 				initialize(position.coords, false, false);
-				console.log(position.coords);
+				//console.log(position.coords);
 			}
 			
 			function error(msg) {
@@ -431,6 +436,9 @@ if($page == 'login' && isset($postpic)) {
 				initialize(position.coords);*/
 			}
 			
+			var mapset = false;
+			var map;
+			var marker;
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(success, error);
 			} else {
