@@ -565,7 +565,7 @@ class Statistics {
 		}
 	}
 	//Postet ein Bild
-	public function registerpic ($brid, $description, $city, $country, $title, $picture_file, $max_file_size) {
+	public function registerpic ($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $picture_file, $max_file_size) {
 		$submissions_valid = true;
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
@@ -655,7 +655,7 @@ class Statistics {
 				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
 				///////////////////////////
 			
-				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext)";
+				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext, latitude, longitude, state) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext, :latitude, :longitude, :state)";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
 					':picid' => $picid,
@@ -666,10 +666,12 @@ class Statistics {
 					'city' => $city,
 					'country' => $country,
 					'title' => $title,
-					'fileext' => $fileext
+					'fileext' => $fileext,
+					':latitude' => $latitude,
+					':longitude' => $longitude,
+					':state' => $state
 				));
-				/*echo 'WTF am I not being displayed????';
-				//E-Mail an die Personen senden, die das Armband abboniert haben
+				/*//E-Mail an die Personen senden, die das Armband abboniert haben
 				$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(':brid' => $brid));
