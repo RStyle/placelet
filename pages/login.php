@@ -127,8 +127,8 @@ if(isset($loginattempt)) {
 					<div id="pos" style="width:800px; height:600px;">
 						Deine Position wird ermittelt...
 					</div>
-					<input type="hidden" name="registerpic_latitude" id="latitude" value="0">
-					<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
+					<input type="text" name="registerpic_latitude" id="latitude" value="0">
+					<input type="text" name="registerpic_longitude" id="longitude" value="0">
 					
 					<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
 					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($_GET['descr'])) echo urldecode(str_replace("ujhztg", "\r\n", $_GET['descr']));?></textarea><br>

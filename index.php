@@ -246,9 +246,9 @@ if($page == 'login' && isset($postpic)) {
 					if (status == google.maps.GeocoderStatus.OK) {
 					  console.log(results[0].geometry.location);
 						lat = results[0].geometry.location.ob;
-						$("latitude").val(lat);
+						$("#latitude").val(lat.toString());
 						long = results[0].geometry.location.pb;
-						$("longitude").val(long);
+						$("#longitude").val(long.toString());
 					  initialize(results[0].geometry.location, lat, long);
 					} else {
 					  alert('Geocode was not successful for the following reason: ' + status);
@@ -367,6 +367,8 @@ if($page == 'login' && isset($postpic)) {
 								$('#registerpic_city').val(city);
 								$('#registerpic_state').val(bundesland);
 								$('#registerpic_country').val(country);
+								$("#latitude").val(lat.toString());
+								$("#longitude").val(long.toString());
 								console.log('Success');
 							},
 							error: function () { console.log('error'); } 
@@ -380,9 +382,9 @@ if($page == 'login' && isset($postpic)) {
 			
 			function success(position) {
 				lat = position.coords.latitude;
-				$("latitude").val(lat);
+				$("#latitude").val(lat.toString());
 				long = position.coords.longitude;
-				$("longitude").val(long);
+				$("#longitude").val(long.toString());
 				initialize(position.coords, false, false);
 				//console.log(position.coords);
 			}
