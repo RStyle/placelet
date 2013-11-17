@@ -113,12 +113,11 @@ class User
 			$q->execute(array(
 				':user' => clean_input($reg['reg_login']))
 			);
-			return 'Erfolgreich registriert.\\nDu bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.';
+			return true;
 		} else{
 			return 'Die beiden Passwörter sind nicht gleich.';
 		}
 	}
-	
 	public function regstatuschange ($code, $username){
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
         $q = $this->db->prepare($sql); 
@@ -301,6 +300,46 @@ class User
 			));
 
 		return 'Passwort erfolgreich geändert.';
+	}
+	public function revalidate($username, $email){
+		//Überprüfen, ob der Benutzer existiert.
+		if(!Statistics::userexists($username)) return 'Diesen Benutzer gibt es nicht.';
+		//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
+		$stmt = $this->db->prepare('SELECT email FROM users WHERE email = :email AND user != :user');
+		$stmt->execute(array(
+			'email' => $email,
+			':user' => $username
+		));
+		$anz = $stmt->rowCount();
+		if($anz != 0) return 'Auf diese E-Mail Adresse wurde schon ein anderer Benutzer registriert.';
+		//Überprüfen, ob der Benutzer schon bestätigt wurde.
+		$sql = "SELECT status FROM users WHERE user = :user";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(':user' => $username));
+		$result = $q->fetch(PDO::FETCH_ASSOC);
+		if($result['status'] != '0') return 'Dieser Benutzer wurde schon bestätigt.';
+		//Updaten
+		$sql = "UPDATE user_status SET code = :code WHERE user = :user";
+		$q = $this->db->prepare($sql);
+		$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
+		$q->execute(array(
+			':user' => clean_input($username),
+			':code' => $code) // Ein 60 buchstabenlanger Zufallscode
+		);
+		$sql = "UPDATE users SET email = :email WHERE user = :user";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+			':user' => clean_input($username),
+			':email' => $email
+		));
+		//Neue Email senden.
+		$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.$username.'&regstatuschange='.$code;
+		$mail_header = "From: Placelet <support@placelet.de>\n";
+		$mail_header .= "MIME-Version: 1.0" . "\n";
+		$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
+		$mail_header .= "Content-transfer-encoding: 8bit";
+		mail($email, 'Bestätigungsemail', $content, $mail_header);
+		return true;
 	}
 }
 ?>
