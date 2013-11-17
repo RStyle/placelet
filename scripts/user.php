@@ -714,16 +714,18 @@ class Statistics {
 				$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(':brid' => $brid));
-				$row = $q->fetchAll(PDO::FETCH_ASSOC);
+				$q->setFetchMode(PDO::FETCH_ASSOC);
+				while( $row = $q->fetch(PDO::FETCH_ASSOC)){
 				print_r($row);
-				echo '<h1>'.$row.'<h1>';
-				$content = "Zu dem Armband <a href='".$this->brid2name($brid)."'>".$this->brid2name($brid)."</a> wurde ein neues Bild gepostet.";
+				echo '<h1>'.$row['email'].'ascasc</h1>';
+				$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."'>".$this->brid2name($brid)."</a> wurde ein neues Bild gepostet.<br>
+							Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."&sub=false&sub_email=".$row['email']."'>hier</a>";
 				$mail_header = "From: Placelet <support@placelet.de>\n";
 				$mail_header .= "MIME-Version: 1.0" . "\n";
 				$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 				$mail_header .= "Content-transfer-encoding: 8bit";
-				//foreach() {}
-				mail($reg['reg_email'], 'Neues Bild für Armband '.$this->brid2name($brid), $content, $mail_header);
+				mail($row['email'], 'Neues Bild für Armband '.$this->brid2name($brid), $content, $mail_header);
+				}
 				return 7;//Bild erfolgreich gepostet.
 			} elseif ($file_uploaded == false) {
 				return $picture_file['error'];//Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.
@@ -731,41 +733,34 @@ class Statistics {
 		}
 	}
 	public function manage_subscription($input, $brid, $email) {
-		switch($input) {
-			case 'true':
-				$sql = "INSERT INTO subscriptions (user, brid, email, status) VALUES (:user, :brid, :email, status)";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(
-					':user' => $this->user->login,
-					':brid' => $brid,
-					':email' => $email,
-					':status' => 'false'
-				));
-				break;
-			case 'email':
-				$sql = "INSERT INTO subscriptions (user, brid, email, status) VALUES (:user, :brid, :email, status)";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(
-					':user' => $this->user->login,
-					':brid' => $brid,
-					':email' => $email,
-					':' => 'true'
-				));
-				break;
-			case 'false':
-				$sql = "DELETE subscriptions WHERE email = :email";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(
-					':picid' => $picid,
-					':brid' => $brid,
-					':user' => $this->user->login,
-					':description' => $description,
-					':date' => time(),
-					'city' => $city,
-					'country' => $country,
-					'title' => $title,
-					'fileext' => $fileext
-				));				
+		$sql = "SELECT email FROM subscriptions WHERE brid = :brid AND email = :email";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+			':brid' => $brid,
+			':email' => $email
+		));
+		$anz = $q->rowCount();
+		if($anz == 0) {
+			switch($input) {
+				case 'true':
+					$sql = "INSERT INTO subscriptions (brid, email) VALUES (:brid, :email)";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':brid' => $brid,
+						':email' => $email
+					));
+					break;
+				case 'false':
+					$sql = "DELETE subscriptions WHERE email = :email AND brid = :brid";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':email' => $email,
+						':brid' => $brid
+					));				
+			}
+			return true;
+		}else {
+			return 2;
 		}
 	}
 	

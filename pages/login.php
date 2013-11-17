@@ -122,7 +122,7 @@ if(isset($loginattempt)) {
 					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" maxlength="30" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
 					
 					<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
-					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" maxlength="30" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>" required><br>
+					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" maxlength="30" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>"><br>
 					
 					<div id="pos" style="width:800px; height:600px;">
 						Deine Position wird ermittelt...

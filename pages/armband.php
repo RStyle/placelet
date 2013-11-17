@@ -25,15 +25,29 @@ if ($braceName != NULL) {
 		$bracelet_stats['owners'] = 0;
 		$stats = $bracelet_stats;
 	}
-	if(isset($_GET['sub'])) {
-		$statistics->manage_subscription($_GET['sub'], $braceID);
+	if(isset($_GET['sub']) && isset($_GET['sub_email'])) {
+		$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, $_GET['sub_email']);
+		if(isset($sub_added)) {
+			if($sub_added === true) $js .= 'alert("Abonnement erfolgreich hinzugefügt.");';
+				elseif($sub_added == 2) $js .= 'alert("Dieses Armband wurde schon mit der eingegebenen E-Mail abonniert.");';
+		}
 	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
-				<a href="<?php echo $friendly_self; ?>?sub=true" style="float: right;">Armband abbonieren</a>
+				<a href="<?php echo $friendly_self.'?name='.urlencode($braceName); ?>&sub=true" style="float: right;">Armband abbonieren</a>
 				<a href="<?php echo 'login?postpic=true'; ?>">Ein neues Bild zu diesem Armband posten</a>
 <?php
+	if(isset($_GET['sub'])) {
+?>
+				<form method="get" action="<?php echo $friendly_self; ?>">
+					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right">
+					<input name="sub_email" type="text" maxlength="30" placeholder="E-Mail" class="float_right" required>
+					<input type="hidden" name="sub" value="true">
+					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>">
+				</form>
+<?php
+	}
 					for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
 ?>
 				<div style="width: 100%; overflow: auto;">
