@@ -30,6 +30,8 @@ if ($braceName != NULL) {
 		if(isset($sub_added)) {
 			if($sub_added === true) $js .= 'alert("Abonnement erfolgreich hinzugefügt.");';
 				elseif($sub_added == 2) $js .= 'alert("Dieses Armband wurde schon mit der eingegebenen E-Mail abonniert.");';
+				elseif($sub_added == 3) $js .= 'alert("Dieses Armband wurde nicht mit dieser E-Mail abonniert.");';
+				elseif($sub_added === false) $js .= 'alert("Du hast das Abonnement erfolgreich beendet.");';
 		}
 	}
 ?>

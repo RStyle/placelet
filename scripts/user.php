@@ -740,28 +740,32 @@ class Statistics {
 			':email' => $email
 		));
 		$anz = $q->rowCount();
-		if($anz == 0) {
-			switch($input) {
-				case 'true':
-					$sql = "INSERT INTO subscriptions (brid, email) VALUES (:brid, :email)";
-					$q = $this->db->prepare($sql);
-					$q->execute(array(
-						':brid' => $brid,
-						':email' => $email
-					));
-					break;
-				case 'false':
-					$sql = "DELETE subscriptions WHERE email = :email AND brid = :brid";
-					$q = $this->db->prepare($sql);
-					$q->execute(array(
-						':email' => $email,
-						':brid' => $brid
-					));				
+		if($input == 'true') {
+			if($anz == 0){
+				$sql = "INSERT INTO subscriptions (brid, email) VALUES (:brid, :email)";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':brid' => $brid,
+					':email' => $email
+				));
+				return true;
+			}else {
+				return 2;
 			}
-			return true;
-		}else {
-			return 2;
+		}elseif($input == 'false') {
+			if($anz == 1 && $input == 'false') {
+				$sql = "DELETE FROM subscriptions WHERE brid = :brid AND email = :email";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':email' => $email,
+					':brid' => $brid
+				));	
+				return false;
+			}else {
+				return 3;
+			}
 		}
+		
 	}
 	
 }
