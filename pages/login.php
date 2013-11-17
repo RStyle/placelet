@@ -2,17 +2,17 @@
 @$registerbr = $_GET['registerbr'];
 @$postpic = $_GET['postpic'];
 @$loginattempt = $_GET['loginattempt'];
+@$unvalidated = $_GET['unvalidated'];
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
 //Registrierungsfunktion
 if(isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
 	$user_registered = User::register($_POST, $db);
-	if($user_registered === true) {
-    	$js .= 'alert("Dein Account wurde erfolgreich erstellt.");';
-	}else {
-		$js .= 'alert("'.$user_registered.'");';
-	}
+}
+//E-Mail Bestätigung erneut senden.
+if(isset($_POST['revalidate_submit'])) {
+	$revalidation = $user->revalidate($_POST['revalidate_user'], $_POST['revalidate_email']);
 }
 //Bild posten Funktion aufrufen
 if(isset($_POST['registerpic_submit'])) {
@@ -175,7 +175,37 @@ if(isset($loginattempt)) {
 				</form><br>
 <?php
 	}
+}elseif(isset($unvalidated) || @$user_registered === true || isset($revalidation)) {
+	if(isset($user_registered)) {
+?>
+				<p>
+					Dein Account wurde erfolgreich erstellt.<br>
+					Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.
+					Falls du innerhalb von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
+				</p>
+<?php
+	}elseif(isset($revalidation)) {
+		if($revalidation === true){
+?>
+				<p>Deine E-Mail wurde erfolgreich geändert, du bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.</p>
+<?php
+		}
+	}elseif(isset($revalidation)) {
+		echo $revalidation;
+	}else {
+?>
+				<p>Hier kannst du deine E-Mail ändern und dir eine neue Bestätigungs-Email zusenden lassen.</p>
+<?php
+	}
+?>
+				<form method="post" action="<?php echo $friendly_self; ?>">
+					<input type="text" name="revalidate_user" placeholder="Benutzername" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'"';?>>
+					<input type="text" name="revalidate_email" placeholder="E-Mail">
+					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
+				</form>
+<?php
 }elseif(!$user->login) {
+	if(isset($user_registered)) echo $user_registered;
 ?>
 				<form name="reg" id="form_reg" action="<?php echo $friendly_self; ?>" method="post">
 					<table style="border: 1px solid black">

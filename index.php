@@ -43,7 +43,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 		header('Location: start');
 	}elseif($checklogin == 2) {
 		header('Location: login?unvalidated='.$_POST['login']);
-	}elseif ($checklogin == false) {
+	}elseif ($checklogin === false) {
 		header('Location: login?loginattempt=false');
 		exit;
 	}
