@@ -34,9 +34,9 @@ class User
 		$stmt = $this->db->prepare('SELECT * FROM users WHERE user = :user');
 		$stmt->execute(array('user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($row['status'] == 0) return 2;
 		if (PassHash::check_password($row['password'], $pw)) {
 			$this->login = $row['user'];
-			if($row['status'] == 0) return 2;
 			$dynamic_password = PassHash::hash($row['password']);
 			$_SESSION['dynamic_password'] = PassHash::hash(substr($dynamic_password, 0, 15)).PassHash::hash(substr($dynamic_password, 15, 15)).PassHash::hash(substr($dynamic_password, 30, 15)).PassHash::hash(substr($dynamic_password, 45, 15));
 			//4-facher Hash des Hashes - da der Hash ab einer bestimmten Anzahl von Buchstaben das Passwort abschneidet.
@@ -710,7 +710,7 @@ class Statistics {
 					':longitude' => $longitude,
 					':state' => $state
 				));
-				/*//E-Mail an die Personen senden, die das Armband abboniert haben
+				///E-Mail an die Personen senden, die das Armband abboniert haben
 				$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(':brid' => $brid));
@@ -723,7 +723,7 @@ class Statistics {
 				$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 				$mail_header .= "Content-transfer-encoding: 8bit";
 				//foreach() {}
-				mail($reg['reg_email'], 'Neues Bild für Armband '.$this->brid2name($brid), $content, $mail_header);*/
+				mail($reg['reg_email'], 'Neues Bild für Armband '.$this->brid2name($brid), $content, $mail_header);
 				return 7;//Bild erfolgreich gepostet.
 			} elseif ($file_uploaded == false) {
 				return $picture_file['error'];//Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.

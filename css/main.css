@@ -311,13 +311,19 @@
 				margin-right: 3em;
 			}
 		.mainnavlinks:link, .mainnavlinks:visited {
+			border-top: 1px #B7D300 solid;
 		    position: relative;
 			text-decoration: none;
 			font-family: 'Dosis', Times;
 			font-size: 42px;			
 			transition: all 500ms ease 0s;
-			border-top: 1px #B7D300 solid;
-			
+		}
+		.mainnavlink_active {
+			border-top: 1px #FF0000 solid !important;
+		}
+		.mainnavlink_active:hover {
+		    border-top: 5px #FF0000 solid !important;
+			top: 0.1em;
 		}
 		.mainnavlinks:hover {
 		    border-top: 5px #B7D300 solid;

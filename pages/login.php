@@ -62,7 +62,6 @@ if($user->login) {
 						$js .= 'alert("Dieses Armband gibt es nicht.");';
 						break;
 					case 1:
-						//$js .= 'alert("Armband erfolgreich registriert.");';
 						header('Location: profil');
 						break;
 					case 2:
@@ -149,7 +148,7 @@ if(isset($loginattempt)) {
 ?>
 				<form name="registerbr" action="<?php echo $friendly_self; ?>" method="post">
 					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}// else {echo "Armband ID";}?>">
+					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" required>
 					<input type="submit" name="registerbr_submit" value="Armband registrieren">
 				</form>
 <?php
@@ -199,8 +198,8 @@ if(isset($loginattempt)) {
 	}
 ?>
 				<form method="post" action="<?php echo $friendly_self; ?>">
-					<input type="text" name="revalidate_user" placeholder="Benutzername" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'"';?>>
-					<input type="text" name="revalidate_email" placeholder="E-Mail">
+					<input type="text" name="revalidate_user" placeholder="Benutzername" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'"';?> required>
+					<input type="text" name="revalidate_email" placeholder="E-Mail" required>
 					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
 				</form>
 <?php

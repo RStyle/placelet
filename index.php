@@ -42,7 +42,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 	if($checklogin === true) {
 		header('Location: start');
 	}elseif($checklogin == 2) {
-		header('Location: login?unvalidated='.$_POST['login']);
+		header('Location: login?unvalidated='.$user->login);
 	}elseif ($checklogin === false) {
 		header('Location: login?loginattempt=false');
 		exit;
@@ -212,11 +212,11 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
-				<li><a href="home" class="mainnavlinks">Home</a></li>
-				<li><a href="start" class="mainnavlinks">Start</a></li>
-				<li><a href="about" class="mainnavlinks">Das Team</a></li>
-				<li><a href="shop" class="mainnavlinks">Shop</a></li>
-				<li><a href="<?php echo $navregister['href']; ?>" class="mainnavlinks"><?php echo $navregister['value']; ?></a></li>
+				<li><a href="home" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>">Home</a></li>
+				<li><a href="start" class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>">Start</a></li>
+				<li><a href="about" class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>">Das Team</a></li>
+				<li><a href="shop" class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>">Shop</a></li>
+				<li><a href="<?php echo $navregister['href']; ?>" class="mainnavlinks<?php if(($page == 'profil' && $user->login) || ($page == 'login' &! $user->login)) echo ' mainnavlink_active'?>"><?php echo $navregister['value']; ?></a></li>
 			</ul>
 		</nav>
 <!--###SECTION TAG###-->
