@@ -719,7 +719,7 @@ class Statistics {
 				print_r($row);
 				echo '<h1>'.$row['email'].'ascasc</h1>';
 				$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."'>".$this->brid2name($brid)."</a> wurde ein neues Bild gepostet.<br>
-							Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."&sub=false&sub_email=".md5($row['email'])."'>hier</a>";
+							Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."&sub=false&sub_email=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
 				$mail_header = "From: Placelet <support@placelet.de>\n";
 				$mail_header .= "MIME-Version: 1.0" . "\n";
 				$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
@@ -759,9 +759,8 @@ class Statistics {
 				':brid' => $brid
 			));
 			$result = $q->fetchAll(PDO::FETCH_ASSOC);
-			$anz = 0;
 			foreach($result as $key => $val) {
-				if(md5($val['email']) == $email) {
+				if(PassHash::check_password(urldecode($email), $val['email'])) {
 					$sql = "DELETE FROM subscriptions WHERE brid = :brid AND email = :email";
 					$q = $this->db->prepare($sql);
 					$q->execute(array(

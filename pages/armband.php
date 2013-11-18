@@ -37,19 +37,15 @@ if ($braceName != NULL) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
-				<a href="<?php echo $friendly_self.'?name='.urlencode($braceName); ?>&sub=true" style="float: right;">Armband abbonieren</a>
+				<span class="pseudo_link float_right" id="show_sub">Armband abbonieren</span>
 				<a href="<?php echo 'login?postpic=true'; ?>">Ein neues Bild zu diesem Armband posten</a>
-<?php
-	if(isset($_GET['sub'])) {
-?>
 				<form method="get" action="<?php echo $friendly_self; ?>">
-					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right">
-					<input name="sub_email" type="text" maxlength="30" placeholder="E-Mail" class="float_right" required>
+					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right sub_inputs" style="display: none;">
+					<input name="sub_email" type="text" maxlength="30" placeholder="E-Mail" class="float_right sub_inputs" style="display: none;" required>
 					<input type="hidden" name="sub" value="true">
 					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>">
 				</form>
 <?php
-	}
 					for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
 ?>
 				<div style="width: 100%; overflow: auto;">
