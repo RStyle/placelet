@@ -161,6 +161,10 @@ $('body').on('click', '.toggle_comments', function (){
 //---
 
 
+
+
+
+
 function check_width(){   
 //Logo Positionierung    
     if(window.innerWidth < 1480 && window.innerWidth > 1230){
