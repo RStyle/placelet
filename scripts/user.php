@@ -719,7 +719,7 @@ class Statistics {
 				print_r($row);
 				echo '<h1>'.$row['email'].'ascasc</h1>';
 				$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."'>".$this->brid2name($brid)."</a> wurde ein neues Bild gepostet.<br>
-							Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."&sub=false&sub_email=".$row['email']."'>hier</a>";
+							Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."&sub=false&sub_email=".md5($row['email'])."'>hier</a>";
 				$mail_header = "From: Placelet <support@placelet.de>\n";
 				$mail_header .= "MIME-Version: 1.0" . "\n";
 				$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
@@ -733,14 +733,14 @@ class Statistics {
 		}
 	}
 	public function manage_subscription($input, $brid, $email) {
-		$sql = "SELECT email FROM subscriptions WHERE brid = :brid AND email = :email";
-		$q = $this->db->prepare($sql);
-		$q->execute(array(
-			':brid' => $brid,
-			':email' => $email
-		));
-		$anz = $q->rowCount();
-		if($input == 'true') {
+		if($input == 'true') {//true beudeutet Hinzufügen
+			$sql = "SELECT email FROM subscriptions WHERE brid = :brid AND email = :email";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':brid' => $brid,
+				':email' => $email
+			));
+			$anz = $q->rowCount();
 			if($anz == 0){
 				$sql = "INSERT INTO subscriptions (brid, email) VALUES (:brid, :email)";
 				$q = $this->db->prepare($sql);
@@ -752,21 +752,28 @@ class Statistics {
 			}else {
 				return 2;
 			}
-		}elseif($input == 'false') {
-			if($anz == 1 && $input == 'false') {
-				$sql = "DELETE FROM subscriptions WHERE brid = :brid AND email = :email";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(
-					':email' => $email,
-					':brid' => $brid
-				));	
-				return false;
-			}else {
-				return 3;
+		}elseif($input == 'false') {//False bedeutet Löschen
+			$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':brid' => $brid
+			));
+			$result = $q->fetchAll(PDO::FETCH_ASSOC);
+			$anz = 0;
+			foreach($result as $key => $val) {
+				if(md5($val['email']) == $email) {
+					$sql = "DELETE FROM subscriptions WHERE brid = :brid AND email = :email";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':email' => $val['email'],
+						':brid' => $brid
+					));	
+					return false;
+				}else {
+					return 3;
+				}
 			}
 		}
-		
 	}
-	
 }
 ?>
