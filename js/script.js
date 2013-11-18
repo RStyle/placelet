@@ -262,3 +262,9 @@ function change_pic(cv, sv) {
 		alert( "error" );
 	}); 
 }
+//Aboformular anzeigen
+$(document).ready(function(){
+	$('#show_sub').click(function(){
+		$('.sub_inputs').toggle('fast');
+	});
+});

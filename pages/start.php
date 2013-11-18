@@ -119,7 +119,11 @@ for ($i = 0; $i < $user_anz; $i++) {
 							</tr>
 							<tr>
 								<td>Letzter Ort</td>
-								<td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
+								<td><?php echo $stats[$i][0]['city']; ?>,</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><?php echo $stats[$i][0]['country']; ?></td>
 							</tr>
 							<tr>
 								<td>Station Nr.</td>

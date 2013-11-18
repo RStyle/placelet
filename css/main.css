@@ -319,10 +319,10 @@
 			transition: all 500ms ease 0s;
 		}
 		.mainnavlink_active {
-			border-top: 1px #FF0000 solid !important;
+			border-top: 1px #7E74E1 solid !important;
 		}
 		.mainnavlink_active:hover {
-		    border-top: 5px #FF0000 solid !important;
+		    border-top: 5px #7E74E1 solid !important;
 			top: 0.1em;
 		}
 		.mainnavlinks:hover {
@@ -335,7 +335,6 @@
 	#section {
 		font-size: 1.15em;
 		margin-top: 1em;
-		animation:fadein 2s;-moz-animation:fadein 4s;-webkit-animation:fadein 2s;
 	}
 		.mainarticles {
 			padding-bottom: 1em;
