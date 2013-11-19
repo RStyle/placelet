@@ -505,12 +505,11 @@ class Statistics {
 	}
 	//Bilderdetails
 	public function picture_details ($brid) {
-		$sql = "SELECT user, description, picid, city, country, date, title, fileext FROM pictures WHERE brid = :brid";
+		$sql = "SELECT user, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
-			//$details[$val['picid']] = $val;
 			$details[$val['picid']]['user'] = $val['user'];
 			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];
@@ -519,6 +518,9 @@ class Statistics {
 			$details[$val['picid']]['date'] = $val['date'];
 			$details[$val['picid']]['title'] = $val['title'];
 			$details[$val['picid']]['fileext'] = $val['fileext'];
+			$details[$val['picid']]['latitude'] = $val['latitude'];
+			$details[$val['picid']]['longitude'] = $val['longitude'];
+			$details[$val['picid']]['state'] = $val['state'];
 		}
 		$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid";
 		$stmt = $this->db->prepare($sql);

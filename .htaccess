@@ -26,4 +26,7 @@ RewriteRule ^(.*)$ http://placelet.de/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^www.placelet.net$ [NC]
 RewriteRule ^(.*)$ http://placelet.net/$1 [R=301,L]
-#composed by Daniel Schäfer
+
+#404 Page
+ErrorDocument 404 /404.php
+#composed by Daniel Schäfer and Roman Savrasov

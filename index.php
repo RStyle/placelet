@@ -75,7 +75,8 @@ $pagename = array(
 	"profil" => "Profil",
 	"search" => "Suchergebnis",
 	"shop" => "Shop",
-	"start" => "Start"
+	"start" => "Start",
+	"404" => "Seite nicht gefunden"
 	);
 	
 $navregister['href'] = "login";	
