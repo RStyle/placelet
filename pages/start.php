@@ -163,7 +163,11 @@ for ($i = 0; $i < $user_anz; $i++) {
 					$last_comment = 'last';
 				}
 ?>
+<<<<<<< HEAD
 					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>&comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&delete_comm=true" class="delete_button float_right">X</a>
+=======
+					<a href="http://placelet.de/start?commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>" class="delete_button float_right">X</a>
+>>>>>>> 9ad200d9d563443e2bef126dfe1e748fd97cce57
 					<strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
