@@ -3,7 +3,8 @@ class User
 {
 	protected $db;
 	public $login;
-	public $logged = false; //eingeloggt?;
+	public $logged = false; //eingeloggt?
+	public $admin = false; //admin?
 	public function __construct($login, $db){
 		$this->db = $db;
 		$this->login = $login;
@@ -19,6 +20,13 @@ class User
 					//Überprüfung des 4-fachen Hashs des Hashes - müsste unschlagbare Sicherheit bieten ;)
 				){
 					$this->logged = true;
+					//Status abfragen
+					$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
+					$stmt->execute(array('user' =>$_SESSION['user']));
+					$row = $stmt->fetch(PDO::FETCH_ASSOC);
+					if($row['status'] == 2) {
+						$this->admin = true;
+					}
 				} else {
 					echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15);
 					$this->login = false;	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
@@ -57,6 +65,13 @@ class User
 				':password'=>$dynamic_password)
 			);
 			$this->logged = true;
+			//Status abfragen
+			$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
+			$stmt->execute(array('user' =>$_SESSION['user']));
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($row['status'] == 2) {
+				$this->admin = true;
+			}
 			return true;
 		}else { 
 			return false; 
@@ -766,11 +781,68 @@ class Statistics {
 					$q->execute(array(
 						':email' => $val['email'],
 						':brid' => $brid
-					));	
+					));
 					return false;
 				}else {
 					return 3;
 				}
+			}
+		}
+	}
+	private function delete_comment($input, $commid, $picid, $brid) {
+			$sql = "DELETE FROM comments WHERE commid = :commid AND picid = :picid AND brid = :brid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':picid' => $picid,
+				':brid' => $brid,
+				':commid' => $commid
+			));
+			$anz = $q->rowCount();
+			if($input == 'middle') {
+				$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid AND commid > :commid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':picid' => $picid,
+					':brid' => $brid,
+					':commid' => $commid
+				));
+				$result = $q->fetchAll(PDO::FETCH_ASSOC);
+				foreach($result as $key => $val) {
+					$sql = "UPDATE comments SET commid = :newcommid WHERE brid = :brid AND picid = :picid AND commid = :commid";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':picid' => $picid,
+						':brid' => $brid,
+						':commid' => $val['commid'],
+						':newcommid' => $val['commid'] - 1
+					));
+				}
+			}
+			if($anz == 1) {
+				return true;//erfolgreich gelöscht
+			}else {
+				return false;
+			}
+	}
+	public function manage_comment($admin, $input, $commid, $picid, $brid) {
+		if($admin) {
+			return $this->delete_comment($input, $commid, $picid, $brid);
+		}else {
+			if($this->user->login) {
+				$sql = "SELECT user FROM bracelets WHERE user = :user AND brid = :brid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':user' => $this->user->login,
+					':brid' => $brid,
+				));
+				$anz = $q->rowCount();
+				if($anz == 1) {
+					return $this->delete_comment($input, $commid, $picid, $brid);
+				}else {
+					return 2;//gemeldet
+				}
+			}else {
+				return 2;//gemeldet
 			}
 		}
 	}

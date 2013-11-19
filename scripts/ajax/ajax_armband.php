@@ -82,14 +82,21 @@ if ($braceID != NULL) {
 				default:
 					$x_days_ago = 'vor '.$x_days_ago.' Tagen';
 			}
+			//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
+			if(isset($stats[$i][$j + 1]['commid'])) {
+				$last_comment = 'middle';
+			}else {
+				$last_comment = 'last';
+			}
 ?>
+							<a href="armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right">X</a>
                             <strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  
 <?php 
 		}
 ?>   
-						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self.'?name='.urlencode($braceName); ?>" method="post">
+						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
 							<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
 							<label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
 							<input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  

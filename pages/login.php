@@ -153,7 +153,7 @@ if(isset($loginattempt)) {
 }elseif(isset($registerbr)) {
 	if($user->login) {
 ?>
-				<form name="registerbr" action="<?php echo $friendly_self; ?>" method="post">
+				<form name="registerbr" action="login" method="post">
 					<label for="reg_br">Armband registrieren</label>
 					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" required>
 					<input type="submit" name="registerbr_submit" value="Armband registrieren">
@@ -163,7 +163,7 @@ if(isset($loginattempt)) {
 ?>
 				Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
 				um dein Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $registerbr; ?></span> registrieren:<br>
-				<form name="login" id="form_login" action="<?php echo $friendly_self.'?registerbr='.$registerbr; ?>" method="post">
+				<form name="login" id="form_login" action="login?registerbr=<?php echo $registerbr; ?>" method="post">
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -204,7 +204,7 @@ if(isset($loginattempt)) {
 <?php
 	}
 ?>
-				<form method="post" action="<?php echo $friendly_self; ?>">
+				<form method="post" action="login">
 					<input type="text" name="revalidate_user" placeholder="Benutzername" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'"';?> required>
 					<input type="text" name="revalidate_email" placeholder="E-Mail" required>
 					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
@@ -213,7 +213,7 @@ if(isset($loginattempt)) {
 }elseif(!$user->login) {
 	if(isset($user_registered)) echo $user_registered;
 ?>
-				<form name="reg" id="form_reg" action="<?php echo $friendly_self; ?>" method="post">
+				<form name="reg" id="form_reg" action="login" method="post">
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="reg_login">Benutzername</label></td>

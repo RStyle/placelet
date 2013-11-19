@@ -31,7 +31,7 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 						<table class="pic-info">
 							<tr>
 								<th>Datum</th>
-								<td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?></td>
+								<td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?> Uhr</td>
 							</tr>
 							<tr>
 								<th>Ort</th>
@@ -71,7 +71,11 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 							</tr>
 							<tr>
 								<td>Letzter Ort</td>
-								<td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
+								<td><?php echo $stats[$i][0]['city']; ?>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td><?php echo $stats[$i][0]['country']; ?></td>
 							</tr>
 							<tr>
 								<td>Station Nr.</td>
@@ -95,14 +99,21 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 						default:
 							$x_days_ago = 'vor '.$x_days_ago.' Tagen';
 					}
+				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
+				if(isset($stats[$i][0][$j + 1]['commid'])) {
+					$last_comment = 'middle';
+				}else {
+					$last_comment = 'last';
+				}
 ?>
+					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>&comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&delete_comm=true" class="delete_button float_right">X</a>
                     <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
 <?php 
 				}
 ?>   
-					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self; ?>" method="post">
+					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="start" method="post">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
 						<label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
 						<input type="text" name="comment_user[<?php echo $i; ?>]" id="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if ($checklogin)echo ' value="'.$user->login.'" '; ?>

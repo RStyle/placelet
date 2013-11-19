@@ -41,7 +41,7 @@ if ($user->login) {
 				<div class="green_line mainarticleheaders line_header"><h1>Deine Accounteinstellungen, <?php echo $user->login ?></h1></div>
 				<div>
 					Deine Accountdetails:
-					<form name="change" action="<?php echo $friendly_self; ?>" method="post">
+					<form name="change" action="account" method="post">
 						<table border="0">
 							<tr>
 								<th>Vorname:</th>
@@ -87,7 +87,7 @@ if ($user->login) {
 					In Kürze werden Sie eine E-Mail erhalten in der ein Link ist, mit dem Sie Ihr Passwort zurücksetzen können.
 				</p>
 
-				<form name="recover_password" action"<?php echo $friendly_self; ?>" method="post">
+				<form name="recover_password" action"account" method="post">
 					E-Mail Adresse <input type="text" name="recover_email" placeholder="E-Mail Adresse"><br>
 					<input type="submit" name="submit" value="Neues Passwort zuschicken">
 				</form>
@@ -99,7 +99,7 @@ if ($user->login) {
 <?php
 		if($recover_code) {
 ?>
-				<form name="change" action="<?php echo $friendly_self_get; ?>" method="post">
+				<form name="change" action="account" method="post">
 					<input type="password" name="new_pwd" placeholder="neues Passwort">
 					<input type="submit" name="submit" value="Passwort ändern">
 				</form>
@@ -114,7 +114,7 @@ if ($user->login) {
 				<div class="green_line mainarticleheaders line_header"><h1>Account</h1></div>
 					Du kannst deine Accounteinstellungen nur ändern, wenn du eingeloggt bist.<br>
 					Bitte logge dich ein:
-					<form name="login" action="<?php echo $friendly_self; ?>" method="post">
+					<form name="login" action="account" method="post">
 						<table style="border: 1px solid black">
 							<tr>
 								<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>

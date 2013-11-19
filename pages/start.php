@@ -3,15 +3,24 @@ foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
 //Kommentare schreiben
-if (isset($_POST['comment_submit'])) {
+if(isset($_POST['comment_submit'])) {
 	$write_comment = $statistics->write_comment ($_POST['comment_brid'][$_POST['comment_form']],
 						 $_POST['comment_user'][$_POST['comment_form']],
 						 $_POST['comment_content'][$_POST['comment_form']],
 						 $_POST['comment_picid'][$_POST['comment_form']],
 						 $user);
 }
-if (isset($write_comment)) {
+if(isset($write_comment)) {
 	$js .= 'alert("'.$write_comment.'");';
+}
+//Kommentar löschen
+if(isset($_GET['last_comment']) && isset($_GET['delete_comm']) && isset($_GET['commid']) && isset($_GET['picid']) && isset($_GET['comm_name'])) {
+	$comment_deleted = $statistics->manage_comment($user->admin, $_GET['last_comment'], $_GET['commid'], $_GET['picid'], urldecode($statistics->name2brid($_GET['comm_name'])));
+	if($comment_deleted === true) {
+		$js .= 'alert("Kommentar erfolgreich gelöscht.");';
+	}elseif($comment_deleted == 2) {
+		$js .= 'alert("Kommentar gemeldet.");';
+	}
 }
 $user_anz = 3;
 $systemStats = $statistics->systemStats($user_anz, 3);
@@ -147,14 +156,21 @@ for ($i = 0; $i < $user_anz; $i++) {
 						default:
 							$x_days_ago = 'vor '.$x_days_ago.' Tagen';
 					}
+				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
+				if(isset($stats[$i][0][$j + 1]['commid'])) {
+					$last_comment = 'middle';
+				}else {
+					$last_comment = 'last';
+				}
 ?>
-                    <strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
+					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>&comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&delete_comm=true" class="delete_button float_right">X</a>
+					<strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
 <?php 
 				}
 ?>   
-					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="<?php echo $friendly_self; ?>" method="post">
+					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="start" method="post">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
 						<label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
 						<input type="text" name="comment_user[<?php echo $i; ?>]" id="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  

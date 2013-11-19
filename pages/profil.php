@@ -83,7 +83,7 @@ if(!isset($_GET['user'])) {
 				<div style="float: left; margin-right: 2em;">
 					Dein Profil kann nur angezeigt werden, wenn du eingeloggt bist.<br>
 					Bitte logge dich ein:
-					<form name="login" action="<?php echo $friendly_self; ?>" method="post">
+					<form name="login" action="profil" method="post">
 						<table style="border: 1px solid black">
 							<tr>
 								<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -102,7 +102,7 @@ if(!isset($_GET['user'])) {
 				</div>
 				<div>
 					Oder suche nach dem Profil von jemand anderem:
-					<form action="<?php echo $friendly_self; ?>" method="get">
+					<form action="profil" method="get">
 						<table style="border: 1px solid black; overflow: auto;">
 							<tr>
 								<td><input type="text" name="user" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>

@@ -21,7 +21,7 @@ if (isset($send_email)) {
 				Dieses Formular können Sie benutzen, wenn sie Fragen zu unseren Produkten oder Anliegen bezüglich unserer Webseite haben.<br>
 				Wir bemühen uns, Ihnen schnellstmöglich eine Antwort per E-Mail zukommen zu lassen.
 			</p>
-			<form style="padding-left: 20px; border-left: 4px #BEBEBE solid;" method="post" action="<?php echo $friendly_self;?>">
+			<form style="padding-left: 20px; border-left: 4px #BEBEBE solid;" method="post" action="kontakt">
 				<table>
 					<tr>
 						<td><label for="sender">Ihre E-Mail Adresse:</label><br></td>
