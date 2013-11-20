@@ -92,7 +92,7 @@ if ($braceName != NULL) {
                     
 					<div class="comments" id="comment<?php echo $i;?>">
 <?php
-					for ($j = 1; $j <= count($stats[$i])-8; $j++) {
+					for ($j = 1; $j <= count($stats[$i])-11; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
 					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
 					switch($x_days_ago) {

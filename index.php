@@ -76,7 +76,8 @@ $pagename = array(
 	"search" => "Suchergebnis",
 	"shop" => "Shop",
 	"start" => "Start",
-	"404" => "Seite nicht gefunden"
+	"404" => "Seite nicht gefunden",
+	'admin' => 'Admin'
 	);
 	
 $navregister['href'] = "login";	
@@ -218,6 +219,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li><a href="about" class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>">Das Team</a></li>
 				<li><a href="shop" class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>">Shop</a></li>
 				<li><a href="<?php echo $navregister['href']; ?>" class="mainnavlinks<?php if(($page == 'profil' && $user->login) || ($page == 'login' &! $user->login)) echo ' mainnavlink_active'?>"><?php echo $navregister['value']; ?></a></li>
+				<?php if($user->admin) { ?>
+				<li><a href="admin" class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>">Admin-Tools</a></li>
+				<?php } ?>
 			</ul>
 		</nav>
 <!--###SECTION TAG###-->

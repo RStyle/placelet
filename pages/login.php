@@ -44,9 +44,6 @@ if(isset($_POST['registerpic_submit'])) {
 			case 5:
 				$js .= 'alert("Dieses Armband gibt es nicht.");';
 				break;
-			case 6:
-				$js .= 'alert("Das erste Bild kann nur der Käufer hochladen.");';
-				break;
 			case 7:
 				header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
 				break;

@@ -646,9 +646,6 @@ class Statistics {
 		$bracelet_status = $this->bracelet_status($brid);
 		if($bracelet_status == 1) return 4;
 		elseif($bracelet_status == 0) return 5;
-		//Prüft, wenn es das erste Bild ist, ob der Poster der Besitzer ist
-		$bracelet_stats = $this->bracelet_stats($brid);
-		if($bracelet_stats['owner'] != $this->user->login && !isset($bracelet_stats['owners'])) return 6;
 		//Lädt das Bild hoch und trägt es in die Datenbank ein
 		if ($submissions_valid) {
 			$description = clean_input($description);
@@ -841,12 +838,34 @@ class Statistics {
 				if($anz == 1) {
 					return $this->delete_comment($input, $commid, $picid, $brid);
 				}else {
+					$sql = "UPDATE comments SET spam = true WHERE brid = :brid AND picid = :picid AND commid = :commid";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':picid' => $picid,
+						':brid' => $brid,
+						':commid' => $commid
+					));
 					return 2;//gemeldet
 				}
 			}else {
+				$sql = "UPDATE comments SET spam = true WHERE brid = :brid AND picid = :picid AND commid = :commid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':picid' => $picid,
+					':brid' => $brid,
+					':commid' => $commid
+				));
 				return 2;//gemeldet
 			}
 		}
+	}
+	public function admin_stats() {
+		//Spam-Kommentare
+		$sql = "SELECT commid, picid, user, comment, date, brid FROM comments";
+		$q = $this->db->prepare($sql);
+		$q->execute();
+		$result['spam_comments'] = $q->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
 	}
 }
 ?>

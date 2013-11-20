@@ -29,10 +29,16 @@ if(!isset($_GET['user'])) {
 							<th>E-Mail Adresse</th>
 							<td><?php echo $userdetails['email']; ?></td>
 						</tr>
+<?php
+		if($userdetails['status']) {
+?>
 						<tr>
-							<th>&nbsp;</th>
-							<td><?php echo $userdetails['status']; ?></td>
+							<th>Status</th>
+							<td>Admin</td>
 						</tr>
+<?php
+		}
+?>
 					</table>
 					<p><a href="account">Accountdetails ändern</a></p>
 				</div>
