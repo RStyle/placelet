@@ -377,6 +377,10 @@ class Statistics {
 		$stmt = $this->db->prepare("SELECT brid, date FROM bracelets WHERE user = :user ORDER BY  `bracelets`.`date` ASC ");
 		$stmt->execute(array('user' => $user));
 		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		//Abonnierte Armbänder
+		$stmt = $this->db->prepare("SELECT brid FROM subscriptions WHERE email = :email");
+		$stmt->execute(array('email' => $result[0]['email']));
+		$result[4] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$user_details = $result;
 		$user_details['users'] = $user_details[0];
@@ -390,6 +394,7 @@ class Statistics {
 		}
 		$user_details['bracelets'] = $brids;
 		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
+		$userdetails['subscriptions'] = $user_details[4];
 		if(isset($result[3]))
 			$userdetails['picture_count'] = $result[3];
 		else

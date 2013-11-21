@@ -14,8 +14,11 @@ if(isset($username) && Statistics::userexists($username)) {
 }
 if(!isset($_GET['user'])) {
 	if ($user->login) {
-		if($userdetails['status'] == 0) $userdetails['status'] = 'E-Mail nicht bestätigt';
-		if($userdetails['status'] == 1) $userdetails['status'] = 'E-Mail bestätigt';
+		/*foreach($userdetails as $key => $val) {
+			echo $key.'---';
+			print_r($val);
+			echo '<br>';
+		}*/
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Dein Profil, <?php echo $user->login ?></h1></div>
 				<div style="float: left; margin-right: 2em;">
@@ -41,6 +44,16 @@ if(!isset($_GET['user'])) {
 ?>
 					</table>
 					<p><a href="account">Accountdetails ändern</a></p>
+					Abonnierte Armbänder
+					<ul>
+<?php
+		foreach($userdetails['subscriptions'] as $key => $val) {
+?>
+							<li><a href="armband?name=<?php echo urlencode($statistics->brid2name($val['brid'])); ?>"><?php echo $statistics->brid2name($val['brid']); ?></a></li>
+<?php
+		}
+?>
+					</ul>
 				</div>
 				<div style="float: left;">
 <?php

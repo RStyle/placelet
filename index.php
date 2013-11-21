@@ -64,8 +64,10 @@ $max_file_size = 8000000;
 if (!isset($braceName)) { $braceName = ""; }
 //Dateinamen werden Titel zugeordnet
 $pagename = array(
+	"404" => "Seite nicht gefunden",
 	"about" => "&Uuml;ber Uns",
 	"account" => "Account Einstellungen",
+	'admin' => 'Admin',
 	"armband" => "Armband: ".$braceName,
 	"connect" => "Connect",
 	"home" => "Global Bracelet. Travel & Connect",
@@ -75,9 +77,7 @@ $pagename = array(
 	"profil" => "Profil",
 	"search" => "Suchergebnis",
 	"shop" => "Shop",
-	"start" => "Start",
-	"404" => "Seite nicht gefunden",
-	'admin' => 'Admin'
+	"start" => "Start"
 	);
 	
 $navregister['href'] = "login";	

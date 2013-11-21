@@ -15,10 +15,19 @@ if($user->admin && $checklogin) {
 <?php
 	if(isset($admin_stats)) {
 		if(count($admin_stats['spam_comments']) != 0) {
+?>
+					<tr>
+						<th>Benutzername</th>
+						<th>Armband-ID</th>
+						<th>Kommentar</th>
+						<th>&nbsp;</th>
+					</tr>
+<?php
 			for($i = 0; $i < count($admin_stats['spam_comments']); $i++) {
 ?>
 					<tr>
 						<td><?php echo $admin_stats['spam_comments'][$i]['user']; ?></td>
+						<td><a href="<?php echo $statistics->brid2name($admin_stats['spam_comments'][$i]['brid']); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo $statistics->brid2name($admin_stats['spam_comments'][$i]['brid']); ?></a></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['comment']; ?></td>
 						<td><a href="admin?delete_comm=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_comments'][$i]['brid'])); ?>">Kommentar löschen</a></td>
 					</tr>
