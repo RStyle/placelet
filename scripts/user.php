@@ -102,7 +102,7 @@ class User
 			if(strlen($reg['reg_password']) < 6) return 'Passwort zu kurz. Min. 6';
 			if(strlen($reg['reg_password']) > 30) return 'Passwort zu lang. Max. 30';
 			if(check_email_address($reg['reg_email']) === false) return 'Das ist keine gültige E-Mail Adresse';
-			$sql = "INSERT INTO users (user,email,password,status) VALUES (:user,:email,:password,:status)";
+			$sql = "INSERT INTO users (user, email, password, status) VALUES (:user, :email, :password, :status)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
 				':user' => clean_input($reg['reg_login']),
@@ -123,11 +123,6 @@ class User
 			$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
 			mail($reg['reg_email'], 'Bestätigungsemail', $content, $mail_header);
-			$sql = "INSERT INTO addresses (user) VALUES (:user)";
-			$q = $db->prepare($sql);
-			$q->execute(array(
-				':user' => clean_input($reg['reg_login']))
-			);
 			return true;
 		} else{
 			return 'Die beiden Passwörter sind nicht gleich.';
@@ -215,28 +210,6 @@ class User
 	//Accountdetails ändern
 	public function change_details($firstname, $lastname, $email, $old_pwd, $new_pwd, $username) {
 		$return = '';
-		//Vorname ändern
-		if($firstname != NULL) {
-			$firstname = clean_input($firstname);
-			$sql = "UPDATE addresses SET first_name = :firstname WHERE user = :user";
-			$q = $this->db->prepare($sql);
-			$q->execute(array(
-						':firstname' => $firstname,
-						':user' => $username
-						));
-			$return .= "Vorname erfolgreich geändert.\\n";
-		}
-		//Nachname ändern
-		if($lastname != NULL) {
-			$lastname = clean_input($lastname);
-			$sql = "UPDATE addresses SET last_name = :lastname WHERE user = :user";
-			$q = $this->db->prepare($sql);
-			$q->execute(array(
-						':lastname' => $lastname,
-						':user' => $username
-						));
-			$return .= "Nachname erfolgreich geändert.\\n";
-		}
 		//Passwort ändern
 		$return .= $this->change_password($old_pwd, $new_pwd, $username)."\\n";
 		//E-Mail ändern
@@ -371,30 +344,26 @@ class Statistics {
 		$stmt = $this->db->prepare("SELECT user, email, status FROM users WHERE user = :user LIMIT 1");
 		$stmt->execute(array('user' => $user));
 		$result[0] = $stmt->fetch(PDO::FETCH_ASSOC);
-		$stmt = $this->db->prepare("SELECT last_name, first_name, adress, adress_2, city, post_code, phone_number, country FROM addresses WHERE user = :user");
-		$stmt->execute(array('user' => $user));
-		$result[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$stmt = $this->db->prepare("SELECT brid, date FROM bracelets WHERE user = :user ORDER BY  `bracelets`.`date` ASC ");
 		$stmt->execute(array('user' => $user));
-		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		//Abonnierte Armbänder
 		$stmt = $this->db->prepare("SELECT brid FROM subscriptions WHERE email = :email");
 		$stmt->execute(array('email' => $result[0]['email']));
-		$result[4] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$user_details = $result;
 		$user_details['users'] = $user_details[0];
-		$user_details['addresses'] = $user_details[1][0]; //<--- Nur eine Adresse wird ausgegeben, aber Benutzer können eventuell mehrere haben!
 		$brids = array();
-		foreach ($user_details[2] as $key => $val) {
+		foreach ($user_details[1] as $key => $val) {
 			$brids = array_merge_recursive($val, $brids);
 			$stmt = $this->db->prepare("SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1");
 			$stmt->execute(array('brid' => $val['brid']));
 			$result[3][$val['brid']] = $stmt->fetch(PDO::FETCH_ASSOC);
 		}
 		$user_details['bracelets'] = $brids;
-		$userdetails = array_merge($user_details['users'], $user_details['addresses'], $user_details['bracelets']);
-		$userdetails['subscriptions'] = $user_details[4];
+		$userdetails = array_merge($user_details['users'], $user_details['bracelets']);
+		$userdetails['subscriptions'] = $user_details[2];
 		if(isset($result[3]))
 			$userdetails['picture_count'] = $result[3];
 		else
