@@ -44,16 +44,6 @@ if ($user->login) {
 					<form name="change" action="account" method="post">
 						<table border="0">
 							<tr>
-								<th>Vorname:</th>
-								<td><?php echo $userdetails['first_name']; ?></td>
-								<td><input type="text" name="change_firstname" placeholder="Vorname"></td>
-							</tr>
-							<tr>
-								<th>Nachname:</th>
-								<td><?php echo $userdetails['last_name']; ?></td>
-								<td><input type="text" name="change_lastname" placeholder="Nachname"></td>
-							</tr>
-							<tr>
 								<th>E-Mail Adresse</th>
 								<td><?php echo $userdetails['email']; ?></td>
 								<td><input type="text" name="change_email" placeholder="E-Mail Adresse"></td>

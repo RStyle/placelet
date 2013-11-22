@@ -208,7 +208,7 @@ class User
 		}
 	}
 	//Accountdetails ändern
-	public function change_details($firstname, $lastname, $email, $old_pwd, $new_pwd, $username) {
+	public function change_details($email, $old_pwd, $new_pwd, $username) {
 		$return = '';
 		//Passwort ändern
 		$return .= $this->change_password($old_pwd, $new_pwd, $username)."\\n";
