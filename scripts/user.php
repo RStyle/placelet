@@ -329,6 +329,22 @@ class User
 		mail($email, 'Bestätigungsemail', $content, $mail_header);
 		return true;
 	}
+	public function edit_br_name($brid, $new_name) {
+		$stmt = $this->db->prepare("SELECT name FROM bracelets WHERE name = :name");
+		$stmt->execute(array('name' => $new_name));
+		$anz = $stmt->rowCount();
+		if($anz == 0) {
+			$sql = "UPDATE bracelets SET name = :new_name WHERE brid = :brid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':brid' => $brid,
+				':new_name' => $new_name
+			));
+			return 1;
+		}else {
+			return 2;
+		}
+	}
 }
 ?>
 <?php

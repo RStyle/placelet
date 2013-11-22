@@ -265,6 +265,16 @@ function change_pic(cv, sv) {
 //Aboformular anzeigen
 $(document).ready(function(){
 	$('#show_sub').click(function(){
-		$('.sub_inputs').toggle('fast');
+		$('.sub_inputs').toggle();
 	});
+});
+//Armband-Name Formular anzeigen
+$(document).ready(function(){
+	$('#edit_name').click(function(){
+		$('.name_inputs').toggle();
+	});
+});
+//
+$(document).ready(function(){
+	if(Math.floor((Math.random()*10)+1) == 1) alert("Fehler " + Math.floor((Math.random()*10)+1) + "\nBitte dem Support(Daniel) melden.");
 });

@@ -7,13 +7,13 @@ foreach($_GET as $key => $val) {
 }
 if ($braceName != NULL) {
 	//Kommentare schreiben
-	if (isset($_POST['comment_submit'])) {
+	if(isset($_POST['comment_submit'])) {
 		$write_comment = $statistics->write_comment ($braceID,
 							 $_POST['comment_user'][$_POST['comment_form']],
 							 $_POST['comment_content'][$_POST['comment_form']],
 							 $_POST['comment_picid'][$_POST['comment_form']]);
 	}
-	if (isset($write_comment)) {
+	if(isset($write_comment)) {
 		$js .= 'alert("'.$write_comment.'");';
 	}
 	//Kommentar löschen
@@ -24,7 +24,28 @@ if ($braceName != NULL) {
 		}elseif($comment_deleted == 2) {
 			$js .= 'alert("Kommentar gemeldet.");';
 		}
-	}	
+	}
+	//Armband Name ändern
+	$owner = false;
+	if(isset($_POST['edit_submit'])) {
+		$change_name = $user->edit_br_name($braceID, $_POST['edit_name']);
+		if($change_name == 1) {
+			header('Location: armband?name='.urlencode($_POST['edit_name']).'&name_edited='.$change_name);
+		}elseif($change_name == 2) {
+			$js .= 'alert("Es gibt schon ein Armband mit diesem Namen.");';
+		}
+	}
+	if(isset($_GET['name_edited'])) {
+		$js .= 'alert("Name erfolgreich geändert.");';
+	}
+	if($user->login) {
+		//Überprüfen, ob man das Armband gekauft hat.
+		$userdetails = $statistics->userdetails($user->login);
+		$armbaender = profile_stats($userdetails);
+		if(in_array($braceID, $armbaender['brid'])) {
+			$owner = true;
+		}
+	}
 	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
 	if (isset($bracelet_stats['owners'])) {
 		$picture_details = $statistics->picture_details($braceID, $db);
@@ -154,9 +175,27 @@ if ($braceName != NULL) {
 				<h1>Statistik</h1>
 				<table style="width: 100%;">
 					<tr>
-						<td><strong>Armband Name</strong></td>
-						<td><strong><?php echo $stats['name']; ?></strong></td>
+						<th>Name</th>
+<?php
+		if($owner) {
+?> 
+						<td><strong><?php echo $stats['name']; ?></strong> <img src="img/edit.png" id="edit_name" class="pseudo_link"></td>
+<?php
+		}
+?>
 					</tr>
+<?php
+		if($owner) {
+?> 
+					<form method="post" action="armband?name=<?php echo urlencode($braceName); ?>">
+						<tr>
+							<td><input type="text" name="edit_name" placeholder="Neuer Name" class="name_inputs" style="display: none;" size="14"></td>
+							<td><input type="submit" value="Ändern" class="name_inputs" name="edit_submit" style="display: none;"></td>
+						</tr>
+					</form>
+<?php
+		}
+?>
 					<tr>
 						<td>Käufer</td>
 						<td><?php echo $stats['owner']; ?></td>
