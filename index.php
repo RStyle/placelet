@@ -224,7 +224,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
                 <?php } ?>
                 " class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks"><?php echo $navregister['value']; ?></a></li>
 				<?php if($user->admin) { ?>
-				<li><a href="admin" class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>">Admin-Tools</a></li>
+				<li class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks">Admin-Tools</a></li>
 				<?php } ?>
 				
 			</ul>

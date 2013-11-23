@@ -307,20 +307,23 @@
             					
 		}
 			#mainnavlist li {
-			    position: relative;
 				float: left;
 				width: 15%;
 				background-color: #0092FF;
 				margin-right: 0.25%;
 				text-align: center;	
-                transition: all 500ms linear 0s;			
+				
+				-webkit-transition: all 500ms linear 0s;
+                -moz-transition: all 500ms linear 0s;
+                -ms-transition: all 500ms linear 0s;
+                -o-transition: all 500ms linear 0s;
+                transition: all 500ms linear 0s;               		
 			}
 			#mainnavlist li.mainnavlink_active {
                 background-color: #45CCF1;
     		}
     		#mainnavlist li:hover {
-    			background-color: #C819F1;
-    			top: 0.4em;
+    			background-color: #A323CA;
     		}
 		.navlinks:link, .navlinks:visited {
 		    padding: 1em 0 1em 0;
