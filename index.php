@@ -214,14 +214,19 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
-				<li><a href="home" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>">Home</a></li>
-				<li><a href="start" class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>">Start</a></li>
-				<li><a href="about" class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>">Das Team</a></li>
-				<li><a href="shop" class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>">Shop</a></li>
-				<li><a href="<?php echo $navregister['href']; ?>" class="mainnavlinks<?php if(($page == 'profil' && $user->login) || ($page == 'login' &! $user->login)) echo ' mainnavlink_active'?>"><?php echo $navregister['value']; ?></a></li>
+				<li style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>"><a href="home" class="navlinks">Home</a></li>
+				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="start" class="navlinks">Start</a></li>
+				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="about" class="navlinks">Das Team</a></li>
+				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks">Shop</a></li>
+				<li style="margin-right: 0;
+				<?php if (!($user->admin)) { ?>
+                border-top-right-radius: 10px; border-bottom-right-radius: 10px;
+                <?php } ?>
+                " class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks"><?php echo $navregister['value']; ?></a></li>
 				<?php if($user->admin) { ?>
 				<li><a href="admin" class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>">Admin-Tools</a></li>
 				<?php } ?>
+				
 			</ul>
 		</nav>
 <!--###SECTION TAG###-->

@@ -293,48 +293,53 @@
 /*---LOGO---*/
 /*+++NAV+++*/
 	#mainnav {
-		clear: both;
-		margin-top: 2em;
-		height: 55px;	
+		margin-top: 1.5em;
 	}
 	#mainnav > hr {
-        margin: 0; 
+        margin: 0;
     }
 		#mainnavlist {
 			list-style: none;
-			margin-top: 2em;
-			padding: 0;
-			display: inline;
+			padding: 0;	
+            overflow: hidden;
+            width: auto;
+            margin: 0;
+            					
 		}
 			#mainnavlist li {
+			    position: relative;
 				float: left;
-				margin-right: 3em;
+				width: 15%;
+				background-color: #0092FF;
+				margin-right: 0.25%;
+				text-align: center;	
+                transition: all 500ms linear 0s;			
 			}
-		.mainnavlinks:link, .mainnavlinks:visited {
-			border-top: 1px #B7D300 solid;
-		    position: relative;
+			#mainnavlist li.mainnavlink_active {
+                background-color: #45CCF1;
+    		}
+    		#mainnavlist li:hover {
+    			background-color: #C819F1;
+    			top: 0.4em;
+    		}
+		.navlinks:link, .navlinks:visited {
+		    padding: 1em 0 1em 0;
+            position: relative;
 			text-decoration: none;
-			font-family: 'Dosis', Times;
-			font-size: 42px;			
-			transition: all 500ms ease 0s;
+			font-size: 20px;
+            color: #fff;
+            display: block;
+            width: 100%;
+            height: 100%;	
+            	
 		}
-		.mainnavlink_active {
-			border-top: 1px #7E74E1 solid !important;
-		}
-		.mainnavlink_active:hover {
-		    border-top: 5px #7E74E1 solid !important;
-			top: 0.1em;
-		}
-		.mainnavlinks:hover {
-		    border-top: 5px #B7D300 solid;
-			top: 0.1em;
-		}
+		
 /*---NAV---*/
 /*+++SECTION+++*/
 /*++++Allgemeine SECTION Styles++*/
 	#section {
 		font-size: 1.15em;
-		margin-top: 1em;
+		margin-top: 1.5em;
 	}
 		.mainarticles {
 			padding-bottom: 1em;
@@ -388,8 +393,9 @@
 				height: auto;
 				float: left;
 				padding: 1%;
+				background-color: #9B9B9B;
 				border-radius: 0.5em;
-				box-shadow: 0px 3px 3px #000;
+				background-color: #ddd;
 			}
 			.connect_box h1 {
 				text-shadow: 0px 2px 2px #777;
@@ -397,9 +403,7 @@
 				font-family: tahoma;
 				color: #FFF;
 				margin: 0;
-				padding-left: 0.25em;
 				margin-bottom: 0.25em;
-				border-left: 4px #0092FF solid;
 				
 			}
 			/*.connect_box p {
@@ -408,19 +412,7 @@
 				#uploads_box {
 					width: 70%;   
 					margin-right: 1%;  
-					margin-right: 1%;  
-					
-					background: #f9eeb3; /* Old browsers */
-					background: -moz-linear-gradient(top, #f9eeb3 0%, #f79800 85%); /* FF3.6+ */
-					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9eeb3), color-stop(85%,#f79800)); /* Chrome,Safari4+ */
-					background: -webkit-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* Chrome10+,Safari5.1+ */
-					background: -o-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* Opera 11.10+ */
-					background: -ms-linear-gradient(top, #f9eeb3 0%,#f79800 85%); /* IE10+ */
-					background: linear-gradient(to bottom, #f9eeb3 0%,#f79800 85%); /* W3C */
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9eeb3', endColorstr='#f79800',GradientType=0 ); /* IE6-9 */
-				}
-					#uploads_box h1 {
-						border-left: 4px #CF7C00 solid;
+					margin-right: 1%;   
 					}
 					#uploads_box span {
 						color: #A14E00;
@@ -429,15 +421,6 @@
 					}
 				#submit_box {
 					width: 25%;
-					
-					background: #a1db72; /* Old browsers */
-					background: -moz-linear-gradient(top, #a1db72 1%, #2e9622 100%); /* FF3.6+ */
-					background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#a1db72), color-stop(100%,#2e9622)); /* Chrome,Safari4+ */
-					background: -webkit-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* Chrome10+,Safari5.1+ */
-					background: -o-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* Opera 11.10+ */
-					background: -ms-linear-gradient(top, #a1db72 1%,#2e9622 100%); /* IE10+ */
-					background: linear-gradient(to bottom, #a1db72 1%,#2e9622 100%); /* W3C */
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1db72', endColorstr='#2e9622',GradientType=0 ); /* IE6-9 */
 				}
 					#submit_box hr {
 						margin: 0 0 0.1em 0;
@@ -445,9 +428,6 @@
 					}
 					#submit_box p {
 					   margin: 0.5em 0;
-					}
-					#submit_box h1 {
-						border-left: 4px #0B5D0B solid;
 					}
 					#submit_box span {
 						color: #0B5D0B; 
