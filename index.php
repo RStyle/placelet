@@ -218,13 +218,13 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="start" class="navlinks">Start</a></li>
 				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="about" class="navlinks">Das Team</a></li>
 				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks">Shop</a></li>
-				<li style="margin-right: 0;
+				<li 
 				<?php if (!($user->admin)) { ?>
-                border-top-right-radius: 10px; border-bottom-right-radius: 10px;
+                style="margin-right: 0; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" 
                 <?php } ?>
-                " class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks"><?php echo $navregister['value']; ?></a></li>
+                class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks"><?php echo $navregister['value']; ?></a></li>
 				<?php if($user->admin) { ?>
-				<li class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks">Admin-Tools</a></li>
+				<li style="margin-right: 0; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks">Admin-Tools</a></li>
 				<?php } ?>
 				
 			</ul>
