@@ -68,19 +68,19 @@ foreach($bracelets_displayed as $key => $val) {
                 <div class="connect_box" id="submit_box">
                     <h1>+1 bild</h1>
                     <p>Gib deine <span>Armband-ID</span> an:
-                    <form action="login" method="get">
-                        <input name="postpic" type="text" maxlength="6" size="6" placeholder="ID...">
-						<input type="submit" value="Zum Upload">
-                    </form>
-                    </p>
+						<form action="login" method="get">
+							<input name="postpic" type="text" maxlength="6" size="6" placeholder="ID...">
+							<input type="submit" value="Zum Upload">
+						</form>
                     <hr>
                     
                     <h1>neues armband</h1>
                     <p>Gib deine <span>Armband-ID</span> an:
-                    <form action="login" method="get">
-                        <input name="registerbr" type="text" maxlength="6" size="6" placeholder="ID...">
-						<input type="submit" value="Armband registrieren">
-                    </form> 
+						<form action="login" method="get">
+							<input name="registerbr" type="text" maxlength="6" size="6" placeholder="ID...">
+							<input type="submit" value="Armband registrieren">
+						</form> 
+					</p>
                 </div>
             </div>
 

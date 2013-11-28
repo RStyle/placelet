@@ -176,13 +176,7 @@ if ($braceName != NULL) {
 				<table style="width: 100%;">
 					<tr>
 						<th>Name</th>
-<?php
-		if($owner) {
-?> 
-						<td><strong><?php echo $stats['name']; ?></strong> <img src="img/edit.png" id="edit_name" class="pseudo_link"></td>
-<?php
-		}
-?>
+						<td><strong><?php echo $stats['name']; if($owner) {?> </strong> <img src="img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
 		if($owner) {
