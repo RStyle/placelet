@@ -91,8 +91,8 @@ foreach($bracelets_displayed as $key => $val) {
 
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
-				<div class="mainarticleheaders blue_line line_header"><h1>Das Reisearmband</h1></div>
-				<img id="reisearmband_img" alt="kein Bild von uns verfügbar" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">				
+				<div class="mainarticleheaders line_header blue_line"><h1>Das Reisearmband</h1></div>
+				<div class="round_image" style="background: url(http://img.ischatzkiste.com/VDE/201212/goods-img/1354562992934-P-502256.jpg?6)"></div>				
 				<p>
                     Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
                     Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
@@ -103,8 +103,8 @@ foreach($bracelets_displayed as $key => $val) {
 			</article>                                                                                                        
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>Wie funktioniert's?</h1></div>
-				<img id="kollektion_img" alt="kein Bild von uns verfügbar" src="http://img.geo.de/div/image/61566/01-armbaender.jpg">
+				<div class=" mainarticleheaders line_header green_line"><h1>Wie funktioniert's?</h1></div>
+				<div class="round_image" style="background: url(http://i00.i.aliimg.com/wsphoto/v10/1013571924_1/Genuine-Leather-Hand-Knit-Vintage-Watches-bracelet-Wristwatches-Leaf-Pendant-Free-Shipping-SB-001.jpg)"></div>
 				<p>
 					<span class="highlighted kollektion_numbers">1</span> Kaufe Dir ein Armband in unserem Shop. Du erhältst eine einmalige Armband-ID, die du auf der Rückseite des Metallplättchens am Armband findest. Damit kannst du dein Armband in der grünen Box auf unserer Startseite registrieren.
 				</p>

@@ -58,7 +58,7 @@
 			border-bottom: 5px solid #B7D300;
 	}
 	.bottom_border_blue {
-			border-bottom: 5px solid #7E74E1;
+			border-bottom: 5px solid #0092ff;
 	}
 	.pseudo_link {
 		cursor: pointer;
@@ -430,7 +430,7 @@
                 }
 				.connect_thumb_link {
         			float: left;
-        			max-width: 40%;
+        			max-width: 40%; 
         			margin-bottom: 0.5em;
 
         		}
@@ -438,7 +438,6 @@
         			   	padding-right: 1em;
             	        border-right: solid 1px #000;
             			float: left;
-            			height: auto;
             			max-height: 400px;            			
             			max-width: 85%;
             			/* Firefox */
@@ -453,6 +452,7 @@
         			.connect_pic-info {
         			    font-size: 1.1em;
             			float: left;
+            			max-width: 52%;
             		}
             			.connect_pic-info th {
             				padding: 0 1em 0 0;
@@ -483,21 +483,23 @@
 					   margin: 0.5em 0;
 					}
 		/*Artikel*/			
-		#reisearmband {
+		.round_image {
+            margin: 0 auto;
+            padding: 0;
+            width: 340px;
+            height: 340px;
+            border-radius: 100%; 
+            border: 3px #fff dashed
+        }
+        #reisearmband {
 			float: left;
 			width: 35%;
-		}
-		#reisearmband_img {
-			width: 100%;
 		}
 		#kollektion {
 			float: left;
 			margin-left: 3%;
 			width: 35%;
 		}
-			#kollektion_img {
-				width: 100%;
-			}
 			.kollektion_numbers{
 				float: left;
 				padding-right: 10px;
