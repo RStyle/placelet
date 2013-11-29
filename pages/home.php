@@ -26,14 +26,14 @@ foreach($bracelets_displayed as $key => $val) {
             <div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
                     <h1>neuester upload</h1>
+                    
 					<div id="newest_pic">
-						<div class="pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');">&gt;</div>
-						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.'.$stats[1][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="thumb_link">
-							<img src="img/triangle.png" alt="" class="thumb_triangle">
-							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="thumbnail" style="max-height: 175px;">
+                        <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>						
+						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.'.$stats[1][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="connect_thumb_link">							
+						<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
 						</a>
 						<div>
-							<table class="pic-info">
+							<table class="connect_pic-info">
 								<tr>
 									<th>Armband</th>
 									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.$statistics->brid2name($bracelets_displayed[1]).'</a>'; ?></strong></td>
@@ -57,11 +57,16 @@ foreach($bracelets_displayed as $key => $val) {
 				 }
 	?>
 							</table> 
-							<p class="pic-desc">
+							<!--<p class="pic-desc">
 								<span class="desc-header"><?php echo $stats[1][0]['title']; ?></span><br>
 								<?php echo $stats[1][0]['description']; ?>
-							</p>
+							</p>          -->
 						</div>
+						<div class="more_imgs">
+                            <div class="fake_img pseudo_link"></div>
+    						<div class="fake_img pseudo_link"></div>
+    						<div class="fake_img pseudo_link"></div>
+					    </div>
 						<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">
 					</div>
                 </div>
@@ -86,8 +91,8 @@ foreach($bracelets_displayed as $key => $val) {
 
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
-				<div class="blue_line mainarticleheaders line_header"><h1>Das Reisearmband</h1></div>
-				<img id="reisearmband_img" alt="kein Bild von uns verfügbar" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">
+				<div class="mainarticleheaders blue_line line_header"><h1>Das Reisearmband</h1></div>
+				<img id="reisearmband_img" alt="kein Bild von uns verfügbar" src="http://1.bp.blogspot.com/-zjwIgMkzOjY/UY0Go8XBceI/AAAAAAAAFH0/rC73lAYTAUg/s1600/armband+ganz+leicht+selber+machen.jpg">				
 				<p>
                     Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
                     Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>

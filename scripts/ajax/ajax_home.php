@@ -29,21 +29,20 @@ foreach($bracelets_displayed as $key => $val) {
 $i = $startVal;
 if($i != 1) {
 ?>
-						<div class="pseudo_link float_left" onClick="return false" onMouseDown="javascript:change_pic('-', <?php echo $startVal; ?>);">&lt;</div>
+						<div class="pseudo_link float_left" onClick="return false" onMouseDown="javascript:change_pic('-', <?php echo $startVal; ?>);"><img src="img/prev.png" alt="prev"></div>
 <?php
 }
 if(isset($stats[$i + 1][0]['picid'])) {
 ?>
-						<div class="pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', <?php echo $startVal; ?>);">&gt;</div>
+						<div class="pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', <?php echo $startVal; ?>);"><img src="img/next.png" alt="next"></div>
 <?php
 }
 ?>
-						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumb_link">
-							<img src="img/triangle.png" alt="" class="thumb_triangle">
-							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumbnail" style="max-height: 175px;">
+						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumb_link">
+							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
 						</a>
 						<div>
-							<table class="pic-info">
+							<table class="connect_pic-info">
 								<tr>
 									<th>Armband</th>
 									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.$statistics->brid2name($bracelets_displayed[$i]).'</a>'; ?></strong></td>
@@ -67,9 +66,14 @@ if(isset($stats[$i + 1][0]['picid'])) {
 				 }
 	?>
 							</table> 
-							<p class="pic-desc">
+							<!--<p class="pic-desc">
 								<span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
 								<?php echo $stats[$i][0]['description']; ?>
-							</p>
+							</p>              -->
 						</div>
+						<div class="more_imgs">
+                            <div class="fake_img pseudo_link"></div>
+    						<div class="fake_img pseudo_link"></div>
+    						<div class="fake_img pseudo_link"></div>
+					    </div>
 						<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; position: relative; right: 25.5%;">
