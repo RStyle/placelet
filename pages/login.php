@@ -109,7 +109,7 @@ if(isset($loginattempt)) {
 <?php
 }elseif(isset($postpic)) {
 ?>
-				<form id="registerpic" name="registerpic" class="registerpic" action="<?php echo $friendly_self; ?>" method="post" enctype="multipart/form-data">
+				<form id="register_pic" name="registerpic" action="<?php echo $friendly_self; ?>" method="post" enctype="multipart/form-data">
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
@@ -127,10 +127,14 @@ if(isset($loginattempt)) {
 					<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
 					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" maxlength="30" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>"><br>
 					
-					<div id="pos" style="width:800px; height:600px;">
-						Deine Position wird ermittelt...<br>
-						Du kannst den Ort auch manuell eingeben.
-					</div>
+					<div id="map">
+    					<div id="pos">
+    						Deine Position wird ermittelt...<br>
+    						Du kannst den Ort auch manuell eingeben.
+    					</div>
+    					<p>Bewege den roten Zeiger zu dem Ort deines Fotos. Du kannst ihn auch manuell in die Eingabefelder links eingeben.</p>
+                    </div>
+                    
 					<input type="hidden" name="registerpic_latitude" id="latitude" value="0">
 					<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
 					
@@ -143,7 +147,8 @@ if(isset($loginattempt)) {
 					<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
 					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 					<input type="submit" name="registerpic_submit" value="Bild posten"><br>
-					<img id="image_preview" src="./img/placeholder.png" style="background-repeat: no-repeat; background-position: center; max-height:0px">
+					Bildvorschau:<br>
+                    <img id="image_preview" src="./img/placeholder.png">
 				</form>
 			</article>
 <?php

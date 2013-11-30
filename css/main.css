@@ -551,6 +551,11 @@
 			width: 73%;		
 		}
 	/*---Armband SECTION---*/
+	/*+++Profil SECTION+++*/
+	
+	
+	
+	/*---Profil SECTION---*/
 	/*+++Start SECTION+++*/
 		#placelet_stats {
 			background-color: #EBEBEB;
@@ -668,6 +673,8 @@
 			float: left;		
 			width: 49%;
 			margin-right: 3%;
+			position: relative;
+			
 		}
 			#register_pic form{
 				margin: 0 auto;
@@ -676,6 +683,29 @@
 			float: left;
 			width: 48%
 		}
+		
+        #map {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            padding: 1em;
+            border: 1px solid #000;
+        }
+            #pos {
+                width:400px;
+                height:300px;
+            }
+            #map > p {
+                margin: 1em 0 0 0;    
+            }
+        #image_preview {
+            background-repeat: no-repeat;
+            background-position: center;
+            max-height: 0px;
+            border: 1px solid #000;
+            padding: 1em;   
+            max-width: 400px;         
+        }
 	/*---Login SECTION---*/
 /*---SECTION---*/
 /*+++Side Container ASIDE+++*/
