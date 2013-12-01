@@ -116,16 +116,16 @@ if(isset($loginattempt)) {
 					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo urldecode($postpic);?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" placeholder="Titel" value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
+					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="15" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Titel" value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
 					
 					<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" maxlength="30" pattern=".{4,30}" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo urldecode($_GET['city']);?>" required><br>
+					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo urldecode($_GET['city']);?>" required><br>
 					
 					<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" maxlength="30" pattern=".{4,30}" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
+					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
 					
 					<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
-					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" maxlength="30" pattern=".{4,30}" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>"><br>
+					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>"><br>
 					
 					<div id="map">
     					<div id="pos">
