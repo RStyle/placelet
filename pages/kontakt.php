@@ -1,11 +1,6 @@
 <?php
 if(isset($_POST['submit'])) {
-		$send_email = send_email($_POST['sender'], $_POST['subject'], $_POST['content'], $_POST['mailer']);
-}
-if(isset($_GET['captcha'])) {
-	if($_GET['captcha'] == 'false') {
-			$send_email = 'Das Captcha wurde falsch eingegeben.';	
-	}
+	$send_email = send_email($_POST['sender'], $_POST['subject'], $_POST['content'], $_POST['mailer']);
 }
 if (isset($send_email)) {
 	echo '<script type="text/javascript">
@@ -25,7 +20,7 @@ if (isset($send_email)) {
 				<table>
 					<tr>
 						<td><label for="sender">Ihre E-Mail Adresse:</label><br></td>
-						<td><input type="text" name="sender" id="sender" size="25" placeholder="E-Mail Adresse"></td>
+						<td><input type="email" name="sender" id="sender" size="25" placeholder="E-Mail Adresse" required></td>
 					</tr>
 					<tr>
 						<td>Betreff:</td>
@@ -37,7 +32,7 @@ if (isset($send_email)) {
 					</tr>
 					<tr>
 						<td><label for="content">Ihre Nachricht:</label></td>
-						<td><textarea name="content" id="content" cols="60" rows="10"></textarea></td>
+						<td><textarea name="content" id="content" cols="60" rows="10" required></textarea></td>
 					</tr>
 				</table>
 						<input type="hidden" name="mailer" value="contact">

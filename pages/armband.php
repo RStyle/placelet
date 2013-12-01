@@ -70,7 +70,7 @@ if ($braceName != NULL) {
 				<a href="<?php echo 'login?postpic=true'; ?>">Ein neues Bild zu diesem Armband posten</a>
 				<form method="get" action="armband">
 					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right sub_inputs" style="display: none;">
-					<input name="sub_email" type="text" maxlength="30" placeholder="E-Mail" class="float_right sub_inputs" style="display: none;" required>
+					<input name="sub_email" type="email"  size="20" maxlength="254" placeholder="E-Mail Adresse" class="float_right sub_inputs" style="display: none;" required>
 					<input type="hidden" name="sub" value="true">
 					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>">
 				</form>
@@ -143,7 +143,7 @@ if ($braceName != NULL) {
 						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
 							<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
 							<label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
-							<input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15"<?php if (isset($user->login)){echo ' value="'.$user->login.'" ';} ?>placeholder="Name" required><br>  
+							<input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15" <?php if (isset($user->login))echo 'value="'.$user->login.'" '; ?>placeholder="Name" pattern=".{4,15}" title="Min.4 - Max.15" required><br>  
 							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
 							<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
 							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
@@ -183,7 +183,7 @@ if ($braceName != NULL) {
 ?> 
 					<form method="post" action="armband?name=<?php echo urlencode($braceName); ?>">
 						<tr>
-							<td><input type="text" name="edit_name" placeholder="Neuer Name" class="name_inputs" style="display: none;" size="14"></td>
+							<td><input type="text" name="edit_name" placeholder="Neuer Name" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
 							<td><input type="submit" value="Ändern" class="name_inputs" name="edit_submit" style="display: none;"></td>
 						</tr>
 					</form>

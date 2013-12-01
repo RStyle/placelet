@@ -19,7 +19,7 @@ if(isset($_POST['submit'])) {
 		//Userdetails ändern
 		case 'Änderungen speichern':
 			if($user->login) {
-				$change_details = $user->change_details($_POST['change_firstname'], $_POST['change_lastname'], $_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
+				$change_details = $user->change_details($_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
 				$js .= 'alert("'.$change_details.'");';
 			}
 			break;
@@ -46,17 +46,17 @@ if ($user->login) {
 							<tr>
 								<th>E-Mail Adresse</th>
 								<td><?php echo $userdetails['email']; ?></td>
-								<td><input type="text" name="change_email" placeholder="E-Mail Adresse"></td>
+								<td><input type="email" name="change_email" size="20" maxlength="254" placeholder="E-Mail Adresse"></td>
 							</tr>
 							<tr>
 								<th>Passwort</th>
 								<td>&nbsp;</td>
-								<td><input type="password" name="change_old_pwd" placeholder="altes Password"></td>
+								<td><input type="password" name="change_old_pwd" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" placeholder="altes Password"></td>
 							</tr>
 							<tr>
 								<th>&nbsp;</th>
 								<td>&nbsp;</td>
-								<td><input type="password" name="change_new_pwd" placeholder="neues Passwort"></td>
+								<td><input type="password" name="change_new_pwd" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" placeholder="neues Passwort"></td>
 							</tr>
 							<tr>
 								<th>&nbsp;</th>
@@ -78,7 +78,7 @@ if ($user->login) {
 				</p>
 
 				<form name="recover_password" action"account" method="post">
-					E-Mail Adresse <input type="text" name="recover_email" placeholder="E-Mail Adresse"><br>
+					E-Mail Adresse <input type="email" name="recover_email" size="20" maxlength="254" placeholder="E-Mail Adresse"><br>
 					<input type="submit" name="submit" value="Neues Passwort zuschicken">
 				</form>
 <?php
@@ -90,7 +90,7 @@ if ($user->login) {
 		if($recover_code) {
 ?>
 				<form name="change" action="account" method="post">
-					<input type="password" name="new_pwd" placeholder="neues Passwort">
+					<input type="password" name="new_pwd" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" placeholder="neues Passwort">
 					<input type="submit" name="submit" value="Passwort ändern">
 				</form>
 <?php
@@ -107,12 +107,12 @@ if ($user->login) {
 					<form name="login" action="account" method="post">
 						<table style="border: 1px solid black">
 							<tr>
-								<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-								<td><input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+								<td><label for="acc_login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+								<td><input type="text" name="login" id="acc_login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
 							</tr>
 							<tr>
-								<td><label for="password">Passwort</label></td>
-								<td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
+								<td><label for="acc_password">Passwort</label></td>
+								<td><input type="password" name="password" id="acc_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
 							</tr>
 							<tr>
 								<td><input type="submit" value="Login"></td>

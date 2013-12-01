@@ -74,7 +74,7 @@ foreach($bracelets_displayed as $key => $val) {
                     <h1>+1 bild</h1>
                     <p>Gib deine <span>Armband-ID</span> an:
 						<form action="login" method="get">
-							<input name="postpic" type="text" maxlength="6" size="6" placeholder="ID...">
+							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
 							<input type="submit" value="Zum Upload">
 						</form>
                     <hr>
@@ -82,7 +82,7 @@ foreach($bracelets_displayed as $key => $val) {
                     <h1>neues armband</h1>
                     <p>Gib deine <span>Armband-ID</span> an:
 						<form action="login" method="get">
-							<input name="registerbr" type="text" maxlength="6" size="6" placeholder="ID...">
+							<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
 							<input type="submit" value="Armband registrieren">
 						</form> 
 					</p>

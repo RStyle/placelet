@@ -171,7 +171,7 @@ if($page == 'home') {
 			<div id="headerregisterbr">
 				<form name="registerbr" action="search" method="get">
 					<label for="squery">Benutzer/Armband suchen </label>
-					<input name="squery" type="text" required="required" id="squery" placeholder="Suchen..." size="20" maxlength="30">
+					<input name="squery" type="search" id="squery" placeholder="Suchen..." size="20" maxlength="18" required>
 				</form>
 			</div>
 <?php

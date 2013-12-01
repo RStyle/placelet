@@ -113,19 +113,19 @@ if(isset($loginattempt)) {
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
-					<input type="text" name="registerpic_brid" value="<?php if(isset($postpic)) if($postpic != 'true') echo urldecode($postpic);?>" required><br>
+					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo urldecode($postpic);?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="35" placeholder="Titel"  value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
+					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" placeholder="Titel" value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
 					
 					<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" maxlength="30" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo urldecode($_GET['city']);?>" required><br>
+					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" maxlength="30" pattern=".{4,30}" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo urldecode($_GET['city']);?>" required><br>
 					
 					<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" maxlength="30" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
+					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" maxlength="30" pattern=".{4,30}" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
 					
 					<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
-					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" maxlength="30" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>"><br>
+					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" maxlength="30" pattern=".{4,30}" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>"><br>
 					
 					<div id="map">
     					<div id="pos">
@@ -157,7 +157,7 @@ if(isset($loginattempt)) {
 ?>
 				<form name="registerbr" action="login" method="post">
 					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" size="20" maxlength="10" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" required>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" required>
 					<input type="submit" name="registerbr_submit" value="Armband registrieren">
 				</form>
 <?php
@@ -168,12 +168,12 @@ if(isset($loginattempt)) {
 				<form name="login" id="form_login" action="login?registerbr=<?php echo $registerbr; ?>" method="post">
 					<table style="border: 1px solid black">
 						<tr>
-							<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-							<td><input type="text" name="login" id="login" size="20" maxlength="30" placeholder="Benutzername" pattern=".{6,30}" title="Min.4 - Max.15" required></td>
+							<td><label for="log_login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+							<td><input type="text" name="login" id="log_login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
 						<tr>
-							<td><label for="password">Passwort</label></td>
-							<td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
+							<td><label for="log_password">Passwort</label></td>
+							<td><input type="password" name="password" id="log_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
 						</tr>
 						<tr>
 							<td><input type="submit" value="Login"></td>
@@ -207,8 +207,8 @@ if(isset($loginattempt)) {
 	}
 ?>
 				<form method="post" action="login">
-					<input type="text" name="revalidate_user" placeholder="Benutzername" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'"';?> required>
-					<input type="text" name="revalidate_email" placeholder="E-Mail" required>
+					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="Benutzername" placeholder="Benutzername" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
+					<input type="email" name="revalidate_email" size="20" maxlength="30" placeholder="E-Mail" required>
 					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
 				</form>
 <?php
@@ -238,7 +238,7 @@ if(isset($loginattempt)) {
 							<td>&nbsp;</td>
 						</tr>
 					</table>
-				<p>Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.</p>
+					<p>Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.</p>
 				</form>
 <?php
 }

@@ -55,6 +55,9 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 					$mail_subject = 'Unser Produkt';
 					$mail_recipient = 'info@placelet.de';
 					break;
+				default:
+					$mail_subject = 'Kein Betreff ausgewählt';
+					$mail_recipient = 'support@placelet.de';
 			}
 		}
 		$header = 'From:' . $sender . "\n";

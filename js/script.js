@@ -276,5 +276,5 @@ $(document).ready(function(){
 });
 //
 $(document).ready(function(){
-	if(Math.floor((Math.random()*10)+1) == 1) alert("Fehler " + Math.floor((Math.random()*10)+1) + "\nBitte dem Support(Daniel) melden.");
+	if(Math.floor((Math.random()*20)+1) == 1) alert("Fehler " + Math.floor((Math.random()*10)+1) + "\nBitte dem Support(Daniel) melden.");
 });
