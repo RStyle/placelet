@@ -14,7 +14,8 @@ if(isset($_POST['submit'])) {
 	switch($_POST['submit']) {
 		//Link zum Passwort wiederherstellen senden
 		case 'Neues Passwort zuschicken':
-			$password_reset = $user->reset_password($_POST['recover_email'], $_POST['recover_email']);
+			$password_reset = $user->reset_password($_POST['recover_email']);
+			$js .= 'alert("'.$password_reset.'");';
 			break;
 		//Userdetails ändern
 		case 'Änderungen speichern':
@@ -24,10 +25,8 @@ if(isset($_POST['submit'])) {
 			}
 			break;
 		case 'Passwort ändern':
-			if($recover_code) {
-				$new_password = $user->new_password($recover_code, $_POST['new_pwd']);
-				$js .= 'alert("'.$new_password.'");';
-			}
+			$new_password = $user->new_password($_POST['new_username'], $_POST['new_pwd']);
+			$js .= 'alert("'.$new_password.'");';
 			break;
 	}
 }
@@ -85,12 +84,13 @@ if ($user->login) {
 		}
 	}elseif(isset($recover_code)) {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1>Neuese Passwort eingeben</h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1>Neues Passwort eingeben</h1></div>
 <?php
 		if($recover_code) {
 ?>
 				<form name="change" action="account" method="post">
 					<input type="password" name="new_pwd" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" placeholder="neues Passwort">
+					<input type="hidden" name="new_username" value="<?php echo $recover_code; ?>">
 					<input type="submit" name="submit" value="Passwort ändern">
 				</form>
 <?php

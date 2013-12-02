@@ -229,7 +229,7 @@ class User
 		}
 		return $return;
 	}
-	public function reset_password($email, $username) {
+	public function reset_password($email) {
 		$submissions_valid = false;
 		if($email != NULL) {
 		  $stmt = $this->db->prepare('SELECT user FROM users WHERE email = :email');
@@ -260,6 +260,9 @@ class User
 		  $mail_header .= "Content-transfer-encoding: 8bit";
 		  $content = "Bitte klicken sie auf diesen Link, um das Passwort von Ihrem Placelet.de Account zurückzusetzen.\n http://placelet.de/account?passwordCode=".$code;
 		  mail($email, 'Placelet - Passwort zurücksetzen', $content, $mail_header);
+		  return 'Erfolgreich gesendet';
+		}else {
+			return 'Es ist ein Fehler aufgetreten.//nDiese E-Mail ist nicht bei uns registriert.';
 		}
 	}
 	public function check_recover_code($code) {
@@ -283,7 +286,7 @@ class User
 		$sql = "UPDATE user_status SET pass_code = :pass_code WHERE user = :user";
 		$q = $this->db->prepare($sql);
 		$q->execute(array(
-			':pass_code' => '',
+			':pass_code' => NULL,
 			':user' => $username
 			));
 
