@@ -423,10 +423,11 @@
 					margin-right: 1%;   
 				}
 				   
-				#newest_pic {
-				    margin: 0 auto;
+				#central_newest_pic {
+                    padding-left: 10px;
                     overflow: auto;
                 }
+                
                 .changepic {
                 }
 				.connect_thumb_link {
@@ -453,8 +454,7 @@
         			.connect_pic-info {
         			    font-size: 1.1em;
             			float: left;
-            			max-width: 45%;
-            			position: relative;
+            			max-width: 47%;
             		}
             			.connect_pic-info th {
             				padding: 0 1em 0 0;

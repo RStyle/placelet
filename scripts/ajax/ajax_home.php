@@ -38,7 +38,7 @@ if(isset($stats[$i + 1][0]['picid'])) {
 <?php
 }
 ?>
-						<div id="newest_pic">
+						<div id="central_newest_pic">
                             <div class="more_imgs">
                                 <div class="fake_img pseudo_link"></div>
         						<div class="fake_img pseudo_link"></div>
