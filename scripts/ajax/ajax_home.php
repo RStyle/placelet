@@ -34,14 +34,20 @@ if($i != 1) {
 }
 if(isset($stats[$i + 1][0]['picid'])) {
 ?>
-						<div class="pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', <?php echo $startVal; ?>);"><img src="img/next.png" alt="next"></div>
+					    <div class="pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', <?php echo $startVal; ?>);"><img src="img/next.png" alt="next"></div> 
 <?php
 }
 ?>
-						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumb_link">
-							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
-						</a>
-						<div>
+						<div id="newest_pic">
+                            <div class="more_imgs">
+                                <div class="fake_img pseudo_link"></div>
+        						<div class="fake_img pseudo_link"></div>
+        						<div class="fake_img pseudo_link"></div>
+    					    </div>
+                            <a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumb_link">
+    							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+    						</a>
+    						
 							<table class="connect_pic-info">
 								<tr>
 									<th>Armband</th>
@@ -71,9 +77,5 @@ if(isset($stats[$i + 1][0]['picid'])) {
 								<?php echo $stats[$i][0]['description']; ?>
 							</p>              -->
 						</div>
-						<div class="more_imgs">
-                            <div class="fake_img pseudo_link"></div>
-    						<div class="fake_img pseudo_link"></div>
-    						<div class="fake_img pseudo_link"></div>
-					    </div>
-						<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; position: relative; right: 25.5%;">
+						
+						<!--<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; position: relative; right: 25.5%;">     -->

@@ -26,49 +26,48 @@ foreach($bracelets_displayed as $key => $val) {
             <div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
                     <h1>neuester upload</h1>
-                    
-					<div id="newest_pic">
-                        <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>						
-						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.'.$stats[1][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="connect_thumb_link">							
-						<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
-						</a>
-						<div>
-							<table class="connect_pic-info">
-								<tr>
-									<th>Armband</th>
-									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.$statistics->brid2name($bracelets_displayed[1]).'</a>'; ?></strong></td>
-								</tr>
-								<tr>
-									<th>Datum</th>
-									<td><?php echo date('d.m.Y H:i', $stats[1][0]['date']); ?> Uhr</td>
-								</tr>
-								<tr>
-									<th>Ort</th>
-									<td><?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?></td>
-								</tr>
-	<?php
-				if($stats[1][0]['user'] != NULL) {
-	?>
-								<tr>
-									<th>Uploader</th>
-									<td><?php echo $stats[1][0]['user']; ?></td>
-								</tr>
-	<?php
-				 }
-	?>
-							</table> 
-							<!--<p class="pic-desc">
-								<span class="desc-header"><?php echo $stats[1][0]['title']; ?></span><br>
-								<?php echo $stats[1][0]['description']; ?>
-							</p>          -->
-						</div>
-						<div class="more_imgs">
-                            <div class="fake_img pseudo_link"></div>
-    						<div class="fake_img pseudo_link"></div>
-    						<div class="fake_img pseudo_link"></div>
-					    </div>
-						<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">
-					</div>
+                        <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>	
+                        <div id="newest_pic">
+                        	<div class="more_imgs">
+                                <div class="fake_img pseudo_link"></div>
+        						<div class="fake_img pseudo_link"></div>
+        						<div class="fake_img pseudo_link"></div>
+    					   </div>
+                                                       			
+    						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.'.$stats[1][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="connect_thumb_link">							
+    						<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+    						</a>
+    							<table class="connect_pic-info">
+    								<tr>
+    									<th>Armband</th>
+    									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.$statistics->brid2name($bracelets_displayed[1]).'</a>'; ?></strong></td>
+    								</tr>
+    								<tr>
+    									<th>Datum</th>
+    									<td><?php echo date('d.m.Y H:i', $stats[1][0]['date']); ?> Uhr</td>
+    								</tr>
+    								<tr>
+    									<th>Ort</th>
+    									<td><?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?></td>
+    								</tr>
+                                	<?php
+                                				if($stats[1][0]['user'] != NULL) {
+                                	?>
+    								<tr>
+    									<th>Uploader</th>
+    									<td><?php echo $stats[1][0]['user']; ?></td>
+    								</tr>
+                                	<?php
+                                				 }
+                                	?>
+    							</table> 
+    							<!--<p class="pic-desc">
+    								<span class="desc-header"><?php echo $stats[1][0]['title']; ?></span><br>
+    								<?php echo $stats[1][0]['description']; ?>
+    							</p>          -->
+    						
+					    </div>	
+						<!--<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">    -->
                 </div>
                 <div class="connect_box" id="submit_box">
                     <h1>+1 bild</h1>
