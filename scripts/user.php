@@ -611,7 +611,7 @@ class Statistics {
 		}
 	}
 	//Postet ein Bild
-	public function registerpic ($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $picture_file, $max_file_size) {
+	public function registerpic ($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size) {
 		$submissions_valid = true;
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
@@ -696,16 +696,18 @@ class Statistics {
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
 				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg';
 				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
-				//EXIF-Header auslesen und Aufnamedatum bestimmen
-				if($fileext == 'jpg' || $fileext == 'jpeg') {
-					$exif_date = exif_read_data($img_path, 'EXIF', 0);
-					if($exif_date['DateTimeOriginal'] != 'UNDEFINED') {
-        				$date = strtotime($exif_date['DateTimeOriginal']);
+				if($date == 'default') {
+					//EXIF-Header auslesen und Aufnamedatum bestimmen
+					if($fileext == 'jpg' || $fileext == 'jpeg') {
+						$exif_date = exif_read_data($img_path, 'EXIF', 0);
+						if($exif_date['DateTimeOriginal'] != 'UNDEFINED') {
+							$date = strtotime($exif_date['DateTimeOriginal']);
+						}else {
+							$date = time();
+						}
 					}else {
 						$date = time();
 					}
-				}else {
-					$date = time();
 				}
 				///////////////////////////
 			

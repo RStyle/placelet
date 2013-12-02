@@ -121,7 +121,6 @@ $('#holder').on(
 )
 
 //Uploadvorschau
-
 $('input[name=registerpic_file]').change(function() {
 var active = false;
 var i_height = 1000; 
@@ -148,6 +147,30 @@ oFReader.onload = function (oFREvent) {
 	};
 });
 
+//Datumsabfrage
+var someCallback = function(exifObject) {
+	var now = Math.round(+new Date() / 1000);
+	var date = exifObject.DateTimeOriginal;
+	var myDate = "2012:12:24 14:38:12";
+	myDate = date.split(" ");
+	dayDate = myDate[0].split(":");
+	hourDate = myDate[1].split(":");
+	timestamp = new Date(dayDate[0], dayDate[1], dayDate[2], hourDate[0], hourDate[1], hourDate[2], 0).getTime() / 1000;
+	check = confirm("Möchtest du  " + date + " als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet");
+	if(check == true) {
+		$("#registerpic_date").val(timestamp);
+	}else {
+		$("#registerpic_date").val(now);
+	}
+	//console.log(exifObject);
+}
+try {
+	$('#registerpic_file').change(function() {
+		$(this).fileExif(someCallback);
+	});
+}catch (e) {
+	alert(e);
+}
 
 
 

@@ -236,7 +236,6 @@ include_once('./pages/'.$page.'.php');
 ?>
 
 		</section>
-		<!--<script src="js/jquery-1.10.2.min.js"></script>-->
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
 		<?php if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
@@ -244,6 +243,7 @@ include_once('./pages/'.$page.'.php');
 <?php
 if($page == 'login' && isset($postpic)) {
 ?>
+		<script type="text/javascript" src="./js/jquery.exif.js"></script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
 		<script>
 		$(document).ready(function() {
