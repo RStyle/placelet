@@ -446,7 +446,7 @@ class Statistics {
 		//Ermittelt die IDs der neuesten $brid_anz Bilder
 		$sql = "SELECT brid
 				FROM pictures
-				ORDER BY  `date` DESC";
+				ORDER BY id DESC";
 		$stmt = $this->db->query($sql);
 		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$q2 = array();
@@ -696,6 +696,17 @@ class Statistics {
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
 				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg';
 				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
+				//EXIF-Header auslesen und Aufnamedatum bestimmen
+				if($fileext == 'jpg' || $fileext == 'jpeg') {
+					$exif_date = exif_read_data($img_path, 'EXIF', 0);
+					if($exif_date['DateTimeOriginal'] != 'UNDEFINED') {
+        				$date = strtotime($exif_date['DateTimeOriginal']);
+					}else {
+						$date = time();
+					}
+				}else {
+					$date = time();
+				}
 				///////////////////////////
 			
 				$sql = "INSERT INTO pictures (picid, brid, user, description, date, city, country, title, fileext, latitude, longitude, state) VALUES (:picid, :brid, :user, :description, :date, :city, :country, :title, :fileext, :latitude, :longitude, :state)";
@@ -705,7 +716,7 @@ class Statistics {
 					':brid' => $brid,
 					':user' => $this->user->login,
 					':description' => $description,
-					':date' => time(),
+					':date' => $date,//time(),
 					'city' => $city,
 					'country' => $country,
 					'title' => $title,
