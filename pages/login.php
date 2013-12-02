@@ -24,6 +24,7 @@ if(isset($_POST['registerpic_submit'])) {
 											 $_POST['registerpic_latitude'],
 											 $_POST['registerpic_longitude'],
 											 $_POST['registerpic_title'],
+											 $_POST['registerpic_date'],
 											 $_FILES['registerpic_file'],
 											 $max_file_size);
 	//Rückmeldung zu Bild-Posten anzeigen
@@ -146,6 +147,7 @@ if(isset($loginattempt)) {
 ?>
 					<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
 					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
+					<input type="hidden" name="registerpic_date" id="registerpic_date" value="default">
 					<input type="submit" name="registerpic_submit" value="Bild posten"><br>
 					Bildvorschau:<br>
                     <img id="image_preview" src="./img/placeholder.png">
