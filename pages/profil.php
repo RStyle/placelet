@@ -28,7 +28,7 @@ if(!isset($_GET['user'])) {
 							<td><?php echo $userdetails['email']; ?></td>
 						</tr>
 <?php
-		if($userdetails['status']) {
+		if($userdetails['status'] == 2) {
 ?>
 						<tr>
 							<th>Status</th>

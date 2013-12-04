@@ -3,6 +3,13 @@
 @$postpic = $_GET['postpic'];
 @$loginattempt = $_GET['loginattempt'];
 @$unvalidated = $_GET['unvalidated'];
+if(isset($unvalidated)) {
+	$userdetails = $statistics->userdetails($unvalidated);
+	echo $userdetails['status'];
+	if($userdetails['status'] != 0) {
+		unset($unvalidated);
+	}
+}
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
 }
@@ -190,7 +197,7 @@ if(isset($loginattempt)) {
 ?>
 				<p>
 					Dein Account wurde erfolgreich erstellt.<br>
-					Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.
+					Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.<br>
 					Falls du nach von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
 				</p>
 <?php
@@ -204,7 +211,10 @@ if(isset($loginattempt)) {
 		echo $revalidation;
 	}else {
 ?>
-				<p>Hier kannst du deine E-Mail ändern und dir eine neue Bestätigungs-Email zusenden lassen.</p>
+				<p>
+					Deine E-Mail Adresse wurde noch nicht bestätigt.<br>
+					Hier kannst du deine E-Mail ändern und dir eine neue Bestätigungs-Email zusenden lassen.
+				</p>
 <?php
 	}
 ?>
