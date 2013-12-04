@@ -155,7 +155,7 @@ var someCallback = function(exifObject) {
 	myDate = date.split(" ");
 	dayDate = myDate[0].split(":");
 	hourDate = myDate[1].split(":");
-	timestamp = new Date(dayDate[0], dayDate[1], dayDate[2], hourDate[0], hourDate[1], hourDate[2], 0).getTime() / 1000;
+	timestamp = new Date(dayDate[0], dayDate[1] - 1, dayDate[2], hourDate[0], hourDate[1], hourDate[2], 0).getTime() / 1000;
 	check = confirm("Möchtest du  " + date + " als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet");
 	if(check == true) {
 		$("#registerpic_date").val(timestamp);
