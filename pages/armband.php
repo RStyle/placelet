@@ -42,8 +42,10 @@ if ($braceName != NULL) {
 		//Überprüfen, ob man das Armband gekauft hat.
 		$userdetails = $statistics->userdetails($user->login);
 		$armbaender = profile_stats($userdetails);
-		if(in_array($braceID, $armbaender['brid'])) {
-			$owner = true;
+		if($armbaender['brid'] != NULL) {
+			if(in_array($braceID, $armbaender['brid'])) {
+				$owner = true;
+			}
 		}
 	}
 	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);

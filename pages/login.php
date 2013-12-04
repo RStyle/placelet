@@ -191,7 +191,7 @@ if(isset($loginattempt)) {
 				<p>
 					Dein Account wurde erfolgreich erstellt.<br>
 					Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.
-					Falls du innerhalb von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
+					Falls du nach von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
 				</p>
 <?php
 	}elseif(isset($revalidation)) {

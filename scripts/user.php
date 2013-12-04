@@ -703,10 +703,10 @@ class Statistics {
 					//EXIF-Header auslesen und Aufnamedatum bestimmen
 					if($fileext == 'jpg' || $fileext == 'jpeg') {
 						$exif_date = exif_read_data($img_path, 'EXIF', 0);
-						if($exif_date['DateTimeOriginal'] != 'UNDEFINED') {
-							$date = strtotime($exif_date['DateTimeOriginal']);
-						}else {
+						if($exif_date['DateTimeOriginal'] == NULL || preg_match('[^A-Za-z]', $exif_date['DateTimeOriginal'])) {
 							$date = time();
+						}else {
+							$date = strtotime($exif_date['DateTimeOriginal']);
 						}
 					}else {
 						$date = time();
@@ -721,7 +721,7 @@ class Statistics {
 					':brid' => $brid,
 					':user' => $this->user->login,
 					':description' => $description,
-					':date' => $date,//time(),
+					':date' => $date,
 					'city' => $city,
 					'country' => $country,
 					'title' => $title,
@@ -735,7 +735,7 @@ class Statistics {
 				$q = $this->db->prepare($sql);
 				$q->execute(array(':brid' => $brid));
 				$q->setFetchMode(PDO::FETCH_ASSOC);
-				while( $row = $q->fetch(PDO::FETCH_ASSOC)){
+				while($row = $q->fetch(PDO::FETCH_ASSOC)){
 				print_r($row);
 				echo '<h1>'.$row['email'].'ascasc</h1>';
 				$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($this->brid2name($brid))."'>".$this->brid2name($brid)."</a> wurde ein neues Bild gepostet.<br>

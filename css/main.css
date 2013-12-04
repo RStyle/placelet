@@ -513,6 +513,8 @@
 				padding: 10px;
 			}
 			.arrow {
+				/* Fallback */
+				margin-left: 48%;
 				/* Firefox */
 				margin-left: -moz-calc(50% - 20px);
 				/* WebKit */

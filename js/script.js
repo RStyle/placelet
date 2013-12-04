@@ -150,13 +150,13 @@ oFReader.onload = function (oFREvent) {
 //Datumsabfrage
 var someCallback = function(exifObject) {
 	var now = Math.round(+new Date() / 1000);
+	//Format: "yy:MM:dd hh:mm:ss";
 	var date = exifObject.DateTimeOriginal;
-	var myDate = "2012:12:24 14:38:12";
 	myDate = date.split(" ");
 	dayDate = myDate[0].split(":");
 	hourDate = myDate[1].split(":");
 	timestamp = new Date(dayDate[0], dayDate[1] - 1, dayDate[2], hourDate[0], hourDate[1], hourDate[2], 0).getTime() / 1000;
-	check = confirm("Möchtest du  " + date + " als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet");
+	check = confirm("Möchtest du den " + dayDate[2] + "." + dayDate[1] + "." + dayDate[0] + " als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet");
 	if(check == true) {
 		$("#registerpic_date").val(timestamp);
 	}else {
@@ -296,8 +296,4 @@ $(document).ready(function(){
 	$('#edit_name').click(function(){
 		$('.name_inputs').toggle();
 	});
-});
-//
-$(document).ready(function(){
-	if(Math.floor((Math.random()*20)+1) == 1) alert("Fehler " + Math.floor((Math.random()*10)+1) + "\nBitte dem Support(Daniel) melden.");
 });
