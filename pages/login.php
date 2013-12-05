@@ -5,7 +5,6 @@
 @$unvalidated = $_GET['unvalidated'];
 if(isset($unvalidated)) {
 	$userdetails = $statistics->userdetails($unvalidated);
-	echo $userdetails['status'];
 	if($userdetails['status'] != 0) {
 		unset($unvalidated);
 	}
@@ -20,6 +19,9 @@ if(isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg
 //E-Mail Bestätigung erneut senden.
 if(isset($_POST['revalidate_submit'])) {
 	$revalidation = $user->revalidate($_POST['revalidate_user'], $_POST['revalidate_email']);
+	if($revalidation !== true) {
+		$js .= 'alert("'.$revalidation.'");';
+	}
 }
 //Bild posten Funktion aufrufen
 if(isset($_POST['registerpic_submit'])) {
@@ -65,24 +67,24 @@ if($user->login) {
 	$userdetails = $statistics->userdetails($user->login);
 	//Armband registrieren
 	if (isset($_POST['reg_br']) && $_POST['registerbr_submit'] == "Armband registrieren") {
-			$bracelet_registered = $user->registerbr($_POST['reg_br']);
-			//Rückmeldung zu Armband-registrieren anzeigen
-			if(isset($bracelet_registered)) {
-				switch ($bracelet_registered) {
-					case 0:
-						$js .= 'alert("Dieses Armband gibt es nicht.");';
-						break;
-					case 1:
-						header('Location: profil');
-						break;
-					case 2:
-						$js .= 'alert("Dieses Armband wurde schon auf dich registriert.");';
-						break;
-					case 3:
-						$js .= 'alert("Es ist ein Fehler aufgetreten, bitte kontaktiere den Support(support@placelet.de).");';
-						break;
-				}
+		$bracelet_registered = $user->registerbr($_POST['reg_br']);
+		//Rückmeldung zu Armband-registrieren anzeigen
+		if(isset($bracelet_registered)) {
+			switch ($bracelet_registered) {
+				case 0:
+					$js .= 'alert("Dieses Armband gibt es nicht.");';
+					break;
+				case 1:
+					header('Location: profil');
+					break;
+				case 2:
+					$js .= 'alert("Dieses Armband wurde schon auf dich registriert.");';
+					break;
+				case 3:
+					$js .= 'alert("Es ist ein Fehler aufgetreten, bitte kontaktiere den Support(support@placelet.de).");';
+					break;
 			}
+		}
 	}
 }
 //Registrationsstatus von Armband aufrufen

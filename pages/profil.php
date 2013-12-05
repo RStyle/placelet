@@ -15,13 +15,13 @@ if(isset($username) && Statistics::userexists($username)) {
 if(!isset($_GET['user'])) {
 	if ($user->login) {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1>Dein Profil, <?php echo $user->login ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1>Dein Profil, <?php echo htmlentities($user->login); ?></h1></div>
 				<div style="float: left; margin-right: 2em;">
 					Dein Account:
 					<table border="0">
 						<tr>
 							<th>Benutzername:</th>
-							<td><?php echo $userdetails['user']; ?></td>
+							<td><?php echo htmlentities($userdetails['user']); ?></td>
 						</tr>
 						<tr>
 							<th>E-Mail Adresse</th>

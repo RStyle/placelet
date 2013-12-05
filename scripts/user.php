@@ -105,8 +105,8 @@ class User
 			$sql = "INSERT INTO users (user, email, password, status) VALUES (:user, :email, :password, :status)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
-				':user' => clean_input($reg['reg_login']),
-				':email' => clean_input($reg['reg_email']),
+				':user' => trim($reg['reg_login']),
+				':email' => trim($reg['reg_email']),
 				':password' => PassHash::hash($reg['reg_password']),
 				':status' => 0)
 			);
@@ -114,21 +114,22 @@ class User
 			$q = $db->prepare($sql);
 			$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
 			$q->execute(array(
-				':user' => clean_input($reg['reg_login']),
+				':user' => trim($reg['reg_login']),
 				':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 			);
-			$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='. $reg['reg_login'].'&regstatuschange='. $code;
+			$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
 			$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
 			mail($reg['reg_email'], 'Bestätigungsemail', $content, $mail_header);
 			return true;
-		} else{
+		}else {
 			return 'Die beiden Passwörter sind nicht gleich.';
 		}
 	}
 	public function regstatuschange ($code, $username){
+		$username = urldecode($username);
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
         $q = $this->db->prepare($sql); 
         $q->execute(array(':user' => $username));
@@ -151,8 +152,6 @@ class User
 				return false;
 			}
 		}
-		
-		
 	}
 	//Armband registrieren
 	public function registerbr ($brid) {
@@ -214,7 +213,7 @@ class User
 		$return .= $this->change_password($old_pwd, $new_pwd, $username)."\\n";
 		//E-Mail ändern
 		if($email != NULL) {
-			$email = clean_input($email);
+			$email = trim($email);
 			if(check_email_address($email)) {
 				$sql = "UPDATE users SET email = :email WHERE user = :user";
 				$q = $this->db->prepare($sql);
@@ -293,6 +292,8 @@ class User
 		return 'Passwort erfolgreich geändert.';
 	}
 	public function revalidate($username, $email){
+		$username = trim($username);
+		$email = trim($email);
 		//Überprüfen, ob der Benutzer existiert.
 		if(!Statistics::userexists($username)) return 'Diesen Benutzer gibt es nicht.';
 		//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
@@ -314,17 +315,17 @@ class User
 		$q = $this->db->prepare($sql);
 		$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
 		$q->execute(array(
-			':user' => clean_input($username),
+			':user' => $username,
 			':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 		);
 		$sql = "UPDATE users SET email = :email WHERE user = :user";
 		$q = $this->db->prepare($sql);
 		$q->execute(array(
-			':user' => clean_input($username),
+			':user' => $username,
 			':email' => $email
 		));
 		//Neue Email senden.
-		$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.$username.'&regstatuschange='.$code;
+		$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($username).'&regstatuschange='.urlencode($code);
 		$mail_header = "From: Placelet <support@placelet.de>\n";
 		$mail_header .= "MIME-Version: 1.0" . "\n";
 		$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
@@ -422,7 +423,7 @@ class Statistics {
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		for ($i = 0; $i < $user_anz; $i++) {
-				$stats['user_most_bracelets']['user'][$i] = $q[$i]['user'];
+				$stats['user_most_bracelets']['user'][$i] = htmlentities($q[$i]['user']);
 				$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 		}
 		
@@ -484,7 +485,7 @@ class Statistics {
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
-		$stats['owner'] = $q[0]['user'];
+		$stats['owner'] = htmlentities($q[0]['user']);
 		$stats['date'] = $q[0]['date'];
 		$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
 		$stmt = $this->db->prepare($sql);
@@ -503,7 +504,7 @@ class Statistics {
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
-			$details[$val['picid']]['user'] = $val['user'];
+			$details[$val['picid']]['user'] = htmlentities($val['user']);
 			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];
 			$details[$val['picid']]['city'] = $val['city'];
@@ -523,7 +524,7 @@ class Statistics {
 			$details[$val['picid']] [$val['commid']] = array();
 			$details[$val['picid']] [$val['commid']] ['commid'] = $val['commid'];
 			$details[$val['picid']] [$val['commid']] ['picid'] = $val['picid'];
-			$details[$val['picid']] [$val['commid']] ['user'] = $val['user'];
+			$details[$val['picid']] [$val['commid']] ['user'] = htmlentities($val['user']);
 			$details[$val['picid']] [$val['commid']] ['comment'] = nl2br($val['comment'], 0);
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
 		}
@@ -533,11 +534,15 @@ class Statistics {
 	}
 	//Kommentar schreiben
 	public function write_comment ($brid, $username, $comment, $picid) {
+		$username = trim($username);
 		$submissions_valid = true;
 		if (isset($this->user->login)) {
 			if ($this->user->login != $username) {
 				$userexists = Statistics::userexists($username);
-			} else $userexists = false;
+			} else {
+				$userexists = false;
+				$username = clean_input($username);
+			}
 		} else {
 			$userexists = Statistics::userexists($username);
 			
@@ -556,7 +561,6 @@ class Statistics {
 		}
 		if ($submissions_valid) {
 			$comment = clean_input($comment);
-			$username = clean_input($username);
 			$brid = clean_input($brid);
 			try {
 				$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid";

@@ -84,8 +84,6 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 //Benutzereingaben von ungewünschten Zeichen säubern
 function clean_input($input) {
 	if(!empty($input)) {
-		//HTML- und PHP-Code entfernen
-		//$input = strip_tags($input);
 		//Umlaute und Sonderzeichen in HTML-Schreibweise umwandeln
 		$input = htmlentities($input);
 		//Überflüssige Leerzeichen entfernen
