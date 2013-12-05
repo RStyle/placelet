@@ -4,10 +4,12 @@ date_default_timezone_set("Europe/Berlin");
 error_reporting(E_ALL|E_STRICT); 
 ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
-require_once('./scripts/recaptchalib.php');
-include_once('./scripts/functions.php'); 
-include_once('./scripts/connection.php');
-include_once('./scripts/user.php');
+$this_path = '/var/www/virtual/placelet.de/htdocs/';
+$this_path_html = 'http://placelet.de/';
+require_once($this_path.'scripts/recaptchalib.php');
+require_once($this_path.'scripts/functions.php'); 
+require_once($this_path.'scripts/connection.php');
+require_once($this_path.'scripts/user.php');
 
 // Hier werden Cookies überprüft gesetzt usw.
 // Erzwingen das Session-Cookies benutzt werden und die SID nicht per URL transportiert wird
@@ -130,20 +132,20 @@ if(isset($_GET)) {
 		<meta name="description" content="Placelet Shop and Image Service">
 		<meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
 		<meta name="author" content="Roman S., Danial S., Julian Z.">
-		<link href="css/main.css" rel="stylesheet" type="text/css">
-		<link href="css/lightbox.css" rel="stylesheet">
+		<link href="<?php echo $this_path_html; ?>css/main.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo $this_path_html; ?>css/lightbox.css" rel="stylesheet">
 		<!--Google Fonts-->
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis|Open+Sans">
 <?php
 if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Clients
 ?>
-		<link href="css/mobile.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo $this_path_html; ?>css/mobile.css" rel="stylesheet" type="text/css">
 <?php
 }
 ?>
-		<link rel="apple-touch-icon" href="img/touchicon.png">
-		<link rel="icon" href="img/favicon-16.png" type="image/png" sizes="16x16">
-		<link rel="icon" href="img/favicon-32.png" type="image/png" sizes="32x32">
+		<link rel="apple-touch-icon" href="<?php echo $this_path_html; ?>img/touchicon.png">
+		<link rel="icon" href="<?php echo $this_path_html; ?>img/favicon-16.png" type="image/png" sizes="16x16">
+		<link rel="icon" href="<?php echo $this_path_html; ?>img/favicon-32.png" type="image/png" sizes="32x32">
 		<!--[if IE]><link rel="shortcut icon" href="img/favicon.ico"><![endif]-->
 		<meta name="msapplication-TileColor" content="#FFF">
 		<meta name="msapplication-TileImage" content="img/tileicon.png">
@@ -232,7 +234,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 <!--###SECTION TAG###-->
 		<section id="section">
 <?php
-include_once('./pages/'.$page.'.php');
+require_once($this_path.'pages/'.$page.'.php');
 ?>
 
 		</section>
