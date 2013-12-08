@@ -21,7 +21,7 @@ switch($cv){
 		$startVal--;
 		break;
 }
-$systemStats = $statistics->systemStats(0, $startVal + 1);
+$systemStats = $statistics->systemStats(0, $startVal+3);
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
@@ -40,9 +40,9 @@ if(isset($stats[$i + 1][0]['picid'])) {
 ?>
 						<div id="central_newest_pic">
                             <div class="more_imgs">
-                                <div class="fake_img pseudo_link"></div>
-        						<div class="fake_img pseudo_link"></div>
-        						<div class="fake_img pseudo_link"></div>
+                                    <?php if(isset($stats[$i+1][0]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i+1].'-'.$stats[$i+1][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>);"><?php } ?>     <br>
+                                    <?php if(isset($stats[$i+2][0]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i+2].'-'.$stats[$i+2][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>+1);"><?php } ?>     <br>
+                                    <?php if(isset($stats[$i+3][0]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i+3].'-'.$stats[$i+3][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>+2);"><?php } ?>
     					    </div>
                             <a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumb_link">
     							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">

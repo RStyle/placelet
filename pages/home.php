@@ -7,7 +7,7 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 		$js .= 'alert("Die Bestätigung deiner Email ist gescheitert.");';
 	}
 }
-$systemStats = $statistics->systemStats(0, 1);
+$systemStats = $statistics->systemStats(0, 4);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
@@ -30,9 +30,9 @@ foreach($bracelets_displayed as $key => $val) {
                             <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>	
                             <div id="central_newest_pic">
                             	<div class="more_imgs">
-                                    <div class="fake_img pseudo_link"></div>
-            						<div class="fake_img pseudo_link"></div>
-            						<div class="fake_img pseudo_link"></div>
+                            	    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[2].'-'.$stats[2][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">     <br>
+                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[3].'-'.$stats[3][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 2);">     <br>
+                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[4].'-'.$stats[4][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 3);">
         					   </div>
                                                            			
         						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][0]['picid'].'.'.$stats[1][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?>" class="connect_thumb_link">							
