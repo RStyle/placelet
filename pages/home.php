@@ -109,25 +109,29 @@ foreach($bracelets_displayed as $key => $val) {
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class=" mainarticleheaders line_header green_line"><h1>Wie funktioniert's?</h1></div>
-				<div class="round_image" style="background: url(http://i00.i.aliimg.com/wsphoto/v10/1013571924_1/Genuine-Leather-Hand-Knit-Vintage-Watches-bracelet-Wristwatches-Leaf-Pendant-Free-Shipping-SB-001.jpg)"></div>
+				<div class="round_image" style="margin-bottom: 0.5em; background: url(http://i00.i.aliimg.com/wsphoto/v10/1013571924_1/Genuine-Leather-Hand-Knit-Vintage-Watches-bracelet-Wristwatches-Leaf-Pendant-Free-Shipping-SB-001.jpg)"></div>
 				<p>
-					<span class="highlighted kollektion_numbers">1</span> Kaufe Dir ein Armband in unserem Shop. Du erhältst eine einmalige Armband-ID, die du auf der Rückseite des Metallplättchens am Armband findest. Damit kannst du dein Armband in der grünen Box auf unserer Startseite registrieren.
+					<span class="highlighted kollektion_numbers">1</span> Mit dem Kauf eines Armbands erhältst du eine ID, die du auf der Rückseite des Armbandes findest. Registriere dich damit in der Box auf unserer Startseite! 
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">2</span> Trage das Armband solange du möchtest. Wenn du Lust hast, lade ein Foto mit Dir und Deinem Armband (zum Beispiel vor einer Sehenswürdigkeit) in der grünen Box auf unserer Webseite hoch. Achte darauf, dass man auf dem Bild die ID des Armbandes nicht sehen kann, da sie wie ein Passwort funktioniert.
+					<span class="highlighted kollektion_numbers">2</span> Trage dein Armband, solange du Lust und Zeit hast. 
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">3</span> Gib dein Armband an einen Freund, Bekannten oder auch zufällig getroffenen Menschen deiner Wahl weiter, wobei du ihm das Grundprinzip des Reisearmbandes erklärst.
+					<span class="highlighted kollektion_numbers">3</span> Lade Fotos von dir und deinem Armband hoch! Die ID darf nicht sichtbar sein - sie funktioniert wie ein Passwort!
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">4</span>  Der nächste Armbandträger kann dann ebenfalls mit der ID ein Bild hochladen und das Armband weitergeben. Hierzu ist keine Registrierung auf unserer Webseite erforderlich.
+					<span class="highlighted kollektion_numbers">4</span> Verschenke dein Armband an Freunde oder andere Leute weiter und erkläre ihnen das Grundprinzip.
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">5</span>  Verfolge den Weg deines Armbandes um die Welt und kommentiere nach Lust und Laune die Bilder zu deinem oder auch anderen Armbändern.
+					<span class="highlighted kollektion_numbers">5</span> Der nächste Besitzer kann ebenfalls ein Bild mit der ID hochladen und weitergeben. Zum Hochladen alleine benötigst du kein Profil bei uns.
+				</p>
+				<span class="arrow highlighted">&#11015;</span>
+				<p>
+					<span class="highlighted kollektion_numbers">6</span> Verfolge den Weg deines Armbandes und kommentiere nach Lust und Laune die Bilder anderer User.
 				</p>
 			</article>
 <!--SIDEBAR-->

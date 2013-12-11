@@ -1,7 +1,15 @@
 			<article id="about-us" class="mainarticles bottom_border_blue" style="width: 100%">
 				<div class="blue_line mainarticleheaders line_header"><h1>Über uns</h1></div>
 				<a href="pictures/staff.jpg" data-lightbox="wir"><img src="pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet" id="wir"></a>
-				<h1>Global Bracelet. Travel&amp;Connect</h1>
+				<div id="partner_box">
+                    <h1>Partner</h1>
+                    <p>Wir bedanken uns für die freundliche Unterstützung von:</p>
+                    <a id="graffe_link" href="http://mst-graffe.de/" target="_blank">
+                        <img src="http://www.mst-graffe.de/images/MSTgif.gif" alt="mstgraffe_logo">
+                        <p class="partner_name">Maschinen- und Stahlbau-Technik Markus Graffe GMBH</p>
+                    </a>
+                </div>
+				<h1 style="clear: both; padding-top: 1em;">Global Bracelet. Travel&amp;Connect</h1>
 				<p>
 					Wir sind eine Gruppe engagierter Schüler der MSS 11 des Gymnasiums am Römerkastell Bad Kreuznach, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen<!-- und für ein Jahr lang ein Unternehmen führen-->.
 					Das Juniorprojekt bietet die Möglichkeit, 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.

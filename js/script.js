@@ -191,12 +191,12 @@ $('body').on('click', '.toggle_comments', function (){
 function check_width(){   
 //Logo Positionierung    
     if(window.innerWidth < 1480 && window.innerWidth > 1230){
-		$("#logo").attr("src", 'img/logo.svg');
+		$("#logo").attr("src", 'img/neueFarbenLogo.svg');
 		$("#logo").attr("width", '93');
 	}else if(window.innerWidth > 1500) {
 		$("#body").css({ 'width' : 'calc(100% - 500px)' });
 	}else {
-		$("#logo").attr("src", 'img/logo_extended.svg');
+		$("#logo").attr("src", 'img/neueFarbenLogoExtended.svg');
 		$("#logo").attr("width", '206');
 		$("#body").css({ 'width' : '70%' });
 	}
