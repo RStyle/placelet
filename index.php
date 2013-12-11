@@ -42,7 +42,11 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 	$user = new User($_POST['login'], $db);	
 	$checklogin = $user->login($_POST['password']);
 	if($checklogin === true) {
-		header('Location: start');
+		if(isset($_POST['login_location'])) {
+			header('Location: '.$_POST['login_location']);
+		}else {
+			header('Location: start');
+		}
 	}elseif($checklogin == 2) {
 		header('Location: login?unvalidated='.$user->login);
 	}elseif ($checklogin === false) {

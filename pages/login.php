@@ -119,7 +119,7 @@ if(isset($loginattempt)) {
 <?php
 }elseif(isset($postpic)) {
 ?>
-				<form id="register_pic" name="registerpic" action="<?php echo $friendly_self; ?>" method="post" enctype="multipart/form-data">
+				<form id="register_pic" name="registerpic" action="login" method="post" enctype="multipart/form-data">
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
@@ -157,6 +157,7 @@ if(isset($loginattempt)) {
 					<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
 					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 					<input type="hidden" name="registerpic_date" id="registerpic_date" value="default">
+					<input type="hidden" name="" value="">
 					<input type="submit" name="registerpic_submit" value="Bild posten"><br>
 					Bildvorschau:<br>
                     <img id="image_preview" src="./img/placeholder.png">
@@ -176,7 +177,7 @@ if(isset($loginattempt)) {
 ?>
 				Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
 				um dein Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $registerbr; ?></span> registrieren:<br>
-				<form name="login" id="form_login" action="login?registerbr=<?php echo $registerbr; ?>" method="post">
+				<form name="login" id="form_login" action="login" method="post">
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="log_login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -188,7 +189,7 @@ if(isset($loginattempt)) {
 						</tr>
 						<tr>
 							<td><input type="submit" value="Login"></td>
-							<td>&nbsp;</td>
+							<td><input type="hidden" name="login_location" value="login?registerbr=<?php echo $registerbr; ?>"></td>
 						</tr>
 					</table>
 				</form><br>
