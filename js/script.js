@@ -120,6 +120,29 @@ $('#holder').on(
     }
 )
 
+//Überprüfung ob Stadt bei Bildupload exestiert bzw. Korrektur
+$("#form_login").submit(function() {
+	geocoder = new google.maps.Geocoder();
+	var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
+	if(address == ",")
+		return false;
+	geocoder.geocode({ 'address': address }, function (results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			lat = results[0].geometry.location.nb;
+			$("#latitude").val(lat.toString());
+			long = results[0].geometry.location.ob;
+			$("#longitude").val(long.toString());
+			initialize(results[0].geometry.location, lat, long);
+			return;
+		} else {
+			alert('Geocode was not successful for the following reason: ' + status);
+			return false;
+		}
+	});
+}
+);
+
+
 //Uploadvorschau
 $('input[name=registerpic_file]').change(function() {
 var active = false;

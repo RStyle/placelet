@@ -20,41 +20,41 @@
 				<div class="tree">
 					<ul>
 						<li>
-							<a href="#">Vorstandsvorsitzende: Sarah Baiker & Janik Rennollet</a>
+							<span>Vorstandsvorsitzende: Sarah Baiker & Janik Rennollet</span>
 							<ul>
 								<li>
-									<a href="#">Patrick Piroth</a>
+									<span>Verwaltungsabteilung:<br>Patrick Piroth</span>
 									<ul class="tree_second">
 										<li>
-											<a href="#">Eloisa Marzell</a>
+											<span>Eloisa Marzell</span>
 										</li>
 									</ul>
 								</li>
 								<li>
-									<a href="#">Sebastian Gänz</a>
+									<span>Finanzabteilung:<br>Sebastian Gänz</span>
 									<ul class="tree_second">
 										<li>
-											<a href="#">Moritz Junkermann</a>
+											<span>Moritz Junkermann</span>
 										</li>
 									</ul>
 								</li>
 								<li>
-									<a href="#">Celine Müller-Späth</a>
+									<span>Marketingabteilung:<br>Celine Müller-Späth</span>
 									<ul class="tree_second">
 										<li>
-											<a href="#">Alicia Braun</a>
+											<span>Alicia Braun</span>
 											<ul class="tree_3">
 												<li>
-													<a href="#">Kai Zurmöhle</a>
+													<span>Kai Zurmöhle</span>
 													<ul class="tree_3">
 														<li>
-															<a href="#">Justus Renger</a>
+															<span>Justus Renger</span>
 															<ul class="tree_3">
 																<li>
-																	<a href="#">Lea Reinke</a>
+																	<span>Lea Reinke</span>
 																	<ul class="tree_3">
 																		<li>
-																			<a href="#">Collin Meffert</a>
+																			<span>Collin Meffert</span>
 																		</li>
 																	</ul>
 																</li>
@@ -70,19 +70,19 @@
 									</ul>
 								</li>
 								<li>
-									<a href="#">Maximilian Klapdar</a>
+									<span>Produktionsabteilung:<br>Maximilian Klapdar</span>
 									<ul class="tree_second">
 										<li>
-											<a href="#">Edda Strohm</a>
+											<span>Edda Strohm</span>
 											<ul class="tree_second">
 												<li>
-													<a href="#">Johanna Dippel</a>
+													<span>Johanna Dippel</span>
 													<ul class="tree_second">
 														<li>
-															<a href="#">Anna-Lena Bretscher</a>
+															<span>Anna-Lena Bretscher</span>
 															<ul class="tree_second">
 																<li>
-																	<a href="#">Silvia Orth</a>
+																	<span>Silvia Orth</span>
 																</li>
 															</ul>
 														</li>
@@ -95,13 +95,13 @@
 									</ul>
 								</li>
 								<li>
-									<a href="#">Roman Savrasov</a>
+									<span>Webabteilung:<br>Roman Savrasov</span>
 									<ul class="tree_second">
 										<li>
-											<a href="#">Daniel Schäfer</a>
+											<span>Daniel Schäfer</span>
 											<ul class="tree_second">
 												<li>
-													<a href="#">Julian Zimmerlin</a>
+													<span>Julian Zimmerlin</span>
 												</li>
 											</ul>
 										</li>

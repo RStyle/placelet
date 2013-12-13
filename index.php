@@ -256,22 +256,22 @@ if($page == 'login' && isset($postpic)) {
 			
 			$('#registerpic_city').on({
 				blur:function(){
-			var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
-				var geocoder= new google.maps.Geocoder();
-				geocoder.geocode( { 'address': address}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-					  console.log(results[0].geometry.location);
-						lat = results[0].geometry.location.ob;
-						$("#latitude").val(lat.toString());
-						long = results[0].geometry.location.pb;
-						$("#longitude").val(long.toString());
-					  initialize(results[0].geometry.location, lat, long);
-					} else {
-					  alert('Geocode was not successful for the following reason: ' + status);
-					}
+					geocoder = new google.maps.Geocoder();
+					var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
+					geocoder.geocode({ 'address': address }, function (results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+							console.log(results[0].geometry.location.ob + "," + results[0].geometry.location.nb);
+							lat = results[0].geometry.location.nb;
+							$("#latitude").val(lat.toString());
+							long = results[0].geometry.location.ob;
+							$("#longitude").val(long.toString());
+						  initialize(results[0].geometry.location, lat, long);
+						} else {
+							alert('Geocode was not successful for the following reason: ' + status);
+						}
+					});
+				}
 			});
-			}
-			})
 		
 			function initialize(coords, this_lat, this_lng) {
 				if(this_lat != false && this_lng != false)
