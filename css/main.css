@@ -160,14 +160,14 @@
 		width: 0; height: 20px;
 	}
 	
-	.tree li a{
-		width:100px; /*Testweise von mir/Roman*/
+	.tree li span{
+		width:10em; /*Testweise von mir/Roman*/
 		border: 1px solid #ccc;
 		padding: 5px 10px;
-		text-decoration: none;
+		/*text-decoration: none;
 		color: #666;
-		font-family: arial, verdana, tahoma;
-		font-size: 11px;
+		font-family: arial, verdana, tahoma;*/
+		font-size: 100%;
 		display: inline-block;
 		
 		border-radius: 5px;
