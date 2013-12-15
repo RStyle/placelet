@@ -102,14 +102,15 @@ class User
 			if(strlen($reg['reg_password']) < 6) return 'Passwort zu kurz. Min. 6';
 			if(strlen($reg['reg_password']) > 30) return 'Passwort zu lang. Max. 30';
 			if(check_email_address($reg['reg_email']) === false) return 'Das ist keine gültige E-Mail Adresse';
-			$sql = "INSERT INTO users (user, email, password, status) VALUES (:user, :email, :password, :status)";
+			$sql = "INSERT INTO users (user, email, password, status, ´date´) VALUES (:user, :email, :password, :status, :date)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
 				':user' => trim($reg['reg_login']),
 				':email' => trim($reg['reg_email']),
 				':password' => PassHash::hash($reg['reg_password']),
-				':status' => 0)
-			);
+				':status' => 0,
+				':date' => time()
+			));
 			$sql = "INSERT INTO user_status (user,code) VALUES (:user,:code)";
 			$q = $db->prepare($sql);
 			$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
@@ -361,9 +362,11 @@ class Statistics {
 	//Userdetails abfragen
 	public function userdetails($user) {
 		$result = array();
-		$stmt = $this->db->prepare("SELECT user, email, status FROM users WHERE user = :user LIMIT 1");
+		//Allgemeine Daten
+		$stmt = $this->db->prepare("SELECT user, email, status, date AS registered FROM users WHERE user = :user LIMIT 1");
 		$stmt->execute(array('user' => $user));
 		$result[0] = $stmt->fetch(PDO::FETCH_ASSOC);
+		//Gekaufte Armbänder
 		$stmt = $this->db->prepare("SELECT brid, date FROM bracelets WHERE user = :user ORDER BY  `bracelets`.`date` ASC ");
 		$stmt->execute(array('user' => $user));
 		$result[1] = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -371,9 +374,15 @@ class Statistics {
 		$stmt = $this->db->prepare("SELECT brid FROM subscriptions WHERE email = :email");
 		$stmt->execute(array('email' => $result[0]['email']));
 		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+		//Gepostete Bilder
+		$stmt = $this->db->prepare("SELECT brid, picid, fileext FROM pictures WHERE user = :user");
+		$stmt->execute(array('user' => $user));
+		$result[4] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		//Array verschönern
 		$user_details = $result;
 		$user_details['users'] = $user_details[0];
+		$user_details['pics']['pics'] = $user_details[4];
 		$brids = array();
 		foreach ($user_details[1] as $key => $val) {
 			$brids = array_merge_recursive($val, $brids);
@@ -382,7 +391,7 @@ class Statistics {
 			$result[3][$val['brid']] = $stmt->fetch(PDO::FETCH_ASSOC);
 		}
 		$user_details['bracelets'] = $brids;
-		$userdetails = array_merge($user_details['users'], $user_details['bracelets']);
+		$userdetails = array_merge($user_details['users'], $user_details['bracelets'], $user_details['pics']);
 		$userdetails['subscriptions'] = $user_details[2];
 		if(isset($result[3]))
 			$userdetails['picture_count'] = $result[3];

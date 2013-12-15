@@ -52,7 +52,7 @@ if(!isset($_GET['user'])) {
 				</div>
 				<div style="float: left;">
 <?php
-							if (isset($userdetails['brid'])) {
+		if (isset($userdetails['brid'])) {
 ?>
 					Deine Armbänder:
 					<table border="1">
@@ -63,8 +63,8 @@ if(!isset($_GET['user'])) {
 							<th>Anzahl Besitzer</th>
 						</tr>
 <?php
-								for ($i = 0; $i < count($armbaender['brid']); $i++) {
-									if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
+			for ($i = 0; $i < count($armbaender['brid']); $i++) {
+				if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
 ?>
 						<tr>
 							<td><a href="armband?name=<?php echo urlencode($statistics->brid2name($armbaender['brid'][$i])); ?>"><?php echo $statistics->brid2name($armbaender['brid'][$i]); ?></a></td>
@@ -72,18 +72,18 @@ if(!isset($_GET['user'])) {
 							<td><?php echo date('d.m.Y', $armbaender['date'][$i]); ?></td>
 							<td><?php echo $armbaender['picture_count'][$armbaender['brid'][$i]]['picid']; ?></td>
 <?php
-										if($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] == 0) {
+					if($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] == 0) {
 ?>
 							<td><a href="login?postpic=<?php echo $armbaender['brid'][$i]; ?>">Bild posten</a></td>
 <?php
-										}
+					}
 ?>
 						</tr>
 <?php
-								}
-							} else {
-								echo 'Du besitzt leider noch kein Armband.';
-							}
+				}
+		} else {
+			echo 'Du besitzt leider noch kein Armband.';
+		}
 ?>
 					</table>
 				</div>
@@ -136,33 +136,36 @@ if(!isset($_GET['user'])) {
             <div class="user_info">
                 <div class="profile_pic" style="float:left;"></div>            
                 <h1><?php echo $username; ?></h1>
-                <p>Registriert seit: XX.XX.XXXX   <br>
-                Armbänder: XX, Uploads: XX</p>
+                <p>Registriert seit: <?php echo date('H:i d.m.Y', $userdetails['registered']); ?><br>
+                Armbänder: <?php echo count($userdetails['brid']); ?>, Uploads: <?php echo count($userdetails['pics']); ?></p>
             </div>
 <?php
-							if (isset($userdetails['brid'])) {
+	if(isset($userdetails['brid'])) {
 ?>
 				<div class="showcases">
                     <ul class="tabs">
                         <li class="pseudo_link">Armbänder</li>
                         <li class="pseudo_link">Abonnements</li>
                         <li class="pseudo_link">Uploads</li>
-                    </ul> 
-                    <a class="previews" href="armband?name=Armböy">
-                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/pic-123871-2.jpg">      <br>
-                        <p class="preview_text">[Name]
-                        <span style="float:right;">Bilder: X&nbsp;</span></p>                        
-                    </a>   
-                    <a class="previews" href="armband?name=Armböy">
-                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/pic-622537-1.jpeg">      <br>
-                        <p class="preview_text">[Name]
-                        <span style="float:right;">Bilder: X&nbsp;</span></p>
-                    </a>     
-                    <a class="previews" href="armband?name=Armböy">
-                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/pic-440040-1.jpg">      <br>
-                        <p class="preview_text">[Name]
-                        <span style="float:right;">Bilder: X&nbsp;</span></p>
+                    </ul>
+<?php
+		foreach($userdetails['picture_count'] as $key => $val) {
+			if($val['picid'] == NULL) $val['picid'] = 0;
+?>
+                    <a class="previews" href="armband?name=<?php echo urlencode($statistics->brid2name($key)); ?>">
+<?php
+			if($val['picid'] != 0) {
+?>
+                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+<?php
+			}
+?>
+                        <p class="preview_text"><?php echo $statistics->brid2name($key); ?>
+                        <span style="float:right;">Bilder: <?php echo $val['picid']; ?></span></p>                        
                     </a>
+<?php
+		}
+?>
       
     			<!--	<table border="1">
     					<tr>
@@ -171,18 +174,18 @@ if(!isset($_GET['user'])) {
     						<th>Anzahl Besitzer</th>
     					</tr>
 <?php
-								for ($i = 0; $i < count($armbaender['brid']); $i++) {
-									if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
+		for ($i = 0; $i < count($armbaender['brid']); $i++) {
+			if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
 									echo '
 					<tr>
 						<td><a href="armband?name='.urlencode($statistics->brid2name($armbaender['brid'][$i])).'">'.$statistics->brid2name($armbaender['brid'][$i]).'</a></td>
 						<td>'.date('d.m.Y', $armbaender['date'][$i]).'</td>
 						<td>'.$armbaender['picture_count'][$armbaender['brid'][$i]]['picid'].'</td>
 					</tr>';
-								}
-							} else {
-								echo 'Dieser Benutzer besitzt noch kein Armband.';
-							}
+		}
+	} else {
+		echo 'Dieser Benutzer besitzt noch kein Armband.';
+	}
 ?>
 			        </table>       -->
 			    </div>
