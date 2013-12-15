@@ -144,9 +144,9 @@ if(!isset($_GET['user'])) {
 ?>
 				<div class="showcases">
                     <ul class="tabs">
-                        <li class="pseudo_link" style="text-decoration: none;">Armbänder</li>
-                        <li class="pseudo_link" style="text-decoration: none;">Abonnements</li>
-                        <li class="pseudo_link" style="text-decoration: none;">Uploads</li>
+                        <li class="pseudo_link">Armbänder</li>
+                        <li class="pseudo_link">Abonnements</li>
+                        <li class="pseudo_link">Uploads</li>
                     </ul> 
                     <a class="previews" href="armband?name=Armböy">
                         <img class="preview_pic" alt="latest pic" src="pictures/bracelets/pic-123871-2.jpg">      <br>

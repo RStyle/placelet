@@ -1,7 +1,4 @@
 <?php
-foreach($_GET as $key => $val) {
-	$_GET[$key] = clean_input($val);
-}
 if(isset($_GET['squery'])) {
 	$squery = $_GET['squery'];
 	if(strlen($squery) <= 18) {
@@ -35,6 +32,9 @@ if(isset($_GET['squery'])) {
 				$squery_result['bracelet_id'] = 2;
 				break;
 		}
+	}
+	foreach($_GET as $key => $val) {
+		$_GET[$key] = clean_input($val);
 	}
 ?>
 			<article id="kontakt" class="mainarticles bottom_border_green">

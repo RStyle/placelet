@@ -4,8 +4,13 @@ date_default_timezone_set("Europe/Berlin");
 error_reporting(E_ALL|E_STRICT); 
 ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
-$this_path = '/var/www/virtual/placelet.de/htdocs/';
-$this_path_html = 'http://www.placelet.de/';
+if($_SERVER['SERVER_NAME'] == 'localhost') {
+	$this_path = '';
+	$this_path_html = '';
+}else {
+	$this_path = '/var/www/virtual/placelet.de/htdocs/';
+	$this_path_html = 'http://www.placelet.de/';
+}
 require_once($this_path.'scripts/recaptchalib.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/connection.php');

@@ -654,6 +654,7 @@
             float: left;
             padding: 0.5em;
             transition: background-color 400ms linear 0;
+			text-decoration: none;
         }
         .tabs li:hover {
             background-color: #ddd;

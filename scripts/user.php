@@ -869,12 +869,116 @@ class Statistics {
 			}
 		}
 	}
+	private function delete_pic($input, $picid, $brid) {
+			//Datei löschen
+			$sql = "SELECT fileext FROM pictures WHERE brid = :brid AND picid = :picid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':picid' => $picid,
+				':brid' => $brid
+			));
+			$result = $q->fetch(PDO::FETCH_ASSOC);
+			$file_path = $brid.'-'.$picid.'.';
+			unlink($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$file_path.$result['fileext']);
+			unlink($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$file_path.'jpg');
+			//Datenbankeintrag löschen
+			$sql = "DELETE FROM pictures WHERE picid = :picid AND brid = :brid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':picid' => $picid,
+				':brid' => $brid
+			));
+			$anz = $q->rowCount();
+			//Alle Kommentare zu diesem Bild löschen
+			$sql = "DELETE FROM comments WHERE picid = :picid AND brid = :brid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':picid' => $picid,
+				':brid' => $brid
+			));
+			//Wenn das Bild nicht das zuletzt gepostete ist
+			if($input == 'middle') {
+				$sql = "SELECT picid, fileext FROM pictures WHERE brid = :brid AND picid > :picid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':picid' => $picid,
+					':brid' => $brid
+				));
+				$result = $q->fetchAll(PDO::FETCH_ASSOC);
+				foreach($result as $key => $val) {
+					$sql = "UPDATE pictures SET picid = :newpicid WHERE brid = :brid AND picid = :picid ";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':picid' => $picid,
+						':brid' => $brid,
+						':picid' => $val['picid'],
+						':newpicid' => $val['picid'] - 1
+					));
+					$sql = "UPDATE comments SET picid = :newpicid WHERE brid = :brid AND picid = :picid ";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':picid' => $picid,
+						':brid' => $brid,
+						':picid' => $val['picid'],
+						':newpicid' => $val['picid'] - 1
+					));
+					rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.$val['picid'].'.'.$val['fileext'],
+						   $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.($val['picid'] - 1).'.'.$val['fileext']);
+					rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.$val['picid'].'.jpg',
+						   $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.($val['picid'] - 1).'.jpg');
+				}
+			}
+			if($anz == 1) {
+				return true;//erfolgreich gelöscht
+			}else {
+				return false;
+			}
+	}
+	public function manage_pic($admin, $input, $picid, $brid) {
+		if($admin) {
+			return $this->delete_pic($input, $picid, $brid);
+		}else {
+			if($this->user->login) {
+				$sql = "SELECT user FROM bracelets WHERE user = :user AND brid = :brid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':user' => $this->user->login,
+					':brid' => $brid,
+				));
+				$anz = $q->rowCount();
+				if($anz == 1) {
+					return $this->delete_pic($input, $picid, $brid);
+				}else {
+					$sql = "UPDATE pictures SET spam = true WHERE brid = :brid AND picid = :picid";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(
+						':picid' => $picid,
+						':brid' => $brid
+					));
+					return 2;//gemeldet
+				}
+			}else {
+				$sql = "UPDATE pictures SET spam = true WHERE brid = :brid AND picid = :picid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':picid' => $picid,
+					':brid' => $brid
+				));
+				return 2;//gemeldet
+			}
+		}
+	}
 	public function admin_stats() {
 		//Spam-Kommentare
-		$sql = "SELECT commid, picid, user, comment, date, brid FROM comments";
+		$sql = "SELECT commid, picid, user, comment, date, brid FROM comments WHERE spam = true";
 		$q = $this->db->prepare($sql);
 		$q->execute();
 		$result['spam_comments'] = $q->fetchAll(PDO::FETCH_ASSOC);
+		//Spam-Bilder
+		$sql = "SELECT picid, brid, user, description, date, city, country, title, fileext FROM pictures WHERE spam = true";
+		$q = $this->db->prepare($sql);
+		$q->execute();
+		$result['spam_pics'] = $q->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
 }

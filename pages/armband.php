@@ -19,10 +19,36 @@ if ($braceName != NULL) {
 	//Kommentar löschen
 	if(isset($_GET['last_comment']) && isset($_GET['delete_comm']) && isset($_GET['commid']) && isset($_GET['picid']) && isset($_GET['name'])) {
 		$comment_deleted = $statistics->manage_comment($user->admin, $_GET['last_comment'], $_GET['commid'], $_GET['picid'], $braceID);
-		if($comment_deleted === true) {
-			$js .= 'alert("Kommentar erfolgreich gelöscht.");';
+		if($comment_deleted === true ) {
+			header('Location: armband?name='.$braceName.'&comment_deleted=true');
 		}elseif($comment_deleted == 2) {
+			header('Location: armband?name='.$braceName.'&comment_deleted=2');
+		}
+		if($_GET['comment_deleted'] == 'true') {
+			$js .= 'alert("Kommentar erfolgreich gelöscht.");';	
+		}elseif($_GET['comment_deleted'] == '2') {
 			$js .= 'alert("Kommentar gemeldet.");';
+		}
+	}
+	//Bild löschen
+	if(isset($_GET['last_pic']) && isset($_GET['delete_pic']) && isset($_GET['picid']) && isset($_GET['name'])) {
+		$pic_deleted = $statistics->manage_pic($user->admin, $_GET['last_pic'], $_GET['picid'], $braceID);
+		if($pic_deleted === true ) {
+			header('Location: armband?name='.urlencode($braceName).'&pic_deleted=true');
+			echo 'jep';
+		}elseif($pic_deleted == 2) {
+			header('Location: armband?name='.urlencode($braceName).'&pic_deleted=2');
+			echo 'markiert';
+		}elseif ($pic_deleted == false) {
+			$js .= 'Es ist ein Fehler beim Löschen des Bildes aufgetreten<br>Bitte informiere den Support.';
+			echo 'Fehler';
+		}else echo $pic_deleted;
+	}
+	if(isset($_GET['pic_deleted'])) {
+		if($_GET['pic_deleted'] == 'true') {
+			$js .= 'alert("Bild erfolgreich gelöscht.");';	
+		}elseif($_GET['pic_deleted'] == '2') {
+			$js .= 'alert("Bild gemeldet.");';
 		}
 	}
 	//Armband Name ändern
@@ -78,8 +104,11 @@ if ($braceName != NULL) {
 				</form>
 <?php
 					for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
+						if($i == 0) $last_pic = 'last';
+							else $last_pic = 'middle';
 ?>
 				<div style="width: 100%; overflow: auto;">
+				<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;">X</a>
 					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 						<img src="img/triangle.png" alt="" class="thumb_triangle">
