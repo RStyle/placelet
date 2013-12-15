@@ -15,11 +15,32 @@ if(isset($write_comment)) {
 }
 //Kommentar löschen
 if(isset($_GET['last_comment']) && isset($_GET['delete_comm']) && isset($_GET['commid']) && isset($_GET['picid']) && isset($_GET['comm_name'])) {
-	$comment_deleted = $statistics->manage_comment($user->admin, $_GET['last_comment'], $_GET['commid'], $_GET['picid'], urldecode($statistics->name2brid($_GET['comm_name'])));
+	$comment_deleted = $statistics->manage_comment($user->admin, $_GET['last_comment'], $_GET['commid'], $_GET['picid'], $statistics->name2brid(urldecode($_GET['comm_name'])));
 	if($comment_deleted === true) {
-		$js .= 'alert("Kommentar erfolgreich gelöscht.");';
+		header('Location: start?comment_deleted=true');
 	}elseif($comment_deleted == 2) {
-		$js .= 'alert("Kommentar gemeldet.");';
+			$js .= 'alert("Kommentar gemeldet.");';
+	}
+	if($_GET['comment_deleted'] == 'true') {
+		$js .= 'alert("Kommentar erfolgreich gelöscht.");';	
+	}
+}
+//Bild löschen
+if(isset($_GET['last_pic']) && isset($_GET['delete_pic']) && isset($_GET['picid']) && isset($_GET['pic_name'])) {
+	$pic_deleted = $statistics->manage_pic($user->admin, $_GET['last_pic'], $_GET['picid'], $statistics->name2brid(urldecode($_GET['pic_name'])));
+	if($pic_deleted === true ) {
+		header('Location: start?name='.urlencode($braceName).'&pic_deleted=true');
+		echo 'jep';
+	}elseif($pic_deleted == 2) {
+		$js .= 'alert("Bild gemeldet.");';
+	}elseif ($pic_deleted == false) {
+		$js .= 'Es ist ein Fehler beim Löschen des Bildes aufgetreten<br>Bitte informiere den Support.';
+		echo 'Fehler';
+	}else echo $pic_deleted;
+}
+if(isset($_GET['pic_deleted'])) {
+	if($_GET['pic_deleted'] == 'true') {
+		$js .= 'alert("Bild erfolgreich gelöscht.");';	
 	}
 }
 $user_anz = 3;
@@ -81,6 +102,7 @@ for ($i = 0; $i < $user_anz; $i++) {
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
+						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&picid=<?php echo $stats[$i][0]['picid']; ?>&last_pic=last&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="Bild löschen/melden" onclick="return confirmDelete('das Bild');">X</a>
 						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumb_link">
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
 							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumbnail">
@@ -163,7 +185,7 @@ for ($i = 0; $i < $user_anz; $i++) {
 					$last_comment = 'last';
 				}
 ?>
-					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>&comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&delete_comm=true" class="delete_button float_right">X</a>
+					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>&comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&delete_comm=true" class="delete_button float_right" title="Kommentar löschen/melden" onclick="return confirmDelete('den Kommentar');">X</a>
 					<strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  

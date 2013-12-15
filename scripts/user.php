@@ -513,6 +513,7 @@ class Statistics {
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
+			//$details[$val['picid']]['brid'] = $brid;
 			$details[$val['picid']]['user'] = htmlentities($val['user']);
 			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];

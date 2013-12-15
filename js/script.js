@@ -320,3 +320,13 @@ $(document).ready(function(){
 		$('.name_inputs').toggle();
 	});
 });
+
+//Löschen von Kommentaren und Bildern bestätigen
+function confirmDelete(type) {
+    var agree = confirm("Willst du " + type + "wirklich löschen/melden?"); 
+    if(agree) {
+		return true; 
+	}else {
+		return false; 
+	}
+  } 
