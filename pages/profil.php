@@ -1,4 +1,4 @@
-			<article id="kontakt" class="mainarticles bottom_border_green">
+			<article id="profil" class="mainarticles bottom_border_green">
 <?php
 foreach($_GET as $key => $val) {
 	$_GET[$key] = clean_input($val);
@@ -133,16 +133,43 @@ if(!isset($_GET['user'])) {
 } elseif(Statistics::userexists($username)){
 ?>
             <div class="green_line mainarticleheaders line_header"><h1>Profil von <?php echo $username; ?></h1></div>
+            <div class="user_info">
+                <div class="profile_pic" style="float:left;"></div>            
+                <h1><?php echo $username; ?></h1>
+                <p>Registriert seit: XX.XX.XXXX   <br>
+                Armbänder: XX, Uploads: XX</p>
+            </div>
 <?php
 							if (isset($userdetails['brid'])) {
 ?>
-				Seine Armbänder:
-				<table border="1">
-					<tr>
-						<th>Armband Name</th>
-						<th>registriert am</th>
-						<th>Anzahl Besitzer</th>
-					</tr>
+				<div class="showcases">
+                    <ul class="tabs">
+                        <li class="pseudo_link" style="text-decoration: none;">Armbänder</li>
+                        <li class="pseudo_link" style="text-decoration: none;">Abonnements</li>
+                        <li class="pseudo_link" style="text-decoration: none;">Uploads</li>
+                    </ul> 
+                    <a class="previews" href="armband?name=Armböy">
+                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/pic-123871-2.jpg">      <br>
+                        <p class="preview_text">[Name]
+                        <span style="float:right;">Bilder: X&nbsp;</span></p>                        
+                    </a>   
+                    <a class="previews" href="armband?name=Armböy">
+                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/pic-622537-1.jpeg">      <br>
+                        <p class="preview_text">[Name]
+                        <span style="float:right;">Bilder: X&nbsp;</span></p>
+                    </a>     
+                    <a class="previews" href="armband?name=Armböy">
+                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/pic-440040-1.jpg">      <br>
+                        <p class="preview_text">[Name]
+                        <span style="float:right;">Bilder: X&nbsp;</span></p>
+                    </a>
+      
+    			<!--	<table border="1">
+    					<tr>
+    						<th>Armband Name</th>
+    						<th>registriert am</th>
+    						<th>Anzahl Besitzer</th>
+    					</tr>
 <?php
 								for ($i = 0; $i < count($armbaender['brid']); $i++) {
 									if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
@@ -157,7 +184,8 @@ if(!isset($_GET['user'])) {
 								echo 'Dieser Benutzer besitzt noch kein Armband.';
 							}
 ?>
-			</table>
+			        </table>       -->
+			    </div>
 <?php
 }else {
 ?>

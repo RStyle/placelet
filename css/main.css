@@ -625,9 +625,55 @@
 		}
 	/*---Armband SECTION---*/
 	/*+++Profil SECTION+++*/
-	
-	
-	
+	.profile_pic {
+        background-color: #8ED70F;
+        width: 80px;
+        height: 80px;
+        margin-right: 1em; 
+        border-radius: 1em;
+    }	
+	.user_info {
+        overflow: hidden;    
+        margin-bottom: 1em; 
+    }
+        .user_info > h1, .user_info p {
+            margin: 0;
+        }
+    .showcases {
+        
+    }
+    .tabs {
+        overflow: auto;
+        list-style: none;
+        margin: 0;
+        margin-bottom: 1em;
+        padding: 0;
+        border-bottom: 3px #ddd solid;
+    }
+        .tabs li {
+            float: left;
+            padding: 0.5em;
+            transition: background-color 400ms linear 0;
+        }
+        .tabs li:hover {
+            background-color: #ddd;
+        }
+    .previews {
+        background-color: #ddd; 
+        padding: 0.5em;  
+        margin-bottom: 1em;
+        margin-right: 1em;
+        float: left; 
+        text-decoration: none;
+    }
+        .preview_pic {
+            width: 250px;
+            height: auto;    
+        }
+        .preview_text {
+            font-size: 0.8em;  
+            margin: 0;  
+        }    		
 	/*---Profil SECTION---*/
 	/*+++Start SECTION+++*/
 		#placelet_stats {
