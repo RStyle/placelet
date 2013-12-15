@@ -626,9 +626,7 @@
 	/*---Armband SECTION---*/
 	/*+++Profil SECTION+++*/
 	.profile_pic {
-        background-color: #8ED70F;
-        width: 80px;
-        height: 80px;
+	    float: left;
         margin-right: 1em; 
         border-radius: 1em;
     }	
