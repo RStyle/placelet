@@ -1,8 +1,5 @@
 			<article id="profil" class="mainarticles bottom_border_green">
 <?php
-foreach($_GET as $key => $val) {
-	$_GET[$key] = clean_input($val);
-}
 if(isset($_GET['user'])) {
 	$username = $_GET['user'];
 }elseif($user->login) {
@@ -21,7 +18,7 @@ if(!isset($_GET['user'])) {
 					<table border="0">
 						<tr>
 							<th>Benutzername:</th>
-							<td><?php echo htmlentities($userdetails['user']); ?></td>
+							<td><?php echo $userdetails['user']; ?></td>
 						</tr>
 						<tr>
 							<th>E-Mail Adresse</th>
@@ -132,10 +129,10 @@ if(!isset($_GET['user'])) {
 	}
 } elseif(Statistics::userexists($username)){
 ?>
-            <div class="green_line mainarticleheaders line_header"><h1>Profil von <?php echo $username; ?></h1></div>
+            <div class="green_line mainarticleheaders line_header"><h1>Profil von <?php echo htmlentities($username); ?></h1></div>
             <div class="user_info">
                 <img class="profile_pic" src="img/profil_pic_small.png">           
-                <h1><?php echo $username; ?></h1>
+                <h1><?php echo $userdetails['user']; ?></h1>
                 <p>Registriert seit: <?php echo date('H:i d.m.Y', $userdetails['registered']); ?><br>
                 Armbänder: <?php echo count($userdetails['brid']); ?>, Uploads: <?php echo count($userdetails['pics']); ?></p>
             </div>
@@ -160,7 +157,7 @@ if(!isset($_GET['user'])) {
 <?php
 			}
 ?>
-                        <p class="preview_text"><?php echo $statistics->brid2name($key); ?>
+                        <p class="preview_text"><?php echo htmlentities($statistics->brid2name($key)); ?>
                         <span style="float:right;">Bilder: <?php echo $val['picid']; ?></span></p>                        
                     </a>
 <?php

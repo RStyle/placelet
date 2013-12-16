@@ -121,7 +121,7 @@ if ($braceName != NULL) {
 ?>
 						<tr>
 							<th>Uploader</th>
-							<td><a href="profil?user=<?php echo urlencode($stats[$i]['user']); ?>"><?php echo $stats[$i]['user']; ?></a></td>
+							<td><a href="profil?user=<?php echo urlencode(html_entity_decode(($stats[$i]['user']))); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
                  }
@@ -216,7 +216,7 @@ if ($braceName != NULL) {
 ?>
 					<tr>
 						<td>Käufer</td>
-						<td><a href="profil?user=<?php echo urlencode($stats['owner']); ?>"><?php echo $stats['owner']; ?></a></td>
+						<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats['owner'])); ?>"><?php echo $stats['owner']; ?></a></td>
 					</tr>
 					<tr>
 						<td>Registriert am</td>

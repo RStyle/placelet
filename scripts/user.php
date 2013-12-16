@@ -397,6 +397,7 @@ class Statistics {
 			$userdetails['picture_count'] = $result[3];
 		else
 			$userdetails['picture_count'] = 0;
+		$userdetails['user'] = htmlentities($userdetails['user']);
 		return $userdetails;
 	}
 	//Zeigt die allgemeine Statistik an

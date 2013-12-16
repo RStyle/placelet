@@ -32,16 +32,12 @@ if(isset($_GET['squery'])) {
 				$squery_result['bracelet_id'] = 2;
 				break;
 		}
-	}
-	foreach($_GET as $key => $val) {
-		$_GET[$key] = clean_input($val);
-	}
+	$squery = htmlentities($squery);
 ?>
 			<article id="kontakt" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page]; ?></h1></div>
 				<ul>
 <?php
-	if(strlen($squery) <= 18) {
 		switch($squery_result['user']) {
 			case 0:
 ?>
@@ -88,6 +84,9 @@ if(isset($_GET['squery'])) {
 		}
 	}else {
 ?>
+			<article id="kontakt" class="mainarticles bottom_border_green">
+				<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page]; ?></h1></div>
+				<ul>
 					<li>Es gibt keine Armbänder oder Benutzernamen, die länger als 18 Zeichen sind.</li>
 <?php
 	}

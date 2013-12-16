@@ -41,7 +41,7 @@ foreach($bracelets_displayed as $key => $val) {
         							<table class="connect_pic-info">
         								<tr>
         									<th>Armband</th>
-        									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.$statistics->brid2name($bracelets_displayed[1]).'</a>'; ?></strong></td>
+        									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
         								</tr>
         								<tr>
         									<th>Datum</th>
