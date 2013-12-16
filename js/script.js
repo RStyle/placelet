@@ -197,12 +197,17 @@ try {
 
 
 
-
 //Kommentare Ein/Ausblenden
-$('body').on('click', '.toggle_comments', function (){
-	number = $(this).attr('id');
-	number = number.replace('toggle_comment','');
-	$("#comment" + number).toggle(); 
+toggleState = false;
+$('.toggle_comments').click(function (){
+	number = $(this).attr('id').replace('toggle_comment','');
+	$("#comment" + number).toggle();
+	if(toggleState){
+		$("#toggle_comment" + number).text('Kommentare zeigen');
+	}else {
+		$("#toggle_comment" + number).text('Kommentare verstecken');		
+	}
+	toggleState = !toggleState;
 });
 //---
 
