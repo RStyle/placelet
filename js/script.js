@@ -335,3 +335,13 @@ function confirmDelete(type) {
 		return false; 
 	}
   } 
+  
+$(document).ready(function(){
+	$('.delete_comment').click(function(){
+		return confirmDelete('den Kommentar');
+	});
+
+	$('.delete_bild').click(function(){
+		return confirmDelete('das Bild');
+	});
+});
