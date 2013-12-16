@@ -53,7 +53,7 @@ if ($braceID != NULL) {
 ?>
 						<tr>
 							<th>Uploader</th>
-							<td><?php echo $stats[$i]['user']; ?></td>
+							<td><a href="profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
 		 }

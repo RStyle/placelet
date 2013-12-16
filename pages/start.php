@@ -121,7 +121,7 @@ for ($i = 0; $i < $user_anz; $i++) {
 ?>
 							<tr>
 								<th>Uploader</th>
-								<td><?php echo $stats[$i][0]['user']; ?></td>
+								<td><a href="profil?user=<?php echo $stats[$i][0]['user']; ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
 							</tr>
 <?php
                  }
@@ -142,7 +142,7 @@ for ($i = 0; $i < $user_anz; $i++) {
 							</tr>
 							<tr>
 								<td>Käufer</td>
-								<td><?php echo $stats[$i]['owner']; ?></td>
+								<td><a href="profil?user=<?php echo $stats[$i]['owner']; ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
 								<td>Anzahl Besitzer</td>

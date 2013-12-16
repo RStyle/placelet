@@ -42,7 +42,7 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 ?>
 							<tr>
 								<th>Uploader</th>
-								<td><?php echo $stats[$i][0]['user']; ?></td>
+								<td><a href="profil?user=<?php echo $stats[$i][0]['user']; ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
 							</tr>
 <?php
                  }
@@ -63,7 +63,7 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 							</tr>
 							<tr>
 								<td>Käufer</td>
-								<td><?php echo $stats[$i]['owner']; ?></td>
+								<td><a href="profil?user=<?php echo $stats[$i]['owner']; ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
 								<td>Anzahl Besitzer</td>
