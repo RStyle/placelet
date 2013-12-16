@@ -102,8 +102,8 @@ for ($i = 0; $i < $user_anz; $i++) {
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
-						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&picid=<?php echo $stats[$i][0]['picid']; ?>&last_pic=last&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="Bild löschen/melden" onclick="return confirmDelete('das Bild');">X</a>
-						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumb_link">
+						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&picid=<?php echo $stats[$i][0]['picid']; ?>&last_pic=last&delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="Bild löschen/melden" >X</a>
+						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; //onclick="return confirmDelete('das Bild');" ?>" class="thumb_link">
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
 							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumbnail">
 						</a>
@@ -185,8 +185,8 @@ for ($i = 0; $i < $user_anz; $i++) {
 					$last_comment = 'last';
 				}
 ?>
-					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>&comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&delete_comm=true" class="delete_button float_right" title="Kommentar löschen/melden" onclick="return confirmDelete('den Kommentar');">X</a>
-					<strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')'; ?>
+					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][0][$j]['commid']; ?>&picid=<?php echo $stats[$i][0][$j]['picid']; ?>&comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&delete_comm=true" class="delete_button float_right delete_comment" title="Kommentar löschen/melden" >X</a>
+					<strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')';//onclick="return confirmDelete('den Kommentar');" ?>
                     <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
 <?php 
