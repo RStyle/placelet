@@ -21,6 +21,8 @@ if(isset($_GET['last_comment']) && isset($_GET['delete_comm']) && isset($_GET['c
 	}elseif($comment_deleted == 2) {
 			$js .= 'alert("Kommentar gemeldet.");';
 	}
+}
+if(isset($_GET['comment_deleted'])) {
 	if($_GET['comment_deleted'] == 'true') {
 		$js .= 'alert("Kommentar erfolgreich gelöscht.");';	
 	}

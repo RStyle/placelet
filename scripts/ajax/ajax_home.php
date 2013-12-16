@@ -66,7 +66,7 @@ if(isset($stats[$i + 1][0]['picid'])) {
 	?>
 								<tr>
 									<th>Uploader</th>
-									<td><a href="profil?user=<?php echo urlencode($stats[$i][0]['user']); ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
+									<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][0]['user'])); ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
 								</tr>
 	<?php
 				 }

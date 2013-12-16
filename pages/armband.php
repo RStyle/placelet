@@ -19,11 +19,15 @@ if ($braceName != NULL) {
 	//Kommentar löschen
 	if(isset($_GET['last_comment']) && isset($_GET['delete_comm']) && isset($_GET['commid']) && isset($_GET['picid']) && isset($_GET['name'])) {
 		$comment_deleted = $statistics->manage_comment($user->admin, $_GET['last_comment'], $_GET['commid'], $_GET['picid'], $braceID);
-		if($comment_deleted === true ) {
-			header('Location: armband?name='.urlencode($braceName).'&comment_deleted=true');
-		}elseif($comment_deleted == 2) {
-			$js .= 'alert("Kommentar gemeldet.");';
+		if(isset($comment_deleted)) {
+			if($comment_deleted === true ) {
+				header('Location: armband?name='.urlencode($braceName).'&comment_deleted=true');
+			}elseif($comment_deleted == 2) {
+				$js .= 'alert("Kommentar gemeldet.");';
+			}
 		}
+	}
+	if(isset($_GET['comment_deleted'])) {
 		if($_GET['comment_deleted'] == 'true') {
 			$js .= 'alert("Kommentar erfolgreich gelöscht.");';	
 		}
