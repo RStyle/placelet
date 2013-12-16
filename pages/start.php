@@ -29,7 +29,7 @@ if(isset($_GET['last_comment']) && isset($_GET['delete_comm']) && isset($_GET['c
 if(isset($_GET['last_pic']) && isset($_GET['delete_pic']) && isset($_GET['picid']) && isset($_GET['pic_name'])) {
 	$pic_deleted = $statistics->manage_pic($user->admin, $_GET['last_pic'], $_GET['picid'], $statistics->name2brid(urldecode($_GET['pic_name'])));
 	if($pic_deleted === true ) {
-		header('Location: start?name='.urlencode($braceName).'&pic_deleted=true');
+		header('Location: start?pic_deleted=true');
 		echo 'jep';
 	}elseif($pic_deleted == 2) {
 		$js .= 'alert("Bild gemeldet.");';

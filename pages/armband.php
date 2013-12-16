@@ -20,7 +20,7 @@ if ($braceName != NULL) {
 	if(isset($_GET['last_comment']) && isset($_GET['delete_comm']) && isset($_GET['commid']) && isset($_GET['picid']) && isset($_GET['name'])) {
 		$comment_deleted = $statistics->manage_comment($user->admin, $_GET['last_comment'], $_GET['commid'], $_GET['picid'], $braceID);
 		if($comment_deleted === true ) {
-			header('Location: armband?name='.$braceName.'&comment_deleted=true');
+			header('Location: armband?name='.urlencode($braceName).'&comment_deleted=true');
 		}elseif($comment_deleted == 2) {
 			$js .= 'alert("Kommentar gemeldet.");';
 		}
@@ -33,20 +33,15 @@ if ($braceName != NULL) {
 		$pic_deleted = $statistics->manage_pic($user->admin, $_GET['last_pic'], $_GET['picid'], $braceID);
 		if($pic_deleted === true ) {
 			header('Location: armband?name='.urlencode($braceName).'&pic_deleted=true');
-			echo 'jep';
 		}elseif($pic_deleted == 2) {
-			header('Location: armband?name='.urlencode($braceName).'&pic_deleted=2');
-			echo 'markiert';
+			$js .= 'alert("Bild gemeldet.");';
 		}elseif ($pic_deleted == false) {
 			$js .= 'Es ist ein Fehler beim Löschen des Bildes aufgetreten<br>Bitte informiere den Support.';
-			echo 'Fehler';
 		}else echo $pic_deleted;
 	}
 	if(isset($_GET['pic_deleted'])) {
 		if($_GET['pic_deleted'] == 'true') {
 			$js .= 'alert("Bild erfolgreich gelöscht.");';	
-		}elseif($_GET['pic_deleted'] == '2') {
-			$js .= 'alert("Bild gemeldet.");';
 		}
 	}
 	//Armband Name ändern

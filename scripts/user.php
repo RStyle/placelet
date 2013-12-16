@@ -545,60 +545,43 @@ class Statistics {
 	//Kommentar schreiben
 	public function write_comment ($brid, $username, $comment, $picid) {
 		$username = trim($username);
-		$submissions_valid = true;
-		if (isset($this->user->login)) {
-			if ($this->user->login != $username) {
-				$userexists = Statistics::userexists($username);
-			} else {
-				$userexists = false;
-				$username = clean_input($username);
-			}
-		} else {
-			$userexists = Statistics::userexists($username);
-			
-		}
-		if ($userexists) {
-			return 'Diesen Benutzer gibt es schon';
-			$submissions_valid = false;
+		$brid = trim($brid);
+		$comment = clean_input($comment);
+		if(!$this->user->login) {
+			$username = '[Gast] '.$username;
 		}
 		if(strlen($username) < 4) {
-			$submissions_valid = false;
 			return 'Benutzername zu kurz, mindestens 4 Zeichen';
 		}
 		if(strlen($comment) < 2) {
-			$submissions_valid = false;
 			return 'Kommentar zu kurz, mindestens 2 Zeichen';
 		}
-		if ($submissions_valid) {
-			$comment = clean_input($comment);
-			$brid = clean_input($brid);
-			try {
-				$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(':brid' => $brid, ':picid' => $picid));
-				$row = $q->fetchAll(PDO::FETCH_ASSOC);	
-				$row = array_reverse($row);
-				if(isset($row[0]['commid'])) {
-					$commid = $row[0]['commid'] + 1;
-				} else {
-					$commid = 1;
-				}
-				
-				$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(
-					':brid' => $brid,
-					':commid' => $commid,
-					':picid' => $picid,
-					':user' => $username,
-					':comment' => $comment,
-					':date' => time())
-				);
-				return 'Kommentar erfolgreich gesendet.';
-			} catch (PDOException $e) {
-					die('ERROR: ' . $e->getMessage());
-					return false;
+		try {
+			$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(':brid' => $brid, ':picid' => $picid));
+			$row = $q->fetchAll(PDO::FETCH_ASSOC);	
+			$row = array_reverse($row);
+			if(isset($row[0]['commid'])) {
+				$commid = $row[0]['commid'] + 1;
+			} else {
+				$commid = 1;
 			}
+			
+			$sql = "INSERT INTO comments (brid, commid, picid, user, comment, date) VALUES (:brid, :commid, :picid, :user, :comment, :date)";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':brid' => $brid,
+				':commid' => $commid,
+				':picid' => $picid,
+				':user' => $username,
+				':comment' => $comment,
+				':date' => time())
+			);
+			return 'Kommentar erfolgreich gesendet.';
+		} catch (PDOException $e) {
+				die('ERROR: ' . $e->getMessage());
+				return false;
 		}
 	}
 	//Überprüft, ob ein bestimmter Benutzer $user in der Datenbank eingetragen ist

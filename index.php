@@ -40,8 +40,10 @@ if (!isset( $_SESSION['server_SID'] ))
 $checklogin = false;
 $js = '<script type="text/javascript">$(document).ready(function(){';
 
-if(isset($_GET['logout']))
+if(isset($_GET['logout']))  {
 	User::logout();
+	header('Location: home');
+}
 
 if(isset($_POST['login']) && isset($_POST['password'])){
 	$user = new User($_POST['login'], $db);	

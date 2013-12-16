@@ -323,7 +323,7 @@ $(document).ready(function(){
 
 //Löschen von Kommentaren und Bildern bestätigen
 function confirmDelete(type) {
-    var agree = confirm("Willst du " + type + "wirklich löschen/melden?"); 
+    var agree = confirm("Willst du " + type + " wirklich löschen/melden?"); 
     if(agree) {
 		return true; 
 	}else {
