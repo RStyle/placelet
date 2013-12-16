@@ -134,7 +134,7 @@ if(!isset($_GET['user'])) {
 ?>
             <div class="green_line mainarticleheaders line_header"><h1>Profil von <?php echo $username; ?></h1></div>
             <div class="user_info">
-                <div class="profile_pic" style="float:left;"></div>            
+                <img class="profile_pic" src="img/profil_pic_small.png">           
                 <h1><?php echo $username; ?></h1>
                 <p>Registriert seit: <?php echo date('H:i d.m.Y', $userdetails['registered']); ?><br>
                 Armbänder: <?php echo count($userdetails['brid']); ?>, Uploads: <?php echo count($userdetails['pics']); ?></p>
