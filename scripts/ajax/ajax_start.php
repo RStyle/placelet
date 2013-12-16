@@ -42,7 +42,7 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 ?>
 							<tr>
 								<th>Uploader</th>
-								<td><a href="profil?user=<?php echo $stats[$i][0]['user']; ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
+								<td><a href="profil?user=<?php echo $stats[$i][0]['user']; ?>"><?php echo htmlentities($stats[$i][0]['user']); ?></a></td>
 							</tr>
 <?php
                  }

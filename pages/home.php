@@ -56,7 +56,7 @@ foreach($bracelets_displayed as $key => $val) {
                                     	?>
         								<tr>
         									<th>Uploader</th>
-        									<td><a href="profil?user=<?php echo $stats[1][0]['user']; ?>"><?php echo $stats[1][0]['user']; ?></a></td>
+        									<td><a href="profil?user=<?php echo $stats[1][0]['user']; ?>"><?php echo htmlentities($stats[1][0]['user']); ?></a></td>
         								</tr>
                                     	<?php
                                     				 }

@@ -121,7 +121,7 @@ if ($braceName != NULL) {
 ?>
 						<tr>
 							<th>Uploader</th>
-							<td><a href="profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo $stats[$i]['user']; ?></a></td>
+							<td><a href="profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo htmlentities($stats[$i]['user']); ?></a></td>
 						</tr>
 <?php
                  }
