@@ -42,7 +42,7 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 ?>
 							<tr>
 								<th>Uploader</th>
-								<td><a href="profil?user=<?php echo $stats[$i][0]['user']; ?>"><?php echo htmlentities($stats[$i][0]['user']); ?></a></td>
+								<td><a href="profil?user=<?php echo urlencode($stats[$i][0]['user']); ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
 							</tr>
 <?php
                  }
@@ -59,11 +59,11 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 						<table>
 							<tr>
 								<td><strong>Armband</strong></td>
-								<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.$statistics->brid2name($bracelets_displayed[$i]).'</a>'; ?></strong></td>
+								<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
 							</tr>
 							<tr>
 								<td>Käufer</td>
-								<td><a href="profil?user=<?php echo $stats[$i]['owner']; ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
+								<td><a href="profil?user=<?php echo urlencode($stats[$i]['owner']); ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
 								<td>Anzahl Besitzer</td>

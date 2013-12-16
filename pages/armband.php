@@ -86,7 +86,7 @@ if ($braceName != NULL) {
 	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo $braceName; ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo htmlentities($braceName); ?></h1></div>
 				<span class="pseudo_link float_right" id="show_sub">Armband abbonieren</span>
 				<a href="<?php echo 'login?postpic=true'; ?>">Ein neues Bild zu diesem Armband posten</a>
 				<form method="get" action="armband">
@@ -121,7 +121,7 @@ if ($braceName != NULL) {
 ?>
 						<tr>
 							<th>Uploader</th>
-							<td><a href="profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo htmlentities($stats[$i]['user']); ?></a></td>
+							<td><a href="profil?user=<?php echo urlencode($stats[$i]['user']); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
                  }
@@ -200,7 +200,7 @@ if ($braceName != NULL) {
 				<table style="width: 100%;">
 					<tr>
 						<th>Name</th>
-						<td><strong><?php echo $stats['name']; if($owner) {?> </strong> <img src="img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
+						<td><strong><?php echo htmlentities($stats['name']); if($owner) {?> </strong> <img src="img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
 		if($owner) {
@@ -216,7 +216,7 @@ if ($braceName != NULL) {
 ?>
 					<tr>
 						<td>Käufer</td>
-						<td><a href="profil?user=<?php echo $stats['owner']; ?>"><?php echo $stats['owner']; ?></a></td>
+						<td><a href="profil?user=<?php echo urlencode($stats['owner']); ?>"><?php echo $stats['owner']; ?></a></td>
 					</tr>
 					<tr>
 						<td>Registriert am</td>
