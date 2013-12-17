@@ -45,7 +45,7 @@ if(isset($_GET['pic_deleted'])) {
 		$js .= 'alert("Bild erfolgreich gelöscht.");';	
 	}
 }
-$user_anz = 3;
+$user_anz = 5;
 $systemStats = $statistics->systemStats($user_anz, 3);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
@@ -53,47 +53,71 @@ foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
 ?>
-			<aside id="placelet_stats">
-				<h1 style="clear: both">Community-Statistiken</h1>  
-				<table>
-					<tr>
-						<th>registrierte Armbänder</th>
-						<td><?php echo $systemStats['total_registered'].' von '.$systemStats['total']; ?></td>
-					</tr>
-					<tr>
-						<th>verschiedene Städte</th>
-						<td><?php echo $systemStats['city_count']; ?></td>
-					</tr>
-					<tr>
-						<th>beliebteste Stadt</th>
-						<td><?php echo $systemStats['most_popular_city']['city'].' ('.$systemStats['most_popular_city']['number'].')'; ?></td>
-					</tr>
-					<tr>
-						<th>Armband mit den meisten Bildern</th>
-						<td><a href="armband?name=<?php echo urlencode($systemStats['bracelet_most_cities']['name']); ?>"><?php echo $systemStats['bracelet_most_cities']['name'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
-					</tr>
-				</table>
-				<table id="topusers">
-					<tr>
-						<th rowspan="4">Topusers</th>
-						<td style="border-bottom: 1px solid #000;">Benutzername</td>
-						<td style="border-bottom: 1px solid #000;">Armbänder</td>
-						<td style="border-bottom: 1px solid #000;">Uploads</td>
-					</tr>
-<?php
-for ($i = 0; $i < $user_anz; $i++) {
-?>
-					<tr>
-						<td><a href="profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$i]; ?>"><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></a></td>
-						<td><?php echo $systemStats['user_most_bracelets']['number'][$i]; ?></td>
-						<td><?php echo $systemStats['user_most_bracelets']['uploads'][$i]; ?></td>
-					</tr>
-<?php
-}
-?>
-				</table>
-				<hr style="border: none; height: 0px; border-bottom: 0; clear: both;">
-			</aside>
+		    <div id="connect_leiste">
+                <div class="connect_box" id="stats_box">
+                    <h1>Community-Statistiken</h1>
+                    <table>
+    					<tr>
+    						<th>Registrierte Armbänder</th>
+    						<td><?php echo $systemStats['total_registered']?></td>
+    					</tr>
+    					<tr>
+    						<th>Verschiedene Städte</th>
+    						<td><?php echo $systemStats['city_count']; ?></td>
+    					</tr>
+    					<tr>
+    						<th>Beliebteste Stadt</th>
+    						<td><?php echo $systemStats['most_popular_city']['city'].' ('.$systemStats['most_popular_city']['number'].')'; ?></td>
+    					</tr>
+    					<tr>
+    						<th>Armband mit den meisten Bildern</th>
+    						<td><a href="armband?name=<?php echo urlencode($systemStats['bracelet_most_cities']['name']); ?>"><?php echo $systemStats['bracelet_most_cities']['name'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
+    					</tr>
+    				</table>
+                </div>
+                <div class="connect_box" id="topusers_box">
+                    <h1>Aktivste Benutzer</h1>
+                    <table id="topusers">
+    					<tr>
+    						<td style="border-bottom: 1px solid #000;">Benutzername</td>
+    						<td style="border-bottom: 1px solid #000;">Armbänder</td>
+    						<td style="border-bottom: 1px solid #000;">Uploads</td>
+    					</tr>
+    <?php
+    for ($i = 0; $i < $user_anz; $i++) {
+    ?>
+    					<tr>
+    						<td><a href="profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$i]; ?>"><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></a></td>
+    						<td><?php echo $systemStats['user_most_bracelets']['number'][$i]; ?></td>
+    						<td><?php echo $systemStats['user_most_bracelets']['uploads'][$i]; ?></td>
+    					</tr>
+    <?php
+    }
+    ?>
+    				</table>
+                </div>
+                <div class="connect_box" id="submit_box">
+                    <h1>+1 bild</h1>
+                    <p>
+						Gib deine <span>Armband-ID</span> an:
+						<form action="login" method="get">
+							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
+							<input type="submit" value="Zum Upload">
+						</form>
+					</p>
+
+                    <hr>
+
+                    <h1>neues armband</h1>
+                    <p>
+						Gib deine <span>Armband-ID</span> an:
+						<form action="login" method="get">
+							<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
+							<input type="submit" value="Armband registrieren">
+						</form>
+					</p>
+                </div>
+            </div>    
         
 <!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
         
