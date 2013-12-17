@@ -14,6 +14,10 @@ if($user->admin && $checklogin) {
 			$js .= 'alert("Bild erfolgreich gelöscht.");';
 		}
 	}
+	//Kein Spam
+	if(isset($_GET['nospam']) && isset($_GET['commid']) && isset($_GET['picid']) && isset($_GET['name'])) {
+		$no_spam = $statistics->no_spam($statistics->name2brid(urldecode($_GET['name'])), $_GET['picid'], $_GET['commid']);
+	}
 	$admin_stats = $statistics->admin_stats();
 ?>
 			<article id="kontakt" class="mainarticles bottom_border_green">
@@ -45,7 +49,7 @@ if($user->admin && $checklogin) {
 						<td><a href="armband?name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_comments'][$i]['brid'])); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo $statistics->brid2name($admin_stats['spam_comments'][$i]['brid']); ?></a></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['comment']; ?></td>
 						<td><a href="admin?comments&delete_comm=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_comments'][$i]['brid'])); ?>">Kommentar löschen</a></td>
-						<td><a href="#">Kein Spam</a></td>
+						<td><a href="admin?comments&nospam=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_comments'][$i]['brid'])); ?>">Kein Spam</a></td>
 					</tr>
 <?php
 				}	
@@ -79,7 +83,7 @@ if($user->admin && $checklogin) {
 							</a>
 						</td>
 						<td><a href="admin?pictures&delete_pic=true&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_pics'][$i]['brid'])); ?>">Bild löschen</a></td>
-						<td><a href="#">Kein Spam</a></td>
+						<td><a href="admin?pictures&nospam=true&commid=0&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_pics'][$i]['brid'])); ?>">Kein Spam</a></td>
 					</tr>
 <?php
 				}	

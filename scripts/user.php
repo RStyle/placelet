@@ -975,5 +975,23 @@ class Statistics {
 		$result['spam_pics'] = $q->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
 	}
+	public function no_spam($brid, $picid, $commid) {
+		if($commid == 0) {//Bild
+			$sql = "UPDATE pictures SET spam = false WHERE brid = :brid AND picid = :picid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':picid' => $picid,
+				':brid' => $brid
+			));
+		}else {//Kommentar
+			$sql = "UPDATE comments SET spam = false WHERE brid = :brid AND picid = :picid AND commid = :commid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':picid' => $picid,
+				':brid' => $brid,
+				':commid' => $commid
+			));			
+		}
+	}
 }
 ?>
