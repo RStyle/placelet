@@ -495,16 +495,20 @@ class Statistics {
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
-		$stats['owner'] = htmlentities($q[0]['user']);
-		$stats['date'] = $q[0]['date'];
-		$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
-		$stmt = $this->db->prepare($sql);
-		$stmt->execute(array('brid' => $brid));
-		$q = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($q != NULL) {
-			$stats['owners'] = $q['picid'];
+		if($stmt->rowCount() == 0) {
+			$stats['name'] = false;
+		}else {
+			$stats['name'] = $this->brid2name($brid);
+			$stats['owner'] = htmlentities($q[0]['user']);
+			$stats['date'] = $q[0]['date'];
+			$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array('brid' => $brid));
+			$q = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($q != NULL) {
+				$stats['owners'] = $q['picid'];
+			}
 		}
-		$stats['name'] = $this->brid2name($brid);
 		return $stats;
 	}
 	//Bilderdetails

@@ -97,6 +97,7 @@ if ($braceName != NULL) {
 		$bracelet_stats['owners'] = 0;
 		$stats = $bracelet_stats;
 	}
+	if($stats['name'] !== false) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo htmlentities($braceName); ?></h1></div>
@@ -109,9 +110,9 @@ if ($braceName != NULL) {
 					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>" id="bracelet_name">
 				</form>
 <?php
-					for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
-						if($i == 0) $last_pic = 'last';
-							else $last_pic = 'middle';
+		for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
+			if($i == 0) $last_pic = 'last';
+				else $last_pic = 'middle';
 ?>
 				<div style="width: 100%; overflow: auto;">
 				<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="Bild löschen/melden" onclick="return confirmDelete('das Bild');">X</a>
@@ -130,14 +131,14 @@ if ($braceName != NULL) {
 							<td><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></td>
 						</tr>
 <?php
-				if($stats[$i]['user'] != NULL) {
+			if($stats[$i]['user'] != NULL) {
 ?>
 						<tr>
 							<th>Uploader</th>
 							<td><a href="profil?user=<?php echo urlencode(html_entity_decode(($stats[$i]['user']))); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
-                 }
+			 }
 ?>
 					</table>
 						
@@ -150,32 +151,32 @@ if ($braceName != NULL) {
                     
 					<div class="comments" id="comment<?php echo $i;?>">
 <?php
-					for ($j = 1; $j <= count($stats[$i])-11; $j++) {
-					//Vergangene Zeit seit dem Kommentar berechnen
-					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
-					switch($x_days_ago) {
-						case 0:
-							$x_days_ago = 'heute';
-							break;
-						case 1:
-							$x_days_ago = 'gestern';
-							break;
-						default:
-							$x_days_ago = 'vor '.$x_days_ago.' Tagen';
-					}
-					//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
-					if(isset($stats[$i][$j + 1]['commid'])) {
-						$last_comment = 'middle';
-					}else {
-						$last_comment = 'last';
-					}
+			for ($j = 1; $j <= count($stats[$i])-11; $j++) {
+				//Vergangene Zeit seit dem Kommentar berechnen
+				$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
+				switch($x_days_ago) {
+					case 0:
+						$x_days_ago = 'heute';
+						break;
+					case 1:
+						$x_days_ago = 'gestern';
+						break;
+					default:
+						$x_days_ago = 'vor '.$x_days_ago.' Tagen';
+				}
+				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
+				if(isset($stats[$i][$j + 1]['commid'])) {
+					$last_comment = 'middle';
+				}else {
+					$last_comment = 'last';
+				}
 ?>
 							<a href="armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" title="Kommentar löschen/melden" onclick="return confirmDelete('den Kommentar');">X</a>
                             <strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  
 <?php 
-					}
+			}
 ?>   
 						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
 							<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
@@ -191,12 +192,12 @@ if ($braceName != NULL) {
 					</div>
 				</div>
 <?php
-						if ($i < count($stats) - 5 && $i < 2) {
+			if ($i < count($stats) - 5 && $i < 2) {
 ?>
 <!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
 <?php	
-						}
-					}
+				}
+			}
 ?>
 <?php
 		if ($bracelet_stats['owners'] == 0 ) {
@@ -256,7 +257,24 @@ if ($braceName != NULL) {
 				</table>
 			</aside>
 <?php
-} else {
+	}else {
+?>
+			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
+				<div class="green_line mainarticleheaders line_header"><h1>Falschse Armband</h1></div>
+				<p>
+					Dieses Armband gibt es nicht, gehe hier direkt zu einem anderen Armband.
+					<form action="armband">
+						<input type="search" name="name" placeholder="Arbmand Name" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
+					</form>
+					<br>Oder suche hier nach einem:
+					<form action="search" method="get">
+						<input name="squery" type="search" placeholder="Suchen..." size="20" maxlength="18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
+					</form>
+				</p>
+			</article>
+<?php
+	}
+}else {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
 				<div class="green_line mainarticleheaders line_header"><h1>Falsche Seite</h1></div>
