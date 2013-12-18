@@ -40,8 +40,9 @@ if(!isset($_GET['user'])) {
 					<ul>
 <?php
 		foreach($userdetails['subscriptions'] as $key => $val) {
+			$val['name'] = $statistics->brid2name($val['brid']);
 ?>
-							<li><a href="armband?name=<?php echo urlencode($statistics->brid2name($val['brid'])); ?>"><?php echo $statistics->brid2name($val['brid']); ?></a></li>
+							<li><a href="armband?name=<?php echo urlencode($val['name']); ?>"><?php echo htmlentities($val['name']); ?></a></li>
 <?php
 		}
 ?>
@@ -61,10 +62,11 @@ if(!isset($_GET['user'])) {
 						</tr>
 <?php
 			for ($i = 0; $i < count($armbaender['brid']); $i++) {
+				$armbaender['name'][$i] = $statistics->brid2name($armbaender['brid'][$i]);
 				if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
 ?>
 						<tr>
-							<td><a href="armband?name=<?php echo urlencode($statistics->brid2name($armbaender['brid'][$i])); ?>"><?php echo $statistics->brid2name($armbaender['brid'][$i]); ?></a></td>
+							<td><a href="armband?name=<?php echo urlencode($armbaender['name'][$i]); ?>"><?php echo $armbaender['name'][$i]; ?></a></td>
 							<td><?php echo $armbaender['brid'][$i]; ?></a></td>
 							<td><?php echo date('d.m.Y', $armbaender['date'][$i]); ?></td>
 							<td><?php echo $armbaender['picture_count'][$armbaender['brid'][$i]]['picid']; ?></td>
@@ -147,9 +149,10 @@ if(!isset($_GET['user'])) {
                     </ul>
 <?php
 		foreach($userdetails['picture_count'] as $key => $val) {
+			$key_name = $statistics->brid2name($key);
 			if($val['picid'] == NULL) $val['picid'] = 0;
 ?>
-                    <a class="previews" href="armband?name=<?php echo urlencode($statistics->brid2name($key)); ?>">
+                    <a class="previews" href="armband?name=<?php echo urlencode($key_name); ?>">
 <?php
 			if($val['picid'] != 0) {
 ?>
@@ -157,7 +160,7 @@ if(!isset($_GET['user'])) {
 <?php
 			}
 ?>
-                        <p class="preview_text"><?php echo htmlentities($statistics->brid2name($key)); ?>
+                        <p class="preview_text"><?php echo htmlentities($key_name); ?>
                         <span style="float:right;">Bilder: <?php echo $val['picid']; ?></span></p>                        
                     </a>
 <?php
@@ -172,10 +175,11 @@ if(!isset($_GET['user'])) {
     					</tr>
 <?php
 		for ($i = 0; $i < count($armbaender['brid']); $i++) {
+			$armbaender['name'][$i] = $statistics->brid2name($armbaender['brid'][$i]);
 			if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
 									echo '
 					<tr>
-						<td><a href="armband?name='.urlencode($statistics->brid2name($armbaender['brid'][$i])).'">'.$statistics->brid2name($armbaender['brid'][$i]).'</a></td>
+						<td><a href="armband?name='.urlencode($armbaender['name'][$i]).'">'.$armbaender['name'][$i].'</a></td>
 						<td>'.date('d.m.Y', $armbaender['date'][$i]).'</td>
 						<td>'.$armbaender['picture_count'][$armbaender['brid'][$i]]['picid'].'</td>
 					</tr>';
