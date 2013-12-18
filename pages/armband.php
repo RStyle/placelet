@@ -70,15 +70,16 @@ if ($braceName != NULL) {
 				$owner = true;
 			}
 		}
+		//Armband abonnieren
+		if(isset($_GET['sub']) && isset($_GET['sub_user'])) {
+			$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, $_GET['sub_user']);
+			if(isset($sub_added)) {
+				if($sub_added === true) $js .= 'alert("Abonnement erfolgreich hinzugefügt.");';
+					elseif($sub_added == 2) $js .= 'alert("Du hast dieses Armband schon abonniert.");';
+			}
+		}
 	}
-	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
-	if (isset($bracelet_stats['owners'])) {
-		$picture_details = $statistics->picture_details($braceID, $db);
-		$stats = array_merge($bracelet_stats, $picture_details);
-	} else {
-		$bracelet_stats['owners'] = 0;
-		$stats = $bracelet_stats;
-	}
+	//Armband abonnieren
 	if(isset($_GET['sub']) && isset($_GET['sub_email'])) {
 		$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, $_GET['sub_email']);
 		if(isset($sub_added)) {
@@ -88,6 +89,14 @@ if ($braceName != NULL) {
 				elseif($sub_added === false) $js .= 'alert("Du hast das Abonnement erfolgreich beendet.");';
 		}
 	}
+	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
+	if (isset($bracelet_stats['owners'])) {
+		$picture_details = $statistics->picture_details($braceID, $db);
+		$stats = array_merge($bracelet_stats, $picture_details);
+	} else {
+		$bracelet_stats['owners'] = 0;
+		$stats = $bracelet_stats;
+	}
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo htmlentities($braceName); ?></h1></div>
@@ -96,8 +105,8 @@ if ($braceName != NULL) {
 				<form method="get" action="armband">
 					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right sub_inputs" style="display: none;">
 					<input name="sub_email" type="email"  size="20" maxlength="254" placeholder="E-Mail Adresse" class="float_right sub_inputs" style="display: none;" required>
-					<input type="hidden" name="sub" value="true">
-					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>">
+					<input type="hidden" name="sub" value="email">
+					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>" id="bracelet_name">
 				</form>
 <?php
 					for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {

@@ -70,19 +70,8 @@ if($user->login) {
 		$bracelet_registered = $user->registerbr($_POST['reg_br']);
 		//Rückmeldung zu Armband-registrieren anzeigen
 		if(isset($bracelet_registered)) {
-			switch ($bracelet_registered) {
-				case 0:
-					$js .= 'alert("Dieses Armband gibt es nicht.");';
-					break;
-				case 1:
+			if($bracelet_registered == 1) {
 					header('Location: profil');
-					break;
-				case 2:
-					$js .= 'alert("Dieses Armband wurde schon auf dich registriert.");';
-					break;
-				case 3:
-					$js .= 'alert("Es ist ein Fehler aufgetreten, bitte kontaktiere den Support(support@placelet.de).");';
-					break;
 			}
 		}
 	}
@@ -119,23 +108,23 @@ if(isset($loginattempt)) {
 <?php
 }elseif(isset($postpic)) {
 ?>
-				<form id="register_pic" name="registerpic" action="login" method="post" enctype="multipart/form-data">
+				<form id="register_pic" name="registerpic" action="login?postpic" method="post" enctype="multipart/form-data">
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
-					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo urldecode($postpic);?>" required><br>
+					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="15" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Titel" value="<?php if(isset($_GET['title'])) echo urldecode($_GET['title']);?>"required><br>
+					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="15" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>
 					
 					<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="Stadt" value="<?php if(isset($_GET['city'])) echo urldecode($_GET['city']);?>" required><br>
+					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="30" placeholder="Stadt" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_city'];?>" required><br>
 					
 					<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" placeholder="Land" value="<?php if(isset($_GET['country'])) echo urldecode($_GET['country']);?>" required><br>
+					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="30" placeholder="Land" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_country'];?>" required><br>
 					
 					<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
-					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" placeholder="Bundesland" value="<?php if(isset($_GET['state'])) echo urldecode($_GET['state']);?>"><br>
+					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="30" placeholder="Bundesland" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_state'];?>"><br>
 					
 					<div id="map">
     					<div id="pos">
@@ -149,7 +138,7 @@ if(isset($loginattempt)) {
 					<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
 					
 					<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
-					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($_GET['descr'])) echo urldecode(str_replace("ujhztg", "\r\n", $_GET['descr']));?></textarea><br>
+					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
 <?php
 		//$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
 		//echo recaptcha_get_html($publickey);
@@ -166,8 +155,21 @@ if(isset($loginattempt)) {
 <?php
 }elseif(isset($registerbr)) {
 	if($user->login) {
+		if(isset($bracelet_registered)) {
+			switch($bracelet_registered) {
+					case 0:
+						echo 'Dieses Armband gibt es nicht.';
+						break;
+					case 2:
+						echo 'Dieses Armband wurde schon auf dich registriert.';
+						break;
+					default:
+			if($bracelet_registered[0] == 3)
+				echo 'Dieses Armband wurde schon auf <a href="profil?user='.urlencode($bracelet_registered[1]).'">'.$bracelet_registered[1].'</a> registriert.';
+			}
+		}
 ?>
-				<form name="registerbr" action="login" method="post">
+				<form name="registerbr" action="login?registerbr" method="post">
 					<label for="reg_br">Armband registrieren</label>
 					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" required>
 					<input type="submit" name="registerbr_submit" value="Armband registrieren">

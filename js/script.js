@@ -134,6 +134,9 @@ $("#form_login").submit(function() {
 			$("#longitude").val(long.toString());
 			initialize(results[0].geometry.location, lat, long);
 			return;
+		} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+			alert('Dieser Ort wurde nicht gefunden.');
+			return false;
 		} else {
 			alert('Geocode was not successful for the following reason: ' + status);
 			return false;
@@ -316,7 +319,12 @@ function change_pic(cv, sv) {
 //Aboformular anzeigen
 $(document).ready(function(){
 	$('#show_sub').click(function(){
-		$('.sub_inputs').toggle();
+		if(username != '') {
+			bracelet_name = $('#bracelet_name').val();
+			window.location.replace("http://www.placelet.de/armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
+		}else {
+			$('.sub_inputs').toggle();
+		}
 	});
 });
 //Armband-Name Formular anzeigen

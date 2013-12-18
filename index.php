@@ -249,6 +249,7 @@ require_once($this_path.'pages/'.$page.'.php');
 ?>
 
 		</section>
+		<script>username = '<?php echo $user->login; ?>';</script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
 		<?php if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
@@ -273,6 +274,8 @@ if($page == 'login' && isset($postpic)) {
 							long = results[0].geometry.location.ob;
 							$("#longitude").val(long.toString());
 						  initialize(results[0].geometry.location, lat, long);
+						} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+							alert('Dieser Ort wurde nicht gefunden.');
 						} else {
 							alert('Geocode was not successful for the following reason: ' + status);
 						}

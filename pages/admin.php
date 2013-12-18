@@ -43,13 +43,15 @@ if($user->admin && $checklogin) {
 					</tr>
 <?php
 				for($i = 0; $i < count($admin_stats['spam_comments']); $i++) {
+					$admin_stats['spam_comments'][$i]['name'] = $statistics->brid2name($admin_stats['spam_comments'][$i]['brid']);
+
 ?>
 					<tr>
-						<td><?php echo $admin_stats['spam_comments'][$i]['user']; ?></td>
-						<td><a href="armband?name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_comments'][$i]['brid'])); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo $statistics->brid2name($admin_stats['spam_comments'][$i]['brid']); ?></a></td>
+						<td><?php echo htmlentities($admin_stats['spam_comments'][$i]['user']); ?></td>
+						<td><a href="armband?name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_comments'][$i]['name']); ?></a></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['comment']; ?></td>
-						<td><a href="admin?comments&delete_comm=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_comments'][$i]['brid'])); ?>">Kommentar löschen</a></td>
-						<td><a href="admin?comments&nospam=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_comments'][$i]['brid'])); ?>">Kein Spam</a></td>
+						<td><a href="admin?comments&delete_comm=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>">Kommentar löschen</a></td>
+						<td><a href="admin?comments&nospam=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>">Kein Spam</a></td>
 					</tr>
 <?php
 				}	
@@ -73,17 +75,18 @@ if($user->admin && $checklogin) {
 					</tr>
 <?php
 				for($i = 0; $i < count($admin_stats['spam_pics']); $i++) {
+					$admin_stats['spam_pics'][$i]['name'] = $statistics->brid2name($admin_stats['spam_pics'][$i]['brid']);
 ?>
 					<tr>
-						<td><?php echo $admin_stats['spam_pics'][$i]['user']; ?></td>
-						<td><a href="armband?name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_pics'][$i]['brid'])); ?>" title="<?php echo $admin_stats['spam_pics'][$i]['brid']; ?>"><?php echo $statistics->brid2name($admin_stats['spam_pics'][$i]['brid']); ?></a></td>
+						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['user']); ?></td>
+						<td><a href="armband?name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_pics'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_pics'][$i]['name']); ?></a></td>
 						<td>
 							<a href="pictures/bracelets/pic<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$stats[$i]['picid'].'.'.$admin_stats['spam_pics'][$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumb_link">
 								<img src="pictures/bracelets/thumb<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$admin_stats['spam_pics'][$i]['picid'].'.jpg'; ?>" alt="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumbnail">
 							</a>
 						</td>
-						<td><a href="admin?pictures&delete_pic=true&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_pics'][$i]['brid'])); ?>">Bild löschen</a></td>
-						<td><a href="admin?pictures&nospam=true&commid=0&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($statistics->brid2name($admin_stats['spam_pics'][$i]['brid'])); ?>">Kein Spam</a></td>
+						<td><a href="admin?pictures&delete_pic=true&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>">Bild löschen</a></td>
+						<td><a href="admin?pictures&nospam=true&commid=0&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>">Kein Spam</a></td>
 					</tr>
 <?php
 				}	

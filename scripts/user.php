@@ -181,7 +181,7 @@ class User
 			}elseif ($bracelet['user'] == $this->login) {
 				return 2;
 			}else {
-				return 3;
+				return array(3, $bracelet['user']);
 			}
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -751,7 +751,16 @@ class Statistics {
 		}
 	}
 	public function manage_subscription($input, $brid, $email) {
-		if($input == 'true') {//true beudeutet Hinzufügen
+		if($input == 'email' || $input == 'username') {//Hinzufügen
+			if($input == 'username') {
+				$sql = "SELECT email FROM users WHERE user = :user";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(
+					':user' => $email
+				));
+				$result = $q->fetch(PDO::FETCH_ASSOC);
+				$email = $result['email'];
+			}
 			$sql = "SELECT email FROM subscriptions WHERE brid = :brid AND email = :email";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(

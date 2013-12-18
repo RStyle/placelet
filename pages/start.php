@@ -71,7 +71,7 @@ foreach($bracelets_displayed as $key => $val) {
     					</tr>
     					<tr>
     						<th>Armband mit den meisten Bildern</th>
-    						<td><a href="armband?name=<?php echo urlencode($systemStats['bracelet_most_cities']['name']); ?>"><?php echo $systemStats['bracelet_most_cities']['name'].' ('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
+    						<td><a href="armband?name=<?php echo urlencode($systemStats['bracelet_most_cities']['name']); ?>"> <?php echo $systemStats['bracelet_most_cities']['name'].'('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
     					</tr>
     				</table>
                 </div>
@@ -87,7 +87,11 @@ foreach($bracelets_displayed as $key => $val) {
     for ($i = 0; $i < $user_anz; $i++) {
     ?>
     					<tr>
-    						<td><a href="profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$i]; ?>"><?php echo $systemStats['user_most_bracelets']['user'][$i]; ?></a></td>
+    						<td>
+								<a href="profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$i]; ?>">
+									<?php echo $systemStats['user_most_bracelets']['user'][$i]; ?>
+								</a>
+							</td>
     						<td><?php echo $systemStats['user_most_bracelets']['number'][$i]; ?></td>
     						<td><?php echo $systemStats['user_most_bracelets']['uploads'][$i]; ?></td>
     					</tr>
