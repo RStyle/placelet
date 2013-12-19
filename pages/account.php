@@ -1,40 +1,5 @@
 			<article id="kontakt" class="mainarticles bottom_border_green">
 <?php
-foreach($_GET as $key => $val) {
-	$_GET[$key] = clean_input($val);
-}
-if($user->login) {
-	$username = $user->login;
-}
-//Passwortlink überprüfen
-if(isset($_GET['passwordCode'])) {
-	$recover_code = $user->check_recover_code($_GET['passwordCode']);
-}
-if(isset($_POST['submit'])) {
-	switch($_POST['submit']) {
-		//Link zum Passwort wiederherstellen senden
-		case 'Neues Passwort zuschicken':
-			$password_reset = $user->reset_password($_POST['recover_email']);
-			$js .= 'alert("'.$password_reset.'");';
-			break;
-		//Userdetails ändern
-		case 'Änderungen speichern':
-			if($user->login) {
-				$change_details = $user->change_details($_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
-				$js .= 'alert("'.$change_details.'");';
-			}
-			break;
-		case 'Passwort ändern':
-			$new_password = $user->new_password($_POST['new_username'], $_POST['new_pwd']);
-			$js .= 'alert("'.$new_password.'");';
-			break;
-	}
-}
-//Userdetails abrufen
-if(isset($username) && Statistics::userexists($username)) {
-	$userdetails = $statistics->userdetails($username);
-	$armbaender = profile_stats($userdetails);
-}
 if ($user->login) {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Deine Accounteinstellungen, <?php echo $user->login ?></h1></div>

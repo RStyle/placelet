@@ -1,14 +1,5 @@
 			<article id="profil" class="mainarticles bottom_border_green">
 <?php
-if(isset($_GET['user'])) {
-	$username = $_GET['user'];
-}elseif($user->login) {
-	$username = $user->login;
-}
-if(isset($username) && Statistics::userexists($username)) {
-	$userdetails = $statistics->userdetails($username);
-	$armbaender = profile_stats($userdetails);
-}
 if(!isset($_GET['user'])) {
 	if ($user->login) {
 ?>

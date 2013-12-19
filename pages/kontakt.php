@@ -1,15 +1,3 @@
-<?php
-if(isset($_POST['submit'])) {
-	$send_email = send_email($_POST['sender'], $_POST['subject'], $_POST['content'], $_POST['mailer']);
-}
-if (isset($send_email)) {
-	echo '<script type="text/javascript">
-			//$(document).ready(function(){
-				alert("'.$send_email.'");
-			//});
-		  </script>';
-}
-?>
 		<article id="kontakt" class="mainarticles bottom_border_green">
 			<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page]; ?></h1></div>
 			<p>
