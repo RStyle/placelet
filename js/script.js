@@ -281,8 +281,7 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
 	if(data != ""){
 	$("#start_reload").remove();
 	htmlcode = $("#recent_pics").html();
-	//$("#recent_pics").html( htmlcode + data + '<div class="pseudo_link" id="start_reload" onclick="reload_start();" style="clear: both;" >Mehr anzeigen</div>');
-	$("#recent_pics").html( data + '<div class="pseudo_link" id="start_reload" onClick="reload_start(-3);"  style="clear: both;" >Vorherige Seite</div><div class="pseudo_link" id="start_reload" onClick="reload_start(3);"  style="clear: both;" >Nächste Seite</div>');
+	$("#recent_pics").html(data);
 	} else {
 	reload_q -= 3;
 	}
@@ -298,7 +297,7 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&brace
 	.done(function( data ) {
 	$("#armband_reload").remove();
 	htmlcode = $("#armband").html();
-	$("#armband").html( htmlcode + data + '<div class="pseudo_link" id="armband_reload" onclick="reload_armband(\''+braceName+'\');" style="clear: both;" >Mehr anzeigen</div>');
+	$("#armband").html( htmlcode + data);
 	reload_q2 += 3;
 	})
 	.fail(function() {

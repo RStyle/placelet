@@ -402,6 +402,12 @@ class Statistics {
 	}
 	//Zeigt die allgemeine Statistik an
 	public function systemStats($user_anz, $brid_anz) {
+		//Arnzahl 'beposteter' Armbänder		
+		$sql = "SELECT brid FROM pictures GROUP BY brid";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['total_posted'] = count($q);
+		
 		//Arnzahl registrierter Armbänder
 		$sql = "SELECT brid FROM bracelets WHERE user != ''";
 		$stmt = $this->db->query($sql);

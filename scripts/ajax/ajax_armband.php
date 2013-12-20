@@ -22,18 +22,16 @@ if ($braceID != NULL) {
 		$bracelet_stats['owners'] = 0;
 		$stats = $bracelet_stats;
 	}
-?>
-<!--HR über dem 1. nachgeladenen Bild<hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">-->
-<?php
 	for ($i = $_GET['q'] - 3; $i < $_GET['q']; $i++) {
 		if(!isset($stats[$i])) break;
-			if($i < $_GET['q']) {
+		if($i < $_GET['q']) {
 ?>
 <!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
 <?php
-	}
+		}
 ?>
 				<div style="width: 100%; overflow: auto;">
+					<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="Bild löschen/melden" onclick="return confirmDelete('das Bild');">X</a>
 					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 						<img src="img/triangle.png" alt="" class="thumb_triangle">
@@ -56,7 +54,7 @@ if ($braceID != NULL) {
 							<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['user'])); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
-		 }
+		}
 ?>
 					</table>
 						
@@ -109,6 +107,11 @@ if ($braceID != NULL) {
 						</form>
 					</div>
 				</div>
+<?php
+	}
+	if($stats['owners'] > $_GET['q']) {
+?>
+				<div class="pseudo_link" id="armband_reload" onclick="reload_armband('<?php echo urlencode($braceName); ?>');" style="clear: both;" >Mehr anzeigen</div>
 <?php
 	}
 }

@@ -17,13 +17,16 @@ $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
+?>
+			<div class="blue_line mainarticleheaders line_header"><h2>Neueste Bilder</h2></div>
+<?php
 if(isset($stats[$_GET['q'] - 2]))
-echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 			for ($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
 				if(!isset($stats[$i])) break;
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
+						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&picid=<?php echo $stats[$i][0]['picid']; ?>&last_pic=last&delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="Bild löschen/melden" >X</a>
 						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumb_link">
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
 							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumbnail">
@@ -132,5 +135,15 @@ echo'<!--HR über dem 1. nachgeladenen Bild--><hr style="clear: both;">';
 <!--~~~HR~~~~--><hr style="clear: both;">
 <?php	
 					}
-				}				
+				}
+				if($_GET['q'] > 3) {
+?>
+				<div class="pseudo_link" id="start_reload" onClick="reload_start(-3);"  style="clear: both;" >Vorherige Seite</div>
+<?php
+				}
+				if($systemStats['total_posted'] >= $_GET['q']) {
+?>
+				<div class="pseudo_link" id="start_reload" onClick="reload_start(3);"  style="clear: both;" >Nächste Seite</div>
+<?php
+				}
 ?>
