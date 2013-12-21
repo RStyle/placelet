@@ -1,5 +1,4 @@
 @charset "utf-8";
-/* HTML5 tags für ältere Browser*/
 html {
 	border-top: 0 !important;
 }
@@ -13,7 +12,7 @@ body {
 			margin-left: 0 !important;
 		}
 /*----FÜR OPERA MOBILE----*/
-/*----KANN BEI BEDARF AUCH NUR FÜR OPERA MOBILE ANGEWENDET WERDEN----*/
+/*----KANN BEI BEDARF AUCH NUR FÜR OPERA MOBILE ANGEWENDET WERDEN----
 	#headerlist {
 		max-height: 2.9em !important;
 		padding-top: 0.45em !important;
@@ -28,4 +27,4 @@ body {
 		max-height: 3em !important;
 		padding-top: 0.5em !important;
 		vertical-align: middle !important;
-		}
+		}*/

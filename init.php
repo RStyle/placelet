@@ -123,6 +123,8 @@ if(isset($_GET)) {
 	$friendly_self_get = $friendly_self.'?';
 	$gets = '';
 	foreach($_GET as $key => $val) {
+		$key = urlencode($key);
+		$val = urlencode($val);
 		if(!$first) {
 			$friendly_self_get .= '&'.$key.'='.$val;
 			$gets .= '&'.$key.'='.$val;

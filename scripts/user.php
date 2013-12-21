@@ -102,7 +102,7 @@ class User
 			if(strlen($reg['reg_password']) < 6) return 'Passwort zu kurz. Min. 6';
 			if(strlen($reg['reg_password']) > 30) return 'Passwort zu lang. Max. 30';
 			if(check_email_address($reg['reg_email']) === false) return 'Das ist keine gültige E-Mail Adresse';
-			$sql = "INSERT INTO users (user, email, password, status, ´date´) VALUES (:user, :email, :password, :status, :date)";
+			$sql = "INSERT INTO users (user, email, password, status, date) VALUES (:user, :email, :password, :status, :date)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
 				':user' => trim($reg['reg_login']),
@@ -489,7 +489,7 @@ class Statistics {
 		$q = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $q['name'];
 	}
-	public function name2brid($name) {
+	public function name2brid($name, $oldname = false) {
 		$stmt = $this->db->prepare('SELECT brid FROM bracelets WHERE name = :name');
 		$stmt->execute(array('name' => $name));
 		$q = $stmt->fetch(PDO::FETCH_ASSOC);

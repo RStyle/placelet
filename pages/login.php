@@ -87,7 +87,7 @@ if(isset($loginattempt)) {
 ?>
 				<form name="registerbr" action="login?registerbr" method="post">
 					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" required>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
 					<input type="submit" name="registerbr_submit" value="Armband registrieren">
 				</form>
 <?php

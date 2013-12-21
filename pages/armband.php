@@ -29,10 +29,6 @@ if ($braceName != NULL) {
 							<th>Datum</th>
 							<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
 						</tr>
-						<tr>
-							<th>Ort</th>
-							<td><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></td>
-						</tr>
 <?php
 			if($stats[$i]['user'] != NULL) {
 ?>
@@ -166,7 +162,7 @@ if ($braceName != NULL) {
 	}else {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
-				<div class="green_line mainarticleheaders line_header"><h1>Falschse Armband</h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1>Falsches Armband</h1></div>
 				<p>
 					Dieses Armband gibt es nicht, gehe hier direkt zu einem anderen Armband.
 					<form action="armband">
