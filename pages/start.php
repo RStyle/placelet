@@ -73,7 +73,7 @@
 			<article id="recent_pics" class="mainarticles bottom_border_blue">
 			<div class="blue_line mainarticleheaders line_header"><h2>Neueste Bilder</h2></div>
 <?php
-			for ($i = 1; $i <= count($bracelets_displayed); $i++) {
+			for ($i = 1; $i <= count($bracelets_displayed) && $i <= $systemStats['total_posted']; $i++) {
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">

@@ -10,7 +10,7 @@ if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 		$js .= 'alert("Die Bestätigung deiner Email ist gescheitert.");';
 	}
 }
-$systemStats = $statistics->systemStats(0, 4);
+$systemStats = $statistics->systemStats(0, 3);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {

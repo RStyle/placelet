@@ -1,17 +1,15 @@
-<!--HINWEIS-->
-            <div class="hint" id="hint1">
-				<h1>Hinweis:</h1>
-				<p>
-					Sie befinden sich hier auf der Webseite des JUNIOR-Unternehmens "Placelet". Bitte beachten Sie, dass sich diese Webseite noch im Aufbau befindet und daher einige unvollst&auml;ndige Inhalte wie zum Beispiel Platzhalter-Texte enthalten k&ouml;nnte. Wir arbeiten an einer z&uuml;gigen Vervollst&auml;ndigung dieser Webseite und bitten um Ihr Verst&auml;ndnis.
-				</p> 
-				<span class="pseudo_link toggle_comments" onclick="document.getElementById('hint1').style.display='none';">Hinweis ausblenden</span>  
-			</div>
 <!--CONNECT-LEISTE-->
             <div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
                     <h1>neuester upload</h1>
                         <div id="newest_pic">
+<?php
+if($systemStats['total_posted'] > 3) {
+?>
                             <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>	
+<?php
+}
+?>
                             <div id="central_newest_pic">
                             	<div class="more_imgs">
                             	    <img class="fake_img pseudo_link" src="#" alt="-"><br>

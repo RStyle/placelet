@@ -9,12 +9,15 @@ if (default_password_value == '')
 var show_login = false;
 var login_return = true;
 
+//Login-Box anzeigen
 $("#headerlogin").click(function(){
 	show_login = !show_login;
-	if(show_login == true)
+	if(show_login == true) {
 		$("#login-box").show();
-	else
+		$("#login").focus();
+	}else {
 		$("#login-box").hide();
+	}
 });
 
 jQuery(document).click(function(e) {
