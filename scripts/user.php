@@ -373,11 +373,22 @@ class Statistics {
 		//Abonnierte Armbänder
 		$stmt = $this->db->prepare("SELECT brid FROM subscriptions WHERE email = :email");
 		$stmt->execute(array('email' => $result[0]['email']));
-		$result[2] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($q as $key => $val) {
+			$stmt = $this->db->prepare("SELECT picid, fileext FROM pictures WHERE brid = :brid ORDER BY picid DESC");
+			$stmt->execute(array('brid' => $val['brid']));
+			$result[2][$val['brid']] = $stmt->fetch(PDO::FETCH_ASSOC);
+		}
 		//Gepostete Bilder
 		$stmt = $this->db->prepare("SELECT brid, picid, fileext FROM pictures WHERE user = :user");
 		$stmt->execute(array('user' => $user));
 		$result[4] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($result[4] as $key => $val) {
+			$stmt = $this->db->prepare("SELECT picid FROM pictures WHERE brid = :brid ORDER BY picid DESC");
+			$stmt->execute(array('brid' => $val['brid']));
+			$q = $stmt->fetch(PDO::FETCH_ASSOC);
+			$result[4][$key]['picCount'] = $q['picid'];
+		}
 		
 		//Array verschönern
 		$user_details = $result;

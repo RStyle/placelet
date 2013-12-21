@@ -218,43 +218,20 @@ $('.toggle_comments').click(function (){
 
 
 //Profil Showcases Ein/ausblenden
-tabToggleState_1 = true;
-tabToggleState_2 = false;
-tabToggleState_3 = false;
 $('.tabs').click(function (){
 	number = $(this).attr('id').replace('tab_','');
 	$("#showcase_" + number).toggle();
-
-    if (number==1) {
-        if(tabToggleState_1) {
-    		document.getElementById("tab_" + number).innerHTML='<strong class="arrow_right"></strong>&nbsp;Armbänder';
-    	}else {
-    		document.getElementById("tab_" + number).innerHTML='<strong class="arrow_down"></strong>&nbsp;Armbänder';
-    	}  
-    	tabToggleState_1 = !tabToggleState_1;
-    } 
-    if (number==2) {
-        if(tabToggleState_2) {
-    		document.getElementById("tab_" + number).innerHTML='<strong class="arrow_right"></strong>&nbsp;Abonnements';
-    	}else {
-    		document.getElementById("tab_" + number).innerHTML='<strong class="arrow_down"></strong>&nbsp;Abonnements';
-    	}
-    	tabToggleState_2 = !tabToggleState_2;
+    if(number == 1) {
+		$(".showcase_arrow" + number).toggleClass("arrow_right");
+		$(".showcase_arrow" + number).toggleClass("arrow_down");
+	}else if(number == 2) {
+		$(".showcase_arrow" + number).toggleClass("arrow_right");
+		$(".showcase_arrow" + number).toggleClass("arrow_down");
+	}else if(number == 3) {
+		$(".showcase_arrow" + number).toggleClass("arrow_right");
+		$(".showcase_arrow" + number).toggleClass("arrow_down");
     }
-    if (number==3) {
-        if(tabToggleState_3) {
-    		document.getElementById("tab_" + number).innerHTML='<strong class="arrow_right"></strong>&nbsp;Uploads';
-    	}else {
-    		document.getElementById("tab_" + number).innerHTML='<strong class="arrow_down"></strong>&nbsp;Uploads';
-    	}
-    	tabToggleState_3 = !tabToggleState_3;
-    }      
-	
 });
-
-
-
-
 
 function check_width(){   
 //Logo Positionierung    
