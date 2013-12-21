@@ -1,5 +1,4 @@
-﻿@import url(timeline.css);
-@charset "utf-8";
+﻿@charset "utf-8";
 /*+++HTML5 tags für ältere Browser+++*/
 	header, section, footer,
 	aside, nav, article, figure {
@@ -88,6 +87,37 @@
 		font-weight: bold;
 		text-shadow: 2px 2px 0 #fff, 4px 4px 0 #8ED70F;
 	}
+	.arrow_up {
+        position: relative;
+        top: 3em;
+        margin: 0 auto;
+        border: 15px solid #234754;
+        font-size:0;line-height:0;height:0;padding:0;width:0;
+        border-top-color: transparent;
+        border-top-width: 0;
+    	border-right-color: transparent;
+    	border-left-color: transparent;
+    }
+    .arrow_right {
+        margin-right: 2em;
+        display: inline-block;
+        border: 8px solid #234754;
+        font-size:0;line-height:0;height:0;padding:0;width:0;
+        border-top-color: transparent;
+    	border-right-color: transparent;
+    	border-bottom-color: transparent;
+    	border-right-width: 0;
+    }
+    .arrow_down {
+        margin-right: 2em;
+        display: inline-block;
+        border: 8px solid #234754;
+        font-size:0;line-height:0;height:0;padding:0;width:0;
+        border-left-color: transparent;
+    	border-right-color: transparent;
+    	border-bottom-color: transparent;
+    	border-bottom-width: 0;
+    }
 /*---allgemeine Styles---*/
 /*+++Baumdiagramm+++*/
 	.tree ul {
@@ -286,17 +316,6 @@
 				z-index: 100;
 			}
 			    
-                .arrow_up {
-                    position: relative;
-                    top: 3em;
-                    margin: 0 auto;
-                    border: 15px solid #234754;
-                    font-size:0;line-height:0;height:0;padding:0;width:0;
-                    border-top-color: transparent;
-                    border-top-width: 0;
-                	border-right-color: transparent;
-                	border-left-color: transparent;
-                }
 			#headerlogin:hover {
 				background-color: #BBB;
 			}
@@ -659,25 +678,24 @@
             margin: 0;
         }
     .showcases {
-        
+        clear: both;  
+        overflow: auto;  
     }
-    .tabs {
-        overflow: auto;
-        list-style: none;
-        margin: 0;
-        margin-bottom: 1em;
-        padding: 0;
-        border-bottom: 3px #ddd solid;
-    }
-        .tabs li {
-            float: left;
-            padding: 0.5em;
-            transition: background-color 400ms linear 0;
-			text-decoration: none;
+        #showcase_2, #showcase_3 {
+            display: none;
         }
-        .tabs li:hover {
+    .tabs {
+        margin: 0;
+        padding: 0.4em;
+        clear: both;
+        display: inline-block;
+        text-decoration: none;
+        transition: background-color 400ms linear 0;
+    }
+        .tabs:hover {
             background-color: #ddd;
         }
+
     .previews {
         background-color: #ddd; 
         padding: 0.5em;  
@@ -686,10 +704,6 @@
         float: left; 
         text-decoration: none;
     }
-        .preview_pic {
-            width: 250px;
-            height: auto;    
-        }
         .preview_text {
             font-size: 0.8em;  
             margin: 0;  

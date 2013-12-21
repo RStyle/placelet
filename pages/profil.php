@@ -127,18 +127,15 @@ if(!isset($_GET['user'])) {
                 <img class="profile_pic" src="img/profil_pic_small.png">           
                 <h1><?php echo $userdetails['user']; ?></h1>
                 <p>Registriert seit: <?php echo date('H:i d.m.Y', $userdetails['registered']); ?><br>
-                Armbänder: <?php echo count($userdetails['brid']); ?>, Uploads: <?php echo count($userdetails['pics']); ?></p>
+                Armbänder: <?php if (isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>, Uploads: <?php echo count($userdetails['pics']); ?></p>
             </div>
+
+<!-- ------------------------------------------ Armbänder ---------------------------------------------------- -->
+            <p class="tabs pseudo_link" id="tab_1"><strong class="arrow_down"></strong>&nbsp;Armbänder</p>
+            <hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
+				<div class="showcases" id="showcase_1">
 <?php
-	if(isset($userdetails['brid'])) {
-?>
-				<div class="showcases">
-                    <ul class="tabs">
-                        <li class="pseudo_link">Armbänder</li>
-                        <li class="pseudo_link">Abonnements</li>
-                        <li class="pseudo_link">Uploads</li>
-                    </ul>
-<?php
+    if(isset($userdetails['brid'])) {
 		foreach($userdetails['picture_count'] as $key => $val) {
 			$key_name = $statistics->brid2name($key);
 			if($val['picid'] == NULL) $val['picid'] = 0;
@@ -147,7 +144,7 @@ if(!isset($_GET['user'])) {
 <?php
 			if($val['picid'] != 0) {
 ?>
-                        <img class="preview_pic" alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+                        <img alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 			}
 ?>
@@ -156,37 +153,68 @@ if(!isset($_GET['user'])) {
                     </a>
 <?php
 		}
+	} else echo 'Dieser Benutzer besitzt noch kein Armband.'
 ?>
-      
-    			<!--	<table border="1">
-    					<tr>
-    						<th>Armband Name</th>
-    						<th>registriert am</th>
-    						<th>Anzahl Besitzer</th>
-    					</tr>
-<?php
-		for ($i = 0; $i < count($armbaender['brid']); $i++) {
-			$armbaender['name'][$i] = $statistics->brid2name($armbaender['brid'][$i]);
-			if(!isset($armbaender['picture_count'][$armbaender['brid'][$i]]['picid'])) $armbaender['picture_count'][$armbaender['brid'][$i]]['picid'] = 0;
-									echo '
-					<tr>
-						<td><a href="armband?name='.urlencode($armbaender['name'][$i]).'">'.$armbaender['name'][$i].'</a></td>
-						<td>'.date('d.m.Y', $armbaender['date'][$i]).'</td>
-						<td>'.$armbaender['picture_count'][$armbaender['brid'][$i]]['picid'].'</td>
-					</tr>';
-		}
-	} else {
-		echo 'Dieser Benutzer besitzt noch kein Armband.';
-	}
-?>
-			        </table>       -->
 			    </div>
+<!-- ------------------------------------------ Abos ---------------------------------------------------- -->
+            <p class="tabs pseudo_link" id="tab_2"><strong class="arrow_right"></strong>&nbsp;Abonnements</p>
+            <hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
+				<div class="showcases" id="showcase_2">
 <?php
-}else {
+    if($userdetails['subscriptions']!=NULL) {
+		foreach($userdetails['picture_count'] as $key => $val) {
+			$key_name = $statistics->brid2name($key);
+			if($val['picid'] == NULL) $val['picid'] = 0;
+?>
+                    <a class="previews" href="armband?name=<?php echo urlencode($key_name); ?>">
+<?php
+			if($val['picid'] != 0) {
+?>
+                        <img alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+<?php
+			}
+?>
+                        <p class="preview_text"><?php echo htmlentities($key_name); ?>
+                        <span style="float:right;">Bilder: <?php echo $val['picid']; ?></span></p>
+                    </a>
+<?php
+		}
+	} else echo 'Dieser Benutzer hat noch kein Armband abonniert.';
+?>
+			    </div>
+<!-- ------------------------------------------ Uploads ---------------------------------------------------- -->            
+            <p class="tabs pseudo_link" id="tab_3"><strong class="arrow_right"></strong>&nbsp;Uploads</p>
+            <hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
+				<div class="showcases" id="showcase_3">
+<?php
+    if ($userdetails['pics'] != NULL) { 
+		foreach($userdetails['picture_count'] as $key => $val) {
+			$key_name = $statistics->brid2name($key);
+			if($val['picid'] == NULL) $val['picid'] = 0;
+?>
+                    <a class="previews" href="armband?name=<?php echo urlencode($key_name); ?>">
+<?php
+			if($val['picid'] != 0) {
+?>
+                        <img alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+<?php
+			}
+?>
+                        <p class="preview_text"><?php echo htmlentities($key_name); ?>
+                        <span style="float:right;">Bilder: <?php echo $val['picid']; ?></span></p>
+                    </a>
+<?php
+		}
+	} else echo 'Dieser Benutzer hat noch kein Bild hochgeladen.';
+?>
+			    </div>    
+<?php
+} else {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Benutzer existiert nicht</h1></div>
 				<p>Dieser Benutzer existiert nicht.</p>
 <?php
 }
+
 ?>
 			</article>
