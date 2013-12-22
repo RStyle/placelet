@@ -15,7 +15,7 @@ RewriteBase /htdocs
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 
 #create friendly URL
-#RewriteCond %{REQUEST_URI} !/
+RewriteCond %{REQUEST_URI} !http://placelet.de/
 RewriteCond %{REQUEST_FILENAME} !armband.*
 RewriteCond %{REQUEST_FILENAME} !about.*
 RewriteCond %{REQUEST_FILENAME} !account.*
@@ -29,6 +29,7 @@ RewriteCond %{REQUEST_FILENAME} !profil.*
 RewriteCond %{REQUEST_FILENAME} !search.*
 RewriteCond %{REQUEST_FILENAME} !shop.*
 RewriteCond %{REQUEST_FILENAME} !start.*
+RewriteCond %{REQUEST_FILENAME} !error.*
 RewriteCond %{REQUEST_URI} !css/.*
 RewriteCond %{REQUEST_URI} !img/.*
 RewriteCond %{REQUEST_URI} !js/.*
@@ -46,6 +47,6 @@ RewriteRule ^(.*)$ http://placelet.de/$1 [R=301,L]
 RewriteCond %{HTTP_HOST} ^www.placelet.net$ [NC]
 RewriteRule ^(.*)$ http://placelet.net/$1 [R=301,L]
 
-#404 Page
+#Error documents
 ErrorDocument 404 /404.php
 #composed by Daniel Schäfer and Roman Savrasov

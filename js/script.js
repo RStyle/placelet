@@ -191,7 +191,7 @@ var someCallback = function(exifObject) {
 	}else {
 		$("#registerpic_date").val(now);
 	}
-	//console.log(exifObject);
+	console.log(exifObject);
 }
 try {
 	$('#registerpic_file').change(function() {

@@ -5,7 +5,7 @@ if ($braceName != NULL) {
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo htmlentities($braceName); ?></h1></div>
 				<span class="pseudo_link float_right" id="show_sub">Armband abbonieren</span>
-				<a href="<?php echo 'login?postpic=true'; ?>">Ein neues Bild zu diesem Armband posten</a>
+				<a href="<?php echo 'login?postpic'; ?>">Ein neues Bild zu diesem Armband posten</a>
 				<form method="get" action="armband">
 					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right sub_inputs" style="display: none;">
 					<input name="sub_email" type="email"  size="20" maxlength="254" placeholder="E-Mail Adresse" class="float_right sub_inputs" style="display: none;" required>
@@ -180,7 +180,7 @@ if ($braceName != NULL) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
 				<div class="green_line mainarticleheaders line_header"><h1>Falsche Seite</h1></div>
-				<p>Du solltest nicht hier sein. Gehe einfach eine Seite zurück.</p>
+				<p>Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span></p>
 			</article>
 <?php
 }

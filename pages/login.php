@@ -28,7 +28,7 @@ if(isset($loginattempt)) {
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
 					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
-																																if(isset($_GET["postpic"])) {echo $_GET["postpic"];}?>" required><br>
+																																if(isset($_GET["postpic"])) if($_GET["postpic"] <= 6) echo $_GET["postpic"]; ?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
 					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="15" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>

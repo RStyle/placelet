@@ -55,31 +55,31 @@ if($systemStats['total_posted'] > 3) {
                 </div>
                 <div class="connect_box" id="submit_box">
                     <h1>+1 bild</h1>
-                    <p>
-						Gib deine <span>Armband-ID</span> an:
-						<form action="login" method="get">
-							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
-							<input type="submit" value="Zum Upload">
-						</form>
-					</p>
+					<form action="login" method="get">
+						<p>
+							Gib deine <span>Armband-ID</span> an:<br>
+								<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
+								<input type="submit" value="Zum Upload">
+						</p>
+					</form>
 					
                     <hr>
                     
                     <h1>neues armband</h1>
-                    <p>
-						Gib deine <span>Armband-ID</span> an:
-						<form action="login" method="get">
-							<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
-							<input type="submit" value="Armband registrieren">
-						</form> 
-					</p>
+					<form action="login" method="get">
+						<p>
+							Gib deine <span>Armband-ID</span> an:<br>
+								<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
+								<input type="submit" value="Armband registrieren">
+						</p>
+					</form>
                 </div>
             </div>
 
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
 				<div class="mainarticleheaders line_header blue_line"><h1>Das Reisearmband</h1></div>
-				<div class="round_image" style="background: url(http://img.ischatzkiste.com/VDE/201212/goods-img/1354562992934-P-502256.jpg?6)"></div>				
+				<?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband.jpg" alt="Armband"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband.jpg)"></div>';?>
 				<p>
                     Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
                     Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
@@ -91,7 +91,7 @@ if($systemStats['total_posted'] > 3) {
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class=" mainarticleheaders line_header green_line"><h1>Wie funktioniert's?</h1></div>
-				<div class="round_image" style="margin-bottom: 0.5em; background: url(http://i00.i.aliimg.com/wsphoto/v10/1013571924_1/Genuine-Leather-Hand-Knit-Vintage-Watches-bracelet-Wristwatches-Leaf-Pendant-Free-Shipping-SB-001.jpg)"></div>
+				<?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband2.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband2.jpg" alt="Armband"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband2.jpg)"></div>';?>
 				<p>
 					<span class="highlighted kollektion_numbers">1</span> Mit dem Kauf eines Armbands erhältst du eine ID, die du auf der Rückseite des Armbandes findest. Registriere dich damit in der Box auf unserer Startseite! 
 				</p>
