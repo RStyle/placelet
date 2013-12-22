@@ -15,8 +15,8 @@ RewriteBase /htdocs
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 
 #create friendly URL
-#Redirect placelet.de http://placelet.de/home [L]
 RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !armband.*
 RewriteCond %{REQUEST_FILENAME} !about.*
 RewriteCond %{REQUEST_FILENAME} !account.*
