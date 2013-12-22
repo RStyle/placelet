@@ -18,71 +18,30 @@
 				</p>
 				
 				<ul id='timeline'>
-				  <li class='work'>
-					<input class='radio' id='work5' name='works' type='radio'>
-					<div class="relative">
-					  <label for='work5'>Lorem ipsum dolor sit amet</label>
-					  <span class='date'>12 May 2013</span>
-					  <span class='circle'></span>
-					</div>
-					<div class='content'>
-					  <p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus!
-					  </p>
-					</div>
-				  </li>
-				  <li class='work'>
-					<input class='radio' id='work4' name='works' type='radio' checked>
-					<div class="relative">
-					  <label for='work4'>Lorem ipsum dolor sit amet</label>
-					  <span class='date'>11 May 2013</span>
-					  <span class='circle'></span>
-					</div>
-					<div class='content'>
-					  <p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus!
-					  </p>
-					</div>
-				  </li>
-				  <li class='work'>
-					<input class='radio' id='work3' name='works' type='radio'>
-					<div class="relative">
-					  <label for='work3'>Hauptversammlung</label>
-					  <span class='date'>10 May 2013</span>
-					  <span class='circle'></span>
-					</div>
-					<div class='content'>
-					  <p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus!
-					  </p>
-					</div>
-				  </li>
-				  <li class='work'>
-					<input class='radio' id='work2' name='works' type='radio'>
-					<div class="relative">
-					  <label for='work2'>Gründung</label>
-					  <span class='date'>09 May 2013</span>
-					  <span class='circle'></span>
-					</div>
-					<div class='content'>
-					  <p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus!
-					  </p>
-					</div>
-				  </li>
-				  <li class='work'>
-					<input class='radio' id='work1' name='works' type='radio'>
-					<div class="relative">
-					  <label for='work1'>Erstes Treffen</label>
-					  <span class='date'>08 May 2013</span>
-					  <span class='circle'></span>
-					</div>
-					<div class='content'>
-					  <p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ea necessitatibus quo velit natus cupiditate qui alias possimus ab praesentium nostrum quidem obcaecati nesciunt! Molestiae officiis voluptate excepturi rem veritatis eum aliquam qui laborum non ipsam ullam tempore reprehenderit illum eligendi cumque mollitia temporibus!
-					</div>
-				  </li>
+<?php
+$timeline['title'] = array(1 => 'Erstes Treffen', 'Ideenfindungsworkshop', 'Gründung',           'Veröffentlichung der Website', 'Fortbildung');
+$timeline['date']  = array(1 => '4. Juli 2013',   '24. August 2013',       '13. September 2013', '22. September',                 'Oktober 2013');
+$timeline['description'] = array(1 => 'test', 'test', 'test', 'test', 'test', 'test');
+for($i = 1; $i <= count($timeline['title']); $i++) {
+?>
+					<li class='work'>
+						<input class='radio' id='work<?php echo $i; ?>' name='works' type='radio'>
+						<div class="relative">
+							<label for='work<?php echo $i; ?>'><?php echo $timeline['title'][$i]?></label>
+							<span class='date'><?php echo $timeline['date'][$i]?></span>
+							<span class='circle'></span>
+						</div>
+						<div class='content'>
+							<p>
+								<?php echo $timeline['description'][$i]?>
+							</p>
+						</div>
+					</li>
+<?php
+}
+?>
 				</ul>
+
 				
 				<div class="tree">
 					<ul>
@@ -128,7 +87,6 @@
 																
 															</ul>
 														</li>
-														
 													</ul>
 												</li>
 											</ul>

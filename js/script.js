@@ -220,7 +220,7 @@ $('.toggle_comments').click(function (){
 //Profil Showcases Ein/ausblenden
 $('.tabs').click(function (){
 	number = $(this).attr('id').replace('tab_','');
-	$("#showcase_" + number).toggle();
+	$("#showcase_" + number).toggle(400);
     if(number == 1) {
 		$(".showcase_arrow" + number).toggleClass("arrow_right");
 		$(".showcase_arrow" + number).toggleClass("arrow_down");

@@ -374,6 +374,7 @@ class Statistics {
 		$stmt = $this->db->prepare("SELECT brid FROM subscriptions WHERE email = :email");
 		$stmt->execute(array('email' => $result[0]['email']));
 		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$result[2] = array();
 		foreach($q as $key => $val) {
 			$stmt = $this->db->prepare("SELECT picid, fileext FROM pictures WHERE brid = :brid ORDER BY picid DESC");
 			$stmt->execute(array('brid' => $val['brid']));

@@ -8,12 +8,12 @@ if($user->admin && $checklogin) {
 					<li><a href="admin?pictures">Bilder verwalten</a></li>
 
 				</ul>
-				<table border="1">
 <?php
 	if(isset($admin_stats)) {
 		if(isset($_GET['comments'])) {
 			if(count($admin_stats['spam_comments']) != 0) {
 ?>
+				<table border="1">
 					<tr>
 						<th>Benutzername</th>
 						<th>Armband-Name<br>
@@ -35,17 +35,19 @@ if($user->admin && $checklogin) {
 						<td><a href="admin?comments&nospam=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>">Kein Spam</a></td>
 					</tr>
 <?php
-				}	
+				}
+?>
+				</table>
+<?php
 			}else {
 ?>
-					<tr>
-						<td>Es gibt keine als Spam markierten Kommentare.</td>
-					</tr>
+				<p>Es gibt keine als Spam markierten Kommentare.</p>
 <?php
 			}
 		}elseif(isset($_GET['pictures'])) {
 			if(count($admin_stats['spam_pics']) != 0) {
 ?>
+				<table border="1">
 					<tr>
 						<th>Benutzername</th>
 						<th>Armband-Name<br>
@@ -70,18 +72,18 @@ if($user->admin && $checklogin) {
 						<td><a href="admin?pictures&nospam=true&commid=0&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>">Kein Spam</a></td>
 					</tr>
 <?php
-				}	
+				}
+?>
+				</table>
+<?php
 			}else {
 ?>
-					<tr>
-						<td>Es gibt keine als Spam markierten Bilder.</td>
-					</tr>
+				<p>Es gibt keine als Spam markierten Bilder.</p>
 <?php
 			}
 		}
 	}
 ?>
-				</table>
 			</article>
 <?php
 }else {

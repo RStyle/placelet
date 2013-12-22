@@ -696,19 +696,22 @@
         .tabs:hover {
             background-color: #ddd;
         }
-
-    .previews {
-        background-color: #ddd; 
-        padding: 0.5em;  
-        margin-bottom: 1em;
-        margin-right: 1em;
-        float: left; 
-        text-decoration: none;
-    }
-        .preview_text {
-            font-size: 0.8em;  
-            margin: 0;  
-        }    		
+	.previews {
+		background-color: #ddd;
+		width: 300px;
+		height: 200px;
+		float: left;
+		margin: 1%;
+		padding: 0.5em;
+	}
+		.preview_text {
+			font-size: 0.8em;
+			margin: 0;
+		}
+		.previewpic {
+			max-width: 90%;
+			height: 170px;
+		}
 	/*---Profil SECTION---*/
 	/*+++Start SECTION+++*/
 			

@@ -1,6 +1,6 @@
 			<article id="profil" class="mainarticles bottom_border_green">
 <?php
-if(!isset($_GET['user'])) {
+if(!isset($_GET['user']) && !$user->login) {
 ?>
 								<div class="green_line mainarticleheaders line_header"><h1>Profil</h1></div>
                                 <div style="float: left; margin-right: 2em;">
@@ -38,11 +38,11 @@ if(!isset($_GET['user'])) {
                                         &nbsp;
                                 </div>
 <?php	
-}elseif($user->login || Statistics::userexists($_GET['user'])) {
+}elseif($user->login || Statistics::userexists($username)) {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1>Dein Profil, <?php echo htmlentities($user->login); ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo 'Dein Profil, '.htmlentities($user->login); else echo 'Profil von '.htmlentities($username); ?></h1></div>
 				<div class="user_info">
-					<img class="profile_pic" src="img/profil_pic_small.png">           
+					<img class="profile_pic" src="img/profil_pic_small.png" alt="Profilbild">           
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
 						Registriert seit: <?php echo date('H:i d.m.Y', $userdetails['registered']); ?><br>
@@ -50,8 +50,8 @@ if(!isset($_GET['user'])) {
 					</p>
 				</div>
 	
-	<!-- ------------------------------------------ Armbänder ---------------------------------------------------- -->
-				<p class="tabs pseudo_link" id="tab_1"><strong class="showcase_arrow1 arrow_down"></strong>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+				<p class="tabs pseudo_link" id="tab_1"><span class="showcase_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_1">
 <?php
@@ -60,73 +60,86 @@ if(!isset($_GET['user'])) {
 				$key_name = $statistics->brid2name($key);
 				if($val['picid'] == NULL) $val['picid'] = 0;
 ?>
-						<a class="previews" href="armband?name=<?php echo urlencode($key_name); ?>">
+						<div class="previews">
+							<a href="armband?name=<?php echo urlencode($key_name); ?>">
 <?php
 				if($val['picid'] != 0) {
 ?>
-							<img alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 				}
 ?>
-							<p class="preview_text"><?php echo htmlentities($key_name); ?>
-							<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span></p>                        
-						</a>
+								<p class="preview_text">
+									<?php echo htmlentities($key_name)."\n"; ?>
+									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
+								</p>
+							</a>
+						</div>
 <?php
 			}
-		}elseif($user->login) echo 'Du besitzt noch kein Armband.';
-		else 'Dieser Benutzer besitzt noch kein Armband.';
+		}elseif($user->login == $username) echo 'Du besitzt noch kein Armband.';
+		else echo 'Dieser Benutzer besitzt noch kein Armband.';
 ?>
 					</div>
-	<!-- ------------------------------------------ Abos ---------------------------------------------------- -->
-				<p class="tabs pseudo_link" id="tab_2"><strong class="showcase_arrow2 arrow_right"></strong>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Abos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+				<p class="tabs pseudo_link" id="tab_2"><span class="showcase_arrow2 arrow_right"></span>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_2">
 <?php
 		if($userdetails['subscriptions'] != NULL) {
 			foreach($userdetails['subscriptions'] as $key => $val) {
 				$val['name'] = $statistics->brid2name($key);
-				if($val['picid'] == NULL) $val['picid'] = 0;
+				if(!isset($val['picid'])) $val['picid'] = 0;
 ?>
-						<a class="previews" href="armband?name=<?php echo urlencode($val['name']); ?>">
+						<div class="previews">
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
 <?php
 				if($val['picid'] != 0) {
 ?>
-							<img alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 				}
 ?>
-							<p class="preview_text"><?php echo htmlentities($val['name']); ?>
-							<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span></p>
-						</a>
+								<p class="preview_text">
+									<?php echo htmlentities($val['name']."\n"); ?>
+									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
+								</p>
+							</a>
+						</div>
 <?php
 			}
-		}elseif($user->login) echo 'Du hast noch kein Armband abonniert.';
+		}elseif($user->login == $username) echo 'Du hast noch kein Armband abonniert.';
 		else echo 'Dieser Benutzer hat noch kein Armband abonniert.';
 ?>
 					</div>
-	<!-- ------------------------------------------ Uploads ---------------------------------------------------- -->            
-				<p class="tabs pseudo_link" id="tab_3"><strong class="showcase_arrow3 arrow_right"></strong>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Uploads ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->            
+				<p class="tabs pseudo_link" id="tab_3"><span class="showcase_arrow3 arrow_right"></span>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_3">
 <?php
 		if($userdetails['pics'] != NULL) {
 			foreach($userdetails['pics'] as $key => $val) {
+				$val['name'] = $statistics->brid2name($val['brid']);
 				if($val['picid'] == NULL) $val['picid'] = 0;
 ?>
-						<a class="previews" href="armband?name=<?php echo urlencode($val['brid']); ?>">
+						<div class="previews">
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
 <?php
 				if($val['picid'] != 0) {
 ?>
-							<img alt="latest pic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 				}
 ?>
-							<p class="preview_text"><?php echo htmlentities($val['brid']); ?>
-							<span style="float:right;">Station Nr.: <?php echo $val['picid']; ?> Bilder: <?php echo $val['picCount']; ?></span></p>
-						</a>
+								<p class="preview_text">
+									<?php echo htmlentities($val['name'])."\n"; ?>
+									<span style="float:right;">Station Nr.: <?php echo $val['picid']; ?> Bilder: <?php echo $val['picCount']; ?></span>
+								</p>
+							</a>
+						</div>
 <?php
 			}
-		}elseif($user->login) echo 'Du hast noch kein Bild hochgeladen';
+		}elseif($user->login == $username) echo 'Du hast noch kein Bild hochgeladen';
 		else echo 'Dieser Benutzer hat noch kein Bild hochgeladen.';
 ?>
 					</div>

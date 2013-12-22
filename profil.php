@@ -3,7 +3,7 @@ $page = 'profil';
 require_once('./init.php');
 /*---------------------------------------------------------*/
 if(isset($_GET['user'])) {
-	$username = $_GET['user'];
+	$username = urldecode($_GET['user']);
 }elseif($user->login) {
 	$username = $user->login;
 }

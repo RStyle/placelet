@@ -1,5 +1,4 @@
 #### Rule for Error Page - 404 ####
-####ErrorDocument 404 http://rstyle.mania-server.net/jp/404.php
 
 #default page set
 DirectoryIndex home.php index.php index.html
@@ -16,9 +15,29 @@ RewriteBase /htdocs
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 
 #create friendly URL
+#RewriteCond %{REQUEST_URI} !/
+RewriteCond %{REQUEST_FILENAME} !armband.*
+RewriteCond %{REQUEST_FILENAME} !about.*
+RewriteCond %{REQUEST_FILENAME} !account.*
+RewriteCond %{REQUEST_FILENAME} !admin.*
+RewriteCond %{REQUEST_FILENAME} !armband.*
+RewriteCond %{REQUEST_FILENAME} !home.*
+RewriteCond %{REQUEST_FILENAME} !impressum.*
+RewriteCond %{REQUEST_FILENAME} !kontakt.*
+RewriteCond %{REQUEST_FILENAME} !login.*
+RewriteCond %{REQUEST_FILENAME} !profil.*
+RewriteCond %{REQUEST_FILENAME} !search.*
+RewriteCond %{REQUEST_FILENAME} !shop.*
+RewriteCond %{REQUEST_FILENAME} !start.*
+RewriteCond %{REQUEST_URI} !css/.*
+RewriteCond %{REQUEST_URI} !img/.*
+RewriteCond %{REQUEST_URI} !js/.*
+RewriteCond %{REQUEST_URI} !pictures/.*
+RewriteRule ^(.*)$ http://placelet.de/armband?name=$1 [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.*?)/?$ /$1.php [L]
+RewriteRule ^(.*?)/?$ /$1.php
 
 #redirect subdomains to maindomain
 RewriteCond %{HTTP_HOST} ^www.placelet.de$ [NC]
