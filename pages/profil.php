@@ -45,11 +45,21 @@ if(!isset($_GET['user']) && !$user->login) {
 					<img class="profile_pic" src="img/profil_pic_small.png" alt="Profilbild">           
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
-						Registriert seit: <?php echo date('H:i d.m.Y', $userdetails['registered']); ?><br>
-						<?php if($userdetails['status'] == 2) echo 'Admin'; ?>
+						Registriert seit: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
+						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>
 					</p>
 				</div>
-	
+<?php 
+    if ($user->login == $username) {
+?>        
+                <div class="logged_info">
+                    <p>Deine E-Mail-Adresse: <?php echo $userdetails['email']; ?> <br>
+                    <a href="account">Accountdetails ändern</a></p>                    
+                </div>      
+<?php        
+    }
+?>
+	            <div style="clear: both;">
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 				<p class="tabs pseudo_link" id="tab_1"><span class="showcase_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
@@ -147,6 +157,7 @@ if(!isset($_GET['user']) && !$user->login) {
 		else echo 'Dieser Benutzer hat noch kein Bild hochgeladen.';
 ?>
 					</div>
+				</div>
 <?php
 }else {
 ?>

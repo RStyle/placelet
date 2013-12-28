@@ -674,10 +674,15 @@
 	.user_info {
         overflow: hidden;    
         margin-bottom: 1em; 
+        float: left;
+        width: 50%;
     }
         .user_info > h1, .user_info p {
             margin: 0;
         }
+    .logged_info {
+        float: right; 
+    }
     .showcases {
         clear: both;  
         overflow: auto;  
