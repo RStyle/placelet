@@ -844,6 +844,29 @@
             max-width: 400px;         
         }
 	/*---Login SECTION---*/
+	/*+++ FAQ SECTION +++*/
+
+    .answers {
+        clear: both;
+        overflow: auto;
+        display: none;
+        margin-left: 2em;
+    }
+        .answers > p {
+            margin-top: 0;
+        }
+    .questions {
+        margin: 0;
+        padding: 0.4em;
+        clear: both;
+        display: inline-block;
+        text-decoration: none;
+        transition: background-color 400ms linear 0;
+    }
+        .questions:hover {
+            background-color: #ddd;
+        }
+	/*--- FAQ SECTION ---*/
 /*---SECTION---*/
 /*+++Side Container ASIDE+++*/
 	.side_container {

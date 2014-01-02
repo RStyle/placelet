@@ -203,7 +203,7 @@ try {
 
 
 
-//Kommentare Ein/Ausblenden
+//Kommentare Ein-/Ausblenden
 toggleState = false;
 $('.toggle_comments').click(function (){
 	number = $(this).attr('id').replace('toggle_comment','');
@@ -217,7 +217,7 @@ $('.toggle_comments').click(function (){
 });
 
 
-//Profil Showcases Ein/ausblenden
+//Profil Showcases Ein-/Ausblenden
 $('.tabs').click(function (){
 	number = $(this).attr('id').replace('tab_','');
 	$("#showcase_" + number).toggle(400);
@@ -230,6 +230,22 @@ $('.tabs').click(function (){
 	}else if(number == 3) {
 		$(".showcase_arrow" + number).toggleClass("arrow_right");
 		$(".showcase_arrow" + number).toggleClass("arrow_down");
+    }
+});
+
+//FAQ Fragen Ein-/Ausblenden
+$('.questions').click(function (){
+	number = $(this).attr('id').replace('question_','');
+	$("#answer_" + number).toggle(400);
+    if(number == 1) {
+		$(".question_arrow" + number).toggleClass("arrow_right");
+		$(".question_arrow" + number).toggleClass("arrow_down");
+	}else if(number == 2) {
+		$(".question_arrow" + number).toggleClass("arrow_right");
+		$(".question_arrow" + number).toggleClass("arrow_down");
+	}else if(number == 3) {
+		$(".question_arrow" + number).toggleClass("arrow_right");
+		$(".question_arrow" + number).toggleClass("arrow_down");
     }
 });
 

@@ -1,15 +1,17 @@
+<!--HINWEIS-->
+            <div class="hint" id="hint1">
+				<h1>Hinweis:</h1>
+				<p>
+					Sie befinden sich hier auf der Webseite des JUNIOR-Unternehmens "Placelet". Bitte beachten Sie, dass sich diese Webseite noch im Aufbau befindet und daher einige unvollst&auml;ndige Inhalte wie zum Beispiel Platzhalter-Texte enthalten k&ouml;nnte. Wir arbeiten an einer z&uuml;gigen Vervollst&auml;ndigung dieser Webseite und bitten um Ihr Verst&auml;ndnis.
+				</p> 
+				<span class="pseudo_link toggle_comments" onclick="document.getElementById('hint1').style.display='none';">Hinweis ausblenden</span>  
+			</div>
 <!--CONNECT-LEISTE-->
             <div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
                     <h1>neuester upload</h1>
                         <div id="newest_pic">
-<?php
-if($systemStats['total_posted'] > 3) {
-?>
                             <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>	
-<?php
-}
-?>
                             <div id="central_newest_pic">
                             	<div class="more_imgs">
                             	    <img class="fake_img pseudo_link" src="#" alt="-"><br>
@@ -55,31 +57,31 @@ if($systemStats['total_posted'] > 3) {
                 </div>
                 <div class="connect_box" id="submit_box">
                     <h1>+1 bild</h1>
-					<form action="login" method="get">
-						<p>
-							Gib deine <span>Armband-ID</span> an:<br>
-								<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
-								<input type="submit" value="Zum Upload">
-						</p>
-					</form>
+                    <p>
+						Gib deine <span>Armband-ID</span> an:
+						<form action="login" method="get">
+							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
+							<input type="submit" value="Zum Upload">
+						</form>
+					</p>
 					
                     <hr>
                     
                     <h1>neues armband</h1>
-					<form action="login" method="get">
-						<p>
-							Gib deine <span>Armband-ID</span> an:<br>
-								<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
-								<input type="submit" value="Armband registrieren">
-						</p>
-					</form>
+                    <p>
+						Gib deine <span>Armband-ID</span> an:
+						<form action="login" method="get">
+							<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" placeholder="ID...">
+							<input type="submit" value="Armband registrieren">
+						</form> 
+					</p>
                 </div>
             </div>
 
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
 				<div class="mainarticleheaders line_header blue_line"><h1>Das Reisearmband</h1></div>
-				<?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband.jpg" alt="Armband"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband.jpg)"></div>';?>
+				<div class="round_image" style="background: url(http://img.ischatzkiste.com/VDE/201212/goods-img/1354562992934-P-502256.jpg?6)"></div>				
 				<p>
                     Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
                     Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
@@ -91,7 +93,7 @@ if($systemStats['total_posted'] > 3) {
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class=" mainarticleheaders line_header green_line"><h1>Wie funktioniert's?</h1></div>
-				<?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband2.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband2.jpg" alt="Armband"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband2.jpg)"></div>';?>
+				<div class="round_image" style="margin-bottom: 0.5em; background: url(http://i00.i.aliimg.com/wsphoto/v10/1013571924_1/Genuine-Leather-Hand-Knit-Vintage-Watches-bracelet-Wristwatches-Leaf-Pendant-Free-Shipping-SB-001.jpg)"></div>
 				<p>
 					<span class="highlighted kollektion_numbers">1</span> Mit dem Kauf eines Armbands erhältst du eine ID, die du auf der Rückseite des Armbandes findest. Registriere dich damit in der Box auf unserer Startseite! 
 				</p>
@@ -109,12 +111,13 @@ if($systemStats['total_posted'] > 3) {
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">5</span> Der nächste Besitzer kann ebenfalls ein Bild mit der ID hochladen und weitergeben. Zum Hochladen alleine benötigst du kein Profil bei uns.
+					<span class="highlighted kollektion_numbers">5</span> Der nächste Besitzer kann ebenfalls ein Bild mit der ID hochladen und das Armband weitergeben. Zum Hochladen alleine benötigst du kein Profil bei uns.
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
-				<p>
+				<p style="margin-bottom: 0.5em;">
 					<span class="highlighted kollektion_numbers">6</span> Verfolge den Weg deines Armbandes und kommentiere nach Lust und Laune die Bilder anderer User.
 				</p>
+				<b>Noch Fragen?</b> Schau dir die <a href="faq">FAQ</a> an oder <a href="kontakt">kontaktiere uns</a>.
 			</article>
 <!--SIDEBAR-->
 			<aside class="side_container">

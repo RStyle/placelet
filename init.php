@@ -77,6 +77,7 @@ $max_file_size = 8000000;
 if (!isset($braceName)) { $braceName = ""; }
 //Dateinamen werden Titel zugeordnet
 $pagename = array(
+    "faq" => "FAQ",
 	"404" => "Seite nicht gefunden",
 	"about" => "&Uuml;ber Uns",
 	"account" => "Account Einstellungen",
@@ -123,8 +124,6 @@ if(isset($_GET)) {
 	$friendly_self_get = $friendly_self.'?';
 	$gets = '';
 	foreach($_GET as $key => $val) {
-		$key = urlencode($key);
-		$val = urlencode($val);
 		if(!$first) {
 			$friendly_self_get .= '&'.$key.'='.$val;
 			$gets .= '&'.$key.'='.$val;
