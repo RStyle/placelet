@@ -28,10 +28,10 @@ if(isset($loginattempt)) {
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
 					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
-																																if(isset($_GET["postpic"])) if($_GET["postpic"] <= 6) echo $_GET["postpic"]; ?>" required><br>
+																																if(isset($_GET["postpic"])) {echo $_GET["postpic"];}?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="15" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>
+					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" title="Min. 4 - Max. 30" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>
 					
 					<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
 					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="Stadt" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_city'];?>" required><br>
@@ -87,7 +87,7 @@ if(isset($loginattempt)) {
 ?>
 				<form name="registerbr" action="login?registerbr" method="post">
 					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" required>
 					<input type="submit" name="registerbr_submit" value="Armband registrieren">
 				</form>
 <?php

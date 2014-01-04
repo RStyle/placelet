@@ -867,6 +867,18 @@
             background-color: #ddd;
         }
 	/*--- FAQ SECTION ---*/
+	/*+++ Shop SECTION +++*/
+	.product_pic {
+        border: 6px solid #999;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+	#order > form {
+        padding-left: 1em;
+        border-left: 4px solid #999; 
+    }
+	/*--- Shop SECTION ---*/
 /*---SECTION---*/
 /*+++Side Container ASIDE+++*/
 	.side_container {
