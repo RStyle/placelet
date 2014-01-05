@@ -135,7 +135,7 @@ $("#form_login").submit(function() {
 			$("#latitude").val(lat.toString());
 			long = results[0].geometry.location.ob;
 			$("#longitude").val(long.toString());
-			initialize(results[0].geometry.location, lat, long);
+			initialize_postpic(results[0].geometry.location, lat, long);
 			return;
 		} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 			alert('Dieser Ort wurde nicht gefunden.');
@@ -299,8 +299,166 @@ function check_width(){
 window.onresize = check_width;
 check_width();
 
-
 });
+
+//---------------------Bildhochladeseite--------------------\\
+//Funktion zum Marker setzen auf der Bildhochladenseite
+var mapset = false;
+var map;
+var marker;
+function initialize_postpic(coords, this_lat, this_lng) {
+	if(this_lat != false && this_lng != false)
+		var latlng = new google.maps.LatLng(this_lat, this_lng);
+	else
+		var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
+	
+	$.ajax({
+		type: 'GET',
+		dataType: "json",
+		url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false",
+		data: {},
+		success: function(data) {
+			city = "";
+			bundesland = "";
+			country = "";
+			$('#registerpic_city').val("");
+			$('#registerpic_country').val("");
+			$.each( data['results'],function(i, val) {
+				$.each( val['address_components'],function(i, val) {
+					if (val['types'] == "locality,political") {
+						if (val['long_name']!="") {
+							city = val['long_name'];
+						}
+					}
+					if (val['types'] == "country,political") {
+						if (val['long_name']!="") {
+							country = val['long_name'];
+						}
+					}
+					//if (val['types'].indexOf("administrative_area_level_1") >= 0) {
+					if (val['types'] == "administrative_area_level_1,political") {
+						if (val['long_name']!="") {
+							bundesland = val['long_name'];
+						//console.log(i+", " + val['long_name']);
+						//console.log(i+", " + val['types']);
+						}
+					}
+				});
+				$('#registerpic_city').val(city);
+				$('#registerpic_state').val(bundesland);
+				$('#registerpic_country').val(country);
+			});
+			console.log('Success');
+		},
+		error: function () { console.log('error'); } 
+	}); 
+
+	var myOptions = {
+		zoom: 8,
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		tilt: 0
+	};
+	
+	if(mapset == true){
+		marker.setPosition(latlng);
+		console.log("moved the marker");
+	} else {
+		map = new google.maps.Map(document.getElementById("pos"), myOptions);
+		mapset = true;
+			console.log("newmap");
+		
+		marker = new google.maps.Marker({
+			position: latlng, 
+			map: map, 
+			title: "Hier bist du :)",
+			draggable: true
+		}); 
+		
+		//map.setCenter(marker.position);
+		google.maps.event.addListener(marker, 'dragend', function(evt) {
+			map.setCenter(marker.position);
+			
+			lat = evt.latLng.lat().toFixed(6);
+			long = evt.latLng.lng().toFixed(6);
+			
+			$.ajax({
+				type: 'GET',
+				dataType: "json",
+				url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false",
+				data: {},
+				success: function(data) {
+					city = "";
+					bundesland = "";
+					country = "";
+					$('#registerpic_city').val("");
+					$('#registerpic_country').val("");
+					$.each( data['results'],function(i, val) {
+						$.each( val['address_components'],function(i, val) {
+							if (val['types'] == "locality,political") {
+								if (val['long_name']!="") {
+									city = val['long_name'];
+									//return;
+								}
+							}
+							if (val['types'] == "country,political") {
+								if (val['long_name']!="") {
+									country = val['long_name'];
+								}
+							}
+							if (val['types'] == "administrative_area_level_1,political") {
+								if (val['long_name']!="") {
+									bundesland = val['long_name'];
+								}
+							}
+						});
+					});
+					$('#registerpic_city').val(city);
+					$('#registerpic_state').val(bundesland);
+					$('#registerpic_country').val(country);
+					$("#latitude").val(lat.toString());
+					$("#longitude").val(long.toString());
+					console.log('Success');
+				},
+				error: function () { console.log('error'); } 
+			}); 
+		});
+	}
+	map.setCenter(marker.position);
+}
+
+$('#registerpic_city').on({
+	blur:function(){
+		geocoder = new google.maps.Geocoder();
+		var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
+		geocoder.geocode({ 'address': address }, function (results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				console.log(results[0].geometry.location.ob + "," + results[0].geometry.location.nb);
+				lat = results[0].geometry.location.nb;
+				$("#latitude").val(lat.toString());
+				long = results[0].geometry.location.ob;
+				$("#longitude").val(long.toString());
+			  initialize_postpic(results[0].geometry.location, lat, long);
+			} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+				alert('Dieser Ort wurde nicht gefunden.');
+			} else {
+				alert('Geocode was not successful for the following reason: ' + status);
+			}
+		});
+	}
+});
+function success_postpic(position) {
+	lat = position.coords.latitude;
+	$("#latitude").val(lat.toString());
+	long = position.coords.longitude;
+	$("#longitude").val(long.toString());
+	initialize_postpic(position.coords, false, false);
+	//console.log(position.coords);
+}
+function error_postpic(msg) {
+	console.log(typeof msg == 'string' ? msg : "error123");
+}
+//--------------------^^Bildhochladeseite^^-------------------\\
 
 //Neuste Bilder Nachladen -start.php
 var reload_q = 3;

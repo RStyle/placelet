@@ -124,19 +124,47 @@ function create_thumbnail($target, $thumb, $w, $h, $ext) {
 
 //Überprüft, ob der Wert leer, bzw. auch getrimmt leer ist
 function tisset($a){
-$t = trim($a);
-if(!empty($t)){
-	return true;
-}
-return false;
+	$t = trim($a);
+	if(!empty($t)){
+		return true;
+	}
+	return false;
 }
 
 //Email überprüfen - unterstützt keine arabischen emailadressen :'(
 function check_email_address($email) {
-if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    return true;
+	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		return true;
+	}
+	return false;
 }
-return false;
+
+//Longitude und Latitude Daten erhalten
+function getlnlt($name = false){
+	global $db;
+	$return = array();
+	if($name === false){
+		$query = 'SELECT brid, city, longitude, latitude  FROM pictures';
+		$stmt = $db->query($query);
+		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			$return[] = $row;
+		}
+	}
+	else
+	{
+		$query = 'SELECT brid FROM bracelets WHERE name = :name';
+		$stmt = $db->prepare($query);
+		$stmt->execute(array('name' => $name));
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+		$query = 'SELECT brid, city, longitude, latitude FROM pictures WHERE brid = :brid';
+		$stmt = $db->prepare($query);
+		$stmt->execute(array('brid' => $row['brid']));
+		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			$return[] = $row;
+		}
+	}
+	return $return;
 }
 
 //Start - Hash Klasse um Passwörter zu verschlüsseln und zu überprüfen

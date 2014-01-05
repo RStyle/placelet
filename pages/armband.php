@@ -1,6 +1,40 @@
 <?php
 if ($braceName != NULL) {
 	if($stats['name'] !== false) {
+		$eecho = '';
+		$data = getlnlt($stats['name']);
+		$i=0;
+		foreach($data as $pos){ 
+			$js.= '
+			var latlng'.$i.' = new google.maps.LatLng('.$pos['latitude'].', '.$pos['longitude'].');';
+			$eecho .= '
+			var marker'.$i.' = new google.maps.Marker({
+				position: latlng'.$i.',
+				map: map
+			});';
+			$i++;
+		}
+		 $js.='
+		function initialize() {
+		  var mapOptions = {
+			zoom: 4,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+			//center: new google.maps.LatLng(51, 0)
+		  }
+		var map = new google.maps.Map(document.getElementById("map_home"), mapOptions);
+		
+		var defaultBounds = new google.maps.LatLngBounds(
+		'; for($i2 = 0; $i2 < $i; $i2++){
+			$js.= 'latlng'.$i2;
+			if($i2 != ($i-1))
+				$js.= ',';
+		} $js.= '
+		);
+		map.fitBounds(defaultBounds);
+		map.panToBounds(defaultBounds);
+		'.$eecho.'
+		}
+		google.maps.event.addDomListener(window, "load", initialize);';
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo htmlentities($braceName); ?></h1></div>
@@ -157,6 +191,9 @@ if ($braceName != NULL) {
 		}
 ?>
 				</table>
+			</aside>
+			<aside id="map_home" class="side_container" style="margin-top: 20px;">
+			Bitte aktivieren sie Javascript.
 			</aside>
 <?php
 	}else {

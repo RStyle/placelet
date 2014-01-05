@@ -986,3 +986,7 @@
 	position:relative;
 	top:1px;
 }
+
+#map_home {
+	height: 400px;
+}
