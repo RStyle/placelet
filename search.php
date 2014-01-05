@@ -2,11 +2,14 @@
 $page = 'search';
 require_once('./init.php');
 /*---------------------------------------------------------*/
-if(isset($_GET['squery'])) {
-	$squery = $_GET['squery'];
+if(isset($_GET['squery']) && !isset($_POST['squery']))
+	$_POST['squery'] = $_GET['squery'];	//Für Browsernachladen
+if(isset($_POST['squery'])) {
+	$js .= 'window.history.replaceState( {}, "Placelet - Suchergebnis", "/search?squery='.$_POST['squery'].'");';
+	$squery = $_POST['squery'];
 	if(strlen($squery) <= 18) {
 		$braceID = $statistics->name2brid($squery);
-		if(Statistics::userexists($_GET['squery'])) {
+		if(Statistics::userexists($_POST['squery'])) {
 			$squery_result['user'] = 0;
 		}else {
 			$squery_result['user'] = 1;

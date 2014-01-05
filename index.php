@@ -44,7 +44,7 @@ if($page == 'home') {
 <!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">
-				<form name="registerbr" action="search" method="get">
+				<form name="registerbr" action="search" method="post">
 					<label for="squery">Benutzer/Armband suchen </label>
 					<input name="squery" type="search" id="squery" placeholder="Suchen..." size="20" maxlength="18" required>
 				</form>
