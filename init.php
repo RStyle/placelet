@@ -91,7 +91,8 @@ $pagename = array(
 	"profil" => "Profil",
 	"search" => "Suchergebnis",
 	"shop" => "Shop",
-	"start" => "Start"
+	"start" => "Start",
+	"order" => "Bestellung"
 	);
 	
 $navregister['href'] = "login";	

@@ -868,12 +868,45 @@
         }
 	/*--- FAQ SECTION ---*/
 	/*+++ Shop SECTION +++*/
-	.product_pic {
+	#shop h2 {
+        margin-top: 0;
+        margin-bottom: 0.5em;
+        font-size: 3em; 
+    }
+    #shop h3 {
+        margin: 0;
+    }
+    #shop h4 {
+        margin: 0;
+        font-weight: normal;
+        font-size: 1.2em;
+    }
+    .shop_text {
+        margin-top: 0;
+    }
+    #shop hr {
+        margin-top: 0;
+        width: 400px;
+    }
+    .product_pic {
         border: 6px solid #999;
         float: left;
         margin-right: 10px;
         margin-bottom: 10px;
     }
+    .order_button {
+        margin-top: 1em;
+        display: inline-block;
+        padding: 1em;
+        text-decoration: none;
+        background-color: #0092ff;
+        color: #fff;
+        border-radius: 10px;
+        transition: background-color 300ms linear;
+    }
+        .order_button:hover {
+            background-color: #A323CA;
+        }
 	#order > form {
         padding-left: 1em;
         border-left: 4px solid #999; 

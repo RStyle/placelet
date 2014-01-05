@@ -249,6 +249,11 @@ $('.questions').click(function (){
     }
 });
 
+//Shop weiterlesen
+$('.read_more').click(function (){
+    $('.shop_text').text('Unser Armband besteht aus einem Ledermaterial, welches mit einer Knottechnik geschlossen wird. Das Armband ist mit einem Metallplättchen versehen, worauf unser Logo gelasert ist. Außerdem wirst Du auf der Rückseite deines Armbands eine ID-Nummer finden, mit der du dich auf unserer Homepage einloggen und dein Armband verfolgen kannst. Unsere Armband ist schlicht und modisch und wir hoffen, hierbei genau auf Deinen Geschmack zu treffen!');   
+});
+
 function check_width(){   
 //Logo Positionierung    
     if(window.innerWidth < 1480 && window.innerWidth > 1230){
