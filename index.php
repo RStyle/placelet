@@ -113,12 +113,12 @@ require_once($this_path.'pages/'.$page.'.php');
 		</section>
 		<script>username = '<?php echo $user->login; ?>';</script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="./js/script.js"></script>
-		<script src="js/lightbox-2.6.min.js"></script>
+		<script type="text/javascript" src="http://placelet.de/js/script.js"></script>
+		<script src="http://placelet.de/js/lightbox-2.6.min.js"></script>
 <?php
 if($page == 'login' && isset($postpic)) {
 ?>
-		<script type="text/javascript" src="./js/jquery.exif.js"></script>
+		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
 		<script>
 		$(document).ready(function() {
@@ -131,7 +131,7 @@ if($page == 'login' && isset($postpic)) {
 <?php
 }elseif($page == 'home'){
 ?>
-		<script type="text/javascript" src="./js/jquery.exif.js"></script>
+		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
 		<script>
 		<?php $eecho = '';
@@ -169,7 +169,7 @@ if($page == 'login' && isset($postpic)) {
 <?php
 }elseif($page == 'armband'){
 ?>
-		<script type="text/javascript" src="./js/jquery.exif.js"></script>
+		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
 	<?php } if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
 	</body>

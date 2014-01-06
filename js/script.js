@@ -500,7 +500,7 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&brace
 //Nächstes/Vorheriges Bild
 function change_pic(cv, sv) {
 	$("#loading").toggle();
-	$.post("scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv}, function(data) {
+	$.post("./scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv}, function(data) {
 		$("#newest_pic").html(data);
 		});
 	$.fail(function() {
