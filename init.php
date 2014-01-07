@@ -46,19 +46,23 @@ if(isset($_GET['logout']))  {
 }
 
 if(isset($_POST['login']) && isset($_POST['password'])){
-	$user = new User($_POST['login'], $db);	
-	$checklogin = $user->login($_POST['password']);
-	if($checklogin === true) {
-		if(isset($_POST['login_location'])) {
-			header('Location: '.$_POST['login_location']);
-		}else {
-			header('Location: start');
+	if(Statistics::userexists($_POST['login'])) {
+		$user = new User($_POST['login'], $db);	
+		$checklogin = $user->login($_POST['password']);
+		if($checklogin === true) {
+			if(isset($_POST['login_location'])) {
+				header('Location: '.$_POST['login_location']);
+			}else {
+				header('Location: start');
+			}
+		}elseif($checklogin == 2) {
+			header('Location: login?unvalidated='.$user->login);
+		}elseif ($checklogin === false) {
+			header('Location: login?loginattempt=false');
+			exit;
 		}
-	}elseif($checklogin == 2) {
-		header('Location: login?unvalidated='.$user->login);
-	}elseif ($checklogin === false) {
-		header('Location: login?loginattempt=false');
-		exit;
+	}else {
+		$user = new User(false, $db);
 	}
 } elseif(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
