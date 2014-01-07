@@ -704,7 +704,7 @@
 	.previews {
 		background-color: #ddd;
 		width: 300px;
-		height: 200px;
+		/*height: 200px;------------------------------------------------------------------------------------Maybe*/
 		float: left;
 		margin: 1%;
 		padding: 0.5em;

@@ -110,40 +110,47 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Abos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<?php
+		if($user->login == $username) {
+?>
 				<p class="tabs pseudo_link" id="tab_2"><span class="showcase_arrow2 arrow_right"></span>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_2">
 <?php
-		if($userdetails['subscriptions'] != NULL) {
-			foreach($userdetails['subscriptions'] as $key => $val) {
-				$val['name'] = $statistics->brid2name($key);
-				if(!isset($val['picid'])) $val['picid'] = 0;
+			if($userdetails['subscriptions'] != NULL) {
+				foreach($userdetails['subscriptions'] as $key => $val) {
+					$val['name'] = $statistics->brid2name($key);
+					if(!isset($val['picid'])) $val['picid'] = 0;
 ?>
 						<div class="previews">
 							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
 <?php
-				if($val['picid'] != 0) {
+					if($val['picid'] != 0) {
 ?>
 								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
-				}else {
+					}else {
 ?>
                                 <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
-				}
+					}
 ?>
 								<p class="preview_text">
 									<?php echo htmlentities($val['name']."\n"); ?>
 									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
 								</p>
-							</a>
+							</a><br>
+							<a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_email='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text">Deabonnieren</a>
 						</div>
 <?php
-			}
-		}elseif($user->login == $username) echo 'Du hast noch kein Armband abonniert.';
-		else echo 'Dieser Benutzer hat noch kein Armband abonniert.';
+				}
+			}elseif($user->login == $username) echo 'Du hast noch kein Armband abonniert.';
+			else echo 'Dieser Benutzer hat noch kein Armband abonniert.';//Entfernen, wenn es nicht gewünscht ist fremde Abos anzuzeigen
 ?>
 					</div>
+<?php
+		}
+?>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Uploads ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->            
 				<p class="tabs pseudo_link" id="tab_3"><span class="showcase_arrow3 arrow_right"></span>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
