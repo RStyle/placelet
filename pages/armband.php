@@ -193,7 +193,7 @@ if ($braceName != NULL) {
 				</table>
 			</aside>
 			<aside id="map_home" class="side_container" style="margin-top: 20px;">
-			Bitte aktivieren sie Javascript.
+				Bitte aktivieren sie Javascript um die Karte der verschiedenen Stationen zu sehen.
 			</aside>
 <?php
 	}else {

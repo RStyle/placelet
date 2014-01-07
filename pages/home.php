@@ -1,5 +1,5 @@
 <!--CONNECT-LEISTE-->
-            <div id="connect_leiste">
+			<div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
                     <h1>neuester upload</h1>
                         <div id="newest_pic">
@@ -130,5 +130,5 @@ if($systemStats['total_posted'] > 3) {
 				<div id="fb_plugin" class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
 			</aside>
 			<aside id="map_home" class="side_container" style="margin-top: 20px;">
-			Bitte aktivieren sie Javascript.
+				Bitte aktivieren sie Javascript um die Weltkarte mit allen Orten sehen zu können.
 			</aside>

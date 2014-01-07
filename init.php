@@ -74,26 +74,26 @@ $max_file_size = 8000000;
 
 //--//
 
-if (!isset($braceName)) { $braceName = ""; }
-//Dateinamen werden Titel zugeordnet
+if (!isset($braceName)) $braceName = "";
+//Dateinamen werden Titel zugeordnet - Nach dem Alphabet geordnet!!
 $pagename = array(
-    "faq" => "FAQ",
 	"404" => "Seite nicht gefunden",
 	"about" => "&Uuml;ber Uns",
 	"account" => "Account Einstellungen",
 	'admin' => 'Admin',
 	"armband" => "Armband: ".$braceName,
 	"connect" => "Connect",
+    "faq" => "FAQ",
 	"home" => "Global Bracelet. Travel & Connect",
 	"impressum" => "Impressum",
 	"kontakt" => "Konkakt",
 	"login" => "Registrieren",
+	"order" => "Bestellung",
 	"profil" => "Profil",
 	"search" => "Suchergebnis",
 	"shop" => "Shop",
-	"start" => "Start",
-	"order" => "Bestellung"
-	);
+	"start" => "Start"
+);
 	
 $navregister['href'] = "login";	
 $navregister['value'] = "Registrieren";

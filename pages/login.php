@@ -22,13 +22,16 @@ if(isset($loginattempt)) {
 				</form><br>
 <?php
 }elseif(isset($postpic)) {
+	$postpic_id = array(false);
+	if($postpic != "") 
+		preg_match("/^[0-9]{6}$/", $postpic, $postpic_id);
 ?>
 				<form id="register_pic" name="registerpic" action="login?postpic" method="post" enctype="multipart/form-data">
 					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 					
 					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
 					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
-																																if(isset($_GET["postpic"])) if($_GET["postpic"] <= 6) echo $_GET["postpic"]; ?>" required><br>
+																																 if(count($postpic_id) == 1) echo $postpic_id[0]; ?>" required><br>
 					
 					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
 					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" title="Min. 4 - Max. 30" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>
@@ -54,7 +57,7 @@ if(isset($loginattempt)) {
 					<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
 					
 					<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
-					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
+					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
 <?php
 		//$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
 		//echo recaptcha_get_html($publickey);
@@ -140,7 +143,7 @@ if(isset($loginattempt)) {
 	}
 ?>
 				<form method="post" action="login">
-					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="Benutzername" placeholder="Benutzername" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
+					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
 					<input type="email" name="revalidate_email" size="20" maxlength="30" placeholder="E-Mail" required>
 					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
 				</form>
@@ -173,6 +176,10 @@ if(isset($loginattempt)) {
 					</table>
 					<p>Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.</p>
 				</form>
+<?php
+}else {
+?>
+				<p>Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span></p>
 <?php
 }
 ?>

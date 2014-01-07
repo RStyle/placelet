@@ -77,9 +77,12 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
-				} else { ?>
+				}else {
+?>
                                     <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
-<?php           } ?>
+<?php
+				}
+?>
 
 								<p class="preview_text">
 									<?php echo htmlentities($key_name)."\n"; ?>
@@ -110,9 +113,12 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
-				} else { ?>
+				}else {
+?>
                                 <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
-<?php           } ?>
+<?php
+				}
+?>
 								<p class="preview_text">
 									<?php echo htmlentities($val['name']."\n"); ?>
 									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
@@ -142,9 +148,12 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
-				} else { ?>
+				}else { 
+?>
                                 <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
-<?php           } ?>
+<?php
+				}//Nicht wirklich nötig.
+?>
 								<p class="preview_text">
 									<?php echo htmlentities($val['name'])."\n"; ?>
 									<span style="float:right;">Station Nr.: <?php echo $val['picid']; ?> Bilder: <?php echo $val['picCount']; ?></span>

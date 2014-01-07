@@ -22,6 +22,7 @@ RewriteCond %{REQUEST_FILENAME} !about.*
 RewriteCond %{REQUEST_FILENAME} !account.*
 RewriteCond %{REQUEST_FILENAME} !admin.*
 RewriteCond %{REQUEST_FILENAME} !armband.*
+RewriteCond %{REQUEST_FILENAME} !faq.*
 RewriteCond %{REQUEST_FILENAME} !home.*
 RewriteCond %{REQUEST_FILENAME} !impressum.*
 RewriteCond %{REQUEST_FILENAME} !kontakt.*
@@ -35,7 +36,7 @@ RewriteCond %{REQUEST_URI} !css/.*
 RewriteCond %{REQUEST_URI} !img/.*
 RewriteCond %{REQUEST_URI} !js/.*
 RewriteCond %{REQUEST_URI} !pictures/.*
-RewriteRule ^(.*)$ http://placelet.de/armband?name=$1 [L]
+RewriteRule ^(.*)$ /armband?name=$1 [L,B]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.php -f
