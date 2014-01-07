@@ -62,7 +62,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<div class="arrow_up"></div>
 				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
 					<label for="login" id="label_login">Benutzername</label><br>
-					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Username" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
+					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
 					<label for="password" id="label_password">Passwort</label><br>
 					<input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
 					<input type="submit" value="Login" id="submit_login">
@@ -113,7 +113,7 @@ require_once($this_path.'pages/'.$page.'.php');
 		</section>
 		<script>username = '<?php echo $user->login; ?>';</script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://placelet.de/js/script.js"></script>
+		<script type="text/javascript" src="/js/script.js"></script>
 		<script type="text/javascript" src="http://placelet.de/js/lightbox-2.6.min.js"></script>
 <?php
 if($page == 'login' && isset($postpic)) {
@@ -173,6 +173,8 @@ if($page == 'login' && isset($postpic)) {
 ?>
 		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
-<?php } if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
+<?php
+}
+if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
 	</body>
 </html>

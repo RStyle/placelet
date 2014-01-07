@@ -50,7 +50,7 @@ if(!isset($_GET['user']) && !$user->login) {
 					</p>
 				</div>
 <?php 
-    if ($user->login == $username) {
+    if($user->login == $username) {
 ?>        
                 <div class="logged_info">
                     <p>Deine E-Mail-Adresse: <?php echo $userdetails['email']; ?> <br>
@@ -71,14 +71,27 @@ if(!isset($_GET['user']) && !$user->login) {
 				if($val['picid'] == NULL) $val['picid'] = 0;
 ?>
 						<div class="previews">
-							<a href="armband?name=<?php echo urlencode($key_name); ?>">
 <?php
 				if($val['picid'] != 0) {
+					if($user->login == $username) {
 ?>
+							<a href="armband?name=<?php echo urlencode($key_name); ?>" title="<?php echo urlencode($key); ?>">
 									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+<?php	
+					}else {
+?>
+							<a href="armband?name=<?php echo urlencode($key_name); ?>">
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+<?php
+					}
+				}elseif($user->login == $username) {
+?>
+							<a href="login?postpic=<?php echo urlencode($key); ?>" title="<?php echo urlencode($key); ?>">
+                                    <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
 				}else {
 ?>
+							<a href="armband?name=<?php echo urlencode($key_name); ?>">
                                     <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
 				}
@@ -142,14 +155,22 @@ if(!isset($_GET['user']) && !$user->login) {
 				if($val['picid'] == NULL) $val['picid'] = 0;
 ?>
 						<div class="previews">
-							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
 <?php
 				if($val['picid'] != 0) {
+					if($user->login == $username) {
 ?>
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>" title="<?php echo $val['brid']; ?>">
 								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
+					}else {
+?>
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
+<?php
+					}
 				}else { 
 ?>
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
                                 <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
 				}//Nicht wirklich nötig.

@@ -813,14 +813,10 @@
 			position: relative;
 			
 		}
-			#register_pic form{
-				margin: 0 auto;
-			}
 		#register_br {
 			float: left;
 			width: 48%
 		}
-		
         #map {
             position: absolute;
             left: 100%;
@@ -845,7 +841,6 @@
         }
 	/*---Login SECTION---*/
 	/*+++ FAQ SECTION +++*/
-
     .answers {
         clear: both;
         overflow: auto;

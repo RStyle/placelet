@@ -545,3 +545,11 @@ $(document).ready(function(){
 		return confirmDelete('das Bild');
 	});
 });
+
+//Den Rest vom Bild-Hochladformular anzeigen, wenn man nicht eingeloggt ist.
+$(document).ready(function(){
+	$('#picupload_nologin').click(function(){
+		$('#registerpic_upload_inputs').toggle();
+		$('#picupload_nologin_text').remove();
+	});
+});
