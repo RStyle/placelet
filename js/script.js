@@ -448,16 +448,16 @@ function error_postpic(msg) {
 
 //Kommentare Ein-/Ausblenden
 function show_comments(obj){
-	number = $(obj).attr('id').replace('toggle_comment','');
-	$("#comment" + number).toggle();
-	if($("#toggle_comment" + number).text() == 'Kommentare verstecken'){
-		$("#toggle_comment" + number).text('Kommentare zeigen');
-	}else {
-		$("#toggle_comment" + number).text('Kommentare verstecken');		
-	}
+        number = $(obj).attr('id').replace('toggle_comment','');
+        $("#comment" + number).toggle();
+        if($("#toggle_comment" + number).text() == 'Kommentare verstecken'){
+                $("#toggle_comment" + number).text('Kommentare zeigen');
+        }else {
+                $("#toggle_comment" + number).text('Kommentare verstecken');                
+        }
 }
 $('.toggle_comments').click(function (){
-	show_comments(this);
+        show_comments(this);
 });
 
 
@@ -558,7 +558,6 @@ $(document).ready(function(){
 //Ajax-Login
 $(document).ready(function(){
 	$("#picupload_login_submit").click(function(){
-		console.log('hi');
 		username = $("#picupload_login_username").val();
 		password = $("#picupload_login_password").val();
 		$.ajax({
@@ -566,7 +565,6 @@ $(document).ready(function(){
 			url: "../scripts/ajax/ajax_login.php",
 			data: "login=" + username + "&password=" + password,
 			success: function(html){
-				//console.log('WTF');
 				if(html == 'true') {
 					$('#registerpic_upload_inputs').toggle();
 					$('#picupload_login_loading').toggle();
@@ -574,15 +572,27 @@ $(document).ready(function(){
 					$('#login-box').remove();
 					$('#headerlogin').html('Logout');
 					$('#headerlogin').attr('href', 'login?logout');
-					console.log('Eingeloggt');
-				}else if(html == 'notsent'){
-					//nothing sent
+				}else {
+					$('#picupload_login_submit').toggle();
+					$('#picupload_login_loading').toggle();
+					if(html == 'notsent'){
+						$('#picupload_login_errormsg').html('Du hast nichts eingegeben.<br>');
+					}else if(html == 'false') {
+						$('#picupload_login_errormsg').html('Falsches Passwort oder Benutzername.<br>');
+					}else if(html == 'notexisting') {
+						$('#picupload_login_errormsg').html('Dieser Benutzer existiert nicht.<br>');
+					}else if(html == 'unvalidated'){
+						$('#picupload_login_errormsg').html('Dein Account wurde noch nicht bestätigt.<br>');
+					}
 				}
+					
+				
 			},
 			beforeSend:function()
 			{
 				$('#picupload_login_submit').toggle();
 				$('#picupload_login_loading').toggle();
+				$('#picupload_login_errormsg').html('');
 			}
 		});
 		return false;
