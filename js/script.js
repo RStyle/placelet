@@ -203,20 +203,6 @@ try {
 
 
 
-//Kommentare Ein-/Ausblenden
-toggleState = false;
-$('.toggle_comments').click(function (){
-	number = $(this).attr('id').replace('toggle_comment','');
-	$("#comment" + number).toggle();
-	if(toggleState){
-		$("#toggle_comment" + number).text('Kommentare zeigen');
-	}else {
-		$("#toggle_comment" + number).text('Kommentare verstecken');		
-	}
-	toggleState = !toggleState;
-});
-
-
 //Profil Showcases Ein-/Ausblenden
 $('.tabs').click(function (){
 	number = $(this).attr('id').replace('tab_','');
@@ -459,6 +445,21 @@ function error_postpic(msg) {
 	console.log(typeof msg == 'string' ? msg : "error123");
 }
 //--------------------^^Bildhochladeseite^^-------------------\\
+
+//Kommentare Ein-/Ausblenden
+function show_comments(obj){
+	number = $(obj).attr('id').replace('toggle_comment','');
+	$("#comment" + number).toggle();
+	if($("#toggle_comment" + number).text() == 'Kommentare verstecken'){
+		$("#toggle_comment" + number).text('Kommentare zeigen');
+	}else {
+		$("#toggle_comment" + number).text('Kommentare verstecken');		
+	}
+}
+$('.toggle_comments').click(function (){
+	show_comments(this);
+});
+
 
 //Neuste Bilder Nachladen -start.php
 var reload_q = 3;
