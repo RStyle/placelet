@@ -34,11 +34,11 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
 						
 						<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
-						<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
+						<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" id="registerpic_brid" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
 																																	 if(count($postpic_id) == 1) echo $postpic_id[0]; ?>" required><br>
 						
 						<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" title="Min. 4 - Max. 30" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>
+						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" id="registerpic_title" title="Min. 4 - Max. 30" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>" required><br>
 						
 						<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
 						<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="Stadt" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_city'];?>" required><br>
@@ -61,7 +61,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
 						
 						<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
-						<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
+						<textarea name="registerpic_description" id="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
 <?php
 		//$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
 		//echo recaptcha_get_html($publickey);
@@ -70,10 +70,10 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						<input type="hidden" name="registerpic_date" id="registerpic_date" value="default">
 						<input type="hidden" name="" value="">
 						<div id="registerpic_upload_inputs"<?php if($user->login == false) echo ' style="display: none;"'; ?>>
-							<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>"><br>
+							<input type="file" name="registerpic_file" id="registerpic_file"><br>
 							<input type="submit" name="registerpic_submit" id="registerpic_submit" value="Bild posten"><br>
 							Bildvorschau:<br>
-							<img id="image_preview" src="./img/placeholder.png">
+							<img id="image_preview" src="./img/placeholder.png" alt="preview">
 						</div>
 					</form>
 					
@@ -85,8 +85,9 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<span class="pseudo_link" id="picupload_nologin">Das Bild uneingeloggt hochladen.</span>
 						</p>
 						<!--<form action="./" method="post">-->
+							<span id="picupload_login_errormsg"></span>
 							<input type="text" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
-							<input type="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text" id="picupload_login_password"><br>
+							<input type="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
 							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
 						<!--</form>-->
 <?php
