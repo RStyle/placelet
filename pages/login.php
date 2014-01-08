@@ -1,10 +1,13 @@
 			<article class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page];?></h1></div>
 <?php
-if(isset($loginattempt)) {
+if(isset($loginattempt) || isset($_GET['notexisting'])) {
+	if(isset($loginattempt)) echo '
+				Der eingegebene Benutzername oder das Passwort waren falsch, versuche es bitte erneut.<br><br>';
+	if(isset($_GET['notexisting'])) echo '
+				Der Account auf den du dich einloggen willst existiert nicht, versuche es bitte erneut.<br><br>';
 ?>
-				Der eingegebene Benutzername oder das Passwort waren falsch.<br><br>
-				<form name="login" id="form_login" action="<?php echo $friendly_self; ?>" method="post">
+				<form name="login" id="form_login" action="login" method="post">
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -26,51 +29,70 @@ if(isset($loginattempt)) {
 	if($postpic != "") 
 		preg_match("/^[0-9]{6}$/", $postpic, $postpic_id);
 ?>
-				<form id="register_pic" name="registerpic" action="login?postpic" method="post" enctype="multipart/form-data">
-					<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
-					
-					<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
-					<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
-																																 if(count($postpic_id) == 1) echo $postpic_id[0]; ?>" required><br>
-					
-					<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-					<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" title="Min. 4 - Max. 30" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>
-					
-					<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-					<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="Stadt" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_city'];?>" required><br>
-					
-					<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-					<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" placeholder="Land" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_country'];?>" required><br>
-					
-					<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
-					<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" placeholder="Bundesland" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_state'];?>"><br>
-					
-					<div id="map">
-    					<div id="pos">
-    						Deine Position wird ermittelt...<br>
-    						Du kannst den Ort auch manuell eingeben.
-    					</div>
-    					<p>Bewege den roten Zeiger zu dem Ort deines Fotos. Du kannst ihn auch manuell in die Eingabefelder links eingeben.</p>
-                    </div>
-                    
-					<input type="hidden" name="registerpic_latitude" id="latitude" value="0">
-					<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
-					
-					<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
-					<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
+				<div id="register_pic">
+					<form name="registerpic" action="login?postpic=<?php echo $postpic; ?>" method="post" enctype="multipart/form-data">
+						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
+						
+						<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
+						<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
+																																	 if(count($postpic_id) == 1) echo $postpic_id[0]; ?>" required><br>
+						
+						<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
+						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" title="Min. 4 - Max. 30" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>"required><br>
+						
+						<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
+						<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="Stadt" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_city'];?>" required><br>
+						
+						<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
+						<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" placeholder="Land" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_country'];?>" required><br>
+						
+						<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
+						<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" placeholder="Bundesland" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_state'];?>"><br>
+						
+						<div id="map">
+							<div id="pos">
+								Deine Position wird ermittelt...<br>
+								Du kannst den Ort auch manuell eingeben.
+							</div>
+							<p>Bewege den roten Zeiger zu dem Ort deines Fotos. Du kannst ihn auch manuell in die Eingabefelder links eingeben.</p>
+						</div>
+						
+						<input type="hidden" name="registerpic_latitude" id="latitude" value="0">
+						<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
+						
+						<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
+						<textarea name="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
 <?php
 		//$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
 		//echo recaptcha_get_html($publickey);
 ?>
-					<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>" required><br>
-					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
-					<input type="hidden" name="registerpic_date" id="registerpic_date" value="default">
-					<input type="hidden" name="" value="">
-					<input type="submit" name="registerpic_submit" value="Bild posten"><br>
-					Bildvorschau:<br>
-                    <img id="image_preview" src="./img/placeholder.png">
-				</form>
-			</article>
+						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
+						<input type="hidden" name="registerpic_date" id="registerpic_date" value="default">
+						<input type="hidden" name="" value="">
+						<div id="registerpic_upload_inputs"<?php if($user->login == false) echo ' style="display: none;"'; ?>>
+							<input type="file" name="registerpic_file" id="registerpic_file" maxlength="<?php echo $max_file_size; ?>"><br>
+							<input type="submit" name="registerpic_submit" id="registerpic_submit" value="Bild posten"><br>
+							Bildvorschau:<br>
+							<img id="image_preview" src="./img/placeholder.png">
+						</div>
+					</form>
+					
+<?php
+	if($user->login == false) {
+?>
+						<p class="picupload_nologin_text">
+							Wenn du einen Account besitzt logge dich bitte ein, bevor du dein Bild hochlädst.
+							<span class="pseudo_link" id="picupload_nologin">Das Bild uneingeloggt hochladen.</span>
+						</p>
+						<!--<form action="./" method="post">-->
+							<input type="text" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
+							<input type="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text" id="picupload_login_password"><br>
+							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
+						<!--</form>-->
+<?php
+	}
+?>
+				</div>
 <?php
 }elseif(isset($registerbr)) {
 	if($user->login) {
@@ -183,4 +205,4 @@ if(isset($loginattempt)) {
 <?php
 }
 ?>
-		</article>
+			</article>

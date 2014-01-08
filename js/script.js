@@ -548,8 +548,42 @@ $(document).ready(function(){
 
 //Den Rest vom Bild-Hochladformular anzeigen, wenn man nicht eingeloggt ist.
 $(document).ready(function(){
-	$('#picupload_nologin').click(function(){
+	$('#picupload_nologin').click(function() {
 		$('#registerpic_upload_inputs').toggle();
-		$('#picupload_nologin_text').remove();
+		$('.picupload_nologin_text').remove();
+	});
+});
+
+//Ajax-Login
+$(document).ready(function(){
+	$("#picupload_login_submit").click(function(){
+		console.log('hi');
+		username = $("#picupload_login_username").val();
+		password = $("#picupload_login_password").val();
+		$.ajax({
+			type: "POST",
+			url: "../scripts/ajax/ajax_login.php",
+			data: "login=" + username + "&password=" + password,
+			success: function(html){
+				//console.log('WTF');
+				if(html == 'true') {
+					$('#registerpic_upload_inputs').toggle();
+					$('#picupload_login_loading').toggle();
+					$('.picupload_nologin_text').remove();
+					$('#login-box').remove();
+					$('#headerlogin').html('Logout');
+					$('#headerlogin').attr('href', 'login?logout');
+					console.log('Eingeloggt');
+				}else if(html == 'notsent'){
+					//nothing sent
+				}
+			},
+			beforeSend:function()
+			{
+				$('#picupload_login_submit').toggle();
+				$('#picupload_login_loading').toggle();
+			}
+		});
+		return false;
 	});
 });

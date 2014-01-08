@@ -36,6 +36,7 @@ RewriteCond %{REQUEST_URI} !css/.*
 RewriteCond %{REQUEST_URI} !img/.*
 RewriteCond %{REQUEST_URI} !js/.*
 RewriteCond %{REQUEST_URI} !pictures/.*
+RewriteCond %{REQUEST_URI} !scripts/.*
 RewriteRule ^(.*)$ /armband?name=$1 [L,B]
 
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -63,6 +63,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 		}
 	}else {
 		$user = new User(false, $db);
+		header('Location: login?notexisting');
 	}
 } elseif(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
