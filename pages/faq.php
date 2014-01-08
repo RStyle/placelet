@@ -16,7 +16,7 @@
 				<div class="answers" id="answer_2">
 					<p>
 						Auch wenn du auch ohne Account bestimmte Funktionen unserer Webseite nutzen kannst, bringt dir ein eigener Account einige Vorteile.
-						Du erhältst zum Beispiel eine eigene Profilseite, anhand derer deine Freunde deine Armbänder und Uploads nachverfolgen können.
+						Er ist die Vorraussetzung Du erhältst zum Beispiel eine eigene Profilseite, anhand derer deine Freunde deine Armbänder und Uploads nachverfolgen können.
 						Außerdem wirst diesen unschönen Gast-Tag vor allen deinen Kommentaren los.
 					</p>
 				</div>

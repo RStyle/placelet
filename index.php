@@ -81,6 +81,8 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="kontakt">Kontakt</a></li>
 				<li class="headerlist_sub_divider">|</li>
+				<li><a href="faq">FAQ</a></li>
+				<li class="headerlist_sub_divider">|</li>
 				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
 			</ul>
 		</header>

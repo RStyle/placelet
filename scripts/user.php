@@ -570,7 +570,7 @@ class Statistics {
 		$username = trim($username);
 		$brid = trim($brid);
 		$comment = clean_input($comment);
-		if(!$this->user->login) {
+		if($this->user->login != $username) {
 			$username = '[Gast] '.$username;
 		}
 		if(strlen($username) < 4) {
