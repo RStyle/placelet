@@ -62,7 +62,7 @@ if ($braceID != NULL) {
 						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
 						<?php echo $stats[$i]['description']; ?>      
 						<br><br>
-						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
+						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" onClick="show_comments(this);">Kommentare zeigen</span>
 					</p>
                     
 					<div class="comments" id="comment<?php echo $i;?>">
