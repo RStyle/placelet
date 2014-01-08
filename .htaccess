@@ -29,6 +29,7 @@ RewriteCond %{REQUEST_FILENAME} !kontakt.*
 RewriteCond %{REQUEST_FILENAME} !login.*
 RewriteCond %{REQUEST_FILENAME} !profil.*
 RewriteCond %{REQUEST_FILENAME} !search.*
+RewriteCond %{REQUEST_FILENAME} !order.*
 RewriteCond %{REQUEST_FILENAME} !shop.*
 RewriteCond %{REQUEST_FILENAME} !start.*
 RewriteCond %{REQUEST_FILENAME} !error.*
@@ -36,7 +37,6 @@ RewriteCond %{REQUEST_URI} !css/.*
 RewriteCond %{REQUEST_URI} !img/.*
 RewriteCond %{REQUEST_URI} !js/.*
 RewriteCond %{REQUEST_URI} !pictures/.*
-RewriteCond %{REQUEST_URI} !scripts/.*
 RewriteRule ^(.*)$ /armband?name=$1 [L,B]
 
 RewriteCond %{REQUEST_FILENAME} !-f

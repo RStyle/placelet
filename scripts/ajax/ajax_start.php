@@ -17,12 +17,12 @@ $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
-?>
-			<div class="blue_line mainarticleheaders line_header"><h2>Neueste Bilder</h2></div>
-<?php
+
 if(isset($stats[$_GET['q'] - 2]))
 			for ($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
 				if(!isset($stats[$i])) break;
+				if($i == $_GET['q'] - 2)
+					echo '<hr style="clear: both;">';
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
@@ -141,15 +141,5 @@ if(isset($stats[$_GET['q'] - 2]))
 <!--~~~HR~~~~--><hr style="clear: both;">
 <?php	
 					}
-				}
-				if($_GET['q'] > 3) {
-?>
-				<div class="pseudo_link" id="start_reload" onClick="reload_start(-3);"  style="clear: both;" >Vorherige Seite</div>
-<?php
-				}
-				if($systemStats['total_posted'] >= $_GET['q']) {
-?>
-				<div class="pseudo_link" id="start_reload" onClick="reload_start(3);"  style="clear: both;" >Nächste Seite</div>
-<?php
 				}
 ?>

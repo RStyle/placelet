@@ -475,7 +475,7 @@ var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
 	if(data != ""){
 	$("#start_reload").remove();
 	htmlcode = $("#recent_pics").html();
-	$("#recent_pics").html(data);
+	$("#recent_pics").append(data);
 	} else {
 	reload_q -= 3;
 	}
@@ -587,4 +587,11 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+});
+
+$(window).scroll(function () {
+	if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		console.log("jo!");
+		reload_start(3);
+	}
 });
