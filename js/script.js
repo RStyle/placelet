@@ -538,27 +538,27 @@ $(document).ready(function(){
 //Löschen von Kommentaren und Bildern bestätigen
 function confirmDelete(type, object) {
 	var braceName = $(object).attr('data-bracelet');
-	console.log(braceName);
+	console.log(type);
 	$.ajax({
-			type: "POST",
-			url: "../scripts/ajax/ajax_statistics.php",
-			data: "braceName=" + braceName + "&delete=" + type,
-			success: function(data){
-				var json = JSON.parse(data);
-				if(json.flag) var deleteORflag = 'melden';
-					else var deleteORflag = 'löschen';
-				console.log(deleteORflag);
-				var agree = confirm("Willst du " + type + " wirklich " + deleteORflag + " ?");
-				    if(agree) {
-						console.log("hi1");
-						return true; 
-					}else {
-						console.log("hi2");
-						return false; 
-					}
+		type: "POST",
+		url: "../scripts/ajax/ajax_statistics.php",
+		data: "braceName=" + encodeURIComponent(braceName) + "&delete=true",
+		success: function(data){
+			console.log(data);
+			var json = JSON.parse(data);
+			if(json.flag) var deleteORflag = 'melden';
+				else var deleteORflag = 'löschen';
+			var agree = confirm("Willst du " + type + " wirklich " + deleteORflag + "?");
+			if(agree) {
+				console.log("hi1");
+				return true; 
+			}else {
+				console.log("hi2");
+				return false; 
 			}
-		});
-  } 
+		}
+	});
+} 
   
   /*
 $(document).ready(function(){

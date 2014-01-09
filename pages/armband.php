@@ -172,7 +172,7 @@ if ($braceName != NULL) {
 ?>
 					<tr>
 						<td>Käufer</td>
-						<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats['owner'])); ?>"><?php echo $stats['owner']; ?></a></td>
+						<td><a href="profil?user=<?php echo urlencode(htmlentities($stats['owner'])); ?>"><?php echo htmlentities($stats['owner']); ?></a></td>
 					</tr>
 					<tr>
 						<td>Registriert am</td>

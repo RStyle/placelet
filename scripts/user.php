@@ -517,7 +517,7 @@ class Statistics {
 			$stats['name'] = false;
 		}else {
 			$stats['name'] = $this->brid2name($brid);
-			$stats['owner'] = htmlentities($q[0]['user']);
+			$stats['owner'] = $q[0]['user'];
 			$stats['date'] = $q[0]['date'];
 			$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
 			$stmt = $this->db->prepare($sql);

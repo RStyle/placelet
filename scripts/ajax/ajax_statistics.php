@@ -11,20 +11,23 @@ if(isset($_SESSION['user'])){
 	$checklogin = false;
 }
 $statistics = new Statistics($db, $user);
-if(isset($_POST['login'])) if($_POST['login'] == 'true') {
-	$return = Array('checklogin' => $checklogin);
-	echo json_encode($return);
+if(isset($_POST['login'])) {
+		if($_POST['login'] == 'true') {
+		$return = array('checklogin' => $checklogin);
+		echo json_encode($return);
+	}
 }elseif(isset($_POST['braceName']) && isset($_POST['delete'])) {//'flag' => true bedeutet als Spam markieren und false bedeutet löschen
-	if($userlogin === false) {
-		$return = Array('flag' => true);
+	$braceID = $statistics->name2brid(urldecode($_POST['braceName']));
+	if($user->login == false) {
+		$return = array('flag' => true);
 	}elseif($user->admin) {
-		$return = Array('flag' => false);
+		$return = array('flag' => false);
 	}else {
-		$bracelet_stats = $statistics->bracelet_stats($_POST['braceName'], $db);
+		$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
 		if($user->login == $bracelet_stats['owner']) {
-			$return = Array('flag' => false);
+			$return = array('flag' => false);
 		}else {
-			$return = Array('flag' => true);
+			$return = array('flag' => true);
 		}
 	}
 	echo json_encode($return);
