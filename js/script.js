@@ -543,12 +543,12 @@ function confirmDelete(type, object) {
 			type: "POST",
 			url: "../scripts/ajax/ajax_statistics.php",
 			data: "braceName=" + braceName + "&delete=" + type,
-			success: function(data){
+			success: function(){/*
 				var json = JSON.parse(data);
 				if(json.flag) var deleteORflag = 'melden';
 					else var deleteORflag = 'löschen';
-				console.log(deleteORflag);
-				var agree = confirm("Willst du " + type + " wirklich " + deleteORflag + " ?");
+				console.log(deleteORflag);*/
+				var agree = confirm("Willst du " + type + " wirklich " + "" + " ?");
 				    if(agree) {
 						console.log("hi1");
 						return true; 
