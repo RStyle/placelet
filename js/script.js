@@ -540,6 +540,7 @@ function confirmDelete(type, object) {
 	var braceName = $(object).attr('data-bracelet');
 	console.log(type);
 	$.ajax({
+<<<<<<< HEAD
 		type: "POST",
 		url: "../scripts/ajax/ajax_statistics.php",
 		data: "braceName=" + encodeURIComponent(braceName) + "&delete=true",
@@ -555,6 +556,24 @@ function confirmDelete(type, object) {
 			}else {
 				console.log("hi2");
 				return false; 
+=======
+			type: "POST",
+			url: "../scripts/ajax/ajax_statistics.php",
+			data: "braceName=" + braceName + "&delete=" + type,
+			success: function(){/*
+				var json = JSON.parse(data);
+				if(json.flag) var deleteORflag = 'melden';
+					else var deleteORflag = 'löschen';
+				console.log(deleteORflag);*/
+				var agree = confirm("Willst du " + type + " wirklich " + "" + " ?");
+				    if(agree) {
+						console.log("hi1");
+						return true; 
+					}else {
+						console.log("hi2");
+						return false; 
+					}
+>>>>>>> 11cb57d58abfdfedc7a1d79043d58c305c7f8790
 			}
 		}
 	});
