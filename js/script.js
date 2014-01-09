@@ -536,8 +536,8 @@ $(document).ready(function(){
 });
 
 //Löschen von Kommentaren und Bildern bestätigen
-function confirmDelete(type) {
-	var braceName = $(this).attr('data-bracelet');
+function confirmDelete(type, object) {
+	var braceName = $(object).attr('data-bracelet');
 	console.log(braceName);
 	$.ajax({
 			type: "POST",
@@ -549,15 +549,18 @@ function confirmDelete(type) {
 					else var deleteORflag = 'löschen';
 				console.log(deleteORflag);
 				var agree = confirm("Willst du " + type + " wirklich " + deleteORflag + " ?");
+				    if(agree) {
+						console.log("hi1");
+						return true; 
+					}else {
+						console.log("hi2");
+						return false; 
+					}
 			}
 		});
-    if(agree) {
-		return true; 
-	}else {
-		return false; 
-	}
   } 
   
+  /*
 $(document).ready(function(){
 	$('.delete_comment').click(function(){
 		return confirmDelete('den Kommentar');
@@ -567,7 +570,7 @@ $(document).ready(function(){
 		return confirmDelete('das Bild');
 	});
 });
-
+*/
 //Den Rest vom Bild-Hochladformular anzeigen, wenn man nicht eingeloggt ist.
 $(document).ready(function(){
 	$('#picupload_nologin').click(function() {

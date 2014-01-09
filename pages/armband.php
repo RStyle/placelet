@@ -52,7 +52,7 @@ if ($braceName != NULL) {
 				else $last_pic = 'middle';
 ?>
 				<div style="width: 100%; overflow: auto;">
-				<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="Bild löschen/melden" onclick="return confirmDelete('das Bild');">X</a>
+				<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="Bild löschen/melden" onclick="confirmDelete('das Bild', this); return false;">X</a>
 					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 						<img src="img/triangle.png" alt="" class="thumb_triangle">
