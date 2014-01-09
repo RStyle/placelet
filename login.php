@@ -19,10 +19,9 @@ if(isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg
 //E-Mail Bestätigung erneut senden.
 if(isset($_POST['revalidate_submit'])) {
 	$revalidation = $user->revalidate($_POST['revalidate_user'], $_POST['revalidate_email']);
-	if($revalidation !== true) {
-		$js .= 'alert("'.$revalidation.'");';
-	}
 }
+	//Titel anpassen
+if(isset($unvalidated) || @$user_registered === true || isset($revalidation)) $pagename[$page] = 'Bestätigung';
 //Bild posten Funktion aufrufen
 if(isset($_POST['registerpic_submit'])) {
 		$pic_registered = $statistics->registerpic($_POST['registerpic_brid'],

@@ -98,10 +98,10 @@ if ($braceName != NULL) {
 		}
 	}
 	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
-	if (isset($bracelet_stats['owners'])) {
+	if(isset($bracelet_stats['owners'])) {
 		$picture_details = $statistics->picture_details($braceID, $db);
 		$stats = array_merge($bracelet_stats, $picture_details);
-	} else {
+	}else {
 		$bracelet_stats['owners'] = 0;
 		$stats = $bracelet_stats;
 	}

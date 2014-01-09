@@ -5,7 +5,7 @@ require_once('./init.php');
 if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 	$regstatus_change = $user->regstatuschange($_GET['regstatuschange'], $_GET['regstatuschange_user']);
 	if($regstatus_change) {
-		$js .= 'alert("Deine E-Mail wurde erfolgreich bestätigt.");';
+		$js .= 'validationRegister = confirm("Bestätigung erfolgreich.\\nMöchtest du direkt ein Armband registrieren?"); if(validationRegister) window.location.replace("http://www.placelet.de/login?registerbr");';
 	}elseif(!$regstatus_change) {
 		$js .= 'alert("Die Bestätigung deiner Email ist gescheitert.");';
 	}

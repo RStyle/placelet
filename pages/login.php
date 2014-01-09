@@ -86,8 +86,8 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</p>
 						<!--<form action="./" method="post">-->
 							<span id="picupload_login_errormsg"></span>
-							<input type="text" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
-							<input type="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
+							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
+							<input type="password" size="20" name="picupload_login_password" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
 							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
 						<!--</form>-->
 <?php
@@ -119,9 +119,9 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 <?php
 	}else {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen
 ?>
+				<form name="login" id="form_login" action="login" method="post" style="float: left;">
 				Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
-				um dein Armband Nr. <span style="color: #000; font-style: italic;"><?php echo $registerbr; ?></span> registrieren:<br>
-				<form name="login" id="form_login" action="login" method="post">
+				um dein Armband <?php if($registerbr != '') echo 'Nr. <span style="color: #000; font-style: italic;">'.$registerbr.'</span>'; ?> registrieren:
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="log_login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -136,45 +136,9 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<td><input type="hidden" name="login_location" value="login?registerbr=<?php echo $registerbr; ?>"></td>
 						</tr>
 					</table>
-				</form><br>
-<?php
-	}
-}elseif(isset($unvalidated) || @$user_registered === true || isset($revalidation)) {
-	if(isset($user_registered)) {
-?>
-				<p>
-					Dein Account wurde erfolgreich erstellt.<br>
-					Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.<br>
-					Falls du nach von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
-				</p>
-<?php
-	}elseif(isset($revalidation)) {
-		if($revalidation === true){
-?>
-				<p>Deine E-Mail wurde erfolgreich geändert, du bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.</p>
-<?php
-		}
-	}elseif(isset($revalidation)) {
-		echo $revalidation;
-	}else {
-?>
-				<p>
-					Deine E-Mail Adresse wurde noch nicht bestätigt.<br>
-					Hier kannst du deine E-Mail ändern und dir eine neue Bestätigungs-Email zusenden lassen.
-				</p>
-<?php
-	}
-?>
-				<form method="post" action="login">
-					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
-					<input type="email" name="revalidate_email" size="20" maxlength="30" placeholder="E-Mail" required>
-					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
 				</form>
-<?php
-}elseif(!$user->login) {
-	if(isset($user_registered)) echo $user_registered;
-?>
-				<form name="reg" id="form_reg" action="login" method="post">
+				<form name="reg" id="form_reg" action="login" method="post" style="float: right;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!!--->
+					Deine E-Mail-Adresse wird nicht an Dritte weitergegeben.<br>Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="reg_login">Benutzername</label></td>
@@ -197,7 +161,68 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<td>&nbsp;</td>
 						</tr>
 					</table>
-					<p>Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.</p>
+				</form>
+<?php
+	}
+}elseif(isset($unvalidated) || @$user_registered === true || isset($revalidation)) {
+	if(isset($user_registered)) {
+?>
+				<p>
+					Dein Account wurde erfolgreich erstellt.<br>
+					Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.<br>
+					Falls du nach von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
+				</p>
+<?php
+	}elseif(isset($revalidation)) {
+		if($revalidation === true){
+?>
+				<p>Deine E-Mail wurde erfolgreich geändert, du bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.</p>
+<?php
+		}else {
+			echo $revalidation;
+		}
+	}else {
+?>
+				<p>
+					Deine E-Mail Adresse wurde noch nicht bestätigt.<br>
+					Hier kannst du deine E-Mail ändern und dir eine neue Bestätigungs-Email zusenden lassen.
+				</p>
+<?php
+	}
+?>
+				<form method="post" action="login">
+					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
+					<input type="email" name="revalidate_email" size="20" maxlength="30" placeholder="E-Mail" required>
+					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
+				</form>
+<?php
+}elseif(!$user->login) {
+	if(isset($user_registered)) echo $user_registered;
+?>
+				<form name="reg" id="form_reg" action="login" method="post"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->
+					Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.
+					<table style="border: 1px solid black">
+						<tr>
+							<td><label for="reg_login">Benutzername</label></td>
+							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+						</tr>
+						<tr>
+							<td><label for="reg_email">Email-Adresse</label></td>
+							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
+						</tr>
+						<tr>
+							<td><label for="reg_password">Passwort</label></td>
+							<td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
+						</tr>
+						<tr>
+							<td><label for="reg_password2">Passwort wiederholen</label></td>
+							<td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
+						</tr>
+						<tr>
+							<td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
 				</form>
 <?php
 }else {

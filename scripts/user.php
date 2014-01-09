@@ -87,10 +87,10 @@ class User
 		//ist ein (getrimter) Wert leer?
 		if(tisset($reg['reg_login']) && tisset($reg['reg_email']) && !empty($reg['reg_password'])  && !empty($reg['reg_password2'])){
 			if($reg['reg_password'] != $reg['reg_password2']){
-				return 'Die Passwörter sind nicht dieselben.';
+				return 'Die Passwörter passen nicht zusammen.';
 			}
 			if(Statistics::userexists($reg['reg_login'])){
-				return 'Dieser Benutzer existiert schon';
+				return 'Dieser Benutzer existiert schon.';
 			}
 			//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
 			$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');

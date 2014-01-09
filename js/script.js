@@ -512,12 +512,20 @@ function change_pic(cv, sv) {
 //Aboformular anzeigen
 $(document).ready(function(){
 	$('#show_sub').click(function(){
-		if(username != '') {
-			bracelet_name = $('#bracelet_name').val();
-			window.location.replace("http://www.placelet.de/armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
-		}else {
-			$('.sub_inputs').toggle();
-		}
+		$.ajax({
+			type: "POST",
+			url: "../scripts/ajax/ajax_statistics.php",
+			data: "login=" + 'true',
+			success: function(data){
+				var json = JSON.parse(data);		
+				if(json.checklogin == false) {
+					$('.sub_inputs').toggle();
+				}else {
+					bracelet_name = $('#bracelet_name').val();
+					window.location.replace("http://www.placelet.de/armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
+				}
+			}
+		});
 	});
 });
 //Armband-Name Formular anzeigen
@@ -529,7 +537,20 @@ $(document).ready(function(){
 
 //Löschen von Kommentaren und Bildern bestätigen
 function confirmDelete(type) {
-    var agree = confirm("Willst du " + type + " wirklich löschen/melden?"); 
+	var braceName = $(this).attr('data-bracelet');
+	console.log(braceName);
+	$.ajax({
+			type: "POST",
+			url: "../scripts/ajax/ajax_statistics.php",
+			data: "braceName=" + braceName + "&delete=" + type,
+			success: function(data){
+				var json = JSON.parse(data);
+				if(json.flag) var deleteORflag = 'melden';
+					else var deleteORflag = 'löschen';
+				console.log(deleteORflag);
+				var agree = confirm("Willst du " + type + " wirklich " + deleteORflag + " ?");
+			}
+		});
     if(agree) {
 		return true; 
 	}else {
@@ -582,7 +603,7 @@ $(document).ready(function(){
 					}else if(html == 'notexisting') {
 						$('#picupload_login_errormsg').html('Dieser Benutzer existiert nicht.<br>');
 					}else if(html == 'unvalidated'){
-						$('#picupload_login_errormsg').html('Dein Account wurde noch nicht bestätigt.<br>');
+						$('#picupload_login_errormsg').html('Dein Account wurde noch nicht bestätigt.<br> Keine E-Mail bekommen? Lass dir <a href="login?unvalidated=' + encodeURIComponent(username) + '">hier</a> eine neue zusenden.<br>');
 					}
 				}
 					
