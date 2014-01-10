@@ -114,7 +114,7 @@ require_once($this_path.'pages/'.$page.'.php');
 
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://placelet.de/js/script.js"></script>
+		<script type="text/javascript" src="/js/script.js"></script>
 		<script type="text/javascript" src="http://placelet.de/js/lightbox-2.6.min.js"></script>
 <?php
 if($page == 'login' && isset($postpic)) {

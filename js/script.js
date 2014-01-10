@@ -538,39 +538,47 @@ $(document).ready(function(){
 //Löschen von Kommentaren und Bildern bestätigen
 function confirmDelete(type, object) {
 	var braceName = $(object).attr('data-bracelet');
-	console.log(type);
+	var href = $('<a>', { href:$(object).attr("href") } )[0];
+	var getVariables = href.search.replace('?', '');
 	$.ajax({
 		type: "POST",
 		url: "../scripts/ajax/ajax_statistics.php",
-		data: "braceName=" + encodeURIComponent(braceName) + "&delete=true",
+		data: "braceName=" + encodeURIComponent(braceName) + "&deleterequest=true",
 		success: function(data){
-			console.log(data);
 			var json = JSON.parse(data);
-			if(json.flag) var deleteORflag = 'melden';
-				else var deleteORflag = 'löschen';
+			if(json.flag) {
+				var deleteORflag = 'melden';
+			}else {
+				var deleteORflag = 'löschen';
+			}
 			var agree = confirm("Willst du " + type + " wirklich " + deleteORflag + "?");
 			if(agree) {
-				console.log("hi1");
-				return true; 
+				$.ajax({
+					type: "POST",
+					url: "../scripts/ajax/ajax_statistics.php",
+					data: getVariables + "&name=" + braceName,
+					success: function(data){
+						var json = JSON.parse(data);
+						if(json.gemeldet != undefined) {
+							if(json.gemeldet == 'Bild') alert("Das Bild wurde gemeldet.");
+							if(json.gemeldet == 'Kommentar') alert("Der Kommentar wurde gemeldet.");
+						}else if(json.location != undefined) {
+							window.location.replace("http://placelet.de/" + json.location);
+						}else {
+							alert("Error: " + json.error);
+							console.log(json);
+						}
+					}
+				});
+				return true;
 			}else {
-				console.log("hi2");
+				console.log("Nope, Chuck Testa!");
 				return false; 
 			}
 		}
 	});
-} 
-  
-  /*
-$(document).ready(function(){
-	$('.delete_comment').click(function(){
-		return confirmDelete('den Kommentar');
-	});
+}
 
-	$('.delete_bild').click(function(){
-		return confirmDelete('das Bild');
-	});
-});
-*/
 //Den Rest vom Bild-Hochladformular anzeigen, wenn man nicht eingeloggt ist.
 $(document).ready(function(){
 	$('#picupload_nologin').click(function() {
