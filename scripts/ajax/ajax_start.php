@@ -21,7 +21,7 @@ foreach($bracelets_displayed as $key => $val) {
 if(isset($stats[$_GET['q'] - 2]))
 			for ($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
 				if(!isset($stats[$i])) break;
-				$braceName = urlencode($statistics->brid2name($bracelets_displayed[$i]));
+				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
 				if($i == $_GET['q'] - 2)
 					echo '<hr style="clear: both;">';
 ?>
@@ -63,11 +63,11 @@ if(isset($stats[$_GET['q'] - 2]))
 						<table>
 							<tr>
 								<td><strong>Armband</strong></td>
-								<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
+								<td><strong><?php echo '<a href="armband?name='.urlencode($braceName).'">'.htmlentities($braceName).'</a>'; ?></strong></td>
 							</tr>
 							<tr>
 								<td>Käufer</td>
-								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['owner'])); ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
+								<td><a href="profil?user=<?php echo urlencode($stats[$i]['owner']); ?>" style="color: #fff;"><?php echo htmlentities($stats[$i]['owner']); ?></a></td>
 							</tr>
 							<tr>
 								<td>Anzahl Besitzer</td>

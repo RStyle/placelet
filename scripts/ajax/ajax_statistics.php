@@ -47,7 +47,7 @@ if(isset($_POST['login'])) {
 		$braceID = $statistics->name2brid($_POST['name']);
 		$pic_deleted = $statistics->manage_pic($user->admin, $_POST['last_pic'], $_POST['picid'], $braceID);
 		if($pic_deleted === true ) {
-			$return = array('location' => 'armband?name='.urlencode($_GET['name']).'&pic_deleted=true');
+			$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&pic_deleted=true');
 		}elseif($pic_deleted == 2) {
 			$return = array('gemeldet' => 'Bild');
 		}elseif ($pic_deleted == false) {

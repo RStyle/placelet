@@ -52,6 +52,7 @@ if($user->admin && $checklogin) {
 						<th>Benutzername</th>
 						<th>Armband-Name<br>
 							(ID bei Mouseover)</th>
+						<th>Titel</th>
 						<th>Bild</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
@@ -63,6 +64,7 @@ if($user->admin && $checklogin) {
 					<tr>
 						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['user']); ?></td>
 						<td><a href="armband?name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_pics'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_pics'][$i]['name']); ?></a></td>
+						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['title']); ?></td>
 						<td>
 							<a href="pictures/bracelets/pic<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$stats[$i]['picid'].'.'.$admin_stats['spam_pics'][$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumb_link">
 								<img src="pictures/bracelets/thumb<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$admin_stats['spam_pics'][$i]['picid'].'.jpg'; ?>" alt="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumbnail">
