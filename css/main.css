@@ -453,8 +453,13 @@
 				background-color: #9B9B9B;
 				background-color: #eee;
 			}
+			        #connectbox_1, #connectbox_2 {
+                        display: none;
+                    }
+
     			.connect_box h1 {
     				text-shadow: 0px 2px 2px #777;
+    				text-decoration: none;
     				font-size: 2em;
     				font-family: tahoma;
     				color: #FFF;
@@ -463,7 +468,8 @@
     				padding-left: 10px;
     				border-left: 4px solid #B7D300;
     				
-    			}
+    			}    			    
+    			    
     			.connect_box span {
                     color: #0092ff;
                     font-weight: bold;

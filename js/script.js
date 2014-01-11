@@ -202,38 +202,24 @@ try {
 }
 
 
-
+//Drop-Down Text
+function dropdown(button, content) {
+	$('.' + button + "s").click(function (){
+		number = $(this).attr('id').replace(button + '_', '');
+		//Pfeile austauschen
+		$("." + button + "_arrow" + number).toggleClass("arrow_right");
+		$("." + button + "_arrow" + number).toggleClass("arrow_down");
+		//Inhalt sichtbar/unsichtbar
+		$("#" + content + "_" + number).toggle(400);
+	});
+}
 //Profil Showcases Ein-/Ausblenden
-$('.tabs').click(function (){
-	number = $(this).attr('id').replace('tab_','');
-	$("#showcase_" + number).toggle(400);
-    if(number == 1) {
-		$(".showcase_arrow" + number).toggleClass("arrow_right");
-		$(".showcase_arrow" + number).toggleClass("arrow_down");
-	}else if(number == 2) {
-		$(".showcase_arrow" + number).toggleClass("arrow_right");
-		$(".showcase_arrow" + number).toggleClass("arrow_down");
-	}else if(number == 3) {
-		$(".showcase_arrow" + number).toggleClass("arrow_right");
-		$(".showcase_arrow" + number).toggleClass("arrow_down");
-    }
-});
-
+dropdown("tab", "showcase");
 //FAQ Fragen Ein-/Ausblenden
-$('.questions').click(function (){
-	number = $(this).attr('id').replace('question_','');
-	$("#answer_" + number).toggle(400);
-    if(number == 1) {
-		$(".question_arrow" + number).toggleClass("arrow_right");
-		$(".question_arrow" + number).toggleClass("arrow_down");
-	}else if(number == 2) {
-		$(".question_arrow" + number).toggleClass("arrow_right");
-		$(".question_arrow" + number).toggleClass("arrow_down");
-	}else if(number == 3) {
-		$(".question_arrow" + number).toggleClass("arrow_right");
-		$(".question_arrow" + number).toggleClass("arrow_down");
-    }
-});
+dropdown("question", "answer");
+//Home Boxen Ein-/Ausblenden
+dropdown("header", "connectbox")
+
 
 //Shop weiterlesen
 $('.read_more').click(function (){
@@ -509,7 +495,7 @@ function reload_armband(braceName, plus) {
 function change_pic(cv, sv) {
 	$("#loading").toggle();
 	$.post("./scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv}, function(data) {
-		$("#newest_pic").html(data);
+		$("#connectbox_1").html(data);
 		});
 	$.fail(function() {
 		$("#loading").toggle();

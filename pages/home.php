@@ -1,8 +1,8 @@
 <!--CONNECT-LEISTE-->
-			<div id="connect_leiste" style="display: none;">
+			<div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
-                    <h1>neuester upload</h1>
-                        <div id="newest_pic">
+                    <h1 class="headers pseudo_link" id="header_1"><span class="header_arrow1 arrow_right"></span>&nbsp;neuester upload</h1>
+                        <div id="connectbox_1">
 <?php
 if($systemStats['total_posted'] > 3) {
 ?>
@@ -54,25 +54,27 @@ if($systemStats['total_posted'] > 3) {
     					</div>
                 </div>
                 <div class="connect_box" id="submit_box">
-                    <h1>+1 bild</h1>
-                    <form action="login" method="get">
+                    <h1 class="headers pseudo_link" id="header_2"><span class="header_arrow2 arrow_right"></span>&nbsp;+1 bild</h1>
+                    <div id="connectbox_2">
+                        <form action="login" method="get">
+                            <p>
+        						Gib deine <span>Armband-ID</span> an:    						
+    							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
+    							<input type="submit" value="Zum Upload">    						
+        					</p>
+    					</form>
+    					
+                        <hr>
+                        
+                        <h1>neues armband</h1>
+                        <form action="login" method="get">
                         <p>
-    						Gib deine <span>Armband-ID</span> an:    						
-							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
-							<input type="submit" value="Zum Upload">    						
+    						Gib deine <span>Armband-ID</span> an:						
+    						<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
+    						<input type="submit" value="Armband registrieren">						 
     					</p>
-					</form>
-					
-                    <hr>
-                    
-                    <h1>neues armband</h1>
-                    <form action="login" method="get">
-                    <p>
-						Gib deine <span>Armband-ID</span> an:						
-						<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
-						<input type="submit" value="Armband registrieren">						 
-					</p>
-					</form>
+    					</form>
+    				</div>
                 </div>
             </div>
 

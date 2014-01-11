@@ -61,7 +61,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 	            <div style="clear: both;">
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_1"><span class="showcase_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
+				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_1">
 <?php
@@ -110,7 +110,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Abos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_2"><span class="showcase_arrow2 arrow_right"></span>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
+				<p class="tabs pseudo_link" id="tab_2"><span class="tab_arrow2 arrow_right"></span>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_2">
 <?php
@@ -146,7 +146,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Uploads ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->            
-				<p class="tabs pseudo_link" id="tab_3"><span class="showcase_arrow3 arrow_right"></span>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
+				<p class="tabs pseudo_link" id="tab_3"><span class="tab_arrow3 arrow_right"></span>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_3">
 <?php
