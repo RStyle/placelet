@@ -144,10 +144,6 @@ if ($braceName != NULL) {
 <?php
 		if ($bracelet_stats['owners'] == 0 ) {
 			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
-		}elseif($stats['owners'] > 3) {
-?>
-			<div class="pseudo_link" id="armband_reload" onClick="reload_armband('<?php echo urlencode($braceName); ?>');"  style="clear: both;" >Mehr anzeigen</div>
-<?php
 		}
 ?>
 			</article>

@@ -115,9 +115,4 @@ if ($braceID != NULL) {
 				</div>
 <?php
 	}
-	if($stats['owners'] > $_GET['q']) {
-?>
-				<div class="pseudo_link" id="armband_reload" onclick="reload_armband('<?php echo urlencode($braceName); ?>');" style="clear: both;" >Mehr anzeigen</div>
-<?php
-	}
 }

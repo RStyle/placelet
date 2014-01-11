@@ -1,5 +1,5 @@
 <!--CONNECT-LEISTE-->
-			<div id="connect_leiste">
+			<div id="connect_leiste" style="display: none;">
                 <div class="connect_box" id="uploads_box">
                     <h1>neuester upload</h1>
                         <div id="newest_pic">

@@ -464,38 +464,45 @@ $('.toggle_comments').click(function (){
 //Neuste Bilder Nachladen -start.php
 var reload_q = 3;
 
-function reload_start(plus) {
-//var plus = plus || 1;
-reload_q += plus;
-if(reload_q < 3)
-	reload_q = 3;
-console.log(reload_q);
-var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
-	.done(function( data ) {
-	if(data != ""){
-	$("#start_reload").remove();
-	htmlcode = $("#recent_pics").html();
-	$("#recent_pics").append(data);
-	} else {
-	reload_q -= 3;
+$(window).scroll(function () {
+	if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		var braceNameReload = $("#bracelet_name").val();
+		reload_start(3);
+		if(braceNameReload != undefined) reload_armband(braceNameReload, 3);
 	}
-	})
-	.fail(function() {
+});
+
+function reload_start(plus) {
+	reload_q += plus;
+	if(reload_q < 3)
+		reload_q = 3;
+	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
+		.done(function( data ) {
+			if(data != ""){
+				$("#start_reload").remove();
+				htmlcode = $("#recent_pics").html();
+				$("#recent_pics").append(data);
+			} else {
+				reload_q -= 3;
+			}
+		})
+		.fail(function() {
 		alert( "error" );
 	});
 }
 //Neuste Bilder Nachladen -armband.php
 var reload_q2 = 6;
-function reload_armband(braceName) {
-var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName)
-	.done(function( data ) {
-	$("#armband_reload").remove();
-	htmlcode = $("#armband").html();
-	$("#armband").html( htmlcode + data);
-	reload_q2 += 3;
-	})
-	.fail(function() {
-		alert( "error" );
+
+function reload_armband(braceName, plus) {
+	var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName)
+		.done(function( data ) {
+		$("#armband_reload").remove();
+		htmlcode = $("#armband").html();
+		$("#armband").append(data);
+		reload_q2 += plus;
+		})
+		.fail(function() {
+			alert( "error" );
 	}); 
 }
 //Nächstes/Vorheriges Bild
@@ -629,11 +636,4 @@ $(document).ready(function(){
 		});
 		return false;
 	});
-});
-
-$(window).scroll(function () {
-	if($(window).scrollTop() + $(window).height() == $(document).height()) {
-		console.log("jo!");
-		reload_start(3);
-	}
 });
