@@ -205,13 +205,46 @@ try {
 
 //Drop-Down Text
 function dropdown(button, content) {
+	var tmp;
 	$('.' + button + "s").click(function (){
-		number = $(this).attr('id').replace(button + '_', '');
+		number = $('.' + button + "s").attr('id').replace(button + '_', '');
 		//Pfeile austauschen
 		$("." + button + "_arrow" + number).toggleClass("arrow_right");
 		$("." + button + "_arrow" + number).toggleClass("arrow_down");
 		//Inhalt sichtbar/unsichtbar
-		$("#" + content + "_" + number).toggle(400);
+		//$("#" + content + "_" + number).toggle();
+		tmp = $("#" + content + "_" + number);
+		tmp.stop(true, true);
+		if (tmp.height() <= '1') {
+			tmp.height('100%');
+			var height = tmp.height();
+			tmp.height('1px');
+			tmp.animate({
+				'height': height
+			}, 500);
+			state = 'open';
+		}
+		else if (tmp.height() > '2') {
+			tmp.slideUp(500);
+		}
+	});
+	
+	$('.' + button + "s").hover(function() {
+		var number = $('.' + button + "s").attr('id').replace(button + '_', '');
+		tmp = $("#" + content + "_" + number);
+		if (tmp.is(':hidden')) {
+			tmp.height("1px");
+			tmp.stop(true, true);
+			tmp.slideDown('3s');
+		}
+	},
+	function() {
+		var number = $('.' + button + "s").attr('id').replace(button + '_', '');
+		tmp = $("#" + content + "_" + number);
+		if (tmp.height() <= '1') {
+			tmp.slideUp('3s');
+	
+		}
 	});
 }
 //Profil Showcases Ein-/Ausblenden
