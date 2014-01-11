@@ -1,3 +1,4 @@
+var currentPath = $(location).attr('pathname');
 $(document).ready(function() {
 	// starte wenn DOM geladen ist
 	
@@ -467,7 +468,8 @@ var reload_q = 3;
 $(window).scroll(function () {
 	if($(window).scrollTop() + $(window).height() == $(document).height()) {
 		var braceNameReload = $("#bracelet_name").val();
-		reload_start(3);
+		console.log(currentPath);
+		if(currentPath == "/start" || currentPath == "/start.php") reload_start(3);
 		if(braceNameReload != undefined) reload_armband(braceNameReload, 3);
 	}
 });

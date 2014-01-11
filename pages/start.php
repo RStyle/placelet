@@ -194,10 +194,5 @@
 <?php	
 					}
 				}
-				if($systemStats['total_posted'] > 3) {
-?>
-			<div class="pseudo_link" id="start_reload" onClick="reload_start(3);"  style="clear: both;" >Nächste Seite</div>
-<?php
-				}
 ?>
 		</article>
