@@ -85,6 +85,12 @@ if ($braceName != NULL) {
 		$bracelet_stats['owners'] = 0;
 		$stats = $bracelet_stats;
 	}
+	$user_subscribed = false;
+	if($user->login) {
+		$userdetails = $statistics->userdetails($user->login);
+		if(!$userdetails['subscriptions'] == NULL)
+			if(!array_key_exists($braceID, $userdetails['subscriptions'])) $user_subscribed = true;
+	}
 }
 /*---------------------------------------------------------*/
 require_once('./index.php');

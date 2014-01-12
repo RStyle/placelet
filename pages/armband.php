@@ -38,11 +38,10 @@ if ($braceName != NULL) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo htmlentities($braceName); ?></h1></div>
-				<?php if(!array_key_exists($braceID, $userdetails['subscriptions'])) echo '<span class="pseudo_link float_right" id="show_sub">Armband abbonieren</span>'; ?>
+				<?php if(!$user_subscribed) echo '<span class="pseudo_link float_right" id="show_sub">Armband abbonieren</span>'; ?>
 				<a href="<?php echo 'login?postpic'; if($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner']) echo '='.$braceID.'" title="'.$braceID.'"';?>">Ein neues Bild zu diesem Armband posten</a>
 <?php
-		$userdetails = $statistics->userdetails($user->login);
-		if(!array_key_exists($braceID, $userdetails['subscriptions'])) {
+		if(!$user_subscribed) {
 ?>
 				<form method="get" action="armband">
 					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right sub_inputs" style="display: none;">
