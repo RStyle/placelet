@@ -43,6 +43,7 @@ $js = '<script type="text/javascript">$(document).ready(function(){';
 if(isset($_GET['logout']))  {
 	User::logout();
 	header('Location: home');
+	exit;
 }
 
 if(isset($_POST['login']) && isset($_POST['password'])){
@@ -52,11 +53,14 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 		if($checklogin === true) {
 			if(isset($_POST['login_location'])) {
 				header('Location: '.$_POST['login_location']);
+				exit;
 			}else {
 				header('Location: start');
+				exit;
 			}
 		}elseif($checklogin == 2) {
 			header('Location: login?unvalidated='.$user->login);
+			exit;
 		}elseif ($checklogin === false) {
 			header('Location: login?loginattempt=false');
 			exit;
@@ -64,6 +68,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 	}else {
 		$user = new User(false, $db);
 		header('Location: login?notexisting');
+		exit;
 	}
 } elseif(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);

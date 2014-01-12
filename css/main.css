@@ -119,6 +119,9 @@
     	border-bottom-color: transparent;
     	border-bottom-width: 0;
     }
+	.list_style_none li{
+		list-style-type: none;
+	}
 /*---allgemeine Styles---*/
 /*+++Baumdiagramm+++*/
 	.tree ul {
@@ -392,7 +395,7 @@
 /*+++SECTION+++*/
 /*++++Allgemeine SECTION Styles++*/
 	#section {
-		font-size: 1.15em;
+		font-size: 1em;
 		margin-top: 1.5em;
 	}
 		.mainarticles {

@@ -1,6 +1,7 @@
 			<article id="kontakt" class="mainarticles bottom_border_green">
 <?php
-if ($user->login) {
+if($user->login) {
+	if($category == 'details') {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Deine Accounteinstellungen, <?php echo $user->login ?></h1></div>
 				<div>
@@ -31,7 +32,59 @@ if ($user->login) {
 					</form>
 				</div>
 <?php 
-} else {
+	}elseif($category == 'notifications') {
+?>
+			<div class="green_line mainarticleheaders line_header"><h1>Benachrichtigungseinstellungen (<?php echo $user->login ?>)</h1></div>
+				<div>
+					<form action="account" method="post">
+						<table border="0">
+							<tr>
+								<td>&nbsp;</td>
+								<td>online</td>
+								<td>E-Mail</td>
+							</tr>
+							<tr>
+								<th>Neue Bilder auf deinen Armbändern</th>
+								<td><input type="checkbox" name="pic_own_online"<?php if($userdetails['pic_own_online']) echo ' checked';?>></td>
+								<td><input type="checkbox" name="pic_own_email"<?php if($userdetails['pic_own_email']) echo ' checked';?>></td>
+							</tr>
+							<tr>
+								<th>Neue Kommentare auf deinen Armbändern</th>
+								<td><input type="checkbox" name="comm_own_online"<?php if($userdetails['comm_own_online']) echo ' checked';?>></td>
+								<td><input type="checkbox" name="comm_own_email"<?php if($userdetails['comm_own_email']) echo ' checked';?>></td>
+							</tr>
+							<tr>
+								<th>Neue Kommentare auf deinen Bildern</th>
+								<td><input type="checkbox" name="comm_own_online"<?php if($userdetails['comm_own_online']) echo ' checked';?>></td>
+								<td><input type="checkbox" name="comm_pic_email"<?php if($userdetails['comm_pic_email']) echo ' checked';?>></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td><input type="submit" name="submit" value="Änderungen speichern"></td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+<?php
+	}elseif($category == 'privacy') {
+?>
+			<div class="green_line mainarticleheaders line_header"><h1>Privatsphäreeinstellungen (<?php echo $user->login ?>)</h1></div>
+<?php	
+	}else {
+?>
+			<div class="green_line mainarticleheaders line_header"><h1>Keine Kategorie ausgewählt (<?php echo $user->login ?>)</h1></div>
+			<p>
+				Bitte wähle eine Kategorie aus:<br>
+				<ul class="list_style_none" style="padding: 0;">
+					<li><a href="account?details">Accountdetails ändern</a></li>
+                	<li><a href="account?notifications">Benachrichtigungseinstellungen</a></li>
+                	<li><a href="account?privacy">Privatsphäreeinstellungen</a></li>
+				</ul>
+			</p>
+<?php
+	}
+}else {
 	if(isset($_GET['recoverPassword'])) {
 		if($_GET['recoverPassword'] == 'yes') {
 ?>
@@ -51,7 +104,7 @@ if ($user->login) {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Neues Passwort eingeben</h1></div>
 <?php
-		if($recover_code) {
+			if($recover_code) {
 ?>
 				<form name="change" action="account" method="post">
 					<input type="password" name="new_pwd" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" placeholder="neues Passwort">
@@ -81,7 +134,7 @@ if ($user->login) {
 							</tr>
 							<tr>
 								<td><input type="submit" value="Login"></td>
-								<td>&nbsp;</td>
+								<td><input type="hidden" name="login_location" value="account?<?php echo $category; ?>"></td>
 							</tr>
 						</table>
 					</form>

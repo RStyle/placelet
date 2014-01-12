@@ -2,9 +2,10 @@
 $page = 'account';
 require_once('./init.php');
 /*---------------------------------------------------------*/
-foreach($_GET as $key => $val) {
-	$_GET[$key] = clean_input($val);
-}
+if(isset($_GET['details'])) $category = 'details';
+	elseif(isset($_GET['notifications'])) $category = 'notifications';
+	elseif(isset($_GET['privacy'])) $category = 'privacy';
+	else $category = 'none_selected';
 if($user->login) {
 	$username = $user->login;
 }

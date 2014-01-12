@@ -1024,5 +1024,10 @@ class Statistics {
 			));			
 		}
 	}
+	public function private_userdetails() {
+		$stmt = $this->db->prepare("SELECT pic_own_online, pic_own_email, comm_own_online, comm_own_email, comm_own_online, comm_pic_email FROM users WHERE user = :user LIMIT 1");
+		$stmt->execute(array('user' => $user));
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	}
 }
 ?>

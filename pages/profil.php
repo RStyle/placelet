@@ -53,8 +53,14 @@ if(!isset($_GET['user']) && !$user->login) {
     if($user->login == $username) {
 ?>        
                 <div class="logged_info">
-                    <p>Deine E-Mail-Adresse: <?php echo $userdetails['email']; ?> <br>
-                    <a href="account">Accountdetails ändern</a></p>                    
+                    <p>
+						Deine E-Mail-Adresse: <?php echo $userdetails['email']; ?>
+						<ul class="list_style_none" style="padding: 0;">
+							<li><a href="account?details">Accountdetails ändern</a></li>
+							<li><a href="account?notifications">Benachrichtigungseinstellungen</a></li>
+							<li><a href="account?privacy">Privatsphäreeinstellungen</a></li>
+						</ul>
+					</p>
                 </div>      
 <?php        
     }
