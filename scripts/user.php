@@ -568,11 +568,10 @@ class Statistics {
 	//Kommentar schreiben
 	public function write_comment ($brid, $username, $comment, $picid) {
 		$username = trim($username);
-		$brid = trim($brid);
+		$brid = $brid;
 		$comment = clean_input($comment);
-		if($this->user->login != $username) {
-			$username = '[Gast] '.$username;
-		}
+		if($this->user->login != $username) $username = '[Gast] '.$username;
+		if($username == '[Gast] ') $username = '[Gast] Anonymous';
 		if(strlen($username) < 4) {
 			return 'Benutzername zu kurz, mindestens 4 Zeichen';
 		}

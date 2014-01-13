@@ -170,14 +170,8 @@
 ?>   
 					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="start" method="post">
 						<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
-<?php
-			if($user->login != true) {
-?>
-						<label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
-						<input type="text" name="comment_user[<?php echo $i; ?>]" id="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15" <?php if (isset($user->login)){echo 'value="'.$user->login.'" ';} ?>placeholder="Name" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
-<?php
-			}
-?>
+						<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
+						<input <?php if($user->login) echo 'type="hidden" '; else echo 'type="text" ';?>type="text" name="comment_user[<?php echo $i; ?>]" <?php if($user->login == true) echo ' value="'.$user->login.'" ';?>id="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15" <?php if (isset($user->login)){echo 'value="'.$user->login.'" ';} ?>placeholder="Name" pattern=".{4,15}" title="Min.4 - Max.15" required><?php if(!$user->login) echo '<br>'; ?>
 						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
 						<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
