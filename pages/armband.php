@@ -45,7 +45,7 @@ if ($braceName != NULL) {
 ?>
 				<form method="get" action="armband">
 					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right sub_inputs" style="display: none;">
-					<input name="sub_email" type="email"  size="20" maxlength="254" placeholder="E-Mail Adresse" class="float_right sub_inputs" style="display: none;" required>
+					<input name="sub_code" type="email"  size="20" maxlength="254" placeholder="E-Mail Adresse" class="float_right sub_inputs" style="display: none;" required>
 					<input type="hidden" name="sub" value="email">
 					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>" id="bracelet_name">
 				</form>

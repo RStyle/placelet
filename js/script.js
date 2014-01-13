@@ -203,7 +203,7 @@ try {
 }
 
 
-//Drop-Down Text
+/*Drop-Down Text mit Hover-Effekt
 function dropdown(button, content) {
 	var tmp;
 	$('.' + button + "s").click(function (){
@@ -245,6 +245,17 @@ function dropdown(button, content) {
 			tmp.slideUp('3s');
 	
 		}
+	});
+}*/
+//Drop-Down Text
+function dropdown(button, content) {
+	$('.' + button + "s").click(function (){
+		number = $(this).attr('id').replace(button + '_', '');
+		//Pfeile austauschen
+		$("." + button + "_arrow" + number).toggleClass("arrow_right");
+		$("." + button + "_arrow" + number).toggleClass("arrow_down");
+		//Inhalt sichtbar/unsichtbar
+		$("#" + content + "_" + number).toggle(400);
 	});
 }
 //Profil Showcases Ein-/Ausblenden

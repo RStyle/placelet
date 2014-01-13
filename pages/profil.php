@@ -143,7 +143,7 @@ if(!isset($_GET['user']) && !$user->login) {
 									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
 								</p>
 							</a>
-							<?php if($user->login == $username) {?><br><a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_email='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text">Deabonnieren</a><?php } ?>
+							<?php if($user->login == $username) {?><br><a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_code='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text">Deabonnieren</a><?php } ?>
 						</div>
 <?php
 			}

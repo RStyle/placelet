@@ -63,13 +63,8 @@ if ($braceName != NULL) {
 		}
 	}
 	//Armband abonnieren/deabonnieren
-	if(isset($_GET['sub']) && (isset($_GET['sub_code']) || isset($_GET['sub_email']))) {
-		if(isset($_GET['sub_code'])) {
-			$sub_email = $_GET['sub_code'];
-		}elseif(isset($_GET['sub_email'])) {
-			$sub_email = $_GET['sub_email'];
-		}
-		$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, $sub_email);
+	if(isset($_GET['sub']) && isset($_GET['sub_code'])) {
+		$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, urldecode($_GET['sub_code']));
 		if(isset($sub_added)) {
 			if($sub_added === true) $js .= 'alert("Abonnement erfolgreich hinzugefügt.");';
 				elseif($sub_added == 2) $js .= 'alert("Dieses Armband wurde schon mit der eingegebenen E-Mail abonniert.");';

@@ -807,19 +807,20 @@ class Statistics {
 				':brid' => $brid
 			));
 			$result = $q->fetchAll(PDO::FETCH_ASSOC);
+			$unsubscribed = false;
 			foreach($result as $key => $val) {
-				if(PassHash::check_password(urldecode($email), $val['email'])) {
+				if(PassHash::check_password($email, $val['email'])) {
+					$unsubscribed = true;
 					$sql = "DELETE FROM subscriptions WHERE brid = :brid AND email = :email";
 					$q = $this->db->prepare($sql);
 					$q->execute(array(
 						':email' => $val['email'],
 						':brid' => $brid
 					));
-					return false;
-				}else {
-					return 3;
 				}
 			}
+			if($unsubscribed) return false;
+				else return 3;
 		}
 	}
 	private function delete_comment($input, $commid, $picid, $brid) {
