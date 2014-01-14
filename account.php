@@ -20,11 +20,21 @@ if(isset($_POST['submit'])) {
 			$password_reset = $user->reset_password($_POST['recover_email']);
 			$js .= 'alert("'.$password_reset.'");';
 			break;
-		//Userdetails ändern
 		case 'Änderungen speichern':
 			if($user->login) {
-				$change_details = $user->change_details($_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
-				$js .= 'alert("'.$change_details.'");';
+				//Userdetails ändern
+				if(isset($_POST['change_email']) && isset($_POST['change_old_pwd']) && isset($_POST['change_new_pwd'])) {
+					$change_details = $user->change_details($_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $user->login);
+					$js .= 'alert("'.$change_details.'");';
+				}elseif(isset($_POST['notification_change'])) {
+					if(!isset($_POST['pic_own_online'])) $_POST['pic_own_online'] = false;
+					if(!isset($_POST['pic_own_email'])) $_POST['pic_own_email'] = false;
+					if(!isset($_POST['comm_own_online'])) $_POST['comm_own_online'] = false;
+					if(!isset($_POST['comm_own_email'])) $_POST['comm_own_email'] = false;
+					if(!isset($_POST['comm_pic_online'])) $_POST['comm_pic_online'] = false;
+					if(!isset($_POST['comm_pic_email'])) $_POST['comm_pic_email'] = false;
+					$update_notifications = $user->update_notifications($_POST['pic_own_online'], $_POST['pic_own_email'], $_POST['comm_own_online'], $_POST['comm_own_email'], $_POST['comm_pic_online'], $_POST['comm_pic_email']);
+				}
 			}
 			break;
 		case 'Passwort ändern':

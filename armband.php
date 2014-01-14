@@ -83,8 +83,8 @@ if ($braceName != NULL) {
 	$user_subscribed = false;
 	if($user->login) {
 		$userdetails = $statistics->userdetails($user->login);
-		if(!$userdetails['subscriptions'] == NULL)
-			if(!array_key_exists($braceID, $userdetails['subscriptions'])) $user_subscribed = true;
+		if($userdetails['subscriptions'] != NULL)
+			if(array_key_exists($braceID, $userdetails['subscriptions'])) $user_subscribed = true;
 	}
 }
 /*---------------------------------------------------------*/
