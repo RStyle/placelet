@@ -23,7 +23,7 @@
 					</p>
                     <div class="hint">
                         <h1>Hinweis</h1>
-                        <p>Bitte beachten sie, dass wir zurzeit keine Armbänder auf Lager haben. Sollten sie jetzt bestellen, kann sich die Lieferung ihres Armbandes um einige Zeit verzögern.</p>
+                        <p>Bitte beachten Sie, dass wir zurzeit keine Armbänder auf Lager haben. Sollten Sie jetzt bestellen, kann sich die Lieferung Ihres Armbandes um einige Zeit verzögern.</p>
                     </div>					
 					<h4>Größe:</h4>
 					Einheitsgröße (Verschluss verstellbar)
