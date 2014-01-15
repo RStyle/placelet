@@ -431,25 +431,27 @@ class Statistics {
 		$user_details['users'] = $user_details[0];
 		$user_details['pics']['pics'] = $user_details[4];
 		
-		foreach($result[5] as $key => $val) {
-			switch($val) {
-				case 1:
-					$user_details['notifications']['notifications'][$key.'_online'] = true;
-					$user_details['notifications']['notifications'][$key.'_email'] = false;
-					break;
-				case 2:
-					$user_details['notifications']['notifications'][$key.'_online'] = false;
-					$user_details['notifications']['notifications'][$key.'_email'] = true;
-					break;
-				case 3:
-					$user_details['notifications']['notifications'][$key.'_online'] = true;
-					$user_details['notifications']['notifications'][$key.'_email'] = true;
-					break;
-				default:
-					$user_details['notifications']['notifications'][$key.'_online'] = false;
-					$user_details['notifications']['notifications'][$key.'_email'] = false;
+		if($result[5] != NULL) {
+			foreach($result[5] as $key => $val) {
+				switch($val) {
+					case 1:
+						$user_details['notifications']['notifications'][$key.'_online'] = true;
+						$user_details['notifications']['notifications'][$key.'_email'] = false;
+						break;
+					case 2:
+						$user_details['notifications']['notifications'][$key.'_online'] = false;
+						$user_details['notifications']['notifications'][$key.'_email'] = true;
+						break;
+					case 3:
+						$user_details['notifications']['notifications'][$key.'_online'] = true;
+						$user_details['notifications']['notifications'][$key.'_email'] = true;
+						break;
+					default:
+						$user_details['notifications']['notifications'][$key.'_online'] = false;
+						$user_details['notifications']['notifications'][$key.'_email'] = false;
+				}
 			}
-		}
+		}else $user_details['notifications']['notifications'] = 'not_set';
 		
 		$brids = array();
 		foreach ($user_details[1] as $key => $val) {
@@ -592,7 +594,6 @@ class Statistics {
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
-			//$details[$val['picid']]['brid'] = $brid;
 			$details[$val['picid']]['user'] = htmlentities($val['user']);
 			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];
@@ -656,6 +657,7 @@ class Statistics {
 				':comment' => $comment,
 				':date' => time())
 			);
+			$this->notify_subscribers($brid, $username, true);
 			return 'Kommentar erfolgreich gesendet.';
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -689,7 +691,7 @@ class Statistics {
 		}
 	}
 	//Postet ein Bild
-	public function registerpic ($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size) {
+	public function registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size) {
 		$submissions_valid = true;
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
@@ -806,7 +808,7 @@ class Statistics {
 					':state' => $state
 				));
 				///E-Mail an die Personen senden, die das Armband abboniert haben
-				$this->notify_subscribers($brid);
+				$this->notify_subscribers($brid, $this->user->login);
 				return 7;//Bild erfolgreich gepostet.
 			} elseif ($file_uploaded == false) {
 				return $picture_file['error'];//Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.
@@ -1071,20 +1073,66 @@ class Statistics {
 		$stmt->execute(array('user' => $user));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	}
-	public function notify_subscribers($brid) {
-		$braceName = $this->brid2name($brid);
-		$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
-		$q = $this->db->prepare($sql);
-		$q->execute(array(':brid' => $brid));
-		$q->setFetchMode(PDO::FETCH_ASSOC);
-		while($row = $q->fetch(PDO::FETCH_ASSOC)){
-			$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-						Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
-			$mail_header = "From: Placelet <support@placelet.de>\n";
-			$mail_header .= "MIME-Version: 1.0" . "\n";
-			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-			$mail_header .= "Content-transfer-encoding: 8bit";
-			mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+	private function notify_subscribers($brid, $uploader, $comm = false) {
+		$own_bracelet = false;
+		$bracelet_stats = $this->bracelet_stats($brid);
+		$owner = $bracelet_stats['owner'];
+		if($this->user->login) if($this->user->login == $owner) $own_bracelet = true;
+		if(!$own_bracelet) {
+			$braceName = $this->brid2name($brid);
+			if(!$comm) {
+				//Direkte Abonnenten informieren
+				$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(':brid' => $brid));
+				$q->setFetchMode(PDO::FETCH_ASSOC);
+				while($row = $q->fetch(PDO::FETCH_ASSOC)){
+					$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+								Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
+					$mail_header = "From: Placelet <support@placelet.de>\n";
+					$mail_header .= "MIME-Version: 1.0" . "\n";
+					$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+					$mail_header .= "Content-transfer-encoding: 8bit";
+					mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+				}
+			}
+			//Benachrichtigungen, wie im Profil festgelegt
+			$sql = "SELECT user, pic_own, comm_own, comm_pic FROM notifications WHERE user = :uploader";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array(':uploader' => $uploader));
+			$q = $stmt->fetchAll();
+			foreach($q as $userNR => $userProps) {
+				$userdetails = $this->userdetails($userProps['user']);
+				$user_email = $userdetails['email'];
+				foreach($userProps as $key => $val) {
+					if($key == 'pic_own') {
+						if($val == 2 || $val == 3) {
+							if(!$comm) {
+								$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+								$mail_header = "From: Placelet <support@placelet.de>\n";
+								$mail_header .= "MIME-Version: 1.0" . "\n";
+								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+								$mail_header .= "Content-transfer-encoding: 8bit";
+								mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+							}
+						}
+					}elseif($key == 'comm_own') {
+						if($val == 2 || $val == 3) {
+					echo 'HI; DU HAST NOCH EIN KOMMENTAR GESENDET';
+							if($comm) {
+								$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+								$mail_header = "From: Placelet <support@placelet.de>\n";
+								$mail_header .= "MIME-Version: 1.0" . "\n";
+								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+								$mail_header .= "Content-transfer-encoding: 8bit";
+								mail($user_email, 'Neues Kommentar für Armband '.$braceName, $content, $mail_header);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

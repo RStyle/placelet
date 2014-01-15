@@ -17,8 +17,10 @@ if(isset($_POST['submit'])) {
 	switch($_POST['submit']) {
 		//Link zum Passwort wiederherstellen senden
 		case 'Neues Passwort zuschicken':
-			$password_reset = $user->reset_password($_POST['recover_email']);
-			$js .= 'alert("'.$password_reset.'");';
+			if(isset($_POST['recover_email'])) {
+				$password_reset = $user->reset_password($_POST['recover_email']);
+				$js .= 'alert("'.$password_reset.'");';
+			}
 			break;
 		case 'Änderungen speichern':
 			if($user->login) {
@@ -38,8 +40,10 @@ if(isset($_POST['submit'])) {
 			}
 			break;
 		case 'Passwort ändern':
-			$new_password = $user->new_password($_POST['new_username'], $_POST['new_pwd']);
-			$js .= 'alert("'.$new_password.'");';
+			if(isset($_POST['new_username']) && isset($_POST['new_pwd'])) {
+				$new_password = $user->new_password($_POST['new_username'], $_POST['new_pwd']);
+				$js .= 'alert("'.$new_password.'");';
+			}
 			break;
 	}
 }

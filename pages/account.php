@@ -6,7 +6,7 @@ if($user->login) {
 				<div class="green_line mainarticleheaders line_header"><h1>Deine Accounteinstellungen, <?php echo $user->login ?></h1></div>
 				<div>
 					Deine Accountdetails:
-					<form name="change" action="account" method="post">
+					<form name="change" action="account?details" method="post">
 						<table border="0">
 							<tr>
 								<th>E-Mail Adresse</th>
@@ -44,17 +44,17 @@ if($user->login) {
 								<td>E-Mail</td>
 							</tr>
 							<tr>
-								<th>Neue Bilder auf deinen Armbändern</th>
+								<th>Neue Bilder von deinen Armbändern</th>
 								<td><input type="checkbox" name="pic_own_online"<?php if($userdetails['notifications']['pic_own_online']) echo ' checked';?>></td>
 								<td><input type="checkbox" name="pic_own_email"<?php if($userdetails['notifications']['pic_own_email']) echo ' checked';?>></td>
 							</tr>
 							<tr>
-								<th>Neue Kommentare auf deinen Armbändern</th>
+								<th>Neue Kommentare zu Bildern von deinen Armbändern</th>
 								<td><input type="checkbox" name="comm_own_online"<?php if($userdetails['notifications']['comm_own_online']) echo ' checked';?>></td>
 								<td><input type="checkbox" name="comm_own_email"<?php if($userdetails['notifications']['comm_own_email']) echo ' checked';?>></td>
 							</tr>
 							<tr>
-								<th>Neue Kommentare auf deinen Bildern</th>
+								<th>Neue Kommentare zu deinen Bildern</th>
 								<td><input type="checkbox" name="comm_pic_online"<?php if($userdetails['notifications']['comm_pic_online']) echo ' checked';?>></td>
 								<td><input type="checkbox" name="comm_pic_email"<?php if($userdetails['notifications']['comm_pic_email']) echo ' checked';?>></td>
 							</tr>
@@ -65,7 +65,7 @@ if($user->login) {
 							</tr>
 						</table>
 					</form>
-					Noch nicht funktionstüchtig.
+					Noch nicht funktionstüchtig!
 				</div>
 <?php
 	}elseif($category == 'privacy') {

@@ -66,6 +66,18 @@ if(!isset($_GET['user']) && !$user->login) {
     }
 ?>
 	            <div style="clear: both;">
+<?php
+	if($user->login == $username) {
+?>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Benachrichtigungen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+				<p class="tabs pseudo_link" id="tab_4"><span class="tab_arrow4 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
+				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
+					<div class="showcases" id="showcase_4" style="display: none;">
+					
+					</div>
+<?php
+	}
+?>					
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
