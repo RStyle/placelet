@@ -20,7 +20,11 @@
 						Unser Armband besteht aus einem Ledermaterial, welches mit einer Knottechnik geschlossen wird.
 						Das Armband ist mit einem Metallplättchen versehen, worauf unser Logo gelasert ist. 
 						Außerdem wirst ... <span class="pseudo_link read_more">Weiterlesen</span>
-					</p>					
+					</p>
+                    <div class="hint">
+                        <h1>Hinweis</h1>
+                        <p>Bitte beachten sie, dass wir zurzeit keine Armbänder auf Lager haben. Sollten sie jetzt bestellen, kann sich die Lieferung ihres Armbandes um einige Zeit verzögern.</p>
+                    </div>					
 					<h4>Größe:</h4>
 					Einheitsgröße (Verschluss verstellbar)
 					<hr>

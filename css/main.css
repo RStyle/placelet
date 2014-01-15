@@ -427,11 +427,10 @@
 /*---allgemeine SECTION Styles---*/
 	/*+++Home SECTION+++*/
 		.hint {
-			padding: 20px;
+			padding: 15px;
 			background-color: #EBEBEB;
 			margin-bottom: 20px;
 			margin-top: 10px;
-			display: none;
 		}
 		.hint h1 {
 			margin: 0px;
