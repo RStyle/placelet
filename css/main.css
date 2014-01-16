@@ -606,6 +606,22 @@
 		.line_header {
 			margin-bottom: 1em;
 		}
+		.responsive_16-9, .responsive_4-3, .responsive_a4{  
+           position: relative;  
+           /*16 zu 9 Layout für Videos*/
+           padding-bottom: 56.25%;  
+           height: 0;  
+           overflow: hidden;  
+        }            
+        .responsive_16-9 iframe, .responsive_4-3 iframe, .responsive_a4 iframe,  
+        .responsive_16-9 object, .responsive_4-3 object, .responsive_a4 object,  
+        .responsive_16-9 embed, .responsive_4-3 embed, .responsive_a4 embed{  
+           position: absolute;  
+           top: 0;  
+           left: 0;  
+           width: 100%;  
+           height: 100%;  
+        }  
 	/*---Home SECTION---*/
 	/*+++Über uns SECTION+++*/
 		#about-us {
