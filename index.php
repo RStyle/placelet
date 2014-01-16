@@ -137,22 +137,65 @@ if($page == 'login' && isset($postpic)) {
 		<script>
 		<?php $eecho = '';
 		$data = getlnlt();
+		$central = '0, 0';
+		$max = array(false, false, false, false, 0);
 		$i = 0;
 		foreach($data as $pos){ 
+			if($pos['latitude'] < $max[0] || $max[0] == false)
+				$max[0] = $pos['latitude'];
+			if($pos['latitude'] > $max[1] || $max[1] == false)
+				$max[1] = $pos['latitude'];
+			if($pos['longitude'] < $max[2] || $max[2] == false)
+				$max[2] = $pos['longitude'];
+			if($pos['longitude'] > $max[3] || $max[3] == false)
+				$max[3] = $pos['longitude'];
 			echo '
 			var latlng'.$i.' = new google.maps.LatLng('.$pos['latitude'].', '.$pos['longitude'].');';
 			$eecho .= '
 			var marker'.$i.' = new google.maps.Marker({
 				position: latlng'.$i.',
 				map: map
-		  });'; $i++; } ?>
+		  });'; $i++; }
+				$central = ($max[0]+($max[1]-$max[0])/2) . ', ' . ($max[2]+($max[3]-$max[2])/2);
+				$max[4] = ($max[1]-$max[0]);
+				if(($max[3]-$max[2]) > $max[4])
+					$max[4] = ($max[3]-$max[2]);
+					
+				$zoom = 1;
+				if($max[4] < 0.02)
+					$zoom = 14;
+				else if($max[4] < 0.0625)
+					$zoom = 12;
+				else if($max[4] < 0.125)
+					$zoom = 11;
+				else if($max[4] < 0.25)
+					$zoom = 10;
+				else if($max[4] < 0.5)
+					$zoom = 9;
+				else if($max[4] < 1)
+					$zoom = 8;
+				else if($max[4] < 2)
+					$zoom = 7;
+				else if($max[4] < 5)
+					$zoom = 6;
+				else if($max[4] < 6.5)
+					$zoom = 5;
+				else if($max[4] < 18)
+					$zoom = 4;
+				else if($max[4] < 40)
+					$zoom = 3;
+				else if($max[4] < 80)
+					$zoom = 2;
+			?>
 		function initialize() {
 		  var mapOptions = {
-			zoom: 4,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+			zoom: <?php echo $zoom; ?>,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			center: new google.maps.LatLng(<?php echo $central ?>)
 		  }
 		var map = new google.maps.Map(document.getElementById('map_home'), mapOptions);
 		
+		<?php /*
 		var defaultBounds = new google.maps.LatLngBounds(
 		//new google.maps.LatLng(-33.8902, 151.1759),
 		<?php for($i2 = 0; $i2 < $i; $i2++){
@@ -162,10 +205,12 @@ if($page == 'login' && isset($postpic)) {
 		} ?>
 		);
 		map.fitBounds(defaultBounds);
+		
+		
 
 		
 
-		<?php echo $eecho; ?>
+		<?php */ echo $eecho; ?>
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 		</script>

@@ -3,8 +3,20 @@ if ($braceName != NULL) {
 	if($stats['name'] !== false) {
 		$eecho = '';
 		$data = getlnlt($stats['name']);
+		$central = '0, 0';
+		$max = array(false, false, false, false, 0);
 		$i=0;
-		foreach($data as $pos){ 
+		foreach($data as $pos){
+		
+			if($pos['latitude'] < $max[0] || $max[0] == false)
+				$max[0] = $pos['latitude'];
+			if($pos['latitude'] > $max[1] || $max[1] == false)
+				$max[1] = $pos['latitude'];
+			if($pos['longitude'] < $max[2] || $max[2] == false)
+				$max[2] = $pos['longitude'];
+			if($pos['longitude'] > $max[3] || $max[3] == false)
+				$max[3] = $pos['longitude'];
+				
 			$js.= '
 			var latlng'.$i.' = new google.maps.LatLng('.$pos['latitude'].', '.$pos['longitude'].');';
 			$eecho .= '
@@ -14,24 +26,46 @@ if ($braceName != NULL) {
 			});';
 			$i++;
 		}
+		
+		$central = ($max[0]+($max[1]-$max[0])/2) . ', ' . ($max[2]+($max[3]-$max[2])/2);
+		$max[4] = ($max[1]-$max[0]);
+		if(($max[3]-$max[2]) > $max[4])
+			$max[4] = ($max[3]-$max[2]);
+			
+		$zoom = 1;
+		if($max[4] < 0.02)
+			$zoom = 14;
+		else if($max[4] < 0.0625)
+			$zoom = 12;
+		else if($max[4] < 0.125)
+			$zoom = 11;
+		else if($max[4] < 0.25)
+			$zoom = 10;
+		else if($max[4] < 0.5)
+			$zoom = 9;
+		else if($max[4] < 1)
+			$zoom = 8;
+		else if($max[4] < 2)
+			$zoom = 7;
+		else if($max[4] < 5)
+			$zoom = 6;
+		else if($max[4] < 6.5)
+			$zoom = 5;
+		else if($max[4] < 18)
+			$zoom = 4;
+		else if($max[4] < 40)
+			$zoom = 3;
+		else if($max[4] < 80)
+			$zoom = 2;
+					
 		 $js.='
 		function initialize() {
 		  var mapOptions = {
-			zoom: 4,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-			//center: new google.maps.LatLng(51, 0)
+			zoom: '.$zoom.',
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			center: new google.maps.LatLng('.$central.')
 		  }
 		var map = new google.maps.Map(document.getElementById("map_home"), mapOptions);
-		
-		var defaultBounds = new google.maps.LatLngBounds(
-		'; for($i2 = 0; $i2 < $i; $i2++){
-			$js.= 'latlng'.$i2;
-			if($i2 != ($i-1))
-				$js.= ',';
-		} $js.= '
-		);
-		map.fitBounds(defaultBounds);
-		map.panToBounds(defaultBounds);
 		'.$eecho.'
 		}
 		google.maps.event.addDomListener(window, "load", initialize);';
