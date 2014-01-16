@@ -1,6 +1,6 @@
 			<article id="shop" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Shop</h1></div>
-				<div style="float: left; width: 50%;">
+				<!--<div style="float: left; width: 50%;">
 					<a href="pictures/product_pic2.jpg" data-lightbox="pictures" title="Unser Armband">
 						<img class="product_pic" src="pictures/product_pic2_medium.jpg" alt="Unser Armband">
 					</a>
@@ -35,13 +35,14 @@
 					Stahl, Leder
 					<hr>
 					<h4>Geschlecht:</h4>
-					Unisex ( &#x2642; | &#x2640; )<br>
-					<!--<a class="order_button" href="order">Jetzt Bestellen!</a>-->
-					<br><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					Unisex ( &#x2642; | &#x2640; )<br>-->
+					<!--<a class="order_button" href="order">Jetzt Bestellen!</a> -->
+					<!--<br><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 						<input type="hidden" name="cmd" value="_s-xclick">
 						<input type="hidden" name="hosted_button_id" value="AWD5N67HHG896">
 						<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
 						<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
 					</form>
-				</div>
+				</div>-->
+				<p>Hier wird in Kürze unser Online-Shop erscheinen. Wenn sie über den Verkaufsstart informiert werden wollen, <a href="login">registrieren</a> sie sich auf dieser Seite und sie werden eine Benachrichtigung per E-Mail erhalten.</p>
 			</article>
