@@ -57,8 +57,8 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<p>Bewege den roten Zeiger zu dem Ort deines Fotos. Du kannst ihn auch manuell in die Eingabefelder links eingeben.</p>
 						</div>
 						
-						<input type="hidden" name="registerpic_latitude" id="latitude" value="0">
-						<input type="hidden" name="registerpic_longitude" id="longitude" value="0">
+						<input type="hidden" name="registerpic_latitude" id="latitude" value="49.848970">
+						<input type="hidden" name="registerpic_longitude" id="longitude" value="7.867824">
 						
 						<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
 						<textarea name="registerpic_description" id="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
@@ -81,7 +81,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 	if($user->login == false) {
 ?>
 						<p class="picupload_nologin_text">
-							Wenn du einen Account besitzt logge dich bitte ein, bevor du dein Bild hochlädst.
+							Wenn du einen Account besitzt logge dich bitte ein, bevor du dein Bild hochlädst.<br>
 							<span class="pseudo_link" id="picupload_nologin">Das Bild uneingeloggt hochladen.</span>
 						</p>
 						<!--<form action="./" method="post">-->

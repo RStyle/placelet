@@ -124,7 +124,11 @@
 	}
 /*---allgemeine Styles---*/
 /*+++Baumdiagramm+++*/
+	.tree {
+		font-size: 0.8em;
+	}
 	.tree ul {
+		font-size: 1em;
 		list-style-type: none;
 		padding-top: 20px; position: relative;
 		/*padding-left: 0px;*/
@@ -606,6 +610,7 @@
 		.line_header {
 			margin-bottom: 1em;
 		}
+		/*YOUTUBE*/
 		.responsive_16-9, .responsive_4-3, .responsive_a4{  
            position: relative;  
            /*16 zu 9 Layout für Videos*/

@@ -49,7 +49,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 							<span>Vorstandsvorsitzende: Sarah Baiker & Janik Rennollet</span>
 							<ul>
 								<li>
-									<span>Verwaltungsabteilung:<br>Patrick Piroth</span>
+									<span>Verwaltung:<br>Patrick Piroth</span>
 									<ul class="tree_second">
 										<li>
 											<span>Eloisa Marzell</span>
@@ -57,7 +57,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Finanzabteilung:<br>Sebastian Gänz</span>
+									<span>Finanzen:<br>Sebastian Gänz</span>
 									<ul class="tree_second">
 										<li>
 											<span>Moritz Junkermann</span>
@@ -65,7 +65,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Marketingabteilung:<br>Celine Müller-Späth</span>
+									<span>Marketing:<br>Celine Müller-Späth</span>
 									<ul class="tree_second">
 										<li>
 											<span>Alicia Braun</span>
@@ -95,7 +95,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Produktionsabteilung:<br>Maximilian Klapdar</span>
+									<span>Produktion:<br>Maximilian Klapdar</span>
 									<ul class="tree_second">
 										<li>
 											<span>Edda Strohm</span>
@@ -120,7 +120,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Webabteilung:<br>Roman Savrasov</span>
+									<span>Website:<br>Roman Savrasov</span>
 									<ul class="tree_second">
 										<li>
 											<span>Daniel Schäfer</span>

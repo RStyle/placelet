@@ -1,8 +1,9 @@
 <?php
 date_default_timezone_set("Europe/Berlin");
 // Alle Fehlermeldungen werden angezeigt
-error_reporting(E_ALL|E_STRICT); 
-ini_set('display_errors', true);
+/*error_reporting(E_ALL|E_STRICT); 
+ini_set('display_errors', true);*/
+error_reporting(0);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
 if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path = '';
