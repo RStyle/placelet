@@ -31,78 +31,88 @@ if ($braceID != NULL) {
 		}
 ?>
 				<div style="width: 100%; overflow: auto;">
-					<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="Bild löschen/melden" onclick="confirmDelete('das Bild', this); return false;">X</a>
-						<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-						<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
-							<img src="img/triangle.png" alt="" class="thumb_triangle">
-							<img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
-						</a>
-						<table class="pic-info">
-							<tr>
-								<th>Datum</th>
-								<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
-							</tr>
+					<a href="armband?picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="Bild löschen/melden" onclick="return confirmDelete('das Bild');">X</a>
+					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+					<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
+						<img src="img/triangle.png" alt="" class="thumb_triangle">
+						<img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
+					</a>
+					<table class="pic-info">
+						<tr>
+							<th>Datum</th>
+							<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
+						</tr>
+						<tr>
+							<th>Ort</th>
+							<td><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></td>
+						</tr>
 <?php
-			if($stats[$i]['user'] != NULL) {
+		if($stats[$i]['user'] != NULL) {
 ?>
-							<tr>
-								<th>Uploader</th>
-								<td><a href="profil?user=<?php echo urlencode(html_entity_decode(($stats[$i]['user']))); ?>"><?php echo $stats[$i]['user']; ?></a></td>
-							</tr>
+						<tr>
+							<th>Uploader</th>
+							<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['user'])); ?>"><?php echo $stats[$i]['user']; ?></a></td>
+						</tr>
 <?php
-			 }
+		}
 ?>
-						</table>
-							
-						<p class="pic-desc">
-							<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
-							<?php echo $stats[$i]['description']; ?>      
-							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
-						</p>
+					</table>
 						
-						<div class="comments" id="comment<?php echo $i;?>">
+					<p class="pic-desc">
+						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
+						<?php echo $stats[$i]['description']; ?>      
+						<br><br>
+						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" onClick="show_comments(this);">Kommentare zeigen</span>
+					</p>
+                    
+					<div class="comments" id="comment<?php echo $i;?>">
 <?php
-			for ($j = 1; $j <= count($stats[$i])-11; $j++) {
-				//Vergangene Zeit seit dem Kommentar berechnen
-				$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
-				switch($x_days_ago) {
-					case 0:
-						$x_days_ago = 'heute';
-						break;
-					case 1:
-						$x_days_ago = 'gestern';
-						break;
-					default:
-						$x_days_ago = 'vor '.$x_days_ago.' Tagen';
-				}
-				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
-				if(isset($stats[$i][$j + 1]['commid'])) {
-					$last_comment = 'middle';
-				}else {
-					$last_comment = 'last';
-				}
-?>
-								<a href="armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="Kommentar löschen/melden" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
-								<strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
-								<p><?php echo $stats[$i][$j]['comment']; ?></p> 
-								<hr style="border: 1px solid white;">  
-<?php 
+		for ($j = 1; $j <= count($stats[$i])-11; $j++) {
+			//Vergangene Zeit seit dem Kommentar berechnen
+			$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
+			switch($x_days_ago) {
+				case 0:
+					$x_days_ago = 'heute';
+					break;
+				case 1:
+					$x_days_ago = 'gestern';
+					break;
+				default:
+					$x_days_ago = 'vor '.$x_days_ago.' Tagen';
 			}
+			//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
+			if(isset($stats[$i][$j + 1]['commid'])) {
+				$last_comment = 'middle';
+			}else {
+				$last_comment = 'last';
+			}
+?>
+							<a href="armband?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
+                            <strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
+                            <p><?php echo $stats[$i][$j]['comment']; ?></p> 
+                            <hr style="border: 1px solid white;">  
+<?php 
+		}
 ?>   
-							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
-								<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
-								<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
-								<input <?php if($user->login) echo 'type="hidden" '; else echo 'type="text" ';?>name="comment_user[<?php echo $i; ?>]" <?php if($user->login == true) echo ' value="'.$user->login.'" ';?>class="comment_user" size="20" maxlength="15" placeholder="Name" pattern=".{4,15}" title="Min.4 - Max.15" required><?php if(!$user->login) echo '<br>'; ?>
-								<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
-								<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-								<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
-								<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
-								<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
-								<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
-							</form>
-						</div>
+						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
+							<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
+<?php
+			if($user->login != true) {
+?>
+							<label for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
+							<input type="text" name="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15" <?php if (isset($user->login)){echo 'value="'.$user->login.'" ';} ?>placeholder="Name" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
+<?php
+			}
+?>
+							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
+							<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
+							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
+							<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
+							<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
+							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
+						</form>
 					</div>
+				</div>
 <?php
 	}
 }
