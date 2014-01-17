@@ -450,11 +450,16 @@ $('#registerpic_city').on({
 		var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
 		geocoder.geocode({ 'address': address }, function (results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
-				console.log(results[0].geometry.location.ob + "," + results[0].geometry.location.nb);
-				lat = results[0].geometry.location.nb;
-				$("#latitude").val(lat.toString());
-				long = results[0].geometry.location.ob;
-				$("#longitude").val(long.toString());
+				myString = results[0].geometry.location;
+				myString = myString.toString();
+				myString = myString.replace('(', '');
+				myString = myString.replace(')', '');
+				geoData = myString.split(', ');
+				//console.log(geoData[0] + "," + geoData[1]);
+				lat = geoData[0];
+				$("#latitude").val(lat);
+				long = geoData[1];
+				$("#longitude").val(long);
 			  initialize_postpic(results[0].geometry.location, lat, long);
 			} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 				alert('Dieser Ort wurde nicht gefunden.');
