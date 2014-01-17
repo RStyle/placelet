@@ -4,7 +4,7 @@
                     <h1 class="headers pseudo_link" id="header_1"><span class="header_arrow1 arrow_right"></span>&nbsp;neuester upload</h1>
                         <div id="connectbox_1">
 <?php
-if($systemStats['total_posted'] > 3) {
+if($systemStats['total_posted'] > 1) {
 ?>
                             <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>	
 <?php

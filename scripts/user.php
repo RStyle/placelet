@@ -509,8 +509,10 @@ class Statistics {
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		for ($i = 0; $i < $user_anz; $i++) {
+			if(isset($q[$i]['user'])) {
 				$stats['user_most_bracelets']['user'][$i] = htmlentities($q[$i]['user']);
 				$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
+			}
 		}
 		
 		//Uploads der Top-Benutzer

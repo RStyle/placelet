@@ -29,7 +29,7 @@
     						<td style="border-bottom: 1px solid #000;">Uploads</td>
     					</tr>
     <?php
-    for ($i = 0; $i < $user_anz; $i++) {
+    for ($i = 0; $i < count($systemStats['user_most_bracelets']['user']); $i++) {
     ?>
     					<tr>
     						<td>
