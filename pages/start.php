@@ -1,5 +1,5 @@
 		    <div id="connect_leiste">
-                <div class="connect_box" id="stats_box">
+                <div class="connect_box connect_box_start" id="stats_box">
                     <h1>Community-Statistiken</h1>
                     <table>
     					<tr>
@@ -20,7 +20,7 @@
     					</tr>
     				</table>
                 </div>
-                <div class="connect_box" id="topusers_box">
+                <div class="connect_box connect_box_start" id="topusers_box">
                     <h1>Aktivste Benutzer</h1>
                     <table id="topusers">
     					<tr>
@@ -45,7 +45,7 @@
     ?>
     				</table>
                 </div>
-                <div class="connect_box" id="submit_box">
+                <div class="connect_box connect_box_start" id="submit_box">
                     <h1>+1 bild</h1>
                     <p>
 						Gib deine <span>Armband-ID</span> an:
@@ -66,7 +66,7 @@
 						</form>
 					</p>
                 </div>
-            </div>    
+            </div>
         
 <!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
         
@@ -179,7 +179,7 @@
 						<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
 					</form>
-					</div>
+				</div>
                  
 <?php
 					if ($i < count($bracelets_displayed)) {

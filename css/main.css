@@ -451,9 +451,11 @@
 			 overflow: auto;
 			 padding-bottom: 1em; 
 		}
+			.connect_box_start {
+				/*min-height: 230px;
+				max-*/height: 260px;	
+			}
 			.connect_box {
-	  
-				height: auto;
 				float: left;
 				padding: 1%;
 				background-color: #9B9B9B;
@@ -548,7 +550,6 @@
                        border-left: 4px solid #0092ff;
                     }
                 #stats_box {
-                    padding: 1em;
                     margin-right: 1%;
                     width: 35%;
                 }

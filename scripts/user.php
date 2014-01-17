@@ -517,13 +517,15 @@ class Statistics {
 		
 		//Uploads der Top-Benutzer
 		for ($i = 0; $i < $user_anz; $i++) {
-			$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
-			$stmt = $this->db->query($sql);
-			$q = $stmt->fetchAll();
-			if(isset($q[0]['number'])) {
-				$stats['user_most_bracelets']['uploads'][$i] = $q[0]['number'];
-			} else {
-				$stats['user_most_bracelets']['uploads'][$i] = 0;
+			if(isset($stats['user_most_bracelets']['user'][$i])) {
+				$sql = "SELECT COUNT(*) AS number,user FROM pictures WHERE user = '".$stats['user_most_bracelets']['user'][$i]."' GROUP BY user ORDER BY number DESC";
+				$stmt = $this->db->query($sql);
+				$q = $stmt->fetchAll();
+				if(isset($q[0]['number'])) {
+					$stats['user_most_bracelets']['uploads'][$i] = $q[0]['number'];
+				} else {
+					$stats['user_most_bracelets']['uploads'][$i] = 0;
+				}
 			}
 		}
 		

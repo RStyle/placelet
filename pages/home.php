@@ -43,12 +43,7 @@ if($systemStats['total_posted'] > 1) {
                                     	<?php
                                     				 }
                                     	?>
-        							</table> 
-        							<!--<p class="pic-desc">
-        								<span class="desc-header"><?php echo $stats[1][0]['title']; ?></span><br>
-        								<?php echo $stats[1][0]['description']; ?>
-        							</p>          -->
-        						
+        							</table>
     					    </div>	
     						<!--<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">    -->
     					</div>
@@ -100,7 +95,7 @@ if($systemStats['total_posted'] > 1) {
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">2</span> Trage dein Armband, solange du Lust und Zeit hast. 
+					<span class="highlighted kollektion_numbers">2</span> Trage dein Armband, solange du Lust und Zeit hast.<br>
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
