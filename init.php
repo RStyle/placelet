@@ -59,6 +59,8 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 				header('Location: start');
 				exit;
 			}
+		}elseif($checklogin == 3) {
+			$js .= 'validationRegister = confirm("Bestätigung erfolgreich.\\nMöchtest du direkt ein Armband registrieren?"); if(validationRegister) window.location.replace("http://www.placelet.de/login?registerbr");';
 		}elseif($checklogin == 2) {
 			header('Location: login?unvalidated='.$user->login);
 			exit;
