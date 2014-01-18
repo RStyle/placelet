@@ -53,7 +53,7 @@ if($systemStats['total_posted'] > 1) {
                     <div id="connectbox_2">
                         <form action="login" method="get">
                             <p>
-        						Gib deine <span>Armband-ID</span> an:    						
+        						Gib deine <span>Armband-ID</span> an:<br>    						
     							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
     							<input type="submit" value="Zum Upload">    						
         					</p>
@@ -64,7 +64,7 @@ if($systemStats['total_posted'] > 1) {
                         <h1>neues armband</h1>
                         <form action="login" method="get">
                         <p>
-    						Gib deine <span>Armband-ID</span> an:						
+    						Gib deine <span>Armband-ID</span> an:<br>
     						<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
     						<input type="submit" value="Armband registrieren">						 
     					</p>
@@ -80,8 +80,11 @@ if($systemStats['total_posted'] > 1) {
 				<p>
                     Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
                     Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
-                    Mithilfe eines Namens, den du selbst für dein Armband festlegst, kann jeder, dem du den Namen mitteilst, dein Armband mithilfe unserer Suchleiste finden und seinen Weg nachverfolgen.<br><br>
-                    <b>Hast du Lust, bei unserem sozialen Experiment mitzumachen?</b> In unserem Shop geht es weiter.
+                    Mithilfe eines Namens, den du selbst für dein Armband festlegst, kann jeder, dem du den Namen mitteilst, dein Armband mithilfe unserer Suchleiste finden und seinen Weg nachverfolgen.
+				</p>
+				<p>
+                    <b>Hast du Lust, bei unserem sozialen Experiment mitzumachen?</b><br>
+					In unserem Shop geht es weiter.
                      
 				</p>
 			</article>                                                                                                        
@@ -95,7 +98,7 @@ if($systemStats['total_posted'] > 1) {
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
-					<span class="highlighted kollektion_numbers">2</span> Trage dein Armband, solange du Lust und Zeit hast.<br>
+					<span class="highlighted kollektion_numbers">2</span> Trage dein Armband, solange du Lust und Zeit hast.<br>&nbsp;
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
 				<p>
