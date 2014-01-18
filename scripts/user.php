@@ -125,6 +125,14 @@ class User
 				':user' => trim($reg['reg_login']),
 				':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 			);
+			$sql = "INSERT INTO notifications (user, pic_own, comm_own, comm_pic) VALUES (:user, :pic_own, :comm_own, :comm_pic)";
+			$q = $db->prepare($sql);
+			$q->execute(array(
+				':user' => trim($reg['reg_login']),
+				':pic_own' => 3,
+				':comm_own' => 1,
+				':comm_pic' => 1
+			));
 			$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
