@@ -65,7 +65,7 @@ if($user->login) {
 							</tr>
 						</table>
 					</form>
-					Noch nicht funktionstüchtig!
+					Bisher funktioniert nur die E-Mail Benachrichtigung.
 				</div>
 <?php
 	}elseif($category == 'privacy') {

@@ -73,9 +73,6 @@ class User
 				':date' => time()
 			));
 			//Status abfragen
-			$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
-			$stmt->execute(array('user' =>$_SESSION['user']));
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			if($row['status'] == 2) $this->admin = true;
 			if($row['last_login'] == 0) return 3;
 			return true;
@@ -668,7 +665,7 @@ class Statistics {
 				':comment' => $comment,
 				':date' => time())
 			);
-			$this->notify_subscribers($brid, $username, true);
+			$this->notify_subscribers($brid, $username, $picid);
 			return 'Kommentar erfolgreich gesendet.';
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -1108,10 +1105,11 @@ class Statistics {
 				}
 			}
 			//Benachrichtigungen, wie im Profil festgelegt
-			$sql = "SELECT user, pic_own, comm_own, comm_pic FROM notifications WHERE user = :uploader";
+				//Beim Inhaber
+			$sql = "SELECT user, pic_own, comm_own, comm_pic FROM notifications WHERE user = :owner";
 			$stmt = $this->db->prepare($sql);
-			$stmt->execute(array(':uploader' => $uploader));
-			$q = $stmt->fetchAll();
+			$stmt->execute(array(':owner' => $owner));
+			$q = $stmt->fetchAll();//DAS MUSS NOCH AUF EIN EINFACH FETCH REDUZIERT WERDEN UND DIE SCHLEIFE ENTFERNT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 			foreach($q as $userNR => $userProps) {
 				$userdetails = $this->userdetails($userProps['user']);
 				$user_email = $userdetails['email'];
@@ -1130,8 +1128,8 @@ class Statistics {
 						}
 					}elseif($key == 'comm_own') {
 						if($val == 2 || $val == 3) {
-					echo 'HI; DU HAST NOCH EIN KOMMENTAR GESENDET';
 							if($comm) {
+								echo 'kommentar-email gesendet';
 								$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
 											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
 								$mail_header = "From: Placelet <support@placelet.de>\n";
@@ -1139,6 +1137,34 @@ class Statistics {
 								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 								$mail_header .= "Content-transfer-encoding: 8bit";
 								mail($user_email, 'Neues Kommentar für Armband '.$braceName, $content, $mail_header);
+							}
+						}
+					}
+				}
+			}
+				//Und beim Bildbesitzer
+			if($comm) {
+				$sql = "SELECT user FROM pictures WHERE brid = :brid AND picid = :picid";
+				$stmt = $this->db->prepare($sql);
+				$stmt->execute(array(':brid' => $brid, ':picid' => $comm));
+				$picposter = $stmt->fetch();
+				$sql = "SELECT user, pic_own, comm_own, comm_pic FROM notifications WHERE user = :picposter";
+				$stmt = $this->db->prepare($sql);
+				$stmt->execute(array(':picposter' => $picposter['user']));
+				$q = $stmt->fetchALl();//UND HIER AUCH
+				foreach($q as $userNR => $userProps) {
+					$userdetails = $this->userdetails($userProps['user']);
+					$user_email = $userdetails['email'];
+					foreach($userProps as $key => $val) {
+						if($key == 'comm_pic') {
+							if($val == 2 || $val == 3) {
+								$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+								$mail_header = "From: Placelet <support@placelet.de>\n";
+								$mail_header .= "MIME-Version: 1.0" . "\n";
+								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+								$mail_header .= "Content-transfer-encoding: 8bit";
+								mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 							}
 						}
 					}
