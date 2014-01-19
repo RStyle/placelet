@@ -107,7 +107,7 @@
 							<span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
 							<?php echo $stats[$i][0]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][0])-11; ?>">Kommentare zeigen (<?php echo count($stats[$i][0])-11; ?>)</span>
 						</p>
 					</div>
 					<aside class="bracelet-props side_container">

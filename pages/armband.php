@@ -117,7 +117,7 @@ if ($braceName != NULL) {
 						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
 						<?php echo $stats[$i]['description']; ?>      
 						<br><br>
-						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>">Kommentare zeigen</span>
+						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i])-11 ?>">Kommentare zeigen (<?php echo count($stats[$i])-11; ?>)</span>
 					</p>
                     
 					<div class="comments" id="comment<?php echo $i;?>">

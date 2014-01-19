@@ -487,7 +487,7 @@ function show_comments(obj){
         number = $(obj).attr('id').replace('toggle_comment','');
         $("#comment" + number).toggle();
         if($("#toggle_comment" + number).text() == 'Kommentare verstecken'){
-                $("#toggle_comment" + number).text('Kommentare zeigen');
+                $("#toggle_comment" + number).text('Kommentare zeigen (' + $("#toggle_comment" + number).data("counts") + ')');
         }else {
                 $("#toggle_comment" + number).text('Kommentare verstecken');                
         }
