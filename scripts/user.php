@@ -385,6 +385,56 @@ class User
 		));
 		return true;
 	}
+	public function recieve_notifications() {
+		$sql = "SELECT brid FROM bracelets WHERE user = :username";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array(':username' => $this->login));
+		$bracelets = $stmt->fetchAll();
+		
+		$sql = "SELECT notific_checked FROM users WHERE user = :username LIMIT 1";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array(':username' => $this->login));
+		$stats = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		$sql = "SELECT pic_own, comm_own, comm_pic FROM notifications WHERE user = :username LIMIT 1";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array(':username' => $this->login));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		foreach($q as $key => $val) {
+			if($val == 1 || $val == 3) {
+				if($key == 'pic_own') {
+					foreach($bracelets as $bracelet) {
+						$sql = "SELECT user, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked";
+						$stmt = $this->db->prepare($sql);
+						$stmt->execute(array(':brid' => $bracelet['brid'], ':notific_checked' => $stats['notific_checked']));
+						$pic_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}elseif($key == 'comm_own') {
+					foreach($bracelets as $bracelet) {
+						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND date > :notific_checked ";
+						$stmt = $this->db->prepare($sql);
+						$stmt->execute(array(':brid' => $bracelet['brid'], ':notific_checked' => $stats['notific_checked']));
+						$comm_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}elseif($key == 'comm_pic') {
+					$sql = "SELECT picid FROM pictures WHERE user = :username";
+					$stmt = $this->db->prepare($sql);
+					$stmt->execute(array(':username' => $this->login));
+					$own_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					foreach($own_pics as $id => $pic_details) {
+						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND picid = :picid AND date > :notific_checked ";
+						$stmt = $this->db->prepare($sql);
+						$stmt->execute(array(':brid' => $pic_details['brid'], ':picid' => $pic_details['picid']));
+						$comm_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+			}
+		}
+		@$return['pic_owns'] = $pic_owns;
+		@$return['comm_owns'] = $comm_owns;
+		@$return['comm_pics'] = $comm_pics;
+		return $return;
+	}
 }
 ?>
 <?php
@@ -1075,11 +1125,6 @@ class Statistics {
 				':commid' => $commid
 			));			
 		}
-	}
-	public function private_userdetails() {
-		$stmt = $this->db->prepare("SELECT pic_own_online, pic_own_email, comm_own_online, comm_own_email, comm_own_online, comm_pic_email FROM users WHERE user = :user LIMIT 1");
-		$stmt->execute(array('user' => $user));
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 	private function notify_subscribers($brid, $uploader, $comm = false) {
 		$own_bracelet = false;
