@@ -120,7 +120,7 @@ require_once($this_path.'pages/'.$page.'.php');
 if($page == 'login' && isset($postpic)) {
 ?>
 		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 		<script>
 		$(document).ready(function() {
 			if (navigator.geolocation) {
@@ -133,7 +133,7 @@ if($page == 'login' && isset($postpic)) {
 }elseif($page == 'home'){
 ?>
 		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 		<script>
 		<?php $eecho = '';
 		$data = getlnlt();
@@ -218,7 +218,7 @@ if($page == 'login' && isset($postpic)) {
 }elseif($page == 'armband'){
 ?>
 		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&sensor=true&v=3.exp"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 <?php
 }
 if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>

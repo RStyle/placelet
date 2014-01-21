@@ -92,7 +92,7 @@ if($systemStats['total_posted'] > 1) {
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class=" mainarticleheaders line_header green_line"><h1>Wie funktioniert's?</h1></div>
 				<!--<?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband.jpg" style="width: 100%;" alt="Armband"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband.jpg)"></div>';?>-->
-				<div class="responsive_16-9" style="margin-bottom: 1em;"><iframe width="560" height="315" src="//www.youtube.com/embed/xtnbzTK2G8I" frameborder="0" allowfullscreen></iframe></div>
+				<div class="responsive_16-9" style="margin-bottom: 1em;"><iframe width="560" height="315" src="//www.youtube.com/embed/xtnbzTK2G8I" style="border: none"></iframe></div>
 				<p>
 					<span class="highlighted kollektion_numbers">1</span> Mit dem Kauf eines Armbands erhältst du eine ID, die du auf der Rückseite des Armbandes findest. Registriere dich damit in der Box auf unserer Startseite! 
 				</p>
