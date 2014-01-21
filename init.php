@@ -118,8 +118,8 @@ if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'M
 	$navregister['href'] = "profil";
 	$navregister['value'] = "Mein Profil";
 	$notifics = $user->recieve_notifications();
-	if($notifics['pic_owns'] != NULL && $notifics['comm_owns'] != NULL && $notifics['comm_pics'] != NULL) {
-		$navregister['value'] = 'Mein Profil ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics'])).')';
+	if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
+		$navregister['value'] = 'Mein Profil ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
 	}
 }
 if($page == 'login') {

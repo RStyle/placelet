@@ -408,14 +408,14 @@ class User
 		$q = $stmt->fetch(PDO::FETCH_ASSOC);
 		
 		$sql = "SELECT email FROM users WHERE user = :user LIMIT 1";
-		$q = $this->db->prepare($sql);
-		$q->execute(array(':user' => $this->login));
-		$email = $q->fetch(PDO::FETCH_ASSOC);
+		$email_q = $this->db->prepare($sql);
+		$email_q->execute(array(':user' => $this->login));
+		$email = $email_q->fetch(PDO::FETCH_ASSOC);
 		$email = $email['email'];
 		$sql = "SELECT brid FROM subscriptions WHERE email = :email";
-		$q = $this->db->prepare($sql);
-		$q->execute(array(':email' => $email));
-		$subscriptions = $q->fetchAll(PDO::FETCH_ASSOC);
+		$subs_q = $this->db->prepare($sql);
+		$subs_q->execute(array(':email' => $email));
+		$subscriptions = $subs_q->fetchAll(PDO::FETCH_ASSOC);
 		
 		foreach($q as $key => $val) {
 			if($val == 1 || $val == 3) {

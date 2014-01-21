@@ -68,21 +68,23 @@ if(!isset($_GET['user']) && !$user->login) {
 	            <div style="clear: both;">
 <?php
 	if($user->login == $username) {
-		if($notifications['pic_owns'] != NULL && $notifications['comm_owns'] != NULL && $notifications['comm_pics'] != NULL && $notifications['pic_subs'] != NULL) $notifications['new'] = true;
-			else $notifications['new'] = false;
+		if($notifications['pic_owns'] == NULL && $notifications['comm_owns'] == NULL && $notifications['comm_pics'] == NULL && $notifications['pic_subs'] == NULL) $notifications['new'] = false;
+			else $notifications['new'] = true;
 ?>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Benachrichtigungen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if($notifications['new']) echo count($notifications['pic_owns']) + count($notifications['comm_owns']) + count($notifications['comm_pics'] + count($notifications['pic_subs'])); else echo '0'; ?>)</p>
+				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if($notifications['new'])
+				echo (count($notifications['pic_owns']) + count($notifications['comm_owns']) + count($notifications['comm_pics']) + count($notifications['pic_subs'])); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_1">
 <?php
 		if($notifications['new']) {
+			if($notifications['pic_owns'] != NULL) {
 ?>
 						<div class="pic_owns notifications">
 							<p>Neue Bilder auf deinen eigenen Armbändern:</p>
 <?php
-			foreach($notifications['pic_owns'] as $pic) {
-				$pic['name'] = $statistics->brid2name($pic['brid']);
+				foreach($notifications['pic_owns'] as $pic) {
+					$pic['name'] = $statistics->brid2name($pic['brid']);
 ?>
 							<div class="previews">
 								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
@@ -94,14 +96,18 @@ if(!isset($_GET['user']) && !$user->login) {
 								</a>
 							</div>
 <?php
-			}
+				}
 ?>
 						</div>
+<?php
+			}
+			if($notifications['pic_subs'] != NULL) {
+?>
 						<div class="pic_subs notifications">
 							<p>Neue Bilder auf deinen abonnierten Armbändern:</p>
 <?php
-			foreach($notifications['pic_subs'] as $pic) {
-				$pic['name'] = $statistics->brid2name($pic['brid']);
+				foreach($notifications['pic_subs'] as $pic) {
+					$pic['name'] = $statistics->brid2name($pic['brid']);
 ?>
 							<div class="previews">
 								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
@@ -113,36 +119,45 @@ if(!isset($_GET['user']) && !$user->login) {
 								</a>
 							</div>
 <?php
-			}
+				}
 ?>
 						</div>
+<?php
+			}
+			if($notifications['comm_owns'] != NULL) {
+?>
 						<div class="comm_owns notifications">
 							<p>Neue Kommentare auf deinen eigenen Armbändern:</p>
 <?php
-			foreach($notifications['comm_owns'] as $comm) {
+				foreach($notifications['comm_owns'] as $comm) {
 ?>
 							<div class="previews comments" style="display: block;">
 								<strong><?php echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
 								<p><?php echo $comm['comment']; ?></p> 
 							</div>
 <?php
-			}
+				}
 ?>
 						</div>
+<?php
+			}
+			if($notifications['comm_pics'] != NULL) {
+?>
 						<div class="comm_owns notifications">
 							<p>Neue Kommentare auf deinen Bildern:</p>
 <?php
-			foreach($notifications['comm_pics'] as $comm) {
+				foreach($notifications['comm_pics'] as $comm) {
 ?>
 							<div class="previews comments" style="display: block;">
 								<strong><?php echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
 								<p><?php echo $comm['comment']; ?></p> 
 							</div>
 <?php
-			}
+				}
 ?>
 						</div>
 <?php
+			}
 		}else echo '<p>Es gibt keine neuen Benachrichtigungen für dich.</p>';
 ?>
 					</div>
