@@ -124,17 +124,7 @@ if ($braceName != NULL) {
 <?php
 			for ($j = 1; $j <= count($stats[$i])-11; $j++) {
 				//Vergangene Zeit seit dem Kommentar berechnen
-				$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$j]['date']) / 86400);
-				switch($x_days_ago) {
-					case 0:
-						$x_days_ago = 'heute';
-						break;
-					case 1:
-						$x_days_ago = 'gestern';
-						break;
-					default:
-						$x_days_ago = 'vor '.$x_days_ago.' Tagen';
-				}
+				$x_days_ago = days_since($stats[$i][$j]['date']);
 				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
 				if(isset($stats[$i][$j + 1]['commid'])) {
 					$last_comment = 'middle';

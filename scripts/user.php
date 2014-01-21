@@ -404,27 +404,41 @@ class User
 			if($val == 1 || $val == 3) {
 				if($key == 'pic_own') {
 					foreach($bracelets as $bracelet) {
-						$sql = "SELECT user, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked";
+						$sql = "SELECT user, brid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked  AND user != :user";
 						$stmt = $this->db->prepare($sql);
-						$stmt->execute(array(':brid' => $bracelet['brid'], ':notific_checked' => $stats['notific_checked']));
+						$stmt->execute(array(
+							':brid' => $bracelet['brid'],
+							':notific_checked' => $stats['notific_checked'],
+							':user' => $this->login
+						));
 						$pic_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
 					}
 				}elseif($key == 'comm_own') {
 					foreach($bracelets as $bracelet) {
-						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND date > :notific_checked ";
+						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND date > :notific_checked AND user != :user";
 						$stmt = $this->db->prepare($sql);
-						$stmt->execute(array(':brid' => $bracelet['brid'], ':notific_checked' => $stats['notific_checked']));
+						$stmt->execute(array(
+							':brid' => $bracelet['brid'],
+							':notific_checked' => $stats['notific_checked'],
+							':user' => $this->login
+						));
 						$comm_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
 					}
 				}elseif($key == 'comm_pic') {
-					$sql = "SELECT picid FROM pictures WHERE user = :username";
+					$sql = "SELECT brid, picid FROM pictures WHERE user = :username";
 					$stmt = $this->db->prepare($sql);
 					$stmt->execute(array(':username' => $this->login));
 					$own_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+					
 					foreach($own_pics as $id => $pic_details) {
-						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND picid = :picid AND date > :notific_checked ";
+						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND picid = :picid AND date > :notific_checked AND user != :user";
 						$stmt = $this->db->prepare($sql);
-						$stmt->execute(array(':brid' => $pic_details['brid'], ':picid' => $pic_details['picid']));
+						$stmt->execute(array(
+							':brid' => $pic_details['brid'],
+							':picid' => $pic_details['picid'],
+							':notific_checked' => $stats['notific_checked'],
+							':user' => $this->login
+						));
 						$comm_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
 					}
 				}
@@ -433,6 +447,12 @@ class User
 		@$return['pic_owns'] = $pic_owns;
 		@$return['comm_owns'] = $comm_owns;
 		@$return['comm_pics'] = $comm_pics;
+		/*foreach($return as $key => $val) {
+			print_r($key);
+			echo ': ';
+			print_r($val);
+			echo '<br><br>';
+		}*/
 		return $return;
 	}
 }

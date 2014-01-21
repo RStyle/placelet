@@ -1,4 +1,19 @@
 <?php
+//Vergangene Zeit berechnen
+function days_since($unix_time) {
+	$x_days_ago = ceil((strtotime("00:00") - $unix_time) / 86400);
+	switch($x_days_ago) {
+		case 0:
+			$x_days_ago = 'heute';
+			break;
+		case 1:
+			$x_days_ago = 'gestern';
+			break;
+		default:
+			$x_days_ago = 'vor '.$x_days_ago.' Tagen';
+	}
+	return $x_days_ago;
+}
 //Verarbeitet die Profildaten
 function profile_stats($userdetails) {
 	if (isset($userdetails['brid'])) {

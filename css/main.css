@@ -731,8 +731,12 @@
         .tabs:hover {
             background-color: #ddd;
         }
+	.notifications {
+		float: left;
+		width: 30%;
+	}
 	.previews {
-		background-color: #ddd;
+		background-color: #EBEBEB;/*#ddd;*/
 		width: 300px;
 		/*height: 200px;------------------------------------------------------------------------------------Maybe*/
 		float: left;

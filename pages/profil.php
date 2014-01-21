@@ -68,18 +68,70 @@ if(!isset($_GET['user']) && !$user->login) {
 	            <div style="clear: both;">
 <?php
 	if($user->login == $username) {
+		if($notifications['pic_owns'] != NULL && $notifications['comm_owns'] != NULL && $notifications['comm_pics'] != NULL) $notifications['new'] = true;
+			else $notifications['new'] = false;
 ?>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Benachrichtigungen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_4"><span class="tab_arrow4 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
+				<p class="tabs pseudo_link" id="tab_4"><span class="tab_arrow4 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if($notifications['new']) echo count($notifications['pic_owns']) + count($notifications['comm_owns']) + count($notifications['comm_pics']); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_4" style="display: none;">
-					
+<?php
+		if($notifications['new']) {
+?>
+						<div class="pic_owns notifications">
+							<p>Neue Bilder auf deinen eigenen Armbändern:</p>
+<?php
+			foreach($notifications['pic_owns'] as $pic) {
+				$pic['name'] = $statistics->brid2name($pic['brid']);
+?>
+							<div class="previews">
+								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$pic['brid'].'-'.$pic['picid'].'.jpg'; ?>"><br>
+									<p class="preview_text">
+										<?php echo htmlentities($pic['name'])."\n"; ?>
+										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
+									</p>
+								</a>
+							</div>
+<?php
+			}
+?>
+						</div>
+						<div class="comm_owns notifications">
+							<p>Neue Kommentare auf deinen eigenen Armbändern:</p>
+<?php
+			foreach($notifications['comm_owns'] as $comm) {
+?>
+							<div class="previews comments" style="display: block;">
+								<strong><?php echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
+								<p><?php echo $comm['comment']; ?></p> 
+							</div>
+<?php
+			}
+?>
+						</div>
+						<div class="comm_owns notifications">
+							<p>Neue Kommentare auf deinen Bildern:</p>
+<?php
+			foreach($notifications['comm_pics'] as $comm) {
+?>
+							<div class="previews comments" style="display: block;">
+								<strong><?php echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
+								<p><?php echo $comm['comment']; ?></p> 
+							</div>
+<?php
+			}
+?>
+						</div>
+<?php
+		}else echo '<p>Es gibt keine neuen Benachrichtigungen für dich.</p>';
+?>
 					</div>
 <?php
 	}
 ?>					
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])){ echo count($userdetails['brid']); } else { echo '0';} ?>)</p>
+				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])) echo count($userdetails['brid']); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_1">
 <?php
@@ -123,8 +175,8 @@ if(!isset($_GET['user']) && !$user->login) {
 						</div>
 <?php
 			}
-		}elseif($user->login == $username) echo 'Du besitzt noch kein Armband.';
-		else echo 'Dieser Benutzer besitzt noch kein Armband.';
+		}elseif($user->login == $username) echo '<p>Du besitzt noch kein Armband.</p>';
+		else echo '<p>Dieser Benutzer besitzt noch kein Armband.</p>';
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Abos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -155,12 +207,12 @@ if(!isset($_GET['user']) && !$user->login) {
 									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
 								</p>
 							</a>
-							<?php if($user->login == $username) {?><br><a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_code='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text">Deabonnieren</a><?php } ?>
+							<?php if($user->login == $username) { ?><br><a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_code='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text">Deabonnieren</a><?php } ?>
 						</div>
 <?php
 			}
-		}elseif($user->login == $username) echo 'Du hast noch kein Armband abonniert.';
-		else echo 'Dieser Benutzer hat noch kein Armband abonniert.';//Entfernen, wenn es nicht gewünscht ist fremde Abos anzuzeigen
+		}elseif($user->login == $username) echo '<p>Du hast noch kein Armband abonniert.</p>';
+		else echo '<p>Dieser Benutzer hat noch kein Armband abonniert.</p>';//Entfernen, wenn es nicht gewünscht ist fremde Abos anzuzeigen
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Uploads ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->            
@@ -202,8 +254,8 @@ if(!isset($_GET['user']) && !$user->login) {
 						</div>
 <?php
 			}
-		}elseif($user->login == $username) echo 'Du hast noch kein Bild hochgeladen';
-		else echo 'Dieser Benutzer hat noch kein Bild hochgeladen.';
+		}elseif($user->login == $username) echo '<p>Du hast noch kein Bild hochgeladen.</p>';
+			else echo '<p>Dieser Benutzer hat noch kein Bild hochgeladen.</p>';
 ?>
 					</div>
 				</div>
@@ -214,6 +266,5 @@ if(!isset($_GET['user']) && !$user->login) {
 				<p>Dieser Benutzer existiert nicht.</p>
 <?php
 }
-
 ?>
 			</article>
