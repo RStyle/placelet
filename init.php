@@ -60,7 +60,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 				exit;
 			}
 		}elseif($checklogin == 3) {
-			$js .= 'validationRegister = confirm("Bestätigung erfolgreich.\\nMöchtest du direkt ein Armband registrieren?"); if(validationRegister) window.location.replace("http://placelet.de/login?registerbr");';
+			$js .= 'validationRegister = confirm("Bestätigung erfolgreich.\\nMöchtest du direkt ein Armband registrieren?"); if(validationRegister) window.location.replace("/login?registerbr");';
 		}elseif($checklogin == 2) {
 			header('Location: login?unvalidated='.$user->login);
 			exit;
@@ -82,10 +82,10 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 
 $statistics = new Statistics($db, $user);
 
+//--//
+
 //Maximale Größe für hochgeladene Bilder
 $max_file_size = 8000000;
-
-//--//
 
 if (!isset($braceName)) $braceName = "";
 //Dateinamen werden Titel zugeordnet - Nach dem Alphabet geordnet!!
@@ -114,6 +114,10 @@ $navregister['value'] = "Registrieren";
 if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'Mein Profil'
 	$navregister['href'] = "profil";
 	$navregister['value'] = "Mein Profil";
+	$notifics = $user->recieve_notifications();
+	if($notifics['pic_owns'] != NULL && $notifics['comm_owns'] != NULL && $notifics['comm_pics'] != NULL) {
+		$navregister['value'] = 'Mein Profil ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics'])).')';
+	}
 }
 if($page == 'login') {
 	if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'

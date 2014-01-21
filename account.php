@@ -35,7 +35,13 @@ if(isset($_POST['submit'])) {
 					if(!isset($_POST['comm_own_email'])) $_POST['comm_own_email'] = false;
 					if(!isset($_POST['comm_pic_online'])) $_POST['comm_pic_online'] = false;
 					if(!isset($_POST['comm_pic_email'])) $_POST['comm_pic_email'] = false;
-					$update_notifications = $user->update_notifications($_POST['pic_own_online'], $_POST['pic_own_email'], $_POST['comm_own_online'], $_POST['comm_own_email'], $_POST['comm_pic_online'], $_POST['comm_pic_email']);
+					if(!isset($_POST['pic_subs_online'])) $_POST['pic_subs_online'] = false;
+					if(!isset($_POST['pic_subs_email'])) $_POST['pic_subs_email'] = false;
+					$update_notifications = $user->update_notifications(
+						$_POST['pic_own_online'], $_POST['pic_own_email'],
+						$_POST['comm_own_online'], $_POST['comm_own_email'],
+						$_POST['comm_pic_online'], $_POST['comm_pic_email'],
+						$_POST['pic_subs_online'], $_POST['pic_subs_email']);
 				}
 			}
 			break;

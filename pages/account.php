@@ -59,13 +59,17 @@ if($user->login) {
 								<td><input type="checkbox" name="comm_pic_email"<?php if($userdetails['notifications']['comm_pic_email']) echo ' checked';?>></td>
 							</tr>
 							<tr>
+								<th>Neue Bilder zu deinen abonnierten Armbändern</th>
+								<td><input type="checkbox" name="pic_subs_online"<?php if($userdetails['notifications']['pic_subs_online']) echo ' checked';?>></td>
+								<td><input type="checkbox" name="pic_subs_email"<?php if($userdetails['notifications']['pic_subs_email']) echo ' checked';?>></td>
+							</tr>
+							<tr>
 								<td><?php if(isset($_POST['notification_change'])) echo 'Erfolgreich geändert.'; else echo '&nbsp;';?></td>
 								<td><input type="submit" name="submit" value="Änderungen speichern"></td>
 								<td><input type="hidden" name="notification_change"></td>
 							</tr>
 						</table>
 					</form>
-					Bisher funktioniert nur die E-Mail Benachrichtigung.
 				</div>
 <?php
 	}elseif($category == 'privacy') {

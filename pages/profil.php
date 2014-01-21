@@ -68,13 +68,13 @@ if(!isset($_GET['user']) && !$user->login) {
 	            <div style="clear: both;">
 <?php
 	if($user->login == $username) {
-		if($notifications['pic_owns'] != NULL && $notifications['comm_owns'] != NULL && $notifications['comm_pics'] != NULL) $notifications['new'] = true;
+		if($notifications['pic_owns'] != NULL && $notifications['comm_owns'] != NULL && $notifications['comm_pics'] != NULL && $notifications['pic_subs'] != NULL) $notifications['new'] = true;
 			else $notifications['new'] = false;
 ?>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Benachrichtigungen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_4"><span class="tab_arrow4 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if($notifications['new']) echo count($notifications['pic_owns']) + count($notifications['comm_owns']) + count($notifications['comm_pics']); else echo '0'; ?>)</p>
+				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if($notifications['new']) echo count($notifications['pic_owns']) + count($notifications['comm_owns']) + count($notifications['comm_pics'] + count($notifications['pic_subs'])); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
-					<div class="showcases" id="showcase_4" style="display: none;">
+					<div class="showcases" id="showcase_1">
 <?php
 		if($notifications['new']) {
 ?>
@@ -82,6 +82,25 @@ if(!isset($_GET['user']) && !$user->login) {
 							<p>Neue Bilder auf deinen eigenen Armbändern:</p>
 <?php
 			foreach($notifications['pic_owns'] as $pic) {
+				$pic['name'] = $statistics->brid2name($pic['brid']);
+?>
+							<div class="previews">
+								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$pic['brid'].'-'.$pic['picid'].'.jpg'; ?>"><br>
+									<p class="preview_text">
+										<?php echo htmlentities($pic['name'])."\n"; ?>
+										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
+									</p>
+								</a>
+							</div>
+<?php
+			}
+?>
+						</div>
+						<div class="pic_subs notifications">
+							<p>Neue Bilder auf deinen abonnierten Armbändern:</p>
+<?php
+			foreach($notifications['pic_subs'] as $pic) {
 				$pic['name'] = $statistics->brid2name($pic['brid']);
 ?>
 							<div class="previews">
@@ -131,9 +150,9 @@ if(!isset($_GET['user']) && !$user->login) {
 	}
 ?>					
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])) echo count($userdetails['brid']); else echo '0'; ?>)</p>
+				<p class="tabs pseudo_link" id="tab_2"><span class="tab_arrow2 arrow_right"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])) echo count($userdetails['brid']); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
-					<div class="showcases" id="showcase_1">
+					<div class="showcases" id="showcase_2">
 <?php
 		if(isset($userdetails['brid'])) {
 			foreach($userdetails['picture_count'] as $key => $val) {
@@ -180,9 +199,9 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Abos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_2"><span class="tab_arrow2 arrow_right"></span>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
+				<p class="tabs pseudo_link" id="tab_3"><span class="tab_arrow3 arrow_right"></span>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
-					<div class="showcases" id="showcase_2">
+					<div class="showcases" id="showcase_3">
 <?php
 		if($userdetails['subscriptions'] != NULL) {
 			foreach($userdetails['subscriptions'] as $key => $val) {
@@ -216,9 +235,9 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Uploads ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->            
-				<p class="tabs pseudo_link" id="tab_3"><span class="tab_arrow3 arrow_right"></span>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
+				<p class="tabs pseudo_link" id="tab_4"><span class="tab_arrow4 arrow_right"></span>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
-					<div class="showcases" id="showcase_3">
+					<div class="showcases" id="showcase_4">
 <?php
 		if($userdetails['pics'] != NULL) {
 			foreach($userdetails['pics'] as $key => $val) {
