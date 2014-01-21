@@ -81,7 +81,7 @@
   max-height: 0;
   color: transparent;
   text-align: justify;
-  word-break: break-word;
+  word-break: break-all;
   hyphens: auto;
   overflow: hidden;
 }
