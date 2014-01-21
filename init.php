@@ -80,6 +80,9 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 	$user = new User(false, $db);
 }
 
+if($user->logged == true)
+	$js.='username = "'. $user->login .'";';
+
 $statistics = new Statistics($db, $user);
 
 //--//

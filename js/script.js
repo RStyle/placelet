@@ -556,6 +556,8 @@ function change_pic(cv, sv) {
 //Aboformular anzeigen
 $(document).ready(function(){
 	$('#show_sub').click(function(){
+		if(!isset(username))
+			username = "";
 		$.ajax({
 			type: "POST",
 			url: "../scripts/ajax/ajax_statistics.php",
