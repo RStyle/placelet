@@ -556,8 +556,6 @@ function change_pic(cv, sv) {
 //Aboformular anzeigen
 $(document).ready(function(){
 	$('#show_sub').click(function(){
-		if(!isset(username))
-			username = "";
 		$.ajax({
 			type: "POST",
 			url: "../scripts/ajax/ajax_statistics.php",
@@ -568,7 +566,7 @@ $(document).ready(function(){
 					$('.sub_inputs').toggle();
 				}else {
 					bracelet_name = $('#bracelet_name').val();
-					window.location.replace("http://www.placelet.de/armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
+					window.location.replace("armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
 				}
 			}
 		});
@@ -661,7 +659,7 @@ $(document).ready(function(){
 						$('#picupload_login_errormsg').html('Dieser Benutzer existiert nicht.<br>');
 					}else if(html == 'unvalidated'){
 						$('#picupload_login_errormsg').html('Dein Account wurde noch nicht bestätigt.<br> Keine E-Mail bekommen? Lass dir <a href="login?unvalidated=' + encodeURIComponent(username) + '">hier</a> eine neue zusenden.<br>');
-					}
+					}else $('#picupload_login_errormsg').html(html);
 				}
 					
 				
@@ -674,5 +672,23 @@ $(document).ready(function(){
 			}
 		});
 		return false;
+	});
+});
+
+//Benachrichtigungen gelesen
+$(document).ready(function(){
+	$("#notific_read").click(function(){
+		$.ajax({
+			type: "POST",
+			url: "../scripts/ajax/ajax_login.php",
+			data: "notific_read=true",
+			success: function(html){
+				$("#notific_read").append(html);	
+			},
+			beforeSend:function()
+			{
+				$("#notific_read").append("LADEN");	
+			}
+		});
 	});
 });

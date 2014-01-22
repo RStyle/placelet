@@ -5,7 +5,7 @@
                     <h1>Partner</h1>
                     <p>Mit seiner kompetenten Beratung und der Bereitstellung einiger Materialien unterstützte uns Herr Graffe und die MST-Graffe GmbH besonders bei der Verwirklichung unseres Projektes.</p>
                     <a id="graffe_link" href="http://mst-graffe.de/" target="_blank">
-                        <img src="http://www.mst-graffe.de/images/MSTgif.gif" alt="mstgraffe_logo">
+                        <img src="http://mst-graffe.de/index_htm_files/670.jpg" alt="mstgraffe_logo">
                         <p class="partner_name">Maschinen- und Stahlbau-Technik Markus Graffe GMBH</p>
                     </a>
                 </div>

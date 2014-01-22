@@ -73,15 +73,12 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 		header('Location: login?notexisting');
 		exit;
 	}
-} elseif(isset($_SESSION['user'])){
+}elseif(isset($_SESSION['user'])) {
 	$user = new User($_SESSION['user'], $db);
 	$checklogin = $user->logged;
-} else{
+}else {
 	$user = new User(false, $db);
 }
-
-if($user->logged == true)
-	$js.='username = "'. $user->login .'";';
 
 $statistics = new Statistics($db, $user);
 

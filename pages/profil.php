@@ -81,7 +81,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			if($notifications['pic_owns'] != NULL) {
 ?>
 						<div class="pic_owns notifications">
-							<p>Neue Bilder auf deinen eigenen Armbändern:</p>
+							<p>Neue Bilder auf deinen eigenen Armbändern:<br>&nbsp;</p>
 <?php
 				foreach($notifications['pic_owns'] as $pic) {
 					$pic['name'] = $statistics->brid2name($pic['brid']);
@@ -144,7 +144,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			if($notifications['comm_pics'] != NULL) {
 ?>
 						<div class="comm_owns notifications">
-							<p>Neue Kommentare auf deinen Bildern:</p>
+							<p>Neue Kommentare auf deinen Bildern:<br>&nbsp;</p>
 <?php
 				foreach($notifications['comm_pics'] as $comm) {
 ?>
@@ -156,6 +156,7 @@ if(!isset($_GET['user']) && !$user->login) {
 				}
 ?>
 						</div>
+						<span id="notific_read" class="pseudo_link" style="clear: both;">Benachrichtigungen gelesen</span>
 <?php
 			}
 		}else echo '<p>Es gibt keine neuen Benachrichtigungen für dich.</p>';

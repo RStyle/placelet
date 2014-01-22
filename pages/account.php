@@ -75,6 +75,7 @@ if($user->login) {
 	}elseif($category == 'privacy') {
 ?>
 			<div class="green_line mainarticleheaders line_header"><h1>Privatsphäreeinstellungen (<?php echo $user->login ?>)</h1></div>
+			<p>Es sind noch keine Privatsphäreeinstellungen verfügbar, es wäre nett, wenn du uns mitteilen würdest, welche du gerne bei uns sehen würdest.</p>
 <?php	
 	}else {
 ?>

@@ -43,6 +43,11 @@ if(isset($_POST['submit'])) {
 						$_POST['comm_pic_online'], $_POST['comm_pic_email'],
 						$_POST['pic_subs_online'], $_POST['pic_subs_email']);
 				}
+				$notifics = $user->recieve_notifications();
+				$navregister['value'] = "Mein Profil";
+				if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
+					$navregister['value'] = 'Mein Profil ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
+	}
 			}
 			break;
 		case 'Passwort ändern':

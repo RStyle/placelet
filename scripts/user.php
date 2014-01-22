@@ -402,7 +402,7 @@ class User
 		$stmt->execute(array(':username' => $this->login));
 		$stats = $stmt->fetch(PDO::FETCH_ASSOC);
 		
-		$sql = "SELECT pic_own, comm_own, comm_pic FROM notifications WHERE user = :username LIMIT 1";
+		$sql = "SELECT pic_own, comm_own, comm_pic, pic_subs FROM notifications WHERE user = :username LIMIT 1";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array(':username' => $this->login));
 		$q = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -460,7 +460,7 @@ class User
 						$sql = "SELECT user, brid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked";
 						$stmt = $this->db->prepare($sql);
 						$stmt->execute(array(
-							':brid' => $brid,
+							':brid' => $brid['brid'],
 							':notific_checked' => $stats['notific_checked']
 						));
 						$pic_subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -472,13 +472,15 @@ class User
 		@$return['comm_owns'] = $comm_owns;
 		@$return['comm_pics'] = $comm_pics;
 		@$return['pic_subs'] = $pic_subs;
-		/*foreach($return as $key => $val) {
-			print_r($key);
-			echo ': ';
-			print_r($val);
-			echo '<br><br>';
-		}*/
 		return $return;
+	}
+	public function notifications_read() {
+		$sql = "UPDATE users SET notific_checked = :date WHERE user = :username";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+			':date' => time(),
+			':username' => $this->login
+		));
 	}
 }
 ?>
@@ -1183,48 +1185,46 @@ class Statistics {
 			$sql = "SELECT user, pic_own, comm_own, comm_pic FROM notifications WHERE user = :owner";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute(array(':owner' => $owner));
-			$q = $stmt->fetchAll();//DAS MUSS NOCH AUF EIN EINFACH FETCH REDUZIERT UND DIE SCHLEIFE ENTFERNT WERDEN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+			$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
 			$users_pic_subs_informed = array();
-			foreach($q as $userNR => $userProps) {
-				$userdetails = $this->userdetails($userProps['user']);
-				$user_email = $userdetails['email'];
-				foreach($userProps as $key => $val) {
-					if($key == 'pic_own') {
-						if($val == 2 || $val == 3) {
-							if(!$comm) {
-								$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
-								$mail_header = "From: Placelet <support@placelet.de>\n";
-								$mail_header .= "MIME-Version: 1.0" . "\n";
-								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-								$mail_header .= "Content-transfer-encoding: 8bit";
-								mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
-							}
+			$userdetails = $this->userdetails($userProps['user']);
+			$user_email = $userdetails['email'];
+			foreach($userProps as $key => $val) {
+				if($key == 'pic_own') {
+					if($val == 2 || $val == 3) {
+						if(!$comm) {
+							$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+							$mail_header = "From: Placelet <support@placelet.de>\n";
+							$mail_header .= "MIME-Version: 1.0" . "\n";
+							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+							$mail_header .= "Content-transfer-encoding: 8bit";
+							mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 						}
-					}elseif($key == 'comm_own') {
-						if($val == 2 || $val == 3) {
-							if($comm) {
-								$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
-											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
-								$mail_header = "From: Placelet <support@placelet.de>\n";
-								$mail_header .= "MIME-Version: 1.0" . "\n";
-								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-								$mail_header .= "Content-transfer-encoding: 8bit";
-								mail($user_email, 'Neues Kommentar für Armband '.$braceName, $content, $mail_header);
-							}
+					}
+				}elseif($key == 'comm_own') {
+					if($val == 2 || $val == 3) {
+						if($comm) {
+							$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+							$mail_header = "From: Placelet <support@placelet.de>\n";
+							$mail_header .= "MIME-Version: 1.0" . "\n";
+							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+							$mail_header .= "Content-transfer-encoding: 8bit";
+							mail($user_email, 'Neues Kommentar für Armband '.$braceName, $content, $mail_header);
 						}
-					}elseif($key == 'pic_subs') {
-						if($val == 2 || $val == 3) {
-							if($comm) {
-								$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-											Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
-								$mail_header = "From: Placelet <support@placelet.de>\n";
-								$mail_header .= "MIME-Version: 1.0" . "\n";
-								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-								$mail_header .= "Content-transfer-encoding: 8bit";
-								mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
-								$useremails_pic_subs_informed[] = $user_email;
-							}
+					}
+				}elseif($key == 'pic_subs') {
+					if($val == 2 || $val == 3) {
+						if($comm) {
+							$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+										Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
+							$mail_header = "From: Placelet <support@placelet.de>\n";
+							$mail_header .= "MIME-Version: 1.0" . "\n";
+							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+							$mail_header .= "Content-transfer-encoding: 8bit";
+							mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+							$useremails_pic_subs_informed[] = $user_email;
 						}
 					}
 				}
@@ -1238,23 +1238,21 @@ class Statistics {
 				$sql = "SELECT user, pic_own, comm_own, comm_pic FROM notifications WHERE user = :picposter";
 				$stmt = $this->db->prepare($sql);
 				$stmt->execute(array(':picposter' => $picposter['user']));
-				$q = $stmt->fetchALl();//UND HIER AUCH
-				foreach($q as $userNR => $userProps) {
-					$userdetails = $this->userdetails($userProps['user']);
-					$user_email = $userdetails['email'];
-					foreach($userProps as $key => $val) {
-						if($key == 'comm_pic') {
+				$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
+				$userdetails = $this->userdetails($userProps['user']);
+				$user_email = $userdetails['email'];
+				foreach($userProps as $key => $val) {
+					if($key == 'comm_pic') {
 
 
-							if($val == 2 || $val == 3) {
-								$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
-											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
-								$mail_header = "From: Placelet <support@placelet.de>\n";
-								$mail_header .= "MIME-Version: 1.0" . "\n";
-								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-								$mail_header .= "Content-transfer-encoding: 8bit";
-								mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
-							}
+						if($val == 2 || $val == 3) {
+							$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+							$mail_header = "From: Placelet <support@placelet.de>\n";
+							$mail_header .= "MIME-Version: 1.0" . "\n";
+							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+							$mail_header .= "Content-transfer-encoding: 8bit";
+							mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 						}
 					}
 				}
