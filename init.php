@@ -22,8 +22,7 @@ require_once($this_path.'scripts/user.php');
 ini_set( 'session.use_only_cookies', '1' );
 ini_set( 'session.use_trans_sid', '0' );
 session_start(); //Session starten
-if (!isset( $_SESSION['server_SID'] ))
-{
+if(!isset($_SESSION['server_SID'])) {
     // Möglichen Session Inhalt löschen
     session_unset();
     // Ganz sicher gehen das alle Inhalte der Session gelöscht sind

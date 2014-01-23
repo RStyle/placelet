@@ -682,12 +682,8 @@ $(document).ready(function(){
 			type: "POST",
 			url: "../scripts/ajax/ajax_login.php",
 			data: "notific_read=true",
-			success: function(html){
-				$("#notific_read").append(html);	
-			},
-			beforeSend:function()
-			{
-				$("#notific_read").append("LADEN");	
+			success: function(){
+				$("#notific_read").remove();
 			}
 		});
 	});
