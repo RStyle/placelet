@@ -8,8 +8,8 @@
 					55543 Bad Kreuznach<br>
 				</p>
 				<p style="float: left; margin-left: 2em;">
-					Telefon: 0671 - 66464<br>
-					Telefax: 0671 - 64119<br>
+					Telefon: 017670174562<br>
+					<!--Telefax: 0671 - 64119<br>-->
 					<br>
 					www.placelet.de<br>
 					www.placelet.net<br>
