@@ -121,7 +121,7 @@ class User
 				':user' => trim($reg['reg_login']),
 				':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 			);
-			$sql = "INSERT INTO notifications (user, pic_own, comm_own, comm_pic) VALUES (:user, :pic_own, :comm_own, :comm_pic)";
+			$sql = "INSERT INTO notifications (user, pic_own, comm_own, comm_pic, pic_subs) VALUES (:user, :pic_own, :comm_own, :comm_pic, :pic_subs)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
 				':user' => trim($reg['reg_login']),
@@ -130,10 +130,11 @@ class User
 				':comm_pic' => 1,
 				':pic_subs' => 3
 			));
-			$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
+			//$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
+			$content = str_replace(array('username', 'code'),array(urlencode($reg['reg_login']), urlencode($code)),file_get_contents('./text/email/basic.html'));
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
-			$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
+			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
 			mail($reg['reg_email'], 'Bestätigungsemail', $content, $mail_header);
 			return true;
