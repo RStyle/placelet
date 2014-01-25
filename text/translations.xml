@@ -355,6 +355,60 @@
 	<search>
 	</search>
 	<shop>
+		<unser_armband>
+			<en>our bracelet</en>
+			<de>Unser Armband</de>
+		</unser_armband>
+		<reisearmband>
+			<en>travel bracelet</en>
+			<de>Reisearmband</de>
+		</reisearmband>
+		<artikelinfo>
+			<en>product information</en>
+			<de>Artikelinformationen</de>
+		</artikelinfo>
+		<description>
+			<en>
+				Our bracelet is made out of leather, using a knotting technique to close it.
+				The logo is engraved on the front side of the metal plaque, the ID on the backside.
+				You can use the ID to register on our website and keep track of you bracelet. 
+				Our idea was it to keep it simple but fashionable and we hope you like the design!
+			</en>
+			<de>
+				Unser Armband besteht aus einem Ledermaterial, welches mit einer Knottechnik geschlossen wird.
+				Das Armband ist mit einem Metallplättchen versehen, worauf unser Logo gelasert ist.
+				Außerdem wirst Du auf der Rückseite deines Armbands eine ID-Nummer finden, mit der du dich auf unserer Homepage einloggen und dein Armband verfolgen kannst.
+				Unsere Armband ist schlicht und modisch und wir hoffen, hierbei genau auf Deinen Geschmack zu treffen!
+			</de>
+		</description>
+		<size en-title="size:" de-title="Größe:">
+			<en>one size (fits all)</en>
+			<de>Einheitsgröße (Verschluss verstellbar)</de>
+		</size>
+		<color en-title="colors:" de-title="Farben:">
+			<en>matt grey, brown</en>
+			<de>mattgrau, braun</de>
+		</color>
+		<material en-title="material:" de-title="Material:">
+			<en>stainless steel, leather</en>
+			<de>Edelstahl, Leder</de>
+		</material>
+		<gender en-title="gender:" de-title="Geschlecht:">
+			<en>unisex ( &#x2642; | &#x2640; )</en>
+			<de>Unisex ( &#x2642; | &#x2640; )</de>
+		</gender>
+		<ordernow>
+			<en>Order now!</en>
+			<de>Jetzt bestellen!</de>
+		</ordernow>
+		<paypal>
+			<en><![CDATA[<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">]]></en>
+			<de><![CDATA[<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">]]></de>
+		</paypal>
+		<notavailable>
+			<en><![CDATA[Very soon you will be able to visit our new Online-Shop right here. If you want to be notified when it launches, register <a href="login">here</a> and you will recieve an email once it is online.]]></en>
+			<de><![CDATA[Hier wird in Kürze unser Online-Shop erscheinen. Wenn sie über den Verkaufsstart informiert werden wollen, registrieren sie sich <a href="login">hier</a> und sie werden eine Benachrichtigung per E-Mail erhalten.]]></de>
+		</notavailable>
 	</shop>
 	<start>
 	</start>
