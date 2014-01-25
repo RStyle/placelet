@@ -1,7 +1,7 @@
 <!--CONNECT-LEISTE-->
 			<div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
-                    <h1 class="headers pseudo_link" id="header_1"><span class="header_arrow1 arrow_right"></span>&nbsp;neuester upload</h1>
+                    <h1 class="headers pseudo_link" id="header_1"><span class="header_arrow1 arrow_right"></span>&nbsp;<?php echo $lang->stats->neuesterupload[$lng."-title"]; ?></h1>
                         <div id="connectbox_1">
 <?php
 if($systemStats['total_posted'] > 1) {
@@ -22,22 +22,22 @@ if($systemStats['total_posted'] > 1) {
         						</a>
         							<table class="connect_pic-info">
         								<tr>
-        									<th>Armband</th>
+        									<th><?php echo $lang->stats->neuesterupload->armband->$lng; ?></th>
         									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
         								</tr>
         								<tr>
-        									<th>Datum</th>
-        									<td><?php echo date('d.m.Y H:i', $stats[1][0]['date']); ?> Uhr</td>
+        									<th><?php echo $lang->stats->neuesterupload->datum->$lng; ?></th>
+        									<td><?php echo date('d.m.Y H:i', $stats[1][0]['date'])." ".$lang->misc->uhr->$lng; ?></td>
         								</tr>
         								<tr>
-        									<th>Ort</th>
+        									<th><?php echo $lang->stats->neuesterupload->ort->$lng; ?></th>
         									<td><?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?></td>
         								</tr>
                                     	<?php
                                     				if($stats[1][0]['user'] != NULL) {
                                     	?>
         								<tr>
-        									<th>Uploader</th>
+        									<th><?php echo $lang->stats->neuesterupload->uploader->$lng; ?></th>
         									<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[1][0]['user'])); ?>"><?php echo $stats[1][0]['user']; ?></a></td>
         								</tr>
                                     	<?php
@@ -49,24 +49,24 @@ if($systemStats['total_posted'] > 1) {
     					</div>
                 </div>
                 <div class="connect_box" id="submit_box">
-                    <h1 class="headers pseudo_link" id="header_2"><span class="header_arrow2 arrow_right"></span>&nbsp;+1 bild</h1>
+                    <h1 class="headers pseudo_link" id="header_2"><span class="header_arrow2 arrow_right"></span>&nbsp;<?php echo $lang->stats->neuesbild[$lng."-title"]; ?></h1>
                     <div id="connectbox_2">
                         <form action="login" method="get">
                             <p>
-        						Gib deine <span>Armband-ID</span> an:<br>    						
+        						<?php echo $lang->stats->neuesbild->ideingeben->$lng; ?><br>						
     							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
-    							<input type="submit" value="Zum Upload">    						
+    							<input type="submit" value="<?php echo $lang->stats->neuesbild->button->$lng; ?>">    						
         					</p>
     					</form>
     					
                         <hr>
                         
-                        <h1>neues armband</h1>
+                        <h1><?php echo $lang->stats->neuesarmband[$lng."-title"]; ?></h1>
                         <form action="login" method="get">
                         <p>
-    						Gib deine <span>Armband-ID</span> an:<br>
+    						<?php echo $lang->stats->neuesarmband->ideingeben->$lng; ?><br>
     						<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
-    						<input type="submit" value="Armband registrieren">						 
+    						<input type="submit" value="<?php echo $lang->stats->neuesarmband->button->$lng; ?>">						 
     					</p>
     					</form>
     				</div>
@@ -75,48 +75,32 @@ if($systemStats['total_posted'] > 1) {
 
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
-				<div class="mainarticleheaders line_header blue_line"><h1>Das Reisearmband</h1></div>
+				<div class="mainarticleheaders line_header blue_line"><h1><?php echo $lang->home->artikel1[$lng."-title"]; ?></h1></div>
 				 <?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband2.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband2.jpg" alt="Armband" style="width: 100%;"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband2.jpg)"></div>';?>				
 				<p>
-                    Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
-                    Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
-                    Mithilfe eines Namens, den du selbst für dein Armband festlegst, kann jeder, dem du den Namen mitteilst, dein Armband mithilfe unserer Suchleiste finden und seinen Weg nachverfolgen.
+                    <?php echo $lang->home->artikel1->paragraph[0]->$lng; ?>
 				</p>
 				<p>
-                    <b>Hast du Lust, bei unserem sozialen Experiment mitzumachen?</b><br>
-					In unserem Shop geht es weiter.
+                    <?php echo $lang->home->artikel1->paragraph[1]->$lng; ?>
                      
 				</p>
 			</article>                                                                                                        
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
-				<div class=" mainarticleheaders line_header green_line"><h1>Wie funktioniert's?</h1></div>
+				<div class=" mainarticleheaders line_header green_line"><h1><?php echo $lang->home->artikel2[$lng."-title"]; ?></h1></div>
 				<!--<?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband.jpg" style="width: 100%;" alt="Armband"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband.jpg)"></div>';?>-->
 				<div class="responsive_16-9" style="margin-bottom: 1em;"><iframe width="560" height="315" src="//www.youtube.com/embed/xtnbzTK2G8I" style="border: none"></iframe></div>
+<?php
+for($i = 0; $i < 6; $i++){
+?>
 				<p>
-					<span class="highlighted kollektion_numbers">1</span> Mit dem Kauf eines Armbands erhältst du eine ID, die du auf der Rückseite des Armbandes findest. Registriere dich damit in der Box auf unserer Startseite! 
+					<span class="highlighted kollektion_numbers"><?php echo $i+1; ?></span><?php echo $lang->home->artikel2->paragraph[$i]->$lng; ?>
 				</p>
 				<span class="arrow highlighted">&#11015;</span>
-				<p>
-					<span class="highlighted kollektion_numbers">2</span> Trage dein Armband, solange du Lust und Zeit hast.<br>&nbsp;
-				</p>
-				<span class="arrow highlighted">&#11015;</span>
-				<p>
-					<span class="highlighted kollektion_numbers">3</span> Lade Fotos von dir und deinem Armband hoch! Die ID darf nicht sichtbar sein - sie funktioniert wie ein Passwort!
-				</p>
-				<span class="arrow highlighted">&#11015;</span>
-				<p>
-					<span class="highlighted kollektion_numbers">4</span> Verschenke dein Armband an Freunde oder andere Leute weiter und erkläre ihnen das Grundprinzip.
-				</p>
-				<span class="arrow highlighted">&#11015;</span>
-				<p>
-					<span class="highlighted kollektion_numbers">5</span> Der nächste Besitzer kann ebenfalls ein Bild mit der ID hochladen und das Armband weitergeben. Zum Hochladen alleine benötigst du kein Profil bei uns.
-				</p>
-				<span class="arrow highlighted">&#11015;</span>
-				<p style="margin-bottom: 0.5em;">
-					<span class="highlighted kollektion_numbers">6</span> Verfolge den Weg deines Armbandes und kommentiere nach Lust und Laune die Bilder anderer User.
-				</p>
-				<b>Noch Fragen?</b> Schau dir die <a href="faq">FAQ</a> an oder <a href="kontakt">kontaktiere uns</a>.
+<?php
+}
+?>
+				<br><?php echo $lang->home->artikel2->articlefooter->$lng; ?>
 			</article>
 <!--SIDEBAR-->
 			<aside class="side_container">

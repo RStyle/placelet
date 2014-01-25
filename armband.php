@@ -22,13 +22,13 @@ if ($braceName != NULL) {
 	//Kommentar löschen
 	if(isset($_GET['comment_deleted'])) {
 		if($_GET['comment_deleted'] == 'true') {
-			$js .= 'alert("Kommentar erfolgreich gelöscht.");';	
+			$js .= 'alert("'.$lang->php->manage_comment->$lng.'");';	
 		}
 	}
 	//Bild löschen
 	if(isset($_GET['pic_deleted'])) {
 		if($_GET['pic_deleted'] == 'true') {
-			$js .= 'alert("Bild erfolgreich gelöscht.");';	
+			$js .= 'alert("'.$lang->php->manage_pic->$lng.'");';	
 		}
 	}
 	//Armband Name ändern
@@ -38,11 +38,11 @@ if ($braceName != NULL) {
 		if($change_name == 1) {
 			header('Location: armband?name='.urlencode($_POST['edit_name']).'&name_edited='.$change_name);
 		}elseif($change_name == 2) {
-			$js .= 'alert("Es gibt schon ein Armband mit diesem Namen.");';
+			$js .= 'alert("'.$lang->php->edit_br_name->f2->$lng.'");';
 		}
 	}
 	if(isset($_GET['name_edited'])) {
-		$js .= 'alert("Name erfolgreich geändert.");';
+		$js .= 'alert("'.$lang->php->edit_br_name->name_edited->$lng.'");';
 	}
 	if($user->login) {
 		//Überprüfen, ob man das Armband gekauft hat.
@@ -57,8 +57,8 @@ if ($braceName != NULL) {
 		if(isset($_GET['sub']) && isset($_GET['sub_user'])) {
 			$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, $_GET['sub_user']);
 			if(isset($sub_added)) {
-				if($sub_added === true) $js .= 'alert("Abonnement erfolgreich hinzugefügt.");';
-					elseif($sub_added == 2) $js .= 'alert("Du hast dieses Armband schon abonniert.");';
+				if($sub_added === true) $js .= 'alert("'.$lang->php->manage_subscription->wahr->$lng.'");';
+					elseif($sub_added == 2) $js .= 'alert("'.$lang->php->manage_subscription->f2->$lng.'");';
 			}
 		}
 	}
@@ -66,10 +66,10 @@ if ($braceName != NULL) {
 	if(isset($_GET['sub']) && isset($_GET['sub_code'])) {
 		$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, urldecode($_GET['sub_code']));
 		if(isset($sub_added)) {
-			if($sub_added === true) $js .= 'alert("Abonnement erfolgreich hinzugefügt.");';
-				elseif($sub_added == 2) $js .= 'alert("Dieses Armband wurde schon mit der eingegebenen E-Mail abonniert.");';
-				elseif($sub_added == 3) $js .= 'alert("Dieses Armband wurde nicht mit dieser E-Mail abonniert.");';
-				elseif($sub_added === false) $js .= 'alert("Du hast das Abonnement erfolgreich beendet.");';
+			if($sub_added === true) $js .= 'alert("'.$lang->php->manage_subscription->wahr->$lng.'");';
+				elseif($sub_added == 2) $js .= 'alert('.$lang->php->manage_subscription->f2->$lng.'");';
+				elseif($sub_added == 3) $js .= 'alert("'.$lang->php->manage_subscription->f3->$lng.'");';
+				elseif($sub_added === false) $js .= 'alert("'.$lang->php->manage_subscription->falsch->$lng.'");';
 		}
 	}
 	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);

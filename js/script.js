@@ -509,16 +509,20 @@ $(window).scroll(function () {
 	}
 });
 
-function reload_start(plus) {
+function reload_start(plus, pic_br_switch) {
+	console.log('reload: ' + $('#pic_br_switch').data('recent_brid_pics'));
 	reload_q += plus;
 	if(reload_q < 3)
 		reload_q = 3;
-	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q )
-		.done(function( data ) {
+	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + $('#pic_br_switch').data('recent_brid_pics'))
+		.done(function(data) {
 			if(data != ""){
-				$("#start_reload").remove();
-				htmlcode = $("#recent_pics").html();
-				$("#recent_pics").append(data);
+					htmlcode = $("#recent_pics").html();
+					if(plus == 0) {
+						$("#recent_pics").html(data);
+					}else {
+						$("#recent_pics").append(data);
+					}
 			} else {
 				reload_q -= 3;
 			}
@@ -688,3 +692,12 @@ $(document).ready(function(){
 		});
 	});
 });
+
+//Zwischen neuesten Bildern und zuletzt geposteten Armbändern wechseln.
+$(document).ready(function() {
+	$('#pic_br_switch').click(function() {
+		if($('#pic_br_switch').data('recent_brid_pics') == 'true') $('#pic_br_switch').data('recent_brid_pics', 'false');
+			else $('#pic_br_switch').data('recent_brid_pics', 'true');
+		reload_start(0);
+	});
+});pic_br_switch

@@ -45,8 +45,8 @@ if($page == 'home') {
 		<header id="header">
 			<div id="headerregisterbr">
 				<form name="registerbr" action="search" method="post">
-					<label for="squery">Benutzer/Armband suchen </label>
-					<input name="squery" type="search" id="squery" placeholder="Suchen..." size="20" maxlength="18" required>
+					<label for="squery"><?php echo $lang->misc->search->$lng; ?></label>
+					<input name="squery" type="search" id="squery" placeholder="<?php echo $lang->misc->searchbox->$lng; ?>" size="20" maxlength="18" required>
 				</form>
 			</div>
 <?php
@@ -77,11 +77,11 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="http://placelet.net<?php echo $friendly_self_get; ?>" hreflang="en"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 				<li class="headerlist_main_divider">|</li>
-				<li><a href="impressum">Impressum</a></li>
+				<li><a href="impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="kontakt">Kontakt</a></li>
+				<li><a href="kontakt"><?php echo $lang->misc->nav->kontakt->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="faq">FAQ</a></li>
+				<li><a href="faq"><?php echo $lang->misc->nav->faq->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
 			</ul>
@@ -91,17 +91,17 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
-				<li style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>"><a href="home" class="navlinks">Home</a></li>
-				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="start" class="navlinks">Community</a></li>
-				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="about" class="navlinks">Das Team</a></li>
-				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks">Shop</a></li>
+				<li style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>"><a href="home" class="navlinks"><?php echo $lang->misc->nav->home->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="start" class="navlinks"><?php echo $lang->misc->nav->community->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="about" class="navlinks"><?php echo $lang->misc->nav->about->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks"><?php echo $lang->misc->nav->shop->$lng; ?></a></li>
 				<li 
 				<?php if (!($user->admin)) { ?>
                 style="margin-right: 0; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" 
                 <?php } ?>
                 class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks"><?php echo $navregister['value']; ?></a></li>
 				<?php if($user->admin) { ?>
-				<li style="margin-right: 0; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks">Admin-Tools</a></li>
+				<li style="margin-right: 0; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks"><?php echo $lang->misc->nav->admin->$lng; ?></a></li>
 				<?php } ?>
 				
 			</ul>

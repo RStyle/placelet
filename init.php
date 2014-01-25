@@ -3,7 +3,6 @@ date_default_timezone_set("Europe/Berlin");
 // Alle Fehlermeldungen werden angezeigt
 error_reporting(E_ALL|E_STRICT);
 ini_set('display_errors', true);
-/*error_reporting(0);*/
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
 if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path = '';
@@ -37,8 +36,12 @@ if(!isset($_SESSION['server_SID'])) {
     $_SESSION['server_SID'] = true;
 }
 
-$checklogin = false;
+$lang = simplexml_load_file('./text/translations.xml');
+$lng = 'en';
 $js = '<script type="text/javascript">$(document).ready(function(){';
+foreach($lang->js as $key => $val) {
+	$js.= 'langjs['.$key.'] = '.$val->$lng;
+}
 
 if(isset($_GET['logout']))  {
 	User::logout();
@@ -46,6 +49,7 @@ if(isset($_GET['logout']))  {
 	exit;
 }
 
+$checklogin = false;
 if(isset($_POST['login']) && isset($_POST['password'])){
 	if(Statistics::userexists($_POST['login'])) {
 		$user = new User($_POST['login'], $db);	
@@ -108,14 +112,14 @@ $pagename = array(
 );
 	
 $navregister['href'] = "login";	
-$navregister['value'] = "Registrieren";
+$navregister['value'] = $lang->misc->nav->register->$lng;
 
 if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'Mein Profil'
 	$navregister['href'] = "profil";
-	$navregister['value'] = "Mein Profil";
+	$navregister['value'] = $lang->misc->nav->proil->$lng;
 	$notifics = $user->recieve_notifications();
 	if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
-		$navregister['value'] = 'Mein Profil ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
+		$navregister['value'] = $lang->misc->nav->profil->$lng . ' ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
 	}
 }
 if($page == 'login') {

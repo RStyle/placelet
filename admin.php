@@ -7,14 +7,14 @@ if($user->admin && $checklogin) {
 	if(isset($_GET['delete_comm']) && isset($_GET['commid']) && isset($_GET['picid']) && isset($_GET['name'])) {
 		$comment_deleted = $statistics->manage_comment($user->admin, 'middle', $_GET['commid'], $_GET['picid'], $statistics->name2brid(urldecode($_GET['name'])));
 		if($comment_deleted === true) {
-			$js .= 'alert("Kommentar erfolgreich gelöscht.");';
+			$js .= 'alert("'.$lang->php->manage_comment->$lng.'");';
 		}
 	}
 	//Bild löschen
 	if(isset($_GET['delete_pic']) && isset($_GET['picid']) && isset($_GET['name'])) {
 		$pic = $statistics->manage_pic($user->admin, 'middle', $_GET['picid'], $statistics->name2brid(urldecode($_GET['name'])));
 		if($pic === true) {
-			$js .= 'alert("Bild erfolgreich gelöscht.");';
+			$js .= 'alert("'.$lang->php->manage_pic->$lng.'");';
 		}
 	}
 	//Kein Spam

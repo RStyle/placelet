@@ -30,6 +30,8 @@ $systemStats = $statistics->systemStats($user_anz, 3);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
+	if(isset($displayed_brids[$val])) $displayed_brids[$val]++;
+		else $displayed_brids[$val] = 0;
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
 /*---------------------------------------------------------*/

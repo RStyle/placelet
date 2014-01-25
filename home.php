@@ -5,9 +5,9 @@ require_once('./init.php');
 if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){
 	$regstatus_change = $user->regstatuschange($_GET['regstatuschange'], $_GET['regstatuschange_user']);
 	if($regstatus_change) {
-		$js .= 'alert("Bestätigung erfolgreich.");';
+		$js .= 'alert("'.$lang->php->regstatuschange->wahr->$lng.'");';
 	}elseif(!$regstatus_change) {
-		$js .= 'alert("Die Bestätigung deiner Email ist gescheitert.");';
+		$js .= 'alert("'.$lang->php->regstatuschange->falsch->$lng.'");';
 	}
 }
 $systemStats = $statistics->systemStats(0, 3);

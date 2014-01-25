@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<langs>
+	<misc>
+		<nav>
+			<home>
+				<en>Home</en>
+				<de>Home</de>
+			</home>
+			<community>
+				<en>Community</en>
+				<de>Community</de>
+			</community>
+			<about>
+				<en>About Us</en>
+				<de>Das Team</de>
+			</about>
+			<shop>
+				<en>Shop</en>
+				<de>Shop</de>
+			</shop>
+			<profil>
+				<en>My Profile</en>
+				<de>Mein Profil</de>
+			</profil>
+			<register>
+				<en>Register</en>
+				<de>Registrieren</de>
+			</register>
+			<admin>
+				<en>Admin-Tools</en>
+				<de>Admin-Tools</de>
+			</admin>
+			
+			<impressum>
+				<en>legal notice</en>
+				<de>Impressum</de>
+			</impressum>
+			<kontakt>
+				<en>contact</en>
+				<de>Kontakt</de>
+			</kontakt>
+			<faq>
+				<en>FAQ</en>
+				<de>FAQ</de>
+			</faq>
+		</nav>
+		<search>
+			<en>Search for user/bracelet</en>
+			<de>Benutzer/Armband suchen</de>
+		</search>
+		<searchbox>
+			<en>Search...</en>
+			<de>Suchen...</de>
+		</searchbox>
+		<uhr>
+			<en></en>
+			<de>Uhr</de>
+		</uhr>
+	</misc>
+	<about>
+	</about>
+	<account>
+	</account>
+	<admin>
+	</admin>
+	<armband>
+	</armband>
+	<community>
+	</community>
+	<faq>
+	</faq>
+	<home>
+		<artikel1 de-title="Das Reisearmband" en-title="The Travel Bracelet">
+			<paragraph>
+				<en><![CDATA[
+					Do you want to own a Travelbracelet, present it to others and become part of our community?<br>
+					Then buy one of our personal bracelets and bring joy to people all over the world!<br>
+					Using a name you come up with, others can also keep track of your bracelet traveling the world.
+				]]></en>
+				<de><![CDATA[
+					Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
+					Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
+					Mithilfe eines Namens, den du selbst für dein Armband festlegst, kann jeder, dem du den Namen mitteilst, dein Armband mithilfe unserer Suchleiste finden und seinen Weg nachverfolgen.
+				]]></de>
+			</paragraph>
+			<paragraph>
+				<en><![CDATA[
+					<b>Do you want to be part of our social experiment?</b><br>
+					Then visit our shop.
+					]]>
+				</en>
+				<de><![CDATA[
+					<b>Hast du Lust, bei unserem sozialen Experiment mitzumachen?</b><br>
+					In unserem Shop geht es weiter.
+				]]></de>
+			</paragraph>
+		</artikel1>
+		<artikel2 de-title="Wie funktioniert's?" en-title="How does it work?">
+			<paragraph>
+				<en>Each bracelet has an ID on the backside. Use it to register yourself in the box on our home page!</en>
+				<de>Mit dem Kauf eines Armbands erhältst du eine ID, die du auf der Rückseite des Armbandes findest. Registriere dich damit in der Box auf unserer Startseite!</de>
+			</paragraph>
+			<paragraph>
+				<en><![CDATA[Wear your bracelet as long as you want.<br>&nbsp;]]></en>
+				<de><![CDATA[Trage dein Armband, solange du Lust und Zeit hast.<br>&nbsp;]]></de>
+			</paragraph>
+			<paragraph>
+				<en>Upload pictures of yourself and your bracelet. Make sure the ID is not legible – it works as a password!</en>
+				<de>Lade Fotos von dir und deinem Armband hoch! Die ID darf nicht sichtbar sein - sie funktioniert wie ein Passwort!</de>
+			</paragraph>
+			<paragraph>
+				<en>Give your bracelet to friends or strangers and explain the basic principle to them.</en>
+				<de>Verschenke dein Armband an Freunde oder andere Leute weiter und erkläre ihnen das Grundprinzip</de>
+			</paragraph>
+			<paragraph>
+				<en>The next user can also upload pictures and give the bracelet away. You don't need a profile to upload pictures, only to register a new bracelet.</en>
+				<de>Der nächste Besitzer kann ebenfalls ein Bild mit der ID hochladen und das Armband weitergeben. Zum Hochladen alleine benötigst du kein Profil bei uns.</de>
+			</paragraph>
+			<paragraph>
+				<en>Keep track of your bracelet, comment on pictures and stay in touch with people from all over the world!</en>
+				<de>Verfolge den Weg deines Armbandes und kommentiere nach Lust und Laune die Bilder anderer User.</de>
+			</paragraph>
+			<articlefooter>
+				<en><![CDATA[<b>Any questions?</b> Take a look at the <a href="faq">FAQ</a> or <a href="kontakt">contact us</a>.
+]]></en>
+				<de><![CDATA[<b>Noch Fragen?</b> Schau dir die <a href="faq">FAQ</a> an oder <a href="kontakt">kontaktiere uns</a>.
+]]></de>
+			</articlefooter>
+		</artikel2>
+	</home>
+	<impressum>
+	</impressum>
+	<kontakt>
+	</kontakt>
+	<login>
+	</login>
+	<order>
+	</order>
+	<profil>
+	</profil>
+	<search>
+	</search>
+	<shop>
+	</shop>
+	<start>
+	</start>
+	<stats>
+		<neuesterupload de-title="neuster upload" en-title="latest upload">
+			<armband>
+				<en>bracelet</en>
+				<de>Armband</de>
+			</armband>
+			<datum>
+				<en>date</en>
+				<de>Datum</de>
+			</datum>
+			<ort>
+				<en>location</en>
+				<de>Ort</de>
+			</ort>
+			<uploader>
+				<en>Uploader</en>
+				<de>Uploader</de>
+			</uploader>
+		</neuesterupload>
+		<neuesbild en-title="+1 pic" de-title="+1 bild">
+			<ideingeben>
+				<en><![CDATA[Enter your <span>bracelet-ID</span>:]]></en>
+				<de><![CDATA[Gib deine <span>Armband-ID</span> an:]]></de>
+			</ideingeben>
+			<button>
+				<en>upload</en>
+				<de>Zum Upload</de>
+			</button>
+		</neuesbild>
+		<neuesarmband en-title="+1 bracelet" de-title="+1 armband">
+			<ideingeben>
+				<en><![CDATA[Enter your <span>bracelet-ID</span>:]]></en>
+				<de><![CDATA[Gib deine <span>Armband-ID</span> an:]]></de>
+			</ideingeben>
+			<button>
+				<en>register</en>
+				<de>Registrieren</de>
+			</button>
+		</neuesarmband>
+	</stats>
+	<php>
+		<manage_comment>
+			<en>Comment successfully deleted.</en>
+			<de>Kommentar erfolgreich gelöscht.</de>
+		</manage_comment>
+		<manage_pic>
+			<en>Picture successfully deleted</en>
+			<de>Bild erfolgreich gelöscht</de>
+		</manage_pic>
+		<edit_br_name>
+			<f2>
+				<en>There already exists a bracelet with that name.</en>
+				<de>Es gibt schon ein Armband mit diesem Namen.</de>
+			</f2>
+			<name_edited>
+				<en>Name changed successfully.</en>
+				<de>Name erfolgreich geändert.</de>
+			</name_edited>
+		</edit_br_name>
+		<manage_subscription>
+			<wahr>
+				<en>Abonnonement successfully added.</en>
+				<de>Das Abonnement wurde erfolgreich hinzugefügt.</de>
+			</wahr>
+			<f2>
+				<en>You are already subscribed to this bracelet.</en>
+				<de>Du hast dieses Armband schon abonniert.</de>
+			</f2>
+			<f3>
+				<en>This e-mail address is not subscribed to this bracelet.</en>
+				<de>Dieses Armband wurde nicht mit dieser E-Mail abonniert.</de>
+			</f3>
+			<falsch>
+				<en>You successfully cancelled the subscription.</en>
+				<de>Das Abonnement wurde erfolgreich beendet.</de>
+			</falsch>
+		</manage_subscription>
+		<regstatuschange>
+			<wahr>
+				<en>Confirmation successful.</en>
+				<de>Bestätigung erfolgreich.</de>
+			</wahr>
+			<falsch>
+				<en>Your Conformation failed.</en>
+				<de>Die Bestätigung deiner Email ist gescheitert.</de>
+			</falsch>
+		</regstatuschange>
+	</php>
+	<js>
+		<test>
+			<en></en>
+			<de></de>
+		</test>
+	</js>
+</langs>

@@ -71,43 +71,44 @@
 <!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
         
 			<article id="recent_pics" class="mainarticles bottom_border_blue">
-			<div class="blue_line mainarticleheaders line_header"><h2 title="Zuletzt aktualisierte Armbänder mit deren neuesten Bild">Neueste Bilder</h2></div>
+			<div class="blue_line mainarticleheaders line_header"><h2 id="pic_br_switch" data-recent_brid_pics="false">Neueste Bilder</h2></div>
 <?php
-			for ($i = 1; $i <= count($bracelets_displayed) && $i <= $systemStats['total_posted']; $i++) {
+			for($i = 1; $i <= count($bracelets_displayed) && $i <= $systemStats['total_posted']; $i++) {
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
+				if(!isset($displayed_picnr)) $displayed_picnr = 0;
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
-						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][0]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="Bild löschen/melden" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('das Bild', this); return false;">X</a>
-						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; //onclick="return confirmDelete('das Bild');" ?>" class="thumb_link">
+						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="Bild löschen/melden" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('das Bild', this); return false;">X</a>
+						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.'.$stats[$i][$displayed_picnr]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; //onclick="return confirmDelete('das Bild');" ?>" class="thumb_link">
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
-							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="thumbnail">
+							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?>" class="thumbnail">
 						</a>
 						<table class="pic-info">
 							<tr>
 								<th>Datum</th>
-								<td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?> Uhr</td>
+								<td><?php echo date('d.m.Y H:i', $stats[$i][$displayed_picnr]['date']); ?> Uhr</td>
 							</tr>
 							<tr>
 								<th>Ort</th>
-								<td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
+								<td><?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?></td>
 							</tr>
 <?php
-				if($stats[$i][0]['user'] != NULL) {
+				if($stats[$i][$displayed_picnr]['user'] != NULL) {
 ?>
 							<tr>
 								<th>Uploader</th>
-								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][0]['user'])); ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
+								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$displayed_picnr]['user'])); ?>"><?php echo $stats[$i][$displayed_picnr]['user']; ?></a></td>
 							</tr>
 <?php
                  }
 ?>
 						</table> 
 						<p class="pic-desc">
-							<span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
-							<?php echo $stats[$i][0]['description']; ?>      
+							<span class="desc-header"><?php echo $stats[$i][$displayed_picnr]['title']; ?></span><br>
+							<?php echo $stats[$i][$displayed_picnr]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][0])-11; ?>">Kommentare zeigen (<?php echo count($stats[$i][0])-11; ?>)</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$displayed_picnr])-11; ?>">Kommentare zeigen (<?php echo count($stats[$i][$displayed_picnr])-11; ?>)</span>
 						</p>
 					</div>
 					<aside class="bracelet-props side_container">
@@ -134,16 +135,16 @@
 							</tr>
 							<tr>
 								<td>Station Nr.</td>
-								<td><?php echo $stats[$i][0]['picid']; ?></td>
+								<td><?php echo $stats[$i][$displayed_picnr]['picid']; ?></td>
 							</tr>
 						</table>
 					</aside>
 				</div>
 				<div class="comments" id="comment<?php echo $i;?>">
 <?php
-				for ($j = 1; $j <= count($stats[$i][0])-11; $j++) {
+				for ($j = 1; $j <= count($stats[$i][$displayed_picnr])-11; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
-					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][0][$j]['date']) / 86400);
+					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$displayed_picnr][$j]['date']) / 86400);
 					switch($x_days_ago) {
 						case 0:
 							$x_days_ago = 'heute';
@@ -155,15 +156,15 @@
 							$x_days_ago = 'vor '.$x_days_ago.' Tagen';
 					}
 				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
-				if(isset($stats[$i][0][$j + 1]['commid'])) {
+				if(isset($stats[$i][$displayed_picnr][$j + 1]['commid'])) {
 					$last_comment = 'middle';
 				}else {
 					$last_comment = 'last';
 				}
 ?>
-					<a href="start?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][0][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][0][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="Kommentar löschen/melden" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
-					<strong><?php echo $stats[$i][0][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][0][$j]['date']).')';//onclick="return confirmDelete('den Kommentar');" ?>
-                    <p><?php echo $stats[$i][0][$j]['comment']; ?></p> 
+					<a href="start?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$displayed_picnr][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="Kommentar löschen/melden" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
+					<strong><?php echo $stats[$i][$displayed_picnr][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$displayed_picnr][$j]['date']).')';//onclick="return confirmDelete('den Kommentar');" ?>
+                    <p><?php echo $stats[$i][$displayed_picnr][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
 <?php 
 				}
@@ -175,17 +176,19 @@
 						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
 						<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
-						<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][0]['picid']; ?>">
+						<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][$displayed_picnr]['picid']; ?>">
 						<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
 					</form>
 				</div>
                  
 <?php
+					if($displayed_picnr < $displayed_brids[$bracelets_displayed[$i]]) $displayed_picnr++;
+						else $displayed_picnr = 0;
 					if ($i < count($bracelets_displayed)) {
 ?>
 <!--~~~HR~~~~--><hr style="clear: both;">
-<?php	
+<?php
 					}
 				}
 ?>

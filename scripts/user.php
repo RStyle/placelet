@@ -573,7 +573,7 @@ class Statistics {
 		return $userdetails;
 	}
 	//Zeigt die allgemeine Statistik an
-	public function systemStats($user_anz, $brid_anz) {
+	public function systemStats($user_anz, $brid_anz, $recent_brid_pics = false) {
 		//Arnzahl 'beposteter' Armbänder		
 		$sql = "SELECT brid FROM pictures GROUP BY brid";
 		$stmt = $this->db->query($sql);
@@ -645,17 +645,22 @@ class Statistics {
 				ORDER BY id DESC";
 		$stmt = $this->db->query($sql);
 		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$q2 = array();
-		$q = array();
-		foreach ($q1 as $i){
-			if(!isset($q2[$i['brid']])){
-				$q2[$i['brid']] = true;
-				$q[] = array( 'brid' => $i['brid']);
+		if(!$recent_brid_pics) {
+			$q = $q1;
+		}else {
+			$q2 = array();
+			$q = array();
+			foreach ($q1 as $i){
+				if(!isset($q2[$i['brid']])){
+					$q2[$i['brid']] = true;
+					$q[] = array( 'brid' => $i['brid']);
+				}
 			}
 		}
 		for($i = 0; $i < $brid_anz; $i++) {
 			$stats['recent_brids'][$i+1] = $q[$i]['brid'];
 		}
+		
 		return $stats;
 	}
 	//Name von Armband ermitteln
