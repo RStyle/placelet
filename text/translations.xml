@@ -246,10 +246,14 @@
 				<en>Guest</en>
 				<de>Gast</de>
 			</gast>
-			<tagen>
-				<en>days</en>
+			<tagenstart>
+				<en></en>
+				<de>vor</de>
+			</tagenstart>
+			<tagenend>
+				<en>days ago</en>
 				<de>Tagen</de>
-			</tagen>
+			</tagenend>
 			<heute>
 				<en>today</en>
 				<de>heute</de>
@@ -262,6 +266,14 @@
 				<en><![CDATA[<span style="font-family: Verdana, Times">Write a <strong style="color: #000;">comment</strong></span>]]></en>
 				<de><![CDATA[<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span>]]></de>
 			</kommentarschreiben>
+			<name>
+				<en>name:</en>
+				<de>Name:</de>
+			</name>
+			<minmax415>
+				<en>min.4 - max.15</en>
+				<de>Min.4 - Max.15</de>
+			</minmax415>
 			<deinkommentar>
 				<en>your comment:</en>
 				<de>Dein Kommentar:</de>
@@ -421,11 +433,11 @@
 				<de>Benutzername</de>
 			</benutzername>
 			<armbänder>
-				<en>Bracelets</en>
+				<en>bracelets</en>
 				<de>Armbänder</de>
 			</armbänder>
 			<uploads>
-				<en>Uploads</en>
+				<en>uploads</en>
 				<de>Uploads</de>
 			</uploads>
 		</aktivstebenutzer>
