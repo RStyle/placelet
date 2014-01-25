@@ -1,9 +1,9 @@
 			<article id="about-us" class="mainarticles bottom_border_blue" style="width: 100%">
-				<div class="blue_line mainarticleheaders line_header"><h1>Über uns</h1></div>
+				<div class="blue_line mainarticleheaders line_header"><h1><?php echo $lang->about[$lng.'-title']; ?></h1></div>
 				<a href="pictures/staff.jpg" data-lightbox="wir"><img src="pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet" id="wir"></a>
 				<div id="partner_box">
-                    <h1>Partner</h1>
-                    <p>Mit seiner kompetenten Beratung und der Bereitstellung einiger Materialien unterstützte uns Herr Graffe und die MST-Graffe GmbH besonders bei der Verwirklichung unseres Projektes.</p>
+                    <h1><?php echo $lang->about->partner->$lng; ?></h1>
+                    <p><?php echo $lang->about->graffelob->$lng; ?></p>
                     <a id="graffe_link" href="http://mst-graffe.de/" target="_blank">
                         <img src="http://mst-graffe.de/index_htm_files/670.jpg" alt="mstgraffe_logo">
                         <p class="partner_name">Maschinen- und Stahlbau-Technik Markus Graffe GMBH</p>
@@ -11,10 +11,7 @@
                 </div>
 				<h1 style="clear: both; padding-top: 1em;">Global Bracelet. Travel&amp;Connect</h1>
 				<p>
-					Wir sind eine Gruppe engagierter Schüler der MSS 11 des Gymnasiums am Römerkastell Bad Kreuznach, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen<!-- und für ein Jahr lang ein Unternehmen führen-->.
-					Das Juniorprojekt bietet die Möglichkeit, 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.
-					Unsere Geschäftsidee besteht darin, Reisearmbänder herzustellen die von Freund zu Freund um die Welt weitergegeben werden und die persönlichen Fotos,
-					auf dem das Armband zu erkennen ist, auf unserer Homepage hochzuladen und auf diesem Weg eine Community zu gründen.
+					<?php echo $lang->about->about_us->$lng; ?>
 				</p>
 				
 				<ul id='timeline'>
@@ -46,10 +43,10 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 				<div class="tree">
 					<ul>
 						<li>
-							<span>Vorstandsvorsitzende: Sarah Baiker & Janik Rennollet</span>
+							<span><?php echo $lang->about->vorstandsvorsitz->$lng; ?>: Sarah Baiker & Janik Rennollet</span>
 							<ul>
 								<li>
-									<span>Verwaltung:<br>Patrick Piroth</span>
+									<span><?php echo $lang->about->verwaltung->$lng; ?>:<br>Patrick Piroth</span>
 									<ul class="tree_second">
 										<li>
 											<span>Eloisa Marzell</span>
@@ -57,7 +54,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Finanzen:<br>Sebastian Gänz</span>
+									<span><?php echo $lang->about->finanzen->$lng; ?>:<br>Sebastian Gänz</span>
 									<ul class="tree_second">
 										<li>
 											<span>Moritz Junkermann</span>
@@ -65,7 +62,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Marketing:<br>Celine Müller-Späth</span>
+									<span><?php echo $lang->about->marketing->$lng; ?>:<br>Celine Müller-Späth</span>
 									<ul class="tree_second">
 										<li>
 											<span>Alicia Braun</span>
@@ -95,7 +92,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Produktion:<br>Maximilian Klapdar</span>
+									<span><?php echo $lang->about->produktion->$lng; ?>:<br>Maximilian Klapdar</span>
 									<ul class="tree_second">
 										<li>
 											<span>Edda Strohm</span>
@@ -120,7 +117,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 									</ul>
 								</li>
 								<li>
-									<span>Website:<br>Roman Savrasov</span>
+									<span><?php echo $lang->about->website->$lng; ?>:<br>Roman Savrasov</span>
 									<ul class="tree_second">
 										<li>
 											<span>Daniel Schäfer</span>

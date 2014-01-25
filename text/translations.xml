@@ -57,9 +57,138 @@
 			<de>Uhr</de>
 		</uhr>
 	</misc>
-	<about>
+	<error404 en-title="Page not found" de-title="Seite nicht gefunden">
+			<en>The requested page could not be found.</en>
+			<de>Die angeforderte Seite konnte leider nicht gefunden werden.</de>
+	</error404>
+	<about en-title="About us" de-title="Über Uns">
+		<partner>
+			<en>partner</en>
+			<de>Partner</de>
+		</partner>
+		<graffelob>
+			<en>MST-Graffe's Markus Graffe provided us with professional advice and two prototypes, which really helped us out in the development of our product.</en>
+			<de>Mit seiner kompetenten Beratung und der Bereitstellung einiger Materialien unterstützte uns Herr Graffe und die MST-Graffe GmbH besonders bei der Verwirklichung unseres Projektes.</de>
+		</graffelob>
+		<about_us>
+			<en>
+				We are a team of highly motivated students of grade 11 at the Gymnasium am Römerkastell Bad Kreuznach, who participate in the Juniorprojekt of the German Institute for Economic Research(DIW) in Cologne.
+				The Juniorprojekt offers students the opportunity to actively engage in the daily activities associated with running a business to gain a variety of experiences to prepare for the working life.
+				The concept of our business is to produce 'Travelbracelets' which are given from friend to friend around the world. The various owners of the bracelet will take photos of it and uploads it to our website,
+				which we hope will become a great community.
+			</en>
+			<de>
+				Wir sind eine Gruppe engagierter Schüler der MSS 11 des Gymnasiums am Römerkastell Bad Kreuznach, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen.
+				Das Juniorprojekt bietet die Möglichkeit, 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.
+				Unsere Geschäftsidee besteht darin, Reisearmbänder herzustellen die von Freund zu Freund um die Welt weitergegeben werden und die persönlichen Fotos,
+				auf dem das Armband zu erkennen ist, auf unserer Homepage hochzuladen und auf diesem Weg eine Community zu gründen.
+			</de>
+		</about_us>
+		<vorstandsvorsitz>
+			<en>chief executives</en>
+			<de>Vorstandsvorsitzende</de>
+		</vorstandsvorsitz>
+		<verwaltung>
+			<en>management</en>
+			<de>Verwaltung</de>
+		</verwaltung>
+		<finanzen>
+			<en>finances</en>
+			<de>Finanzen</de>
+		</finanzen>
+		<marketing>
+			<en>marketing</en>
+			<de>Marketing</de>
+		</marketing>
+		<produktion>
+			<en>production</en>
+			<de>Produktion</de>
+		</produktion>
+		<website>
+			<en>website</en>
+			<de>Website</de>
+		</website>
 	</about>
 	<account>
+		<titel>
+			<en>Your account settings</en>
+			<de>Deine Accounteinstellungen</de>
+		</titel>
+		<deine>
+			<en>Your</en>
+			<de>Deine</de>
+		</deine>
+		<details>
+			<en>account details</en>
+			<de>Accountdetails</de>
+		</details>
+		<neues_passwort>
+			<en>enter new password</en>
+			<de>Neues Passwort eingeben</de>
+		</neues_passwort>
+		
+		<notifications>
+			<en>notification options</en>
+			<de>Benachrichtigungseinstellungen</de>
+		</notifications>
+		<nocategory>
+			<en>No category chosen</en>
+			<de>Keine Kategorie ausgewählt</de>
+		</nocategory>
+		<pic_owns>
+			<en>new pictures on your bracelets</en>
+			<de>Neue Bilder von deinen Armbändern</de>
+		</pic_owns>
+		<comm_owns>
+			<en>new comments on the pictures of your bracelets</en>
+			<de>Neue Kommentare zu den Bildern von deinen Armbändern</de>
+		</comm_owns>
+		<comm_pics>
+			<en>new comments on the pictures you posted</en>
+			<de>Neue Kommentare zu den Bildern, die du hochgeladen hast</de>
+		</comm_pics>
+		<pic_subs>
+			<en>new pictures on the pictures you posted</en>
+			<de>Neue Bilder zu deinen abonnierten Armbändern</de>
+		</pic_subs>
+		
+		<privacy>
+			<en>privacy options</en>
+			<de>Privatsphäreeinstellungen</de>
+		</privacy>
+		<privacy_availability>
+			<en>Currently there are no privacy option, check back later. It would be nice though, if you informed us what options you would like to see.</en>
+			<de>Es sind noch keine Privatsphäreeinstellungen verfügbar, es wäre nett, wenn du uns mitteilen würdest, welche du gerne bei uns sehen würdest.</de>
+		</privacy_availability>
+		
+		<category>
+			<en>please choose your category</en>
+			<de>Bitte wähle eine Kategorie aus</de>
+		</category>
+		<lostpasswort>
+			<en><![CDATA[
+				In case you forgot you password, please enter your e-mail address in the field below on which you account on placelet.net is registered.<br>
+				You'll shortly recieve an email with a link with which you can reset your password.
+			]]></en>
+			<de><![CDATA[
+				Für den Fall, dass Sie Ihr Passwort vergessen haben sollten, tragen Sie bitte in das nachfolgende Eingabefeld die E-Mailadresse ein, auf welche Ihr Account bei placelet.de registriert ist.<br>
+				In Kürze werden Sie eine E-Mail erhalten in der ein Link ist, mit dem Sie Ihr Passwort zurücksetzen können.
+			]]></de>
+		</lostpasswort>
+		<invalid_code>
+			<en>This is not a valid code for resetting your password.</en>
+			<de>Dies ist kein gültiger Code, um dein Passwort zurückzusetzen.</de>
+		</invalid_code>
+		<ausgeloggt>
+			<en><![CDATA[
+				You can only edit the settings of your account if you are logged in.<br>
+				Please log in.
+			]]></en>
+			<de><![CDATA[
+				Du kannst deine Accounteinstellungen nur ändern, wenn du eingeloggt bist.<br>
+					Bitte logge dich ein:
+			]]></de>
+		</ausgeloggt>
 	</account>
 	<admin>
 	</admin>
@@ -268,16 +397,13 @@
 				<de>Registrieren</de>
 			</button>
 		</neuesarmband>
-		
-		
-		
 		<main en-title="community-stats" de-title="community-statistiken">
 			<regarmbänder>
 				<en>Registered bracelets</en>
 				<de>Registrierte Armbänder</de>
 			</regarmbänder>
 			<städte>
-				<en>Varios cities</en>
+				<en>Various cities</en>
 				<de>Verschiedene Städte</de>
 			</städte>
 			<beliebtestestadt>
@@ -303,7 +429,6 @@
 				<de>Uploads</de>
 			</uploads>
 		</aktivstebenutzer>
-		
 	</stats>
 	<php>
 		<manage_comment>
@@ -359,4 +484,35 @@
 			<de></de>
 		</test>
 	</js>
+	<form>
+		<email>
+			<en>e-mail address</en>
+			<de>E-Mail Adresse</de>
+		</email>
+		<oldpass>
+			<en>old password</en>
+			<de>altes Passwort</de>
+		</oldpass>
+		<newpass>
+			<en>new password</en>
+			<de>neues Passwort</de>
+		</newpass>
+		<changepass>
+			<en>change password</en>
+			<de>Passwort ändern</de>
+		</changepass>
+		<passwort_vergessen>
+			<en>Forgot your password?</en>
+			<de>Passwort vergessen?</de>
+		</passwort_vergessen>
+		<benutzername>
+			<en>username</en>
+			<de>Benutzername</de>
+		</benutzername>
+		<passwort>
+			<en>password</en>
+			<de>Passwort</de>
+		</passwort>
+		
+	</form>
 </langs>
