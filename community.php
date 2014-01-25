@@ -11,18 +11,18 @@ if(isset($_POST['comment_submit'])) {
 						 $user);
 }
 if(isset($write_comment)) {
-	$js .= 'alert("'.$write_comment.'");';
+	$js .= 'alert("'.$write_comment.'");'; //MUSS NOCH GEÄNDERT WERDEN!
 }
 //Kommentar löschen
 if(isset($_GET['comment_deleted'])) {
 	if($_GET['comment_deleted'] == 'true') {
-		$js .= 'alert("Kommentar erfolgreich gelöscht.");';	
+		$js .= 'alert("'.$lang->php->manage_comment->$lng.'");';	
 	}
 }
 //Bild löschen
 if(isset($_GET['pic_deleted'])) {
 	if($_GET['pic_deleted'] == 'true') {
-		$js .= 'alert("Bild erfolgreich gelöscht.");';	
+		$js .= 'alert("'.$lang->php->manage_pic->$lng.'");';	
 	}
 }
 $user_anz = 5;

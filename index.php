@@ -92,7 +92,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 		<nav id="mainnav">
 			<ul id="mainnavlist">
 				<li style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>"><a href="home" class="navlinks"><?php echo $lang->misc->nav->home->$lng; ?></a></li>
-				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="start" class="navlinks"><?php echo $lang->misc->nav->community->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="community" class="navlinks"><?php echo $lang->misc->nav->community->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="about" class="navlinks"><?php echo $lang->misc->nav->about->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks"><?php echo $lang->misc->nav->shop->$lng; ?></a></li>
 				<li 

@@ -66,6 +66,91 @@
 	<armband>
 	</armband>
 	<community>
+		<neuestebilder en-ttle="Latest Pictures" de-title="Neueste Bilder" >
+			<datum>
+				<en>date</en>
+				<de>Datum</de>
+			</datum>
+			<uhr>
+				<en></en>
+				<de>Uhr</de>
+			</uhr>
+			<ort>
+				<en>location</en>
+				<de>Ort</de>
+			</ort>
+			<uploader>
+				<en>uploader</en>
+				<de>Uploader</de>
+			</uploader>
+			
+			<armband>
+				<en>bracelet</en>
+				<de>Armband</de>
+			</armband>
+			<käufer>
+				<en>purchaser</en>
+				<de>Käufer</de>
+			</käufer>
+			<besitzer>
+				<en>amount owners</en>
+				<de>Anzahl Besitzer</de>
+			</besitzer>
+			<letzterort>
+				<en>last location</en>
+				<de>Letzter Ort</de>
+			</letzterort>
+			<station>
+				<en>location no.</en>
+				<de>Station Nr.</de>
+			</station>
+			
+			<showcomment>
+				<en>show comments</en>
+				<de>Kommentare zeigen</de>
+			</showcomment>
+			<hidecomment>
+				<en>hide comments</en>
+				<de>Kommentare verstecken</de>
+			</hidecomment>
+			<gast>
+				<en>Guest</en>
+				<de>Gast</de>
+			</gast>
+			<tagen>
+				<en>days</en>
+				<de>Tagen</de>
+			</tagen>
+			<heute>
+				<en>today</en>
+				<de>heute</de>
+			</heute>
+			<gestern>
+				<en>yesterday</en>
+				<de>gestern</de>
+			</gestern>
+			<kommentarschreiben>
+				<en><![CDATA[<span style="font-family: Verdana, Times">Write a <strong style="color: #000;">comment</strong></span>]]></en>
+				<de><![CDATA[<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span>]]></de>
+			</kommentarschreiben>
+			<deinkommentar>
+				<en>your comment:</en>
+				<de>Dein Kommentar:</de>
+			</deinkommentar>
+			<button>
+				<en>send comment</en>
+				<de>Kommentar abschicken</de>
+			</button>
+			
+			<deletepic>
+				<en>delete/report picture</en>
+				<de>Bild löschen/melden</de>
+			</deletepic>
+			<deletecomment>
+				<en>delete/report comment</en>
+				<de>Kommentar löschen/melden</de>
+			</deletecomment>
+		</neuestebilder>
 	</community>
 	<faq>
 	</faq>
@@ -173,7 +258,7 @@
 				<de>Zum Upload</de>
 			</button>
 		</neuesbild>
-		<neuesarmband en-title="+1 bracelet" de-title="+1 armband">
+		<neuesarmband en-title="new bracelet" de-title="neues armband">
 			<ideingeben>
 				<en><![CDATA[Enter your <span>bracelet-ID</span>:]]></en>
 				<de><![CDATA[Gib deine <span>Armband-ID</span> an:]]></de>
@@ -183,6 +268,42 @@
 				<de>Registrieren</de>
 			</button>
 		</neuesarmband>
+		
+		
+		
+		<main en-title="community-stats" de-title="community-statistiken">
+			<regarmbänder>
+				<en>Registered bracelets</en>
+				<de>Registrierte Armbänder</de>
+			</regarmbänder>
+			<städte>
+				<en>Varios cities</en>
+				<de>Verschiedene Städte</de>
+			</städte>
+			<beliebtestestadt>
+				<en>Most popular city</en>
+				<de>Beliebteste Stadt</de>
+			</beliebtestestadt>
+			<armband>
+				<en>Bracelets with most pictures</en>
+				<de>Armband mit den meisten Bildern</de>
+			</armband>
+		</main>
+		<aktivstebenutzer en-title="most active users" de-title="aktivste benutzer">
+			<benutzername>
+				<en>username</en>
+				<de>Benutzername</de>
+			</benutzername>
+			<armbänder>
+				<en>Bracelets</en>
+				<de>Armbänder</de>
+			</armbänder>
+			<uploads>
+				<en>Uploads</en>
+				<de>Uploads</de>
+			</uploads>
+		</aktivstebenutzer>
+		
 	</stats>
 	<php>
 		<manage_comment>
