@@ -35,7 +35,7 @@ if($page == 'home') {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/<?php echo $lang->form->suchen->$lng; ?>..."/all.js#xfbml=1";
+      js.src = "//connect.facebook.net/<?php echo $lang->misc->facebooklang->$lng; ?>/all.js#xfbml=1";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 <?php
@@ -46,7 +46,7 @@ if($page == 'home') {
 			<div id="headerregisterbr">
 				<form name="registerbr" action="search" method="post">
 					<label for="squery"><?php echo $lang->misc->search->$lng; ?></label>
-					<input name="squery" type="search" id="squery" placeholder="<?php echo $lang->misc->searchbox->$lng; ?>" size="20" maxlength="18" required>
+					<input name="squery" type="search" id="squery" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" required>
 				</form>
 			</div>
 <?php
