@@ -48,14 +48,64 @@
 			<en>Search for user/bracelet</en>
 			<de>Benutzer/Armband suchen</de>
 		</search>
-		<searchbox>
-			<en>Search...</en>
-			<de>Suchen...</de>
-		</searchbox>
 		<uhr>
 			<en></en>
 			<de>Uhr</de>
 		</uhr>
+		<facebooklang>
+			<en>en_US</en>
+			<de>de_DE</de>
+		</facebooklang>
+		<comments>
+			<showcomment>
+				<en>show comments</en>
+				<de>Kommentare zeigen</de>
+			</showcomment>
+			<hidecomment>
+				<en>hide comments</en>
+				<de>Kommentare verstecken</de>
+			</hidecomment>
+			<gast>
+				<en>Guest</en>
+				<de>Gast</de>
+			</gast>
+			<tagenstart>
+				<en></en>
+				<de>vor</de>
+			</tagenstart>
+			<tagenend>
+				<en>days ago</en>
+				<de>Tagen</de>
+			</tagenend>
+			<heute>
+				<en>today</en>
+				<de>heute</de>
+			</heute>
+			<gestern>
+				<en>yesterday</en>
+				<de>gestern</de>
+			</gestern>
+			<kommentarschreiben>
+				<en><![CDATA[<span style="font-family: Verdana, Times">Write a <strong style="color: #000;">comment</strong></span>]]></en>
+				<de><![CDATA[<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span>]]></de>
+			</kommentarschreiben>
+			<name>
+				<en>name:</en>
+				<de>Name:</de>
+			</name>
+			<minmax415>
+				<en>min.4 - max.15</en>
+				<de>Min.4 - Max.15</de>
+			</minmax415>
+			<deinkommentar>
+				<en>your comment:</en>
+				<de>Dein Kommentar:</de>
+			</deinkommentar>
+			<comment_button>
+				<en>send comment</en>
+				<de>Kommentar abschicken</de>
+			</comment_button>
+		</comments>
 	</misc>
 	<error404 en-title="Page not found" de-title="Seite nicht gefunden">
 			<en>The requested page could not be found.</en>
@@ -126,7 +176,6 @@
 			<en>enter new password</en>
 			<de>Neues Passwort eingeben</de>
 		</neues_passwort>
-		
 		<notifications>
 			<en>notification options</en>
 			<de>Benachrichtigungseinstellungen</de>
@@ -137,7 +186,7 @@
 		</nocategory>
 		<pic_owns>
 			<en>new pictures on your bracelets</en>
-			<de>Neue Bilder von deinen Armbändern</de>
+			<de>Neue Bilder auf deine Armbänder</de>
 		</pic_owns>
 		<comm_owns>
 			<en>new comments on the pictures of your bracelets</en>
@@ -151,7 +200,6 @@
 			<en>new pictures on the pictures you posted</en>
 			<de>Neue Bilder zu deinen abonnierten Armbändern</de>
 		</pic_subs>
-		
 		<privacy>
 			<en>privacy options</en>
 			<de>Privatsphäreeinstellungen</de>
@@ -160,7 +208,6 @@
 			<en>Currently there are no privacy option, check back later. It would be nice though, if you informed us what options you would like to see.</en>
 			<de>Es sind noch keine Privatsphäreeinstellungen verfügbar, es wäre nett, wenn du uns mitteilen würdest, welche du gerne bei uns sehen würdest.</de>
 		</privacy_availability>
-		
 		<category>
 			<en>please choose your category</en>
 			<de>Bitte wähle eine Kategorie aus</de>
@@ -195,7 +242,7 @@
 	<armband>
 	</armband>
 	<community>
-		<neuestebilder en-ttle="Latest Pictures" de-title="Neueste Bilder" >
+		<neuestebilder en-title="Latest Pictures" de-title="Neueste Bilder" >
 			<datum>
 				<en>date</en>
 				<de>Datum</de>
@@ -234,54 +281,7 @@
 				<de>Station Nr.</de>
 			</station>
 			
-			<showcomment>
-				<en>show comments</en>
-				<de>Kommentare zeigen</de>
-			</showcomment>
-			<hidecomment>
-				<en>hide comments</en>
-				<de>Kommentare verstecken</de>
-			</hidecomment>
-			<gast>
-				<en>Guest</en>
-				<de>Gast</de>
-			</gast>
-			<tagenstart>
-				<en></en>
-				<de>vor</de>
-			</tagenstart>
-			<tagenend>
-				<en>days ago</en>
-				<de>Tagen</de>
-			</tagenend>
-			<heute>
-				<en>today</en>
-				<de>heute</de>
-			</heute>
-			<gestern>
-				<en>yesterday</en>
-				<de>gestern</de>
-			</gestern>
-			<kommentarschreiben>
-				<en><![CDATA[<span style="font-family: Verdana, Times">Write a <strong style="color: #000;">comment</strong></span>]]></en>
-				<de><![CDATA[<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span>]]></de>
-			</kommentarschreiben>
-			<name>
-				<en>name:</en>
-				<de>Name:</de>
-			</name>
-			<minmax415>
-				<en>min.4 - max.15</en>
-				<de>Min.4 - Max.15</de>
-			</minmax415>
-			<deinkommentar>
-				<en>your comment:</en>
-				<de>Dein Kommentar:</de>
-			</deinkommentar>
-			<button>
-				<en>send comment</en>
-				<de>Kommentar abschicken</de>
-			</button>
+			
 			
 			<deletepic>
 				<en>delete/report picture</en>
@@ -362,7 +362,101 @@
 	</login>
 	<order>
 	</order>
-	<profil>
+	<profil en-title="Profile" de-title="Profil">
+		<notlogged>
+			<en><![CDATA[
+				Your profile can only be displayed if you are logged in.<br>
+				Please log in:
+			]]></en>
+			<de><![CDATA[
+				Dein Profil kann nur angezeigt werden, wenn du eingeloggt bist.<br>
+				Bitte logge dich ein:
+			]]></de>
+		</notlogged>
+		<searchprofil>
+			<en>Or search for the profile of someone else:</en>
+			<de>Oder suche nach dem Profil von jemand anderem:</de>
+		</searchprofil>
+		<deinprofil>
+			<en>Your Profile</en>
+			<de>Dein Profil</de>
+		</deinprofil>
+		<profilpic>
+			<en>profile pic</en>
+			<de>Profilbild</de>
+		</profilpic>
+		<registered_since>
+			<en>Registered since</en>
+			<de>Registriert seit</de>
+		</registered_since>
+		<youremail>
+			<en>Your email-address</en>
+			<de>Deine E-Mail Adresse</de>
+		</youremail>
+		<change_accountdetails>
+			<en>Edit your account-details</en>
+			<de>Accountdetails ändern</de>
+		</change_accountdetails>
+		<notifications>
+			<en>Notifications</en>
+			<de>Benachrichtigungen</de>
+		</notifications>	
+		<notific_read>
+			<en>Notifications read</en>
+			<de>Benachrichtigungen gelesen</de>
+		</notific_read>
+		<nonew_notific>
+			<en>There's no new notifications for you</en>
+			<de>Es gibt keine neuen Benachrichtigungen für dich</de>
+		</nonew_notific>
+		<bracelets>
+			<en>bracelets</en>
+			<de>Armbänder</de>
+		</bracelets>
+		<pictures>
+			<en>pictures</en>
+			<de>Bilder</de>
+		</pictures>
+		<abos>
+			<en>abonnements</en>
+			<de>Abonnements</de>
+		</abos>
+		<unsubscribe>
+			<en>unsubscribe</en>
+			<de>Deabonnieren</de>
+		</unsubscribe>
+		<noabos>
+			<en>You are not subscribed to any bracelets</en>
+			<de>Du hast keine Armbänder abonniert</de>
+		</noabos>
+		<noabos_other>
+			<en>This user is not subscribed to any bracelets</en>
+			<de>Dieser Benutzer hat keine Armbänder abonniert</de>
+		</noabos_other>
+		<uploads>
+			<en>uploads</en>
+			<de>Uploads</de>
+		</uploads>
+		<station>
+			<en>station no.</en>
+			<de>Station Nr.</de>
+		</station>
+		<noupload>
+			<en>You haven't uploaded a picture yet</en>
+			<de>Du hast noch kein bild hochgeladen</de>
+		</noupload>
+		<noupload_other>
+			<en>This user is has not uploaded a picture yet</en>
+			<de>Dieser Benutzer hat noch kein Bild hochgeladen</de>
+		</noupload_other>
+		<notexists>
+			<en>User not existing</en>
+			<de>Benutzer existiert nicht</de>
+		</notexists>
+		<notexists>
+			<en>This user does not exist</en>
+			<de>Dieser Benutzer existiert nicht</de>
+		</notexists>
 	</profil>
 	<search>
 	</search>
@@ -579,6 +673,10 @@
 			<en>password</en>
 			<de>Passwort</de>
 		</passwort>
+		<suchen>
+			<en>Search</en>
+			<de>Suchen</de>
+		</suchen>
 		
 	</form>
 </langs>

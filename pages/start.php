@@ -87,7 +87,7 @@
 						<table class="pic-info">
 							<tr>
 								<th><?php echo $lang->community->neuestebilder->datum->$lng; ?></th>
-								<td><?php echo date('d.m.Y H:i', $stats[$i][$displayed_picnr]['date']). ' '. $lang->community->neuestebilder->uhr->$lng; ?></td>
+								<td><?php echo date('d.m.Y H:i', $stats[$i][$displayed_picnr]['date']). ' '. $lang->misc->uhr->$lng; ?></td>
 							</tr>
 							<tr>
 								<th><?php echo $lang->community->neuestebilder->ort->$lng; ?></th>
@@ -108,7 +108,7 @@
 							<span class="desc-header"><?php echo $stats[$i][$displayed_picnr]['title']; ?></span><br>
 							<?php echo $stats[$i][$displayed_picnr]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$displayed_picnr])-11; ?>"><?php echo $lang->community->neuestebilder->showcomment->$lng; ?> (<?php echo count($stats[$i][$displayed_picnr])-11; ?>)</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$displayed_picnr])-11; ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$displayed_picnr])-11; ?>)</span>
 						</p>
 					</div>
 					<aside class="bracelet-props side_container">
@@ -144,23 +144,13 @@
 <?php
 				for ($j = 1; $j <= count($stats[$i][$displayed_picnr])-11; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
-					$x_days_ago = ceil((strtotime("00:00") - $stats[$i][$displayed_picnr][$j]['date']) / 86400);
-					switch($x_days_ago) {
-						case 0:
-							$x_days_ago = $lang->community->neuestebilder->heute->$lng;
-							break;
-						case 1:
-							$x_days_ago = $lang->community->neuestebilder->gestern->$lng;
-							break;
-						default:
-							$x_days_ago = $lang->community->neuestebilder->tagenstart->$lng.$x_days_ago.$lang->community->tagenend->$lng;
+					$x_days_ago = days_since($stats[$i][$displayed_picnr][$j]['date']);
+					//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
+					if(isset($stats[$i][$displayed_picnr][$j + 1]['commid'])) {
+						$last_comment = 'middle';
+					}else {
+						$last_comment = 'last';
 					}
-				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
-				if(isset($stats[$i][$displayed_picnr][$j + 1]['commid'])) {
-					$last_comment = 'middle';
-				}else {
-					$last_comment = 'last';
-				}
 ?>
 					<a href="start?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$displayed_picnr][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->community->neuestebilder->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
 					<strong><?php echo $stats[$i][$displayed_picnr][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$displayed_picnr][$j]['date']).')';//onclick="return confirmDelete('den Kommentar');" ?>
@@ -170,15 +160,15 @@
 				}
 ?>   
 					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="start" method="post">
-						<?php echo $lang->community->neuestebilder->kommentarschreiben->$lng; ?>
-						<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user"><?php echo $lang->community->neuestebilder->name->$lng; ?> </label>
-						<input <?php if($user->login) echo 'type="hidden"'; else echo 'type="text"';?> name="comment_user[<?php echo $i; ?>]" <?php if($user->login == true) echo ' value="'.$user->login.'" ';?>id="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15" <?php if (isset($user->login)){echo 'value="'.$user->login.'" ';} ?>placeholder="Name" pattern=".{4,15}" title="<?php echo $lang->community->neuestebilder->minmax415->$lng; ?>" required><?php if(!$user->login) echo '<br>'; ?>
-						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->community->neuestebilder->deinkommentar->$lng; ?></label><br>
+						<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
+						<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user"><?php echo $lang->misc->comments->name->$lng; ?> </label>
+						<input <?php if($user->login) echo 'type="hidden"'; else echo 'type="text"';?> name="comment_user[<?php echo $i; ?>]" <?php if($user->login == true) echo ' value="'.$user->login.'" ';?>id="comment_user[<?php echo $i; ?>]" class="comment_user" size="20" maxlength="15" <?php if (isset($user->login)){echo 'value="'.$user->login.'" ';} ?>placeholder="Name" pattern=".{4,15}" title="<?php echo $lang->misc->comments->minmax415->$lng; ?>" required><?php if(!$user->login) echo '<br>'; ?>
+						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
 						<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
 						<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][$displayed_picnr]['picid']; ?>">
 						<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
-						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->community->neuestebilder->button->$lng; ?>" class="submit_comment">
+						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
 					</form>
 				</div>
                  

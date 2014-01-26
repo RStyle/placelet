@@ -4,13 +4,13 @@ function days_since($unix_time) {
 	$x_days_ago = ceil((strtotime("00:00") - $unix_time) / 86400);
 	switch($x_days_ago) {
 		case 0:
-			$x_days_ago = 'heute';
+			$x_days_ago = $GLOBALS['lang']->misc->comments->heute->$GLOBALS['lng'];
 			break;
 		case 1:
-			$x_days_ago = 'gestern';
+			$x_days_ago = $GLOBALS['lang']->misc->comments->gestern->$GLOBALS['lng'];
 			break;
 		default:
-			$x_days_ago = 'vor '.$x_days_ago.' Tagen';
+			$x_days_ago = $GLOBALS['lang']->misc->comments->tagenvor->$GLOBALS['lng'].' '.$x_days_ago.' '.$GLOBALS['lang']->misc->comments->tagenend->$GLOBALS['lng'];
 	}
 	return $x_days_ago;
 }

@@ -2,18 +2,17 @@
 <?php
 if(!isset($_GET['user']) && !$user->login) {
 ?>
-								<div class="green_line mainarticleheaders line_header"><h1>Profil</h1></div>
+								<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->profil[$lng.'-title']; ?></h1></div>
                                 <div style="float: left; margin-right: 2em;">
-                                        Dein Profil kann nur angezeigt werden, wenn du eingeloggt bist.<br>
-                                        Bitte logge dich ein:
+                                        <?php echo $lang->profil->notlogged->$lng; ?>
                                         <form name="login" action="profil" method="post">
                                                 <table style="border: 1px solid black">
                                                         <tr>
-                                                                <td><label for="profile_login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-                                                                <td><input type="text" name="login" id="profile_login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+                                                                <td><label for="profile_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+                                                                <td><input type="text" name="login" id="profile_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
                                                         </tr>
                                                         <tr>
-                                                                <td><label for="profile_password">Passwort</label></td>
+                                                                <td><label for="profile_password"><?php echo $lang->form->passwort->$lng; ?></label></td>
                                                                 <td><input type="password" name="password" id="profile_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
                                                         </tr>
                                                         <tr>
@@ -24,12 +23,12 @@ if(!isset($_GET['user']) && !$user->login) {
                                         </form>
                                 </div>
                                 <div>
-                                        Oder suche nach dem Profil von jemand anderem:
+                                        <?php echo $lang->profil->searchprofil->$lng; ?>
                                         <form action="profil" method="get">
                                                 <table style="border: 1px solid black; overflow: auto;">
                                                         <tr>
-                                                                <td><input type="text" name="user" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
-                                                                <td><input type="submit" value="Suchen"></td>
+                                                                <td><input type="text" name="user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+                                                                <td><input type="submit" value="<?php echo $lang->form->suchen->$lng; ?>"></td>
                                                         </tr>
                                                 </table>
                                         </form>
@@ -40,12 +39,12 @@ if(!isset($_GET['user']) && !$user->login) {
 <?php	
 }elseif($user->login || Statistics::userexists($username)) {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo 'Dein Profil, '.htmlentities($user->login); else echo 'Profil von '.htmlentities($username); ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo $lang->profil->deinprofil->$lng.', '.htmlentities($user->login); else echo 'Profil von '.htmlentities($username); ?></h1></div>
 				<div class="user_info">
-					<img class="profile_pic" src="img/profil_pic_small.png" alt="Profilbild">           
+					<img class="profile_pic" src="img/profil_pic_small.png" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
-						Registriert seit: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
+						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
 						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>
 					</p>
 				</div>
@@ -54,11 +53,11 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>        
                 <div class="logged_info">
                     <p>
-						Deine E-Mail-Adresse: <?php echo $userdetails['email']; ?>
+						<?php echo $lang->profil->youremail->$lng; ?>: <?php echo $userdetails['email']; ?>
 						<ul class="list_style_none" style="padding: 0;">
-							<li><a href="account?details">Accountdetails ändern</a></li>
-							<li><a href="account?notifications">Benachrichtigungseinstellungen</a></li>
-							<li><a href="account?privacy">Privatsphäreeinstellungen</a></li>
+							<li><a href="account?details"><?php echo $lang->profil->change_accountdetails->$lng; ?></a></li>
+							<li><a href="account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
+							<li><a href="account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
 						</ul>
 					</p>
                 </div>      
@@ -72,7 +71,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			else $notifications['new'] = true;
 ?>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Benachrichtigungen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;Benachrichtigungen (<?php if($notifications['new'])
+				<p class="tabs pseudo_link" id="tab_1"><span class="tab_arrow1 arrow_down"></span>&nbsp;<?php echo $lang->profil->notifications->$lng; ?> (<?php if($notifications['new'])
 				echo (count($notifications['pic_owns']) + count($notifications['comm_owns']) + count($notifications['comm_pics']) + count($notifications['pic_subs'])); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_1">
@@ -81,7 +80,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			if($notifications['pic_owns'] != NULL) {
 ?>
 						<div class="pic_owns notifications">
-							<p>Neue Bilder auf deinen eigenen Armbändern:<br>&nbsp;</p>
+							<p><?php echo $lang->account->pic_owns->$lng; ?>:<br>&nbsp;</p>
 <?php
 				foreach($notifications['pic_owns'] as $pic) {
 					$pic['name'] = $statistics->brid2name($pic['brid']);
@@ -104,7 +103,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			if($notifications['pic_subs'] != NULL) {
 ?>
 						<div class="pic_subs notifications">
-							<p>Neue Bilder auf deinen abonnierten Armbändern:</p>
+							<p><?php echo $lang->account->pic_subs->$lng; ?>:</p>
 <?php
 				foreach($notifications['pic_subs'] as $pic) {
 					$pic['name'] = $statistics->brid2name($pic['brid']);
@@ -127,7 +126,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			if($notifications['comm_owns'] != NULL) {
 ?>
 						<div class="comm_owns notifications">
-							<p>Neue Kommentare auf deinen eigenen Armbändern:</p>
+							<p><?php echo $lang->account->comm_owns->$lng; ?>:</p>
 <?php
 				foreach($notifications['comm_owns'] as $comm) {
 ?>
@@ -144,7 +143,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			if($notifications['comm_pics'] != NULL) {
 ?>
 						<div class="comm_owns notifications">
-							<p>Neue Kommentare auf deinen Bildern:<br>&nbsp;</p>
+							<p><?php echo $lang->account->comm_pics->$lng; ?>:<br>&nbsp;</p>
 <?php
 				foreach($notifications['comm_pics'] as $comm) {
 ?>
@@ -156,17 +155,17 @@ if(!isset($_GET['user']) && !$user->login) {
 				}
 ?>
 						</div>
-						<span id="notific_read" class="pseudo_link" style="clear: both;">Benachrichtigungen gelesen</span>
+						<span id="notific_read" class="pseudo_link" style="clear: both;"><?php echo $lang->profil->notific_read->$lng; ?></span>
 <?php
 			}
-		}else echo '<p>Es gibt keine neuen Benachrichtigungen für dich.</p>';
+		}else echo '<p>'.$lang->profil->nonew_notific->$lng.'.</p>';
 ?>
 					</div>
 <?php
 	}
 ?>					
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_2"><span class="tab_arrow2 arrow_right"></span>&nbsp;Armbänder (<?php if(isset($userdetails['brid'])) echo count($userdetails['brid']); else echo '0'; ?>)</p>
+				<p class="tabs pseudo_link" id="tab_2"><span class="tab_arrow2 arrow_right"></span>&nbsp;<?php echo $lang->profil->bracelets->$lng; ?> (<?php if(isset($userdetails['brid'])) echo count($userdetails['brid']); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_2">
 <?php
@@ -204,7 +203,7 @@ if(!isset($_GET['user']) && !$user->login) {
 
 								<p class="preview_text">
 									<?php echo htmlentities($key_name)."\n"; ?>
-									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
+									<span style="float:right;"><?php echo $lang->profil->pictures->$lng; ?>: <?php echo $val['picid']; ?></span>
 								</p>
 							</a>
 						</div>
@@ -215,7 +214,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Abos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_3"><span class="tab_arrow3 arrow_right"></span>&nbsp;Abonnements (<?php echo count($userdetails['subscriptions']); ?>)</p>
+				<p class="tabs pseudo_link" id="tab_3"><span class="tab_arrow3 arrow_right"></span>&nbsp;<?php echo $lang->profil->abos->$lng; ?> (<?php echo count($userdetails['subscriptions']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_3">
 <?php
@@ -239,19 +238,19 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 								<p class="preview_text">
 									<?php echo htmlentities($val['name']."\n"); ?>
-									<span style="float:right;">Bilder: <?php echo $val['picid']; ?></span>
+									<span style="float:right;"><?php echo $lang->profil->pictures->$lng; ?>: <?php echo $val['picid']; ?></span>
 								</p>
 							</a>
-							<?php if($user->login == $username) { ?><br><a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_code='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text">Deabonnieren</a><?php } ?>
+							<?php if($user->login == $username) { ?><br><a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_code='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text"><?php echo $lang->profil->unsubscribe->$lng; ?></a><?php } ?>
 						</div>
 <?php
 			}
-		}elseif($user->login == $username) echo '<p>Du hast noch kein Armband abonniert.</p>';
-		else echo '<p>Dieser Benutzer hat noch kein Armband abonniert.</p>';//Entfernen, wenn es nicht gewünscht ist fremde Abos anzuzeigen
+		}elseif($user->login == $username) echo '<p>'.$lang->profil->noabos->$lng.'.</p>';
+		else echo '<p>'.$lang->profil->noabos_other->$lng.'.</p>';
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Uploads ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->            
-				<p class="tabs pseudo_link" id="tab_4"><span class="tab_arrow4 arrow_right"></span>&nbsp;Uploads (<?php echo count($userdetails['pics']); ?>)</p>
+				<p class="tabs pseudo_link" id="tab_4"><span class="tab_arrow4 arrow_right"></span>&nbsp;<?php echo $lang->profil->uploads->$lng; ?> (<?php echo count($userdetails['pics']); ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_4">
 <?php
@@ -283,22 +282,22 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 								<p class="preview_text">
 									<?php echo htmlentities($val['name'])."\n"; ?>
-									<span style="float:right;">Station Nr.: <?php echo $val['picid']; ?> Bilder: <?php echo $val['picCount']; ?></span>
+									<span style="float:right;"><?php echo $lang->profil->station->$lng; ?> <?php echo $val['picid']; ?> <?php echo $lang->profil->pictures->$lng; ?>: <?php echo $val['picCount']; ?></span>
 								</p>
 							</a>
 						</div>
 <?php
 			}
-		}elseif($user->login == $username) echo '<p>Du hast noch kein Bild hochgeladen.</p>';
-			else echo '<p>Dieser Benutzer hat noch kein Bild hochgeladen.</p>';
+		}elseif($user->login == $username) echo '<p>'.$lang->profil->noupload->$lng.'.</p>';
+			else echo '<p>'.$lang->profil->noupload_other->$lng.'.</p>';
 ?>
 					</div>
 				</div>
 <?php
 }else {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1>Benutzer existiert nicht</h1></div>
-				<p>Dieser Benutzer existiert nicht.</p>
+				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->profil->notexists->$lng; ?></h1></div>
+				<p><?php echo $lang->profil->this_notexists->$lng; ?>.</p>
 <?php
 }
 ?>

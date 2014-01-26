@@ -35,7 +35,7 @@ if($page == 'home') {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/de_DE/all.js#xfbml=1";
+      js.src = "//connect.facebook.net/<?php echo $lang->misc->facebooklang->$lng; ?>/all.js#xfbml=1";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 <?php
@@ -46,7 +46,7 @@ if($page == 'home') {
 			<div id="headerregisterbr">
 				<form name="registerbr" action="search" method="post">
 					<label for="squery"><?php echo $lang->misc->search->$lng; ?></label>
-					<input name="squery" type="search" id="squery" placeholder="<?php echo $lang->misc->searchbox->$lng; ?>" size="20" maxlength="18" required>
+					<input name="squery" type="search" id="squery" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" required>
 				</form>
 			</div>
 <?php
@@ -61,13 +61,13 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			<div id="login-box">
 				<div class="arrow_up"></div>
 				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
-					<label for="login" id="label_login">Benutzername</label><br>
-					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
-					<label for="password" id="label_password">Passwort</label><br>
+					<label for="login" id="label_login"><?php echo $lang->form->benutzername->$lng; ?></label><br>
+					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
+					<label for="password" id="label_password"><?php echo $lang->form->passwort->$lng; ?></label><br>
 					<input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
 					<input type="submit" value="Login" id="submit_login">
 				</form><br>
-				<a href="account?recoverPassword=yes">Passwort vergessen?</a>
+				<a href="account?recoverPassword=yes"><?php echo $lang->form->passwort_vergessen->$lng; ?></a>
 			</div>
 <?php
 }

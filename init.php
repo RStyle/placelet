@@ -11,6 +11,9 @@ if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path = '/var/www/virtual/placelet.de/htdocs/';
 	$this_path_html = 'http://www.placelet.de/';
 }
+$lang = simplexml_load_file('./text/translations.xml');
+$lng = 'en';
+if(isset($_GET['de'])) $lng = 'de';
 require_once($this_path.'scripts/recaptchalib.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/connection.php');
@@ -36,8 +39,6 @@ if(!isset($_SESSION['server_SID'])) {
     $_SESSION['server_SID'] = true;
 }
 
-$lang = simplexml_load_file('./text/translations.xml');
-$lng = 'en';
 $js = '<script type="text/javascript">$(document).ready(function(){';
 foreach($lang->js as $key => $val) {
 	$js.= 'langjs['.$key.'] = '.$val->$lng;
@@ -110,16 +111,15 @@ $pagename = array(
 	"shop" => "Shop",
 	"start" => "Start"
 );
-	
 $navregister['href'] = "login";	
 $navregister['value'] = $lang->misc->nav->register->$lng;
 
 if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'Mein Profil'
 	$navregister['href'] = "profil";
-	$navregister['value'] = $lang->misc->nav->proil->$lng;
+	$navregister['value'] = $lang->misc->nav->profil->$lng;
 	$notifics = $user->recieve_notifications();
 	if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
-		$navregister['value'] = $lang->misc->nav->profil->$lng . ' ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
+		$navregister['value'] = $lang->misc->nav->profil->$lng.' ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
 	}
 }
 if($page == 'login') {
