@@ -124,13 +124,13 @@ if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'M
 }
 if($page == 'login') {
 	if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'
-		$pagename['login'] = "Armband registrieren";	
+		$pagename['login'] = $lang->login->armband_registrieren->$lng;	
 	}
 	if(isset($_GET['loginattempt'])) {
-		$pagename['login'] = 'Login-Daten inkorrekt';
+		$pagename['login'] = $lang->login->notlogged_pic[$lng.'-title'];
 	}
 	if(isset($_GET['postpic'])) {
-		$pagename['login'] = 'Bild posten';
+		$pagename['login'] = $lang->login->bildupload->$lng;
 	}
 }
 

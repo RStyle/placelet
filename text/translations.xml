@@ -106,6 +106,10 @@
 				<de>Kommentar abschicken</de>
 			</comment_button>
 		</comments>
+		<nope>
+			<en><![CDATA[You should not be here. Just go to the <span class="pseudo_link" onclick="history.back(-1)">previous</span> page.]]></en>
+			<de><![CDATA[Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span>]]></de>
+		</nope>
 	</misc>
 	<error404 en-title="Page not found" de-title="Seite nicht gefunden">
 			<en>The requested page could not be found.</en>
@@ -240,6 +244,7 @@
 	<admin>
 	</admin>
 	<armband>
+		
 	</armband>
 	<community>
 		<neuestebilder en-title="Latest Pictures" de-title="Neueste Bilder" >
@@ -356,9 +361,135 @@
 	</home>
 	<impressum>
 	</impressum>
-	<kontakt>
+	<kontakt en-title="contact" de-title="Kontakt">
+		<text>
+			<en><![CDATA[
+				You are welcome to use this form to contact us if you have any questions regarding our product or our website.<br>
+				We try our best to send you an email response as quickly as possible.
+			]]></en>
+			<de><![CDATA[
+				Dieses Formular können Sie benutzen, wenn sie Fragen zu unseren Produkten oder Anliegen bezüglich unserer Webseite haben.<br>
+				Wir bemühen uns, Ihnen schnellstmöglich eine Antwort per E-Mail zukommen zu lassen.			
+			]]></de>
+		</text>
+		<youremail>
+			<en>Your email address</en>
+			<de>Ihre E-Mail Adresse</de>
+		</youremail>
+		<betreff>
+			<en>subject</en>
+			<de>Betreff</de>
+		</betreff>
+		<support>
+			<en>our website</en>
+			<de>Unsere Website</de>
+		</support>
+		<info>
+			<en>Your email address</en>
+			<de>Ihre E-Mail Adresse</de>
+		</info>
+		<misc>
+			<en>miscellaneous</en>
+			<de>Anderes</de>
+		</misc>
+		<nachricht>
+			<en>Your message</en>
+			<de>Ihre Nachricht</de>
+		</nachricht>
 	</kontakt>
 	<login>
+		<bildposten>
+			<en><![CDATA[Post <strong style="color: #000;">picture</strong>]]></en>
+			<de><![CDATA[<strong style="color: #000;">Bild</strong> posten]]></de>
+		</bildposten>
+		<title>
+			<en>title</en>
+			<de>Titel</de>
+		</title>
+		<city>
+			<en>city</en>
+			<de>Stadt</de>
+		</city>
+		<country>
+			<en>country</en>
+			<de>Land</de>
+		</country>
+		<state>
+			<en>state</en>
+			<de>Bundesland</de>
+		</state>
+		<description>
+			<en>description</en>
+			<de>Beschreibung</de>
+		</description>
+		<notlogged_pic en-title="Login incorrect" de-title="Login-Daten inkorrekt">
+			<en><![CDATA[
+				If you do have an account, please log in before you upload your picture.<br>
+				<span class="pseudo_link" id="picupload_nologin">Upload your picture without logging in.</span>
+			]]></en>
+			<de><![CDATA[
+				Wenn du einen Account besitzt logge dich bitte ein, bevor du dein Bild hochlädst.<br>
+				<span class="pseudo_link" id="picupload_nologin">Das Bild uneingeloggt hochladen.</span>
+			]]></de>
+		</notlogged_pic>
+		<bildupload>
+			<en>upload picture</en>
+			<de>Bild hochladen</de>
+		</bildupload>
+		<preview>
+			<en>Image preview</en>
+			<de>Bildvorschau</de>
+		</preview>
+		<mapinfo>
+			<en>Move the red indicator to the location of your picture. You may enter the name of the city in the form to the left first.</en>
+			<de>Bewege den roten Zeiger zu dem Ort deines Fotos. Du kannst ihn auch manuell in die Eingabefelder links eingeben.</de>
+		</mapinfo>
+		<map_pladeholder>
+			<en><![CDATA[
+				Locating your position...<br>
+				You may enter it manually. 
+			]]></en>
+			<de><![CDATA[
+				Deine Position wird ermittelt...<br>
+				Du kannst den Ort auch manuell eingeben.
+			]]></de>
+		</map_pladeholder>
+		<armband_registrieren>
+			<en>register bracelet</en>
+			<de>Armband registrieren</de>
+		</armband_registrieren>
+		<armbandid>
+			<en>bracelet ID</en>
+			<de>Armband ID</de>
+		</armbandid>
+		<notlogged_armband1>
+			<en><![CDATA[
+				Please log in or create a new account,<br>
+				to register your bracelet
+			]]></en>
+			<de><![CDATA[
+				Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
+				um dein Armband
+			]]></de>
+		</notlogged_armband1>
+		<notlogged_armband2>
+			<en></en>
+			<de>zu registrieren:</de>
+		</notlogged_armband2>
+		<disclaimer>
+			<en><![CDATA[
+				Your email will not be given to third parties.<br>
+				We will use it for example to restore your passwort.
+			]]></en>
+			<de><![CDATA[
+				Deine E-Mail-Adresse wird nicht an Dritte weitergegeben.<br>
+				Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.
+			]]></de>
+		</disclaimer>
+		<change_email>
+			<en>change email</en>
+			<de>Email ändern</de>
+		</change_email>
 	</login>
 	<order>
 	</order>
@@ -398,7 +529,7 @@
 			<de>Accountdetails ändern</de>
 		</change_accountdetails>
 		<notifications>
-			<en>Notifications</en>
+			<en>notifications</en>
 			<de>Benachrichtigungen</de>
 		</notifications>	
 		<notific_read>
@@ -406,7 +537,7 @@
 			<de>Benachrichtigungen gelesen</de>
 		</notific_read>
 		<nonew_notific>
-			<en>There's no new notifications for you</en>
+			<en>There are no new notifications for you</en>
 			<de>Es gibt keine neuen Benachrichtigungen für dich</de>
 		</nonew_notific>
 		<bracelets>
@@ -516,8 +647,6 @@
 			<de><![CDATA[Hier wird in Kürze unser Online-Shop erscheinen. Wenn sie über den Verkaufsstart informiert werden wollen, registrieren sie sich <a href="login">hier</a> und sie werden eine Benachrichtigung per E-Mail erhalten.]]></de>
 		</notavailable>
 	</shop>
-	<start>
-	</start>
 	<stats>
 		<neuesterupload de-title="neuster upload" en-title="latest upload">
 			<armband>
@@ -637,6 +766,62 @@
 				<de>Die Bestätigung deiner Email ist gescheitert.</de>
 			</falsch>
 		</regstatuschange>
+		<loginattempt>
+			<en>The entered username or password are incorrect, please try again.</en>
+			<de>Der eingegebene Benutzername oder das Passwort waren falsch, versuche es bitte erneut.</de>
+		</loginattempt>
+		<notexisting>
+			<en>The account you tried logging into does not exist, please try again.</en>
+			<de>Der Account auf den du dich einloggen willst, existiert nicht, versuche es bitte erneut.</de>
+		</notexisting>
+		<bracelet_registered>
+			<f0>
+				<en>This bracelet does not exist.</en>
+				<de>Dieses Armband existiert nicht.</de>
+			</f0>
+			<f2>
+				<en>This bracelet has already been registered to your account.</en>
+				<de>Dieses Armband wurde schon auf dich registriert.</de>
+			</f2>
+			<f3>
+				<first>
+					<en>This bracelet has already been registered to</en>
+					<de>Dieses Armband wurde schon auf </de>
+				</first>
+				<last>
+					<en></en>
+					<de>registriert.</de>
+				</last>
+			</f3>
+		</bracelet_registered>
+		<successfully_registered>
+			<en><![CDATA[
+				Your account has been successfully registered.<br>
+				You will shortly recieve an email containing a link with wich you will be able to confirm your email-address.<br>
+				If you don't recieve an email within the next five minutes, you will be able to send another one right here.
+			]]></en>
+			<de><![CDATA[
+				Dein Account wurde erfolgreich erstellt.<br>
+				Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.<br>
+				Falls du nach von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
+			]]></de>
+		</successfully_registered>
+		<revalidation>
+			<wahr>
+				<en>Your email address has been changed successfully, you will recieve a link per email with which you can confirm your account.</en>
+				<de>Deine E-Mail wurde erfolgreich geändert, du bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.</de>
+			</wahr>
+			<falsch>
+				<en><![CDATA[
+					Your email address has not been confirmed.<br>
+					You can change your email address here and we will send you another confirmation-email.
+				]]></en>
+				<de><![CDATA[
+					Deine E-Mail Adresse wurde noch nicht bestätigt.<br>
+					Hier kannst du deine E-Mail ändern und dir eine neue Bestätigungs-Email zusenden lassen.
+				]]></de>
+			</falsch>
+		</revalidation>
 	</php>
 	<js>
 		<test>
@@ -673,10 +858,21 @@
 			<en>password</en>
 			<de>Passwort</de>
 		</passwort>
+		<repeat_passwort>
+			<en>repeat password</en>
+			<de>Passwort wiederholen</de>
+		</repeat_passwort>
 		<suchen>
 			<en>Search</en>
 			<de>Suchen</de>
 		</suchen>
-		
+		<send>
+			<en>send</en>
+			<de>Abschicken</de>
+		</send>
+		<register>
+			<en>register</en>
+			<de>Registrieren</de>
+		</register>
 	</form>
 </langs>

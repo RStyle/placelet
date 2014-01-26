@@ -3,18 +3,18 @@
 <?php
 if(isset($loginattempt) || isset($_GET['notexisting'])) {
 	if(isset($loginattempt)) echo '
-				Der eingegebene Benutzername oder das Passwort waren falsch, versuche es bitte erneut.<br><br>';
+				'.$lang->php->loginattempt->$lng.'<br><br>';
 	if(isset($_GET['notexisting'])) echo '
-				Der Account auf den du dich einloggen willst existiert nicht, versuche es bitte erneut.<br><br>';
+				'.$lang->php->notexisting->$lng.'<br><br>';
 ?>
 				<form name="login" id="form_login" action="login" method="post">
 					<table style="border: 1px solid black">
 						<tr>
-							<td><label for="login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-							<td><input type="text" name="login" id="login" size="20" maxlength="30" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="Benutzername" required></td>
+							<td><label for="login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+							<td><input type="text" name="login" id="login" size="20" maxlength="30" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" required></td>
 						</tr>
 						<tr>
-							<td><label for="password">Passwort</label></td>
+							<td><label for="password"><?php echo $lang->form->passwort->$lng; ?></label></td>
 							<td><input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%&$%&/%§$" required></td>
 						</tr>
 						<tr>
@@ -31,36 +31,33 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 ?>
 				<div id="register_pic">
 					<form name="registerpic" action="login?postpic=<?php echo $postpic; ?>" method="post" enctype="multipart/form-data">
-						<span style="font-family: Verdana, Times"><strong style="color: #000;">Bild</strong> posten</span><br><br>
+						<span style="font-family: Verdana, Times"><?php echo $lang->login->bildposten->$lng; ?></span><br><br>
 						
-						<label for="registerpic_brid" class="label_registerpic_brid">Armband ID:</label><br>
+						<label for="registerpic_brid" class="label_registerpic_brid"><?php echo $lang->login->armbandid->$lng; ?>:</label><br>
 						<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" id="registerpic_brid" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
 																																	 if(count($postpic_id) == 1) echo $postpic_id[0]; ?>" required><br>
 						
-						<label for="registerpic_title" class="label_registerpic_title">Titel:</label><br>
-						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" id="registerpic_title" title="Min. 4 - Max. 30" placeholder="Titel" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>" required><br>
+						<label for="registerpic_title" class="label_registerpic_title"><?php echo $lang->login->title->$lng; ?>:</label><br>
+						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" id="registerpic_title" title="Min. 4 - Max. 30" placeholder="<?php echo $lang->login->title->$lng; ?>" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>" required><br>
 						
-						<label for="registerpic_city" class="label_registerpic_city">Stadt:</label><br>
-						<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="Stadt" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_city'];?>" required><br>
+						<label for="registerpic_city" class="label_registerpic_city"><?php echo $lang->login->city->$lng; ?>:</label><br>
+						<input type="text" name="registerpic_city" class="registerpic_city" id="registerpic_city" size="20" placeholder="<?php echo $lang->login->city->$lng; ?>" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_city'];?>" required><br>
 						
-						<label for="registerpic_country" class="label_registerpic_country">Land:</label><br>
-						<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" placeholder="Land" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_country'];?>" required><br>
+						<label for="registerpic_country" class="label_registerpic_country"><?php echo $lang->login->country->$lng; ?>:</label><br>
+						<input type="text" name="registerpic_country" class="registerpic_country" id="registerpic_country" size="20" placeholder="<?php echo $lang->login->country->$lng; ?>" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_country'];?>" required><br>
 						
-						<label for="registerpic_state" class="label_registerpic_state">Bundesland:</label><br>
-						<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" placeholder="Bundesland" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_state'];?>"><br>
+						<label for="registerpic_state" class="label_registerpic_state"><?php echo $lang->login->state->$lng; ?>:</label><br>
+						<input type="text" name="registerpic_state" class="registerpic_state" id="registerpic_state" size="20" placeholder="<?php echo $lang->login->state->$lng; ?>" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_state'];?>"><br>
 						
 						<div id="map">
-							<div id="pos">
-								Deine Position wird ermittelt...<br>
-								Du kannst den Ort auch manuell eingeben.
-							</div>
-							<p>Bewege den roten Zeiger zu dem Ort deines Fotos. Du kannst ihn auch manuell in die Eingabefelder links eingeben.</p>
+							<div id="pos"><?php echo $lang->login->map_placeholder->$lng; ?></div>
+							<p><?php echo $lang->login->mapinfo->$lng; ?></p>
 						</div>
 						
 						<input type="hidden" name="registerpic_latitude" id="latitude" value="49.848970">
 						<input type="hidden" name="registerpic_longitude" id="longitude" value="7.867824">
 						
-						<label for="registerpic_description" class="registerpic_description">Beschreibung:</label><br>
+						<label for="registerpic_description" class="registerpic_description"><?php echo $lang->login->description->$lng; ?>:</label><br>
 						<textarea name="registerpic_description" id="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
 <?php
 		//$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
@@ -71,8 +68,8 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						<input type="hidden" name="" value="">
 						<div id="registerpic_upload_inputs"<?php if($user->login == false) echo ' style="display: none;"'; ?>>
 							<input type="file" name="registerpic_file" accept="image/*" id="registerpic_file"><br>
-							<input type="submit" name="registerpic_submit" id="registerpic_submit" value="Bild posten"><br>
-							Bildvorschau:<br>
+							<input type="submit" name="registerpic_submit" id="registerpic_submit" value="<?php echo $lang->login->bildupload->$lng; ?>"><br>
+							<?php echo $lang->login->preview->$lng; ?>:<br>
 							<img id="image_preview" src="./img/placeholder.png" alt="preview">
 						</div>
 					</form>
@@ -80,13 +77,10 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 <?php
 	if($user->login == false) {
 ?>
-						<p class="picupload_nologin_text">
-							Wenn du einen Account besitzt logge dich bitte ein, bevor du dein Bild hochlädst.<br>
-							<span class="pseudo_link" id="picupload_nologin">Das Bild uneingeloggt hochladen.</span>
-						</p>
+						<p class="picupload_nologin_text"><?php echo $lang->login->notlogged_pic->$lng; ?></p>
 						<!--<form action="./" method="post">-->
 							<span id="picupload_login_errormsg"></span>
-							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
+							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
 							<input type="password" size="20" name="picupload_login_password" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
 							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
 						<!--</form>-->
@@ -100,35 +94,34 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 		if(isset($bracelet_registered)) {
 			switch($bracelet_registered) {
 					case 0:
-						echo 'Dieses Armband gibt es nicht.';
+						echo $lang->php->bracelet_registered->f0->$lng;
 						break;
 					case 2:
-						echo 'Dieses Armband wurde schon auf dich registriert.';
+						echo $lang->php->bracelet_registered->f2->$lng;
 						break;
 					default:
 			if($bracelet_registered[0] == 3)
-				echo 'Dieses Armband wurde schon auf <a href="profil?user='.urlencode($bracelet_registered[1]).'">'.$bracelet_registered[1].'</a> registriert.';
+				echo $lang->php->bracelet_registered->f3->first->$lng.' <a href="profil?user='.urlencode($bracelet_registered[1]).'">'.$bracelet_registered[1].'</a> '.$lang->php->bracelet_registered->last->f3->$lng;
 			}
 		}
 ?>
 				<form name="registerbr" action="login?registerbr" method="post">
-					<label for="reg_br">Armband registrieren</label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="Armband ID" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
-					<input type="submit" name="registerbr_submit" value="Armband registrieren">
+					<label for="reg_br"><?php echo $lang->login->armband_registrieren->$lng; ?></label>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="<?php echo $lang->login->armbandid->$lng; ?>" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
+					<input type="submit" name="registerbr_submit" value="<?php echo $lang->form->register->$lng; ?>">
 				</form>
 <?php
 	}else {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen
 ?>
 				<form name="login" id="form_login" action="login" method="post" style="float: left;">
-				Bitte Logge dich ein oder erstelle dir einen neuen Account,<br>
-				um dein Armband <?php if($registerbr != '') echo 'Nr. <span style="color: #000; font-style: italic;">'.$registerbr.'</span>'; ?> registrieren:
+				<?php echo $lang->login->notlogged_armband1->$lng; if($registerbr != '') echo 'Nr. <span style="color: #000; font-style: italic;">'.$registerbr.'</span> '.$lang->login->notlogged_armband2->$lng; ?>
 					<table style="border: 1px solid black">
 						<tr>
-							<td><label for="log_login">Benutzername&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-							<td><input type="text" name="login" id="log_login" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+							<td><label for="log_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+							<td><input type="text" name="login" id="log_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
 						<tr>
-							<td><label for="log_password">Passwort</label></td>
+							<td><label for="log_password"><?php echo $lang->form->passwort->$lng; ?></label></td>
 							<td><input type="password" name="password" id="log_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
 						</tr>
 						<tr>
@@ -138,26 +131,26 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 					</table>
 				</form>
 				<form name="reg" id="form_reg" action="login" method="post" style="float: right;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!!--->
-					Deine E-Mail-Adresse wird nicht an Dritte weitergegeben.<br>Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.
+					<?php echo $lang->login->disclaimer->$lng; ?>
 					<table style="border: 1px solid black">
 						<tr>
-							<td><label for="reg_login">Benutzername</label></td>
-							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
+							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
 						<tr>
-							<td><label for="reg_email">Email-Adresse</label></td>
-							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
+							<td><label for="reg_email"><?php echo $lang->form->email->$lng; ?></label></td>
+							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
 						</tr>
 						<tr>
-							<td><label for="reg_password">Passwort</label></td>
+							<td><label for="reg_password"><?php echo $lang->form->passwort->$lng; ?></label></td>
 							<td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
 						</tr>
 						<tr>
-							<td><label for="reg_password2">Passwort wiederholen</label></td>
+							<td><label for="reg_password2"><?php echo $lang->form->repeat_passwort->$lng; ?></label></td>
 							<td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
 						</tr>
 						<tr>
-							<td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
+							<td><input type="hidden" name="new_register" value="true"><input type="submit" value="<?php echo $lang->form->register->$lng; ?>"></td>
 							<td>&nbsp;</td>
 						</tr>
 					</table>
@@ -167,59 +160,52 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 }elseif(isset($unvalidated) || @$user_registered === true || isset($revalidation)) {
 	if(isset($user_registered)) {
 ?>
-				<p>
-					Dein Account wurde erfolgreich erstellt.<br>
-					Du wirst eine E-Mail mit einem Link bekommen, mit dem du deine E-Mail Adresse bestätigen kannst.<br>
-					Falls du nach von 5 Minuten keine E-Mail bekommen hast, kannst du deine E-Mail hier ändern.
-				</p>
+				<p><?php echo $lang->php->successfully_registered->$lng; ?></p>
 <?php
 	}elseif(isset($revalidation)) {
 		if($revalidation === true){
 ?>
-				<p>Deine E-Mail wurde erfolgreich geändert, du bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.</p>
+				<p><?php echo $lang->php->revalidation->wahr->$lng; ?></p>
 <?php
 		}else {
 			echo $revalidation;
 		}
 	}else {
 ?>
-				<p>
-					Deine E-Mail Adresse wurde noch nicht bestätigt.<br>
-					Hier kannst du deine E-Mail ändern und dir eine neue Bestätigungs-Email zusenden lassen.
-				</p>
+				<p><?php echo $lang->php->revalidation->falsch->$lng; ?></p>
 <?php
 	}
 ?>
 				<form method="post" action="login">
-					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="Benutzername" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
-					<input type="email" name="revalidate_email" size="20" maxlength="30" placeholder="E-Mail" required>
-					<input type="submit" name="revalidate_submit" value="E-Mail ändern">
+					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
+					<input type="email" name="revalidate_email" size="20" maxlength="30" placeholder="<?php echo $lang->form->email->$lng; ?>" required>
+					<input type="submit" name="revalidate_submit" value="<?php echo $lang->login->change_email->$lng; ?>">
 				</form>
 <?php
 }elseif(!$user->login) {
 	if(isset($user_registered)) echo $user_registered;
 ?>
 				<form name="reg" id="form_reg" action="login" method="post"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->
-					Deine E-Mail-Adresse wird nicht an Dritte weitergegeben. Wir benötigen sie zum Beispiel, um dir auf Anfrage dein Passwort senden zu können.
+					<?php echo $lang->login->disclaimer->$lng; ?>
 					<table style="border: 1px solid black">
 						<tr>
-							<td><label for="reg_login">Benutzername</label></td>
-							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="Benutzername" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
+							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
 						<tr>
-							<td><label for="reg_email">Email-Adresse</label></td>
-							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="Email-Adresse" required></td>
+							<td><label for="reg_email"><?php echo $lang->form->email->$lng; ?></label></td>
+							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
 						</tr>
 						<tr>
-							<td><label for="reg_password">Passwort</label></td>
+							<td><label for="reg_password"><?php echo $lang->form->passwort->$lng; ?></label></td>
 							<td><input type="password" name="reg_password" id="reg_password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
 						</tr>
 						<tr>
-							<td><label for="reg_password2">Passwort wiederholen</label></td>
+							<td><label for="reg_password2"><?php echo $lang->form->repeat_passwort->$lng; ?></label></td>
 							<td><input type="password" name="reg_password2" id="reg_password2" class="password" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required></td>
 						</tr>
 						<tr>
-							<td><input type="hidden" name="new_register" value="true"><input type="submit" value="Registrieren"></td>
+							<td><input type="hidden" name="new_register" value="true"><input type="submit" value="<?php echo $lang->form->register->$lng; ?>"></td>
 							<td>&nbsp;</td>
 						</tr>
 					</table>
@@ -227,7 +213,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 <?php
 }else {
 ?>
-				<p>Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span></p>
+				<p><?php echo $lang->misc->nope->$lng; ?></p>
 <?php
 }
 ?>
