@@ -106,6 +106,10 @@
 				<de>Kommentar abschicken</de>
 			</comment_button>
 		</comments>
+		<activate_js>
+			<en>Please activate Javascript to view the map with all the locations.</en>
+			<de>Bitte aktivieren sie Javascript um die Karte der verschiedenen Stationen zu sehen.</de>
+		</activate_js>
 		<nope>
 			<en><![CDATA[You should not be here. Just go to the <span class="pseudo_link" onclick="history.back(-1)">previous</span> page.]]></en>
 			<de><![CDATA[Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span>]]></de>
@@ -128,7 +132,7 @@
 			<en>
 				We are a team of highly motivated students of grade 11 at the Gymnasium am Römerkastell Bad Kreuznach, who participate in the Juniorprojekt of the German Institute for Economic Research(DIW) in Cologne.
 				The Juniorprojekt offers students the opportunity to actively engage in the daily activities associated with running a business to gain a variety of experiences to prepare for the working life.
-				The concept of our business is to produce 'Travelbracelets' which are given from friend to friend around the world. The various owners of the bracelet will take photos of it and uploads it to our website,
+				The concept of our business is to produce 'travel bracelets' which are given from friend to friend around the world. The various owners of the bracelet will take photos of it and uploads it to our website,
 				which we hope will become a great community.
 			</en>
 			<de>
@@ -244,10 +248,40 @@
 	<admin>
 	</admin>
 	<armband>
-		
+		<abonnieren>
+			<en>subscribe to bracelet</en>
+			<de>Armband abonnieren</de>
+		</abonnieren>
+		<bildposten>
+			<en>Post a new picture to this bracelet</en>
+			<de>Ein neues Bild zu diesem Armband posten</de>
+		</bildposten>
+		<nopics>
+			<en>No picture have been posted to this bracelet</en>
+			<de>Zu diesem Armband wurde noch kein Bild gepostet</de>
+		</nopics>
+		<statistik>
+			<en>statistics</en>
+			<de>Statistik</de>
+		</statistik>
+		<neuername>
+			<en>new name</en>
+			<de>Neuer Name</de>
+		</neuername>
+		<aendern>
+			<en>save</en>
+			<de>ändern</de>
+		</aendern>
+		<registriert_am>
+			<en>registered on</en>
+			<de>Registriert am</de>
+		</registriert_am>
+		<besitzeranzahl>
+			<en>owner count</en>
+			<de>Anzahl Besitzer</de>
+		</besitzeranzahl>
 	</armband>
-	<community>
-		<neuestebilder en-title="Latest Pictures" de-title="Neueste Bilder" >
+	<pictures>
 			<datum>
 				<en>date</en>
 				<de>Datum</de>
@@ -269,10 +303,10 @@
 				<en>bracelet</en>
 				<de>Armband</de>
 			</armband>
-			<käufer>
+			<kaeufer>
 				<en>purchaser</en>
 				<de>Käufer</de>
-			</käufer>
+			</kaeufer>
 			<besitzer>
 				<en>amount owners</en>
 				<de>Anzahl Besitzer</de>
@@ -281,10 +315,6 @@
 				<en>last location</en>
 				<de>Letzter Ort</de>
 			</letzterort>
-			<station>
-				<en>location no.</en>
-				<de>Station Nr.</de>
-			</station>
 			
 			
 			
@@ -296,6 +326,13 @@
 				<en>delete/report comment</en>
 				<de>Kommentar löschen/melden</de>
 			</deletecomment>
+		</pictures>
+	<community>
+		<neuestebilder en-title="Latest Pictures" de-title="Neueste Bilder" >
+			<station>
+				<en>location no.</en>
+				<de>Station Nr.</de>
+			</station>
 		</neuestebilder>
 	</community>
 	<faq>
@@ -304,7 +341,7 @@
 		<artikel1 de-title="Das Reisearmband" en-title="The Travel Bracelet">
 			<paragraph>
 				<en><![CDATA[
-					Do you want to own a Travelbracelet, present it to others and become part of our community?<br>
+					Do you want to own a travel bracelet, present it to others and become part of our community?<br>
 					Then buy one of our personal bracelets and bring joy to people all over the world!<br>
 					Using a name you come up with, others can also keep track of your bracelet traveling the world.
 				]]></en>
@@ -359,7 +396,34 @@
 			</articlefooter>
 		</artikel2>
 	</home>
-	<impressum>
+	<impressum en-title="legal notice" de-title="impressum">
+		<placelet>
+			<en><![CDATA[
+				Placelet, a <a href="http://juniorprojekt.de" target="_blank">JUNIOR</a>-Company
+			]]></en>
+			<de><![CDATA[
+				Placelet, ein <a href="http://juniorprojekt.de" target="_blank">JUNIOR</a>-Unternehmen
+			]]></de>
+		</placelet>
+		<telefon>
+			<en>telephone: +49</en>
+			<de>Telefon: 0</de>
+		</telefon>
+		<creators>
+			<en><![CDATA[
+				This website is being developed and designed by<br>
+				<a href="mailto:roman.savrasov@placelet.de">Roman Savrasov</a>, <a href="mailto:daniel.schaefer@placelet.de">Daniel Schäfer</a>
+				and <a href="mailto:julian.zimmerlin@placelet.de">Julian Zimmerlin</a>
+			]]></en>
+			<de><![CDATA[
+				Diese Website wird entwickelt und designt von<br>
+						<a href="mailto:roman.savrasov@placelet.de">Roman Savrasov</a>, <a href="mailto:daniel.schaefer@placelet.de">Daniel Schäfer</a> und <a href="mailto:julian.zimmerlin@placelet.de">Julian Zimmerlin</a>
+			]]></de>
+		</creators>
+		<validity>
+			<en>and is valid HTML5.</en>
+			<de>and ist HTML5 valide.</de>
+		</validity>
 	</impressum>
 	<kontakt en-title="contact" de-title="Kontakt">
 		<text>
@@ -648,7 +712,7 @@
 		</notavailable>
 	</shop>
 	<stats>
-		<neuesterupload de-title="neuster upload" en-title="latest upload">
+		<neuesterupload de-title="neuester upload" en-title="latest upload">
 			<armband>
 				<en>bracelet</en>
 				<de>Armband</de>

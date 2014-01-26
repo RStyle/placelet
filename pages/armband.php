@@ -71,15 +71,15 @@ if ($braceName != NULL) {
 		google.maps.event.addDomListener(window, "load", initialize);';
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>Armband <?php echo htmlentities($braceName); ?></h1></div>
-				<?php if(!$user_subscribed) echo '<span class="pseudo_link float_right" id="show_sub">Armband abonnieren</span>'; ?>
-				<a href="<?php echo 'login?postpic'; if($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner']) echo '='.$braceID.'" title="'.$braceID.'"';?>">Ein neues Bild zu diesem Armband posten</a>
+				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
+				<?php if(!$user_subscribed) echo '<span class="pseudo_link float_right" id="show_sub">'.$lang->armband->abonnieren->$lng.'</span>'; ?>
+				<a href="<?php echo 'login?postpic'; if($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner']) echo '='.$braceID.'" title="'.$braceID.'"';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
 <?php
 		if(!$user_subscribed) {
 ?>
 				<form method="get" action="armband">
-					<input type="submit" name="sub_submit" value="Abonnieren" class="float_right sub_inputs" style="display: none;">
-					<input name="sub_code" type="email"  size="20" maxlength="254" placeholder="E-Mail Adresse" class="float_right sub_inputs" style="display: none;" required>
+					<input type="submit" name="sub_submit" value="<?php echo $lang->pictures->armband->$lng; ?>" class="float_right sub_inputs" style="display: none;">
+					<input name="sub_code" type="email"  size="20" maxlength="254" placeholder="<?php echo $lang->form->email->$lng; ?>" class="float_right sub_inputs" style="display: none;" required>
 					<input type="hidden" name="sub" value="email">
 					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>" id="bracelet_name">
 				</form>
@@ -90,7 +90,7 @@ if ($braceName != NULL) {
 				else $last_pic = 'middle';
 ?>
 				<div style="width: 100%; overflow: auto;">
-				<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="Bild löschen/melden" onclick="confirmDelete('das Bild', this); return false;">X</a>
+				<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('das Bild', this); return false;">X</a>
 					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 						<img src="img/triangle.png" alt="" class="thumb_triangle">
@@ -98,14 +98,14 @@ if ($braceName != NULL) {
 					</a>
 					<table class="pic-info">
 						<tr>
-							<th>Datum</th>
+							<th><?php echo $lang->pictures->armband->$lng; ?></th>
 							<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
 						</tr>
 <?php
 			if($stats[$i]['user'] != NULL) {
 ?>
 						<tr>
-							<th>Uploader</th>
+							<th><?php echo $lang->pictures->uploader->$lng; ?></th>
 							<td><a href="profil?user=<?php echo urlencode(html_entity_decode(($stats[$i]['user']))); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
@@ -117,7 +117,7 @@ if ($braceName != NULL) {
 						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
 						<?php echo $stats[$i]['description']; ?>      
 						<br><br>
-						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i])-11 ?>">Kommentare zeigen (<?php echo count($stats[$i])-11; ?>)</span>
+						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i])-11 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-11; ?>)</span>
 					</p>
                     
 					<div class="comments" id="comment<?php echo $i;?>">
@@ -132,7 +132,7 @@ if ($braceName != NULL) {
 					$last_comment = 'last';
 				}
 ?>
-							<a href="armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="Kommentar löschen/melden" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
+							<a href="armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="><?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
                             <strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  
@@ -140,15 +140,15 @@ if ($braceName != NULL) {
 			}
 ?>   
 						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
-							<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span><br><br>
-							<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user">Name: </label>
+							<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
+							<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user">><?php echo $lang->misc->comments->name->$lng; ?>: </label>
 							<input <?php if($user->login) echo 'type="hidden" '; else echo 'type="text" ';?>name="comment_user[<?php echo $i; ?>]" <?php if($user->login == true) echo ' value="'.$user->login.'" ';?>class="comment_user" size="20" maxlength="15" placeholder="Name" pattern=".{4,15}" title="Min.4 - Max.15" required><?php if(!$user->login) echo '<br>'; ?>
-							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content">Dein Kommentar:</label><br>
+							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
 							<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
 							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
 							<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
 							<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
-							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="Kommentar abschicken" class="submit_comment">
+							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="><?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
 						</form>
 					</div>
 				</div>
@@ -165,15 +165,15 @@ if ($braceName != NULL) {
 ?>
 <?php
 		if ($bracelet_stats['owners'] == 0 ) {
-			echo '<p>Zu diesem Armband wurde noch kein Bild gepostet.</p>';
+			echo '<p>'.$lang->armband->nopics->$lng.'</p>';
 		}
 ?>
 			</article>
 			<aside class="side_container" id="bracelet_props">
-				<h1>Statistik</h1>
+				<h1><?php echo $lang->armband->statistik->$lng; ?></h1>
 				<table style="width: 100%;">
 					<tr>
-						<th>Name</th>
+						<th><?php echo $lang->misc->comments->name->$lng; ?></th>
 						<td><strong><?php echo htmlentities($stats['name']); if($owner) {?> </strong> <img src="img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
@@ -181,30 +181,30 @@ if ($braceName != NULL) {
 ?> 
 					<form method="post" action="armband?name=<?php echo urlencode($braceName); ?>">
 						<tr>
-							<td><input type="text" name="edit_name" placeholder="Neuer Name" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
-							<td><input type="submit" value="Ändern" class="name_inputs" name="edit_submit" style="display: none;"></td>
+							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
+							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs" name="edit_submit" style="display: none;"></td>
 						</tr>
 					</form>
 <?php
 		}
 ?>
 					<tr>
-						<td>Käufer</td>
+						<td><?php echo $lang->pictures->kaeufer->$lng; ?></td>
 						<td><a href="profil?user=<?php echo urlencode(htmlentities($stats['owner'])); ?>"><?php echo htmlentities($stats['owner']); ?></a></td>
 					</tr>
 					<tr>
-						<td>Registriert am</td>
+						<td><?php echo $lang->armband->registriert_am->$lng; ?></td>
 						<td><?php echo date('d.m.Y', $stats['date']); ?></td>
 					</tr>
 					<tr>
-						<td>Anzahl Besitzer</td>
+						<td><?php echo $lang->armband->besitzeranzahl->$lng; ?></td>
 						<td><?php echo $stats['owners']; ?></td>
 					</tr>
 <?php
 		if($bracelet_stats['owners'] != 0) {
 ?>
 					<tr>
-						<td>Letzter Ort</td>
+						<td><?php echo $lang->pictures->letzterort->$lng; ?></td>
 						<td><?php echo $stats[0]['city']; ?>,</td>
 					</tr>
 					<tr>
@@ -219,9 +219,7 @@ if ($braceName != NULL) {
 <?php
 		if($bracelet_stats['owners'] != 0) {
 ?>
-			<aside id="map_home" class="side_container" style="margin-top: 20px;">
-				Bitte aktivieren sie Javascript um die Karte der verschiedenen Stationen zu sehen.
-			</aside>
+			<aside id="map_home" class="side_container" style="margin-top: 20px;"><?php echo $lang->misc->activate_js->$lng; ?></aside>
 <?php
 		}
 	}else {

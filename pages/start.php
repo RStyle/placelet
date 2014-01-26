@@ -79,25 +79,25 @@
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
-						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->community->neuestebilder->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('das Bild', this); return false;">X</a>
+						<a href="start?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('das Bild', this); return false;">X</a>
 						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.'.$stats[$i][$displayed_picnr]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; //onclick="return confirmDelete('das Bild');" ?>" class="thumb_link">
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
 							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?>" class="thumbnail">
 						</a>
 						<table class="pic-info">
 							<tr>
-								<th><?php echo $lang->community->neuestebilder->datum->$lng; ?></th>
+								<th><?php echo $lang->pictures->datum->$lng; ?></th>
 								<td><?php echo date('d.m.Y H:i', $stats[$i][$displayed_picnr]['date']). ' '. $lang->misc->uhr->$lng; ?></td>
 							</tr>
 							<tr>
-								<th><?php echo $lang->community->neuestebilder->ort->$lng; ?></th>
+								<th><?php echo $lang->pictures->ort->$lng; ?></th>
 								<td><?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?></td>
 							</tr>
 <?php
 				if($stats[$i][$displayed_picnr]['user'] != NULL) {
 ?>
 							<tr>
-								<th><?php echo $lang->community->neuestebilder->uploader->$lng; ?></th>
+								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
 								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$displayed_picnr]['user'])); ?>"><?php echo $stats[$i][$displayed_picnr]['user']; ?></a></td>
 							</tr>
 <?php
@@ -114,19 +114,19 @@
 					<aside class="bracelet-props side_container">
 						<table>
 							<tr>
-								<td><strong><?php echo $lang->community->neuestebilder->armband->$lng; ?></strong></td>
+								<td><strong><?php echo $lang->pictures->armband->$lng; ?></strong></td>
 								<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
 							</tr>
 							<tr>
-								<td><?php echo $lang->community->neuestebilder->käufer->$lng; ?></td>
+								<td><?php echo $lang->pictures->käufer->$lng; ?></td>
 								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['owner'])); ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
-								<td><?php echo $lang->community->neuestebilder->besitzer->$lng; ?></td>
+								<td><?php echo $lang->pictures->besitzer->$lng; ?></td>
 								<td><?php echo $stats[$i]['owners']; ?></td>
 							</tr>
 							<tr>
-								<td><?php echo $lang->community->neuestebilder->letzterort->$lng; ?></td>
+								<td><?php echo $lang->pictures->letzterort->$lng; ?></td>
 								<td><?php echo $stats[$i][0]['city']; ?>,</td>
 							</tr>
 							<tr>
@@ -152,7 +152,7 @@
 						$last_comment = 'last';
 					}
 ?>
-					<a href="start?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$displayed_picnr][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->community->neuestebilder->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
+					<a href="start?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$displayed_picnr][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
 					<strong><?php echo $stats[$i][$displayed_picnr][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$displayed_picnr][$j]['date']).')';//onclick="return confirmDelete('den Kommentar');" ?>
                     <p><?php echo $stats[$i][$displayed_picnr][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  

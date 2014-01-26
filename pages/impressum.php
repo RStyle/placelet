@@ -1,6 +1,6 @@
 			<article id="impressum" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1>Impressum</h1></div>
-				<h3 style="text-align: center;">Placelet, ein <a href="http://juniorprojekt.de" target="_blank">JUNIOR</a>-Unternehmen</h3>
+				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->impressum[$lng.'-title']; ?></h1></div>
+				<h3 style="text-align: center;"><?php echo $lang->impressum->placelet->$lng; ?></h3>
 				<p style="float: left;">
 					Sarah Baiker, Janik Rennollet<br>
 					Gymnasium am Römerkastell<br>
@@ -8,7 +8,7 @@
 					55543 Bad Kreuznach<br>
 				</p>
 				<p style="float: left; margin-left: 2em;">
-					Telefon: 017670174562<br>
+					<?php echo $lang->impressum->telefon->$lng; ?>17670174562<br>
 					<!--Telefax: 0671 - 64119<br>-->
 					<br>
 					www.placelet.de<br>
@@ -18,21 +18,16 @@
 					<a href="mailto:info@placelet.net">info@placelet.net</a>
 				</p>
 				<div style="float: right; width: 50%">
-					<p>
-						Diese Website wird entwickelt und designt von<br>
-						<a href="mailto:roman.savrasov@placelet.de">Roman Savrasov</a>, <a href="mailto:daniel.schaefer@placelet.de">Daniel Schäfer</a> und <a href="mailto:julian.zimmerlin@placelet.de">Julian Zimmerlin</a>
-					</p>
-					<p>
-						und ist HTML5 und CSS3 valide.
-					</p>
+					<p><?php echo $lang->impressum->creators->$lng; ?></p>
+					<p><?php echo $lang->impressum->validity->$lng; ?></p>
 					<p>
 						<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fplacelet.de" style="text-decoration: none;">
 							<img src="http://www.w3.org/html/logo/badge/html5-badge-h-solo.png" width="63" height="64" alt="HTML5 ist valide">
 						</a>
-						&nbsp;
+						<!--&nbsp;
 						<a href="http://jigsaw.w3.org/css-validator/validator?uri=placelet.de" style="text-decoration: none;">
 							<img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="CSS ist valide!">
-						</a>
+						</a>-->
 					</p>
 				</div>
 			</article>
