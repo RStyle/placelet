@@ -266,37 +266,18 @@ dropdown("question", "answer");
 dropdown("header", "connectbox")
 
 function check_width(){   
-//Logo Positionierung    
-    if(window.innerWidth < 1480 && window.innerWidth > 1230){
-		$("#logo").attr("src", 'img/neueFarbenLogo.svg');
-		$("#logo").attr("width", '93');
-	}else if(window.innerWidth > 1500) {
-		$("#body").css({ 'width' : 'calc(100% - 500px)' });
+//Logo Positionierung 
+    if(window.innerWidth < 1240) {
+        $("#round_logo").css({ 'display' : 'none' });    
+    }   
+    if(window.innerWidth > 1500) {
+		$("#section").css({ 'width' : 'calc(100% - 500px)' });
+		$("#mainnavlist").css({ 'width' : 'calc(100% - 500px)' });
 	}else {
-		$("#logo").attr("src", 'img/neueFarbenLogoExtended.svg');
-		$("#logo").attr("width", '206');
-		$("#body").css({ 'width' : '70%' });
+		$("#section").css({ 'width' : '70%' }); 
+		$("#mainnavlist").css({ 'width' : '70%' });
 	}
-	
-	if(window.innerWidth > 1230){
-		$("#logo").attr("style", 'top: 4em;');
-	}   
-	else {
-        $("#logo").attr("style", 'top: 11px;'); 
-    }
-//Login-Box-Positionierung	
-	if(window.innerWidth < 1038){
-		$("#login-box").css({ 'left' : 500 });
-	}   
-	else {
-		if(window.innerWidth > 1560) {
-			$("#login-box").css({ 'right' : '34%' });
-		}
-		else {
-			
-			$("#login-box").css({ 'left' : '51%' });
-		}
-	}
+
 //FB-Plugin-Höhe
     if(window.innerWidth < 1587) {
         $("#fb_plugin").attr("data-height", '200');

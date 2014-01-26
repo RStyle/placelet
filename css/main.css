@@ -12,12 +12,6 @@
 	}
 /*---Styles für Internet-Explorer---*/
 /*+++allgemeine Tags+++*/
-	html {
-		border-top-color: #234754;
-		border-top-style: solid;
-		border-top-width: 11px;
-		overflow-y: scroll;/*Scrollbalken für einheitliches Design erzwingen*/
-	}
 	/*+++Responsives FB Plugin+++*/
 		.fb-like-box, .fb-like-box span, .fb-like-box.fb_iframe_widget span iframe {
 			width: 100% !important;
@@ -28,12 +22,9 @@
 		background-color: #fff;
 		background-position: 0 200px;
 		color: #234754;
-		margin: 0 auto;
-		min-width: 1000px;
+		margin: 0;
 		padding: 0 0;
-		width: 70%;
-		font-family: 'Open Sans', Verdana;
-		
+		font-family: 'Open Sans', Verdana;		
 	}
 	a {
 		color: #000;
@@ -262,9 +253,11 @@
 		margin-top: 0;
 		overflow: auto;
 		width: 100%;
+		background-color: #333;
+		min-width: 1000px;
 	}
 		#headerlist {
-			color: #9B9B9B;
+			color: #fff;
 			float: right;
 			height: 2.9em;
 			margin: 1px 1px 0 0;
@@ -273,7 +266,7 @@
 			padding: 0 1em 0 0;
 		}
 			#headerlist a {
-				color: #9B9B9B;
+				color: #fff;
 			}
 			/*#headerlist a:hover {
 				text-decoration: none;
@@ -287,7 +280,7 @@
 				margin-left: 0.5em;
 			}
 			.headerlist_main_divider {
-				color: #000;
+				color: #fff;
 			}
 			.headerlist_sub_divider {
 				font-size: 0.8em;
@@ -302,7 +295,8 @@
 			}
 		#headerlogin {
 			color: #FFF;
-			background-color: #56747C;
+			background-color: #333;
+			border-left: #555 solid 2px; 
 			float: right;
 			height: 2.9em;
 			line-height: 2.9em;
@@ -318,18 +312,20 @@
 				display: none;
 				padding: 1em;
 				position: absolute;
-				top: 4em;
-				border: 1px solid #B7D300;
+				top: 3.5em;
+				right: 350px;
+				border: 1px solid #333;
 				border-radius: 8px;
 				z-index: 100;
 			}
 			    
 			#headerlogin:hover {
-				background-color: #BBB;
+				background-color: #666;
 			}
 			#headerregisterbr{
 				color: #FFF;
-				background-color: #234754;
+				background-color: #333;
+				border-left: 2px #555 solid;
 				float: right;
 				height: 3em;
 				line-height: 3em;
@@ -342,16 +338,32 @@
 		}
 /*---HEADER---*/
 /*+++LOGO+++*/
-	#logo {
-		height: 70px;
-		left: 1%;
+	#round_logo {
+        width: 80px;
+	    height: 80px; 
+	    background-color: #fff;
+		border-radius: 100%;
+		border: 2px #B7D300 dotted;
+		padding: 0em;
+		
 		position:  absolute;
-		top: 10px;
+		top: 8px;
+		left: 1%;
+    }
+    #logo {
+	    width: 60px;
+	    height: auto;
+	    
+	    position: relative;
+		left: 11px;
+		top: 15px;
 	}
 /*---LOGO---*/
 /*+++NAV+++*/
 	#mainnav {
-		margin-top: 1.5em;
+	    border-top: #fff solid 1px;
+		width: 100%;
+        background-color: #0092ff;
 	}
 	#mainnav > hr {
         margin: 0;
@@ -360,31 +372,38 @@
 			list-style: none;
 			padding: 0;	
             overflow: hidden;
-            width: auto;
-            margin: 0;
+            width: 70%;
+            min-width: 1000px;
+            margin: 0 auto;
             					
 		}
 			#mainnavlist li {
 				float: left;
 				width: 15%;
-				background-color: #0092FF;
-				margin-right: 0.25%;
+				background-color: #0092ff;
+				border-right: 1px #fff solid;
 				text-align: center;	
 				
-				-webkit-transition: background-color 300ms linear 0s;
-                -moz-transition: background-color 300ms linear 0s;
-                -ms-transition: background-color 300ms linear 0s;
-                -o-transition: background-color 300ms linear 0s;
-                transition: background-color 300ms linear 0s;               		
+				-webkit-transition: all 200ms linear 0s;
+                -moz-transition: all 200ms linear 0s;
+                -ms-transition: all 200ms linear 0s;
+                -o-transition: all 200ms linear 0s;
+                transition: all 200ms linear 0s;               		
 			}
-			#mainnavlist li.mainnavlink_active {
-                background-color: #45CCF1;
+			#mainnavlist li.mainnavlink_active, #mainnavlist li.mainnavlink_active:hover {
+                background-color: #fff;                
     		}
-    		#mainnavlist li:hover {
-    			background-color: #A323CA;
-    		}
+    		    #mainnavlist li.mainnavlink_active a, #mainnavlist li.mainnavlink_active:hover a {
+                    color: #333;
+                }
+            #mainnavlist li:hover {
+                background-color: #8ED70F;
+            }
+                #mainnavlist li:hover a, {
+                    color: #333;
+                }
 		.navlinks:link, .navlinks:visited {
-		    padding: 0.8em 0;
+		    padding: 0.6em 0;
             position: relative;
 			text-decoration: none;
 			font-size: 20px;
@@ -401,6 +420,9 @@
 	#section {
 		font-size: 1em;
 		margin-top: 1.5em;
+		width: 70%;
+		margin: 1.5em auto 0;
+		min-width: 1000px;
 	}
 		.mainarticles {
 			padding-bottom: 1em;
