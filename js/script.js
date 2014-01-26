@@ -675,4 +675,4 @@ $(document).ready(function() {
 			else $('#pic_br_switch').data('recent_brid_pics', 'true');
 		reload_start(0);
 	});
-});pic_br_switch
+});

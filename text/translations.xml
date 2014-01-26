@@ -713,22 +713,6 @@
 	</shop>
 	<stats>
 		<neuesterupload de-title="neuester upload" en-title="latest upload">
-			<armband>
-				<en>bracelet</en>
-				<de>Armband</de>
-			</armband>
-			<datum>
-				<en>date</en>
-				<de>Datum</de>
-			</datum>
-			<ort>
-				<en>location</en>
-				<de>Ort</de>
-			</ort>
-			<uploader>
-				<en>Uploader</en>
-				<de>Uploader</de>
-			</uploader>
 		</neuesterupload>
 		<neuesbild en-title="+1 pic" de-title="+1 bild">
 			<ideingeben>
@@ -750,13 +734,13 @@
 				<de>Registrieren</de>
 			</button>
 		</neuesarmband>
-		<main en-title="community-stats" de-title="community-statistiken">
+		<main en-title="community stats" de-title="Community Statistiken">
 			<regarmbänder>
 				<en>Registered bracelets</en>
 				<de>Registrierte Armbänder</de>
 			</regarmbänder>
 			<städte>
-				<en>Various cities</en>
+				<en>Different cities</en>
 				<de>Verschiedene Städte</de>
 			</städte>
 			<beliebtestestadt>

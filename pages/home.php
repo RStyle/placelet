@@ -22,22 +22,22 @@ if($systemStats['total_posted'] > 1) {
         						</a>
         							<table class="connect_pic-info">
         								<tr>
-        									<th><?php echo $lang->stats->neuesterupload->armband->$lng; ?></th>
+        									<th><?php echo $lang->pictures->armband->$lng; ?></th>
         									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
         								</tr>
         								<tr>
-        									<th><?php echo $lang->stats->neuesterupload->datum->$lng; ?></th>
+        									<th><?php echo $lang->pictures->datum->$lng; ?></th>
         									<td><?php echo date('d.m.Y H:i', $stats[1][0]['date'])." ".$lang->misc->uhr->$lng; ?></td>
         								</tr>
         								<tr>
-        									<th><?php echo $lang->stats->neuesterupload->ort->$lng; ?></th>
+        									<th><?php echo $lang->pictures->ort->$lng; ?></th>
         									<td><?php echo $stats[1][0]['city'].', '.$stats[1][0]['country']; ?></td>
         								</tr>
                                     	<?php
                                     				if($stats[1][0]['user'] != NULL) {
                                     	?>
         								<tr>
-        									<th><?php echo $lang->stats->neuesterupload->uploader->$lng; ?></th>
+        									<th><?php echo $lang->pictures->uploader->$lng; ?></th>
         									<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[1][0]['user'])); ?>"><?php echo $stats[1][0]['user']; ?></a></td>
         								</tr>
                                     	<?php

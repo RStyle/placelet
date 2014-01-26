@@ -118,7 +118,7 @@
 								<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
 							</tr>
 							<tr>
-								<td><?php echo $lang->pictures->käufer->$lng; ?></td>
+								<td><?php echo $lang->pictures->kaeufer->$lng; ?></td>
 								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['owner'])); ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>

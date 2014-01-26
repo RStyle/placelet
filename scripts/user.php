@@ -418,53 +418,55 @@ class User
 		$subs_q->execute(array(':email' => $email));
 		$subscriptions = $subs_q->fetchAll(PDO::FETCH_ASSOC);
 		
-		foreach($q as $key => $val) {
-			if($val == 1 || $val == 3) {
-				if($key == 'pic_own') {
-					foreach($bracelets as $bracelet) {
-						$sql = "SELECT user, brid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked";
+		if($q != NULL) {
+			foreach($q as $key => $val) {
+				if($val == 1 || $val == 3) {
+					if($key == 'pic_own') {
+						foreach($bracelets as $bracelet) {
+							$sql = "SELECT user, brid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked";
+							$stmt = $this->db->prepare($sql);
+							$stmt->execute(array(
+								':brid' => $bracelet['brid'],
+								':notific_checked' => $stats['notific_checked']
+							));
+							$pic_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						}
+					}elseif($key == 'comm_own') {
+						foreach($bracelets as $bracelet) {
+							$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND date > :notific_checked";
+							$stmt = $this->db->prepare($sql);
+							$stmt->execute(array(
+								':brid' => $bracelet['brid'],
+								':notific_checked' => $stats['notific_checked']
+							));
+							$comm_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						}
+					}elseif($key == 'comm_pic') {
+						$sql = "SELECT brid, picid FROM pictures WHERE user = :username";
 						$stmt = $this->db->prepare($sql);
-						$stmt->execute(array(
-							':brid' => $bracelet['brid'],
-							':notific_checked' => $stats['notific_checked']
-						));
-						$pic_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}elseif($key == 'comm_own') {
-					foreach($bracelets as $bracelet) {
-						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND date > :notific_checked";
-						$stmt = $this->db->prepare($sql);
-						$stmt->execute(array(
-							':brid' => $bracelet['brid'],
-							':notific_checked' => $stats['notific_checked']
-						));
-						$comm_owns = $stmt->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}elseif($key == 'comm_pic') {
-					$sql = "SELECT brid, picid FROM pictures WHERE user = :username";
-					$stmt = $this->db->prepare($sql);
-					$stmt->execute(array(':username' => $this->login));
-					$own_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
-					
-					foreach($own_pics as $id => $pic_details) {
-						$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND picid = :picid AND date > :notific_checked";
-						$stmt = $this->db->prepare($sql);
-						$stmt->execute(array(
-							':brid' => $pic_details['brid'],
-							':picid' => $pic_details['picid'],
-							':notific_checked' => $stats['notific_checked']
-						));
-						$comm_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}elseif($key == 'pic_subs') {
-					foreach($subscriptions as $brid) {
-						$sql = "SELECT user, brid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked";
-						$stmt = $this->db->prepare($sql);
-						$stmt->execute(array(
-							':brid' => $brid['brid'],
-							':notific_checked' => $stats['notific_checked']
-						));
-						$pic_subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						$stmt->execute(array(':username' => $this->login));
+						$own_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						
+						foreach($own_pics as $id => $pic_details) {
+							$sql = "SELECT commid, picid, user, comment, date FROM comments WHERE brid = :brid AND picid = :picid AND date > :notific_checked";
+							$stmt = $this->db->prepare($sql);
+							$stmt->execute(array(
+								':brid' => $pic_details['brid'],
+								':picid' => $pic_details['picid'],
+								':notific_checked' => $stats['notific_checked']
+							));
+							$comm_pics = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						}
+					}elseif($key == 'pic_subs') {
+						foreach($subscriptions as $brid) {
+							$sql = "SELECT user, brid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid AND date > :notific_checked";
+							$stmt = $this->db->prepare($sql);
+							$stmt->execute(array(
+								':brid' => $brid['brid'],
+								':notific_checked' => $stats['notific_checked']
+							));
+							$pic_subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+						}
 					}
 				}
 			}
