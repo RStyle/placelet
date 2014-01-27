@@ -3,6 +3,8 @@ session_start(); //Session starten
 include_once('../connection.php');
 include_once('../functions.php');
 include_once('../user.php');
+$lang = simplexml_load_file('../../text/translations.xml');
+$lng = 'en';
 if(isset($_POST['login']) && isset($_POST['password'])) {
 	if($_POST['login'] != '' && $_POST['password'] != '') {
 		if(Statistics::userexists($_POST['login'])) {
