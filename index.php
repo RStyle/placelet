@@ -87,7 +87,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			</ul>
 		</header>
 <!--###LOGO###-->
-		<div id="round_logo"><a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogo.svg" alt="Placelet"></a></div>
+		<div id="round_logo" style="display: none;"><a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogo.svg" alt="Placelet"></a></div>
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
@@ -110,7 +110,6 @@ require_once($this_path.'pages/'.$page.'.php');
 
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="/js/script.js"></script>
 		<script type="text/javascript" src="http://placelet.de/js/lightbox-2.6.min.js"></script>
 <?php
 if($page == 'login' && isset($postpic)) {
@@ -209,7 +208,21 @@ if($page == 'login' && isset($postpic)) {
 		<?php */ echo $eecho; ?>
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
+		
+		var lang = new Array();
+<?php 
+		foreach($lang->js as $obj) {
+			foreach($obj as $key => $val) {
+				foreach($val as $lng => $value) {
+					echo 'lang["'.$key.'"] = new Array();'."\n";
+					echo 'lang["'.$key.'"]["'.$lng.'"] = "'.$value.'";'."\n";
+				}
+			}
+		}
+		echo 'var lng = "'.$lng.'";';
+?>
 		</script>
+		<script type="text/javascript" src="/js/script.js"></script>
 <?php
 }elseif($page == 'armband'){
 ?>

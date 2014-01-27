@@ -964,10 +964,22 @@
 		</pic_registered>
 	</php>
 	<js>
-		<test>
-			<en></en>
-			<de></de>
-		</test>
+		<showcomment>
+			<en>show comments</en>
+			<de>Kommentare anzeigen</de>
+		</showcomment>
+		<hidecomment>
+			<en>hide comments</en>
+			<de>Kommentare verstecken</de>
+		</hidecomment>
+		<kommentar_gemeldet>
+			<en>comment flagged</en>
+			<de>Kommentar gemeldet</de>
+		</kommentar_gemeldet>
+		<bild_gemeldet>
+			<en>picture flagged</en>
+			<de>Bild gemeldet</de>
+		</bild_gemeldet>
 	</js>
 	<form>
 		<email>

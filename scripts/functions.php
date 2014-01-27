@@ -79,7 +79,7 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 		$header .= "MIME-Version: 1.0" . "\n";
 		$header .= "Content-type: text/plain; charset=utf-8" . "\n";
 		$header .= "Content-transfer-encoding: 8bit";
-		//mail($mail_recipient, $mail_subject, $mail_content, $header);
+		mail($mail_recipient, $mail_subject, $mail_content, $header);
 		//Bestätigung an den Sender
 			$mail_header = "From: Placelet <info@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
@@ -90,7 +90,7 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 			$fp = fopen($datei, 'r');
 			$inhalt = fread($fp, filesize($datei));
 			fclose($fp);
-			//mail($mail_sender, $betreff, $inhalt, $mail_header);
+			mail($mail_sender, $betreff, $inhalt, $mail_header);
 		return true;
 	}else {
 		return false;				

@@ -40,9 +40,6 @@ if(!isset($_SESSION['server_SID'])) {
 }
 
 $js = '<script type="text/javascript">$(document).ready(function(){';
-foreach($lang->js as $key => $val) {
-	$js.= 'langjs['.$key.'] = '.$val->$lng;
-}
 
 if(isset($_GET['logout']))  {
 	User::logout();

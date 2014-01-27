@@ -461,10 +461,12 @@ function error_postpic(msg) {
 function show_comments(obj){
         number = $(obj).attr('id').replace('toggle_comment','');
         $("#comment" + number).toggle();
-        if($("#toggle_comment" + number).text() == 'Kommentare verstecken'){
-                $("#toggle_comment" + number).text('Kommentare zeigen (' + $("#toggle_comment" + number).data("counts") + ')');
+        if($("#toggle_comment" + number).text() == lang['hidecomment'][lang]){
+                $("#toggle_comment" + number).text(lang['showcomment'][lang] + ' (' + $("#toggle_comment" + number).data("counts") + ')');
+				console.log(lang['showcomment'][lang]);
         }else {
-                $("#toggle_comment" + number).text('Kommentare verstecken');                
+                $("#toggle_comment" + number).text(lang['hidecomment'][lang]);
+				console.log(lang['hidecomment'][lang]);
         }
 }
 $('.toggle_comments').click(function (){
@@ -583,8 +585,8 @@ function confirmDelete(type, object) {
 					success: function(data){
 						var json = JSON.parse(data);
 						if(json.gemeldet != undefined) {
-							if(json.gemeldet == 'Bild') alert("Das Bild wurde gemeldet.");
-							if(json.gemeldet == 'Kommentar') alert("Der Kommentar wurde gemeldet.");
+							if(json.gemeldet == 'Bild') alert(lang['bild_gemeldet'][lang]);
+							if(json.gemeldet == 'Kommentar') alert(lang['kommentar_gemeldet'][lang]);
 						}else if(json.location != undefined) {
 							window.location.replace("http://placelet.de/" + json.location);
 						}else {
