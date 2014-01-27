@@ -17,7 +17,15 @@ if ($braceName != NULL) {
 							 $_POST['comment_picid'][$_POST['comment_form']]);
 	}
 	if(isset($write_comment)) {
-		$js .= 'alert("'.$write_comment.'");';
+		if($write_comment === true) {
+			$js .= 'alert("'.$lang->php->write_comment->wahr->$lng.'");';			
+		}elseif($write_comment == 2) {
+			$js .= 'alert("'.$lang->php->write_comment->f2->$lng.'");';			
+		}elseif($write_comment == 3) {
+			$js .= 'alert("'.$lang->php->write_comment->f3->$lng.'");';			
+		}elseif($write_comment === false) {
+			$js .= 'alert("'.$lang->php->write_comment->falsch->$lng.'");';			
+		}
 	}
 	//Kommentar löschen
 	if(isset($_GET['comment_deleted'])) {

@@ -214,9 +214,9 @@ class User
 							':password' => PassHash::hash($new_pwd),
 							':user' => $username
 							));
-				return 'Passwort erfolgreich geändert.';
+				return true;
 			}else {
-				return 'Falsches Passwort';
+				return false;
 			}
 		}
 	}
@@ -224,7 +224,7 @@ class User
 	public function change_details($email, $old_pwd, $new_pwd, $username) {
 		$return = '';
 		//Passwort ändern
-		$return .= $this->change_password($old_pwd, $new_pwd, $username)."\\n";
+		$change_password = $this->change_password($old_pwd, $new_pwd, $username);
 		//E-Mail ändern
 		if($email != NULL) {
 			$email = trim($email);
@@ -235,12 +235,15 @@ class User
 							':email' => $email,
 							':user' => $username
 							));
-				$return .= 'E-Mail erfolgreich geändert.';
+				$change_details = true;
 			}else {
-				$return .= 'Das ist keine gültige E-Mail.';
+				$change_details = false;
 			}
 		}
-		return $return;
+		if($change_password === true && $change_details === true) return true;
+			elseif($change_password === false && $change_details === true) return 2;
+			elseif($change_password === true && $change_details === true)  return 3;
+			else return false;
 	}
 	public function reset_password($email) {
 		$submissions_valid = false;
@@ -273,9 +276,9 @@ class User
 		  $mail_header .= "Content-transfer-encoding: 8bit";
 		  $content = "Bitte klicken sie auf diesen Link, um das Passwort von Ihrem Placelet.de Account zurückzusetzen.\n http://placelet.de/account?passwordCode=".$code;
 		  mail($email, 'Placelet - Passwort zurücksetzen', $content, $mail_header);
-		  return 'Erfolgreich gesendet';
+		  return true;
 		}else {
-			return 'Es ist ein Fehler aufgetreten.//nDiese E-Mail ist nicht bei uns registriert.';
+			return false;
 		}
 	}
 	public function check_recover_code($code) {
@@ -303,7 +306,7 @@ class User
 			':user' => $username
 			));
 
-		return 'Passwort erfolgreich geändert.';
+		return true;
 	}
 	public function revalidate($username, $email){
 		$username = trim($username);
@@ -743,10 +746,10 @@ class Statistics {
 		if($this->user->login != $username) $username = '[Gast] '.$username;
 		if($username == '[Gast] ') $username = '[Gast] Anonymous';
 		if(strlen($username) < 4) {
-			return 'Benutzername zu kurz, mindestens 4 Zeichen';
+			return 2;
 		}
 		if(strlen($comment) < 2) {
-			return 'Kommentar zu kurz, mindestens 2 Zeichen';
+			return 3;
 		}
 		try {
 			$sql = "SELECT commid FROM comments WHERE brid = :brid AND picid = :picid";
@@ -771,7 +774,7 @@ class Statistics {
 				':date' => time())
 			);
 			$this->notify_subscribers($brid, $username, $picid);
-			return 'Kommentar erfolgreich gesendet.';
+			return true;
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
 				return false;
@@ -848,7 +851,7 @@ class Statistics {
 			if ($picture_file['size'] < $max_file_size) {
 				$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
 			} else {
-				return 'Wir unterstützen nur Bilder bis 8MB Größe';
+				return 6;//'Wir unterstützen nur Bilder bis 8MB Größe';
 			}
 			if($file_uploaded == true) {
 				///////////////////////////

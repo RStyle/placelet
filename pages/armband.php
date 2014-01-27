@@ -98,7 +98,7 @@ if ($braceName != NULL) {
 					</a>
 					<table class="pic-info">
 						<tr>
-							<th><?php echo $lang->pictures->armband->$lng; ?></th>
+							<th><?php echo $lang->pictures->datum->$lng; ?></th>
 							<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
 						</tr>
 <?php
@@ -132,7 +132,7 @@ if ($braceName != NULL) {
 					$last_comment = 'last';
 				}
 ?>
-							<a href="armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="><?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
+							<a href="armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
                             <strong><?php echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  
@@ -141,9 +141,9 @@ if ($braceName != NULL) {
 ?>   
 						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
 							<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
-							<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user">><?php echo $lang->misc->comments->name->$lng; ?>: </label>
+							<label <?php if($user->login) echo 'style="display: none; " ';?>for="comment_user[<?php echo $i; ?>]" class="label_comment_user"><?php echo $lang->misc->comments->name->$lng; ?>: </label>
 							<input <?php if($user->login) echo 'type="hidden" '; else echo 'type="text" ';?>name="comment_user[<?php echo $i; ?>]" <?php if($user->login == true) echo ' value="'.$user->login.'" ';?>class="comment_user" size="20" maxlength="15" placeholder="Name" pattern=".{4,15}" title="Min.4 - Max.15" required><?php if(!$user->login) echo '<br>'; ?>
-							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
+							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
 							<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
 							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
 							<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">

@@ -79,21 +79,21 @@ function send_email($sender, $subject, $content, $mailer = '', $recipient = 'inf
 		$header .= "MIME-Version: 1.0" . "\n";
 		$header .= "Content-type: text/plain; charset=utf-8" . "\n";
 		$header .= "Content-transfer-encoding: 8bit";
-		mail($mail_recipient, $mail_subject, $mail_content, $header);
+		//mail($mail_recipient, $mail_subject, $mail_content, $header);
 		//Bestätigung an den Sender
-			$mail_header = 'From: Placelet <info@placelet.de>';
-			/*$mail_header = 'From: Placelet <info@placelet.de>\n';
-			$mail_header .= "Content-Type: text/html\n";
-			$mail_header .= "Content-Transfer-Encoding: 8bit\n";*/
+			$mail_header = "From: Placelet <info@placelet.de>\n";
+			$mail_header .= "MIME-Version: 1.0" . "\n";
+			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+			$mail_header .= "Content-transfer-encoding: 8bit";
 			
 			$datei = 'text/kontakt_bestaetigung.txt';
 			$fp = fopen($datei, 'r');
 			$inhalt = fread($fp, filesize($datei));
 			fclose($fp);
-			mail($mail_sender, $betreff, $inhalt, $mail_header);
-		return 'Anfrage erfolgreich gesendet.';
+			//mail($mail_sender, $betreff, $inhalt, $mail_header);
+		return true;
 	}else {
-		return 'Das ist keine E-Mail!';				
+		return false;				
 	}
 }
 //Benutzereingaben von ungewünschten Zeichen säubern

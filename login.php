@@ -39,19 +39,25 @@ if(isset($_POST['registerpic_submit'])) {
 	if(isset($pic_registered)) {
 		switch ($pic_registered) {
 			case 0:
-				$js .= 'alert("Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.");';
+				$js .= 'alert("'.$lang->php->pic_registered->f0->$lng.'");';
 				break;
 			case 1:
-				$js .= 'alert("Beschreibung zu kurz, mindestens 2 Zeichen, bitte.");';
+				$js .= 'alert("'.$lang->php->pic_registered->f1->$lng.'");';
 				break;
 			case 2:
-				$js .= 'alert("Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.");';
+				$js .= 'alert("'.$lang->php->pic_registered->f2->$lng.'");';
+				break;
+			case 3:
+				$js .= 'alert("'.$lang->php->pic_registered->f3->$lng.'");';
 				break;
 			case 4:
-				$js .= 'alert("Dieses Armband wurde noch nicht registriert.");';
+				$js .= 'alert("'.$lang->php->pic_registered->f4->$lng.'");';
 				break;
 			case 5:
-				$js .= 'alert("Dieses Armband gibt es nicht.");';
+				$js .= 'alert("'.$lang->php->pic_registered->f5->$lng.'");';
+				break;
+			case 6:
+				$js .= 'alert("'.$lang->php->pic_registered->f6->$lng.'");';
 				break;
 			case 7:
 				header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);

@@ -90,16 +90,16 @@
 				<de><![CDATA[<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span>]]></de>
 			</kommentarschreiben>
 			<name>
-				<en>name:</en>
-				<de>Name:</de>
+				<en>name</en>
+				<de>Name</de>
 			</name>
 			<minmax415>
 				<en>min.4 - max.15</en>
 				<de>Min.4 - Max.15</de>
 			</minmax415>
 			<deinkommentar>
-				<en>your comment:</en>
-				<de>Dein Kommentar:</de>
+				<en>your comment</en>
+				<de>Dein Kommentar</de>
 			</deinkommentar>
 			<comment_button>
 				<en>send comment</en>
@@ -449,8 +449,8 @@
 			<de>Unsere Website</de>
 		</support>
 		<info>
-			<en>Your email address</en>
-			<de>Ihre E-Mail Adresse</de>
+			<en>our product</en>
+			<de>Unser Produkt</de>
 		</info>
 		<misc>
 			<en>miscellaneous</en>
@@ -870,6 +870,98 @@
 				]]></de>
 			</falsch>
 		</revalidation>
+		<send_email>
+			<wahr>
+				<en>Your message has been successfully sent to us.</en>
+				<de>Ihre Nachricht wurde erfolgreich an uns gesendet.</de>
+			</wahr>
+			<falsch>
+				<en>Please enter a valid email-address.</en>
+				<de>Bitte geben sie eine korrekte E-Mail Adresse ein.</de>
+			</falsch>
+		</send_email>
+		<reset_password>
+			<wahr>
+				<en>Sent successfully.</en>
+				<de>Erfolgreich gesendet.</de>
+			</wahr>
+			<falsch>
+				<en>An error occurred.\\nThis E-Mail is not registered in our database.</en>
+				<de>Es ist ein Fehler aufgetreten.\\nDiese E-Mail ist nicht bei uns registriert.</de>
+			</falsch>
+		</reset_password>
+		<change_details>
+			<wahr>
+				<en>Your profile data was changed successfully.</en>
+				<de>Deine Daten wurden erfolgreich geändert.</de>
+			</wahr>
+			<f2>
+				<en>You entered the wrong password.</en>
+				<de>Du hast das falsche Passwort eingegeben.</de>
+			</f2>
+			<f3>
+				<en>Please enter a valid email-address.</en>
+				<de>Bitte gib eine korrekte E-Mail Adresse ein.</de>
+			</f3>
+			<falsch>
+				<en>You entered the wrong password and an invalid email-address.</en>
+				<de>Du hast das falsche Passwort und keine richtige E-Mail Adresse eingegeben.</de>
+			</falsch>
+		</change_details>
+		<new_password>
+			<wahr>
+				<en>Your passwort has been updated successfully.</en>
+				<de>Passwort erfolgreich geändert.</de>
+			</wahr>
+		</new_password>
+		<write_comment>
+			<wahr>
+				<en>Comment sent successfully.</en>
+				<de>Kommentar erfolgreich gesendet.</de>
+			</wahr>
+			<f2>
+				<en>Username to short, minimum 4 characters.</en>
+				<de>Benutzername zu kurz, mindestens 4 Zeichen.</de>
+			</f2>
+			<f3>
+				<en>Comment to short, minimum 2 characters.</en>
+				<de>Kommentar zu kurz, mindestens 2 Zeichen.</de>
+			</f3>
+			<falsch>
+				<en>Error!</en>
+				<de>Fehler!</de>
+			</falsch>
+		</write_comment>
+		<pic_registered>
+			<f0>
+				<en>The name of the country is too short, a minimum of 2 letters, please.</en>
+				<de>Das Land ist zu kurz, mindestens 2 Buchstaben, bitte.</de>
+			</f0>
+			<f1>
+				<en>The description is too short, a minimumg of 2 characters, please.</en>
+				<de>Beschreibung zu kurz, mindestens 2 Zeichen, bitte.</de>
+			</f1>
+			<f2>
+				<en>Sorry, we do not support this format. We only support: .jpeg, .jpg, .gif and .png. Please contact our support that we can add your format.</en>
+				<de>Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.</de>
+			</f2>
+			<f3>
+				<en>No picture selected, please try again.</en>
+				<de>Kein Bild ausgewählt, versuch es noch ein Mal.</de>
+			</f3>
+			<f4>
+				<en>This bracelet has not been registered yet.</en>
+				<de>Dieses Armband wurde noch nicht registriert.</de>
+			</f4>
+			<f5>
+				<en>This bracelet does not exist.</en>
+				<de>Dieses Armband gibt es nicht.</de>
+			</f5>
+			<f6>
+				<en>We only support images up to a size of 8MB. If you still want to upload your picture, please contact our support</en>
+				<de>Wir unterstützen nur Bilder bis 8MB Größe. Wenn du dieses Bild doch hochladen willst, wende dich an unseren Support.</de>
+			</f6>
+		</pic_registered>
 	</php>
 	<js>
 		<test>
