@@ -479,7 +479,7 @@ $(window).scroll(function () {
 	if($(window).scrollTop() + $(window).height() == $(document).height()) {
 		var braceNameReload = $("#bracelet_name").val();
 		console.log(currentPath);
-		if(currentPath == "/start" || currentPath == "/start.php") reload_start(3);
+		if(currentPath == "/community" || currentPath == "/community.php") reload_start(3);
 		if(braceNameReload != undefined) reload_armband(braceNameReload, 3);
 	}
 });
