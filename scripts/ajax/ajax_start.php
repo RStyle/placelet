@@ -32,7 +32,7 @@ if(isset($stats[$_GET['q'] - 2]))
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
-						<a href="start?&picid=<?php echo $stats[$i][$displayed_picnr]['picid']; ?>&last_pic=last&delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('das Bild', this); return false;">X</a>
+						<a href="start?&picid=<?php echo $stats[$i][$displayed_picnr]['picid']; ?>&last_pic=last&delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
 						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.'.$stats[$i][$displayed_picnr]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
 							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?>" class="thumbnail">
@@ -115,7 +115,7 @@ if(isset($stats[$_GET['q'] - 2]))
 					$last_comment = 'last';
 				}
 ?>
-					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$displayed_picnr][$j]['commid']; ?>&picid=<?php echo $stats[$i][$displayed_picnr][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('den Kommentar', this); return false;">X</a>
+					<a href="start?last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$displayed_picnr][$j]['commid']; ?>&picid=<?php echo $stats[$i][$displayed_picnr][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
                     <strong><?php echo $stats[$i][$displayed_picnr][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$displayed_picnr][$j]['date']).')'; ?>
                     <p><?php echo $stats[$i][$displayed_picnr][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  

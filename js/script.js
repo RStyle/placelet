@@ -572,9 +572,10 @@ function confirmDelete(type, object) {
 			if(json.flag) {
 				var deleteORflag = 'melden';
 			}else {
-				var deleteORflag = 'löschen';
+				var deleteORflag = 'loeschen';
 			}
-			var agree = confirm("Willst du " + type + " wirklich " + deleteORflag + "?");
+			if(lng == 'en') var agree = confirm("Do you really want to " + lang[deleteORflag][lng] + " that " + lang[type][lng] + "?");
+			if(lng == 'de') var agree = confirm("Willst du " + lang[type][lng] + " wirklich " + lang[deleteORflag][lng] + "?");
 			if(agree) {
 				$.ajax({
 					type: "POST",
@@ -583,8 +584,8 @@ function confirmDelete(type, object) {
 					success: function(data){
 						var json = JSON.parse(data);
 						if(json.gemeldet != undefined) {
-							if(json.gemeldet == 'Bild') alert(lang['bild_gemeldet'][lang]);
-							if(json.gemeldet == 'Kommentar') alert(lang['kommentar_gemeldet'][lang]);
+							if(json.gemeldet == 'Bild') alert(lang['bild_gemeldet'][lng]);
+							if(json.gemeldet == 'Kommentar') alert(lang['kommentar_gemeldet'][lng]);
 						}else if(json.location != undefined) {
 							window.location.replace("http://placelet.de/" + json.location);
 						}else {

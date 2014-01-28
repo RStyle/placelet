@@ -973,12 +973,12 @@
 			<de>Kommentare verstecken</de>
 		</hidecomment>
 		<kommentar_gemeldet>
-			<en>comment flagged</en>
-			<de>Kommentar gemeldet</de>
+			<en>Comment flagged.</en>
+			<de>Kommentar gemeldet.</de>
 		</kommentar_gemeldet>
 		<bild_gemeldet>
-			<en>picture flagged</en>
-			<de>Bild gemeldet</de>
+			<en>Picture flagged.</en>
+			<de>Bild gemeldet.</de>
 		</bild_gemeldet>
 		<passwoerter_unpassend>
 			<en>The passwords do not match.</en>
@@ -1026,6 +1026,22 @@
 			<en>My Profile</en>
 			<de>Mein Profil</de>
 		</meinprofil>
+		<dasBild>
+			<en>picture</en>
+			<de>das Bild</de>
+		</dasBild>
+		<denKommentar>
+			<en>comment</en>
+			<de>den Kommentar</de>
+		</denKommentar>
+		<loeschen>
+			<en>delete</en>
+			<de>löschen</de>
+		</loeschen>
+		<melden>
+			<en>flag</en>
+			<de>melden</de>
+		</melden>
 	</js>
 	<form>
 		<email>
