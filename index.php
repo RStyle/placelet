@@ -87,7 +87,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			</ul>
 		</header>
 <!--###LOGO###-->
-		<div id="round_logo" style="display: none;"><a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogo.svg" alt="Placelet"></a></div>
+		<div id="round_logo"><a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogo.svg" alt="Placelet"></a></div>
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
@@ -95,7 +95,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="community" class="navlinks"><?php echo $lang->misc->nav->community->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="about" class="navlinks"><?php echo $lang->misc->nav->about->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks"><?php echo $lang->misc->nav->shop->$lng; ?></a></li>
-				<li class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks"><?php echo $navregister['value']; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks" id="registerprofile"><?php echo $navregister['value']; ?></a></li>
 				<?php if($user->admin) { ?>
 				<li class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks"><?php echo $lang->misc->nav->admin->$lng; ?></a></li>
 				<?php } ?>
@@ -107,10 +107,31 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 <?php
 require_once($this_path.'pages/'.$page.'.php');
 ?>
-
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://placelet.de/js/lightbox-2.6.min.js"></script>
+		<script type="text/javascript">
+			var lang = new Array();
+<?php 
+		foreach($lang->js as $obj) {
+			foreach($obj as $key => $val) {
+				echo 'lang["'.$key.'"] = new Array();'."\n";
+				foreach($val as $key_lng => $value) {
+					if($key_lng == 'en' || $key_lng == 'de') {
+						echo 'lang["'.$key.'"]["'.$key_lng.'"] = "'.$value.'";'."\n";
+					}else {
+						echo 'lang["'.$key.'"]["'.$key_lng.'"] = new Array();'."\n";
+						foreach($value as $schluessel => $wert) {
+							echo 'lang["'.$key.'"]["'.$key_lng.'"]["'.$schluessel.'"] = "'.$wert.'";'."\n";
+						}
+					}
+				}
+			}
+		}
+		echo 'var lng = "'.$lng.'";';
+?>
+		</script>
+		<script type="text/javascript" src="/js/script.js"></script>
 <?php
 if($page == 'login' && isset($postpic)) {
 ?>
@@ -209,20 +230,7 @@ if($page == 'login' && isset($postpic)) {
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 		
-		var lang = new Array();
-<?php 
-		foreach($lang->js as $obj) {
-			foreach($obj as $key => $val) {
-				foreach($val as $lng => $value) {
-					echo 'lang["'.$key.'"] = new Array();'."\n";
-					echo 'lang["'.$key.'"]["'.$lng.'"] = "'.$value.'";'."\n";
-				}
-			}
-		}
-		echo 'var lng = "'.$lng.'";';
-?>
 		</script>
-		<script type="text/javascript" src="/js/script.js"></script>
 <?php
 }elseif($page == 'armband'){
 ?>

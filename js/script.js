@@ -86,7 +86,7 @@ $("#form_reg").submit(function() {
 	
 	if ($("#reg_password").val() != $("#reg_password2").val()) {
 		$('#reg_password, #reg_password2').each(function() {
-			this.setCustomValidity("Die Passwörter passen nicht zueinander.") //Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide
+			this.setCustomValidity(lang['passwoerter_unpassend'][lng]) //Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide
 			
 		});
 		return false;
@@ -139,7 +139,7 @@ $("#form_login").submit(function() {
 			initialize_postpic(results[0].geometry.location, lat, long);
 			return;
 		} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-			alert('Dieser Ort wurde nicht gefunden.');
+			alert(lang['ort_nichtgefunden'][lng]);
 			return false;
 		} else {
 			alert('Geocode was not successful for the following reason: ' + status);
@@ -186,7 +186,7 @@ var someCallback = function(exifObject) {
 	dayDate = myDate[0].split(":");
 	hourDate = myDate[1].split(":");
 	timestamp = new Date(dayDate[0], dayDate[1] - 1, dayDate[2], hourDate[0], hourDate[1], hourDate[2], 0).getTime() / 1000;
-	check = confirm("Möchtest du den " + dayDate[2] + "." + dayDate[1] + "." + dayDate[0] + " als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet");
+	check = confirm(lang['confirm_date1'][lng] + dayDate[2] + "." + dayDate[1] + "." + dayDate[0] + lang['confirm_date2'][lng]);
 	if(check == true) {
 		$("#registerpic_date").val(timestamp);
 	}else {
@@ -363,7 +363,7 @@ function initialize_postpic(coords, this_lat, this_lng) {
 		marker = new google.maps.Marker({
 			position: latlng, 
 			map: map, 
-			title: "Hier bist du :)",
+			title: lang['bist_da'][lng],
 			draggable: true
 		}); 
 		
@@ -437,7 +437,7 @@ $('#registerpic_city').on({
 				$("#longitude").val(long);
 			  initialize_postpic(results[0].geometry.location, lat, long);
 			} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-				alert('Dieser Ort wurde nicht gefunden.');
+				alert(lang['ort_nichtgefunden'][lng]);
 			} else {
 				alert('Geocode was not successful for the following reason: ' + status);
 			}
@@ -461,12 +461,10 @@ function error_postpic(msg) {
 function show_comments(obj){
         number = $(obj).attr('id').replace('toggle_comment','');
         $("#comment" + number).toggle();
-        if($("#toggle_comment" + number).text() == lang['hidecomment'][lang]){
-                $("#toggle_comment" + number).text(lang['showcomment'][lang] + ' (' + $("#toggle_comment" + number).data("counts") + ')');
-				console.log(lang['showcomment'][lang]);
+        if($("#toggle_comment" + number).text() == lang['hidecomment'][lng]){
+                $("#toggle_comment" + number).text(lang['showcomment'][lng] + ' (' + $("#toggle_comment" + number).data("counts") + ')');
         }else {
-                $("#toggle_comment" + number).text(lang['hidecomment'][lang]);
-				console.log(lang['hidecomment'][lang]);
+                $("#toggle_comment" + number).text(lang['hidecomment'][lng]);
         }
 }
 $('.toggle_comments').click(function (){
@@ -629,17 +627,18 @@ $(document).ready(function(){
 					$('#login-box').remove();
 					$('#headerlogin').html('Logout');
 					$('#headerlogin').attr('href', 'login?logout');
+					$('#registerprofile').html(lang['meinprofil'][lng]);
 				}else {
 					$('#picupload_login_submit').toggle();
 					$('#picupload_login_loading').toggle();
 					if(html == 'notsent'){
-						$('#picupload_login_errormsg').html('Du hast nichts eingegeben.<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f0'][lng] + '<br>');
 					}else if(html == 'false') {
-						$('#picupload_login_errormsg').html('Falsches Passwort oder Benutzername.<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f1'][lng] + '<br>');
 					}else if(html == 'notexisting') {
-						$('#picupload_login_errormsg').html('Dieser Benutzer existiert nicht.<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f2'][lng] + '<br>');
 					}else if(html == 'unvalidated'){
-						$('#picupload_login_errormsg').html('Dein Account wurde noch nicht bestätigt.<br> Keine E-Mail bekommen? Lass dir <a href="login?unvalidated=' + encodeURIComponent(username) + '">hier</a> eine neue zusenden.<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f30'][lng] + encodeURIComponent(username)+ lang['ajax_login']['f31'][lng] + '<br>');
 					}else $('#picupload_login_errormsg').html(html);
 				}
 					

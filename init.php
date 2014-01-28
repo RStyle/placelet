@@ -13,7 +13,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost') {
 }
 $lang = simplexml_load_file('./text/translations.xml');
 $lng = 'en';
-if(isset($_GET['en'])) $lng = 'en';
+if(isset($_GET['de'])) $lng = 'de';
 require_once($this_path.'scripts/recaptchalib.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/connection.php');

@@ -980,6 +980,52 @@
 			<en>picture flagged</en>
 			<de>Bild gemeldet</de>
 		</bild_gemeldet>
+		<passwoerter_unpassend>
+			<en>The passwords do not match.</en>
+			<de>Die Passwörter passen nicht zusammen.</de>
+		</passwoerter_unpassend>
+		<ort_nichtgefunden>
+			<en>This city could not be found.</en>
+			<de>Dieser Ort konnte nicht gefunden werden.</de>
+		</ort_nichtgefunden>
+		<confirm_date1>
+			<en>Do you want to use </en>
+			<de>Möchtest du den </de>
+		</confirm_date1>
+		<confirm_date2>
+			<en> as your date?\nIf not, click 'cancel'.</en>
+			<de> als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet.</de>
+		</confirm_date2>
+		<bist_da>
+			<en>You're here :)</en>
+			<de>Hier bist du :)</de>
+		</bist_da>
+		<ajax_login>
+			<f0>
+				<en>You did not enter anything.</en>
+				<de>Du hast nichts eingegeben.</de>
+			</f0>
+			<f1>
+				<en>Wrong password or username.</en>
+				<de>Falsches Passwort oder Benutzername.</de>
+			</f1>
+			<f2>
+				<en>This user does not exist.</en>
+				<de>Dieser Benutzer existiert nicht.</de>
+			</f2>
+			<f30>
+				<en><![CDATA[Your account has not been confirmed.<br> You haven't recieved an email? Send it again <a href='login?unvalidated=]]></en>
+				<de><![CDATA[Dein Account wurde noch nicht bestätigt.<br> Keine E-Mail bekommen? Lass dir <a href='login?unvalidated=]]></de>
+			</f30>
+			<f31>
+				<en><![CDATA['>here</a>.]]></en>
+				<de><![CDATA['>hier</a> eine neue zusenden.]]></de>
+			</f31>
+		</ajax_login>
+		<meinprofil>
+			<en>My Profile</en>
+			<de>Mein Profil</de>
+		</meinprofil>
 	</js>
 	<form>
 		<email>

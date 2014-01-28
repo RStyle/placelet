@@ -5,6 +5,7 @@ include_once('../functions.php');
 include_once('../user.php');
 $lang = simplexml_load_file('../../text/translations.xml');
 $lng = 'en';
+$user = new User(false, $db);
 if(isset($_POST['login']) && isset($_POST['password'])) {
 	if($_POST['login'] != '' && $_POST['password'] != '') {
 		if(Statistics::userexists($_POST['login'])) {
@@ -20,6 +21,8 @@ if(isset($_POST['login']) && isset($_POST['password'])) {
 		}else {
 			echo 'notexisting';
 		}
+	}else {
+		echo 'notsent';
 	}
 }elseif(isset($_SESSION['user'])) {
 	$user = new User($_SESSION['user'], $db);
