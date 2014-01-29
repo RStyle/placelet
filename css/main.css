@@ -760,6 +760,9 @@
 		float: left;
 		width: 25%;
 	}
+	.notifications .previews {
+		width: auto !important;
+	}
 	.previews {
 		background-color: #EBEBEB;/*#ddd;*/
 		width: 300px;

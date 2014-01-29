@@ -148,7 +148,7 @@ if ($braceName != NULL) {
 							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
 							<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
 							<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
-							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="><?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
+							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
 						</form>
 					</div>
 				</div>

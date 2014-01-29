@@ -12,8 +12,8 @@ if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path_html = 'http://www.placelet.de/';
 }
 $lang = simplexml_load_file('./text/translations.xml');
-$lng = 'en';
-if(isset($_GET['de'])) $lng = 'de';
+$lng = 'de';
+if(isset($_GET['en'])) $lng = 'en';
 require_once($this_path.'scripts/recaptchalib.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/connection.php');
@@ -139,9 +139,12 @@ $friendly_self = $_SERVER['PHP_SELF'];
 $friendly_self = str_replace(".php", "", $friendly_self);
 if(isset($_GET)) {
 	$first = true;
-	$friendly_self_get = $friendly_self.'?';
+	$friendly_self_get = $friendly_self;
+	if($_GET != NULL) $friendly_self_get = $friendly_self.'?';
 	$gets = '';
 	foreach($_GET as $key => $val) {
+		$key = urlencode($key);
+		$val = urlencode($val);
 		if(!$first) {
 			$friendly_self_get .= '&'.$key.'='.$val;
 			$gets .= '&'.$key.'='.$val;

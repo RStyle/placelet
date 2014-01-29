@@ -328,7 +328,7 @@
 			</deletecomment>
 		</pictures>
 	<community>
-		<neuestebilder en-title="Latest Pictures" de-title="Neueste Bilder" >
+		<neuestebilder en-title="Latest Pictures" de-title="Neueste Bilder">
 			<station>
 				<en>location no.</en>
 				<de>Station Nr.</de>

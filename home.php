@@ -1,5 +1,5 @@
 <?php
-$page='home';
+$page = 'home';
 require_once('./init.php');
 /*---------------------------------------------------------*/
 if(isset($_GET['regstatuschange']) && isset($_GET['regstatuschange_user'])){

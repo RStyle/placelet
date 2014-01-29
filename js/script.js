@@ -484,7 +484,7 @@ $(window).scroll(function () {
 	}
 });
 
-function reload_start(plus, pic_br_switch) {
+function reload_start(plus) {
 	console.log('reload: ' + $('#pic_br_switch').data('recent_brid_pics'));
 	reload_q += plus;
 	if(reload_q < 3)
@@ -512,7 +512,7 @@ var reload_q2 = 6;
 function reload_armband(braceName, plus) {
 	var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName)
 		.done(function( data ) {
-		$("#armband_reload").remove();
+		//$("#armband_reload").remove();
 		htmlcode = $("#armband").html();
 		$("#armband").append(data);
 		reload_q2 += plus;
@@ -671,10 +671,12 @@ $(document).ready(function(){
 });
 
 //Zwischen neuesten Bildern und zuletzt geposteten Armbändern wechseln.
-$(document).ready(function() {
-	$('#pic_br_switch').click(function() {
+//$(document).ready(function() {
+	$(document).on('click', '#pic_br_switch', function() {
+		console.log("WHASSUP, BRO?");
 		if($('#pic_br_switch').data('recent_brid_pics') == 'true') $('#pic_br_switch').data('recent_brid_pics', 'false');
 			else $('#pic_br_switch').data('recent_brid_pics', 'true');
+			reload_q = 3;
 		reload_start(0);
 	});
-});
+//});

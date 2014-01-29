@@ -1,5 +1,5 @@
 <?php
-$page='start';
+$page = 'start';
 require_once('./init.php');
 /*---------------------------------------------------------*/
 //Kommentare schreiben

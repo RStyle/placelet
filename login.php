@@ -71,7 +71,7 @@ if(isset($_POST['registerpic_submit'])) {
 if($user->login) {
 	$userdetails = $statistics->userdetails($user->login);
 	//Armband registrieren
-	if (isset($_POST['reg_br']) && $_POST['registerbr_submit'] == "Armband registrieren") {
+	if (isset($_POST['reg_br']) && isset($_POST['registerbr_submit'])) {
 		$bracelet_registered = $user->registerbr($_POST['reg_br']);
 		//Rückmeldung zu Armband-registrieren anzeigen
 		if(isset($bracelet_registered)) {

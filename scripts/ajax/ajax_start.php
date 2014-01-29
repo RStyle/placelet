@@ -13,21 +13,34 @@ if(isset($_SESSION['user'])){
 	$checklogin = false;
 }
 $statistics = new Statistics($db, $user);
-$systemStats = $statistics->systemStats(3, $_GET['q']);
+if($_GET['recent_brid_pics'] == 'true') {
+	$recent_brid_pics = true;
+	$data_recent_brid_pics = 'false';
+}else {
+	$recent_brid_pics = false;
+	$data_recent_brid_pics = 'true';
+}
+$systemStats = $statistics->systemStats(5, $_GET['q'], $recent_brid_pics);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
+	if(isset($displayed_brids[$val])) $displayed_brids[$val]++;
+		else $displayed_brids[$val] = 0;
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
-echo '---'.$_GET['recent_brid_pics'].'---';
-if($_GET['recent_brid_pics'] == 'true') {
-	$displayed_picnr = 0;
+//if($recent_brid_pics) echo '---true---'; else echo '---false---';
+//echo $_GET['q'];
+if($_GET['q'] == 3) {
+?>
+			<div class="blue_line mainarticleheaders line_header"><h2 id="pic_br_switch" data-recent_brid_pics="<?php echo $data_recent_brid_pics; ?>">Neueste Armbänder<?php echo $lang->community->neuestearmbaender[$lng.'-title']; ?></h2></div>
+<?php
 }
 if(isset($stats[$_GET['q'] - 2]))
 			for ($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
 				if(!isset($stats[$i])) break;
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
-				if($i == $_GET['q'] - 2)
+				if(!isset($displayed_picnr)) $displayed_picnr = 0;
+				if($i == $_GET['q'] - 2 && $_GET['q'] > 3)
 					echo '<hr style="clear: both;">';
 ?>
 				<div style="width: 100%; overflow: auto;">
@@ -136,6 +149,8 @@ if(isset($stats[$_GET['q'] - 2]))
 					</div>
                  
 <?php
+					if($displayed_picnr < $displayed_brids[$bracelets_displayed[$i]]) $displayed_picnr++;
+						else $displayed_picnr = 0;
 					if (isset($stats[$i+1])) {
 ?>
 <!--~~~HR~~~~--><hr style="clear: both;">
