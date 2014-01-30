@@ -25,6 +25,7 @@ RewriteCond %{REQUEST_FILENAME} !account.*
 RewriteCond %{REQUEST_FILENAME} !admin.*
 RewriteCond %{REQUEST_FILENAME} !armband.*
 RewriteCond %{REQUEST_FILENAME} !community.*
+RewriteCond %{REQUEST_FILENAME} !error.*
 RewriteCond %{REQUEST_FILENAME} !faq.*
 RewriteCond %{REQUEST_FILENAME} !home.*
 RewriteCond %{REQUEST_FILENAME} !impressum.*
@@ -35,7 +36,7 @@ RewriteCond %{REQUEST_FILENAME} !search.*
 RewriteCond %{REQUEST_FILENAME} !order.*
 RewriteCond %{REQUEST_FILENAME} !shop.*
 RewriteCond %{REQUEST_FILENAME} !start.*
-RewriteCond %{REQUEST_FILENAME} !error.*
+RewriteCond %{REQUEST_FILENAME} !test.*
 RewriteCond %{REQUEST_URI} !css/.*
 RewriteCond %{REQUEST_URI} !img/.*
 RewriteCond %{REQUEST_URI} !js/.*

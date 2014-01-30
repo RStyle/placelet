@@ -15,12 +15,12 @@ if(isset($_SESSION['user'])){
 $statistics = new Statistics($db, $user);
 if($_GET['recent_brid_pics'] == 'true') {
 	$recent_brid_pics = true;
-	$data_recent_brid_pics = 'false';
+	$data_recent_brid_pics = 'true';
 }else {
 	$recent_brid_pics = false;
-	$data_recent_brid_pics = 'true';
+	$data_recent_brid_pics = 'false';
 }
-$systemStats = $statistics->systemStats(5, $_GET['q'], $recent_brid_pics);
+$systemStats = $statistics->systemStats(3, $_GET['q'], $recent_brid_pics);
 //hier werden die Armbänder bestimmt, die angezeigt werden
 $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
@@ -28,8 +28,8 @@ foreach($bracelets_displayed as $key => $val) {
 		else $displayed_brids[$val] = 0;
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
-//if($recent_brid_pics) echo '---true---'; else echo '---false---';
-//echo $_GET['q'];
+print_r($displayed_brids);
+if($recent_brid_pics) echo '---true---'; else echo '---false---';
 if($_GET['q'] == 3) {
 ?>
 			<div class="blue_line mainarticleheaders line_header"><h2 id="pic_br_switch" data-recent_brid_pics="<?php echo $data_recent_brid_pics; ?>">Neueste Armbänder<?php echo $lang->community->neuestearmbaender[$lng.'-title']; ?></h2></div>
@@ -40,6 +40,7 @@ if(isset($stats[$_GET['q'] - 2]))
 				if(!isset($stats[$i])) break;
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
 				if(!isset($displayed_picnr)) $displayed_picnr = 0;
+				echo 'PICNR'.$displayed_picnr.'MAXNR'.$displayed_brids[$bracelets_displayed[$i]];
 				if($i == $_GET['q'] - 2 && $_GET['q'] > 3)
 					echo '<hr style="clear: both;">';
 ?>
@@ -150,7 +151,7 @@ if(isset($stats[$_GET['q'] - 2]))
                  
 <?php
 					if($displayed_picnr < $displayed_brids[$bracelets_displayed[$i]]) $displayed_picnr++;
-						else $displayed_picnr = 0;
+						else {unset($displayed_picnr); echo 'WTF UNSET?';}
 					if (isset($stats[$i+1])) {
 ?>
 <!--~~~HR~~~~--><hr style="clear: both;">
