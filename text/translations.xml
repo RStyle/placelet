@@ -132,7 +132,7 @@
 			<en>
 				We are a team of highly motivated students of grade 11 at the Gymnasium am Römerkastell Bad Kreuznach, who participate in the Juniorprojekt of the German Institute for Economic Research(DIW) in Cologne.
 				The Juniorprojekt offers students the opportunity to actively engage in the daily activities associated with running a business to gain a variety of experiences to prepare for the working life.
-				The concept of our business is to produce 'travel bracelets' which are given from friend to friend around the world. The various owners of the bracelet will take photos of it and uploads it to our website,
+				The concept of our business is to produce 'travel bracelets' which are given from friend to friend around the world. The various owners of the bracelet will take photos of it and upload it to our website,
 				which we hope will become a great community.
 			</en>
 			<de>
@@ -167,7 +167,7 @@
 			<de>Website</de>
 		</website>
 	</about>
-	<account>
+	<account en-title="Account Settings" de-title="Account Einstellungen">
 		<titel>
 			<en>Your account settings</en>
 			<de>Deine Accounteinstellungen</de>
@@ -223,7 +223,7 @@
 		<lostpasswort>
 			<en><![CDATA[
 				In case you forgot you password, please enter your e-mail address in the field below on which you account on placelet.net is registered.<br>
-				You'll shortly recieve an email with a link with which you can reset your password.
+				You'll shortly receive an e-mail with a link with which you can reset your password.
 			]]></en>
 			<de><![CDATA[
 				Für den Fall, dass Sie Ihr Passwort vergessen haben sollten, tragen Sie bitte in das nachfolgende Eingabefeld die E-Mailadresse ein, auf welche Ihr Account bei placelet.de registriert ist.<br>
@@ -245,9 +245,9 @@
 			]]></de>
 		</ausgeloggt>
 	</account>
-	<admin>
+	<admin en-title="Admin-tool" de-title="Admin-Tool">
 	</admin>
-	<armband>
+	<armband en-title="Bracelet: " de-title="Armband: ">
 		<abonnieren>
 			<en>subscribe to bracelet</en>
 			<de>Armband abonnieren</de>
@@ -373,7 +373,7 @@
 				<de><![CDATA[Trage dein Armband, solange du Lust und Zeit hast.<br>&nbsp;]]></de>
 			</paragraph>
 			<paragraph>
-				<en>Upload pictures of yourself and your bracelet. Make sure the ID is not legible – it works as a password!</en>
+				<en>Upload pictures of yourself and your bracelet. Make sure the ID is not visible – it works as a password!</en>
 				<de>Lade Fotos von dir und deinem Armband hoch! Die ID darf nicht sichtbar sein - sie funktioniert wie ein Passwort!</de>
 			</paragraph>
 			<paragraph>
@@ -396,7 +396,7 @@
 			</articlefooter>
 		</artikel2>
 	</home>
-	<impressum en-title="legal notice" de-title="impressum">
+	<impressum en-title="Legal Notice" de-title="Impressum">
 		<placelet>
 			<en><![CDATA[
 				Placelet, a <a href="http://juniorprojekt.de" target="_blank">JUNIOR</a>-Company
@@ -425,11 +425,11 @@
 			<de>and ist HTML5 valide.</de>
 		</validity>
 	</impressum>
-	<kontakt en-title="contact" de-title="Kontakt">
+	<kontakt en-title="Contact" de-title="Kontakt">
 		<text>
 			<en><![CDATA[
 				You are welcome to use this form to contact us if you have any questions regarding our product or our website.<br>
-				We try our best to send you an email response as quickly as possible.
+				We try our best to send you an e-mail response as quickly as possible.
 			]]></en>
 			<de><![CDATA[
 				Dieses Formular können Sie benutzen, wenn sie Fragen zu unseren Produkten oder Anliegen bezüglich unserer Webseite haben.<br>
@@ -437,7 +437,7 @@
 			]]></de>
 		</text>
 		<youremail>
-			<en>Your email address</en>
+			<en>Your e-mail address</en>
 			<de>Ihre E-Mail Adresse</de>
 		</youremail>
 		<betreff>
@@ -461,7 +461,7 @@
 			<de>Ihre Nachricht</de>
 		</nachricht>
 	</kontakt>
-	<login>
+	<login en-title="Register" de-title="Registrieren">
 		<bildposten>
 			<en><![CDATA[Post <strong style="color: #000;">picture</strong>]]></en>
 			<de><![CDATA[<strong style="color: #000;">Bild</strong> posten]]></de>
@@ -542,7 +542,7 @@
 		</notlogged_armband2>
 		<disclaimer>
 			<en><![CDATA[
-				Your email will not be given to third parties.<br>
+				Your e-mail address will not be given to third parties.<br>
 				We will use it for example to restore your passwort.
 			]]></en>
 			<de><![CDATA[
@@ -551,11 +551,11 @@
 			]]></de>
 		</disclaimer>
 		<change_email>
-			<en>change email</en>
+			<en>change e-mail</en>
 			<de>Email ändern</de>
 		</change_email>
 	</login>
-	<order>
+	<order en-title="" de-title="">
 	</order>
 	<profil en-title="Profile" de-title="Profil">
 		<notlogged>
@@ -585,7 +585,7 @@
 			<de>Registriert seit</de>
 		</registered_since>
 		<youremail>
-			<en>Your email-address</en>
+			<en>Your e-mail address</en>
 			<de>Deine E-Mail Adresse</de>
 		</youremail>
 		<change_accountdetails>
@@ -653,7 +653,7 @@
 			<de>Dieser Benutzer existiert nicht</de>
 		</notexists>
 	</profil>
-	<search>
+	<search en-title="Search Results" de-title="Suchergebnisse">
 	</search>
 	<shop>
 		<unser_armband>
@@ -673,7 +673,7 @@
 				Our bracelet is made out of leather, using a knotting technique to close it.
 				The logo is engraved on the front side of the metal plaque, the ID on the backside.
 				You can use the ID to register on our website and keep track of you bracelet. 
-				Our idea was it to keep it simple but fashionable and we hope you like the design!
+				Our idea was to keep it simple but fashionable and we hope you like the design!
 			</en>
 			<de>
 				Unser Armband besteht aus einem Ledermaterial, welches mit einer Knottechnik geschlossen wird.
@@ -707,7 +707,7 @@
 			<de><![CDATA[<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">]]></de>
 		</paypal>
 		<notavailable>
-			<en><![CDATA[Very soon you will be able to visit our new Online-Shop right here. If you want to be notified when it launches, register <a href="login">here</a> and you will recieve an email once it is online.]]></en>
+			<en><![CDATA[Very soon you will be able to visit our new Online-Shop right here. If you want to be notified when it launches, register <a href="login">here</a> and you will recieve an e-mail once it is online.]]></en>
 			<de><![CDATA[Hier wird in Kürze unser Online-Shop erscheinen. Wenn sie über den Verkaufsstart informiert werden wollen, registrieren sie sich <a href="login">hier</a> und sie werden eine Benachrichtigung per E-Mail erhalten.]]></de>
 		</notavailable>
 	</shop>
@@ -845,8 +845,8 @@
 		<successfully_registered>
 			<en><![CDATA[
 				Your account has been successfully registered.<br>
-				You will shortly recieve an email containing a link with wich you will be able to confirm your email-address.<br>
-				If you don't recieve an email within the next five minutes, you will be able to send another one right here.
+				You will shortly recieve an e-mail containing a link with wich you will be able to confirm your e-mail address.<br>
+				If you don't recieve an e-mail within the next five minutes, you will be able to send another one right here.
 			]]></en>
 			<de><![CDATA[
 				Dein Account wurde erfolgreich erstellt.<br>
@@ -856,13 +856,13 @@
 		</successfully_registered>
 		<revalidation>
 			<wahr>
-				<en>Your email address has been changed successfully, you will recieve a link per email with which you can confirm your account.</en>
+				<en>Your e-mail address has been changed successfully, you will recieve a link per e-mail with which you can confirm your account.</en>
 				<de>Deine E-Mail wurde erfolgreich geändert, du bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.</de>
 			</wahr>
 			<falsch>
 				<en><![CDATA[
-					Your email address has not been confirmed.<br>
-					You can change your email address here and we will send you another confirmation-email.
+					Your e-mail address has not been confirmed.<br>
+					You can change your e-mail address here and we will send you another confirmation e-mail.
 				]]></en>
 				<de><![CDATA[
 					Deine E-Mail Adresse wurde noch nicht bestätigt.<br>
@@ -876,7 +876,7 @@
 				<de>Ihre Nachricht wurde erfolgreich an uns gesendet.</de>
 			</wahr>
 			<falsch>
-				<en>Please enter a valid email-address.</en>
+				<en>Please enter a valid e-mail address.</en>
 				<de>Bitte geben sie eine korrekte E-Mail Adresse ein.</de>
 			</falsch>
 		</send_email>
@@ -900,11 +900,11 @@
 				<de>Du hast das falsche Passwort eingegeben.</de>
 			</f2>
 			<f3>
-				<en>Please enter a valid email-address.</en>
+				<en>Please enter a valid e-mail address.</en>
 				<de>Bitte gib eine korrekte E-Mail Adresse ein.</de>
 			</f3>
 			<falsch>
-				<en>You entered the wrong password and an invalid email-address.</en>
+				<en>You entered the wrong password and an invalid e-mail address.</en>
 				<de>Du hast das falsche Passwort und keine richtige E-Mail Adresse eingegeben.</de>
 			</falsch>
 		</change_details>
@@ -1014,7 +1014,7 @@
 				<de>Dieser Benutzer existiert nicht.</de>
 			</f2>
 			<f30>
-				<en><![CDATA[Your account has not been confirmed.<br> You haven't recieved an email? Send it again <a href='login?unvalidated=]]></en>
+				<en><![CDATA[Your account has not been confirmed.<br> You haven't recieved an e-mail? Send it again <a href='login?unvalidated=]]></en>
 				<de><![CDATA[Dein Account wurde noch nicht bestätigt.<br> Keine E-Mail bekommen? Lass dir <a href='login?unvalidated=]]></de>
 			</f30>
 			<f31>
