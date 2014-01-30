@@ -218,6 +218,46 @@ class PassHash {
 }  
 
 
+function getBrowserLanguage($arrAllowedLanguages, $strDefaultLanguage, $strLangVariable = null, $boolStrictMode = true) {//code by:http://burian.appfield.net/entwicklung/php-mysql/php-browsersprache-fur-mehrsprachige-anwendungen-ermitteln.htm
+    if (!is_array($arrAllowedLanguages)) {
+        if (strpos($arrAllowedLanguages,';')) {
+            $array = explode(';',$arrAllowedLanguages);
+            $arrAllowedLanguages = $array;
+        }
+    }
+    if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        return $arrAllowedLanguages[0];
+    }
+    if ($strLangVariable === null) $strLangVariable = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+    if (empty($strLangVariable)) return $strDefaultLanguage;
+    $arrAcceptedLanguages = preg_split('/,\s*/', $strLangVariable);
+    $strCurrentLanguage = $strDefaultLanguage;
+    $intCurrentQ = 0;
+    foreach ($arrAcceptedLanguages as $arrAcceptedLanguage) {
+        $boolResult = preg_match ('/^([a-z]{1,8}(?:-[a-z]{1,8})*)'.
+                        '(?:;\s*q=(0(?:\.[0-9]{1,3})?|1(?:\.0{1,3})?))?$/i', $arrAcceptedLanguage, $arrMatches);
+        if (!$boolResult) continue;
+        $arrLangCode = explode ('-', $arrMatches[1]);
+        if (isset($arrMatches[2]))
+            $intLangQuality = (float)$arrMatches[2];
+        else
+            $intLangQuality = 1.0;
+        while (count ($arrLangCode)) {
+            if (!is_array($arrAllowedLanguages)) $arrAllowedLanguages = array($arrAllowedLanguages);
+            if (in_array (strtolower (join ('-', $arrLangCode)), $arrAllowedLanguages)) {
+                if ($intLangQuality > $intCurrentQ) {
+                    $strCurrentLanguage = strtolower (join ('-', $arrLangCode));
+                    $intCurrentQ = $intLangQuality;
+                    break;
+                }
+            }
+            if ($boolStrictMode) break;
+            array_pop ($arrLangCode);
+        }
+    }
+    return $strCurrentLanguage;
+}
+
 
 
 //Start - der Funktion is_mobile, welche ermittelt, ob der Besucher ein mobiles Endgerät verwendet

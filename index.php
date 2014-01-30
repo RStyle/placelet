@@ -73,9 +73,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 }
 ?>
 			<ul id="headerlist">
-				<li><a href="http://placelet.de<?php echo $friendly_self_get; ?>" hreflang="de"><img src="img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
+				<li><a href="http://placelet.de<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="http://placelet.net<?php echo $friendly_self_get; ?>" hreflang="en"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
+				<li><a href="http://placelet.net<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 				<li class="headerlist_main_divider">|</li>
 				<li><a href="impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>

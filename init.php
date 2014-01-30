@@ -1,23 +1,5 @@
 <?php
 date_default_timezone_set("Europe/Berlin");
-// Alle Fehlermeldungen werden angezeigt
-error_reporting(E_ALL|E_STRICT);
-ini_set('display_errors', true);
-//Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
-if($_SERVER['SERVER_NAME'] == 'localhost') {
-	$this_path = '';
-	$this_path_html = '';
-}else {
-	$this_path = '/var/www/virtual/placelet.de/htdocs/';
-	$this_path_html = 'http://www.placelet.de/';
-}
-$lang = simplexml_load_file('./text/translations.xml');
-$lng = 'de';
-if(isset($_GET['en'])) $lng = 'en';
-require_once($this_path.'scripts/recaptchalib.php');
-require_once($this_path.'scripts/functions.php'); 
-require_once($this_path.'scripts/connection.php');
-require_once($this_path.'scripts/user.php');
 
 // Hier werden Cookies überprüft gesetzt usw.
 // Erzwingen das Session-Cookies benutzt werden und die SID nicht per URL transportiert wird
@@ -38,6 +20,35 @@ if(!isset($_SESSION['server_SID'])) {
     // Status festhalten
     $_SESSION['server_SID'] = true;
 }
+// Alle Fehlermeldungen werden angezeigt
+
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', true);
+//Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
+if($_SERVER['SERVER_NAME'] == 'localhost') {
+	$this_path = '';
+	$this_path_html = '';
+}else {
+	$this_path = '/var/www/virtual/placelet.de/htdocs/';
+	$this_path_html = 'http://www.placelet.de/';
+}
+require_once($this_path.'scripts/recaptchalib.php');
+require_once($this_path.'scripts/functions.php'); 
+require_once($this_path.'scripts/connection.php');
+require_once($this_path.'scripts/user.php');
+$lang = simplexml_load_file('./text/translations.xml');
+if(isset($_GET['language'])){
+	if($_GET['language'] == 'de' || $_GET['language'] == 'en'){
+		setcookie('language', $_GET['language'], time()+3600*24*365); //für ein Jahr
+		$_COOKIE['language'] = $_GET['language'];
+	}
+}
+if(!isset($_COOKIE['language']))
+	$lng = getBrowserLanguage(array('de','en'), 'en');
+else
+	$lng = $_COOKIE['language'];
+if(isset($_GET['en'])) $lng = 'en';
+
 
 $js = '<script type="text/javascript">$(document).ready(function(){';
 
@@ -142,17 +153,24 @@ if(isset($_GET)) {
 	$friendly_self_get = $friendly_self;
 	if($_GET != NULL) $friendly_self_get = $friendly_self.'?';
 	$gets = '';
+	$keycount = 0;
 	foreach($_GET as $key => $val) {
-		$key = urlencode($key);
-		$val = urlencode($val);
-		if(!$first) {
-			$friendly_self_get .= '&'.$key.'='.$val;
-			$gets .= '&'.$key.'='.$val;
-		}else {
-			$friendly_self_get .= $key.'='.$val;
-			$gets .= $key.'='.$val;
+		if($key != 'language'){
+			$key = urlencode($key);
+			$val = urlencode($val);
+			if(!$first) {
+				$friendly_self_get .= '&amp;'.$key.'='.$val;
+				$gets .= '&amp;'.$key.'='.$val;
+			}else {
+				$friendly_self_get .= $key.'='.$val;
+				$gets .= $key.'='.$val;
+				$first = false;
+			}
+		$keycount++;
 		}
 	}
+	if($keycount <= 0)
+		$friendly_self_get = false;
 }else {
 	$friendly_self_get = false;
 }
