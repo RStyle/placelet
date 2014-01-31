@@ -87,8 +87,6 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
 			</ul>
 		</header>
-<!--###LOGO###-->
-		<div id="round_logo"><a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogo.svg" alt="Placelet"></a></div>
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
@@ -103,6 +101,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				
 			</ul>
 		</nav>
+<!--###LOGO###-->
+		<!--<div id="round_logo"><a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogo.svg" alt="Placelet"></a></div>-->
+		<a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogoExtended.svg" alt="Placelet"></a>
 <!--###SECTION TAG###-->
 		<section id="section">
 <?php

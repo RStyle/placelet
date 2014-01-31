@@ -341,7 +341,14 @@
 		}
 /*---HEADER---*/
 /*+++LOGO+++*/
-	#round_logo {
+
+    #logo {
+		left: 1%;
+		height: 70px;
+		top: 7em;
+		position: absolute;
+    }
+	/*#round_logo {
         width: 80px;
 	    height: 80px; 
 	    background-color: #fff;
@@ -359,8 +366,8 @@
 	    
 	    position: relative;
 		left: 11px;
-		top: 15px;
-	}
+		top: 15px; 
+	}*/
 /*---LOGO---*/
 /*+++NAV+++*/
 	#mainnav {

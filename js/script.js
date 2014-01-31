@@ -262,7 +262,7 @@ dropdown("header", "connectbox")
 
 function check_width(){   
 //Logo Positionierung 
-    if(window.innerWidth < 1240) {
+/*    if(window.innerWidth < 1240) {
         $("#round_logo").css({ 'display' : 'none' });    
     }   
     if(window.innerWidth > 1500) {
@@ -271,7 +271,27 @@ function check_width(){
 	}else {
 		$("#section").css({ 'width' : '70%' }); 
 		$("#mainnavlist").css({ 'width' : '70%' });
+	}         */
+   
+    if(window.innerWidth < 1480 && window.innerWidth > 1230){
+ 	    $("#logo").attr("src", 'img/neueFarbenLogo.svg');
+		$("#logo").attr("width", '93');
+	}else if(window.innerWidth > 1500) {
+		$("#section").css({ 'width' : 'calc(100% - 500px)' });
+		$("#mainnavlist").css({ 'width' : 'calc(100% - 500px)' });
+	}else {
+		$("#logo").attr("src", 'img/neueFarbenLogoExtended.svg');
+		$("#logo").attr("width", '206');
+		$("#section").css({ 'width' : '70%' });
+		$("#mainnavlist").css({ 'width' : '70%' });
 	}
+	
+	if(window.innerWidth > 1230){
+		$("#logo").attr("style", 'top: 7em;');
+	}   
+	else {
+        $("#logo").attr("style", 'display: none;'); 
+    }
 
 //FB-Plugin-Höhe
     if(window.innerWidth < 1587) {
