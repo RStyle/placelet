@@ -4,7 +4,7 @@ include_once('../connection.php');
 include_once('../functions.php');
 include_once('../user.php');
 $lang = simplexml_load_file('../../text/translations.xml');
-$lng = 'en';
+if(isset($_POST['eng'])) $lng = $_POST['eng'];
 if(isset($_SESSION['user'])){
 	$user = new User($_SESSION['user'], $db);
 	$checklogin = $user->logged;
