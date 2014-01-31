@@ -1,15 +1,16 @@
 var currentPath = $(location).attr('pathname');
+// starte wenn DOM geladen ist
 $(document).ready(function() {
-	// starte wenn DOM geladen ist
 	
+
 var Input_password = $('input[name=password]');
 var default_reg_password_value = $('input[name=reg_password]').val();
 var default_password_value = Input_password.val();
 if (default_password_value == '')
 	default_password_value = default_reg_password_value;
+
 var show_login = false;
 var login_return = true;
-
 //Login-Box anzeigen
 $("#headerlogin").click(function(){
 	show_login = !show_login;
@@ -21,26 +22,26 @@ $("#headerlogin").click(function(){
 	}
 });
 
-jQuery(document).click(function(e) {
-    if (e.target.id != 'login-box' && e.target.id != 'login' && e.target.id != 'password' && e.target.id != 'form_login' && e.target.id != 'headerlogin' && e.target.id != 'login_icon'
+$(document).click(function(e) {
+	if (e.target.id != 'login-box' && e.target.id != 'login' && e.target.id != 'password' && e.target.id != 'form_login' && e.target.id != 'headerlogin' && e.target.id != 'login_icon'
 		&& e.target.id != 'label_login' && e.target.id != 'label_password' && e.target.id != 'submit_login') {
-        if(show_login == true){
+		if(show_login == true){
 			show_login = false;
 			$("#login-box").hide();
 		}
-    }
+	}
 });
 
 
 //Login
 $('.password').on({
-    focus:function(){                   
+	focus:function(){                   
 		if(this.value == default_password_value || this.value == default_reg_password_value) this.value = '';
-    },
-    blur:function(){
+	},
+	blur:function(){
 		if(this.value == '') this.value = default_password_value;
-    }
-})
+	}
+});
 
 $("#form_login").submit(function() {
 	if ($("#password").val() == default_password_value) {
@@ -68,9 +69,8 @@ $("#form_login").submit(function() {
 });
 
 $(".input_text").blur(function(){
-		if(this.value != $.trim(this.value)) this.value = $.trim(this.value);  //trimt Formualer - außer Passwörter - direkt per JS
-    }
-);
+	if(this.value != $.trim(this.value)) this.value = $.trim(this.value);  //trimt Formualer - außer Passwörter - direkt per JS
+});
 
 
 //Registration
@@ -105,26 +105,22 @@ $("#reg_password2").oninput(function() {
 	}
 });*/
 
-
-
-
-//
 $('#holder').on(
-    'dragover',
-    function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-)
+	'dragover',
+	function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+);
 $('#holder').on(
-    'dragenter',
-    function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-)
+	'dragenter',
+	function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+);
 
-//Überprüfung ob Stadt bei Bildupload exestiert bzw. Korrektur
+//Überprüfung ob Stadt bei Bildupload existiert bzw. Korrektur
 $("#form_login").submit(function() {
 	geocoder = new google.maps.Geocoder();
 	var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
@@ -146,8 +142,7 @@ $("#form_login").submit(function() {
 			return false;
 		}
 	});
-}
-);
+});
 
 
 //Uploadvorschau
@@ -291,7 +286,6 @@ function check_width(){
 window.onresize = check_width;
 check_width();
 
-});
 
 //---------------------Bildhochladeseite--------------------\\
 //Funktion zum Marker setzen auf der Bildhochladenseite
@@ -533,29 +527,25 @@ function change_pic(cv, sv) {
 	}); 
 }
 //Aboformular anzeigen
-$(document).ready(function(){
-	$('#show_sub').click(function(){
-		$.ajax({
-			type: "POST",
-			url: "../scripts/ajax/ajax_statistics.php",
-			data: "login=" + 'true',
-			success: function(data){
-				var json = JSON.parse(data);		
-				if(json.checklogin == false) {
-					$('.sub_inputs').toggle();
-				}else {
-					bracelet_name = $('#bracelet_name').val();
-					window.location.replace("armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
-				}
+$('#show_sub').click(function(){
+	$.ajax({
+		type: "POST",
+		url: "../scripts/ajax/ajax_statistics.php",
+		data: "login=" + 'true',
+		success: function(data){
+			var json = JSON.parse(data);		
+			if(json.checklogin == false) {
+				$('.sub_inputs').toggle();
+			}else {
+				bracelet_name = $('#bracelet_name').val();
+				window.location.replace("armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
 			}
-		});
+		}
 	});
 });
 //Armband-Name Formular anzeigen
-$(document).ready(function(){
-	$('#edit_name').click(function(){
-		$('.name_inputs').toggle();
-	});
+$('#edit_name').click(function(){
+	$('.name_inputs').toggle();
 });
 
 //Löschen von Kommentaren und Bildern bestätigen
@@ -604,79 +594,76 @@ function confirmDelete(type, object) {
 }
 
 //Den Rest vom Bild-Hochladformular anzeigen, wenn man nicht eingeloggt ist.
-$(document).ready(function(){
-	$('#picupload_nologin').click(function() {
-		$('#registerpic_upload_inputs').toggle();
-		$('.picupload_nologin_text').remove();
-	});
+$('#picupload_nologin').click(function() {
+	$('#registerpic_upload_inputs').toggle();
+	$('.picupload_nologin_text').remove();
 });
 
 //Ajax-Login
-$(document).ready(function(){
-	$("#picupload_login_submit").click(function(){
-		username = $("#picupload_login_username").val();
-		password = $("#picupload_login_password").val();
-		$.ajax({
-			type: "POST",
-			url: "../scripts/ajax/ajax_login.php",
-			data: "login=" + username + "&password=" + password,
-			success: function(html){
-				if(html == 'true') {
-					$('#registerpic_upload_inputs').toggle();
-					$('#picupload_login_loading').toggle();
-					$('.picupload_nologin_text').remove();
-					$('#login-box').remove();
-					$('#headerlogin').html('Logout');
-					$('#headerlogin').attr('href', 'login?logout');
-					$('#registerprofile').html(lang['meinprofil'][lng]);
-				}else {
-					$('#picupload_login_submit').toggle();
-					$('#picupload_login_loading').toggle();
-					if(html == 'notsent'){
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f0'][lng] + '<br>');
-					}else if(html == 'false') {
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f1'][lng] + '<br>');
-					}else if(html == 'notexisting') {
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f2'][lng] + '<br>');
-					}else if(html == 'unvalidated'){
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f30'][lng] + encodeURIComponent(username)+ lang['ajax_login']['f31'][lng] + '<br>');
-					}else $('#picupload_login_errormsg').html(html);
-				}
-					
-				
-			},
-			beforeSend:function()
-			{
+$("#picupload_login_submit").click(function(){
+	username = $("#picupload_login_username").val();
+	password = $("#picupload_login_password").val();
+	$.ajax({
+		type: "POST",
+		url: "../scripts/ajax/ajax_login.php",
+		data: "login=" + username + "&password=" + password,
+		success: function(html){
+			if(html == 'true') {
+				$('#registerpic_upload_inputs').toggle();
+				$('#picupload_login_loading').toggle();
+				$('.picupload_nologin_text').remove();
+				$('#login-box').remove();
+				$('#headerlogin').html('Logout');
+				$('#headerlogin').attr('href', 'login?logout');
+				$('#registerprofile').html(lang['meinprofil'][lng]);
+			}else {
 				$('#picupload_login_submit').toggle();
 				$('#picupload_login_loading').toggle();
-				$('#picupload_login_errormsg').html('');
+				if(html == 'notsent'){
+					$('#picupload_login_errormsg').html(lang['ajax_login']['f0'][lng] + '<br>');
+				}else if(html == 'false') {
+					$('#picupload_login_errormsg').html(lang['ajax_login']['f1'][lng] + '<br>');
+				}else if(html == 'notexisting') {
+					$('#picupload_login_errormsg').html(lang['ajax_login']['f2'][lng] + '<br>');
+				}else if(html == 'unvalidated'){
+					$('#picupload_login_errormsg').html(lang['ajax_login']['f30'][lng] + encodeURIComponent(username)+ lang['ajax_login']['f31'][lng] + '<br>');
+				}else $('#picupload_login_errormsg').html(html);
 			}
-		});
-		return false;
+				
+			
+		},
+		beforeSend:function()
+		{
+			$('#picupload_login_submit').toggle();
+			$('#picupload_login_loading').toggle();
+			$('#picupload_login_errormsg').html('');
+		}
 	});
+	return false;
 });
 
 //Benachrichtigungen gelesen
-$(document).ready(function(){
-	$("#notific_read").click(function(){
-		$.ajax({
-			type: "POST",
-			url: "../scripts/ajax/ajax_login.php",
-			data: "notific_read=true",
-			success: function(){
-				$("#notific_read").remove();
-			}
-		});
+$("#notific_read").click(function(){
+	$.ajax({
+		type: "POST",
+		url: "../scripts/ajax/ajax_login.php",
+		data: "notific_read=true",
+		success: function(){
+			$("#notific_read").remove();
+		}
 	});
 });
 
 //Zwischen neuesten Bildern und zuletzt geposteten Armbändern wechseln.
 //$(document).ready(function() {
-	$(document).on('click', '#pic_br_switch', function() {
-		console.log("WHASSUP, BRO?");
-		if($('#pic_br_switch').data('recent_brid_pics') == 'true') $('#pic_br_switch').data('recent_brid_pics', 'false');
-			else $('#pic_br_switch').data('recent_brid_pics', 'true');
-			reload_q = 3;
-		reload_start(0);
-	});
-//});
+$(document).on('click', '#pic_br_switch', function() {
+	console.log("WHASSUP, BRO?");
+	if($('#pic_br_switch').data('recent_brid_pics') == 'true') $('#pic_br_switch').data('recent_brid_pics', 'false');
+		else $('#pic_br_switch').data('recent_brid_pics', 'true');
+		reload_q = 3;
+	reload_start(0);
+});
+
+
+//$(document).ready(function() {
+});
