@@ -504,10 +504,11 @@ $(window).scroll(function () {
 
 function reload_start(plus) {
 	console.log('reload: ' + $('#pic_br_switch').data('recent_brid_pics'));
+	var displayed_picnr = $('#comment' + reload_q).data('picnr');
 	reload_q += plus;
 	if(reload_q < 3)
 		reload_q = 3;
-	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + $('#pic_br_switch').data('recent_brid_pics') + "&eng=" + lng)
+	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + $('#pic_br_switch').data('recent_brid_pics') + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
 		.done(function(data) {
 			if(data != ""){
 					htmlcode = $("#recent_pics").html();

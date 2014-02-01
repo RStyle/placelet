@@ -125,7 +125,7 @@
 			<de>Partner</de>
 		</partner>
 		<graffelob>
-			<en>MST-Graffe's Markus Graffe provided us with professional advice and two prototypes, which really helped us out in the development of our product.</en>
+			<en>MST-Graffe's CEO, Markus Graffe, has generously offered his professional advice and provided us with two prototypes to help improve the development of our product.</en>
 			<de>Mit seiner kompetenten Beratung und der Bereitstellung einiger Materialien unterstützte uns Herr Graffe und die MST-Graffe GmbH besonders bei der Verwirklichung unseres Projektes.</de>
 		</graffelob>
 		<about_us>
@@ -334,6 +334,8 @@
 				<de>Station Nr.</de>
 			</station>
 		</neuestebilder>
+		<neuestearmbaender en-title="Latest Bracelets" de-title="Neueste Armbänder">
+		</neuestearmbaender>
 	</community>
 	<faq>
 	</faq>

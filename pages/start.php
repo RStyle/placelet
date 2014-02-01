@@ -74,8 +74,9 @@
 			<div class="blue_line mainarticleheaders line_header"><h2 id="pic_br_switch" data-recent_brid_pics="false"><?php echo $lang->community->neuestebilder[$lng.'-title']; ?></h2></div>
 <?php
 			for($i = 1; $i <= count($bracelets_displayed) && $i <= $systemStats['total_posted']; $i++) {
+				if($recent_brid_pics) $displayed_picnr = 0;
+					else if($bracelets_displayed[$i] != @$bracelets_displayed[$i-1]) $displayed_picnr = 0;
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
-				if(!isset($displayed_picnr)) $displayed_picnr = 0;
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
@@ -140,7 +141,7 @@
 						</table>
 					</aside>
 				</div>
-				<div class="comments" id="comment<?php echo $i;?>">
+				<div class="comments" id="comment<?php echo $i;?>" data-picnr="<?php echo $displayed_picnr+1; ?>">
 <?php
 				for ($j = 1; $j <= count($stats[$i][$displayed_picnr])-11; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
@@ -173,13 +174,12 @@
 				</div>
                  
 <?php
-					if($displayed_picnr < $displayed_brids[$bracelets_displayed[$i]]) $displayed_picnr++;
-						else $displayed_picnr = 0;
-					if ($i < count($bracelets_displayed)) {
+				$displayed_picnr++;
+				if ($i < count($bracelets_displayed)) {
 ?>
 <!--~~~HR~~~~--><hr style="clear: both;">
 <?php
-					}
 				}
+			}
 ?>
 		</article>

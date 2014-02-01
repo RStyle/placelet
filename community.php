@@ -44,6 +44,7 @@ foreach($bracelets_displayed as $key => $val) {
 		else $displayed_brids[$val] = 0;
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
+$recent_brid_pics = false;
 /*---------------------------------------------------------*/
 require_once('./index.php');
 //$page zeigt die Seite an und durch das einbinden der index.php Datei wird einfach alles über die index.php Datei geregelt, die GET und POST Variablen bleiben unverändert und werden automatisch übermittelt
