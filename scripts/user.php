@@ -705,6 +705,7 @@ class Statistics {
 	}
 	//Bilderdetails
 	public function picture_details ($brid) {
+		$details = array();
 		$sql = "SELECT user, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('brid' => $brid));

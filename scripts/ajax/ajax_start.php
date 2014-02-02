@@ -53,7 +53,7 @@ if($_GET['q'] == 3) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			for($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
-				if(isset($stats[$i])) {
+				if($stats[$i] != array('name' => NULL)) {
 				if($_GET['q'] > 3 || ($i > $_GET['q'] - 2 && $_GET['q'] == 3)) {
 ?>
 <!--~~~HR~~~~--><hr style="clear: both;">
@@ -62,7 +62,7 @@ if($_GET['q'] == 3) {
 				if(!isset($displayed_picnr)) $displayed_picnr = $_GET['displayed_picnr'];
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
 				if($recent_brid_pics) $displayed_picnr = 0;
-					else  if($bracelets_displayed[$i] != $bracelets_displayed[$i-1]) $displayed_picnr = 0;
+					else  if($bracelets_displayed[$i] != @$bracelets_displayed[$i-1]) $displayed_picnr = 0;
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
@@ -95,7 +95,7 @@ if($_GET['q'] == 3) {
 							<span class="desc-header"><?php echo $stats[$i][$displayed_picnr]['title']; ?></span><br>
 							<?php echo $stats[$i][$displayed_picnr]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$displayed_picnr])-11; ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$displayed_picnr])-11; ?>)</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$displayed_picnr])-11; ?>" onClick="show_comments(this);"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$displayed_picnr])-11; ?>)</span>
 						</p>
 					</div>
 					<aside class="bracelet-props side_container">
