@@ -1090,5 +1090,9 @@
 			<en>register</en>
 			<de>Registrieren</de>
 		</register>
+		<speichern>
+			<en>save</en>
+			<de>Speichern</de>
+		</speichern>
 	</form>
 </langs>

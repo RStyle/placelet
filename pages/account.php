@@ -65,7 +65,7 @@ if($user->login) {
 							</tr>
 							<tr>
 								<td><?php if(isset($_POST['notification_change'])) echo 'Erfolgreich geändert.'; else echo '&nbsp;';?></td>
-								<td><input type="submit" name="submit" value="<?php echo $lang->form->newpass->$lng; ?>"></td>
+								<td><input type="submit" name="submit" value="<?php echo $lang->form->speichern->$lng; ?>"></td>
 								<td><input type="hidden" name="notification_change"></td>
 							</tr>
 						</table>

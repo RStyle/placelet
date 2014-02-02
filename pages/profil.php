@@ -143,7 +143,7 @@ if(!isset($_GET['user']) && !$user->login) {
 			if($notifications['comm_pics'] != NULL) {
 ?>
 						<div class="comm_owns notifications">
-							<p><?php echo $lang->account->comm_pics->$lng; ?>:<br>&nbsp;</p>
+							<p><?php echo $lang->account->comm_pics->$lng; ?>:</p>
 <?php
 				foreach($notifications['comm_pics'] as $comm) {
 ?>

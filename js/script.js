@@ -513,10 +513,8 @@ function reload_start(plus) {
 	if(reload_q < 3)
 		reload_q = 3;
 		
-	console.log("WHASSUP, BRO?");
-		
-	console.log("./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr);
-	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
+	//console.log("./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr);
+	/*var nachlad = $.ajax("./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
 		.done(function(data) {
 			if(data != ""){
 					htmlcode = $("#recent_pics").html();
@@ -531,6 +529,28 @@ function reload_start(plus) {
 		})
 		.fail(function() {
 		alert( "error" );
+	});*/
+	$.ajax({
+		type: "GET",
+		url: "./scripts/ajax/ajax_start.php",
+		data: "q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr,
+		success: function(data){
+			if(data != ""){
+					$("#laden").removeAll();
+					htmlcode = $("#recent_pics").html();
+					if(plus == 0) {
+						$("#recent_pics").html(data);
+					}else {
+						$("#recent_pics").append(data);
+					}
+			} else {
+				reload_q -= 3;
+			}
+		},
+		beforeSend:function()
+			{
+				$("#recent_pics").append('<span><img src="./img/loading.gif" alt="Laden" id="laden"></span>');
+			}
 	});
 }
 //Neuste Bilder Nachladen -armband.php
