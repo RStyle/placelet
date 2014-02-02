@@ -14,6 +14,7 @@ if(isset($_SESSION['user'])){
 }
 $statistics = new Statistics($db, $user);
 
+$recent_brid_pics = false;//Zur Absicherung, war bei diesem Syntax ziemlich verwirrt...
 if($_GET['q'] == 3) {
 	if($_GET['recent_brid_pics'] == 'false') $recent_brid_pics = true;
 		else $recent_brid_pics = false;
@@ -49,14 +50,15 @@ if($_GET['q'] == 3) {
 				<div class="blue_line mainarticleheaders line_header"><h2 id="pic_br_switch" data-recent_brid_pics="false"><?php echo $lang->community->neuestebilder[$lng.'-title']; ?></h2></div>
 <?php	
 	}
-}elseif(isset($stats[$i-1])) {//Macht keinen Sinn, funktioniert aber einigermaßen.
-?>
-<!--~~~HR~~~~--><hr style="clear: both;">
-<?php	
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			for($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
 				if(isset($stats[$i])) {
+				if($_GET['q'] > 3 || ($i > $_GET['q'] - 2 && $_GET['q'] == 3)) {
+?>
+<!--~~~HR~~~~--><hr style="clear: both;">
+<?php	
+}
 				if(!isset($displayed_picnr)) $displayed_picnr = $_GET['displayed_picnr'];
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
 				if($recent_brid_pics) $displayed_picnr = 0;
@@ -158,11 +160,6 @@ if($_GET['q'] == 3) {
 				</div>
                  
 <?php
-				if ($i < count($bracelets_displayed)) {
-?>
-<!--~~~HR~~~~--><hr style="clear: both;">
-<?php
-				}
 				}
 				$displayed_picnr++;
 			}

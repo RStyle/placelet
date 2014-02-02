@@ -10,6 +10,8 @@ if (default_password_value == '')
 var show_login = false;
 var login_return = true;
 
+ pic_br_switch_data = true;
+
 //Login-Box anzeigen
 $("#headerlogin").click(function(){
 	show_login = !show_login;
@@ -497,18 +499,24 @@ $(window).scroll(function () {
 	if($(window).scrollTop() + $(window).height() == $(document).height()) {
 		var braceNameReload = $("#bracelet_name").val();
 		console.log(currentPath);
+		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
 		if(currentPath == "/community" || currentPath == "/community.php") reload_start(3);
+		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
 		if(braceNameReload != undefined) reload_armband(braceNameReload, 3);
 	}
 });
 
 function reload_start(plus) {
-	console.log('reload: ' + $('#pic_br_switch').data('recent_brid_pics'));
+	console.log('reload: ' + pic_br_switch_data);
 	var displayed_picnr = $('#comment' + reload_q).data('picnr');
 	reload_q += plus;
 	if(reload_q < 3)
 		reload_q = 3;
-	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + $('#pic_br_switch').data('recent_brid_pics') + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
+		
+	console.log("WHASSUP, BRO?");
+		
+	console.log("./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr);
+	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
 		.done(function(data) {
 			if(data != ""){
 					htmlcode = $("#recent_pics").html();
@@ -692,10 +700,9 @@ $(document).ready(function(){
 //Zwischen neuesten Bildern und zuletzt geposteten Armbändern wechseln.
 //$(document).ready(function() {
 	$(document).on('click', '#pic_br_switch', function() {
-		console.log("WHASSUP, BRO?");
-		if($('#pic_br_switch').data('recent_brid_pics') == 'true') $('#pic_br_switch').data('recent_brid_pics', 'false');
-			else $('#pic_br_switch').data('recent_brid_pics', 'true');
-			reload_q = 3;
+		if(pic_br_switch_data == true){ $('#pic_br_switch').data('recent_brid_pics', 'false'); pic_br_switch_data = false;}
+			else {$('#pic_br_switch').data('recent_brid_pics', 'true'); pic_br_switch_data = true;}
+		reload_q = 3;
 		reload_start(0);
 	});
 //});
