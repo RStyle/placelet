@@ -1223,7 +1223,7 @@ class Statistics {
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($user_email, 'Neues Kommentar für Armband '.$braceName, $content, $mail_header);
+							mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
 						}
 					}
 				}elseif($key == 'pic_subs') {
@@ -1264,7 +1264,7 @@ class Statistics {
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+							mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
 						}
 					}
 				}

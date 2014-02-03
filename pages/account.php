@@ -64,7 +64,7 @@ if($user->login) {
 								<td><input type="checkbox" name="pic_subs_email"<?php if($userdetails['notifications']['pic_subs_email']) echo ' checked';?>></td>
 							</tr>
 							<tr>
-								<td><?php if(isset($_POST['notification_change'])) echo 'Erfolgreich geändert.'; else echo '&nbsp;';?></td>
+								<td><?php if(isset($_POST['notification_change'])) echo $lang->form->saved->$lng; else echo '&nbsp;';?></td>
 								<td><input type="submit" name="submit" value="<?php echo $lang->form->speichern->$lng; ?>"></td>
 								<td><input type="hidden" name="notification_change"></td>
 							</tr>

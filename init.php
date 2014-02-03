@@ -21,7 +21,9 @@ if(!isset($_SESSION['server_SID'])) {
     $_SESSION['server_SID'] = true;
 }
 // Alle Fehlermeldungen werden angezeigt
-
+//
+$ziffern = 6;
+if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) $ziffern = 7;
 error_reporting(E_ALL|E_STRICT);
 ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten

@@ -615,7 +615,7 @@
 			<de>Bilder</de>
 		</pictures>
 		<abos>
-			<en>abonnements</en>
+			<en>subscriptions</en>
 			<de>Abonnements</de>
 		</abos>
 		<unsubscribe>
@@ -790,7 +790,7 @@
 		</edit_br_name>
 		<manage_subscription>
 			<wahr>
-				<en>Abonnonement successfully added.</en>
+				<en>Subscription successfully added.</en>
 				<de>Das Abonnement wurde erfolgreich hinzugefügt.</de>
 			</wahr>
 			<f2>
@@ -1094,5 +1094,9 @@
 			<en>save</en>
 			<de>Speichern</de>
 		</speichern>
+		<saved>
+			<en>Successfully saved.</en>
+			<de>Erfolgreich geändert</de>
+		</saved>
 	</form>
 </langs>

@@ -27,15 +27,14 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 }elseif(isset($postpic)) {
 	$postpic_id = array(false);
 	if($postpic != "") 
-		preg_match("/^[0-9]{6}$/", $postpic, $postpic_id);
+		preg_match("/^[0-9]{".$ziffern."}$/", $postpic, $postpic_id);
 ?>
 				<div id="register_pic">
 					<form name="registerpic" action="login?postpic=<?php echo $postpic; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><?php echo $lang->login->bildposten->$lng; ?></span><br><br>
 						
 						<label for="registerpic_brid" class="label_registerpic_brid"><?php echo $lang->login->armbandid->$lng; ?>:</label><br>
-						<input type="text" name="registerpic_brid" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Zahlen" id="registerpic_brid" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid'];
-																																	 if(count($postpic_id) == 1) echo $postpic_id[0]; ?>" required><br>
+						<input type="text" name="registerpic_brid" maxlength="<?php echo $ziffern; ?>" size="6" pattern="[0-9]{<?php echo $ziffern; ?>}" title="<?php echo $ziffern; ?> Ziffern" id="registerpic_brid" value="<?php if(count($postpic_id) == 1) echo $postpic_id[0]; else if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid']; ?>" required><br>
 						
 						<label for="registerpic_title" class="label_registerpic_title"><?php echo $lang->login->title->$lng; ?>:</label><br>
 						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" id="registerpic_title" title="Min. 4 - Max. 30" placeholder="<?php echo $lang->login->title->$lng; ?>" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>" required><br>
@@ -54,8 +53,8 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<p><?php echo $lang->login->mapinfo->$lng; ?></p>
 						</div>
 						
-						<input type="hidden" name="registerpic_latitude" id="latitude" value="49.848970">
-						<input type="hidden" name="registerpic_longitude" id="longitude" value="7.867824">
+						<input type="hidden" name="registerpic_latitude" id="latitude" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_latitude'];?>">
+						<input type="hidden" name="registerpic_longitude" id="longitude" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_longitude'];?>">
 						
 						<label for="registerpic_description" class="registerpic_description"><?php echo $lang->login->description->$lng; ?>:</label><br>
 						<textarea name="registerpic_description" id="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
@@ -107,7 +106,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 ?>
 				<form name="registerbr" action="login?registerbr" method="post">
 					<label for="reg_br"><?php echo $lang->login->armband_registrieren->$lng; ?></label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="6" size="20" pattern="[0-9]{6}" title="6 Zahlen" placeholder="<?php echo $lang->login->armbandid->$lng; ?>" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="<?php echo $ziffern; ?>" size="20" pattern="[0-9]{<?php echo $ziffern; ?>}" title="<?php echo $ziffern; ?> Ziffern" placeholder="<?php echo $lang->login->armbandid->$lng; ?>" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
 					<input type="submit" name="registerbr_submit" value="<?php echo $lang->form->register->$lng; ?>">
 				</form>
 <?php

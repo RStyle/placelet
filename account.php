@@ -49,9 +49,9 @@ if(isset($_POST['submit'])) {
 				$_POST['pic_subs_online'], $_POST['pic_subs_email']);
 		}
 		$notifics = $user->recieve_notifications();
-		$navregister['value'] = "Mein Profil";
+		$navregister['value'] = $lang->misc->nav->profil->$lng;
 		if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
-			$navregister['value'] = 'Mein Profil ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
+			$navregister['value'] = $lang->misc->nav->profil->$lng.' ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
 		}
 	}
 	//Passwort ändern

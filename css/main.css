@@ -745,11 +745,11 @@
     .logged_info {
         float: right; 
     }
-    .showcases {
+    .showcases, #showcase_2{
         clear: both;  
         overflow: auto;  
     }
-        #showcase_2, #showcase_3, #showcase_4 {
+         #showcase_3, #showcase_4 {
             display: none;
         }
     .tabs {
