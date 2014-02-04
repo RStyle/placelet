@@ -14,7 +14,8 @@ if(isset($unvalidated)) {
 }
 //Registrierungsfunktion
 if(isset($_POST['reg_login']) && isset($_POST['reg_email']) && isset($_POST['reg_password'])  && isset($_POST['reg_password2'])){
-	$user_registered = User::register($_POST, $db);
+	$user_registered_return = User::register($_POST, $db);
+	$user_registered = $lang->php->register->{'f'.$user_registered_return}->$lng;
 }
 //E-Mail Bestätigung erneut senden.
 if(isset($_POST['revalidate_submit'])) {

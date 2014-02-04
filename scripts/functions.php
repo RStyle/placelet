@@ -10,7 +10,7 @@ function days_since($unix_time) {
 			$x_days_ago = $GLOBALS['lang']->misc->comments->gestern->$GLOBALS['lng'];
 			break;
 		default:
-			$x_days_ago = $GLOBALS['lang']->misc->comments->tagenvor->$GLOBALS['lng'].' '.$x_days_ago.' '.$GLOBALS['lang']->misc->comments->tagenend->$GLOBALS['lng'];
+			$x_days_ago = $GLOBALS['lang']->misc->comments->tagenstart->$GLOBALS['lng'].' '.$x_days_ago.' '.$GLOBALS['lang']->misc->comments->tagenend->$GLOBALS['lng'];
 	}
 	return $x_days_ago;
 }

@@ -964,6 +964,44 @@
 				<de>Wir unterstützen nur Bilder bis 8MB Größe. Wenn du dieses Bild doch hochladen willst, wende dich an unseren Support.</de>
 			</f6>
 		</pic_registered>
+		<register>
+			<f2>
+				<en>The passwords don't fit.</en>
+				<de>Die Passwörter passen nicht zusammen.</de>
+			</f2>
+			<f3>
+				<en>This username already exists.</en>
+				<de>Dieser Benutzername existiert schon.</de>
+			</f3>
+			<f4>
+				<en>There already is an account registered on this e-mail address.</en>
+				<de>Auf diese E-Mail Adresse wurde schon ein anderer Benutzer registriert.</de>
+			</f4>
+			<f5>
+				<en>Username too short: at least 4 letters.</en>
+				<de>Benutzername zu kurz: Mindestens 4 Buchstaben.</de>
+			</f5>
+			<f6>
+				<en>Username too long: no more than 15 letters.</en>
+				<de>Benutzername zu lang: Maximal 15 Buchstaben.</de>
+			</f6>
+			<f7>
+				<en>Password too short: at least 6 characters.</en>
+				<de>Passwort zu kurz: Mindestens 6 Zeichen.</de>
+			</f7>
+			<f8>
+				<en>Password too long: no more than 30 characters.</en>
+				<de>Passwort zu lang: Maximal 30 Zeichen.</de>
+			</f8>
+			<f9>
+				<en>Please enter a valid e-mail address.</en>
+				<de>Das ist keine gültige E-Mail Adresse.</de>
+			</f9>
+			<f0>
+				<en>Please fill in the form.</en>
+				<de>Bitte gib etwas ein.</de>
+			</f0>
+		</register>
 	</php>
 	<js>
 		<showcomment>

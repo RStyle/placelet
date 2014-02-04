@@ -182,7 +182,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 				</form>
 <?php
 }elseif(!$user->login) {
-	if(isset($user_registered)) echo $user_registered;
+	if(isset($user_registered)) echo '<span style="font-style: italic; font-weight: bold;">'.$user_registered.'</span>';
 ?>
 				<form name="reg" id="form_reg" action="login" method="post"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->
 					<?php echo $lang->login->disclaimer->$lng; ?>

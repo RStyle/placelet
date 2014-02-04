@@ -90,21 +90,21 @@ class User
 		//ist ein (getrimter) Wert leer?
 		if(tisset($reg['reg_login']) && tisset($reg['reg_email']) && !empty($reg['reg_password'])  && !empty($reg['reg_password2'])){
 			if($reg['reg_password'] != $reg['reg_password2']){
-				return 'Die Passwörter passen nicht zusammen.';
+				return 2;//'Die Passwörter passen nicht zusammen.';
 			}
 			if(Statistics::userexists($reg['reg_login'])){
-				return 'Dieser Benutzer existiert schon.';
+				return 3;//'Dieser Benutzer existiert schon.';
 			}
 			//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
 			$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
 			$stmt->execute(array('email' => $reg['reg_email']));
 			$anz = $stmt->rowCount();
-			if($anz != 0) return 'Auf diese E-Mail Adresse wurde schon ein anderer Benutzer registriert.';
-			if(strlen($reg['reg_login']) < 4) return 'Benutzername zu kurz. Min. 4';
-			if(strlen($reg['reg_login']) > 15) return 'Benutzername zu lang. Max. 15';
-			if(strlen($reg['reg_password']) < 6) return 'Passwort zu kurz. Min. 6';
-			if(strlen($reg['reg_password']) > 30) return 'Passwort zu lang. Max. 30';
-			if(check_email_address($reg['reg_email']) === false) return 'Das ist keine gültige E-Mail Adresse';
+			if($anz != 0) return 4;//'Auf diese E-Mail Adresse wurde schon ein anderer Benutzer registriert.';
+			if(strlen($reg['reg_login']) < 4) return 5;//'Benutzername zu kurz. Min. 4';
+			if(strlen($reg['reg_login']) > 15) return 6;//'Benutzername zu lang. Max. 15';
+			if(strlen($reg['reg_password']) < 6) return 7;//'Passwort zu kurz. Min. 6';
+			if(strlen($reg['reg_password']) > 30) return 8;//'Passwort zu lang. Max. 30';
+			if(check_email_address($reg['reg_email']) === false) return 9;//'Das ist keine gültige E-Mail Adresse';
 			$sql = "INSERT INTO users (user, email, password, status, date) VALUES (:user, :email, :password, :status, :date)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
@@ -137,9 +137,9 @@ class User
 			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
 			mail($reg['reg_email'], 'Bestätigungsemail', $content, $mail_header);
-			return true;
+			return 1;
 		}else {
-			return 'Die beiden Passwörter sind nicht gleich.';
+			return 0;//'Bitte gib etwas ein.';
 		}
 	}
 	public function regstatuschange ($code, $username){
