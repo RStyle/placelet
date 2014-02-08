@@ -114,7 +114,7 @@ if($user->login) {
 				<form name="change" action="account" method="post">
 					<input type="password" name="new_pwd" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" placeholder="<?php echo $lang->form->newpass->$lng; ?>">
 					<input type="hidden" name="new_username" value="<?php echo $recover_code; ?>">
-					<input type="submit" name="submit" value="<?php echo $lang->account->changepass->$lng; ?>">
+					<input type="submit" name="submit" value="<?php echo $lang->form->changepass->$lng; ?>">
 				</form>
 <?php
 		}else {

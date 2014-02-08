@@ -14,7 +14,7 @@
 					<?php echo $lang->about->about_us->$lng; ?>
 				</p>
 				
-				<ul id='timeline'>
+				<!--<ul id='timeline'>
 <?php
 $timeline['title'] = array(1 => 'Erstes Treffen', 'Ideenfindungsworkshop', 'Gründung',           'Veröffentlichung der Website', 'Fortbildung');
 $timeline['date']  = array(1 => '4. Juli 2013',   '24. August 2013',       '13. September 2013', '22. September',                 'Oktober 2013');
@@ -37,7 +37,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 <?php
 }
 ?>
-				</ul>
+				</ul>-->
 
 				
 				<div class="tree">
@@ -81,14 +81,12 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 																		</li>
 																	</ul>
 																</li>
-																
 															</ul>
 														</li>
 													</ul>
 												</li>
 											</ul>
 										</li>
-										
 									</ul>
 								</li>
 								<li>
@@ -108,12 +106,10 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 																</li>
 															</ul>
 														</li>
-														
 													</ul>
 												</li>
 											</ul>
 										</li>
-										
 									</ul>
 								</li>
 								<li>

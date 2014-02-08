@@ -30,7 +30,6 @@
 				<en>Admin-Tools</en>
 				<de>Admin-Tools</de>
 			</admin>
-			
 			<impressum>
 				<en>legal notice</en>
 				<de>Impressum</de>
@@ -426,6 +425,12 @@
 			<en>and is valid HTML5.</en>
 			<de>and ist HTML5 valide.</de>
 		</validity>
+		<deutschland>
+			<en><![CDATA[
+				Germany<br>
+			]]></en>
+			<de></de>
+		</deutschland>
 	</impressum>
 	<kontakt en-title="Contact" de-title="Kontakt">
 		<text>

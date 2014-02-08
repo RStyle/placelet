@@ -165,7 +165,7 @@ if(!isset($_GET['user']) && !$user->login) {
 	}
 ?>					
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Armbänder ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<p class="tabs pseudo_link" id="tab_2"><span class="tab_arrow2 arrow_right"></span>&nbsp;<?php echo $lang->profil->bracelets->$lng; ?> (<?php if(isset($userdetails['brid'])) echo count($userdetails['brid']); else echo '0'; ?>)</p>
+				<p class="tabs pseudo_link" id="tab_2"><span class="tab_arrow2 arrow_down"></span>&nbsp;<?php echo $lang->profil->bracelets->$lng; ?> (<?php if(isset($userdetails['brid'])) echo count($userdetails['brid']); else echo '0'; ?>)</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 					<div class="showcases" id="showcase_2">
 <?php

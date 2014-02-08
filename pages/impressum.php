@@ -6,6 +6,7 @@
 					Gymnasium am Römerkastell<br>
 					Heidenmauer 14<br>
 					55543 Bad Kreuznach<br>
+					<?php echo $lang->impressum->deutschland->$lng; ?>
 				</p>
 				<p style="float: left; margin-left: 2em;">
 					<?php echo $lang->impressum->telefon->$lng; ?>17670174562<br>
