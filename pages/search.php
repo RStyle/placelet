@@ -9,7 +9,6 @@ if(isset($_POST['squery'])) {
 <?php
 		if($squery_result['user'] == 1 && $squery_result['bracelet_name'] != 2 && $squery_result['bracelet_id'] == 0 && $squery_result['users'] === false && $squery_result['bracelets_name'] === false)
 			echo '<li>'.$lang->search->noresults->$lng.'</li>';
-		//<?php echo $lang->search->datum->$lng; ähnlichebenutzer
 		switch($squery_result['user']) {
 			case 0:
 ?>
