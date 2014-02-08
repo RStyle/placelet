@@ -798,6 +798,24 @@ class Statistics {
 			return false;
 		}
 	}
+	//Überprüft, ob es Nutzer mit ähnlichem Namen gibt
+	public static function usersexists($user) {
+		$user = trim($user);
+		if(strlen($user)>3){
+			$sql = "SELECT user FROM users WHERE user LIKE :userlike AND user != :user"; 
+			$q = $GLOBALS['db']->prepare($sql); 
+			$q->bindValue(':userlike', "%{$user}%", PDO::PARAM_STR);
+			$q->bindValue(':user', $user, PDO::PARAM_STR);
+			//DANKE an: http://www.mm-newmedia.de/2009/08/pdo-und-die-vergleichsfunktion-like/ ;)
+			$q->execute();
+			$rows = $q->fetchAll(PDO::FETCH_ASSOC);	
+			$anz = $q->rowCount();
+			if ($anz > 0){
+				return $rows;
+			}
+		}
+		return false;
+	}
 	//Prüft, ob ein Armband schon registriert wurde
 	public function bracelet_status($brid) {
 		$stmt = $this->db->prepare('SELECT user FROM bracelets WHERE brid = :brid');
@@ -811,6 +829,23 @@ class Statistics {
 		} else {
 			return 2;
 		}
+	}
+	//Prüft, ob ähnliche Armbänder schon registriert wurden
+	public function bracelets_status($brid) {
+		$brid = trim($brid);
+		if(strlen($brid)>3){
+			$stmt = $this->db->prepare('SELECT user, name FROM bracelets WHERE name LIKE :bridlike AND name != :brid');
+			$stmt->bindValue(':bridlike', "%{$brid}%", PDO::PARAM_STR);
+			$stmt->bindValue(':brid', $brid, PDO::PARAM_STR);
+			$stmt->execute();
+			$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);	
+			$anz = $stmt->rowCount();
+			$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($anz > 0) {
+				return $rows;
+			}
+		}
+		return false;
 	}
 	//Postet ein Bild
 	public function registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size) {

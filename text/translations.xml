@@ -661,6 +661,40 @@
 		</notexists>
 	</profil>
 	<search en-title="Search Results" de-title="Suchergebnisse">
+		<noresults>
+			<en>No results found or keyword to short...</en>
+			<de>Keine Suchergebnisse für dich oder Suchwort zu kurz...</de>
+		</noresults>
+		<benutzergefunden>
+			<en>There is an user with the name </en>
+			<de>Es gibt einen Benutzer mit dem Namen </de>
+		</benutzergefunden>
+		<ähnlichebenutzer>
+			<en>Similiar users:</en>
+			<de>Ähnliche Benutzer:</de>
+		</ähnlichebenutzer>
+		<ähnlichenamen>
+			<en>Similiar bracelet names:</en>
+			<de>Ähnliche Armbandnamen:</de>
+		</ähnlichenamen>
+		<armbandgefunden>
+			<en><![CDATA[<li>The bracelet <a href="armband?name=:squery_href"><strong>:squery</strong></a> has been registered on <a href="profil?user=:owner_href"><strong>:owner</strong></a>.</li>]]></en>
+			<de><![CDATA[<li>Armband <a href="armband?name=:squery_href"><strong>:squery</strong></a> ist auf <a href="profil?user=:owner_href"><strong>:owner</strong></a> registriert.</li>]]></de>
+		</armbandgefunden>
+		<nochnichtregistriert>
+			<en><![CDATA[<li>The bracelet with the ID <strong>:squery</strong> has not been registered. <a href="login?registerbr=:squery_href">Register it now</a></li>]]></en>
+			<de><![CDATA[<li>Armband mit der ID <strong>:squery</strong> ist noch nicht registriert worden. <a href="login?registerbr=:squery_href">Hier registrieren</a></li>]]></de>
+		</nochnichtregistriert>
+		<schonregistriert>
+			<en><![CDATA[The bracelet <a href="armband?name=:brid2name_href"><strong>:squery</strong></a> has been registered on <a href="profil?user=:owner_href"><strong>:owner</strong></a>.
+						Post <a href="login?postpic=:squery_href">a picture</a>.]]></en>
+			<de><![CDATA[Armband <a href="armband?name=:brid2name_href"><strong>:squery</strong></a> ist auf <a href="profil?user=:owner_href"><strong>:owner</strong></a> registriert.
+						Poste <a href="login?postpic=:squery_href">hier</a> ein Bild.]]></de>
+		</schonregistriert>
+		<ü18>
+			<en>Bracelets and usernames cannot be longer than 18 letters.</en>
+			<de>Es gibt keine Armbänder oder Benutzernamen, die länger als 18 Zeichen sind.</de>
+		</ü18>
 	</search>
 	<shop>
 		<unser_armband>

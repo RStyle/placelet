@@ -14,6 +14,8 @@ if(isset($_POST['squery'])) {
 		}else {
 			$squery_result['user'] = 1;
 		}
+		$squery_result['users'] = Statistics::usersexists($_POST['squery']); //false, wenn keine
+		
 		switch ($statistics->bracelet_status($braceID)) {
 			case '0':
 				$squery_result['bracelet_name'] = 0;
@@ -26,6 +28,8 @@ if(isset($_POST['squery'])) {
 				$squery_result['bracelet_name'] = 2;
 				break;
 		}
+		$squery_result['bracelets_name'] = $statistics->bracelets_status($squery); //false, wenn keine
+		
 		switch ($statistics->bracelet_status($squery)) {
 			case '0':
 				$squery_result['bracelet_id'] = 0;
