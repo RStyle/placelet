@@ -789,7 +789,7 @@ class Statistics {
 	//Überprüft, ob ein bestimmter Benutzer $user in der Datenbank eingetragen ist
 	public static function userexists($user) {
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
-        $q = $GLOBALS['db']->prepare($sql); 
+        $q = $this->db->prepare($sql); 
         $q->execute(array(':user' => $user));
         $anz = $q->rowCount();
         if ($anz > 0){
@@ -803,7 +803,7 @@ class Statistics {
 		$user = trim($user);
 		if(strlen($user)>3){
 			$sql = "SELECT user FROM users WHERE user LIKE :userlike AND user != :user"; 
-			$q = $GLOBALS['db']->prepare($sql); 
+			$q = $this->db->prepare($sql); 
 			$q->bindValue(':userlike', "%{$user}%", PDO::PARAM_STR);
 			$q->bindValue(':user', $user, PDO::PARAM_STR);
 			//DANKE an: http://www.mm-newmedia.de/2009/08/pdo-und-die-vergleichsfunktion-like/ ;)

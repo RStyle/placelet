@@ -3,8 +3,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="description" content="Placelet Shop and Image Service">
-		<meta name="keywords" content="Placelet, Placelet Shop, Global Bracelet, Travel & Connect, Global Bracelet. Travel & Connect, Travel and Connect, Global Bracelet. Travel and Connect">
+		<meta name="keywords" content="
+			Placelet, Placelet Shop, Shop, Placelet kaufen, buy placelet,
+			Global Bracelet, Travel and Connect,
+			Armband, bracelet, Reise, Reisearmband, Reisearmband kaufen, Reise Armband, travel, travelbracelet, buy travelbracelet, travel bracelet, 
+		">
 		<meta name="author" content="Roman S., Danial S., Julian Z.">
+		<meta name="google-site-verification" content="ZkpZK9hxVHOscD4izd7OXGCCjMkpytJMbuOgjO-AWjI">
 		<link href="<?php echo $this_path_html; ?>css/main.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo $this_path_html; ?>css/lightbox.css" rel="stylesheet">
 		<!--Google Fonts-->

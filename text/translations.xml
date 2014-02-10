@@ -279,6 +279,22 @@
 			<en>owner count</en>
 			<de>Anzahl Besitzer</de>
 		</besitzeranzahl>
+		<falschesarmband>
+			<en>wrong bracelet</en>
+			<de>Falsches Armband</de>
+		</falschesarmband>
+		<gibtsnicht>
+			<en>This bracelet does not exist, go directly to another one.</en>
+			<de>Armband gibt es nicht, gehe hier direkt zu einem anderen Armband.</de>
+		</gibtsnicht>
+		<armbandname>
+			<en>bracelet name</en>
+			<de>Armband Name</de>
+		</armbandname>
+		<odersuchen>
+			<en>Or just search for one</en>
+			<de>Oder suche hier nach einem</de>
+		</odersuchen>
 	</armband>
 	<pictures>
 			<datum>

@@ -225,15 +225,15 @@ if ($braceName != NULL) {
 	}else {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
-				<div class="green_line mainarticleheaders line_header"><h1>Falsches Armband</h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falschesarmband->$lng; ?></h1></div>
 				<p>
-					Dieses Armband gibt es nicht, gehe hier direkt zu einem anderen Armband.
+					<?php echo $lang->armband->gibtsnicht->$lng; ?>
 					<form action="armband">
-						<input type="search" name="name" placeholder="Arbmand Name" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
+						<input type="search" name="name" placeholder="<?php echo $lang->armband->armbandname->$lng; ?>" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
 					</form>
-					<br>Oder suche hier nach einem:
+					<br><?php echo $lang->armband->odersuchen->$lng; ?>:
 					<form action="search" method="get">
-						<input name="squery" type="search" placeholder="Suchen..." size="20" maxlength="18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
+						<input name="squery" type="search" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
 					</form>
 				</p>
 			</article>
