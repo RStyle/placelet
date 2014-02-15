@@ -1,14 +1,14 @@
 			<article id="about-us" class="mainarticles bottom_border_blue" style="width: 100%">
 				<div class="blue_line mainarticleheaders line_header"><h1><?php echo $lang->about[$lng.'-title']; ?></h1></div>
-				<a href="pictures/staff.jpg" data-lightbox="wir"><img src="pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet" id="wir"></a>
-				<div id="partner_box">
+				<a href="pictures/staff.jpg" data-lightbox="wir"><img src="pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet" id="wir" style="width: 100%; margin-bottom: 20px;"></a>
+				<!--<div id="partner_box">
                     <h1><?php echo $lang->about->partner->$lng; ?></h1>
                     <p><?php echo $lang->about->graffelob->$lng; ?></p>
                     <a id="graffe_link" href="http://mst-graffe.de/" target="_blank">
                         <img src="http://mst-graffe.de/index_htm_files/670.jpg" alt="mstgraffe_logo">
                         <p class="partner_name">Maschinen- und Stahlbau-Technik Markus Graffe GMBH</p>
                     </a>
-                </div>
+                </div>-->
 				<h1 style="clear: both; padding-top: 1em;">Global Bracelet. Travel&amp;Connect</h1>
 				<p>
 					<?php echo $lang->about->about_us->$lng; ?>

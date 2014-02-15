@@ -231,7 +231,7 @@ if ($braceName != NULL) {
 					<form action="armband">
 						<input type="search" name="name" placeholder="<?php echo $lang->armband->armbandname->$lng; ?>" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
 					</form>
-					<br><?php echo $lang->armband->odersuchen->$lng; ?>:
+					<br><?php echo $lang->armband->odersuchen->no->$lng; ?>:
 					<form action="search" method="get">
 						<input name="squery" type="search" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
 					</form>
@@ -242,8 +242,12 @@ if ($braceName != NULL) {
 }else {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
-				<div class="green_line mainarticleheaders line_header"><h1>Falsche Seite</h1></div>
-				<p>Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span></p>
+				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falscheseite->$lng; ?></h1></div>
+				<p><?php echo $lang->armband->gehweg->$lng; ?></p>
+				<?php echo $lang->armband->odersuchen->armband->$lng; ?>:
+				<form action="search" method="get">
+					<input name="squery" type="search" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
+				</form>
 			</article>
 <?php
 }

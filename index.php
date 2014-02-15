@@ -8,7 +8,7 @@
 			Global Bracelet, Travel and Connect,
 			Armband, bracelet, Reise, Reisearmband, Reisearmband kaufen, Reise Armband, travel, travelbracelet, buy travelbracelet, travel bracelet, 
 		">
-		<meta name="author" content="Roman S., Danial S., Julian Z.">
+		<meta name="author" content="Roman S., Daniel S., Julian Z.">
 		<meta name="google-site-verification" content="ZkpZK9hxVHOscD4izd7OXGCCjMkpytJMbuOgjO-AWjI">
 		<link href="<?php echo $this_path_html; ?>css/main.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo $this_path_html; ?>css/lightbox.css" rel="stylesheet">
@@ -93,7 +93,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			</ul>
 		</header>
 <!--###LOGO###-->
-		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="img/neueFarbenLogo.svg" alt="Placelet"></a><!--</div>-->
+		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="img/logo.svg" alt="Placelet"></a><!--</div>-->
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">

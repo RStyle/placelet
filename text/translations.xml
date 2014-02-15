@@ -285,16 +285,30 @@
 		</falschesarmband>
 		<gibtsnicht>
 			<en>This bracelet does not exist, go directly to another one.</en>
-			<de>Armband gibt es nicht, gehe hier direkt zu einem anderen Armband.</de>
+			<de>Armband gibt es nicht, gehe hier direkt zu einem anderen.</de>
 		</gibtsnicht>
 		<armbandname>
 			<en>bracelet name</en>
 			<de>Armband Name</de>
 		</armbandname>
 		<odersuchen>
-			<en>Or just search for one</en>
-			<de>Oder suche hier nach einem</de>
+			<no>
+				<en>Or just search for one</en>
+				<de>Oder suche hier nach einem</de>
+			</no>
+			<armband>
+				<en>Or just search for a bracelet</en>
+				<de>Oder suche hier nach einem Armband</de>
+			</armband>
 		</odersuchen>
+		<falscheseite>
+			<en>Wrong Page</en>
+			<de>Falsche Seite</de>
+		</falscheseite>
+		<gehweg>
+			<en><![CDATA[You should not be here. Just go <span class="pseudo_link" onclick="history.back(-1)">back</span> one page.]]></en>
+			<de><![CDATA[Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span>]]></de>
+		</gehweg>
 	</armband>
 	<pictures>
 			<datum>
