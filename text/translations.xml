@@ -775,23 +775,23 @@
 		</color>
 		    <green>
                 <en>green</en>
-                <de>grün</de>
+                <de>Grün</de>
             </green>
             <blue>
                 <en>blue</en>
-                <de>blau</de>
+                <de>Blau</de>
             </blue>
             <white>
                 <en>white</en>
-                <de>weiß</de>
+                <de>Weiß</de>
             </white>
             <yellow>
                 <en>yellow</en>
-                <de>gelb</de>
+                <de>Gelb</de>
             </yellow>
             <red>
                 <en>red</en>
-                <de>rot</de>
+                <de>Rot</de>
             </red>
         <claspcolor>
             <en>clasp color: </en>
