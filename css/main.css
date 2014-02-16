@@ -344,7 +344,8 @@
 
     #logo {
 		left: 1%;
-		height: 70px;
+		/*height: 70px;
+		width: 206px;*/
 		top: 7em;
 		position: absolute;
     }

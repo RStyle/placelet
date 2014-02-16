@@ -93,7 +93,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			</ul>
 		</header>
 <!--###LOGO###-->
-		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="img/logo.svg" alt="Placelet"></a><!--</div>-->
+		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="img/logo_extended.svg" alt="Placelet" width="206"></a><!--</div>-->
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
