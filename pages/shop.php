@@ -18,10 +18,23 @@
 					<h3><?php echo $lang->shop->artikelinfo->$lng; ?></h3>
 					<p class="shop_text"><?php echo $lang->shop->description->$lng; ?></p>			
 					<h4><?php echo $lang->shop->size[$lng.'-title']; ?></h4>
+					   <select size="1" name="size">
+                        	<option value="small"><?php echo $lang->shop->small->$lng; ?></option>
+                        	<!--<option value="medium"><?php echo $lang->shop->medium->$lng; ?></option> -->
+                        	<option value="big"><?php echo $lang->shop->big->$lng; ?></option>
+                        </select><br>
 					<?php echo $lang->shop->size->$lng; ?>
 					<hr>
 					<h4><?php echo $lang->shop->color[$lng.'-title']; ?></h4>
-					<?php echo $lang->shop->color->$lng; ?>
+					<?php echo $lang->shop->color->$lng; ?><br>
+                    <?php echo $lang->shop->claspcolor->$lng; ?> 
+                        <select size="1" name="color">
+                        	<option value="white"><?php echo $lang->shop->white->$lng; ?></option>
+                        	<option value="green"><?php echo $lang->shop->green->$lng; ?></option>
+                        	<option value="blue"><?php echo $lang->shop->blue->$lng; ?></option>
+                        	<option value="red"><?php echo $lang->shop->red->$lng; ?></option>
+                        	<option value="yellow"><?php echo $lang->shop->yellow->$lng; ?></option>
+                        </select><br>             					
 					<hr>
 					<h4><?php echo $lang->shop->material[$lng.'-title']; ?></h4>
 					<?php echo $lang->shop->material->$lng; ?>
