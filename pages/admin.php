@@ -19,6 +19,7 @@ if($user->admin && $checklogin) {
 						<th>Armband-Name<br>
 							(ID bei Mouseover)</th>
 						<th>Kommentar</th>
+						<th>Spam</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 					</tr>
@@ -31,6 +32,7 @@ if($user->admin && $checklogin) {
 						<td><?php echo htmlentities($admin_stats['spam_comments'][$i]['user']); ?></td>
 						<td><a href="armband?name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_comments'][$i]['name']); ?></a></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['comment']; ?></td>
+						<td><?php echo $admin_stats['spam_comments'][$i]['spam']; ?>x</td>
 						<td><a href="admin?comments&delete_comm=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>">Kommentar löschen</a></td>
 						<td><a href="admin?comments&nospam=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>">Kein Spam</a></td>
 					</tr>
@@ -54,6 +56,7 @@ if($user->admin && $checklogin) {
 							(ID bei Mouseover)</th>
 						<th>Titel</th>
 						<th>Bild</th>
+						<th>Spam</th>
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 					</tr>
@@ -70,6 +73,7 @@ if($user->admin && $checklogin) {
 								<img src="pictures/bracelets/thumb<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$admin_stats['spam_pics'][$i]['picid'].'.jpg'; ?>" alt="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumbnail">
 							</a>
 						</td>
+						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['spam']); ?>x</td>
 						<td><a href="admin?pictures&delete_pic=true&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>">Bild löschen</a></td>
 						<td><a href="admin?pictures&nospam=true&commid=0&picid=<?php echo $admin_stats['spam_pics'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>">Kein Spam</a></td>
 					</tr>

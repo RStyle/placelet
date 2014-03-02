@@ -129,9 +129,10 @@ if(!isset($_GET['user']) && !$user->login) {
 							<p><?php echo $lang->account->comm_owns->$lng; ?>:</p>
 <?php
 				foreach($notifications['comm_owns'] as $comm) {
+					$comm['user'] = Statistics::id2username($comm['userid']);
 ?>
 							<div class="previews comments" style="display: block;">
-								<strong><?php echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
+								<strong><?php if($comm['userid'] == false) echo 'Anonym'; else echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
 								<p><?php echo $comm['comment']; ?></p> 
 							</div>
 <?php
@@ -146,9 +147,10 @@ if(!isset($_GET['user']) && !$user->login) {
 							<p><?php echo $lang->account->comm_pics->$lng; ?>:</p>
 <?php
 				foreach($notifications['comm_pics'] as $comm) {
+					$comm['user'] = Statistics::id2username($comm['userid']);
 ?>
 							<div class="previews comments" style="display: block;">
-								<strong><?php echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
+								<strong><?php if($comm['user'] == false) echo 'Anonym'; else echo $comm['user']; ?></strong>, <?php echo days_since($comm['date']).'('.date('H:i d.m.Y', $comm['date']).')'; ?>
 								<p><?php echo $comm['comment']; ?></p> 
 							</div>
 <?php

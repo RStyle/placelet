@@ -2,7 +2,7 @@
 session_start(); //Session starten
 include_once('../connection.php');
 include_once('../functions.php');
-include_once('../user.php');
+require_once('../user.php');
 $lang = simplexml_load_file('../../text/translations.xml');
 if(isset($_POST['eng'])) $lng = $_POST['eng'];
 if(isset($_SESSION['user'])){
