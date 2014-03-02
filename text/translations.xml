@@ -750,7 +750,7 @@
 				Unser Armband besteht aus einem Ledermaterial, welches mit einer Knottechnik geschlossen wird.
 				Das Armband ist mit einem Metallplättchen versehen, worauf unser Logo gelasert ist.
 				Außerdem wirst Du auf der Rückseite deines Armbands eine ID-Nummer finden, mit der du dich auf unserer Homepage einloggen und dein Armband verfolgen kannst.
-				Unsere Armband ist schlicht und modisch und wir hoffen, hierbei genau auf Deinen Geschmack zu treffen!
+				Unser Armband ist schlicht und modisch und wir hoffen, hierbei genau auf Deinen Geschmack zu treffen!
 			</de>
 		</description>
 		<size en-title="size:" de-title="Größe:">
@@ -1115,7 +1115,7 @@
 	<js>
 		<showcomment>
 			<en>show comments</en>
-			<de>Kommentare anzeigen</de>
+			<de>Kommentare zeigen</de>
 		</showcomment>
 		<hidecomment>
 			<en>hide comments</en>
