@@ -521,10 +521,12 @@ class User
 <?php
 class Statistics {
 	protected $db;
+	static $usernames;
+	
 	public function __construct($db, $user){
 		$this->db = $db;
 		$this->user = $user;
-		$this->usernames = $this->getUsernames();
+		self::$usernames = $this->getUsernames();
 	}
 	//Userdetails abfragen
 	public function userdetails($user) {
@@ -1359,25 +1361,17 @@ class Statistics {
 		$stmt->execute();
 		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($q as $user) {
-			$usernames[$user['id']] = $user['user'];
+			$usernames['user'][$user['id']] = $user['user'];
+			$usernames['id'][$user['user']] = $user['id'];
 		}
+		$usernames['user'][0] = NULL;
 		return $usernames;
 	}
 	public static function username2id($username) {
-		if($username == false) return 0;
-		$sql = "SELECT id FROM users WHERE user = :username";
-		$stmt = $GLOBALS['db']->prepare($sql);
-		$stmt->execute(array(":username" => $username));
-		$q = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $q['id'];
+		return self::$usernames['id'][$username];
 	}
 	public static function id2username($id) {
-		if($id == 0) return NULL;
-		$sql = "SELECT user FROM users WHERE id = :id";
-		$stmt = $GLOBALS['db']->prepare($sql);
-		$stmt->execute(array(":id" => $id));
-		$q = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $q['user'];
+		return self::$usernames['user'][$id];
 	}
 }
 ?>
