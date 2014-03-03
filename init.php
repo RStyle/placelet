@@ -54,7 +54,7 @@ if(isset($_GET['en'])) $lng = 'en';
 
 $js = '<script type="text/javascript">$(document).ready(function(){';
 
-if(isset($_GET['logout']))  {
+if(isset($_GET['logout'])) {
 	User::logout();
 	header('Location: home');
 	exit;

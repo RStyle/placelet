@@ -6,7 +6,7 @@ class User
 	public $logged = false; //eingeloggt?
 	public $admin = false; //admin?
 	public $userid;
-	public function __construct($login, $db){
+	public function __construct($login, $db) {
 		$this->db = $db;
 		$this->login = $login;
 		$this->userid = Statistics::username2id($login);
@@ -40,7 +40,7 @@ class User
 		}
 	}
 	
-	public function login ($pw){
+	public function login($pw) {
 		$stmt = $this->db->prepare('SELECT * FROM users WHERE user = :user');
 		$stmt->execute(array('user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -85,13 +85,13 @@ class User
 		}
 	}
 	
-	public static function logout (){
+	public static function logout( ){
 		unset($_SESSION['user']);
 		unset($_SESSION['userid']);
 		unset($_SESSION['dynamic_password']);
 	}
 	
-	public static function register($reg, $db){ //$reg ist ein array
+	public static function register($reg, $db) { //$reg ist ein array
 		//ist ein (getrimter) Wert leer?
 		if(tisset($reg['reg_login']) && tisset($reg['reg_email']) && !empty($reg['reg_password'])  && !empty($reg['reg_password2'])){
 			if($reg['reg_password'] != $reg['reg_password2']){
@@ -145,7 +145,7 @@ class User
 			return 0;//'Bitte gib etwas ein.';
 		}
 	}
-	public function regstatuschange ($code, $username){
+	public function regstatuschange($code, $username) {
 		$username = urldecode($username);
 		$userid = Statistics::username2id($username);
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
@@ -172,7 +172,7 @@ class User
 		}
 	}
 	//Armband registrieren
-	public function registerbr ($brid) {
+	public function registerbr($brid) {
 		try {
 			$stmt = $this->db->prepare('SELECT userid FROM bracelets WHERE brid = :brid LIMIT 1');
 			$stmt->execute(array('brid' => $brid));
@@ -207,8 +207,8 @@ class User
 		}
 	}
 	//Passwort ändern
-	public function change_password($old_pwd, $new_pwd, $username) {//Die Funktion sollte ohne den $username Parameter geschrieben werden !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if($old_pwd != NULL && $new_pwd != NULL) {
+	public function change_password($old_pwd, $new_pwd) {
+		if($old_pwd != '' && $new_pwd != '') {
 			$stmt = $this->db->prepare('SELECT password FROM users WHERE user = :user');
 			$stmt->execute(array('user' => $this->login));
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -217,19 +217,31 @@ class User
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
 							':password' => PassHash::hash($new_pwd),
-							':user' => $username
+							':user' => $this->login
 							));
 				return true;
 			}else {
 				return false;
 			}
-		}
+		}else return false;
 	}
 	//Accountdetails ändern
-	public function change_details($email, $old_pwd, $new_pwd, $username) {//DIESE AUCH !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		$return = '';
+	public function change_details($email, $old_pwd, $new_pwd, $new_username) {
+		//Benutzername ändern
+		if($new_username != NULL) {
+			$stmt = $this->db->prepare('SELECT user FROM users WHERE user = :user');
+			$stmt->execute(array('user' => $new_username));
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			if($result == NULL) {//Wenn es noch keinen Benutzer mit selbem Namen gibt
+				$sql = "UPDATE users SET user = :newuser WHERE user = :olduser";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(':olduser' => $this->login, ':newuser' => $new_username));
+				$change_username = true;
+			}else $change_username = false;
+		}else $change_username = true;
 		//Passwort ändern
-		$change_password = $this->change_password($old_pwd, $new_pwd, $username);
+		if($old_pwd != NULL && $new_pwd != NULL) $change_password = $this->change_password($old_pwd, $new_pwd);
+			else $change_password = true;
 		//E-Mail ändern
 		if($email != NULL) {
 			$email = trim($email);
@@ -238,16 +250,20 @@ class User
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
 							':email' => $email,
-							':user' => $username
+							':user' => $this->login
 							));
-				$change_details = true;
+				$change_email = true;
 			}else {
-				$change_details = false;
+				$change_email = false;
 			}
-		}
-		if($change_password === true && $change_details === true) return true;
-			elseif($change_password === false && $change_details === true) return 2;
-			elseif($change_password === true && $change_details === true)  return 3;
+		}else $change_email = true;
+		if(        $change_password === true  && $change_email === true  && $change_username === true)   return true;
+			elseif($change_password === false && $change_email === true  && $change_username === true)   return 2;
+			elseif($change_password === true  && $change_email === false && $change_username === true)   return 3;
+			elseif($change_password === true  && $change_email === true  && $change_username === false)  return 4;
+			elseif($change_password === false && $change_email === false && $change_username === true)   return 5;
+			elseif($change_password === false && $change_email === true  && $change_username === false)  return 6;
+			elseif($change_password === true  && $change_email === false && $change_username === false)  return 7;
 			else return false;
 	}
 	public function reset_password($email) {

@@ -1014,6 +1014,10 @@
 				<en>Please enter a valid e-mail address.</en>
 				<de>Bitte gib eine korrekte E-Mail Adresse ein.</de>
 			</f3>
+			<f4>
+				<en>There already is a user with this username.</en>
+				<de>Es gibt schon einen Benutzer mit diesem Namen.</de>
+			</f4>
 			<falsch>
 				<en>You entered the wrong password and an invalid e-mail address.</en>
 				<de>Du hast das falsche Passwort und keine richtige E-Mail Adresse eingegeben.</de>

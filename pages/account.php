@@ -9,6 +9,11 @@ if($user->login) {
 					<form name="change" action="account?details" method="post">
 						<table border="0">
 							<tr>
+								<th><?php echo $lang->form->benutzername->$lng; ?></th>
+								<td><?php echo $userdetails['user']; ?></td>
+								<td><input type="text" name="change_new_name" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>"></td>
+							</tr>
+							<tr>
 								<th><?php echo $lang->form->email->$lng; ?></th>
 								<td><?php echo $userdetails['email']; ?></td>
 								<td><input type="email" name="change_email" size="20" maxlength="254" placeholder="<?php echo $lang->form->email->$lng; ?>"></td>
@@ -26,7 +31,7 @@ if($user->login) {
 							<tr>
 								<th>&nbsp;</th>
 								<td>&nbsp;</td>
-								<td><input type="submit" name="submit" value="<?php echo $lang->form->changepass->$lng; ?>"></td>
+								<td><input type="submit" name="submit" value="<?php echo $lang->form->speichern->$lng; ?>"></td>
 							</tr>
 						</table>
 					</form>
