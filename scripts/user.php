@@ -24,7 +24,7 @@ class User
 					$this->logged = true;
 					//Status abfragen
 					$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
-					$stmt->execute(array('user' => $_SESSION['userid']));
+					$stmt->execute(array('user' => $_SESSION['user']));
 					$row = $stmt->fetch(PDO::FETCH_ASSOC);
 					if($row['status'] == 2) {
 						$this->admin = true;

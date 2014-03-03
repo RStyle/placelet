@@ -29,7 +29,7 @@ if($user->admin && $checklogin) {
 
 ?>
 					<tr>
-						<td><?php echo htmlentities($admin_stats['spam_comments'][$i]['user']); ?></td>
+						<td><?php echo htmlentities(Statistics::id2username($admin_stats['spam_comments'][$i]['userid'])); ?></td>
 						<td><a href="armband?name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_comments'][$i]['name']); ?></a></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['comment']; ?></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['spam']; ?>x</td>
@@ -65,7 +65,7 @@ if($user->admin && $checklogin) {
 					$admin_stats['spam_pics'][$i]['name'] = $statistics->brid2name($admin_stats['spam_pics'][$i]['brid']);
 ?>
 					<tr>
-						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['user']); ?></td>
+						<td><?php echo htmlentities(Statistics::id2username($admin_stats['spam_pics'][$i]['userid'])); ?></td>
 						<td><a href="armband?name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_pics'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_pics'][$i]['name']); ?></a></td>
 						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['title']); ?></td>
 						<td>
