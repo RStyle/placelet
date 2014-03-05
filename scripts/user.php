@@ -9,7 +9,7 @@ class User
 	public function __construct($login, $db) {
 		$this->db = $db;
 		$this->login = $login;
-		$this->userid = Statistics::username2id($login);
+		$this->userid = username2id($login);
 		if ($login !== false && isset($_SESSION['dynamic_password']) && isset($_SESSION['userid'])){ //prüfen ob eingeloggt
 			try {
 				$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE userid = :userid');
@@ -20,7 +20,7 @@ class User
 					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 120, 60), substr($row['password'], 30, 15)) 
 					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 180, 60), substr($row['password'], 45, 15))
 					//Überprüfung des 4-fachen Hashs des Hashes - müsste unschlagbare Sicherheit bieten ;)
-				) {
+				){
 					$this->logged = true;
 					//Status abfragen
 					$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
@@ -29,12 +29,12 @@ class User
 					if($row['status'] == 2) {
 						$this->admin = true;
 					}
-				}else {
+				} else {
 					echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15);
 					$this->login = false;	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
 					$this->logout();	//Um zukünftige fehlschlagende Versuche des automatischen Logins zu vermeiden
 				}
-			}catch(PDOException $e) {
+			} catch(PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
 			}
 		}
@@ -45,7 +45,7 @@ class User
 		$stmt->execute(array('user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if($row['status'] == 0) return 2;
-		if(PassHash::check_password($row['password'], $pw)) {
+		if (PassHash::check_password($row['password'], $pw)) {
 			$this->login = $row['user'];
 			$this->userid = $row['id'];
 			$dynamic_password = PassHash::hash($row['password']);
@@ -73,7 +73,7 @@ class User
 			$sql= "UPDATE users SET last_login = :date WHERE user = :user LIMIT 1";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
-				':user' => $this->login,
+				':user' => $this->user,
 				':date' => time()
 			));
 			//Status abfragen
@@ -147,7 +147,7 @@ class User
 	}
 	public function regstatuschange($code, $username) {
 		$username = urldecode($username);
-		$userid = Statistics::username2id($username);
+		$userid = username2id($username);
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
         $q = $this->db->prepare($sql); 
         $q->execute(array(':user' => $username));
@@ -196,10 +196,10 @@ class User
 					':name' => $this->login.'#'.$number)
 				);
 				return 1;
-			}elseif(Statistics::id2username($bracelet['user']) == $this->login && Statistics::id2username($bracelet['user']) !== false) {
+			}elseif(id2username($bracelet['user']) == $this->login && Statistics::id2username($bracelet['user']) !== false) {
 				return 2;
 			}else {
-				return array(3, Statistics::id2username($bracelet['user']));
+				return array(3, id2username($bracelet['user']));
 			}
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -277,7 +277,7 @@ class User
 			$username = $result['user'];
 		  }
 		}
-		$userid = Statistics::username2id($username);
+		$userid = username2id($username);
 		if($email != NULL && $submissions_valid) {
 		  $code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
 		  $sql = "UPDATE user_status SET pass_code = :pass_code WHERE userid = :userid";
@@ -308,7 +308,7 @@ class User
 		$stmt->execute(array('code' => $code));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 		if($result != NULL) {
-			return Statistics::id2username($result['userid']);
+			return id2username($result['userid']);
 		}else {
 			return false;
 		}
@@ -320,7 +320,7 @@ class User
 					':password' => PassHash::hash($new_pwd),
 					':user' => $username
 					));
-		$userid = Statistics::username2id($username);
+		$userid = username2id($username);
 		//Code wieder löschen
 		$sql = "UPDATE user_status SET pass_code = :pass_code WHERE userid = :userid";
 		$q = $this->db->prepare($sql);
@@ -334,7 +334,7 @@ class User
 	public function revalidate($username, $email){
 		$username = trim($username);
 		$email = trim($email);
-		$userid = Statistics::username2id($username);
+		$userid = username2id($username);
 		//Überprüfen, ob der Benutzer existiert.
 		if(!Statistics::userexists($username)) return 'Diesen Benutzer gibt es nicht.';
 		//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
@@ -494,7 +494,7 @@ class User
 							$stmt->execute(array(
 								':brid' => $brid['brid'],
 								':notific_checked' => $stats['notific_checked'],
-								':user' => $this->userid
+								':userid' => $this->userid
 							));
 							$pic_subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 						}
@@ -521,7 +521,7 @@ class User
 <?php
 class Statistics {
 	protected $db;
-	public static $usernames;
+	static $usernames;
 	
 	public function __construct($db, $user){
 		$this->db = $db;
@@ -530,7 +530,7 @@ class Statistics {
 	}
 	//Userdetails abfragen
 	public function userdetails($user) {
-		$userid = self::username2id($user);
+		$userid = username2id($user);
 		$result = array();
 		//Allgemeine Daten
 		$stmt = $this->db->prepare("SELECT user, email, status, date AS registered FROM users WHERE user = :user LIMIT 1");
@@ -653,7 +653,7 @@ class Statistics {
 		$q = $stmt->fetchAll();
 		for ($i = 0; $i < $user_anz; $i++) {
 			if(isset($q[$i]['userid'])) {
-				$stats['user_most_bracelets']['user'][$i] = htmlentities(self::id2username($q[$i]['userid']));
+				$stats['user_most_bracelets']['user'][$i] = htmlentities(id2username($q[$i]['userid']));
 				$stats['user_most_bracelets']['userid'][$i] = $q[$i]['userid'];
 				$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 			}
@@ -728,7 +728,7 @@ class Statistics {
 			$stats['name'] = false;
 		}else {
 			$stats['name'] = $this->brid2name($brid);
-			$stats['owner'] = self::id2username($q[0]['userid']);
+			$stats['owner'] = id2username($q[0]['userid']);
 			$stats['date'] = $q[0]['date'];
 			$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
 			$stmt = $this->db->prepare($sql);
@@ -748,7 +748,7 @@ class Statistics {
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
-			$details[$val['picid']]['user'] = htmlentities(self::id2username($val['userid']));
+			$details[$val['picid']]['user'] = htmlentities(id2username($val['userid']));
 			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];
 			$details[$val['picid']]['city'] = $val['city'];
@@ -768,7 +768,7 @@ class Statistics {
 			$details[$val['picid']] [$val['commid']] = array();
 			$details[$val['picid']] [$val['commid']] ['commid'] = $val['commid'];
 			$details[$val['picid']] [$val['commid']] ['picid'] = $val['picid'];
-			$details[$val['picid']] [$val['commid']] ['user'] = htmlentities(self::id2username($val['userid']));
+			$details[$val['picid']] [$val['commid']] ['user'] = htmlentities(id2username($val['userid']));
 			$details[$val['picid']] [$val['commid']] ['comment'] = nl2br($val['comment'], 0);
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
 		}
@@ -778,6 +778,7 @@ class Statistics {
 	}
 	//Kommentar schreiben
 	public function write_comment($brid, $comment, $picid) {
+		$brid = $brid;
 		$comment = clean_input($comment);
 		if(!$this->user->login) $userid = 0;
 			else $userid = $this->user->userid;
@@ -801,8 +802,8 @@ class Statistics {
 				':picid' => $picid,
 				':userid' => $userid,
 				':comment' => $comment,
-				':date' => time()
-			));
+				':date' => time())
+			);
 			$this->notify_subscribers($brid, $userid, $picid);
 			return true;
 		} catch (PDOException $e) {
@@ -1250,21 +1251,21 @@ class Statistics {
 			));			
 		}
 	}
-	private function notify_subscribers($brid, $comm = false) {
+	private function notify_subscribers($brid, $uploader, $comm = false) {
 		$own_bracelet = false;
 		$bracelet_stats = $this->bracelet_stats($brid);
 		$owner = $bracelet_stats['owner'];
-		if($this->user->login && $this->user->login == $owner) $own_bracelet = true;
-		if(!$own_bracelet) {
+		if($this->user->login) if($this->user->login == $owner) $own_bracelet = true;
+		if(!$own_bracelet && $owner != NULL) { // SEIT WANN ANONYME ARMBANDBESITZER!?
 			$braceName = $this->brid2name($brid);
 			//Benachrichtigungen, wie im Profil festgelegt
 				//Beim Inhaber
 			$sql = "SELECT userid, pic_own, comm_own, comm_pic FROM notifications WHERE userid = :ownerid";
 			$stmt = $this->db->prepare($sql);
-			$stmt->execute(array(':ownerid' => self::username2id($owner)));
+			$stmt->execute(array(':ownerid' => username2id($owner)));
 			$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
 			$users_pic_subs_informed = array();
-			$userdetails = $this->userdetails(self::id2username($userProps['userid']));
+			$userdetails = $this->userdetails(id2username($userProps['userid']));
 			$user_email = $userdetails['email'];
 			foreach($userProps as $key => $val) {
 				if($key == 'pic_own') {
@@ -1316,7 +1317,7 @@ class Statistics {
 				$stmt = $this->db->prepare($sql);
 				$stmt->execute(array(':picposterid' => $picposter['userid']));
 				$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
-				$userdetails = $this->userdetails(self::id2username($userProps['userid']));
+				$userdetails = $this->userdetails(id2username($userProps['userid']));
 				$user_email = $userdetails['email'];
 				foreach($userProps as $key => $val) {
 					if($key == 'comm_pic') {
@@ -1361,17 +1362,44 @@ class Statistics {
 		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($q as $user) {
 			$usernames['user'][$user['id']] = $user['user'];
-			$usernames['id'][strtolower($user['user'])] = $user['id'];
+			$usernames['id'][$user['user']] = $user['id'];
 		}
 		$usernames['user'][0] = NULL;
 		return $usernames;
 	}
-	public static function username2id($username) {
-		echo $username.'-'.self::$usernames['id'][$username];
-		return self::$usernames['id'][strtolower($username)];
+	/*public static function username2id($username) {
+		return self::$usernames['id'][$username];
 	}
 	public static function id2username($id) {
 		return self::$usernames['user'][$id];
-	}
+	}*/
 }
+
+	function username2id($name) {
+		global $db;
+		$sql = "SELECT user, id FROM users WHERE user = :user";
+		$stmt = $db->prepare($sql);
+		$stmt->execute(array(':user' => $name));
+		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($q as $user) {
+			if($name == $user['user'])
+				return $user['id'];
+		}
+		return 0;
+		//die(var_dump(debug_backtrace()));
+		//return $usernames['id'][$name];
+	}
+	function id2username($id) {
+		global $db;
+		$sql = "SELECT user, id FROM users WHERE id = :id";
+		$stmt = $db->prepare($sql);
+		$stmt->execute(array(':id' => $id));
+		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($q as $user) {
+			if($id == $user['id'])
+			return $user['user'];
+		}
+		return NULL;
+		//die(var_dump(debug_backtrace()));
+	}
 ?>
