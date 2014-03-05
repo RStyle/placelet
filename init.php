@@ -24,8 +24,8 @@ if(!isset($_SESSION['server_SID'])) {
 //
 $ziffern = 6;
 if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) $ziffern = 7;
-error_reporting(E_ALL|E_STRICT);
-ini_set('display_errors', true);
+//error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', false);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
 if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path = '';
@@ -130,6 +130,9 @@ if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'M
 	if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
 		$navregister['value'] = $lang->misc->nav->profil->$lng.' ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
 	}
+	//
+	$admin_stats = $statistics->admin_stats();
+	$spam_count = array("comm" => count($admin_stats['spam_comments']), "pic" => count($admin_stats['spam_pics']));
 }
 if($page == 'login') {
 	if(isset($_GET['registerbr'])) {//Wenn man keine ID eingegeben hat lautet der Titel von login.php 'Armband registrieren' und nicht 'Registrieren'

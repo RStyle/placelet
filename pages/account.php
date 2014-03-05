@@ -91,6 +91,7 @@ if($user->login) {
 					<li><a href="account?details"><?php echo $lang->account->details->$lng; ?></a></li>
                 	<li><a href="account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
                 	<li><a href="account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
+                	<!--<li><a href="account?delete"><?php echo $lang->account->delete->$lng; ?></a></li>-->
 				</ul>
 			</p>
 <?php

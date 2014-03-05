@@ -11,9 +11,10 @@ if (isset($braceName)) {
 if ($braceName != NULL) {
 	//Kommentare schreiben
 	if(isset($_POST['comment_submit'])) {
-		$write_comment = $statistics->write_comment($braceID,
-							 $_POST['comment_content'][$_POST['comment_form']],
-							 $_POST['comment_picid'][$_POST['comment_form']]);
+		$write_comment = $statistics->write_comment(
+			$braceID,
+			$_POST['comment_content'][$_POST['comment_form']],
+			$_POST['comment_picid'][$_POST['comment_form']]);
 	}
 	if(isset($write_comment)) {
 		if($write_comment === true) {

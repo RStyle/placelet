@@ -25,6 +25,9 @@ if(isset($_POST['submit'])) {
 		if(isset($_POST['change_email']) && isset($_POST['change_old_pwd']) && isset($_POST['change_new_pwd'])) {
 			$change_details = $user->change_details($_POST['change_email'], $_POST['change_old_pwd'], $_POST['change_new_pwd'], $_POST['change_new_name']);
 			if($change_details === true) {
+				User::logout();
+				header('Location: profil');
+				exit;
 				$js .= 'alert("'.$lang->php->change_details->wahr->$lng.'");';
 			}elseif($change_details == 2) {
 				$js .= 'alert("'.$lang->php->change_details->f2->$lng.'");';
@@ -32,14 +35,20 @@ if(isset($_POST['submit'])) {
 				$js .= 'alert("'.$lang->php->change_details->f3->$lng.'");';
 			}elseif($change_details == 4) {
 				User::logout();
-				header('Location: home');
+				header('Location: profil');
 				exit;
 				//$js .= 'alert("'.$lang->php->change_details->f4->$lng.'");';
 			}elseif($change_details == 5) {
 				$js .= 'alert("'.$lang->php->change_details->f2->$lng.'\\n'.$lang->php->change_details->f3->$lng.'");';
 			}elseif($change_details == 6) {
+				User::logout();
+				header('Location: profil');
+				exit;
 				$js .= 'alert("'.$lang->php->change_details->f2->$lng.'\\n'.$lang->php->change_details->f4->$lng.'");';
 			}elseif($change_details == 7) {
+				User::logout();
+				header('Location: profil');
+				exit;
 				$js .= 'alert("'.$lang->php->change_details->f3->$lng.'\\n'.$lang->php->change_details->f4->$lng.'");';
 			}elseif($change_details === false) {
 				$js .= 'alert("'.$lang->php->change_details->falsch->$lng.'");';

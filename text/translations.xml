@@ -243,6 +243,10 @@
 					Bitte logge dich ein:
 			]]></de>
 		</ausgeloggt>
+		<delete>
+			<en>delete account</en>
+			<de>Account löschen</de>
+		</delete>
 	</account>
 	<admin en-title="Admin-tool" de-title="Admin-Tool">
 	</admin>

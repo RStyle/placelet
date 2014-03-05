@@ -103,7 +103,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks"><?php echo $lang->misc->nav->shop->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks" id="registerprofile"><?php echo $navregister['value']; ?></a></li>
 				<?php if($user->admin) { ?>
-				<li class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks"><?php echo $lang->misc->nav->admin->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks"><?php echo $lang->misc->nav->admin->$lng." (".$spam_count['comm'].", ".$spam_count['pic'].")"; ?></a></li>
 				<?php } ?>
 				
 			</ul>

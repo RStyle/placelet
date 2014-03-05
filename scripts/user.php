@@ -20,7 +20,7 @@ class User
 					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 120, 60), substr($row['password'], 30, 15)) 
 					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 180, 60), substr($row['password'], 45, 15))
 					//Überprüfung des 4-fachen Hashs des Hashes - müsste unschlagbare Sicherheit bieten ;)
-				){
+				) {
 					$this->logged = true;
 					//Status abfragen
 					$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
@@ -29,12 +29,12 @@ class User
 					if($row['status'] == 2) {
 						$this->admin = true;
 					}
-				} else {
+				}else {
 					echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15);
 					$this->login = false;	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
 					$this->logout();	//Um zukünftige fehlschlagende Versuche des automatischen Logins zu vermeiden
 				}
-			} catch(PDOException $e) {
+			}catch(PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
 			}
 		}
@@ -45,7 +45,7 @@ class User
 		$stmt->execute(array('user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if($row['status'] == 0) return 2;
-		if (PassHash::check_password($row['password'], $pw)) {
+		if(PassHash::check_password($row['password'], $pw)) {
 			$this->login = $row['user'];
 			$this->userid = $row['id'];
 			$dynamic_password = PassHash::hash($row['password']);
@@ -73,7 +73,7 @@ class User
 			$sql= "UPDATE users SET last_login = :date WHERE user = :user LIMIT 1";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
-				':user' => $this->user,
+				':user' => $this->login,
 				':date' => time()
 			));
 			//Status abfragen
@@ -521,7 +521,7 @@ class User
 <?php
 class Statistics {
 	protected $db;
-	static $usernames;
+	public static $usernames;
 	
 	public function __construct($db, $user){
 		$this->db = $db;
@@ -778,7 +778,6 @@ class Statistics {
 	}
 	//Kommentar schreiben
 	public function write_comment($brid, $comment, $picid) {
-		$brid = $brid;
 		$comment = clean_input($comment);
 		if(!$this->user->login) $userid = 0;
 			else $userid = $this->user->userid;
@@ -802,8 +801,8 @@ class Statistics {
 				':picid' => $picid,
 				':userid' => $userid,
 				':comment' => $comment,
-				':date' => time())
-			);
+				':date' => time()
+			));
 			$this->notify_subscribers($brid, $userid, $picid);
 			return true;
 		} catch (PDOException $e) {
@@ -1251,11 +1250,11 @@ class Statistics {
 			));			
 		}
 	}
-	private function notify_subscribers($brid, $uploader, $comm = false) {
+	private function notify_subscribers($brid, $comm = false) {
 		$own_bracelet = false;
 		$bracelet_stats = $this->bracelet_stats($brid);
 		$owner = $bracelet_stats['owner'];
-		if($this->user->login) if($this->user->login == $owner) $own_bracelet = true;
+		if($this->user->login && $this->user->login == $owner) $own_bracelet = true;
 		if(!$own_bracelet) {
 			$braceName = $this->brid2name($brid);
 			//Benachrichtigungen, wie im Profil festgelegt
@@ -1362,13 +1361,14 @@ class Statistics {
 		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($q as $user) {
 			$usernames['user'][$user['id']] = $user['user'];
-			$usernames['id'][$user['user']] = $user['id'];
+			$usernames['id'][strtolower($user['user'])] = $user['id'];
 		}
 		$usernames['user'][0] = NULL;
 		return $usernames;
 	}
 	public static function username2id($username) {
-		return self::$usernames['id'][$username];
+		echo $username.'-'.self::$usernames['id'][$username];
+		return self::$usernames['id'][strtolower($username)];
 	}
 	public static function id2username($id) {
 		return self::$usernames['user'][$id];
