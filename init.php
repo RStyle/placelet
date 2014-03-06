@@ -24,8 +24,8 @@ if(!isset($_SESSION['server_SID'])) {
 //
 $ziffern = 6;
 if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) $ziffern = 7;
-//error_reporting(E_ALL|E_STRICT);
-ini_set('display_errors', false);
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
 if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path = '';
@@ -35,8 +35,8 @@ if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path_html = 'http://www.placelet.de/';
 }
 require_once($this_path.'scripts/recaptchalib.php');
-require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/connection.php');
+require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/user.php');
 $lang = simplexml_load_file('./text/translations.xml');
 if(isset($_GET['language'])){

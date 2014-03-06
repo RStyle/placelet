@@ -1,4 +1,16 @@
 <?php
+$sql = "SELECT user, id FROM users";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($q as $user) {
+	$usernamelist['user'][$user['id']] = $user['user'];
+	$usernamelist['id'][strtolower($user['user'])] = $user['id'];
+}
+$usernamelist['user'][0] = NULL;
+$usernamelist['id'][0] = NULL;
+$usernamelist['id'][NULL] = 0;
+$usernamelist['user'][NULL] = 0;
 //Vergangene Zeit berechnen
 function days_since($unix_time) {
 	$x_days_ago = ceil((strtotime("00:00") - $unix_time) / 86400);

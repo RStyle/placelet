@@ -9,7 +9,7 @@ class User
 	public function __construct($login, $db) {
 		$this->db = $db;
 		$this->login = $login;
-		$this->userid = username2id($login);
+		$this->userid = Statistics::username2id($login);
 		if ($login !== false && isset($_SESSION['dynamic_password']) && isset($_SESSION['userid'])){ //prüfen ob eingeloggt
 			try {
 				$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE userid = :userid');
@@ -73,7 +73,7 @@ class User
 			$sql= "UPDATE users SET last_login = :date WHERE user = :user LIMIT 1";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
-				':user' => $this->user,
+				':user' => $this->login,
 				':date' => time()
 			));
 			//Status abfragen
@@ -147,7 +147,7 @@ class User
 	}
 	public function regstatuschange($code, $username) {
 		$username = urldecode($username);
-		$userid = username2id($username);
+		$userid = Statistics::username2id($username);
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
         $q = $this->db->prepare($sql); 
         $q->execute(array(':user' => $username));
@@ -196,10 +196,10 @@ class User
 					':name' => $this->login.'#'.$number)
 				);
 				return 1;
-			}elseif(id2username($bracelet['user']) == $this->login && Statistics::id2username($bracelet['user']) !== false) {
+			}elseif(Statistics::id2username($bracelet['user']) == $this->login && Statistics::id2username($bracelet['user']) !== false) {
 				return 2;
 			}else {
-				return array(3, id2username($bracelet['user']));
+				return array(3, Statistics::id2username($bracelet['user']));
 			}
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -277,7 +277,7 @@ class User
 			$username = $result['user'];
 		  }
 		}
-		$userid = username2id($username);
+		$userid = Statistics::username2id($username);
 		if($email != NULL && $submissions_valid) {
 		  $code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
 		  $sql = "UPDATE user_status SET pass_code = :pass_code WHERE userid = :userid";
@@ -308,7 +308,7 @@ class User
 		$stmt->execute(array('code' => $code));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 		if($result != NULL) {
-			return id2username($result['userid']);
+			return Statistics::id2username($result['userid']);
 		}else {
 			return false;
 		}
@@ -320,7 +320,7 @@ class User
 					':password' => PassHash::hash($new_pwd),
 					':user' => $username
 					));
-		$userid = username2id($username);
+		$userid = Statistics::username2id($username);
 		//Code wieder löschen
 		$sql = "UPDATE user_status SET pass_code = :pass_code WHERE userid = :userid";
 		$q = $this->db->prepare($sql);
@@ -334,7 +334,7 @@ class User
 	public function revalidate($username, $email){
 		$username = trim($username);
 		$email = trim($email);
-		$userid = username2id($username);
+		$userid = Statistics::username2id($username);
 		//Überprüfen, ob der Benutzer existiert.
 		if(!Statistics::userexists($username)) return 'Diesen Benutzer gibt es nicht.';
 		//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
@@ -521,16 +521,14 @@ class User
 <?php
 class Statistics {
 	protected $db;
-	static $usernames;
-	
 	public function __construct($db, $user){
 		$this->db = $db;
 		$this->user = $user;
-		self::$usernames = $this->getUsernames();
+		$this->usernames = $this->getUsernames();
 	}
 	//Userdetails abfragen
 	public function userdetails($user) {
-		$userid = username2id($user);
+		$userid = self::username2id($user);
 		$result = array();
 		//Allgemeine Daten
 		$stmt = $this->db->prepare("SELECT user, email, status, date AS registered FROM users WHERE user = :user LIMIT 1");
@@ -598,10 +596,6 @@ class Statistics {
 			$stmt = $this->db->prepare("SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1");
 			$stmt->execute(array('brid' => $val['brid']));
 			$result[3][$val['brid']] = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-
-
 		}
 		$user_details['bracelets'] = $brids;
 		$userdetails = array_merge($user_details['users'], $user_details['bracelets'], $user_details['pics'], $user_details['notifications']);
@@ -653,7 +647,7 @@ class Statistics {
 		$q = $stmt->fetchAll();
 		for ($i = 0; $i < $user_anz; $i++) {
 			if(isset($q[$i]['userid'])) {
-				$stats['user_most_bracelets']['user'][$i] = htmlentities(id2username($q[$i]['userid']));
+				$stats['user_most_bracelets']['user'][$i] = htmlentities(self::id2username($q[$i]['userid']));
 				$stats['user_most_bracelets']['userid'][$i] = $q[$i]['userid'];
 				$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 			}
@@ -728,7 +722,7 @@ class Statistics {
 			$stats['name'] = false;
 		}else {
 			$stats['name'] = $this->brid2name($brid);
-			$stats['owner'] = id2username($q[0]['userid']);
+			$stats['owner'] = self::id2username($q[0]['userid']);
 			$stats['date'] = $q[0]['date'];
 			$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
 			$stmt = $this->db->prepare($sql);
@@ -748,7 +742,7 @@ class Statistics {
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
-			$details[$val['picid']]['user'] = htmlentities(id2username($val['userid']));
+			$details[$val['picid']]['user'] = htmlentities(self::id2username($val['userid']));
 			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];
 			$details[$val['picid']]['city'] = $val['city'];
@@ -768,7 +762,7 @@ class Statistics {
 			$details[$val['picid']] [$val['commid']] = array();
 			$details[$val['picid']] [$val['commid']] ['commid'] = $val['commid'];
 			$details[$val['picid']] [$val['commid']] ['picid'] = $val['picid'];
-			$details[$val['picid']] [$val['commid']] ['user'] = htmlentities(id2username($val['userid']));
+			$details[$val['picid']] [$val['commid']] ['user'] = htmlentities(self::id2username($val['userid']));
 			$details[$val['picid']] [$val['commid']] ['comment'] = nl2br($val['comment'], 0);
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
 		}
@@ -802,8 +796,8 @@ class Statistics {
 				':picid' => $picid,
 				':userid' => $userid,
 				':comment' => $comment,
-				':date' => time())
-			);
+				':date' => time()
+			));
 			$this->notify_subscribers($brid, $userid, $picid);
 			return true;
 		} catch (PDOException $e) {
@@ -1142,6 +1136,7 @@ class Statistics {
 			));
 			$anz = $q->rowCount();
 			//Alle Kommentare zu diesem Bild löschen
+
 			$sql = "DELETE FROM comments WHERE picid = :picid AND brid = :brid";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
@@ -1251,21 +1246,21 @@ class Statistics {
 			));			
 		}
 	}
-	private function notify_subscribers($brid, $uploader, $comm = false) {
+	private function notify_subscribers($brid, $comm = false) {
 		$own_bracelet = false;
 		$bracelet_stats = $this->bracelet_stats($brid);
 		$owner = $bracelet_stats['owner'];
 		if($this->user->login) if($this->user->login == $owner) $own_bracelet = true;
-		if(!$own_bracelet && $owner != NULL) { // SEIT WANN ANONYME ARMBANDBESITZER!?
+		if(!$own_bracelet) {
 			$braceName = $this->brid2name($brid);
 			//Benachrichtigungen, wie im Profil festgelegt
 				//Beim Inhaber
 			$sql = "SELECT userid, pic_own, comm_own, comm_pic FROM notifications WHERE userid = :ownerid";
 			$stmt = $this->db->prepare($sql);
-			$stmt->execute(array(':ownerid' => username2id($owner)));
+			$stmt->execute(array(':ownerid' => self::username2id($owner)));
 			$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
 			$users_pic_subs_informed = array();
-			$userdetails = $this->userdetails(id2username($userProps['userid']));
+			$userdetails = $this->userdetails(self::id2username($userProps['userid']));
 			$user_email = $userdetails['email'];
 			foreach($userProps as $key => $val) {
 				if($key == 'pic_own') {
@@ -1317,20 +1312,22 @@ class Statistics {
 				$stmt = $this->db->prepare($sql);
 				$stmt->execute(array(':picposterid' => $picposter['userid']));
 				$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
-				$userdetails = $this->userdetails(id2username($userProps['userid']));
-				$user_email = $userdetails['email'];
-				foreach($userProps as $key => $val) {
-					if($key == 'comm_pic') {
-
-
-						if($val == 2 || $val == 3) {
-							$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
-										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
-							$mail_header = "From: Placelet <support@placelet.de>\n";
-							$mail_header .= "MIME-Version: 1.0" . "\n";
-							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+				if($userProps['userid'] != 0) {
+					$userdetails = $this->userdetails(self::id2username($userProps['userid']));
+					$user_email = $userdetails['email'];
+					foreach($userProps as $key => $val) {
+						if($key == 'comm_pic') {
+	
+	
+							if($val == 2 || $val == 3) {
+								$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+								$mail_header = "From: Placelet <support@placelet.de>\n";
+								$mail_header .= "MIME-Version: 1.0" . "\n";
+								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+								$mail_header .= "Content-transfer-encoding: 8bit";
+								mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+							}
 						}
 					}
 				}
@@ -1361,45 +1358,27 @@ class Statistics {
 		$stmt->execute();
 		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($q as $user) {
-			$usernames['user'][$user['id']] = $user['user'];
-			$usernames['id'][$user['user']] = $user['id'];
+			$usernames[$user['id']] = $user['user'];
 		}
-		$usernames['user'][0] = NULL;
 		return $usernames;
 	}
-	/*public static function username2id($username) {
-		return self::$usernames['id'][$username];
+	public static function username2id($username) {
+		/*if($username == false) return 0;
+		$sql = "SELECT id FROM users WHERE user = :username";
+		$stmt = $GLOBALS['db']->prepare($sql);
+		$stmt->execute(array(":username" => $username));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $q['id'];*/
+		return $GLOBALS['usernamelist']['id'][strtolower($username)];
 	}
 	public static function id2username($id) {
-		return self::$usernames['user'][$id];
-	}*/
+		/*if($id == 0) return NULL;
+		$sql = "SELECT user FROM users WHERE id = :id";
+		$stmt = $GLOBALS['db']->prepare($sql);
+		$stmt->execute(array(":id" => $id));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $q['user'];*/
+		return $GLOBALS['usernamelist']['user'][$id];
+	}
 }
-
-	function username2id($name) {
-		global $db;
-		$sql = "SELECT user, id FROM users WHERE user = :user";
-		$stmt = $db->prepare($sql);
-		$stmt->execute(array(':user' => $name));
-		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		foreach($q as $user) {
-			if($name == $user['user'])
-				return $user['id'];
-		}
-		return 0;
-		//die(var_dump(debug_backtrace()));
-		//return $usernames['id'][$name];
-	}
-	function id2username($id) {
-		global $db;
-		$sql = "SELECT user, id FROM users WHERE id = :id";
-		$stmt = $db->prepare($sql);
-		$stmt->execute(array(':id' => $id));
-		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		foreach($q as $user) {
-			if($id == $user['id'])
-			return $user['user'];
-		}
-		return NULL;
-		//die(var_dump(debug_backtrace()));
-	}
 ?>
