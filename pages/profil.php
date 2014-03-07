@@ -45,7 +45,7 @@ if(!isset($_GET['user']) && !$user->login) {
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
 						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
-						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?><br><?php echo $user->userid; if($user->userid === NULL) echo "NULL";?>
+						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>
 					</p>
 				</div>
 <?php 

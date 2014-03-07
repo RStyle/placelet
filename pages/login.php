@@ -138,7 +138,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 						<tr>
 							<td><label for="reg_email"><?php echo $lang->form->email->$lng; ?></label></td>
-							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
+							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
 						</tr>
 						<tr>
 							<td><label for="reg_password"><?php echo $lang->form->passwort->$lng; ?></label></td>
@@ -193,7 +193,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 						<tr>
 							<td><label for="reg_email"><?php echo $lang->form->email->$lng; ?></label></td>
-							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
+							<td><input type="email" name="reg_email" id="reg_email" class="input_text" size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
 						</tr>
 						<tr>
 							<td><label for="reg_password"><?php echo $lang->form->passwort->$lng; ?></label></td>

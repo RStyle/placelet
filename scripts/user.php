@@ -101,10 +101,15 @@ class User
 				return 3;//'Dieser Benutzer existiert schon.';
 			}
 			//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
-			$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
+			$stmt = $db->prepare('SELECT email FROM users');
 			$stmt->execute(array('email' => $reg['reg_email']));
-			$anz = $stmt->rowCount();
-			if($anz != 0) return 4;//'Auf diese E-Mail Adresse wurde schon ein anderer Benutzer registriert.';
+			$useremails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$userid =  count($useremails) + 1;
+			$duplicate_email = false;
+			foreach($useremails as $val) {
+				if($val['email'] == $reg['reg_email']) $duplicate_email = true;
+			}
+			if($duplicate_email != 0) return 4;//'Auf diese E-Mail Adresse wurde schon ein anderer Benutzer registriert.';
 			if(strlen($reg['reg_login']) < 4) return 5;//'Benutzername zu kurz. Min. 4';
 			if(strlen($reg['reg_login']) > 15) return 6;//'Benutzername zu lang. Max. 15';
 			if(strlen($reg['reg_password']) < 6) return 7;//'Passwort zu kurz. Min. 6';
@@ -119,15 +124,17 @@ class User
 				':status' => 0,
 				':date' => time()
 			));
-			$sql = "INSERT INTO user_status (code) VALUES (:code)";
+			$sql = "INSERT INTO user_status (userid, code) VALUES (:userid, :code)";
 			$q = $db->prepare($sql);
 			$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
 			$q->execute(array(
-				':code' => $code) // Ein 60 buchstabenlanger Zufallscode
-			);
-			$sql = "INSERT INTO notifications (pic_own, comm_own, comm_pic, pic_subs) VALUES (:pic_own, :comm_own, :comm_pic, :pic_subs)";
+				':userid' => $userid,
+				':code' => $code // Ein 60 buchstabenlanger Zufallscode
+			)); 
+			$sql = "INSERT INTO notifications (userid, pic_own, comm_own, comm_pic, pic_subs) VALUES (:userid, :pic_own, :comm_own, :comm_pic, :pic_subs)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
+				':userid' => $userid,
 				':pic_own' => 3,
 				':comm_own' => 1,
 				':comm_pic' => 1,

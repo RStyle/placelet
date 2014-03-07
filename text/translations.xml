@@ -1082,6 +1082,10 @@
 			</f6>
 		</pic_registered>
 		<register>
+			<f1>
+				<en><![CDATA[You have been successfully registered.<br>You will shortly recieve an email with which you can verify your email-adress and unlock your account.]]></en>
+				<de><![CDATA[Dein Account wurde erfolgreich erstellt.<br>In Kürze wirst du eine E-Mail von uns erhalten, mit der du deine E-Mail Addresse bestätigen und deinen Account freischalten kannst.]]></de>
+			</f1>
 			<f2>
 				<en>The passwords don't fit.</en>
 				<de>Die Passwörter passen nicht zusammen.</de>
