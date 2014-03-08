@@ -8,7 +8,7 @@
 					Straße: <input type="text" name="order_street" size="20" placeholder="Straße" required><br>
 					Postleitzahl: <input type="text" name="order_plz" size="20" placeholder="PLZ" required> Ort: <input type="text" name="order_city" size="20" placeholder="Ort" required><br>
 					<br>					
-					E-Mail: <input type="email" name="order_email" size="20" placeholder="mustermann.max@beispiel.de" required><br>
+					E-Mail: <input type="email" name="order_email" size="20" maxlength="100" placeholder="mustermann.max@beispiel.de" required><br>
 					<br>					
 					Zahlungsmethode:<br>
 					<input type="radio" name="order_paymethod" value="paypal" checked> PayPal<br>

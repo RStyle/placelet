@@ -16,7 +16,7 @@ if($user->login) {
 							<tr>
 								<th><?php echo $lang->form->email->$lng; ?></th>
 								<td><?php echo $userdetails['email']; ?></td>
-								<td><input type="email" name="change_email" size="20" maxlength="254" placeholder="<?php echo $lang->form->email->$lng; ?>"></td>
+								<td><input type="email" name="change_email" size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>"></td>
 							</tr>
 							<tr>
 								<th><?php echo $lang->form->passwort->$lng; ?></th>
@@ -106,7 +106,7 @@ if($user->login) {
 				</p>
 
 				<form name="recover_password" action"account" method="post">
-					<?php echo $lang->form->email->$lng; ?>: <input type="email" name="recover_email" size="20" maxlength="254" placeholder="<?php echo $lang->form->email->$lng; ?>"><br>
+					<?php echo $lang->form->email->$lng; ?>: <input type="email" name="recover_email" size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>"><br>
 					<input type="submit" name="submit" value="<?php echo $lang->form->newpass->$lng; ?>">
 				</form>
 <?php

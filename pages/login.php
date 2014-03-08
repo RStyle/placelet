@@ -177,7 +177,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 ?>
 				<form method="post" action="login">
 					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
-					<input type="email" name="revalidate_email" size="20" maxlength="30" placeholder="<?php echo $lang->form->email->$lng; ?>" required>
+					<input type="email" name="revalidate_email" size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" required>
 					<input type="submit" name="revalidate_submit" value="<?php echo $lang->login->change_email->$lng; ?>">
 				</form>
 <?php

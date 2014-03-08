@@ -5,7 +5,7 @@
 				<table>
 					<tr>
 						<td><label for="sender"><?php echo $lang->kontakt->youremail->$lng; ?>:</label><br></td>
-						<td><input type="email" name="sender" id="sender" size="25" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
+						<td><input type="email" name="sender" id="sender" size="25" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" required></td>
 					</tr>
 					<tr>
 						<td><?php echo $lang->kontakt->betreff->$lng; ?>:</td>
