@@ -211,8 +211,8 @@ if(!isset($_GET['user']) && !$user->login) {
 						</div>
 <?php
 			}
-		}elseif($user->login == $username) echo '<p>Du besitzt noch kein Armband.</p>';
-		else echo '<p>Dieser Benutzer besitzt noch kein Armband.</p>';
+		}elseif($user->login == $username) echo '<p>'.$lang->profil->nobracelet->$lng.'.</p>';
+		else echo '<p>'.$lang->profil->nobracelet_other->$lng.'.</p>';
 ?>
 					</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Abos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

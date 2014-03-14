@@ -130,7 +130,7 @@ class User
 			$q->execute(array(
 				':userid' => $userid,
 				':code' => $code // Ein 60 buchstabenlanger Zufallscode
-			)); 
+			));
 			$sql = "INSERT INTO notifications (userid, pic_own, comm_own, comm_pic, pic_subs) VALUES (:userid, :pic_own, :comm_own, :comm_pic, :pic_subs)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
@@ -141,18 +141,20 @@ class User
 				':pic_subs' => 3
 			));
 			//$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
-			$content = str_replace(array('username', 'code'),array(urlencode($reg['reg_login']), urlencode($code)),file_get_contents('./text/email/basic.html'));
+			$content = str_replace(array('username', 'code'), array(urlencode($reg['reg_login']), urlencode($code)), file_get_contents('./text/email/basic.html'));
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
 			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
 			mail($reg['reg_email'], 'Bestätigungsemail', $content, $mail_header);
+			//echo $reg['reg_login'].'--'.$userid;
 			return 1;
 		}else {
 			return 0;//'Bitte gib etwas ein.';
 		}
 	}
 	public function regstatuschange($code, $username) {
+		$code = urldecode($code);
 		$username = urldecode($username);
 		$userid = Statistics::username2id($username);
 		$sql = "SELECT * FROM users WHERE user = :user LIMIT 1"; 
@@ -171,7 +173,7 @@ class User
 				//Code löschen
 				$sql= "UPDATE user_status SET code = :code WHERE userid = :userid LIMIT 1";
 				$q = $this->db->prepare($sql); 
-				$q->execute(array(':code' => NULL, ':useidr' => $userid));
+				$q->execute(array(':code' => NULL, ':userid' => $userid));
 				return true;
 			}else {
 				return false;
@@ -363,7 +365,7 @@ class User
 		$q = $this->db->prepare($sql);
 		$code = substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20).substr(md5 (uniqid (rand())), 0, 20);
 		$q->execute(array(
-			':user' => $username,
+			':userid' => $userid,
 			':code' => $code) // Ein 60 buchstabenlanger Zufallscode
 		);
 		$sql = "UPDATE users SET email = :email WHERE user = :user";
@@ -373,10 +375,10 @@ class User
 			':email' => $email
 		));
 		//Neue Email senden.
-		$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($username).'&regstatuschange='.urlencode($code);
+		$content = str_replace(array('username', 'code'), array(urlencode($username), urlencode($code)), file_get_contents('./text/email/basic.html'));
 		$mail_header = "From: Placelet <support@placelet.de>\n";
 		$mail_header .= "MIME-Version: 1.0" . "\n";
-		$mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
+		$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 		$mail_header .= "Content-transfer-encoding: 8bit";
 		mail($email, 'Bestätigungsemail', $content, $mail_header);
 		return true;
@@ -1193,10 +1195,10 @@ class Statistics {
 			return $this->delete_pic($input, $picid, $brid);
 		}else {
 			if($this->user->login) {
-				$sql = "SELECT user FROM bracelets WHERE userid = :userid AND brid = :brid";
+				$sql = "SELECT userid FROM bracelets WHERE userid = :userid AND brid = :brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
-					':user' => $this->user->userid,
+					':userid' => $this->user->userid,
 					':brid' => $brid,
 				));
 				$anz = $q->rowCount();

@@ -1,8 +1,9 @@
 <!--CONNECT-LEISTE-->
-            <div class="hint">
-                <h1>Hinweis</h1>
-                <p>Aufgrund technischer Schwierigkeiten wurde die Registrierung sowie das Login-System unserer Webseite vorübergehend deaktiviert. Wir arbeiten an einer schnellstmöglichen Beseitigung dieser Probleme.</p>
-            </div>
+            <!--<div class="hint">
+                <h1><?php if($lng == 'en') echo 'Notice'; elseif($lng == 'de') echo 'Hinweis';?></h1>
+                <p><?php if($lng == 'en') echo 'Due to technical difficulties we had to temporarily disable the registration. We are intensely working on it. Sorry for the inconveniences.';
+					 elseif($lng == 'de') echo 'Aufgrund technischer Schwierigkeiten musste die Registrierung temporär deaktiviert werden. Wir arbeiten an einer schnellstmöglichen Beseitigung des Problems.';?></p>
+            </div>-->
 			<div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
                     <h1 class="headers pseudo_link" id="header_1"><span class="header_arrow1 arrow_right"></span>&nbsp;<?php echo $lang->stats->neuesterupload[$lng."-title"]; ?></h1>
