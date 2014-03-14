@@ -685,6 +685,14 @@
 			<en>This user is has not uploaded a picture yet</en>
 			<de>Dieser Benutzer hat noch kein Bild hochgeladen</de>
 		</noupload_other>
+		<nobracelet>
+			<en>You do not own a bracelet yet</en>
+			<de>Du besitzt noch kein Armband</de>
+		</nobracelet>
+		<nobracelet_other>
+			<en>This user does not own a bracelet yet</en>
+			<de>Dieser Benutzer besitzt noch kein Armband</de>
+		</nobracelet_other>
 		<notexists>
 			<en>User not existing</en>
 			<de>Benutzer existiert nicht</de>

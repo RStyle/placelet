@@ -1093,17 +1093,17 @@ class Statistics {
 			return $this->delete_comment($input, $commid, $picid, $brid);
 		}else {
 			if($this->user->login) {
-				$sql = "SELECT user FROM bracelets WHERE userid = :userid AND brid = :brid";
+				$sql = "SELECT userid FROM bracelets WHERE userid = :userid AND brid = :brid";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
-					':user' => $this->user->userid,
+					':userid' => $this->user->userid,
 					':brid' => $brid,
 				));
 				$anz = $q->rowCount();
 				if($anz == 1) {
 					return $this->delete_comment($input, $commid, $picid, $brid);
 				}else {
-					$sql = "UPDATE comments SET spam = spam +f 1 WHERE brid = :brid AND picid = :picid AND commid = :commid";
+					$sql = "UPDATE comments SET spam = spam + 1 WHERE brid = :brid AND picid = :picid AND commid = :commid";
 					$q = $this->db->prepare($sql);
 					$q->execute(array(
 						':picid' => $picid,
