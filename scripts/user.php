@@ -47,7 +47,7 @@ class User
 		if($row['status'] == 0) return 2;
 		if (PassHash::check_password($row['password'], $pw)) {
 			$this->login = $row['user'];
-			$this->userid = $row['id'];
+			$this->userid = $row['userid'];
 			$dynamic_password = PassHash::hash($row['password']);
 			$_SESSION['dynamic_password'] = PassHash::hash(substr($dynamic_password, 0, 15)).PassHash::hash(substr($dynamic_password, 15, 15)).PassHash::hash(substr($dynamic_password, 30, 15)).PassHash::hash(substr($dynamic_password, 45, 15));
 			//4-facher Hash des Hashes - da der Hash ab einer bestimmten Anzahl von Buchstaben das Passwort abschneidet.
@@ -1362,12 +1362,12 @@ class Statistics {
 		}
 	}
 	public function getUsernames() {
-		$sql = "SELECT user, id FROM users";
+		$sql = "SELECT user, userid FROM users";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
 		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($q as $user) {
-			$usernames[$user['id']] = $user['user'];
+			$usernames[$user['userid']] = $user['user'];
 		}
 		return $usernames;
 	}

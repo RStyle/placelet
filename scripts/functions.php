@@ -1,11 +1,11 @@
 <?php
-$sql = "SELECT user, id FROM users";
+$sql = "SELECT user, userid FROM users";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($q as $user) {
-	$usernamelist['user'][$user['id']] = $user['user'];
-	$usernamelist['id'][strtolower($user['user'])] = $user['id'];
+	$usernamelist['user'][$user['userid']] = $user['user'];
+	$usernamelist['id'][strtolower($user['user'])] = $user['userid'];
 }
 $usernamelist['user'][0] = NULL;
 $usernamelist['id'][0] = NULL;
