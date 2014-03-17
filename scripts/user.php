@@ -853,7 +853,7 @@ class Statistics {
 		$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
 		if ($anz == 0) {
 			return '0';
-		} elseif ($bracelet['userid'] == NULL ) {
+		} elseif ($bracelet['userid'] == 0 ) {
 			return 1;
 		} else {
 			return 2;
