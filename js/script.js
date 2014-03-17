@@ -3,10 +3,8 @@ $(document).ready(function() {
 	// starte wenn DOM geladen ist
 	
 var Input_password = $('input[name=password]');
-var default_reg_password_value = $('input[name=reg_password]').val();
-var default_password_value = Input_password.val();
-if (default_password_value == '')
-	default_password_value = default_reg_password_value;
+var default_reg_password_value = '!§%$$%\/%§$';
+var default_password_value = '!§%$$%\/%§$';
 var show_login = false;
 var login_return = true;
 
@@ -47,6 +45,7 @@ $('.password').on({
 $("#form_login").submit(function() {
 	if ($("#password").val() == default_password_value) {
 	$("#password").select(); 
+		console.log("defaultpassword");
 		return false;
 	}
 	
@@ -55,7 +54,8 @@ $("#form_login").submit(function() {
 		setTimeout(function() {
 			$("#login").css( "background-color", "#FFF" );
 		}, 800);
-		login_return = false;
+		console.log("login");
+		return false;
 	}
 	
 	if($("#password").val().length < 6 || $("#login").val().length > 30){
@@ -63,10 +63,9 @@ $("#form_login").submit(function() {
 		setTimeout(function() {
 			$("#password").css( "background-color", "#FFF" );
 		}, 800);
-		login_return = false;
+		console.log("password");
+		return false;
 	}
-	
-	return login_return;
 });
 
 $(".input_text").blur(function(){
@@ -127,7 +126,7 @@ $('#holder').on(
 )
 
 //Überprüfung ob Stadt bei Bildupload exestiert bzw. Korrektur
-$("#form_login").submit(function() {
+$("form[name=registerpic]").submit(function() {
 	geocoder = new google.maps.Geocoder();
 	var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
 	if(address == ",")
