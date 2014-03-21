@@ -244,6 +244,9 @@ if($page == 'login' && isset($postpic)) {
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 <?php
 }
-if($js != '<script type="text/javascript">$(document).ready(function(){'){ $js .= '});</script>'; echo $js;} ?>
+if($js != '<script type="text/javascript">$(document).ready(function(){') {
+	$js .= '});</script>'; echo $js;
+}
+?>
 	</body>
 </html>

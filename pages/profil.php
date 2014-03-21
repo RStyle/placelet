@@ -157,9 +157,11 @@ if(!isset($_GET['user']) && !$user->login) {
 				}
 ?>
 						</div>
-						<span id="notific_read" class="pseudo_link" style="clear: both;"><?php echo $lang->profil->notific_read->$lng; ?></span>
 <?php
 			}
+?>
+						<span id="notific_read" class="pseudo_link" style="clear: both;"><?php echo $lang->profil->notific_read->$lng; ?></span>
+<?php
 		}else echo '<p>'.$lang->profil->nonew_notific->$lng.'.</p>';
 ?>
 					</div>
