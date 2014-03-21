@@ -17,7 +17,7 @@ $statistics = new Statistics($db, $user);
 $return = array('notsent' => 'notsent');
 if(isset($_POST['login'])) {
 		if($_POST['login'] == 'true') {
-		$return = array('checklogin' => $checklogin);
+		$return = array('checklogin' => $checklogin, 'username' => $user->login);
 		
 	}
 }elseif(isset($_POST['braceName']) && isset($_POST['deleterequest'])) {//'flag' => true bedeutet als Spam markieren und false bedeutet löschen
@@ -58,3 +58,4 @@ if(isset($_POST['login'])) {
 	}
 }
 echo json_encode($return);
+?>

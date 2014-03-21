@@ -7,7 +7,8 @@ if(isset($_POST['comment_submit'])) {
 	$write_comment = $statistics->write_comment(
 		$_POST['comment_brid'][$_POST['comment_form']],
 		$_POST['comment_content'][$_POST['comment_form']],
-		$_POST['comment_picid'][$_POST['comment_form']]);
+		$_POST['comment_picid'][$_POST['comment_form']]
+	);
 }
 if(isset($write_comment)) {
 	if(isset($write_comment)) {

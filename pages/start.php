@@ -29,7 +29,7 @@
     						<td style="border-bottom: 1px solid #000;"><?php echo $lang->stats->aktivstebenutzer->uploads->$lng; ?></td>
     					</tr>
     <?php
-    for ($i = 0; $i < count($systemStats['user_most_bracelets']['user']); $i++) {
+    /*for ($i = 0; $i < count($systemStats['user_most_bracelets']['user']); $i++) {
     ?>
     					<tr>
     						<td>
@@ -39,6 +39,19 @@
 							</td>
     						<td><?php echo $systemStats['user_most_bracelets']['number'][$i]; ?></td>
     						<td><?php echo $systemStats['user_most_bracelets']['uploads'][$i]; ?></td>
+    					</tr>
+    <?php
+    }*/
+    foreach($systemStats['user_most_bracelets']['uploads'] as $key => $val) {
+    ?>
+    					<tr>
+    						<td>
+								<a href="profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>">
+									<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>
+								</a>
+							</td>
+    						<td><?php echo $systemStats['user_most_bracelets']['number'][$key]; ?></td>
+    						<td><?php echo $val;/*$systemStats['user_most_bracelets']['uploads'][$key];*/ ?></td>
     					</tr>
     <?php
     }

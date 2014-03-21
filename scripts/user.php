@@ -540,7 +540,7 @@ class Statistics {
 		$userid = self::username2id($user);
 		$result = array();
 		//Allgemeine Daten
-		$stmt = $this->db->prepare("SELECT user, email, status, date AS registered FROM users WHERE user = :user LIMIT 1");
+		$stmt = $this->db->prepare("SELECT userid, user, email, status, date AS registered FROM users WHERE user = :user LIMIT 1");
 		$stmt->execute(array('user' => $user));
 		$result[0] = $stmt->fetch(PDO::FETCH_ASSOC);
 		//Gekaufte Armbänder
@@ -654,7 +654,7 @@ class Statistics {
 		$sql = "SELECT COUNT(*) AS number, userid FROM bracelets WHERE userid > 0 GROUP BY userid ORDER BY number DESC";//GROUP BY user ORDER BY number DESC
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
-		for ($i = 0; $i < $user_anz; $i++) {
+		for($i = 0; $i < $user_anz; $i++) {
 			if(isset($q[$i]['userid'])) {
 				$stats['user_most_bracelets']['user'][$i] = htmlentities(self::id2username($q[$i]['userid']));
 				$stats['user_most_bracelets']['userid'][$i] = $q[$i]['userid'];
@@ -663,7 +663,7 @@ class Statistics {
 		}
 		
 		//Uploads der Top-Benutzer
-		for ($i = 0; $i < $user_anz; $i++) {
+		for($i = 0; $i < $user_anz; $i++) {
 			if(isset($stats['user_most_bracelets']['user'][$i])) {
 				$sql = "SELECT COUNT(*) AS number, userid FROM pictures WHERE userid = '".$stats['user_most_bracelets']['userid'][$i]."' GROUP BY userid ORDER BY number DESC";
 				$stmt = $this->db->query($sql);
@@ -675,6 +675,7 @@ class Statistics {
 				}
 			}
 		}
+		//asort($stats['user_most_bracelets']['uploads']);
 		
 		//Armband, das Bilder in den meisten Städten hat(mit Anzahl)
 		$sql = "SELECT COUNT(*) AS number,brid FROM pictures GROUP BY brid ORDER BY number DESC";
@@ -1264,12 +1265,16 @@ class Statistics {
 			$braceName = $this->brid2name($brid);
 			//Benachrichtigungen, wie im Profil festgelegt
 				//Beim Inhaber
-			$sql = "SELECT userid, pic_own, comm_own, comm_pic FROM notifications WHERE userid = :ownerid";
+			//echo 'Ownerid:'.self::username2id($owner).'!';
+			$sql = "SELECT pic_own, comm_own, comm_pic FROM notifications WHERE userid = :ownerid";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute(array(':ownerid' => self::username2id($owner)));
 			$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
+			//print_r($userProps);
 			$users_pic_subs_informed = array();
-			$userdetails = $this->userdetails(self::id2username($userProps['userid']));
+			$userdetails = $this->userdetails($owner);
+			//echo 'retrieved from DB:'.$userProps['userid'].'----'.print_r($userProps).'!';
+			//echo "--".self::id2username($userProps['userid']).'--'.var_dump($userProps['userid']).'--';
 			$user_email = $userdetails['email'];
 			foreach($userProps as $key => $val) {
 				if($key == 'pic_own') {

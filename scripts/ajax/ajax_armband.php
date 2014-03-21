@@ -96,3 +96,4 @@ if ($braceID != NULL) {
 <?php
 	}
 }
+?>

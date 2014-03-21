@@ -572,7 +572,7 @@ $(document).ready(function(){
 					$('.sub_inputs').toggle();
 				}else {
 					bracelet_name = $('#bracelet_name').val();
-					window.location.replace("armband?sub=username&sub_user=" + username + "&name=" + bracelet_name);
+					window.location.replace("armband?sub=username&sub_user=" + json.username + "&name=" + bracelet_name);
 				}
 			}
 		});
