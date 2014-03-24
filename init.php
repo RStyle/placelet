@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', true);
 date_default_timezone_set("Europe/Berlin");
 
 // Hier werden Cookies überprüft gesetzt usw.
@@ -24,8 +26,6 @@ if(!isset($_SESSION['server_SID'])) {
 //
 $ziffern = 6;
 if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) $ziffern = 7;
-error_reporting(E_ALL|E_STRICT);
-ini_set('display_errors', true);
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
 if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path = '';
@@ -39,17 +39,6 @@ require_once($this_path.'scripts/connection.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/user.php');
 $lang = simplexml_load_file('./text/translations.xml');
-if(isset($_GET['language'])){
-	if($_GET['language'] == 'de' || $_GET['language'] == 'en'){
-		setcookie('language', $_GET['language'], time()+3600*24*365); //für ein Jahr
-		$_COOKIE['language'] = $_GET['language'];
-	}
-}
-if(!isset($_COOKIE['language']))
-	$lng = getBrowserLanguage(array('de','en'), 'en');
-else
-	$lng = $_COOKIE['language'];
-if(isset($_GET['en'])) $lng = 'en';
 
 
 $js = '<script type="text/javascript">$(document).ready(function(){';
@@ -96,6 +85,37 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 
 $statistics = new Statistics($db, $user);
 
+if(isset($_GET['language'])){
+	if($_GET['language'] == 'de' || $_GET['language'] == 'en'){
+		if($user->login) {
+			if(isset($_COOKIE['language'])) {
+				if($_COOKIE['language'] != $_GET['language']) {
+					$sql= "UPDATE users SET lng = :lng WHERE user = :user LIMIT 1";
+					$q = $db->prepare($sql);
+					$q->execute(array(
+						':user' => $user->login,
+						':lng' => $_GET['language']
+					));
+				}
+			}else {
+				$sql= "UPDATE users SET lng = :lng WHERE user = :user LIMIT 1";
+				$q = $db->prepare($sql);
+				$q->execute(array(
+					':user' => $user->login,
+					':lng' => $_GET['language']
+				));
+			}
+			echo $user->login.$_GET['language'];
+		}
+		setcookie('language', $_GET['language'], time()+3600*24*365); //für ein Jahr
+		$_COOKIE['language'] = $_GET['language'];
+	}
+}
+if(!isset($_COOKIE['language']))
+	$lng = getBrowserLanguage(array('de','en'), 'en');
+else
+	$lng = $_COOKIE['language'];
+if(isset($_GET['en'])) $lng = 'en';
 //--//
 
 //Maximale Größe für hochgeladene Bilder

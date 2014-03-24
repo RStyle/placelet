@@ -115,14 +115,15 @@ class User
 			if(strlen($reg['reg_password']) < 6) return 7;//'Passwort zu kurz. Min. 6';
 			if(strlen($reg['reg_password']) > 30) return 8;//'Passwort zu lang. Max. 30';
 			if(check_email_address($reg['reg_email']) === false) return 9;//'Das ist keine gültige E-Mail Adresse';
-			$sql = "INSERT INTO users (user, email, password, status, date) VALUES (:user, :email, :password, :status, :date)";
+			$sql = "INSERT INTO users (user, email, password, status, date, lng) VALUES (:user, :email, :password, :status, :date, :lng)";
 			$q = $db->prepare($sql);
 			$q->execute(array(
 				':user' => trim($reg['reg_login']),
 				':email' => trim($reg['reg_email']),
 				':password' => PassHash::hash($reg['reg_password']),
 				':status' => 0,
-				':date' => time()
+				':date' => time(),
+				':lng' => $reg['lng']
 			));
 			$sql = "INSERT INTO user_status (userid, code) VALUES (:userid, :code)";
 			$q = $db->prepare($sql);
