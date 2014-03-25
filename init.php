@@ -105,7 +105,6 @@ if(isset($_GET['language'])){
 					':lng' => $_GET['language']
 				));
 			}
-			echo $user->login.$_GET['language'];
 		}
 		setcookie('language', $_GET['language'], time()+3600*24*365); //für ein Jahr
 		$_COOKIE['language'] = $_GET['language'];

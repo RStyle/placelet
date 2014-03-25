@@ -150,7 +150,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 						<tr>
 							<td><input type="hidden" name="new_register" value="true"><input type="submit" value="<?php echo $lang->form->register->$lng; ?>"></td>
-							<td>&nbsp;</td>
+							<td><input type="hidden" name="lng" id="longitude" value="<?php echo $lng;?>"></td>
 						</tr>
 					</table>
 				</form>
@@ -205,7 +205,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 						<tr>
 							<td><input type="hidden" name="new_register" value="true"><input type="submit" value="<?php echo $lang->form->register->$lng; ?>"></td>
-							<td>&nbsp;</td>
+							<td><input type="hidden" name="lng" id="longitude" value="<?php echo $lng;?>"></td>
 						</tr>
 					</table>
 				</form>
