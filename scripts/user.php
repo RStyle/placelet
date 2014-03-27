@@ -687,9 +687,7 @@ class Statistics {
 		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
 		
 		//Ermittelt die IDs der neuesten $brid_anz Bilder
-		$sql = "SELECT brid
-				FROM pictures
-				ORDER BY id DESC";
+		$sql = "SELECT brid, picid FROM pictures ORDER BY id DESC";
 		$stmt = $this->db->query($sql);
 		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		if(!$recent_brid_pics) {
@@ -700,14 +698,14 @@ class Statistics {
 			foreach ($q1 as $i){
 				if(!isset($q2[$i['brid']])){
 					$q2[$i['brid']] = true;
-					$q[] = array( 'brid' => $i['brid']);
+					$q[] = array('brid' => $i['brid'], 'picid' => $i['picid']);
 				}
 			}
 		}
 		for($i = 0; $i < $brid_anz; $i++) {
 			$stats['recent_brids'][$i+1] = $q[$i]['brid'];
+			$stats['recent_picids'][$i+1] = $q[$i]['picid'];
 		}
-		
 		return $stats;
 	}
 	//Name von Armband ermitteln
@@ -746,7 +744,7 @@ class Statistics {
 		return $stats;
 	}
 	//Bilderdetails
-	public function picture_details ($brid) {
+	public function picture_details($brid) {
 		$details = array();
 		$sql = "SELECT userid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid";
 		$stmt = $this->db->prepare($sql);
@@ -777,7 +775,6 @@ class Statistics {
 			$details[$val['picid']] [$val['commid']] ['comment'] = nl2br($val['comment'], 0);
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
 		}
-		$details = array_reverse($details);
 		return $details;
 		
 	}

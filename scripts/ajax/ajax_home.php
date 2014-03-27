@@ -42,12 +42,12 @@ if(isset($stats[$i + 1][0]['picid'])) {
 ?>
 						<div id="central_newest_pic">
                             <div class="more_imgs">
-                                    <?php if(isset($stats[$i-1][0]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i-1].'-'.$stats[$i-1][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('-', <?php echo $startVal;?>);"><?php }else { ?><img class="fake_img pseudo_link" src="#" alt="-"><?php } ?><br>
-                                    <?php if(isset($stats[$i][0]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="-"><?php } ?><br>
-                                    <?php if(isset($stats[$i+1][0]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i+1].'-'.$stats[$i+1][0]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>);"><?php } ?>
+                                    <?php if(isset($stats[$i-1][$systemStats['recent_picids'][$i-1]-1]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i-1].'-'.$stats[$i-1][$systemStats['recent_picids'][$i-1]-1]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('-', <?php echo $startVal;?>);"><?php }else { ?><img class="fake_img pseudo_link" src="#" alt="-"><?php } ?><br>
+                                    <?php if(isset($stats[$i][$systemStats['recent_picids'][$i]-1]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'.jpg'; ?>" alt="-"><?php } ?><br>
+                                    <?php if(isset($stats[$i+1][$systemStats['recent_picids'][$i]-1]['picid'])){?><img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i+1].'-'.$stats[$i+1][$systemStats['recent_picids'][$i+1]-1]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>);"><?php } ?>
     					    </div>
-                            <a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.'.$stats[$i][0]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumb_link">
-    							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][0]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+                            <a href="pictures/bracelets/pic<?php echo '-'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'.'.$stats[$i][$systemStats['recent_picids'][$i]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['contry']; ?>" class="connect_thumb_link">
+    							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
     						</a>
     						
 							<table class="connect_pic-info">
@@ -57,26 +57,26 @@ if(isset($stats[$i + 1][0]['picid'])) {
 								</tr>
 								<tr>
 									<th>Datum</th>
-									<td><?php echo date('d.m.Y H:i', $stats[$i][0]['date']); ?> Uhr</td>
+									<td><?php echo date('d.m.Y H:i', $stats[$i][$systemStats['recent_picids'][$i]-1]['date']); ?> Uhr</td>
 								</tr>
 								<tr>
 									<th>Ort</th>
-									<td><?php echo $stats[$i][0]['city'].', '.$stats[$i][0]['country']; ?></td>
+									<td><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?></td>
 								</tr>
 	<?php
-				if($stats[$i][0]['user'] != NULL) {
+				if($stats[$i][$systemStats['recent_picids'][$i]-1]['user'] != NULL) {
 	?>
 								<tr>
 									<th>Uploader</th>
-									<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][0]['user'])); ?>"><?php echo $stats[$i][0]['user']; ?></a></td>
+									<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
 								</tr>
 	<?php
 				 }
 	?>
 							</table> 
 							<!--<p class="pic-desc">
-								<span class="desc-header"><?php echo $stats[$i][0]['title']; ?></span><br>
-								<?php echo $stats[$i][0]['description']; ?>
+								<span class="desc-header"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['title']; ?></span><br>
+								<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['description']; ?>
 							</p>              -->
 						</div>
 						

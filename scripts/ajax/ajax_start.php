@@ -59,43 +59,40 @@ if($_GET['q'] == 3) {
 <!--~~~HR~~~~--><hr style="clear: both;">
 <?php	
 }
-				if(!isset($displayed_picnr)) $displayed_picnr = $_GET['displayed_picnr'];
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
-				if($recent_brid_pics) $displayed_picnr = 0;
-					else  if($bracelets_displayed[$i] != @$bracelets_displayed[$i-1]) $displayed_picnr = 0;
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<div style="width: 70%; float: left;">
-						<a href="community?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
-						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.'.$stats[$i][$displayed_picnr]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; //onclick="return confirmDelete('dasBild');" ?>" class="thumb_link">
+						<a href="community?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'.'.$stats[$i][$systemStats['recent_picids'][$i]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; //onclick="return confirmDelete('dasBild');" ?>" class="thumb_link">
 							<img src="img/triangle.png" alt="" class="thumb_triangle">
-							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$displayed_picnr]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?>" class="thumbnail">
+							<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[$i].'-'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="thumbnail">
 						</a>
 						<table class="pic-info">
 							<tr>
 								<th><?php echo $lang->pictures->datum->$lng; ?></th>
-								<td><?php echo date('d.m.Y H:i', $stats[$i][$displayed_picnr]['date']). ' '. $lang->misc->uhr->$lng; ?></td>
+								<td><?php echo date('d.m.Y H:i', $stats[$i][$systemStats['recent_picids'][$i]-1]['date']). ' '. $lang->misc->uhr->$lng; ?></td>
 							</tr>
 							<tr>
 								<th><?php echo $lang->pictures->ort->$lng; ?></th>
-								<td><?php echo $stats[$i][$displayed_picnr]['city'].', '.$stats[$i][$displayed_picnr]['country']; ?></td>
+								<td><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?></td>
 							</tr>
 <?php
-				if($stats[$i][$displayed_picnr]['user'] != NULL) {
+				if($stats[$i][$systemStats['recent_picids'][$i]-1]['user'] != NULL) {
 ?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$displayed_picnr]['user'])); ?>"><?php echo $stats[$i][$displayed_picnr]['user']; ?></a></td>
+								<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
 							</tr>
 <?php
                  }
 ?>
 						</table> 
 						<p class="pic-desc">
-							<span class="desc-header"><?php echo $stats[$i][$displayed_picnr]['title']; ?></span><br>
-							<?php echo $stats[$i][$displayed_picnr]['description']; ?>      
+							<span class="desc-header"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['title']; ?></span><br>
+							<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$displayed_picnr])-11; ?>" onClick="show_comments(this);"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$displayed_picnr])-11; ?>)</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>" onClick="show_comments(this);"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>)</span>
 						</p>
 					</div>
 					<aside class="bracelet-props side_container">
@@ -122,26 +119,26 @@ if($_GET['q'] == 3) {
 							</tr>
 							<tr>
 								<td><?php echo $lang->community->neuestebilder->station->$lng; ?></td>
-								<td><?php echo $stats[$i][$displayed_picnr]['picid']; ?></td>
+								<td><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?></td>
 							</tr>
 						</table>
 					</aside>
 				</div>
-				<div class="comments" id="comment<?php echo $i;?>" data-picnr="<?php echo $displayed_picnr+1; ?>">
+				<div class="comments" id="comment<?php echo $i;?>" data-picnr="<?php echo $systemStats['recent_picids'][$i]-1+1; ?>">
 <?php
-				for ($j = 1; $j <= count($stats[$i][$displayed_picnr])-11; $j++) {
+				for ($j = 1; $j <= count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
-					$x_days_ago = days_since($stats[$i][$displayed_picnr][$j]['date']);
+					$x_days_ago = days_since($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']);
 					//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
-					if(isset($stats[$i][$displayed_picnr][$j + 1]['commid'])) {
+					if(isset($stats[$i][$systemStats['recent_picids'][$i]-1][$j + 1]['commid'])) {
 						$last_comment = 'middle';
 					}else {
 						$last_comment = 'last';
 					}
 ?>
-					<a href="community?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$displayed_picnr][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$displayed_picnr][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-					<strong><?php if($stats[$i][$displayed_picnr][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$displayed_picnr][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$displayed_picnr][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
-                    <p><?php echo $stats[$i][$displayed_picnr][$j]['comment']; ?></p> 
+					<a href="community?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
+					<strong><?php if($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
+                    <p><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  
 <?php 
 				}
@@ -151,7 +148,7 @@ if($_GET['q'] == 3) {
 						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
 						<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
-						<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][$displayed_picnr]['picid']; ?>">
+						<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>">
 						<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
 					</form>
@@ -159,6 +156,5 @@ if($_GET['q'] == 3) {
                  
 <?php
 				}
-				$displayed_picnr++;
 			}
 ?>
