@@ -1,11 +1,28 @@
 			<article id="shop" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Shop</h1></div>
+				
+				
+				<?php $js.='var options = { $AutoPlay: true };
+        var jssor_slider1 = new $JssorSlider$("slider1_container", options);'; ?>
+				
+				
+				
 				<div style="float: left; width: 50%;">
-					<a href="pictures/product_pic2.jpg" data-lightbox="pictures" title="<?php echo $lang->shop->unser_armband->$lng; ?>">
+					<div id="slider1_container" style="position: relative; width: 400px; height: 600px;">
+						<div u="slides" class="product_pic" style="cursor: move; overflow: hidden; width: 400px; height: 600px;">
+							<div><img u="image" src="./pictures/shop/thumb-1.jpg" /></div>
+							<!--<div><img u="image" src="./pictures/shop/thumb-2.jpg" /></div>-->
+							<div><img u="image" src="./pictures/shop/thumb-3.jpg" /></div>
+							<!--<div><img u="image" src="./pictures/shop/thumb-4.jpg" /></div>-->
+							<!--<div><img u="image" src="./pictures/shop/thumb-5.jpg" /></div>-->
+							<div><img u="image" src="./pictures/shop/thumb-6.jpg" /></div>
+						</div>
+					</div><br>
+					<!--<a href="pictures/product_pic2.jpg" data-lightbox="pictures" title="<?php echo $lang->shop->unser_armband->$lng; ?>">
 						<img class="product_pic" src="pictures/product_pic2_medium.jpg" alt="<?php echo $lang->shop->unser_armband->$lng; ?>">
-					</a>
-					<a href="pictures/product_pic1.jpg" data-lightbox="pictures" title="<?php echo $lang->shop->unser_armband->$lng; ?>">
-						<img class="product_pic" src="pictures/thumb-product_pic1.jpg" alt="<?php echo $lang->shop->unser_armband->$lng; ?>">
+					</a>-->
+					<a href="./pictures/shop/2.jpg" data-lightbox="pictures" title="<?php echo $lang->shop->unser_armband->$lng; ?>">
+						<img class="product_pic" style="width: 225px; height: 150px" src="./pictures/shop/thumb-2.jpg" alt="<?php echo $lang->shop->unser_armband->$lng; ?>">
 					</a>
 					
 					<a href="pictures/product_pic3.jpg" data-lightbox="pictures" title="<?php echo $lang->shop->unser_armband->$lng; ?>">

@@ -115,6 +115,7 @@ require_once($this_path.'pages/'.$page.'.php');
 ?>
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<?php if($page == 'shop') { ?><script src="./js/jssor.slider.mini.js"></script><?php } ?>
 		<script type="text/javascript" src="http://placelet.de/js/lightbox-2.6.min.js"></script>
 		<script type="text/javascript">
 			var lang = new Array();
