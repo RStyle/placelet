@@ -31,13 +31,17 @@ if ($braceID != NULL) {
 <!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
 <?php
 		}
+		
+		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+		$stmt->execute(array('picid' => $stats[$i]['picid'], 'brid' => $braceID));
+		$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 				<div style="width: 100%; overflow: auto;">
 					<a href="armband?picid=<?php echo $stats[$i]['picid']; ?>&last_pic=middle&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="return confirmDelete('dasBild');">X</a>
 					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-					<a href="pictures/bracelets/pic<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
+					<a href="pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
 						<img src="img/triangle.png" alt="" class="thumb_triangle">
-						<img src="pictures/bracelets/thumb<?php echo '-'.$braceID.'-'.$stats[$i]['picid'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
+						<img src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
 					</a>
 					<table class="pic-info">
 						<tr>

@@ -13,17 +13,23 @@ if($systemStats['total_posted'] > 1) {
 ?>
                             <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>	
 <?php
-}
+}		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+		$stmt->execute(array('picid' => $stats[1][$systemStats['recent_picids'][1]-1]['picid'], 'brid' => $bracelets_displayed[1]));
+		$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+		$stmt->execute(array('picid' => $stats[2][$systemStats['recent_picids'][2]-1]['picid'], 'brid' => $bracelets_displayed[2]));
+		$rowid2 = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
                             <div id="central_newest_pic">
                             	<div class="more_imgs">
                             	    <img class="fake_img pseudo_link" src="#" alt="-"><br>
-                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][$systemStats['recent_picids'][1]-1]['picid'].'.jpg'; ?>" alt="-"><br>
-                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[2].'-'.$stats[2][$systemStats['recent_picids'][2]-1]['picid'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">
+                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="-"><br>
+                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">
         					   </div>
                                                            			
-        						<a href="pictures/bracelets/pic<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][$systemStats['recent_picids'][1]-1]['picid'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
-        						<img src="pictures/bracelets/thumb<?php echo '-'.$bracelets_displayed[1].'-'.$stats[1][$systemStats['recent_picids'][1]-1]['picid'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+        						<a href="pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
+        						<img src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
         						</a>
         							<table class="connect_pic-info">
         								<tr>
