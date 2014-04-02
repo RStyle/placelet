@@ -101,10 +101,11 @@ class User
 				return 3;//'Dieser Benutzer existiert schon.';
 			}
 			//Überprüfen, ob die E-Mail Adresse schon registriert wurde.
-			$stmt = $db->prepare('SELECT email FROM users');
+			$stmt = $db->prepare('SELECT userid, email FROM users');
 			$stmt->execute(array('email' => $reg['reg_email']));
 			$useremails = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			$userid =  count($useremails) + 1;
+			$lastuser = end($useremails);
+			$userid = $lastuser['userid'] + 1;
 			$duplicate_email = false;
 			foreach($useremails as $val) {
 				if($val['email'] == $reg['reg_email']) $duplicate_email = true;
