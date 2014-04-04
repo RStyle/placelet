@@ -84,10 +84,14 @@ if(!isset($_GET['user']) && !$user->login) {
 <?php
 				foreach($notifications['pic_owns'] as $pic) {
 					$pic['name'] = $statistics->brid2name($pic['brid']);
+					
+					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+					$stmt->execute(array('picid' => $pic['picid'], 'brid' => $pic['brid']));
+					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<div class="previews">
 								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
-									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$pic['brid'].'-'.$pic['picid'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 									<p class="preview_text">
 										<?php echo htmlentities($pic['name'])."\n"; ?>
 										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
@@ -107,10 +111,14 @@ if(!isset($_GET['user']) && !$user->login) {
 <?php
 				foreach($notifications['pic_subs'] as $pic) {
 					$pic['name'] = $statistics->brid2name($pic['brid']);
+					
+					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+					$stmt->execute(array('picid' => $pic['picid'], 'brid' => $pic['brid']));
+					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<div class="previews">
 								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
-									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$pic['brid'].'-'.$pic['picid'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 									<p class="preview_text">
 										<?php echo htmlentities($pic['name'])."\n"; ?>
 										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
@@ -182,14 +190,22 @@ if(!isset($_GET['user']) && !$user->login) {
 <?php
 				if($val['picid'] != 0) {
 					if($user->login == $username) {
+					
+						$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+						$stmt->execute(array('picid' => $val['picid'], 'brid' => $key));
+						$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<a href="armband?name=<?php echo urlencode($key_name); ?>" title="<?php echo urlencode($key); ?>">
-									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php	
 					}else {
+					
+						$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+						$stmt->execute(array('picid' => $val['picid'], 'brid' => $key));
+						$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<a href="armband?name=<?php echo urlencode($key_name); ?>">
-									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 					}
 				}elseif($user->login == $username) {
@@ -231,8 +247,12 @@ if(!isset($_GET['user']) && !$user->login) {
 							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
 <?php
 				if($val['picid'] != 0) {
+				
+					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+					$stmt->execute(array('picid' => $val['picid'], 'brid' => $key));
+					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 				}else {
 ?>
@@ -266,15 +286,20 @@ if(!isset($_GET['user']) && !$user->login) {
 						<div class="previews">
 <?php
 				if($val['picid'] != 0) {
+					
+					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+					$stmt->execute(array('picid' => $val['picid'], 'brid' => $val['brid']));
+					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
+					
 					if($user->login == $username) {
 ?>
 							<a href="armband?name=<?php echo urlencode($val['name']); ?>" title="<?php echo $val['brid']; ?>">
-								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 					}else {
 ?>
 							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
-								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 					}
 				}else { 

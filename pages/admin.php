@@ -63,6 +63,10 @@ if($user->admin && $checklogin) {
 <?php
 				for($i = 0; $i < count($admin_stats['spam_pics']); $i++) {
 					$admin_stats['spam_pics'][$i]['name'] = $statistics->brid2name($admin_stats['spam_pics'][$i]['brid']);
+					
+					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+					$stmt->execute(array('picid' => $admin_stats['spam_pics'][$i]['picid'], 'brid' => $admin_stats['spam_pics'][$i]['brid']));
+					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 					<tr>
 						<td><?php echo htmlentities(Statistics::id2username($admin_stats['spam_pics'][$i]['userid'])); ?></td>
@@ -70,7 +74,7 @@ if($user->admin && $checklogin) {
 						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['title']); ?></td>
 						<td>
 							<a href="pictures/bracelets/pic<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$stats[$i]['picid'].'.'.$admin_stats['spam_pics'][$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumb_link">
-								<img src="pictures/bracelets/thumb<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$admin_stats['spam_pics'][$i]['picid'].'.jpg'; ?>" alt="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumbnail">
+								<img src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumbnail">
 							</a>
 						</td>
 						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['spam']); ?>x</td>
