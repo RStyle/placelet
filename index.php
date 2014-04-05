@@ -25,11 +25,17 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 		<link rel="icon" href="/img/favicon-16.png" type="image/png" sizes="16x16">
 		<link rel="icon" href="/img/favicon-32.png" type="image/png" sizes="32x32">
 		<!--[if IE]><link rel="shortcut icon" href="img/favicon.ico"><![endif]-->
-		<?php /*
-		$startPicid ist die picid von dem Bild
-		$braceName ist der Name vom Bracelet
-		*/?>
-		<?php if($page == 'armband' && @!$defaultPicid) echo '<link rel="image_src" href="/pictures/bracelet/pic-.png">'; ?>
+<?php
+if($page == 'armband' && @!$defaultPicid && isset($startPicid) && isset($braceName)) {
+	$stmt = $db->prepare('SELECT brid FROM bracelets WHERE name=:name');
+	$stmt->execute(array('name' => $braceName));
+	$rowbrid = $stmt->fetch(PDO::FETCH_ASSOC);
+	$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+	$stmt->execute(array('picid' => $startPicid, 'brid' => $rowbrid['brid']));
+	$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
+	echo '		<link rel="image_src" href="http://placelet.de/pictures/bracelets/thumb-'.$rowid['id'].'.jpg">';
+}
+?>
 		<meta name="msapplication-TileColor" content="#FFF">
 		<meta name="msapplication-TileImage" content="/img/tileicon.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1"><!--Verhindert Font-Boosting-->

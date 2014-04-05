@@ -201,7 +201,12 @@
 			js = d.createElement(s); js.id = id;
 			js.src = '//connect.facebook.net/de_DE/all.js#xfbml=1';
 			fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));";
+			}(document, 'script', 'facebook-jssdk'));
+			$(document).ajaxComplete(function(){
+				try{
+					FB.XFBML.parse(); 
+				}catch(ex){}
+			});";
 ?>
 		</article>
 		<div id="fb-root"></div>
