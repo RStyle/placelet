@@ -1,6 +1,6 @@
 ﻿			<article id="faq" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $pagename[$page]; ?></h1></div>
-				<p>Hier findest du einige häufig gestellte Fragen. Wenn dir das nicht weiterhilft, <a href="kontakt">kontaktiere uns</a>.</p>
+				<p>Hier findest du einige häufig gestellte Fragen. Wenn dir das nicht weiterhilft, <a href="/kontakt">kontaktiere uns</a>.</p>
 				<p class="questions pseudo_link" id="question_1"><span class="question_arrow1 arrow_right"></span>&nbsp;Wie kann ich unangemessene Bilder oder Kommentare löschen beziehungsweise melden?</p>
 				<hr style="margin-top: 0; height: 3px; background-color: #ddd; border: none;">
 				<div class="answers" id="answer_1">

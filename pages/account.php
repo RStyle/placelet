@@ -88,10 +88,10 @@ if($user->login) {
 			<p>
 				<?php echo $lang->account->category->$lng; ?>:<br>
 				<ul class="list_style_none" style="padding: 0;">
-					<li><a href="account?details"><?php echo $lang->account->details->$lng; ?></a></li>
-                	<li><a href="account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
-                	<li><a href="account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
-                	<!--<li><a href="account?delete"><?php echo $lang->account->delete->$lng; ?></a></li>-->
+					<li><a href="/account?details"><?php echo $lang->account->details->$lng; ?></a></li>
+                	<li><a href="/account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
+                	<li><a href="/account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
+                	<!--<li><a href="/account?delete"><?php echo $lang->account->delete->$lng; ?></a></li>-->
 				</ul>
 			</p>
 <?php

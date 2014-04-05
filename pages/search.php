@@ -12,14 +12,14 @@ if(isset($_POST['squery'])) {
 		switch($squery_result['user']) {
 			case 0:
 ?>
-					<li><?php echo $lang->search->benutzergefunden->$lng; ?> <a href="profil?user=<?php echo $squery_href;?>"><strong><?php echo $squery;?></strong></a></li>
+					<li><?php echo $lang->search->benutzergefunden->$lng; ?> <a href="/profil?user=<?php echo $squery_href;?>"><strong><?php echo $squery;?></strong></a></li>
 <?php
 				break;
 		}
 		if($squery_result['users'] !== false){
 			echo '<li>'.$lang->search->ähnlichebenutzer->$lng.'<br><ul>';
 			foreach($squery_result['users'] as $user_temp){ //User_temporär, um mögliche Namenskonflikte zu umgehen
-				echo '<li><a href="profil?user='.urlencode($user_temp['user']).'"><strong>'.$user_temp['user'].'</strong></a></li>';
+				echo '<li><a href="/profil?user='.urlencode($user_temp['user']).'"><strong>'.$user_temp['user'].'</strong></a></li>';
 			}
 			echo '</ul></li>';
 		}

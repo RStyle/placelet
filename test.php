@@ -11,4 +11,4 @@ if(!isset($_SESSION['testserver'])){
 	echo 'Du bist jetzt nicht mehr unterwegs im Testmodus!';
 }
 ?>
-<br><a href="home">Zur&uuml;ck zu Placelet</a>
+<br><a href="/home">Zur&uuml;ck zu Placelet</a>

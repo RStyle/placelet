@@ -1,20 +1,20 @@
 			<article id="about-us" class="mainarticles bottom_border_blue" style="width: 100%">
 				<div class="blue_line mainarticleheaders line_header"><h1><?php echo $lang->about[$lng.'-title']; ?></h1></div>
-				<a href="pictures/staff.jpg" data-lightbox="wir"><img src="pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet" id="wir" style="width: 100%; margin-bottom: 20px;"></a><br><br>
+				<a href="/pictures/staff.jpg" data-lightbox="wir"><img src="/pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet" id="wir" style="width: 100%; margin-bottom: 20px;"></a><br><br>
 				
 				<div style="float:left; font-size:3em; margin-top:12.5px">
 					Unterstützt von:
 				</div>
 				<div style="float: right; width: 800px">
-					<img src="img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
-					<img src="img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
-					<img src="img/aureliaLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
+					<img src="/img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
+					<img src="/img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
+					<img src="/img/aureliaLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
 				</div>
 				<br>
 				<div style="float: right; width: 800px; text-align: right; font-size:0.75em">
 					<a href="http://odd.de/">http://odd.de/</a>
-					<a href="http://laserkreativ.de/" style="target: tab"><span style="margin-left:140px">http://laserkreativ.de/</span></a>
-					<a href="http://www.goldschmiede-aurelia.de/" style="target: tab"><span style="margin-left:80px;margin-right:90px">http://www.goldschmiede-aurelia.de/</span></a>
+					<a href="http://laserkreativ.de/"><span style="margin-left:140px">http://laserkreativ.de/</span></a>
+					<a href="http://www.goldschmiede-aurelia.de/"><span style="margin-left:80px;margin-right:90px">http://www.goldschmiede-aurelia.de/</span></a>
 				</div>
 				
 				<!--<div id="partner_box">

@@ -11,7 +11,7 @@
 <?php
 if($systemStats['total_posted'] > 1) {
 ?>
-                            <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="img/next.png" alt="next"></div>	
+                            <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="/img/next.png" alt="next"></div>	
 <?php
 }		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
 		$stmt->execute(array('picid' => $stats[1][$systemStats['recent_picids'][1]-1]['picid'], 'brid' => $bracelets_displayed[1]));
@@ -24,17 +24,17 @@ if($systemStats['total_posted'] > 1) {
                             <div id="central_newest_pic">
                             	<div class="more_imgs">
                             	    <img class="fake_img pseudo_link" src="#" alt="-"><br>
-                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="-"><br>
-                                    <img class="fake_img pseudo_link" src="pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">
+                                    <img class="fake_img pseudo_link" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="-"><br>
+                                    <img class="fake_img pseudo_link" src="/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">
         					   </div>
                                                            			
-        						<a href="pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
-        						<img src="pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+        						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
+        						<img src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
         						</a>
         							<table class="connect_pic-info">
         								<tr>
         									<th><?php echo $lang->pictures->armband->$lng; ?></th>
-        									<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
+        									<td><strong><?php echo '<a href="/armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
         								</tr>
         								<tr>
         									<th><?php echo $lang->pictures->datum->$lng; ?></th>
@@ -49,14 +49,14 @@ if($systemStats['total_posted'] > 1) {
                                     	?>
         								<tr>
         									<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-        									<td><a href="profil?user=<?php echo urlencode(html_entity_decode($stats[1][$systemStats['recent_picids'][1]-1]['user'])); ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?></a></td>
+        									<td><a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[1][$systemStats['recent_picids'][1]-1]['user'])); ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?></a></td>
         								</tr>
                                     	<?php
                                     				 }
                                     	?>
         							</table>
     					    </div>	
-    						<!--<img src="img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">    -->
+    						<!--<img src="/img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">    -->
     					</div>
                 </div>
                 <div class="connect_box" id="submit_box">
@@ -87,7 +87,7 @@ if($systemStats['total_posted'] > 1) {
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
 				<div class="mainarticleheaders line_header blue_line"><h1><?php echo $lang->home->artikel1[$lng."-title"]; ?></h1></div>
-				 <?php if(!isset($_GET['rund'])) echo '<a href="pictures/armband3.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband3.jpg" alt="Armband" style="width: 100%;"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband3.jpg)"></div>';?>				
+				 <?php if(!isset($_GET['rund'])) echo '<a href="/pictures/armband3.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband3.jpg" alt="Armband" style="width: 100%;"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband3.jpg)"></div>';?>				
 				<p>
                     <?php echo $lang->home->artikel1->paragraph[0]->$lng; ?>
 				</p>
@@ -99,7 +99,7 @@ if($systemStats['total_posted'] > 1) {
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class=" mainarticleheaders line_header green_line"><h1><?php echo $lang->home->artikel2[$lng."-title"]; ?></h1></div>
-				<div class="responsive_16-9" style="margin-bottom: 1em;"><iframe width="560" height="315" src="//www.youtube.com/embed/xtnbzTK2G8I" style="border: none"></iframe></div>
+				<div class="responsive_16-9" style="margin-bottom: 1em;"><iframe width="560" height="315" src="http://www.youtube.com/embed/xtnbzTK2G8I" style="border: none"></iframe></div>
 <?php
 for($i = 0; $i < 6; $i++){
 ?>
@@ -115,7 +115,7 @@ for($i = 0; $i < 6; $i++){
 <!--SIDEBAR-->
 			<aside class="side_container">
 				<!--<h1>JUNIOR</h1>-->
-				<img src="img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
+				<img src="/img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
 				<p><?php echo $lang->home->JUNIOR->$lng; ?></p>
 			</aside>
 			<aside class="side_container" style="margin-top: 20px;">

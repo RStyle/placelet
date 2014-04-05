@@ -279,13 +279,13 @@ function check_width(){
 		$("#mainnavlist").css({ 'width' : '70%' });
 	}*/
 	if(window.innerWidth < 1480 && window.innerWidth > 1230){
-		$("#logo").attr("src", 'img/logo.svg');
+		$("#logo").attr("src", '/img/logo.svg');
 		$("#logo").attr("width", '93');
 	}else if(window.innerWidth > 1500) {
 		$("#section").css({ 'width' : 'calc(100% - 500px)' });
 		$("#mainnavlist").css({ 'width' : 'calc(100% - 500px)' });
 	}else {
-		$("#logo").attr("src", 'img/logo_extended.svg');
+		$("#logo").attr("src", '/img/logo_extended.svg');
 		$("#logo").attr("width", '206');
 		$("#section").css({ 'width' : '70%' });
 		$("#mainnavlist").css({ 'width' : '70%' });
@@ -515,8 +515,8 @@ function reload_start(plus) {
 		
 	console.log("WHASSUP, BRO?");
 		
-	console.log("./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr);
-	var nachlad = $.ajax( "./scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
+	console.log("/scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr);
+	var nachlad = $.ajax( "/scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
 		.done(function(data) {
 			if(data != ""){
 					htmlcode = $("#recent_pics").html();
@@ -538,7 +538,7 @@ var reload_q2 = 3;
 
 function reload_armband(braceName, plus) {
 	reload_q2 += plus;
-	var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName + "&eng=" + lng)
+	var nachlad = $.ajax( "/scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName + "&eng=" + lng)
 		.done(function( data ) {
 		//$("#armband_reload").remove();
 		htmlcode = $("#armband").html();
@@ -551,7 +551,7 @@ function reload_armband(braceName, plus) {
 //Nächstes/Vorheriges Bild
 function change_pic(cv, sv) {
 	$("#loading").toggle();
-	$.post("./scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv, eng: lng}, function(data) {
+	$.post("/scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv, eng: lng}, function(data) {
 		$("#connectbox_1").html(data);
 		});
 	$.fail(function() {
@@ -564,7 +564,7 @@ $(document).ready(function(){
 	$('#show_sub').click(function(){
 		$.ajax({
 			type: "POST",
-			url: "../scripts/ajax/ajax_statistics.php",
+			url: "/scripts/ajax/ajax_statistics.php",
 			data: "login=true&eng=" + lng,
 			success: function(data){
 				var json = JSON.parse(data);		
@@ -592,7 +592,7 @@ function confirmDelete(type, object) {
 	var getVariables = href.search.replace('?', '');
 	$.ajax({
 		type: "POST",
-		url: "../scripts/ajax/ajax_statistics.php",
+		url: "/scripts/ajax/ajax_statistics.php",
 		data: "braceName=" + encodeURIComponent(braceName) + "&deleterequest=true&eng=" + lng,
 		success: function(data){
 			var json = JSON.parse(data);
@@ -606,7 +606,7 @@ function confirmDelete(type, object) {
 			if(agree) {
 				$.ajax({
 					type: "POST",
-					url: "../scripts/ajax/ajax_statistics.php",
+					url: "/scripts/ajax/ajax_statistics.php",
 					data: getVariables + "&name=" + braceName + "&eng=" + lng,
 					success: function(data){
 						var json = JSON.parse(data);
@@ -645,7 +645,7 @@ $(document).ready(function(){
 		password = $("#picupload_login_password").val();
 		$.ajax({
 			type: "POST",
-			url: "../scripts/ajax/ajax_login.php",
+			url: "/scripts/ajax/ajax_login.php",
 			data: "login=" + username + "&password=" + password + "&eng=" + lng,
 			success: function(html){
 				if(html == 'true') {
@@ -688,7 +688,7 @@ $(document).ready(function(){
 	$("#notific_read").click(function(){
 		$.ajax({
 			type: "POST",
-			url: "../scripts/ajax/ajax_login.php",
+			url: "/scripts/ajax/ajax_login.php",
 			data: "notific_read=true&eng=" + lng,
 			success: function(){
 				$("#notific_read").remove();

@@ -125,8 +125,8 @@
 							<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['description']; ?>      
 							<br><br>
 							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>)</span>
+							<div class="fb-like" data-href="http://placelet.de/fb.php?picid=<?php echo $rowid['id']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 						</p>
-						<div class="fb-like" data-href="http://placelet.de/fb.php?picid=<?php echo $rowid['id']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 					</div>
 					<aside class="bracelet-props side_container">
 						<table>

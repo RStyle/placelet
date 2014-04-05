@@ -115,6 +115,39 @@ if(!isset($_COOKIE['language']))
 else
 	$lng = $_COOKIE['language'];
 if(isset($_GET['en'])) $lng = 'en';
+
+if($page == 'armband') {
+	if(isset($_GET['absolute'])) {
+		$urlData = explode('/', $_GET['absolute']);
+		if(isset($urlData[1]) && isset($urlData[2])) {
+			$sql = "SELECT userid FROM users WHERE user = :user";
+			$q = $db->prepare($sql);
+			$q->execute(array(':user' => $urlData[0]));
+			$owner = $q->fetch(PDO::FETCH_ASSOC);
+			
+			$sql = "SELECT name FROM bracelets WHERE userid = :userid";
+			$q = $db->prepare($sql);
+			$q->execute(array(':userid' => $owner['userid']));
+			$result = $q->fetch(PDO::FETCH_ASSOC);
+			$braceName = $result['name'];
+			$startPicid = $urlData[2];
+			$js .= "$(document.body).animate({
+						'scrollTop':   $('#pic-".$startPicid."').offset().top
+					}, 2000);";
+			$defaultPicid = false;
+		}else $braceName = $_GET['absolute'];
+	}
+	if(isset($_GET['pic'])) {
+		$startPicid = htmlentities($_GET['pic']);
+		$js .= "$(document.body).animate({
+					'scrollTop': $('#pic-".$startPicid."').offset().top
+				}, 2000);";
+		$defaultPicid = false;
+	}elseif(!isset($startPicid)) {
+		$startPicid = 3;
+		$defaultPicid = true;
+	}
+}
 //--//
 
 //Maximale Größe für hochgeladene Bilder

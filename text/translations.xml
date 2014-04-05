@@ -424,9 +424,9 @@
 				<de>Verfolge den Weg deines Armbandes und kommentiere nach Lust und Laune die Bilder anderer User.</de>
 			</paragraph>
 			<articlefooter>
-				<en><![CDATA[<b>Any questions?</b> Take a look at the <a href="faq">FAQ</a> or <a href="kontakt">contact us</a>.
+				<en><![CDATA[<b>Any questions?</b> Take a look at the <a href="/faq">FAQ</a> or <a href="/kontakt">contact us</a>.
 ]]></en>
-				<de><![CDATA[<b>Noch Fragen?</b> Schau dir die <a href="faq">FAQ</a> an oder <a href="kontakt">kontaktiere uns</a>.
+				<de><![CDATA[<b>Noch Fragen?</b> Schau dir die <a href="/faq">FAQ</a> an oder <a href="/kontakt">kontaktiere uns</a>.
 ]]></de>
 			</articlefooter>
 		</artikel2>
@@ -733,18 +733,18 @@
 			<de>Ähnliche Armbandnamen:</de>
 		</ähnlichenamen>
 		<armbandgefunden>
-			<en><![CDATA[<li>The bracelet <a href="armband?name=:squery_href"><strong>:squery</strong></a> has been registered on <a href="profil?user=:owner_href"><strong>:owner</strong></a>.</li>]]></en>
-			<de><![CDATA[<li>Armband <a href="armband?name=:squery_href"><strong>:squery</strong></a> ist auf <a href="profil?user=:owner_href"><strong>:owner</strong></a> registriert.</li>]]></de>
+			<en><![CDATA[<li>The bracelet <a href="/armband?name=:squery_href"><strong>:squery</strong></a> has been registered on <a href="/profil?user=:owner_href"><strong>:owner</strong></a>.</li>]]></en>
+			<de><![CDATA[<li>Armband <a href="/armband?name=:squery_href"><strong>:squery</strong></a> ist auf <a href="/profil?user=:owner_href"><strong>:owner</strong></a> registriert.</li>]]></de>
 		</armbandgefunden>
 		<nochnichtregistriert>
-			<en><![CDATA[<li>The bracelet with the ID <strong>:squery</strong> has not been registered. <a href="login?registerbr=:squery_href">Register it now</a></li>]]></en>
-			<de><![CDATA[<li>Armband mit der ID <strong>:squery</strong> ist noch nicht registriert worden. <a href="login?registerbr=:squery_href">Hier registrieren</a></li>]]></de>
+			<en><![CDATA[<li>The bracelet with the ID <strong>:squery</strong> has not been registered. <a href="/login?registerbr=:squery_href">Register it now</a></li>]]></en>
+			<de><![CDATA[<li>Armband mit der ID <strong>:squery</strong> ist noch nicht registriert worden. <a href="/login?registerbr=:squery_href">Hier registrieren</a></li>]]></de>
 		</nochnichtregistriert>
 		<schonregistriert>
-			<en><![CDATA[The bracelet <a href="armband?name=:brid2name_href"><strong>:squery</strong></a> has been registered on <a href="profil?user=:owner_href"><strong>:owner</strong></a>.
-						Post <a href="login?postpic=:squery_href">a picture</a>.]]></en>
-			<de><![CDATA[Armband <a href="armband?name=:brid2name_href"><strong>:squery</strong></a> ist auf <a href="profil?user=:owner_href"><strong>:owner</strong></a> registriert.
-						Poste <a href="login?postpic=:squery_href">hier</a> ein Bild.]]></de>
+			<en><![CDATA[The bracelet <a href="/armband?name=:brid2name_href"><strong>:squery</strong></a> has been registered on <a href="/profil?user=:owner_href"><strong>:owner</strong></a>.
+						Post <a href="/login?postpic=:squery_href">a picture</a>.]]></en>
+			<de><![CDATA[Armband <a href="/armband?name=:brid2name_href"><strong>:squery</strong></a> ist auf <a href="/profil?user=:owner_href"><strong>:owner</strong></a> registriert.
+						Poste <a href="/login?postpic=:squery_href">hier</a> ein Bild.]]></de>
 		</schonregistriert>
 		<ü18>
 			<en>Bracelets and usernames cannot be longer than 18 letters.</en>
@@ -843,8 +843,8 @@
 			<de><![CDATA[<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">]]></de>
 		</paypal>
 		<notavailable>
-			<en><![CDATA[Very soon you will be able to visit our new Online-Shop right here. If you want to be notified when it launches, register <a href="login">here</a> and you will recieve an e-mail once it is online.]]></en>
-			<de><![CDATA[Hier wird in Kürze unser Online-Shop erscheinen. Wenn sie über den Verkaufsstart informiert werden wollen, registrieren sie sich <a href="login">hier</a> und sie werden eine Benachrichtigung per E-Mail erhalten.]]></de>
+			<en><![CDATA[Very soon you will be able to visit our new Online-Shop right here. If you want to be notified when it launches, register <a href="/login">here</a> and you will recieve an e-mail once it is online.]]></en>
+			<de><![CDATA[Hier wird in Kürze unser Online-Shop erscheinen. Wenn sie über den Verkaufsstart informiert werden wollen, registrieren sie sich <a href="/login">hier</a> und sie werden eine Benachrichtigung per E-Mail erhalten.]]></de>
 		</notavailable>
 	</shop>
 	<stats>
