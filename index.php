@@ -2,7 +2,7 @@
 <html lang="de">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta name="description" content="Placelet Shop and Image Service">
+		<meta name="description" content="Placelet - Reisearmband/Travelbracelet">
 		<meta name="keywords" content="
 			Placelet, Placelet Shop, Shop, Placelet kaufen, buy placelet,
 			Global Bracelet, Travel and Connect,
@@ -10,8 +10,8 @@
 		">
 		<meta name="author" content="Roman S., Daniel S., Julian Z.">
 		<meta name="google-site-verification" content="ZkpZK9hxVHOscD4izd7OXGCCjMkpytJMbuOgjO-AWjI">
-		<link href="<?php echo $this_path_html; ?>css/main.css" rel="stylesheet" type="text/css">
-		<link href="<?php echo $this_path_html; ?>css/lightbox.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet" type="text/css">
+		<link href="/css/lightbox.css" rel="stylesheet">
 		<!--Google Fonts-->
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis|Open+Sans">
 <?php
@@ -21,12 +21,24 @@ if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Cli
 <?php
 }
 ?>
-		<link rel="apple-touch-icon" href="<?php echo $this_path_html; ?>img/touchicon.png">
-		<link rel="icon" href="<?php echo $this_path_html; ?>img/favicon-16.png" type="image/png" sizes="16x16">
-		<link rel="icon" href="<?php echo $this_path_html; ?>img/favicon-32.png" type="image/png" sizes="32x32">
+		<link rel="apple-touch-icon" href="/img/touchicon.png">
+		<link rel="icon" href="/img/favicon-16.png" type="image/png" sizes="16x16">
+		<link rel="icon" href="/img/favicon-32.png" type="image/png" sizes="32x32">
 		<!--[if IE]><link rel="shortcut icon" href="img/favicon.ico"><![endif]-->
+		<?php
+		//$startPicid ist die picid von dem Bild
+		//$braceName ist der Name vom Bracelet
+		if($page == 'armband' && @!$defaultPicid && isset($startPicid) && isset($braceName)){
+		$stmt = $db->prepare('SELECT brid FROM bracelets WHERE name=:name');
+		$stmt->execute(array('name' => $braceName));
+		$rowbrid = $stmt->fetch(PDO::FETCH_ASSOC);
+		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+		$stmt->execute(array('picid' => $startPicid, 'brid' => $rowbrid['brid']));
+		$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
+		echo '<link rel="image_src" href="http://placelet.de/pictures/bracelets/thumb-'.$rowid['id'].'.jpg">';
+		}?>
 		<meta name="msapplication-TileColor" content="#FFF">
-		<meta name="msapplication-TileImage" content="img/tileicon.png">
+		<meta name="msapplication-TileImage" content="/img/tileicon.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1"><!--Verhindert Font-Boosting-->
 		<title><?php echo $title; ?></title>
 	</head>
@@ -57,53 +69,53 @@ if($page == 'home') {
 <?php
 if($user->logged) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
 ?>
-			<a href="<?php echo $friendly_self.'?logout'; ?>" id="headerlogin">Logout</a>
+			<a href="/<?php echo $friendly_self.'?logout'; ?>" id="headerlogin">Logout</a>
 <?php
 }
 else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 ?>
-			<a href="#" id="headerlogin"><img src="img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
+			<a href="#" id="headerlogin"><img src="/img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
 				<div class="arrow_up"></div>
-				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
+				<form name="login" id="form_login" action="/<?php echo $friendly_self;?>" method="post">
 					<label for="login" id="label_login"><?php echo $lang->form->benutzername->$lng; ?></label><br>
 					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required><br>
 					<label for="password" id="label_password"><?php echo $lang->form->passwort->$lng; ?></label><br>
 					<input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
 					<input type="submit" value="Login" id="submit_login">
 				</form><br>
-				<a href="account?recoverPassword=yes"><?php echo $lang->form->passwort_vergessen->$lng; ?></a>
+				<a href="/account?recoverPassword=yes"><?php echo $lang->form->passwort_vergessen->$lng; ?></a>
 			</div>
 <?php
 }
 ?>
 			<ul id="headerlist">
-				<?php if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) echo '<li><a href="test">Auf die öffentliche Seite</a></li>'; ?>
-				<li><a href="http://placelet.de<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
+				<?php if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) echo '<li><a href="/test">Auf die öffentliche Seite</a></li>'; ?>
+				<li><a href="/<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="/img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="http://placelet.net<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
+				<li><a href="/<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="/img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 				<li class="headerlist_main_divider">|</li>
-				<li><a href="impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></li>
+				<li><a href="/impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="kontakt"><?php echo $lang->misc->nav->kontakt->$lng; ?></a></li>
+				<li><a href="/kontakt"><?php echo $lang->misc->nav->kontakt->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="faq"><?php echo $lang->misc->nav->faq->$lng; ?></a></li>
+				<li><a href="/faq"><?php echo $lang->misc->nav->faq->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
 			</ul>
 		</header>
 <!--###LOGO###-->
-		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="img/logo_extended.svg" alt="Placelet" width="206"></a><!--</div>-->
+		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="/img/logo_extended.svg" alt="Placelet" width="206"></a><!--</div>-->
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
-				<li style="border-left: 1px #fff solid;" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>"><a href="home" class="navlinks"><?php echo $lang->misc->nav->home->$lng; ?></a></li>
-				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="community" class="navlinks"><?php echo $lang->misc->nav->community->$lng; ?></a></li>
-				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="about" class="navlinks"><?php echo $lang->misc->nav->about->$lng; ?></a></li>
-				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="shop" class="navlinks"><?php echo $lang->misc->nav->shop->$lng; ?></a></li>
-				<li class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="<?php echo $navregister['href']; ?>" class="navlinks" id="registerprofile"><?php echo $navregister['value']; ?></a></li>
+				<li style="border-left: 1px #fff solid;" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>"><a href="/home" class="navlinks"><?php echo $lang->misc->nav->home->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="/community" class="navlinks"><?php echo $lang->misc->nav->community->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="/about" class="navlinks"><?php echo $lang->misc->nav->about->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="/shop" class="navlinks"><?php echo $lang->misc->nav->shop->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'profil') echo ' mainnavlink_active'?>"><a href="/<?php echo $navregister['href']; ?>" class="navlinks" id="registerprofile"><?php echo $navregister['value']; ?></a></li>
 				<?php if($user->admin) { ?>
-				<li class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="admin" class="navlinks"><?php echo $lang->misc->nav->admin->$lng." (".$spam_count['comm'].", ".$spam_count['pic'].")"; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'admin') echo ' mainnavlink_active'?>"><a href="/admin" class="navlinks"><?php echo $lang->misc->nav->admin->$lng." (".$spam_count['comm'].", ".$spam_count['pic'].")"; ?></a></li>
 				<?php } ?>
 				
 			</ul>
@@ -111,11 +123,11 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 <!--###SECTION TAG###-->
 		<section id="section">
 <?php
-require_once($this_path.'pages/'.$page.'.php');
+require_once($this_path.'/pages/'.$page.'.php');
 ?>
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<?php if($page == 'shop') { ?><script src="./js/jssor.slider.mini.js"></script><?php } ?>
+		<?php if($page == 'shop') { ?><script src="/js/jssor.slider.mini.js"></script><?php } ?>
 		<script type="text/javascript" src="http://placelet.de/js/lightbox-2.6.min.js"></script>
 		<script type="text/javascript">
 			var lang = new Array();
@@ -138,11 +150,11 @@ require_once($this_path.'pages/'.$page.'.php');
 		echo 'var lng = "'.$lng.'";';
 ?>
 		</script>
-		<script type="text/javascript" src="./js/script.js"></script>
+		<script type="text/javascript" src="/js/script.js"></script>
 <?php
 if($page == 'login' && isset($postpic)) {
 ?>
-		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
+		<script type="text/javascript" src="/js/jquery.exif.js"></script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 		<script>
 		$(document).ready(function() {
@@ -155,7 +167,7 @@ if($page == 'login' && isset($postpic)) {
 <?php
 }elseif($page == 'home'){
 ?>
-		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
+		<script type="text/javascript" src="/js/jquery.exif.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 		<script>
 		<?php $eecho = '';
@@ -241,7 +253,7 @@ if($page == 'login' && isset($postpic)) {
 <?php
 }elseif($page == 'armband'){
 ?>
-		<script type="text/javascript" src="http://placelet.de/js/jquery.exif.js"></script>
+		<script type="text/javascript" src="/js/jquery.exif.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 <?php
 }
