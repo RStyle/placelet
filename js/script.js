@@ -502,7 +502,7 @@ $(window).scroll(function () {
 		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
 		if(currentPath == "/community" || currentPath == "/community.php") reload_start(3);
 		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
-		if(braceNameReload != undefined) reload_armband(braceNameReload, $('#bracelet').data('pics') + 3);
+		if(braceNameReload != undefined) reload_armband(braceNameReload, $('#bracelet').data('pics'));
 	}
 });
 

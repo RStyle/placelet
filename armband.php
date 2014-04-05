@@ -10,12 +10,12 @@ if(isset($braceName)) {
 }
 if($braceName != NULL) {
 	if(isset($_GET['pic'])) {
-		$startPicid = htmlentities($_GET['pic']) - 3;
-		//$js .= 'location.hash = "#pic-'.($startPicid + 3).'";';
+		$startPicid = htmlentities($_GET['pic']);
+		//$js .= 'location.hash = "#pic-'.$startPicid .'";';
 		$js .= "$(document.body).animate({
-					'scrollTop':   $('#pic-".($startPicid + 3)."').offset().top
+					'scrollTop':   $('#pic-".$startPicid."').offset().top
 				}, 2000);";
-	}else $startPicid = 0;
+	}else $startPicid = 3;
 	//Kommentare schreiben
 	if(isset($_POST['comment_submit'])) {
 		$write_comment = $statistics->write_comment(

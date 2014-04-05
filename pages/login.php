@@ -134,7 +134,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
-							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
 						<tr>
 							<td><label for="reg_email"><?php echo $lang->form->email->$lng; ?></label></td>
@@ -189,7 +189,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
-							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
 						<tr>
 							<td><label for="reg_email"><?php echo $lang->form->email->$lng; ?></label></td>

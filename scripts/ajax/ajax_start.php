@@ -103,7 +103,7 @@ if($_GET['q'] == 3) {
 						<table>
 							<tr>
 								<td><strong><?php echo $lang->pictures->armband->$lng; ?></strong></td>
-								<td><strong><?php echo '<a href="armband?name='.urlencode($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
+								<td><strong><?php echo '<a href="'.urlencode($statistics->brid2name($bracelets_displayed[$i])).'?pic='.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->kaeufer->$lng; ?></td>

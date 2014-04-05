@@ -1,8 +1,8 @@
-#default page set
-DirectoryIndex home.php index.php index.html
-
 #characterset specified
 AddType 'text/html; charset=UTF-8' html
+
+#default page set
+DirectoryIndex home.php index.php index.html
 
 #enable mod_rewrite
 Options +FollowSymLinks -MultiViews
