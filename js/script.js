@@ -502,7 +502,7 @@ $(window).scroll(function () {
 		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
 		if(currentPath == "/community" || currentPath == "/community.php") reload_start(3);
 		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
-		if(braceNameReload != undefined) reload_armband(braceNameReload, 3);
+		if(braceNameReload != undefined) reload_armband(braceNameReload, $('#bracelet').data('pics') + 3);
 	}
 });
 
@@ -534,15 +534,15 @@ function reload_start(plus) {
 	});
 }
 //Neuste Bilder Nachladen -armband.php
-var reload_q2 = 6;
+var reload_q2 = 3;
 
 function reload_armband(braceName, plus) {
+	reload_q2 += plus;
 	var nachlad = $.ajax( "./scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName + "&eng=" + lng)
 		.done(function( data ) {
 		//$("#armband_reload").remove();
 		htmlcode = $("#armband").html();
 		$("#armband").append(data);
-		reload_q2 += plus;
 		})
 		.fail(function() {
 			alert( "error" );

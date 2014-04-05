@@ -1,14 +1,21 @@
 <?php
 $page = 'armband';
-if (isset($_GET['name'])) {
+if(isset($_GET['name'])) {
 	$braceName = urldecode($_GET['name']);
 }
 require_once('./init.php');
 /*---------------------------------------------------------*/
-if (isset($braceName)) {
+if(isset($braceName)) {
 	$braceID = $statistics->name2brid($braceName);
 }
-if ($braceName != NULL) {
+if($braceName != NULL) {
+	if(isset($_GET['pic'])) {
+		$startPicid = htmlentities($_GET['pic']) - 3;
+		//$js .= 'location.hash = "#pic-'.($startPicid + 3).'";';
+		$js .= "$(document.body).animate({
+					'scrollTop':   $('#pic-".($startPicid + 3)."').offset().top
+				}, 2000);";
+	}else $startPicid = 0;
 	//Kommentare schreiben
 	if(isset($_POST['comment_submit'])) {
 		$write_comment = $statistics->write_comment(

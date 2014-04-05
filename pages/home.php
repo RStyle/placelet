@@ -116,9 +116,7 @@ for($i = 0; $i < 6; $i++){
 			<aside class="side_container">
 				<!--<h1>JUNIOR</h1>-->
 				<img src="img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
-				<p>Das Unternehmen Placelet entstand durch das Projekt JUNIOR der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH. JUNIOR wird 
-				auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank, Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed 
-				Ex gefördert.</p>
+				<p><?php echo $lang->home->JUNIOR->$lng; ?></p>
 			</aside>
 			<aside class="side_container" style="margin-top: 20px;">
 				<h1>facebook</h1>

@@ -82,3 +82,10 @@ foreach($useremails as $key => $val) {
 	$i++;
 }*/
 ?>
+<?php
+/*for($i = 1; $i <= 39; $i++) {
+	$sql = "INSERT INTO notifications (userid, pic_own, comm_own, comm_pic, pic_subs) VALUES (:userid, :pic_own, :comm_own, :comm_pic, :pic_subs)";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(":userid" => $i, ":pic_own" => 3, ":comm_own" => 1, ":comm_pic" => 1, ":pic_subs" => 3));
+}*/
+?>

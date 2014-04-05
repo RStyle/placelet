@@ -71,9 +71,9 @@ if ($braceName != NULL) {
 		google.maps.event.addDomListener(window, "load", initialize);';
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1 id="bracelet" data-pics="<?php echo $startPicid; ?>"><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
 				<?php if(!$user_subscribed) echo '<span class="pseudo_link float_right" id="show_sub">'.$lang->armband->abonnieren->$lng.'</span>'; ?>
-				<a href="<?php echo 'login?postpic'; if($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner']) echo '='.$braceID.'" title="'.$braceID.'"';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
+				<a href="<?php echo 'login?postpic'; if($user->login && ($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner'])) echo '='.$braceID.'" title="'.$braceID.'"';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
 <?php
 		if(!$user_subscribed) {
 ?>
@@ -85,9 +85,9 @@ if ($braceName != NULL) {
 				</form>
 <?php
 		}
-		for ($i = 0; $i < count($stats) - 4 && $i < 3; $i++) {
+		for ($i = 0; $i < count($stats) - 4 && $i < $startPicid + 3; $i++) {
 		
-			$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
+			$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');
 			$stmt->execute(array('picid' => $stats[$i]['picid'], 'brid' => $braceID));
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 				
@@ -96,7 +96,7 @@ if ($braceName != NULL) {
 ?>
 				<div style="width: 100%; overflow: auto;">
 				<a href="armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
-					<h3><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+					<h3 id="pic-<?php echo $row['id']; ?>"><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="pictures/bracelets/pic<?php echo '-'.$row['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 						<img src="img/triangle.png" alt="" class="thumb_triangle">
 						<img src="pictures/bracelets/thumb-<?php echo $row['id']; ?>.jpg" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
@@ -156,13 +156,10 @@ if ($braceName != NULL) {
 					</div>
 				</div>
 <?php
-			if ($i < count($stats) - 5 && $i < 2) {
+			if ($i < count($stats) - 5 && $i < $startPicid + 2) {
 ?>
 <!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
 <?php	
-			}
-			if(true) {
-				
 			}
 		}
 ?>
