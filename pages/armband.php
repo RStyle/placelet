@@ -205,11 +205,11 @@ if ($braceName != NULL) {
 ?>
 					<tr>
 						<td><?php echo $lang->pictures->letzterort->$lng; ?></td>
-						<td><?php echo $stats[0]['city']; ?>,</td>
+						<td><?php echo $stats['lastcity']; ?>,</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
-						<td><?php echo $stats[0]['country']; ?></td>
+						<td><?php echo $stats['lastcountry']; ?></td>
 					</tr>
 <?php
 		}

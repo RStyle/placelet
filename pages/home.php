@@ -65,7 +65,7 @@ if($systemStats['total_posted'] > 1) {
                         <form action="login" method="get">
                             <p>
         						<?php echo $lang->stats->neuesbild->ideingeben->$lng; ?><br>						
-    							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
+    							<input name="postpic" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">
     							<input type="submit" value="<?php echo $lang->stats->neuesbild->button->$lng; ?>">    						
         					</p>
     					</form>
@@ -76,7 +76,7 @@ if($systemStats['total_posted'] > 1) {
                         <form action="login" method="get">
                         <p>
     						<?php echo $lang->stats->neuesarmband->ideingeben->$lng; ?><br>
-    						<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
+    						<input name="registerbr" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">
     						<input type="submit" value="<?php echo $lang->stats->neuesarmband->button->$lng; ?>">						 
     					</p>
     					</form>

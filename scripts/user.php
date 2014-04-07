@@ -734,12 +734,14 @@ class Statistics {
 			$stats['name'] = $this->brid2name($brid);
 			$stats['owner'] = self::id2username($q[0]['userid']);
 			$stats['date'] = $q[0]['date'];
-			$sql = "SELECT picid FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
+			$sql = "SELECT picid, city, country FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute(array('brid' => $brid));
 			$q = $stmt->fetch(PDO::FETCH_ASSOC);
 			if($q != NULL) {
 				$stats['owners'] = $q['picid'];
+				$stats['lastcity'] = $q['city'];
+				$stats['lastcountry'] = $q['country'];
 			}
 		}
 		return $stats;

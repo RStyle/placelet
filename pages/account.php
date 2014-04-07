@@ -136,7 +136,7 @@ if($user->login) {
 						<table style="border: 1px solid black">
 							<tr>
 								<td><label for="acc_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-								<td><input type="text" name="login" id="acc_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+								<td><input type="text" name="login" id="acc_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
 							</tr>
 							<tr>
 								<td><label for="acc_password"><?php echo $lang->form->passwort->$lng; ?></label></td>

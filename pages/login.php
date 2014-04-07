@@ -11,7 +11,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-							<td><input type="text" name="login" id="login" size="20" maxlength="30" pattern=".{4,15}" title="Min.4 - Max.15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" required></td>
+							<td><input type="text" name="login" id="login" size="20" maxlength="30" pattern="\w{4,15}" title="Min.4 - Max.15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" required></td>
 						</tr>
 						<tr>
 							<td><label for="password"><?php echo $lang->form->passwort->$lng; ?></label></td>
@@ -27,14 +27,14 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 }elseif(isset($postpic)) {
 	$postpic_id = array(false);
 	if($postpic != "") 
-		preg_match("/^[0-9]{".$ziffern."}$/", $postpic, $postpic_id);
+		preg_match("/^\w{".$ziffern."}$/", $postpic, $postpic_id);
 ?>
 				<div id="register_pic">
 					<form name="registerpic" action="login?postpic=<?php echo $postpic; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><?php echo $lang->login->bildposten->$lng; ?></span><br><br>
 						
 						<label for="registerpic_brid" class="label_registerpic_brid"><?php echo $lang->login->armbandid->$lng; ?>:</label><br>
-						<input type="text" name="registerpic_brid" maxlength="<?php echo $ziffern; ?>" size="6" pattern="[0-9]{<?php echo $ziffern; ?>}" title="<?php echo $ziffern; ?> Ziffern" id="registerpic_brid" value="<?php if(count($postpic_id) == 1) echo $postpic_id[0]; else if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid']; ?>" required><br>
+						<input type="text" name="registerpic_brid" maxlength="<?php echo $ziffern; ?>" size="6" pattern="\w{<?php echo $ziffern; ?>}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" id="registerpic_brid" value="<?php if(count($postpic_id) == 1) echo $postpic_id[0]; else if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid']; ?>" required><br>
 						
 						<label for="registerpic_title" class="label_registerpic_title"><?php echo $lang->login->title->$lng; ?>:</label><br>
 						<input type="text" name="registerpic_title" class="registerpic_title" size="20" maxlength="30" pattern=".{4,30}" id="registerpic_title" title="Min. 4 - Max. 30" placeholder="<?php echo $lang->login->title->$lng; ?>" value="<?php if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_title'];?>" required><br>
@@ -79,7 +79,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						<p class="picupload_nologin_text"><?php echo $lang->login->notlogged_pic->$lng; ?></p>
 						<!--<form action="./" method="post">-->
 							<span id="picupload_login_errormsg"></span>
-							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
+							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
 							<input type="password" size="20" name="picupload_login_password" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
 							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="/img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
 						<!--</form>-->
@@ -106,7 +106,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 ?>
 				<form name="registerbr" action="login?registerbr" method="post">
 					<label for="reg_br"><?php echo $lang->login->armband_registrieren->$lng; ?></label>
-					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="<?php echo $ziffern; ?>" size="20" pattern="[0-9]{<?php echo $ziffern; ?>}" title="<?php echo $ziffern; ?> Ziffern" placeholder="<?php echo $lang->login->armbandid->$lng; ?>" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
+					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="<?php echo $ziffern; ?>" size="20" pattern="\w{<?php echo $ziffern; ?>}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="<?php echo $lang->login->armbandid->$lng; ?>" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
 					<input type="submit" name="registerbr_submit" value="<?php echo $lang->form->register->$lng; ?>">
 				</form>
 <?php
@@ -117,7 +117,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="log_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-							<td><input type="text" name="login" id="log_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
+							<td><input type="text" name="login" id="log_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
 						</tr>
 						<tr>
 							<td><label for="log_password"><?php echo $lang->form->passwort->$lng; ?></label></td>
@@ -176,7 +176,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 	}
 ?>
 				<form method="post" action="login">
-					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
+					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
 					<input type="email" name="revalidate_email" size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" required>
 					<input type="submit" name="revalidate_submit" value="<?php echo $lang->login->change_email->$lng; ?>">
 				</form>

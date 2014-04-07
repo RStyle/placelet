@@ -361,6 +361,10 @@
 			</deletecomment>
 		</pictures>
 	<community>
+		<sixcharacters>
+			<en>6 characters</en>
+			<de>6 Zeichen</de>
+		</sixcharacters>
 		<neuestebilder en-title="Latest Pictures" de-title="Neueste Bilder">
 			<station>
 				<en>location no.</en>

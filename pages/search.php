@@ -35,7 +35,7 @@ if(isset($_POST['squery'])) {
 		if($squery_result['bracelets_name'] !== false){
 			echo '<li>'.$lang->search->ähnlichenamen->$lng.'<br><ul>';
 			foreach($squery_result['bracelets_name'] as $user_temp){
-				echo str_replace(array(':squery_href', ':squery', ':owner', ':owner_href'), array(urlencode($user_temp['name']), $user_temp['name'], $user_temp['user'], urlencode($user_temp['user'])), $lang->search->armbandgefunden->$lng);
+				echo str_replace(array(':squery_href', ':squery', ':owner', ':owner_href'), array(urlencode($user_temp['name']), $user_temp['name'], @$user_temp['user'], urlencode(@$user_temp['user'])), $lang->search->armbandgefunden->$lng);
 			}
 			echo '</ul></li>';
 		}

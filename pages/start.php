@@ -63,7 +63,7 @@
                     <div>
 						<?php echo $lang->stats->neuesbild->ideingeben->$lng; ?>
 						<form action="login" method="get">
-							<input name="postpic" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
+							<input name="postpic" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">
 							<input type="submit" value="<?php echo $lang->stats->neuesbild->button->$lng; ?>">
 						</form>
 					</div>
@@ -74,7 +74,7 @@
                     <div>
 						<?php echo $lang->stats->neuesarmband->ideingeben->$lng; ?>
 						<form action="login" method="get">
-							<input name="registerbr" type="text" maxlength="6" size="6" pattern="[0-9]{6}" title="6 Ziffern" placeholder="ID...">
+							<input name="registerbr" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">
 							<input type="submit" value="<?php echo $lang->stats->neuesarmband->button->$lng; ?>">
 						</form>
 					</div>
@@ -144,11 +144,11 @@
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->letzterort->$lng; ?></td>
-								<td><?php echo $stats[$i][0]['city']; ?>,</td>
+								<td><?php echo $stats[$i]['lastcity']; ?>,</td>
 							</tr>
 							<tr>
 								<td></td>
-								<td><?php echo $stats[$i][0]['country']; ?></td>
+								<td><?php echo $stats[$i]['lastcountry']; ?></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->community->neuestebilder->station->$lng; ?></td>

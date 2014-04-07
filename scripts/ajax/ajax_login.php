@@ -39,5 +39,5 @@ $statistics = new Statistics($db, $user);
 if(isset($_POST['notific_read'])) {
 	$user->notifications_read();
 }
-echo "a".$user->userid.'a'.$user->login;
+//echo "a".$user->userid.'a'.$user->login;
 ?>
