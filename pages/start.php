@@ -62,7 +62,7 @@
                     <h1><?php echo $lang->stats->neuesbild[$lng.'-title']; ?></h1>
                     <div>
 						<?php echo $lang->stats->neuesbild->ideingeben->$lng; ?>
-						<form action="login" method="get">
+						<form action="/login" method="get">
 							<input name="postpic" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">
 							<input type="submit" value="<?php echo $lang->stats->neuesbild->button->$lng; ?>">
 						</form>
@@ -73,7 +73,7 @@
                     <h1><?php echo $lang->stats->neuesarmband[$lng.'-title']; ?></h1>
                     <div>
 						<?php echo $lang->stats->neuesarmband->ideingeben->$lng; ?>
-						<form action="login" method="get">
+						<form action="/login" method="get">
 							<input name="registerbr" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">
 							<input type="submit" value="<?php echo $lang->stats->neuesarmband->button->$lng; ?>">
 						</form>
@@ -183,7 +183,7 @@
 <?php 
 				}
 ?>   
-					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="community" method="post">
+					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/community" method="post">
 						<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>

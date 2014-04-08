@@ -77,7 +77,7 @@ if($user->login) {
 		//Rückmeldung zu Armband-registrieren anzeigen
 		if(isset($bracelet_registered)) {
 			if($bracelet_registered == 1) {
-					header('Location: profil');
+					header('Location: /profil');
 			}
 		}
 	}
