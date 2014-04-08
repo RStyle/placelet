@@ -45,7 +45,7 @@ $js = '<script type="text/javascript">$(document).ready(function(){';
 
 if(isset($_GET['logout'])) {
 	User::logout();
-	header('Location: home');
+	header('Location: /home');
 	exit;
 }
 
@@ -56,24 +56,24 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 		$checklogin = $user->login($_POST['password']);
 		if($checklogin === true) {
 			if(isset($_POST['login_location'])) {
-				header('Location: '.$_POST['login_location']);
+				header('Location: /'.$_POST['login_location']);
 				exit;
 			}else {
-				header('Location: start');
+				header('Location: /start');
 				exit;
 			}
 		}elseif($checklogin == 3) {
 			$js .= 'validationRegister = confirm("Bestätigung erfolgreich.\\nMöchtest du direkt ein Armband registrieren?"); if(validationRegister) window.location.replace("/login?registerbr");';
 		}elseif($checklogin == 2) {
-			header('Location: login?unvalidated='.$user->login);
+			header('Location: /login?unvalidated='.$user->login);
 			exit;
 		}elseif ($checklogin === false) {
-			header('Location: login?loginattempt=false');
+			header('Location: /login?loginattempt=false');
 			exit;
 		}
 	}else {
 		$user = new User(false, $db);
-		header('Location: login?notexisting');
+		header('Location: /login?notexisting');
 		exit;
 	}
 }elseif(isset($_SESSION['user'])) {
@@ -119,7 +119,7 @@ if(isset($_GET['en'])) $lng = 'en';
 if($page == 'armband') {
 	if(isset($_GET['absolute'])) {
 		$urlData = explode('/', $_GET['absolute']);
-		if(isset($urlData[1]) && isset($urlData[2])) {
+		if(isset($urlData[1])) {
 			$sql = "SELECT userid FROM users WHERE user = :user";
 			$q = $db->prepare($sql);
 			$q->execute(array(':user' => $urlData[0]));
@@ -129,12 +129,16 @@ if($page == 'armband') {
 			$q = $db->prepare($sql);
 			$q->execute(array(':userid' => $owner['userid']));
 			$result = $q->fetchAll(PDO::FETCH_ASSOC);
-			foreach($result as $key => $val) if($key + 1 == $urlData[1]) $braceName = $val['name'];
-			$startPicid = $urlData[2];
-			$js .= "$(document.body).animate({
-						'scrollTop':   $('#pic-".$startPicid."').offset().top
-					}, 2000);";
-			$defaultPicid = false;
+			if($result != NULL) {
+				foreach($result as $key => $val) if($key + 1 == $urlData[1]) $braceName = $val['name'];
+				if(isset($urlData[2])) {
+					$startPicid = $urlData[2];
+					$js .= "$(document.body).animate({
+								'scrollTop':   $('#pic-".$startPicid."').offset().top
+							}, 2000);";
+					$defaultPicid = false;
+				}else $defaultPicid = true;
+			}else $braceName = false;
 		}else $braceName = $_GET['absolute'];
 	}
 	if(isset($_GET['pic'])) {

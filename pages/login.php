@@ -23,6 +23,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 					</table>
 				</form><br>
+				<a href="/account?recoverPassword=yes"><?php echo $lang->form->passwort_vergessen->$lng; ?></a>
 <?php
 }elseif(isset($postpic)) {
 	$postpic_id = array(false);
@@ -30,7 +31,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 		preg_match("/^\w{".$ziffern."}$/", $postpic, $postpic_id);
 ?>
 				<div id="register_pic">
-					<form name="registerpic" action="login?postpic=<?php echo $postpic; ?>" method="post" enctype="multipart/form-data">
+					<form name="registerpic" action="/login?postpic=<?php echo $postpic; ?>" method="post" enctype="multipart/form-data">
 						<span style="font-family: Verdana, Times"><?php echo $lang->login->bildposten->$lng; ?></span><br><br>
 						
 						<label for="registerpic_brid" class="label_registerpic_brid"><?php echo $lang->login->armbandid->$lng; ?>:</label><br>
@@ -104,7 +105,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 			}
 		}
 ?>
-				<form name="registerbr" action="login?registerbr" method="post">
+				<form name="registerbr" action="/login?registerbr" method="post">
 					<label for="reg_br"><?php echo $lang->login->armband_registrieren->$lng; ?></label>
 					<input type="text" name="reg_br" id="reg_br" class="input_text" maxlength="<?php echo $ziffern; ?>" size="20" pattern="\w{<?php echo $ziffern; ?>}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="<?php echo $lang->login->armbandid->$lng; ?>" value="<?php if(isset($_GET["registerbr"])) {echo $_GET["registerbr"];}?>" autofocus required>
 					<input type="submit" name="registerbr_submit" value="<?php echo $lang->form->register->$lng; ?>">
@@ -112,7 +113,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 <?php
 	}else {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen
 ?>
-				<form name="login" id="form_login" action="login" method="post" style="float: left;">
+				<form name="login" id="form_login" action="/login" method="post" style="float: left;">
 				<?php echo $lang->login->notlogged_armband1->$lng; if($registerbr != '') echo 'Nr. <span style="color: #000; font-style: italic;">'.$registerbr.'</span> '.$lang->login->notlogged_armband2->$lng; ?>
 					<table style="border: 1px solid black">
 						<tr>
@@ -129,7 +130,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 					</table>
 				</form>
-				<form name="reg" id="form_reg" action="login" method="post" style="float: right;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!!--->
+				<form name="reg" id="form_reg" action="/login" method="post" style="float: right;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!!--->
 					<?php echo $lang->login->disclaimer->$lng; ?>
 					<table style="border: 1px solid black">
 						<tr>
@@ -175,7 +176,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 <?php
 	}
 ?>
-				<form method="post" action="login">
+				<form method="post" action="/login">
 					<input type="text" name="revalidate_user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" <?php if(isset($unvalidated)) echo 'value="'.$unvalidated.'" '; ?>title="Min.4 - Max.15" required>
 					<input type="email" name="revalidate_email" size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" required>
 					<input type="submit" name="revalidate_submit" value="<?php echo $lang->login->change_email->$lng; ?>">
@@ -184,7 +185,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 }elseif(!$user->login) {
 	if(isset($user_registered)) echo '<span style="font-style: italic; font-weight: bold;">'.$user_registered.'</span>';
 ?>
-				<form name="reg" id="form_reg" action="login" method="post"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->
+				<form name="reg" id="form_reg" action="/login" method="post"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->
 					<?php echo $lang->login->disclaimer->$lng; ?>
 					<table style="border: 1px solid black">
 						<tr>

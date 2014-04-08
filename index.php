@@ -60,7 +60,7 @@ if($page == 'home') {
 <!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">
-				<form name="registerbr" action="search" method="post">
+				<form name="registerbr" action="/search" method="post">
 					<label for="squery"><?php echo $lang->misc->search->$lng; ?></label>
 					<input name="squery" type="search" id="squery" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" required>
 				</form>

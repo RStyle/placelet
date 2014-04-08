@@ -6,7 +6,7 @@ if($user->login) {
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->account->titel->$lng; ?>, <?php echo $user->login ?></h1></div>
 				<div>
 					<?php echo $lang->account->deine->$lng.' '.$lang->account->details->$lng; ?>:
-					<form name="change" action="account?details" method="post">
+					<form name="change" action="/account?details" method="post">
 						<table border="0">
 							<tr>
 								<th><?php echo $lang->form->benutzername->$lng; ?></th>
@@ -41,7 +41,7 @@ if($user->login) {
 ?>
 			<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->account->notifications->$lng; ?> (<?php echo $user->login ?>)</h1></div>
 				<div>
-					<form action="account?notifications" method="post">
+					<form action="/account?notifications" method="post">
 						<table border="0">
 							<tr>
 								<td>&nbsp;</td>
@@ -117,7 +117,7 @@ if($user->login) {
 <?php
 			if($recover_code) {
 ?>
-				<form name="change" action="account" method="post">
+				<form name="change" action="/account" method="post">
 					<input type="password" name="new_pwd" size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" placeholder="<?php echo $lang->form->newpass->$lng; ?>">
 					<input type="hidden" name="new_username" value="<?php echo $recover_code; ?>">
 					<input type="submit" name="submit" value="<?php echo $lang->form->changepass->$lng; ?>">
@@ -132,7 +132,7 @@ if($user->login) {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1>Account</h1></div>
 					<?php echo $lang->account->ausgeloggt->$lng; ?>
-					<form name="login" action="account" method="post">
+					<form name="login" action="/account" method="post">
 						<table style="border: 1px solid black">
 							<tr>
 								<td><label for="acc_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>

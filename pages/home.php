@@ -62,7 +62,7 @@ if($systemStats['total_posted'] > 1) {
                 <div class="connect_box" id="submit_box">
                     <h1 class="headers pseudo_link" id="header_2"><span class="header_arrow2 arrow_right"></span>&nbsp;<?php echo $lang->stats->neuesbild[$lng."-title"]; ?></h1>
                     <div id="connectbox_2">
-                        <form action="login" method="get">
+                        <form action="/login" method="get">
                             <p>
         						<?php echo $lang->stats->neuesbild->ideingeben->$lng; ?><br>						
     							<input name="postpic" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">
@@ -73,7 +73,7 @@ if($systemStats['total_posted'] > 1) {
                         <hr>
                         
                         <h1><?php echo $lang->stats->neuesarmband[$lng."-title"]; ?></h1>
-                        <form action="login" method="get">
+                        <form action="/login" method="get">
                         <p>
     						<?php echo $lang->stats->neuesarmband->ideingeben->$lng; ?><br>
     						<input name="registerbr" type="text" maxlength="6" size="6" pattern="\w{6}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" placeholder="ID...">

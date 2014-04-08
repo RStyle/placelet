@@ -1,11 +1,11 @@
 <?php
-if ($braceName != NULL) {
-	if($stats['name'] !== false) {
+if($braceName !== NULL) {
+	if($stats !== false) {
 		$eecho = '';
 		$data = getlnlt($stats['name']);
 		$central = '0, 0';
 		$max = array(false, false, false, false, 0);
-		$i=0;
+		$i = 0;
 		foreach($data as $pos){
 		
 			if($pos['latitude'] < $max[0] || $max[0] == false)
@@ -149,7 +149,7 @@ if ($braceName != NULL) {
 	<?php 
 				}
 	?>   
-							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
+							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/armband?name=<?php echo urlencode($braceName); ?>" method="post">
 								<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 								<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
 								<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
@@ -185,7 +185,7 @@ if ($braceName != NULL) {
 <?php
 		if($owner) {
 ?> 
-					<form method="post" action="armband?name=<?php echo urlencode($braceName); ?>">
+					<form method="post" action="/armband?name=<?php echo urlencode($braceName); ?>">
 						<tr>
 							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
 							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs" name="edit_submit" style="display: none;"></td>
@@ -234,11 +234,11 @@ if ($braceName != NULL) {
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falschesarmband->$lng; ?></h1></div>
 				<p>
 					<?php echo $lang->armband->gibtsnicht->$lng; ?>
-					<form action="armband">
+					<form action="/armband">
 						<input type="search" name="name" placeholder="<?php echo $lang->armband->armbandname->$lng; ?>" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
 					</form>
 					<br><?php echo $lang->armband->odersuchen->no->$lng; ?>:
-					<form action="search" method="get">
+					<form action="/search" method="get">
 						<input name="squery" type="search" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
 					</form>
 				</p>
@@ -251,7 +251,7 @@ if ($braceName != NULL) {
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falscheseite->$lng; ?></h1></div>
 				<p><?php echo $lang->armband->gehweg->$lng; ?></p>
 				<?php echo $lang->armband->odersuchen->armband->$lng; ?>:
-				<form action="search" method="get">
+				<form action="/search" method="get">
 					<input name="squery" type="search" placeholder="<?php echo $lang->form->suchen->$lng; ?>..." size="20" maxlength="18" value="<?php if(isset($_GET['name'])) echo $_GET['name']?>" required>
 				</form>
 			</article>

@@ -29,8 +29,8 @@ class User
 					if($row['status'] == 2) {
 						$this->admin = true;
 					}
-				} else {
-					echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15);
+				}else {
+					//echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15); WAARUUM????
 					$this->login = false;	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
 					$this->logout();	//Um zukünftige fehlschlagende Versuche des automatischen Logins zu vermeiden
 				}
@@ -729,7 +729,7 @@ class Statistics {
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		if($stmt->rowCount() == 0) {
-			$stats['name'] = false;
+			$stats = false;
 		}else {
 			$stats['name'] = $this->brid2name($brid);
 			$stats['owner'] = self::id2username($q[0]['userid']);

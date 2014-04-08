@@ -6,10 +6,10 @@ if(isset($_GET['name'])) {
 
 require_once('./init.php');
 /*---------------------------------------------------------*/
-if(isset($braceName)) {
-	$braceID = $statistics->name2brid($braceName);
-}
-if($braceName != NULL) {
+if($braceName === false) {
+	$stats = false;
+}elseif($braceName != NULL) {
+	if(isset($braceName)) $braceID = $statistics->name2brid($braceName);
 	//Kommentare schreiben
 	if(isset($_POST['comment_submit'])) {
 		$write_comment = $statistics->write_comment(
@@ -45,7 +45,7 @@ if($braceName != NULL) {
 	if(isset($_POST['edit_submit'])) {
 		$change_name = $user->edit_br_name($braceID, $_POST['edit_name']);
 		if($change_name == 1) {
-			header('Location: armband?name='.urlencode($_POST['edit_name']).'&name_edited='.$change_name);
+			header('Location: /armband?name='.urlencode($_POST['edit_name']).'&name_edited='.$change_name);
 		}elseif($change_name == 2) {
 			$js .= 'alert("'.$lang->php->edit_br_name->f2->$lng.'");';
 		}

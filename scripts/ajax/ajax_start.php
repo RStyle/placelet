@@ -154,7 +154,7 @@ if($_GET['q'] == 3) {
 <?php 
 				}
 ?>   
-					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="community" method="post">
+					<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/community" method="post">
 						<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>

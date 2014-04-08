@@ -1,7 +1,7 @@
 		<article id="kontakt" class="mainarticles bottom_border_green">
 			<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->kontakt[$lng.'-title']; ?></h1></div>
 			<p><?php echo $lang->kontakt->text->$lng; ?></p>
-			<form style="padding-left: 20px; border-left: 4px #BEBEBE solid;" method="post" action="kontakt">
+			<form style="padding-left: 20px; border-left: 4px #BEBEBE solid;" method="post" action="/kontakt">
 				<table>
 					<tr>
 						<td><label for="sender"><?php echo $lang->kontakt->youremail->$lng; ?>:</label><br></td>

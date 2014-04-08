@@ -5,7 +5,7 @@ if(!isset($_GET['user']) && !$user->login) {
 								<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->profil[$lng.'-title']; ?></h1></div>
                                 <div style="float: left; margin-right: 2em;">
                                         <?php echo $lang->profil->notlogged->$lng; ?>
-                                        <form name="login" action="profil" method="post">
+                                        <form name="login" action="/profil" method="post">
                                                 <table style="border: 1px solid black">
                                                         <tr>
                                                                 <td><label for="profile_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
@@ -24,7 +24,7 @@ if(!isset($_GET['user']) && !$user->login) {
                                 </div>
                                 <div>
                                         <?php echo $lang->profil->searchprofil->$lng; ?>
-                                        <form action="profil" method="get">
+                                        <form action="/profil" method="get">
                                                 <table style="border: 1px solid black; overflow: auto;">
                                                         <tr>
                                                                 <td><input type="text" name="user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
