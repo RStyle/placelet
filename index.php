@@ -136,11 +136,11 @@ require_once($this_path.'/pages/'.$page.'.php');
 				echo 'lang["'.$key.'"] = new Array();'."\n";
 				foreach($val as $key_lng => $value) {
 					if($key_lng == 'en' || $key_lng == 'de') {
-						if($key_lng == $lng) echo 'lang["'.$key.'"]["'.$key_lng.'"] = "'.$value.'";'."\n";
+						if($key_lng == $lng) echo 'lang["'.$key.'"] = "'.$value.'";'."\n";
 					}else {
-						echo 'lang["'.$key.'"]["'.$key_lng.'"] = new Array();'."\n";
+						//echo 'lang["'.$key.'"]["'.$key_lng.'"] = new Array();'."\n";
 						foreach($value as $schluessel => $wert) {
-							if($schluessel == $lng) echo 'lang["'.$key.'"]["'.$key_lng.'"]["'.$schluessel.'"] = "'.$wert.'";'."\n";
+							if($schluessel == $lng) echo 'lang["'.$key.'"]["'.$key_lng.'"] = "'.$wert.'";'."\n";
 						}
 					}
 				}

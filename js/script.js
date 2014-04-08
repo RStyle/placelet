@@ -87,7 +87,7 @@ $("#form_reg").submit(function() {
 	
 	if ($("#reg_password").val() != $("#reg_password2").val()) {
 		$('#reg_password, #reg_password2').each(function() {
-			this.setCustomValidity(lang['passwoerter_unpassend'][lng]) //Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide
+			this.setCustomValidity(lang['passwoerter_unpassend']) //Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide
 			
 		});
 		return false;
@@ -140,7 +140,7 @@ $("form[name=registerpic]").submit(function() {
 			initialize_postpic(results[0].geometry.location, lat, long);
 			return;
 		} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-			alert(lang['ort_nichtgefunden'][lng]);
+			alert(lang['ort_nichtgefunden']);
 			return false;
 		} else {
 			alert('Geocode was not successful for the following reason: ' + status);
@@ -187,7 +187,7 @@ var someCallback = function(exifObject) {
 	dayDate = myDate[0].split(":");
 	hourDate = myDate[1].split(":");
 	timestamp = new Date(dayDate[0], dayDate[1] - 1, dayDate[2], hourDate[0], hourDate[1], hourDate[2], 0).getTime() / 1000;
-	check = confirm(lang['confirm_date1'][lng] + dayDate[2] + "." + dayDate[1] + "." + dayDate[0] + lang['confirm_date2'][lng]);
+	check = confirm(lang['confirm_date1'] + dayDate[2] + "." + dayDate[1] + "." + dayDate[0] + lang['confirm_date2']);
 	if(check == true) {
 		$("#registerpic_date").val(timestamp);
 	}else {
@@ -382,7 +382,7 @@ function initialize_postpic(coords, this_lat, this_lng) {
 		marker = new google.maps.Marker({
 			position: latlng, 
 			map: map, 
-			title: lang['bist_da'][lng],
+			title: lang['bist_da'],
 			draggable: true
 		}); 
 		
@@ -457,7 +457,7 @@ $('#registerpic_city').on({
 				$("#longitude").val(long);
 			  initialize_postpic(results[0].geometry.location, lat, long);
 			} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-				alert(lang['ort_nichtgefunden'][lng]);
+				alert(lang['ort_nichtgefunden']);
 			} else {
 				alert('Geocode was not successful for the following reason: ' + status);
 			}
@@ -481,10 +481,10 @@ function error_postpic(msg) {
 function show_comments(obj){
         number = $(obj).attr('id').replace('toggle_comment','');
         $("#comment" + number).toggle();
-        if($("#toggle_comment" + number).text() == lang['hidecomment'][lng]){
-                $("#toggle_comment" + number).text(lang['showcomment'][lng] + ' (' + $("#toggle_comment" + number).data("counts") + ')');
+        if($("#toggle_comment" + number).text() == lang['hidecomment']){
+                $("#toggle_comment" + number).text(lang['showcomment'] + ' (' + $("#toggle_comment" + number).data("counts") + ')');
         }else {
-                $("#toggle_comment" + number).text(lang['hidecomment'][lng]);
+                $("#toggle_comment" + number).text(lang['hidecomment']);
         }
 }
 $('.toggle_comments').click(function (){
@@ -601,8 +601,8 @@ function confirmDelete(type, object) {
 			}else {
 				var deleteORflag = 'loeschen';
 			}
-			if(lng == 'en') var agree = confirm("Do you really want to " + lang[deleteORflag][lng] + " that " + lang[type][lng] + "?");
-			if(lng == 'de') var agree = confirm("Willst du " + lang[type][lng] + " wirklich " + lang[deleteORflag][lng] + "?");
+			if(lng == 'en') var agree = confirm("Do you really want to " + lang[deleteORflag] + " that " + lang[type] + "?");
+			if(lng == 'de') var agree = confirm("Willst du " + lang[type] + " wirklich " + lang[deleteORflag] + "?");
 			if(agree) {
 				$.ajax({
 					type: "POST",
@@ -611,8 +611,8 @@ function confirmDelete(type, object) {
 					success: function(data){
 						var json = JSON.parse(data);
 						if(json.gemeldet != undefined) {
-							if(json.gemeldet == 'Bild') alert(lang['bild_gemeldet'][lng]);
-							if(json.gemeldet == 'Kommentar') alert(lang['kommentar_gemeldet'][lng]);
+							if(json.gemeldet == 'Bild') alert(lang['bild_gemeldet']);
+							if(json.gemeldet == 'Kommentar') alert(lang['kommentar_gemeldet']);
 						}else if(json.location != undefined) {
 							window.location.replace("http://placelet.de/" + json.location);
 						}else {
@@ -655,18 +655,18 @@ $(document).ready(function(){
 					$('#login-box').remove();
 					$('#headerlogin').html('Logout');
 					$('#headerlogin').attr('href', 'login?logout');
-					$('#registerprofile').html(lang['meinprofil'][lng]);
+					$('#registerprofile').html(lang['meinprofil']);
 				}else {
 					$('#picupload_login_submit').toggle();
 					$('#picupload_login_loading').toggle();
 					if(html == 'notsent'){
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f0'][lng] + '<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f0'] + '<br>');
 					}else if(html == 'false') {
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f1'][lng] + '<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f1'] + '<br>');
 					}else if(html == 'notexisting') {
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f2'][lng] + '<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f2'] + '<br>');
 					}else if(html == 'unvalidated'){
-						$('#picupload_login_errormsg').html(lang['ajax_login']['f30'][lng] + encodeURIComponent(username)+ lang['ajax_login']['f31'][lng] + '<br>');
+						$('#picupload_login_errormsg').html(lang['ajax_login']['f30'] + encodeURIComponent(username)+ lang['ajax_login']['f31'] + '<br>');
 					}else $('#picupload_login_errormsg').html(html);
 				}
 					
