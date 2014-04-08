@@ -85,81 +85,87 @@ if ($braceName != NULL) {
 				</form>
 <?php
 		}
-		for ($i = 0; $i < count($stats) - 4 && $i < $startPicid; $i++) {
-		
-			$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');
-			$stmt->execute(array('picid' => $stats[$i]['picid'], 'brid' => $braceID));
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-				
-			if($i == 0) $last_pic = 'last';
-				else $last_pic = 'middle';
-?>
-				<div style="width: 100%; overflow: auto;">
-				<a href="/armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
-					<h3 id="pic-<?php echo $row['id']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '=> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
-					<a href="/pictures/bracelets/pic<?php echo '-'.$row['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
-						<img src="/img/triangle.png" alt="" class="thumb_triangle">
-						<img src="/pictures/bracelets/thumb-<?php echo $row['id']; ?>.jpg" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
-					</a>
-					<table class="pic-info">
-						<tr>
-							<th><?php echo $lang->pictures->datum->$lng; ?></th>
-							<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
-						</tr>
-<?php
-			if($stats[$i]['user'] != NULL) {
-?>
-						<tr>
-							<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-							<td><a href="/profil?user=<?php echo urlencode(html_entity_decode(($stats[$i]['user']))); ?>"><?php echo $stats[$i]['user']; ?></a></td>
-						</tr>
-<?php
-			 }
-?>
-					</table>
+		if($startPicid < 3) {
+			if($stats['owners'] == $startPicid + 1) $showPics = $startPicid + 1;
+				elseif($stats['owners'] > $startPicid) $showPics = 3;
+					else $showPics = $startPicid;
+		}else $showPics = $startPicid;
+		for($i = 0; $i < count($stats) - 4 && $i < $showPics; $i++) {
+			if(isset($stats[$i])) {
+				$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');
+				$stmt->execute(array('picid' => $stats[$i]['picid'], 'brid' => $braceID));
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);
+					
+				if($i == 0) $last_pic = 'last';
+					else $last_pic = 'middle';
+	?>
+					<div style="width: 100%; overflow: auto;">
+					<a href="/armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+						<h3 id="pic-<?php echo $row['id']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '=> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+						<a href="/pictures/bracelets/pic<?php echo '-'.$row['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
+							<img src="/img/triangle.png" alt="" class="thumb_triangle">
+							<img src="/pictures/bracelets/thumb-<?php echo $row['id']; ?>.jpg" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
+						</a>
+						<table class="pic-info">
+							<tr>
+								<th><?php echo $lang->pictures->datum->$lng; ?></th>
+								<td><?php echo date('d.m.Y H:i', $stats[$i]['date']); ?> Uhr</td>
+							</tr>
+	<?php
+				if($stats[$i]['user'] != NULL) {
+	?>
+							<tr>
+								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
+								<td><a href="/profil?user=<?php echo urlencode(html_entity_decode(($stats[$i]['user']))); ?>"><?php echo $stats[$i]['user']; ?></a></td>
+							</tr>
+	<?php
+				 }
+	?>
+						</table>
+							
+						<p class="pic-desc">
+							<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
+							<?php echo $stats[$i]['description']; ?>      
+							<br><br>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i])-11 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-11; ?>)</span>
+						</p>
 						
-					<p class="pic-desc">
-						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
-						<?php echo $stats[$i]['description']; ?>      
-						<br><br>
-						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i])-11 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-11; ?>)</span>
-					</p>
-                    
-					<div class="comments" id="comment<?php echo $i;?>">
-<?php
-			for ($j = 1; $j <= count($stats[$i])-11; $j++) {
-				//Vergangene Zeit seit dem Kommentar berechnen
-				$x_days_ago = days_since($stats[$i][$j]['date']);
-				//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
-				if(isset($stats[$i][$j + 1]['commid'])) {
-					$last_comment = 'middle';
-				}else {
-					$last_comment = 'last';
+						<div class="comments" id="comment<?php echo $i;?>">
+	<?php
+				for ($j = 1; $j <= count($stats[$i])-11; $j++) {
+					//Vergangene Zeit seit dem Kommentar berechnen
+					$x_days_ago = days_since($stats[$i][$j]['date']);
+					//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
+					if(isset($stats[$i][$j + 1]['commid'])) {
+						$last_comment = 'middle';
+					}else {
+						$last_comment = 'last';
+					}
+	?>
+								<a href="/armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
+								<strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
+								<p><?php echo $stats[$i][$j]['comment']; ?></p> 
+								<hr style="border: 1px solid white;">  
+	<?php 
 				}
-?>
-							<a href="/armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-                            <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
-                            <p><?php echo $stats[$i][$j]['comment']; ?></p> 
-                            <hr style="border: 1px solid white;">  
-<?php 
-			}
-?>   
-						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
-							<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
-							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
-							<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
-							<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
-							<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
-							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
-						</form>
+	?>   
+							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="armband?name=<?php echo urlencode($braceName); ?>" method="post">
+								<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
+								<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
+								<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
+								<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
+								<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
+								<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
+								<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
+							</form>
+						</div>
 					</div>
-				</div>
-<?php
-			if ($i < count($stats) - 5 && $i < $startPicid - 1) {
-?>
-<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
-<?php	
+	<?php
+				if(isset($stats[$i + 1]) && $i < $showPics - 1) {
+	?>
+	<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
+	<?php	
+				}
 			}
 		}
 ?>

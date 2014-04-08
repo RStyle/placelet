@@ -125,11 +125,11 @@ if($page == 'armband') {
 			$q->execute(array(':user' => $urlData[0]));
 			$owner = $q->fetch(PDO::FETCH_ASSOC);
 			
-			$sql = "SELECT name FROM bracelets WHERE userid = :userid";
+			$sql = "SELECT name FROM bracelets WHERE userid = :userid ORDER BY date ASC";
 			$q = $db->prepare($sql);
 			$q->execute(array(':userid' => $owner['userid']));
-			$result = $q->fetch(PDO::FETCH_ASSOC);
-			$braceName = $result['name'];
+			$result = $q->fetchAll(PDO::FETCH_ASSOC);
+			foreach($result as $key => $val) if($key + 1 == $urlData[1]) $braceName = $val['name'];
 			$startPicid = $urlData[2];
 			$js .= "$(document.body).animate({
 						'scrollTop':   $('#pic-".$startPicid."').offset().top

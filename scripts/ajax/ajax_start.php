@@ -61,9 +61,15 @@ if($_GET['q'] == 3) {
 }
 				$braceName = $statistics->brid2name($bracelets_displayed[$i]);
 				
-				$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-				$stmt->execute(array('picid' => $stats[$i][$systemStats['recent_picids'][$i]-1]['picid'], 'brid' => $bracelets_displayed[$i]));
+				$rowid = $stmt->fetch(PDO::FETCH_ASSOC);$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');
+				$stmt->execute(array(':picid' => $stats[$i][$systemStats['recent_picids'][$i]-1]['picid'], ':brid' => $bracelets_displayed[$i]));
 				$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
+				$stmt = $db->prepare('SELECT brid FROM bracelets WHERE userid = :ownerid ORDER BY date ASC');
+				$stmt->execute(array(':ownerid' => $statistics->username2id($stats[$i]['owner'])));
+				$userfetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				foreach($userfetch as $key => $val) {
+					if($val['brid'] == $bracelets_displayed[$i]) $stats[$i]['braceletNR'] = $key + 1;
+				}
 ?>
 				<div style="width: 100%;">
 					<div style="width: 70%; float: left;">
@@ -92,19 +98,19 @@ if($_GET['q'] == 3) {
                  }
 ?>
 						</table> 
-						<div class="fb-like" data-href="http://placelet.de/fb.php?picid=<?php echo $rowid['id']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+						<div class="fb-like" data-href="http://placelet.de/<?php echo $stats[$i]['owner'].'/'.$stats[$i]['braceletNR'].'/'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 					<p class="pic-desc">
 							<span class="desc-header"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['title']; ?></span><br>
 							<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>" onClick="show_comments(this);"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>)</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i; ?>" data-counts="<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>" onClick="show_comments(this);"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>)</span>
 							</p>
 							</div>
 					<aside class="bracelet-props side_container">
 						<table>
 							<tr>
 								<td><strong><?php echo $lang->pictures->armband->$lng; ?></strong></td>
-								<td><strong><?php echo '<a href="/'.urlencode($statistics->brid2name($bracelets_displayed[$i])).'?pic='.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
+								<td><strong><?php echo '<a href="/'.$stats[$i]['owner'].'/'.$stats[$i]['braceletNR'].'/'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid'].'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->kaeufer->$lng; ?></td>

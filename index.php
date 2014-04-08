@@ -68,7 +68,7 @@ if($page == 'home') {
 <?php
 if($user->logged) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
 ?>
-			<a href="/<?php echo $friendly_self.'?logout'; ?>" id="headerlogin">Logout</a>
+			<a href="<?php echo $friendly_self.'?logout'; ?>" id="headerlogin">Logout</a>
 <?php
 }
 else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
@@ -76,7 +76,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			<a href="#" id="headerlogin"><img src="/img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
 				<div class="arrow_up"></div>
-				<form name="login" id="form_login" action="/<?php echo $friendly_self;?>" method="post">
+				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
 					<label for="login" id="label_login"><?php echo $lang->form->benutzername->$lng; ?></label><br>
 					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required><br>
 					<label for="password" id="label_password"><?php echo $lang->form->passwort->$lng; ?></label><br>
@@ -90,9 +90,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 ?>
 			<ul id="headerlist">
 				<?php if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) echo '<li><a href="/test">Auf die öffentliche Seite</a></li>'; ?>
-				<li><a href="/<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="/img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
+				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="/img/de_flag.png" alt="Deutsche Flagge" id="de_flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="/<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="/img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
+				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="/img/gb_flag.png" alt="British Flag" id="gb_flag"></a></li>
 				<li class="headerlist_main_divider">|</li>
 				<li><a href="/impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
@@ -136,11 +136,11 @@ require_once($this_path.'/pages/'.$page.'.php');
 				echo 'lang["'.$key.'"] = new Array();'."\n";
 				foreach($val as $key_lng => $value) {
 					if($key_lng == 'en' || $key_lng == 'de') {
-						echo 'lang["'.$key.'"]["'.$key_lng.'"] = "'.$value.'";'."\n";
+						if($key_lng == $lng) echo 'lang["'.$key.'"]["'.$key_lng.'"] = "'.$value.'";'."\n";
 					}else {
 						echo 'lang["'.$key.'"]["'.$key_lng.'"] = new Array();'."\n";
 						foreach($value as $schluessel => $wert) {
-							echo 'lang["'.$key.'"]["'.$key_lng.'"]["'.$schluessel.'"] = "'.$wert.'";'."\n";
+							if($schluessel == $lng) echo 'lang["'.$key.'"]["'.$key_lng.'"]["'.$schluessel.'"] = "'.$wert.'";'."\n";
 						}
 					}
 				}
