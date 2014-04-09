@@ -13,7 +13,7 @@
 		<link href="/css/main.css" rel="stylesheet" type="text/css">
 		<link href="/css/lightbox.css" rel="stylesheet">
 		<!--Google Fonts-->
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis|Open+Sans">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis%7COpen+Sans">
 <?php
 if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Clients
 ?>

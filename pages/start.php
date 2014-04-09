@@ -126,13 +126,14 @@
 <?php
                  }
 ?>
-						</table> 
+						</table>
+						<div class="fb-like" data-href="http://placelet.de/<?php echo $stats[$i]['owner'].'/'.$stats[$i]['braceletNR'].'/'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 						<p class="pic-desc">
 							<span class="desc-header"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['title']; ?></span><br>
 							<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['description']; ?>      
 							<br><br>
 							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>)</span>
-							<div class="fb-like" data-href="http://placelet.de/<?php echo $stats[$i]['owner'].'/'.$stats[$i]['braceletNR'].'/'.$stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+							
 						</p>
 					</div>
 					<aside class="bracelet-props side_container">
