@@ -119,6 +119,10 @@
 			<de>Die angeforderte Seite konnte leider nicht gefunden werden.</de>
 	</error404>
 	<about en-title="About us" de-title="Über Uns">
+	    <imgtitle>
+            <en>The first meeting of the JUNIOR businessmen</en>
+            <de>Das erste Treffen der Juniorunternehmer</de>
+        </imgtitle>   
 		<partner>
 			<en>partner</en>
 			<de>Partner</de>
@@ -137,7 +141,7 @@
 			<de>
 				Wir sind eine Gruppe engagierter Schüler der MSS 11 des Gymnasiums am Römerkastell Bad Kreuznach, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen.
 				Das Juniorprojekt bietet die Möglichkeit, 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.
-				Unsere Geschäftsidee besteht darin, Reisearmbänder herzustellen die von Freund zu Freund um die Welt weitergegeben werden und die persönlichen Fotos,
+				Unsere Geschäftsidee besteht darin, Reisearmbänder herzustellen, die von Freund zu Freund um die Welt weitergegeben werden und die persönlichen Fotos,
 				auf dem das Armband zu erkennen ist, auf unserer Homepage hochzuladen und auf diesem Weg eine Community zu gründen.
 			</de>
 		</about_us>
@@ -165,6 +169,10 @@
 			<en>website</en>
 			<de>Website</de>
 		</website>
+		<supported>
+            <en>Supported by:</en>
+            <de>Unterstützt von:</de>
+        </supported>
 	</about>
 	<account en-title="Account Settings" de-title="Account Einstellungen">
 		<titel>

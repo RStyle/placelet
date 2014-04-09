@@ -121,11 +121,11 @@
 	.tree {
 	   width: 1000px;
 		font-size: 0.8em;
-		margin-left: -moz-calc( ( 100% - 900px ) / 2 );
+		margin-left: -moz-calc( ( 100% - 1100px ) / 2 );
 		/* WebKit */
-		margin-left: -webkit-calc( ( 100% - 900px ) / 2 );
+		margin-left: -webkit-calc( ( 100% - 1100px ) / 2 );
 		/* Opera */
-		margin-left: -o-calc( ( 100% - 900px ) / 2 );
+		margin-left: -o-calc( ( 100% - 1100px ) / 2 );
 		/* Standard */
 		margin-left: calc( ( 100% - 1100px ) / 2 );
 	}
@@ -692,9 +692,9 @@
 		  #text_box {
 		      position: absolute; 
               /* Fallback for web browsers that doesn't support RGBa */
-              background: rgb(256, 256, 256);
+              background: rgb(255, 255, 255);
               /* RGBa with 0.5 opacity */
-              background: rgba(256, 256, 256, 0.4);
+              background: rgba(255, 255, 255, 0.4);
               padding: 10px;
               width: 350px;
               top: -35px;

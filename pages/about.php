@@ -3,7 +3,7 @@
 								
 				<div id="wir">
     				<a href="/pictures/staff.jpg" data-lightbox="wir"><img src="/pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet"></a>
-    				<div id="text_box">Das erste Treffen der JUNIOR-Unternehmer</div>
+    				<div id="text_box"><?php echo $lang->about->imgtitle->$lng; ?></div>
 				</div>
                 <br>
 				
@@ -138,7 +138,7 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 					</ul>
 				</div>
 				<div id="partner">
-					<h1>Unterstützt von:</h1>
+					<h1><?php echo $lang->about->supported->$lng; ?></h1>
 
     				<div style="float: right; width: 800px">
     					<img src="/img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
