@@ -783,7 +783,7 @@
 			float: left;
 			width: 100%;
 		}
-		#disclaimer {
+		#disclaimer-impressum {
 			float: left;
 		}
 	/*---Impressum SECTION---*/
@@ -1052,7 +1052,7 @@
         margin-left: -ms-calc( ( 100% - 450px ) / 2 );
         margin-left: -webkit-calc( ( 100% - 450px ) / 2 );
         margin-left: calc( ( 100% - 450px ) / 2 );
-        width: 450px;
+        width: 100%;
     }
     #reg_table {
         clear: both;
@@ -1162,6 +1162,12 @@
 		}
 /*---Side Container ASIDE---*/
 @keyframes fadein{from{opacity:0;}to{opacity:1;}}@-moz-keyframes fadein{from{opacity:0;}to{opacity:1;}}@-webkit-keyframes fadein{from{opacity:0;}to{opacity:1;}}@-o-keyframes fadein{from{opacity:0;}to{opacity:1;}}
+
+		.paypal{
+			border:0;
+			width:1px;
+			height:1px;
+		}
 
 .delete_button {
 	-moz-box-shadow:inset 0px 0px 0px 0px #ffffff;

@@ -48,8 +48,8 @@
 							<input type="hidden" name="cmd" value="_s-xclick">
 							<input type="hidden" name="hosted_button_id" value="AWD5N67HHG896">
 							<input type="hidden" name="on0" value="Größe">
-							<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
-							<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+							<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
+							<img alt="" class="paypal" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif">
 						</form>
 
 					<?php }else{ ?>
@@ -57,8 +57,8 @@
 						<input type="hidden" name="cmd" value="_s-xclick">
 						<input type="hidden" name="hosted_button_id" value="B4XEFT2AWQN2S">
 						<input type="hidden" name="on0" value="size">
-						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-						<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" class="paypal" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif">
 					</form>
 					<?php } //$lang->shop->notavailable->$lng; ?>
 				</div>

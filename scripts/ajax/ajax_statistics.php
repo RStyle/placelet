@@ -40,7 +40,7 @@ if(isset($_POST['login'])) {
 		$comment_deleted = $statistics->manage_comment($user->admin, $_POST['last_comment'], $_POST['commid'], $_POST['picid'], $braceID);
 		if(isset($comment_deleted)) {
 			if($comment_deleted === true ) {
-				$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&comment_deleted=true');
+				$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&amp;comment_deleted=true');
 			}elseif($comment_deleted == 2) {
 				$return = array('gemeldet' => 'Kommentar');
 			}
@@ -49,7 +49,7 @@ if(isset($_POST['login'])) {
 		$braceID = $statistics->name2brid($_POST['name']);
 		$pic_deleted = $statistics->manage_pic($user->admin, $_POST['last_pic'], $_POST['picid'], $braceID);
 		if($pic_deleted === true ) {
-			$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&pic_deleted=true');
+			$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&amp;pic_deleted=true');
 		}elseif($pic_deleted == 2) {
 			$return = array('gemeldet' => 'Bild');
 		}elseif ($pic_deleted == false) {

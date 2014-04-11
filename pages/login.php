@@ -78,12 +78,12 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 	if($user->login == false) {
 ?>
 						<p class="picupload_nologin_text"><?php echo $lang->login->notlogged_pic->$lng; ?></p>
-						<!--<form action="./" method="post">-->
+						<?php /* <!--<form action="./" method="post">--> */ ?>
 							<span id="picupload_login_errormsg"></span>
 							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
 							<input type="password" size="20" name="picupload_login_password" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
 							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="/img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
-						<!--</form>-->
+						<?php /* <!--</form>--> */ ?>
 <?php
 	}
 ?>
@@ -130,7 +130,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 					</table>
 				</form>
-				<form name="reg" id="form_reg" action="/login" method="post" style="float: right;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!!--->					
+				<form name="reg" id="form_reg" action="/login" method="post" style="float: right;"><?php /*<!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!! -->*/ ?>				
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
@@ -203,7 +203,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
                 <span style="float:left; width: 110px;">&nbsp;</span><span class="arrow_down" style="border-top-color: #FFF;" ></span></p>
                 <hr>
                 
-				<form name="reg" id="form_reg" action="/login" method="post" style="clear: both;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->					
+				<form name="reg" id="form_reg" action="/login" method="post" style="clear: both;"><?php /*<!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!! -->*/ ?>					
 					<table id="reg_table">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>

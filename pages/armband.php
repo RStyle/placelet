@@ -1,6 +1,7 @@
 <?php
+$works = false;
 if($braceName !== NULL) {
-	if($stats !== false) {
+	if(isset($stats['name'])) {
 		$eecho = '';
 		$data = getlnlt($stats['name']);
 		$central = '0, 0';
@@ -100,8 +101,8 @@ if($braceName !== NULL) {
 					else $last_pic = 'middle';
 	?>
 					<div style="width: 100%; overflow: auto;">
-					<a href="/armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
-						<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '<img src="/img/pfeil_small.png" width="30" height="20" style="position: relative; top: 2px;"> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+					<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=<?php echo $last_pic; ?>&amp;delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+						<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '<img alt="" src="/img/pfeil_small.png" width="30" height="20" style="position: relative; top: 2px;"> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 						<a href="/pictures/bracelets/pic<?php echo '-'.$row['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 							<img src="/img/triangle.png" alt="" class="thumb_triangle">
 							<img src="/pictures/bracelets/thumb-<?php echo $row['id']; ?>.jpg" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
@@ -142,7 +143,7 @@ if($braceName !== NULL) {
 						$last_comment = 'last';
 					}
 	?>
-								<a href="/armband?name=<?php echo urlencode($braceName); ?>&last_comment=<?php echo $last_comment; ?>&commid=<?php echo $stats[$i][$j]['commid']; ?>&picid=<?php echo $stats[$i][$j]['picid']; ?>&delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
+								<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
 								<strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
 								<p><?php echo $stats[$i][$j]['comment']; ?></p> 
 								<hr style="border: 1px solid white;">  
@@ -228,7 +229,9 @@ if($braceName !== NULL) {
 			<aside id="map_home" class="side_container" style="margin-top: 20px;"><?php echo $lang->misc->activate_js->$lng; ?></aside>
 <?php
 		}
-	}else {
+		$works = true;
+	}
+	/*}else {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falschesarmband->$lng; ?></h1></div>
@@ -244,8 +247,8 @@ if($braceName !== NULL) {
 				</p>
 			</article>
 <?php
-	}
-}else {
+	}*/
+}if(!$works) {
 ?>
 			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falscheseite->$lng; ?></h1></div>
