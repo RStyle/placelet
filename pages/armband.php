@@ -101,7 +101,7 @@ if($braceName !== NULL) {
 	?>
 					<div style="width: 100%; overflow: auto;">
 					<a href="/armband?name=<?php echo urlencode($braceName); ?>&picid=<?php echo $stats[$i]['picid']; ?>&last_pic=<?php echo $last_pic; ?>&delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
-						<h3 id="pic-<?php echo $row['id']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '=> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+						<h3 id="pic-<?php echo $row['id']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '<img src="/img/pfeil_small.png" width="30" height="20" style="position: relative; top: 2px;"> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 						<a href="/pictures/bracelets/pic<?php echo '-'.$row['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 							<img src="/img/triangle.png" alt="" class="thumb_triangle">
 							<img src="/pictures/bracelets/thumb-<?php echo $row['id']; ?>.jpg" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
