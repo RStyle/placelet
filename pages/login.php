@@ -130,8 +130,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 					</table>
 				</form>
-				<form name="reg" id="form_reg" action="/login" method="post" style="float: right;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!!--->
-					<?php echo $lang->login->disclaimer->$lng; ?>
+				<form name="reg" id="form_reg" action="/login" method="post" style="float: right;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!!--->					
 					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
@@ -154,6 +153,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<td><input type="hidden" name="lng" id="longitude" value="<?php echo $lng;?>"></td>
 						</tr>
 					</table>
+					<?php echo $lang->login->disclaimer->$lng; ?>
 				</form>
 <?php
 	}
@@ -185,9 +185,26 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 }elseif(!$user->login) {
 	if(isset($user_registered)) echo '<span style="font-style: italic; font-weight: bold;">'.$user_registered.'</span>';
 ?>
-				<form name="reg" id="form_reg" action="/login" method="post"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->
-					<?php echo $lang->login->disclaimer->$lng; ?>
-					<table style="border: 1px solid black">
+                <div id="register_pics">
+                    <div id="reg_pic3" class="register_pic" style="margin-top: 25px; border-color: #D340FF;">
+                        <div class="overlay"></div>
+                        <p><?php echo $lang->login->reg_pic3_text->$lng; ?></p>
+                    </div>
+                    <div id="reg_pic1" class="register_pic" style="width: 300px; height: 300px;">
+                        <div class="overlay"></div>
+                        <p style="width: 200px; top: 85px;"><?php echo $lang->login->reg_pic1_text->$lng; ?></p>
+                    </div>
+                    <div id="reg_pic2" class="register_pic" style="margin-right: 0; margin-top: 25px; border-color: #05EB80;">
+                        <div class="overlay"></div>
+                        <p style="left: 40px;"><?php echo $lang->login->reg_pic2_text->$lng; ?></p>
+                    </div>
+                </div>
+                <p id="reg_text"><?php echo $lang->login->register_now->$lng; ?><br>
+                <span style="float:left; width: 110px;">&nbsp;</span><span class="arrow_down" style="border-top-color: #FFF;" ></span></p>
+                <hr>
+                
+				<form name="reg" id="form_reg" action="/login" method="post" style="clear: both;"><!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!!--->					
+					<table id="reg_table">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
 							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
@@ -209,6 +226,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<td><input type="hidden" name="lng" id="longitude" value="<?php echo $lng;?>"></td>
 						</tr>
 					</table>
+					<p id="disclaimer"><?php echo $lang->login->disclaimer->$lng; ?></p>
 				</form>
 <?php
 }else {
