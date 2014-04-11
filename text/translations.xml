@@ -528,6 +528,34 @@
 		</nachricht>
 	</kontakt>
 	<login en-title="Register" de-title="Registrieren">
+	    <reg_pic3_text>
+            <en>Receive your own
+            personal profile page
+            on placelet.net.</en>
+            <de>Erhalte deine eigene
+            Profilseite auf
+            placelet.de.</de>
+        </reg_pic3_text>
+        <reg_pic1_text>
+            <en>Start your own
+            social experiment:
+            Send a travel bracelet
+            around the world.</en>
+            <de>Starte dein eigenes
+            soziales Experiment:
+            Schicke ein Reisearmband
+            um die Welt.</de>
+        </reg_pic1_text>
+        <reg_pic2_text>
+            <en>Get in touch with other users of our web portal.</en>
+            <de>Tausche dich mit
+            anderen Usern unseres
+            Webportals aus.</de>
+        </reg_pic2_text>
+        <register_now>
+            <de>Worauf wartest du noch?</de>
+            <en>What are you waiting for?</en>
+        </register_now>
 		<bildposten>
 			<en><![CDATA[Post <strong style="color: #000;">picture</strong>]]></en>
 			<de><![CDATA[<strong style="color: #000;">Bild</strong> posten]]></de>
