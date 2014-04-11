@@ -91,9 +91,9 @@ if($systemStats['total_posted'] > 1) {
 				$js.='var options = { $AutoPlay: true };
 				var jssor_slider1 = new $JssorSlider$("slider1_container", options);';?>
 				<div id="slider1_container" style="position: relative; width: 492px; height: 272px;">
-						<div id="slider1_c2" u="slides" style="cursor: move; overflow: hidden; width: 492px; height: 272px;">
-							<div><img u="image" src="http://placelet.de/pictures/thumb-armband3.jpg" alt="Armband"></div>
-							<div><img u="image" src="http://placelet.de/pictures/shop/thumb-2.jpg" alt="Armband"></div>
+						<div data-u="slides" style="cursor: move; overflow: hidden; width: 492px; height: 272px;">
+							<div><img data-u="image" src="http://placelet.de/pictures/thumb-armband3.jpg" alt="Armband"></div>
+							<div><img data-u="image" src="http://placelet.de/pictures/shop/thumb-2.jpg" alt="Armband"></div>
 						</div>
 					</div><br>
 				<?php } //491 1920 <a href="/pictures/armband3.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband3.jpg" alt="Armband" style="width: 100%;"></a>	?>
