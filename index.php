@@ -126,27 +126,17 @@ require_once($this_path.'/pages/'.$page.'.php');
 ?>
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript">
-			var lang = new Array();
 <?php 
+		$js.= 'lang = new Array();'."\n";
 		foreach($lang->js as $obj) {
 			foreach($obj as $key => $val) {
-				echo 'lang["'.$key.'"] = new Array();'."\n";
 				foreach($val as $key_lng => $value) {
-					if($key_lng == 'en' || $key_lng == 'de') {
-						if($key_lng == $lng) echo 'lang["'.$key.'"] = "'.$value.'";'."\n";
-					}else {
-						//echo 'lang["'.$key.'"]["'.$key_lng.'"] = new Array();'."\n";
-						foreach($value as $schluessel => $wert) {
-							if($schluessel == $lng) echo 'lang["'.$key.'"]["'.$key_lng.'"] = "'.$wert.'";'."\n";
-						}
-					}
+						if($key_lng == $lng) $js.= 'lang["'.$key.'"] = "'.$value.'";'."\n";
 				}
 			}
 		}
-		echo 'var lng = "'.$lng.'";';
+		$js.= 'lng = "'.$lng.'";';
 ?>
-		</script>
 		<script type="text/javascript" src="/js/exif+jssor+lightbox.js"></script>
 		<script type="text/javascript" src="/js/script.js"></script>
 <?php
