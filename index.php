@@ -126,8 +126,6 @@ require_once($this_path.'/pages/'.$page.'.php');
 ?>
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<?php if($page == 'shop') { ?><script src="/js/jssor.slider.mini.js"></script><?php } ?>
-		<script type="text/javascript" src="http://placelet.de/js/lightbox-2.6.min.js"></script>
 		<script type="text/javascript">
 			var lang = new Array();
 <?php 
@@ -149,11 +147,11 @@ require_once($this_path.'/pages/'.$page.'.php');
 		echo 'var lng = "'.$lng.'";';
 ?>
 		</script>
+		<script type="text/javascript" src="/js/exif+jssor+lightbox.js"></script>
 		<script type="text/javascript" src="/js/script.js"></script>
 <?php
 if($page == 'login' && isset($postpic)) {
 ?>
-		<script type="text/javascript" src="/js/jquery.exif.js"></script>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 		<script>
 		$(document).ready(function() {
@@ -166,7 +164,6 @@ if($page == 'login' && isset($postpic)) {
 <?php
 }elseif($page == 'home'){
 ?>
-		<script type="text/javascript" src="/js/jquery.exif.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 		<script>
 		<?php $eecho = '';
@@ -252,7 +249,6 @@ if($page == 'login' && isset($postpic)) {
 <?php
 }elseif($page == 'armband'){
 ?>
-		<script type="text/javascript" src="/js/jquery.exif.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 <?php
 }

@@ -87,7 +87,16 @@ if($systemStats['total_posted'] > 1) {
 <!--ERSTER ARTIKEL-->
 			<article id="reisearmband" class="mainarticles bottom_border_blue">
 				<div class="mainarticleheaders line_header blue_line"><h1><?php echo $lang->home->artikel1[$lng."-title"]; ?></h1></div>
-				 <?php if(!isset($_GET['rund'])) echo '<a href="/pictures/armband3.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband3.jpg" alt="Armband" style="width: 100%;"></a>'; else echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband3.jpg)"></div>';?>				
+				<?php if(isset($_GET['rund'])) echo '<div class="round_image" style="margin-bottom: 0.5em; background: url(/pictures/thumb-armband3.jpg)"></div>'; else { 
+				$js.='var options = { $AutoPlay: true };
+				var jssor_slider1 = new $JssorSlider$("slider1_container", options);';?>
+				<div id="slider1_container" style="position: relative; width: 492px; height: 272px;">
+						<div id="slider1_c2" u="slides" style="cursor: move; overflow: hidden; width: 492px; height: 272px;">
+							<div><img u="image" src="http://placelet.de/pictures/thumb-armband3.jpg" alt="Armband"></div>
+							<div><img u="image" src="http://placelet.de/pictures/shop/thumb-2.jpg" alt="Armband"></div>
+						</div>
+					</div><br>
+				<?php } //491 1920 <a href="/pictures/armband3.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband3.jpg" alt="Armband" style="width: 100%;"></a>	?>
 				<p>
                     <?php echo $lang->home->artikel1->paragraph[0]->$lng; ?>
 				</p>
