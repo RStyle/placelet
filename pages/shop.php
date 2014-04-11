@@ -1,11 +1,7 @@
+		<?php $js.='var options = { $AutoPlay: true };
+        var jssor_slider1 = new $JssorSlider$("slider1_container", options);'; ?>
 			<article id="shop" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Shop</h1></div>
-				
-				
-				<?php $js.='var options = { $AutoPlay: true };
-        var jssor_slider1 = new $JssorSlider$("slider1_container", options);'; ?>
-				
-				
 				
 				<div style="float: left; width: 50%;">
 					<div id="slider1_container" style="position: relative; width: 400px; height: 600px;">

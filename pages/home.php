@@ -1,9 +1,9 @@
 <!--CONNECT-LEISTE-->
-            <!--<div class="hint">
+            <?php /*<!--<div class="hint">
                 <h1><?php if($lng == 'en') echo 'Notice'; elseif($lng == 'de') echo 'Hinweis';?></h1>
                 <p><?php if($lng == 'en') echo 'Due to technical difficulties we had to temporarily disable the registration. We are intensely working on it. Sorry for the inconveniences.';
 					 elseif($lng == 'de') echo 'Aufgrund technischer Schwierigkeiten musste die Registrierung temporär deaktiviert werden. Wir arbeiten an einer schnellstmöglichen Beseitigung des Problems.';?></p>
-            </div>-->
+            </div>--> */ ?>
 			<div id="connect_leiste">
                 <div class="connect_box" id="uploads_box">
                     <h1 class="headers pseudo_link" id="header_1"><span class="header_arrow1 arrow_right"></span>&nbsp;<?php echo $lang->stats->neuesterupload[$lng."-title"]; ?></h1>
@@ -56,7 +56,7 @@ if($systemStats['total_posted'] > 1) {
                                     	?>
         							</table>
     					    </div>	
-    						<!--<img src="/img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">    -->
+    						<?php //<!--<img src="/img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">    -->?>
     					</div>
                 </div>
                 <div class="connect_box" id="submit_box">
@@ -123,7 +123,7 @@ for($i = 0; $i < 6; $i++){
 			</article>
 <!--SIDEBAR-->
 			<aside class="side_container">
-				<!--<h1>JUNIOR</h1>-->
+				<?php //<!--<h1>JUNIOR</h1>-->?>
 				<img src="/img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
 				<p><?php echo $lang->home->JUNIOR->$lng; ?></p>
 			</aside>
