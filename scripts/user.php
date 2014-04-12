@@ -747,9 +747,11 @@ class Statistics {
 		return $stats;
 	}
 	//Bilderdetails
-	public function picture_details($brid) {
+	public function picture_details($brid, $desc = false) {
 		$details = array();
-		$sql = "SELECT userid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid";
+		$sql = "SELECT userid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid ORDER BY picid";
+		if($desc) $sql .= " DESC";
+			else $sql .= " ASC";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();

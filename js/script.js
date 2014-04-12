@@ -304,6 +304,22 @@ function check_width(){
     else {
         $("#fb_plugin").attr("data-height", '190');
     }
+//Login-Box-Positionierung	
+	if(window.innerWidth < 1038){
+		$("#login-box").css({ 'left' : 500 });
+		$("#login-box").css({ 'right' : 'initial' });
+	}   
+	else {
+		if(window.innerWidth > 1560) {
+			$("#login-box").css({ 'right' : '34%' });
+		$("#login-box").css({ 'left' : 'initial' });
+		}
+		else {
+
+			$("#login-box").css({ 'left' : '51%' });
+		$("#login-box").css({ 'right' : 'initial' });
+		}
+	}
 	
 }
 

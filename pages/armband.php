@@ -70,9 +70,15 @@ if($braceName !== NULL) {
 		'.$eecho.'
 		}
 		google.maps.event.addDomListener(window, "load", initialize);';
+		if($startPicid < 3) {
+			if($stats['owners'] == $startPicid + 1) $showPics = $startPicid + 1;
+				elseif($stats['owners'] > $startPicid) $showPics = 3;
+					else $showPics = $startPicid;
+		}else $showPics = $startPicid;
+		//print_r($stats);
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
-				<div class="green_line mainarticleheaders line_header"><h1 id="bracelet" data-pics="<?php echo $startPicid; ?>"><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1 id="bracelet" data-pics="<?php echo $showPics; ?>"><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
 				<?php if(!$user_subscribed) echo '<span class="pseudo_link float_right" id="show_sub">'.$lang->armband->abonnieren->$lng.'</span>'; ?>
 				<a href="/<?php echo 'login?postpic'; if($user->login && ($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner'])) echo '='.$braceID.'" title="'.$braceID.'"';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
 <?php
@@ -86,11 +92,6 @@ if($braceName !== NULL) {
 				</form>
 <?php
 		}
-		if($startPicid < 3) {
-			if($stats['owners'] == $startPicid + 1) $showPics = $startPicid + 1;
-				elseif($stats['owners'] > $startPicid) $showPics = 3;
-					else $showPics = $startPicid;
-		}else $showPics = $startPicid;
 		for($i = 0; $i < count($stats) - 4 && $i < $showPics; $i++) {
 			if(isset($stats[$i])) {
 				$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');

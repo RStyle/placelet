@@ -29,17 +29,6 @@ $bracelets_displayed = $systemStats['recent_brids'];
 foreach($bracelets_displayed as $key => $val) {
 	$stats[$key] = array_merge($statistics->bracelet_stats($val), $statistics->picture_details($val));
 }
-/*echo 'Q = '.$_GET['q'].'<br>recent_brid_pics = ';
-if($recent_brid_pics) echo 'true'; else echo 'false';*/
-/*echo 'bracelets_displayed:<br>';
-print_r($bracelets_displayed);
-echo '<br><br><hr><hr><br><br>stats:<br>';
-foreach($stats as $key => $val) {
-	print_r($key);
-	echo '<br>';
-	print_r($val);
-	echo '<br><br>';
-}*/
 if($_GET['q'] == 3) {
 	if($recent_brid_pics) {
 ?>
@@ -53,7 +42,7 @@ if($_GET['q'] == 3) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			for($i = $_GET['q'] - 2; $i <= $_GET['q']; $i++) {
-				if($stats[$i] != array('name' => NULL)) {
+				if(/*$stats[$i] != array('name' => NULL) && */isset($stats[$i])) {
 				if($_GET['q'] > 3 || ($i > $_GET['q'] - 2 && $_GET['q'] == 3)) {
 ?>
 <!--~~~HR~~~~--><hr style="clear: both;">
