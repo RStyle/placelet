@@ -383,6 +383,56 @@
 		</neuestearmbaender>
 	</community>
 	<faq>
+	   <faqinfo>
+            <de><![CDATA[Hier findest du einige häufig gestellte Fragen. Wenn dir das nicht weiterhilft, <a href="/kontakt">kontaktiere uns</a>.]]></de>
+            <en><![CDATA[On this page you will find some frequently asked questions. If this doesn't help you, <a href="/kontakt">contact us</a>.]]></en>
+       </faqinfo>
+       <questions>
+            <q1>
+                <en>How can I delete or report pictures or comments with explicit or discriminating content?</en>
+                <de>Wie kann ich unangemessene Bilder oder Kommentare löschen beziehungsweise melden?</de>
+            </q1>
+            <q2>
+                <en>Why should I register on this website?</en>
+                <de>Warum sollte ich mich auf dieser Seite registrieren?</de>
+            </q2>
+            <q3>
+                <en>How can my friends the keep track of the route of my travel bracelet?</en>
+                <de>Wie können meine Freunde den Weg meines Armbandes verfolgen?</de>
+            </q3>
+            <q4>
+                <en>What can I do if I have forgotten the ID of one of my bracelets?</en>
+                <de>Was kann ich tun, wenn ich die ID eines meiner Armbänder vergessen habe?</de>
+            </q4> 
+       </questions>
+       <answers>
+            <a1>
+                <en>If you come across comments or pictures with explicit or discrimintating content or spam on our website, you should report these to the site administration so that they will get deleted.
+                    Click on the button with the "X" in the upper right corner next to the picture or comment.
+                    As the owner of a travel bracelet, you additionally have the ability to delete pictures or comments on your own bracelet directly using the same button.</en>
+                <de>Wenn du auf unserer Seite unangemessene oder anstößige Bilder oder Kommentare (zum Beispiel Spam) findest, solltest du diese der Seitenadministration melden, damit sie gelöscht werden.
+					Klicke dazu auf den Button mit dem "X" rechts oben neben dem Bild oder Kommentar.
+					Als Inhaber eines Armbandes hast du zudem immer die Möglichkeit, Bilder oder Kommentare über denselben Button direkt zu löschen.</de>
+            </a1>
+            <a2>
+                <en>Although you can also use certain functions of our website without a registered account, a personal account brings you several advantages.
+                    For one, it is necessary to send your own travel bracelet around the world. Additionally, you get a personal profile page, which allows your friends to keep track of your bracelets and uploads and you will no longer be displayed anonymously when posting comments.</en>
+                <de>Auch wenn du auch ohne Account bestimmte Funktionen unserer Webseite nutzen kannst, bringt dir ein eigener Account einige Vorteile.
+					Er ist zum Einen erforderlich, um selbst ein Armband um die Welt schicken zu können. Du erhältst außerdem eine eigene Profilseite, anhand derer deine Freunde deine Armbänder und Uploads nachverfolgen können und du wirst bei Kommentaren nicht mehr anonym dargestellt.</de>
+            </a2>
+            <a3>
+                <en>Generally, you can spread your bracelet page everywhere on the internet using a permanent link ("www.placelet.net/[your username]/[number]", where [number] has to be replaced for example by 1 for your first bracelet, 2 for your second bracelet etc.).
+                    Furthermore, your bracelet can be found by entering the bracelet name, which you can change to whatever suits you, into the search bar in the upper right corner of our web page.
+                    Registered users also have the ability to subscribe to your bracelet, meaning they will automatically be informed about new pictures to this bracelet.</en>
+                <de>Generell kannst Du dein Armband überall mithilfe eines permanenten Links verbreiten ("www.placelet.de/[Dein Benutzername]/[Zahl]", [Zahl] wird z.B. durch 1 bei deinem ersten Armband oder 2 bei deinem zweiten Armband usw. ersetzt).
+                    Zudem kann das Armband über die Suchleiste mit dem Armbandnamen, den du selbst festlegen kannst, gefunden werden.
+					Registrierte Benutzer haben auch die Möglichkeit, dein Armband zu abonnieren und so automatisch über neue Bilder zu diesem Armband informiert zu werden.</de>
+            </a3>
+            <a4>
+                <en>Go to your profile page and move the mouse cursor over the bracelet showcase. You will see the ID in a field next to your cursor.</en>
+                <de>Gehe zu deinem Profil und bewege den Mauszeiger über das Armband. Es wird ein Feld mit der ID erscheinen.</de>
+            </a4>
+       </answers>
 	</faq>
 	<home>
 		<artikel1 de-title="Das Reisearmband" en-title="The Travel Bracelet">
