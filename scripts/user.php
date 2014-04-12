@@ -244,7 +244,7 @@ class User
 			$stmt->execute(array('user' => $new_username));
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			if($result == NULL) {//Wenn es noch keinen Benutzer mit selbem Namen gibt
-				rename('pictures/profiles/'.$this->user.'.jpg', 'pictures/profiles/-'.$new_username.'.jpg');
+				rename('pictures/profiles/'.$this->login.'.jpg', 'pictures/profiles/'.$new_username.'.jpg');
 				$sql = "UPDATE users SET user = :newuser WHERE user = :olduser";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(':olduser' => $this->login, ':newuser' => $new_username));
