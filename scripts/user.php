@@ -244,7 +244,7 @@ class User
 			$stmt->execute(array('user' => $new_username));
 			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			if($result == NULL) {//Wenn es noch keinen Benutzer mit selbem Namen gibt
-				rename('pictures/profiles/'.$this->user.'.jpg', 'pictures/profiles/-'.$new_username.'.jpg');
+				rename('pictures/profiles/'.$this->login.'.jpg', 'pictures/profiles/'.$new_username.'.jpg');
 				$sql = "UPDATE users SET user = :newuser WHERE user = :olduser";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(':olduser' => $this->login, ':newuser' => $new_username));
@@ -573,7 +573,17 @@ class User
 		if($only_unseen) $sql .= ' AND seen = 0';
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array(":userid" => $this->userid));
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
+	}
+	//Nachricht als "gelesen" markieren
+	public function messages_read() {
+		$sql = "UPDATE messages SET seen = :date WHERE recipient = :userid";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+			':date' => time(),
+			':userid' => $this->userid
+		));
 	}
 }
 ?>

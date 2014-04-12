@@ -2,7 +2,7 @@
 $page = 'nachrichten';
 require_once('./init.php');
 /*---------------------------------------------------------*/
-$user->send_message(40, "Hi, was geht?");
+//$user->send_message(40, "Hi, was geht?");
 $messages = $user->recieve_messages();
 /*---------------------------------------------------------*/
 require_once('./index.php');
