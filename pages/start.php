@@ -46,7 +46,7 @@
     ?>
     					<tr>
     						<td>
-    						    <img src="/img/profil_pic_small.png" width="20" style="border: 1px #999 solid;">&nbsp;
+    						    <img src="/pictures/profiles/pic?user=<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
 								<a href="/profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>">								    
 									<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>
 								</a>
@@ -121,7 +121,7 @@
 ?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/img/profil_pic_small.png" width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                     <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>">								        
                                         <?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?>
                                     </a></td>
@@ -181,7 +181,7 @@
 					}
 ?>
 					<a href="/community?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-					<img src="/img/profil_pic_small.png" width="20" style="border: 1px #999 solid;">&nbsp;
+					<img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?>" width="20" style="border: 1px #999 solid;">&nbsp;
                     <strong><?php if($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
                     <p><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  

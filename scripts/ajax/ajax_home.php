@@ -78,7 +78,7 @@ if(isset($stats[$i + 1][0]['picid'])) {
 	?>
 								<tr>
 									<th>Uploader</th>
-									<td><img src="/img/profil_pic_small.png" width="20" style="border: 1px #999 solid;">&nbsp;
+									<td><img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                         <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
 								</tr>
 	<?php

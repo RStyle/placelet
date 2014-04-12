@@ -255,6 +255,10 @@
 			<en>delete account</en>
 			<de>Account löschen</de>
 		</delete>
+		<change_profilpic>
+			<en>change profile pic</en>
+			<de>Profilbild ändern</de>
+		</change_profilpic>
 	</account>
 	<admin en-title="Admin-tool" de-title="Admin-Tool">
 	</admin>
@@ -699,8 +703,8 @@
 			<de>Email ändern</de>
 		</change_email>
 	</login>
-	<order en-title="" de-title="">
-	</order>
+	<nachrichten en-title="Messages" de-title="Nachrichten">
+	</nachrichten>
 	<profil en-title="Profile" de-title="Profil">
 		<notlogged>
 			<en><![CDATA[

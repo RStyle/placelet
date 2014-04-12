@@ -61,7 +61,7 @@ if(isset($_POST['registerpic_submit'])) {
 				$js .= 'alert("'.$lang->php->pic_registered->f6->$lng.'");';
 				break;
 			case 7:
-				header('Location: armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
+				header('Location: /armband?name='.urlencode($statistics->brid2name($_POST['registerpic_brid'])).'&picposted='.$pic_registered);
 				break;
 			default:
 				$js .= 'alert("'.$pic_registered.'");';

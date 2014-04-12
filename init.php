@@ -170,6 +170,7 @@ $pagename = array(
 	"impressum" => $lang->impressum[$lng.'-title'],
 	"kontakt" => $lang->kontakt[$lng.'-title'],
 	"login" => $lang->login[$lng.'-title'],
+	"nachrichten" => $lang->nachrichten[$lng.'-title'],
 	"order" => $lang->order[$lng.'-title'],
 	"profil" => $lang->profil[$lng.'-title'],
 	"search" => $lang->search[$lng.'-title'],

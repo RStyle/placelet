@@ -527,6 +527,33 @@ class User
 			':userid' => $this->userid
 		));
 	}
+	public function update_profilepic($picture_file, $max_file_size) {
+		if(isset($picture_file)) {
+			$filename_props = explode(".", $picture_file['name']);
+			$fileext = strtolower(end($filename_props));
+			if($fileext != 'jpeg' && $fileext != 'jpg' && $fileext != 'gif' && $fileext != 'png') {
+				unset($fileext);
+				$submissions_valid = false;
+				return 2;//Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.
+			}else {
+				if($picture_file['size'] < $max_file_size) {
+					$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/profiles/'.$this->login.'.'.$fileext);
+				}else {
+					return 6;//'Wir unterstützen nur Bilder bis 8MB Größe';
+				}
+				if($file_uploaded == true) {
+					//Bild speichern
+					$img_path = 'pictures/profiles/'.$this->login.'.'.$fileext;
+					create_thumbnail($img_path, $img_path, 80, 80, $fileext);
+					return 7;//Bild erfolgreich gepostet.
+				} elseif ($file_uploaded == false) {
+					return $picture_file['error'];//Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.
+				}
+			}
+		}else {
+			return 3;//Kein Bild ausgewählt, versuch es noch ein Mal.
+		}
+	}
 }
 ?>
 <?php

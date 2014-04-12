@@ -41,7 +41,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo $lang->profil->deinprofil->$lng.', '.htmlentities($user->login); else echo 'Profil von '.htmlentities($username); ?></h1></div>
 				<div class="user_info">
-					<img class="profile_pic" src="/img/profil_pic_small.png" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
+					<img class="profile_pic" src="/pictures/profiles/pic?user=<?php echo $username; ?>" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
 						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
@@ -58,6 +58,7 @@ if(!isset($_GET['user']) && !$user->login) {
 							<li><a href="/account?details"><?php echo $lang->profil->change_accountdetails->$lng; ?></a></li>
 							<li><a href="/account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
 							<li><a href="/account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
+							<li><a href="/account?profilpic"><?php echo $lang->account->change_profilpic->$lng; ?></a></li>
 						</ul>
 					</p>
                 </div>      

@@ -5,6 +5,7 @@ require_once('./init.php');
 if(isset($_GET['details'])) $category = 'details';
 	elseif(isset($_GET['notifications'])) $category = 'notifications';
 	elseif(isset($_GET['privacy'])) $category = 'privacy';
+	elseif(isset($_GET['profilpic'])) $category = 'profilpic';
 	else $category = 'none_selected';
 if($user->login) {
 	$username = $user->login;
@@ -79,6 +80,29 @@ if(isset($_POST['submit'])) {
 		$new_password = $user->new_password($_POST['new_username'], $_POST['new_pwd']);
 		if($new_password === true) {
 			$js .= 'alert("'.$lang->php->new_password->wahr->$lng.'");';
+		}
+	}
+	//Profilbild ändern
+	if(isset($_FILES['profilpic_upload_file'])) {
+		$pic_uploaded = $user->update_profilepic($_FILES['profilpic_upload_file'], $max_file_size);
+		//Rückmeldung zu Profilbild hochladen anzeigen
+		if(isset($pic_uploaded)) {
+			switch ($pic_uploaded) {
+				case 2:
+					$js .= 'alert("'.$lang->php->pic_registered->f2->$lng.'");';
+					break;
+				case 3:
+					$js .= 'alert("'.$lang->php->pic_registered->f3->$lng.'");';
+					break;
+				case 6:
+					$js .= 'alert("'.$lang->php->pic_registered->f6->$lng.'");';
+					break;
+				case 7:
+					header('Location: /profil');
+					break;
+				default:
+					$js .= 'alert("'.$pic_uploaded.'");';
+			}
 		}
 	}
 }

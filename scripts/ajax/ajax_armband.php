@@ -53,7 +53,7 @@ if($braceID != NULL) {
 ?>
 						<tr>
 							<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-							<td><img src="/img/profil_pic_small.png" width="20" style="border: 1px #999 solid;">&nbsp;
+							<td><img src="/pictures/profiles/pic?user=<?php echo $stats[$i]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                 <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['user'])); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
@@ -81,7 +81,7 @@ if($braceID != NULL) {
 			}
 ?>
 							<a href="/armband?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-                            <img src="/img/profil_pic_small.png" width="20" style="border: 1px #999 solid;">&nbsp;
+                            <img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$j]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                             <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  

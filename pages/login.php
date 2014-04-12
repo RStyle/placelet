@@ -67,7 +67,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						<input type="hidden" name="registerpic_date" id="registerpic_date" value="default">
 						<input type="hidden" name="" value="">
 						<div id="registerpic_upload_inputs"<?php if($user->login == false) echo ' style="display: none;"'; ?>>
-							<input type="file" name="registerpic_file" accept="image/*" id="registerpic_file"><br>
+							<input type="file" name="registerpic_file" accept="image/*" id="upload_pic"><br>
 							<input type="submit" name="registerpic_submit" id="registerpic_submit" value="<?php echo $lang->login->bildupload->$lng; ?>"><br>
 							<?php echo $lang->login->preview->$lng; ?>:<br>
 							<img id="image_preview" src="/img/placeholder.png" alt="preview">
