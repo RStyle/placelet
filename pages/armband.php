@@ -153,7 +153,7 @@ if($braceName !== NULL) {
 	<?php 
 				}
 	?>   
-							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/armband?name=<?php echo urlencode($braceName); ?>" method="post">
+							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/<?php echo bridtoids($braceName); ?>" method="post">
 								<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 								<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
 								<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
@@ -189,7 +189,7 @@ if($braceName !== NULL) {
 <?php
 		if($owner) {
 ?> 
-					<form method="post" action="/armband?name=<?php echo urlencode($braceName); ?>">
+					<form method="post" action="/<?php echo bridtoids($braceName); ?>">
 						<tr>
 							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
 							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs" name="edit_submit" style="display: none;"></td>

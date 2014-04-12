@@ -34,7 +34,7 @@ if($systemStats['total_posted'] > 1) {
         							<table class="connect_pic-info">
         								<tr>
         									<th><?php echo $lang->pictures->armband->$lng; ?></th>
-        									<td><strong><?php echo '<a href="/armband?name='.urlencode($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
+        									<td><strong><?php echo '<a href="/'.bridtoids($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
         								</tr>
         								<tr>
         									<th><?php echo $lang->pictures->datum->$lng; ?></th>

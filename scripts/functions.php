@@ -1,7 +1,73 @@
 <?php
 function profile_pic($userid) {
-	if(file_exists('pictures/profiles/'.$userid.'.jpg')) return 'pictures/profiles/'.$userid.'.jpg';
-		else return 'img/profil_pic_small.png';
+	if(file_exists('pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
+		else return '/img/profil_pic_small.png';
+}
+function bridtoids($brid, $inurlform = true){ //Armbandname -> Daten /armband?name=
+	global $db;
+	$sql = "SELECT userid FROM bracelets WHERE name = :brid";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':brid' => $brid));
+	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	
+	$sql = "SELECT user FROM users WHERE userid = :userid";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':userid' => $q1['userid']));
+	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	
+	//wievieltes armband?
+	$sql = "SELECT name FROM bracelets WHERE userid = :userid ORDER BY date";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':userid' => $q1['userid']));
+	$qw = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	
+	$number = 1;
+	$count = 1;
+	foreach($qw as $thisq){
+		if($thisq['name'] == $brid){
+			$number = $count;
+			break;
+		}
+		$count++;
+	}
+	if($inurlform == true) return urlencode($qf['user']).'/'.$number;
+	return array($qf['user'], $number);
+}
+function picidtoids($picid, $inurlform = true){
+	global $db;
+	$sql = "SELECT brid, picid FROM pictures WHERE id = :id";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':id' => $picid));
+	$q = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	
+	$sql = "SELECT userid FROM bracelets WHERE brid = :brid";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':brid' => $q['brid']));
+	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	
+	$sql = "SELECT user FROM users WHERE userid = :userid";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':userid' => $q1['userid']));
+	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	
+	//wievieltes armband?
+	$sql = "SELECT brid FROM bracelets WHERE userid = :userid ORDER BY date";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':userid' => $q1['userid']));
+	$qw = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	
+	$number = 1;
+	$count = 1;
+	foreach($qw as $thisq){
+		if($thisq['brid'] == $q['brid']){
+			$number = $count;
+			break;
+		}
+		$count++;
+	}
+	
+	if($inurlform == true) return urlencode($qf['user']).'/'.$number.'/'.$q['picid'];
+	return array($qf['user'], $number, $q['picid']);
 }
 $sql = "SELECT user, userid FROM users";
 $stmt = $db->prepare($sql);
