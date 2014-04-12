@@ -538,14 +538,14 @@ class User
 				return 2;//Dieses Format wird nicht unterstützt. Wir unterstützen nur: .jpeg, .jpg, .gif und .png. Wende dich bitte an unseren Support, dass wir dein Format hinzufügen können.
 			}else {
 				if($picture_file['size'] < $max_file_size) {
-					$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/profiles/'.$this->login.'.'.$fileext);
+					$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/profiles/'.$this->userid.'.'.$fileext);
 				}else {
 					return 6;//'Wir unterstützen nur Bilder bis 8MB Größe';
 				}
 				if($file_uploaded == true) {
 					//Bild speichern
-					$img_path = 'pictures/profiles/'.$this->login.'.'.$fileext;
-					$thumb_path = 'pictures/profiles/'.$this->login.'.jpg';
+					$img_path = 'pictures/profiles/'.$this->userid.'.'.$fileext;
+					$thumb_path = 'pictures/profiles/'.$this->userid.'.jpg';
 					create_thumbnail($img_path, $thumb_path, 80, 80, $fileext);
 					return 7;//Bild erfolgreich gepostet.
 				} elseif ($file_uploaded == false) {
@@ -673,7 +673,7 @@ class Statistics {
 			$userdetails['picture_count'] = $result[3];
 		else
 			$userdetails['picture_count'] = 0;
-		$userdetails['user'] = htmlentities($userdetails['user']);
+		$userdetails['userid'] = $userdetails['userid'];
 		return $userdetails;
 	}
 	//Zeigt die allgemeine Statistik an
@@ -716,7 +716,7 @@ class Statistics {
 		$q = $stmt->fetchAll();
 		for($i = 0; $i < $user_anz; $i++) {
 			if(isset($q[$i]['userid'])) {
-				$stats['user_most_bracelets']['user'][$i] = htmlentities(self::id2username($q[$i]['userid']));
+				$stats['user_most_bracelets']['user'][$i] = self::id2username($q[$i]['userid']);
 				$stats['user_most_bracelets']['userid'][$i] = $q[$i]['userid'];
 				$stats['user_most_bracelets']['number'][$i] = $q[$i]['number'];
 			}
@@ -814,7 +814,8 @@ class Statistics {
 		$stmt->execute(array('brid' => $brid));
 		$q = $stmt->fetchAll();
 		foreach ($q as $key => $val) {
-			$details[$val['picid']]['user'] = htmlentities(self::id2username($val['userid']));
+			$details[$val['picid']]['user'] = self::id2username($val['userid']);
+			$details[$val['picid']]['userid'] = $val['userid'];
 			$details[$val['picid']]['description'] = nl2br($val['description'], 0);
 			$details[$val['picid']]['picid'] = $val['picid'];
 			$details[$val['picid']]['city'] = $val['city'];
@@ -834,7 +835,8 @@ class Statistics {
 			$details[$val['picid']] [$val['commid']] = array();
 			$details[$val['picid']] [$val['commid']] ['commid'] = $val['commid'];
 			$details[$val['picid']] [$val['commid']] ['picid'] = $val['picid'];
-			$details[$val['picid']] [$val['commid']] ['user'] = htmlentities(self::id2username($val['userid']));
+			$details[$val['picid']] [$val['commid']] ['user'] = self::id2username($val['userid']);
+			$details[$val['picid']] [$val['commid']] ['userid'] = $val['userid'];
 			$details[$val['picid']] [$val['commid']] ['comment'] = nl2br($val['comment'], 0);
 			$details[$val['picid']] [$val['commid']] ['date'] = $val['date'];
 		}

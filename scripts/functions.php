@@ -1,4 +1,8 @@
 <?php
+function profile_pic($userid) {
+	if(file_exists('pictures/profiles/'.$userid.'.jpg')) return 'pictures/profiles/'.$userid.'.jpg';
+		else return 'img/profil_pic_small.png';
+}
 $sql = "SELECT user, userid FROM users";
 $stmt = $db->prepare($sql);
 $stmt->execute();

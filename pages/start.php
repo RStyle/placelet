@@ -46,7 +46,7 @@
     ?>
     					<tr>
     						<td>
-    						    <img src="/pictures/profiles/pic?user=<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+    						    <img src="<?php echo profile_pic($systemStats['user_most_bracelets']['userid'][$key]); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
 								<a href="/profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>">								    
 									<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>
 								</a>
@@ -121,7 +121,7 @@
 ?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                     <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>">								        
                                         <?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?>
                                     </a></td>
@@ -147,7 +147,7 @@
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->kaeufer->$lng; ?></td>
-								<td><a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['owner'])); ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
+								<td><a href="/profil?user=<?php echo $stats[$i]['owner']; ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->besitzer->$lng; ?></td>
@@ -170,7 +170,7 @@
 				</div>
 				<div class="comments" id="comment<?php echo $i;?>" data-picnr="<?php echo $systemStats['recent_picids'][$i]; ?>">
 <?php
-				for ($j = 1; $j <= count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; $j++) {
+				for ($j = 1; $j <= count($stats[$i][$systemStats['recent_picids'][$i]-1])-12; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
 					$x_days_ago = days_since($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']);
 					//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
@@ -181,7 +181,7 @@
 					}
 ?>
 					<a href="/community?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-					<img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?>" width="20" style="border: 1px #999 solid;">&nbsp;
+					<img src="<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
                     <strong><?php if($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
                     <p><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  

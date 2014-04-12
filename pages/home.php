@@ -44,17 +44,17 @@ if($systemStats['total_posted'] > 1) {
         									<th><?php echo $lang->pictures->ort->$lng; ?></th>
         									<td><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?></td>
         								</tr>
-                                    	<?php
+<?php
                                     				if($stats[1][$systemStats['recent_picids'][1]-1]['user'] != NULL) {
-                                    	?>
+?>
         								<tr>
         									<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-        									<td><img src="/pictures/profiles/pic?user=<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?>" width="20" style="border: 1px #999 solid;">&nbsp;
-                                                <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[1][$systemStats['recent_picids'][1]-1]['user'])); ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?></a></td>
+        									<td><img src="<?php echo profile_pic($stats[1][$systemStats['recent_picids'][1]-1]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
+                                                <a href="/profil?user=<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?></a></td>
         								</tr>
-                                    	<?php
+<?php
                                     				 }
-                                    	?>
+?>
         							</table>
     					    </div>	
     						<?php //<!--<img src="/img/loading.gif" id="loading" alt="loading..." style="display: block; margin: 0 auto; display: none; right: 25.5%;">    -->?>

@@ -14,7 +14,7 @@ if(isset($_SESSION['user'])){
 }
 $statistics = new Statistics($db, $user);
 
-$recent_brid_pics = false;//Zur Absicherung, war bei diesem Syntax ziemlich verwirrt...
+$recent_brid_pics = false;
 if($_GET['q'] == 3) {
 	if($_GET['recent_brid_pics'] == 'false') $recent_brid_pics = true;
 		else $recent_brid_pics = false;
@@ -81,7 +81,7 @@ if($_GET['q'] == 3) {
 ?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                 <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
 							</tr>
 <?php
@@ -93,7 +93,7 @@ if($_GET['q'] == 3) {
 							<span class="desc-header"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['title']; ?></span><br>
 							<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i; ?>" data-counts="<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>" onClick="show_comments(this);"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; ?>)</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i; ?>" data-counts="<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-12; ?>" onClick="show_comments(this);"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i][$systemStats['recent_picids'][$i]-1])-12; ?>)</span>
 							</p>
 							</div>
 					<aside class="bracelet-props side_container">
@@ -127,7 +127,7 @@ if($_GET['q'] == 3) {
 				</div>
 				<div class="comments" id="comment<?php echo $i;?>" data-picnr="<?php echo $systemStats['recent_picids'][$i]-1+1; ?>">
 <?php
-				for ($j = 1; $j <= count($stats[$i][$systemStats['recent_picids'][$i]-1])-11; $j++) {
+				for ($j = 1; $j <= count($stats[$i][$systemStats['recent_picids'][$i]-1])-12; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
 					$x_days_ago = days_since($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']);
 					//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
@@ -138,7 +138,7 @@ if($_GET['q'] == 3) {
 					}
 ?>
 					<a href="/community?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-					<img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+					<img src="<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                     <strong><?php if($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
                     <p><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['comment']; ?></p> 
                     <hr style="border: 1px solid white;">  

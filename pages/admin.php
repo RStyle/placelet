@@ -29,8 +29,8 @@ if($user->admin && $checklogin) {
 
 ?>
 					<tr>
-						<td><?php echo htmlentities(Statistics::id2username($admin_stats['spam_comments'][$i]['userid'])); ?></td>
-						<td><a href="/armband?name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_comments'][$i]['name']); ?></a></td>
+						<td><?php echo Statistics::id2username($admin_stats['spam_comments'][$i]['userid']); ?></td>
+						<td><a href="/armband?name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_comments'][$i]['brid']; ?>"><?php echo $admin_stats['spam_comments'][$i]['name']; ?></a></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['comment']; ?></td>
 						<td><?php echo $admin_stats['spam_comments'][$i]['spam']; ?>x</td>
 						<td><a href="/admin?comments&delete_comm=true&commid=<?php echo $admin_stats['spam_comments'][$i]['commid']; ?>&picid=<?php echo $admin_stats['spam_comments'][$i]['picid']; ?>&name=<?php echo urlencode($admin_stats['spam_comments'][$i]['name']); ?>">Kommentar löschen</a></td>
@@ -69,8 +69,8 @@ if($user->admin && $checklogin) {
 					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 					<tr>
-						<td><?php echo htmlentities(Statistics::id2username($admin_stats['spam_pics'][$i]['userid'])); ?></td>
-						<td><a href="/armband?name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_pics'][$i]['brid']; ?>"><?php echo htmlentities($admin_stats['spam_pics'][$i]['name']); ?></a></td>
+						<td><?php echo Statistics::id2username($admin_stats['spam_pics'][$i]['userid']); ?></td>
+						<td><a href="/armband?name=<?php echo urlencode($admin_stats['spam_pics'][$i]['name']); ?>" title="<?php echo $admin_stats['spam_pics'][$i]['brid']; ?>"><?php echo $admin_stats['spam_pics'][$i]['name']; ?></a></td>
 						<td><?php echo htmlentities($admin_stats['spam_pics'][$i]['title']); ?></td>
 						<td>
 							<a href="/pictures/bracelets/pic<?php echo '-'.$admin_stats['spam_pics'][$i]['brid'].'-'.$stats[$i]['picid'].'.'.$admin_stats['spam_pics'][$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $admin_stats['spam_pics'][$i]['city'].', '.$admin_stats['spam_pics'][$i]['country']; ?>" class="thumb_link">

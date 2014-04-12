@@ -53,7 +53,7 @@ if($braceID != NULL) {
 ?>
 						<tr>
 							<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-							<td><img src="/pictures/profiles/pic?user=<?php echo $stats[$i]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+							<td><img src="<?php echo profile_pic($stats[$i]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                 <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['user'])); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
@@ -65,12 +65,12 @@ if($braceID != NULL) {
 						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
 						<?php echo $stats[$i]['description']; ?>      
 						<br><br>
-						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" onClick="show_comments(this);" data-counts="<?php echo count($stats[$i])-11 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-11; ?>)</span>
+						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" onClick="show_comments(this);" data-counts="<?php echo count($stats[$i])-12 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-12; ?>)</span>
 					</p>
                     
 					<div class="comments" id="comment<?php echo $i;?>">
 <?php
-		for ($j = 1; $j <= count($stats[$i])-11; $j++) {
+		for ($j = 1; $j <= count($stats[$i])-12; $j++) {
 			//Vergangene Zeit seit dem Kommentar berechnen
 			$x_days_ago = days_since($stats[$i][$j]['date']);
 			//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
@@ -81,7 +81,7 @@ if($braceID != NULL) {
 			}
 ?>
 							<a href="/armband?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-                            <img src="/pictures/profiles/pic?user=<?php echo $stats[$i][$j]['user']; ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+                            <img src="<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                             <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  

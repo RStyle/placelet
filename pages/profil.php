@@ -39,9 +39,9 @@ if(!isset($_GET['user']) && !$user->login) {
 <?php	
 }elseif($user->login || Statistics::userexists($username)) {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo $lang->profil->deinprofil->$lng.', '.htmlentities($user->login); else echo 'Profil von '.htmlentities($username); ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo $lang->profil->deinprofil->$lng.', '.$user->login; else echo 'Profil von '.$username; ?></h1></div>
 				<div class="user_info">
-					<img class="profile_pic" src="/pictures/profiles/pic?user=<?php echo $username; ?>" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
+					<img class="profile_pic" src="<?php echo profile_pic($userdetails['userid']); ?>" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
 						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
