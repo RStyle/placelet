@@ -42,17 +42,42 @@
     					</tr>
     <?php
     }*/
-    foreach($systemStats['user_most_bracelets']['uploads'] as $key => $val) {
+	$activ = array();
+	$sql = "SELECT user, userid FROM users";
+	$stmt = $db->prepare($sql);
+	$stmt->execute();
+	$qusers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	foreach($qusers as $thisuser){
+		$sql = "SELECT name FROM bracelets WHERE userid = :userid";
+		$stmt = $db->prepare($sql);
+		$stmt->execute(array(':userid' => $thisuser['userid']));
+		$bracelets = $stmt->rowCount(); 
+		
+		$sql = "SELECT id FROM pictures WHERE userid = :userid";
+		$stmt = $db->prepare($sql);
+		$stmt->execute(array(':userid' => $thisuser['userid']));
+		$uploads = $stmt->rowCount(); 
+		$activ[$thisuser['user']] = array('br' => $bracelets, 'up' => $uploads, 'userid' => $thisuser['userid']);
+	}
+	foreach ($activ as $key => $row) {
+		$br[$key]    = $row['br'];
+		$up[$key] = $row['up'];
+	}
+	array_multisort($up, SORT_DESC, $br, SORT_DESC, $activ);
+	$activ = array_slice($activ, 0, 5);
+	//var_dump($activ);
+	
+    foreach($activ as $key => $val) {
     ?>
     					<tr>
     						<td>
-    						    <img src="<?php echo profile_pic($systemStats['user_most_bracelets']['userid'][$key]); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
-								<a href="/profil?user=<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>">								    
-									<?php echo $systemStats['user_most_bracelets']['user'][$key]; ?>
+    						    <img src="<?php echo profile_pic($val['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+								<a href="/profil?user=<?php echo urlencode($key); ?>">								    
+									<?php echo $key; ?>
 								</a>
 							</td>
-    						<td><?php echo $systemStats['user_most_bracelets']['number'][$key]; ?></td>
-    						<td><?php echo $val;/*$systemStats['user_most_bracelets']['uploads'][$key];*/ ?></td>
+    						<td><?php echo $val['br']; ?></td>
+    						<td><?php echo $val['up'];/*$systemStats['user_most_bracelets']['uploads'][$key];*/ ?></td>
     					</tr>
     <?php
     }
