@@ -544,7 +544,8 @@ class User
 				if($file_uploaded == true) {
 					//Bild speichern
 					$img_path = 'pictures/profiles/'.$this->login.'.'.$fileext;
-					create_thumbnail($img_path, $img_path, 80, 80, $fileext);
+					$thumb_path = 'pictures/profiles/'.$this->login.'.jpg';
+					create_thumbnail($img_path, $thumb_path, 80, 80, $fileext);
 					return 7;//Bild erfolgreich gepostet.
 				} elseif ($file_uploaded == false) {
 					return $picture_file['error'];//Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.
@@ -553,6 +554,25 @@ class User
 		}else {
 			return 3;//Kein Bild ausgewählt, versuch es noch ein Mal.
 		}
+	}
+	//nachricht senden
+	public function send_message($recipient, $content) {
+		$sql = "INSERT INTO messages (sender, recipient, sent, message) VALUES (:sender, :recipient, :sent, :message)";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+			":sender" => $this->userid,
+			":recipient" => $recipient,
+			":sent" => date(),
+			":message" => $content
+		));
+	}
+	//Nachrichten empfangen
+	public function recieve_messages($only_unseen = true) {
+		$sql = "SELECT sender, recipient, sent, seen, message FROM messages WHERE userid = :userid";
+		if($only_unseen) $sql .= ', seen = 0';
+		$stmt = $db->prepare($sql);
+		$stmt->execute(array(":userid" => $this->userid));
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 }
 ?>
