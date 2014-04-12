@@ -147,6 +147,59 @@ function create_thumbnail($target, $thumb, $w, $h, $ext) {
 	$tci = imagecreatetruecolor($w, $h);
 	imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
 	imagejpeg($tci, $thumb, 80);	
+	
+	
+}
+
+function tinypng($source){
+	global $tinypngapikey;
+	//$tinypngapikey aus connection.php
+	
+	$key = $tinypngapikey;
+
+	$input = $source;
+	$output = $source;
+
+	if(file_exists($input)){
+		$request = curl_init();
+		curl_setopt_array($request, array(
+			CURLOPT_URL => "https://api.tinypng.com/shrink",
+			CURLOPT_USERPWD => "api:" . $key,
+			CURLOPT_POSTFIELDS => file_get_contents($input),
+			CURLOPT_BINARYTRANSFER => true,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_HEADER => true,
+			// Uncomment below if you have trouble validating our SSL certificate.
+			// Download cacgit ert.pem from: http://curl.haxx.se/ca/cacert.pem 
+			// CURLOPT_CAINFO => __DIR__ . "/cacert.pem",
+			CURLOPT_SSL_VERIFYPEER => false
+		));
+
+		$response = curl_exec($request);
+		if (curl_getinfo($request, CURLINFO_HTTP_CODE) === 201) {
+			// Compression was successful, retrieve output from Location header.
+			$headers = substr($response, 0, curl_getinfo($request, CURLINFO_HEADER_SIZE));
+			foreach (explode("\r\n", $headers) as $header) {
+				if (substr($header, 0, 10) === "Location: ") {
+					$request = curl_init();
+					curl_setopt_array($request, array(
+						CURLOPT_URL => substr($header, 10),
+						CURLOPT_RETURNTRANSFER => true,
+						// Uncomment below if you have trouble validating our SSL certificate.
+						// CURLOPT_CAINFO => __DIR__ . "/cacert.pem",
+						CURLOPT_SSL_VERIFYPEER => false
+					));
+					file_put_contents($output, curl_exec($request));
+					$logold = file_get_contents('./text/tinypng-log.txt');
+					file_put_contents('./text/tinypng-log.txt', $logold."Compression succesful: ".$output." - ".date('l jS \of F Y h:i:s A')."\n");
+				}
+			}
+		} else {
+			$logold = file_get_contents('./text/tinypng-log.txt');
+			file_put_contents('./text/tinypng-log.txt', $logold."Compression failed: ".$output." - ".date('l jS \of F Y h:i:s A')."\n");
+			// Something went wrong! 
+		}
+	}
 }
 
 //Überprüft, ob der Wert leer, bzw. auch getrimmt leer ist

@@ -1055,13 +1055,14 @@ class Statistics {
 					':longitude' => $longitude,
 					':state' => $state
 				));
-				
 				$stmt = $this->db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
 				$stmt->execute(array('picid' => $picid, 'brid' => $brid));
 				$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
+				//rename muss sein
 				rename('pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext, 'pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
 				rename('pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg', 'pictures/bracelets/thumb-'.$rowid['id'].'.jpg');
-				
+				if($fileext == 'png')
+					tinypng('pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
 				///E-Mail an die Personen senden, die das Armband abboniert haben
 				$this->notify_subscribers($brid, $this->user->login);
 				return 7;//Bild erfolgreich gepostet.
