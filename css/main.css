@@ -1133,6 +1133,56 @@
         border-left: 4px solid #999; 
     }
 	/*--- Shop SECTION ---*/
+	/*+++ Nachrichten SECTION +++*/
+	#sidebar {
+        width: 400px;
+        float: left;
+    }
+    #sidebar hr {
+        margin: 0;
+    }
+    #chat_list {
+        border-left: 2px #0092ff solid;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    #chat_list li {
+        padding: 10px;
+        background-color: #eee;
+        border-right: 1px solid #000;
+    }
+    #chat_list li.selected {
+        background-color: #fff;
+        border: none;    
+    }
+    #chat_room {
+        float: left;
+        width: calc( 100% - 421px );
+        border: 1px solid #000;
+        border-left: none;
+        border-bottom: none;
+        padding: 10px;
+    }
+        #message_box {
+            background-color: #eee;
+            border-radius: 10px; 
+            height: 100%;
+            padding: 10px;   
+        }
+            .post {
+                overflow: auto;
+                margin-bottom: 20px;
+                clear: both;
+            }
+            .chat_text {
+                width: 100%;
+                height: 100px;
+                font-family: Open Sans;
+                font-size: 1em;
+                resize: none;
+            }
+	/*--- Nachrichten SECTION ---*/
 /*---SECTION---*/
 /*+++Side Container ASIDE+++*/
 	.side_container {
