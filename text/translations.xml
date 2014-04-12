@@ -139,7 +139,7 @@
 				which we hope will become a great community.
 			</en>
 			<de>
-				Wir sind eine Gruppe engagierter Schüler der MSS 11 des Gymnasiums am Römerkastell Bad Kreuznach, die an dem Juniorprojekt des Deutschen Institut für Wirtschaft(DIW) in Köln teilnehmen.
+				Wir sind eine Gruppe engagierter Schüler der MSS 11 des Gymnasiums am Römerkastell Bad Kreuznach, die an dem Juniorprojekt der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH teilnehmen.
 				Das Juniorprojekt bietet die Möglichkeit, 12 Monate lang aktiv in der Wirtschaft mitzuwirken und Erfahrungen in verschiedenen Bereichen für das spätere Berufsleben zu sammeln.
 				Unsere Geschäftsidee besteht darin, Reisearmbänder herzustellen, die von Freund zu Freund um die Welt weitergegeben werden und die persönlichen Fotos,
 				auf dem das Armband zu erkennen ist, auf unserer Homepage hochzuladen und auf diesem Weg eine Community zu gründen.
@@ -448,7 +448,7 @@
 				]]></en>
 				<de><![CDATA[
 					Möchtest du auch ein Reisearmband besitzen, es weiterverschenken und dich somit vielen anderen netten Usern unserer Community anzuschließen?<br>
-					Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
+					Kauf' ein Armband und werde ein Teil davon! Unser Armband ist etwas ganz Persönliches, womit man vielen Menschen auf der Welt eine Freude bereiten kann.<br>
 					Mithilfe eines Namens, den du selbst für dein Armband festlegst, kann jeder, dem du den Namen mitteilst, dein Armband mithilfe unserer Suchleiste finden und seinen Weg nachverfolgen.
 				]]></de>
 			</paragraph>
@@ -503,11 +503,16 @@
 				"Gesamtmetall", the "Handelsblatt", "Danfoss", "Deloitte", the "AXA insurance" and "Fed Ex".
 			</en>
 			<de>
-				JUNIOR ist ein Projekt der Institut der deutschen Wirtschaft Köln gGmbH.
-				Das Unternehmen Placelet entstand durch das Projekt JUNIOR der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH.
+				JUNIOR ist ein Projekt der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH.
 				JUNIOR wird auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank,
 				Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed Ex gefördert.
 			</de>
+			<deold>
+				JUNIOR ist ein Projekt der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH.
+				Das Unternehmen Placelet entstand durch das Projekt JUNIOR der Institut der deutschen Wirtschaft Köln JUNIOR gGmbH.
+				JUNIOR wird auf Bundesebene durch das Bundesministerium für Wirtschaft und Technologie, die KfW Mittelstandsbank,
+				Gesamtmetall, dem Handelsblatt, Danfoss, Deloitte, der AXA Versicherung und Fed Ex gefördert.
+			</deold>
 		</JUNIOR>
 	</home>
 	<impressum en-title="Legal Notice" de-title="Impressum">
