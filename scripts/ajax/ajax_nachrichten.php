@@ -48,16 +48,13 @@ if($user->login) {
 			}
 		}
 		if(!isset($highest_msg_id)) $highest_msg_id = $_POST['msg_id'];
-		if(!isset($seen)) {
-			$seen = 0;
-			echo 'lol ne';
-		}
+		if(!isset($seen)) $seen = 0;
 		if(!isset($seen) && !isset($highest_msg_id)) $messages->read();
 ?>
-                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*Gesehen '.date('H:i', $seen); ?></p>
+                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
 <?php
 	}elseif(isset($_POST['messages_read'])) {
 		$messages = $user->messages_read();
-	}else echo 'du hast nichts ausgewählt';
-}else echo 'WTF is wrong with you?';
+	}
+}
 ?>

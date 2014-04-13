@@ -732,7 +732,7 @@ $('#chat_text').keypress(function(e) {
 		$.ajax({
 			type: "POST",
 			url: "scripts/ajax/ajax_nachrichten.php",
-			data: "recipient=" + recipient + "&message=" + message + "&send_msg=true",
+			data: "recipient=" + recipient + "&message=" + message + "&send_msg=true&eng=" + lng,
 			success: function(html){
 				$("#chat_text").val("");
 				receive_messages();
@@ -751,7 +751,7 @@ function receive_messages() {
 	$.ajax({
 		type: "POST",
 		url: "scripts/ajax/ajax_nachrichten.php",
-		data: "receive_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&lng=" + lng,
+		data: "receive_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&eng=" + lng,
 		success: function(html){
 			$("#seen_marker").remove();
 			$("#message_box").append(html);
@@ -761,6 +761,7 @@ function receive_messages() {
 		}
 	});
 }
+//Nach unten scrollen in der Nachrichtenbox
 $(document).ready(function() {
 	$('#message_box').scroll();
 	$("#message_box").animate({ scrollTop: 4000 }, 6000);
@@ -775,7 +776,7 @@ function messages_read() {
 }
 var intervalID;
 var freqSecs = 15;
-intervalID = setInterval(RepeatCall, freqSecs * 1000 );
+if($('#title').data('title') == 'msg') intervalID = setInterval(RepeatCall, freqSecs * 1000 );
 
 function RepeatCall() {
 	var inout = (freqSecs * 1000) / 2;
@@ -783,3 +784,9 @@ function RepeatCall() {
 	messages_read();
 	console.log("Receiver");
 }
+//Nachrichten-Benachrichtigungen entfernen
+$(document).ready(function() {
+	$('.del_note').click(function() {
+		console.log(this.data("del_note") + "sdafsdf");
+	})
+});

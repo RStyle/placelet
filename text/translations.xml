@@ -717,6 +717,30 @@
 			<en>Me</en>
 			<de>Ich</de>
 		</ich>
+		<antworten>
+			<en>write response</en>
+			<de>Antwort verfassen</de>
+		</antworten>
+		<select_user>
+			<en>You have to select a user to write messages.</en>
+			<de>Du musst einen Benutzer auswählen, dem du schreiben möchtest.</de>
+		</select_user>
+		<selbst_msg>
+			<en>You cannot write to yourself.</en>
+			<de>Du kannst dir nicht selbst schreiben.</de>
+		</selbst_msg>
+		<notexisting>
+			<en>The selected user does not exist.</en>
+			<de>Diesen Benutzer gibt es nicht.</de>
+		</notexisting>
+		<notlogged>
+			<en>You can only send messages if you're logged in. Please log in or create a new </en>
+			<de>Du kannst Nachrichten nur verschicken oder empfangen, wenn du eingeloggt bist. Logge dich ein oder erstelle dir einen </de>
+		</notlogged>
+		<seen>
+			<en>seen</en>
+			<de>Gesehen</de>
+		</seen>
 	</nachrichten>
 	<profil en-title="Profile" de-title="Profil">
 		<notlogged>

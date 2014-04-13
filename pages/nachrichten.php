@@ -1,5 +1,5 @@
 		<article class="mainarticles bottom_border_green">
-			<div class="green_line mainarticleheaders line_header"><h2><?php echo $lang->nachrichten[$lng.'-title']; ?></h2></div>
+			<div class="green_line mainarticleheaders line_header"><h2 id="title" data-title="msgs"><?php echo $lang->nachrichten[$lng.'-title']; ?></h2></div>
 <?php
 if($user->login) {
 ?>
@@ -58,7 +58,7 @@ if($user->login) {
 	if($recipient_known) {
 		$user->messages_read();
 ?>
-                    hallo<p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*Gesehen '.date('H:i', $seen); ?></p>
+                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
 <?php
 	}
 ?>
@@ -66,14 +66,14 @@ if($user->login) {
 <?php
 	if($new_message || $recipient_known) {
 ?>
-					<textarea id="chat_text" placeholder="Antwort verfassen..."></textarea>
+					<textarea id="chat_text" placeholder="<?php echo $lang->nachrichten->antworten->$lng; ?>..."></textarea>
 <?php
-	}elseif(!isset($recipient['name']) && $messages == NULL) echo '<p>Du musst einen Benutzer auswählen, dem du schreiben möchtest.</p>';
-	elseif($user->userid == $recipient['id']) echo '<p>Du kannst dir nicht selbst schreiben.</p>';
-	else echo '<p>Diesen Benutzer gibt es nicht.</p>';
+	}elseif(!isset($recipient['name']) && $messages == NULL) echo '<p>'.$lang->nachrichten->select_user->$lng.'</p>';
+	elseif($user->userid == $recipient['id']) echo '<p>'.$lang->nachrichten->selbst_msg->$lng.'</p>';
+	else echo '<p>'.$lang->nachrichten->notexisting->$lng.'</p>';
 ?>
             </div>
 <?php
-}else echo '<p>Du kannst Nachrichten nur verschicken oder empfangen, wenn du eingeloggt bist. Logge dich ein, oder erstelle dir einen <a href="/login">Account</a>.</p>';
+}else echo '<p>'.$lang->nachrichten->notlogged->$lng.'<a href="/login">Account</a>.</p>';
 ?>
 		</article>

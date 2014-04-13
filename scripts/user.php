@@ -572,7 +572,7 @@ class User
 		$sql = "SELECT id, sender, recipient, sent, seen, message FROM messages WHERE recipient = :userid";
 		if(!$only_recieved) $sql .= " OR sender = :userid";
 		if($only_unseen) $sql .= ' AND seen = 0';
-		//$sql .= " ORDER BY id DESC";
+		$sql .= " ORDER BY id ASC";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array(":userid" => $this->userid));
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);

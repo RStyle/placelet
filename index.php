@@ -69,7 +69,7 @@ if($page == 'home') {
 				<div class="highlighted float_left">+1&nbsp;</div>
 				<img class="float_left" src="/img/msg_icon.png" style="margin-right: 10px;">
 				<p style="margin: 0; width: 270px; float: left;"><?php echo $lang->community->new_msg->$lng->p1.$sender['name'].$lang->community->new_msg->$lng->p2; ?></p></a>
-				<div class="del_msg pseudo_link float_right" onclick="note<?php echo $sender['id']; ?>.parentElement.removeChild(note<?php echo $sender['id']; ?>);">x</div>
+				<div data-del_note="<?php echo $sender['id']; ?>" class="del_msg pseudo_link float_right">x</div>
 			</div>
 		</div>
 <?php
