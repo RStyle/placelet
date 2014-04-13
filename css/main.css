@@ -685,7 +685,7 @@
 			/* Standard */
 			margin-left: calc( ( 100% - 984px ) / 2 );
 			width: 972px;
-			height: 296px;
+			height: 400px;
 			position: relative;
 			overflow: hidden;
 		}
@@ -700,7 +700,7 @@
               top: -35px;
               left: 10px;
               transition: all 400ms linear;
-              color: #fff;      
+              color: #000;      
               border-radius: 5px;      
           }
 
@@ -1141,8 +1141,8 @@
         margin-top: 0;
     }
     #shop hr {
-        margin-top: 0;
-        width: 400px;
+        margin-top: 0;        
+        margin-top: 0;        
     }
     .product_pic {
         border: 6px solid #999;
@@ -1150,6 +1150,37 @@
         margin-right: 10px;
         margin-bottom: 10px;
     }
+    #preis {
+        border: 2px #05EB80 solid;        
+        box-shadow: inset 0px 0px 0px 3px #fff;
+        margin-top: 50px;
+        margin-left: 20px;
+        padding: 0;
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+
+        float: right; 
+        background-color: #ddd;   
+    }
+        .preis_text {
+            margin-bottom: 0;
+            margin-top: 50px;
+            margin-left: 30px;
+            font-family: dosis;
+            font-size: 4em;
+            color: #fff;
+            text-shadow: 3px 3px 0 #ddd, 5px 5px 0 #707070;
+        } 
+        .preis_text2 {
+            margin-top: 0;
+            margin-left: 54px;
+            font-family: dosis;
+            font-size: 1em;
+            color: #fff;
+            text-shadow: 1px 1px 0 #ddd, 2px 2px 0 #707070;
+        }
+    
     .order_button {
         margin-top: 1em;
         display: inline-block;

@@ -120,8 +120,8 @@
 	</error404>
 	<about en-title="About us" de-title="Über Uns">
 	    <imgtitle>
-            <en>The first meeting of the JUNIOR businessmen</en>
-            <de>Das erste Treffen der Juniorunternehmer</de>
+            <en>The JUNIOR businessmen at a meeting</en>
+            <de>Die Juniorunternehmer beim Geschäftstreffen</de>
         </imgtitle>   
 		<partner>
 			<en>partner</en>
@@ -958,9 +958,13 @@
 			<de><![CDATA[<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">]]></de>
 		</paypal>
 		<notavailable>
-			<en><![CDATA[Very soon you will be able to visit our new Online-Shop right here. If you want to be notified when it launches, register <a href="/login">here</a> and you will recieve an e-mail once it is online.]]></en>
+			<en><![CDATA[Very soon you will be able to visit our new Online-Shop right here. If you want to be notified when it launches, register <a href="/login">here</a> and you will receive an e-mail once it is online.]]></en>
 			<de><![CDATA[Hier wird in Kürze unser Online-Shop erscheinen. Wenn sie über den Verkaufsstart informiert werden wollen, registrieren sie sich <a href="/login">hier</a> und sie werden eine Benachrichtigung per E-Mail erhalten.]]></de>
 		</notavailable>
+		<versand>
+            <de>Versand</de>
+            <en>shipping</en>
+        </versand>
 	</shop>
 	<stats>
 		<neuesterupload de-title="neuester upload" en-title="latest upload">
@@ -1096,8 +1100,8 @@
 		<successfully_registered>
 			<en><![CDATA[
 				Your account has been successfully registered.<br>
-				You will shortly recieve an e-mail containing a link with wich you will be able to confirm your e-mail address.<br>
-				If you don't recieve an e-mail within the next five minutes, you will be able to send another one right here.
+				You will shortly receive an e-mail containing a link with wich you will be able to confirm your e-mail address.<br>
+				If you don't receive an e-mail within the next five minutes, you will be able to send another one right here.
 			]]></en>
 			<de><![CDATA[
 				Dein Account wurde erfolgreich erstellt.<br>
@@ -1107,7 +1111,7 @@
 		</successfully_registered>
 		<revalidation>
 			<wahr>
-				<en>Your e-mail address has been changed successfully, you will recieve a link per e-mail with which you can confirm your account.</en>
+				<en>Your e-mail address has been changed successfully, you will receive a link per e-mail with which you can confirm your account.</en>
 				<de>Deine E-Mail wurde erfolgreich geändert, du bekommst per E-Mail einen Link, mit dem du deinen Account freischalten kannst.</de>
 			</wahr>
 			<falsch>
@@ -1219,7 +1223,7 @@
 		</pic_registered>
 		<register>
 			<f1>
-				<en><![CDATA[You have been successfully registered.<br>You will shortly recieve an email with which you can verify your email-adress and unlock your account.]]></en>
+				<en><![CDATA[You have been successfully registered.<br>You will shortly receive an email with which you can verify your email-adress and unlock your account.]]></en>
 				<de><![CDATA[Dein Account wurde erfolgreich erstellt.<br>In Kürze wirst du eine E-Mail von uns erhalten, mit der du deine E-Mail Addresse bestätigen und deinen Account freischalten kannst.]]></de>
 			</f1>
 			<f2>
@@ -1311,7 +1315,7 @@
 				<de>Dieser Benutzer existiert nicht.</de>
 			</f2>
 			<f30>
-				<en><![CDATA[Your account has not been confirmed.<br> You haven't recieved an e-mail? Send it again <a href='login?unvalidated=]]></en>
+				<en><![CDATA[Your account has not been confirmed.<br> You haven't received an e-mail? Send it again <a href='login?unvalidated=]]></en>
 				<de><![CDATA[Dein Account wurde noch nicht bestätigt.<br> Keine E-Mail bekommen? Lass dir <a href='login?unvalidated=]]></de>
 			</f30>
 			<f31>

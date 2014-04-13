@@ -2,7 +2,7 @@
 				<div class="blue_line mainarticleheaders line_header"><h1><?php echo $lang->about[$lng.'-title']; ?></h1></div>
 								
 				<div id="wir">
-    				<a href="/pictures/staff.jpg" data-lightbox="wir"><img src="/pictures/thumb-staff.jpg" alt="Mitarbeiter von Placelet"></a>
+    				<a href="/pictures/mitarbeiterklein.JPG" data-lightbox="wir"><img src="/pictures/thumb-mitarbeiterklein.JPG" alt="Mitarbeiter von Placelet"></a>
     				<div id="text_box"><?php echo $lang->about->imgtitle->$lng; ?></div>
 				</div>
                 <br>
