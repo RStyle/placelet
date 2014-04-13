@@ -46,6 +46,7 @@ if(!isset($_GET['user']) && !$user->login) {
 					<p>
 						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
 						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>
+						<?php if($user->login != $username && $user->login) echo '<br><a href="/nachrichten?msg='.$username.'">Nachricht schreiben</a>'; ?>
 					</p>
 				</div>
 <?php 

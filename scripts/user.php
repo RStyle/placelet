@@ -569,16 +569,30 @@ class User
 	}
 	//Nachrichten empfangen
 	public function recieve_messages($only_unseen = true) {
-		$sql = "SELECT sender, recipient, sent, seen, message FROM messages WHERE recipient = :userid";
+		$sql = "SELECT id, sender, recipient, sent, seen, message FROM messages WHERE recipient = :userid OR sender = :userid";
 		if($only_unseen) $sql .= ' AND seen = 0';
+		//$sql .= " ORDER BY id DESC";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array(":userid" => $this->userid));
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		return $result;
+		$messages = array();
+		for($i = 0; $i < count($result); $i++) {
+			$result[$i]['recipient'] = array('name' => Statistics::id2username($result[$i]['recipient']), 'id' => $result[$i]['recipient']);
+			$result[$i]['sender'] = array('name' => Statistics::id2username($result[$i]['sender']), 'id' => $result[$i]['sender']);
+			
+			if($result[$i]['sender']['id'] == $this->userid) {
+				$messages[$result[$i]['recipient']['id']]['recipient'] = $result[$i]['recipient'];
+				$messages[$result[$i]['recipient']['id']][$i] = $result[$i];
+			}else {
+				$messages[$result[$i]['sender']['id']]['recipient'] = $result[$i]['sender'];
+				$messages[$result[$i]['sender']['id']][$i] = $result[$i];
+			}
+		}
+		return $messages;
 	}
 	//Nachricht als "gelesen" markieren
 	public function messages_read() {
-		$sql = "UPDATE messages SET seen = :date WHERE recipient = :userid";
+		$sql = "UPDATE messages SET seen = :date WHERE recipient = :userid AND seen = 0";
 		$q = $this->db->prepare($sql);
 		$q->execute(array(
 			':date' => time(),

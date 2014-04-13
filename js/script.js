@@ -723,3 +723,36 @@ $(document).ready(function(){
 		reload_start(0);
 	});
 //});
+
+//Nachricht senden
+$('#chat_text').keypress(function(e) {
+	if(e.which == 13) {
+		message = $("#chat_text").val();
+		recipient = $("#chat_room").data("recipient");
+		$.ajax({
+			type: "POST",
+			url: "scripts/ajax/ajax_nachrichten.php",
+			data: "recipient=" + recipient + "&message=" + message + "&send_msg=true",
+			success: function(html){
+				$("#chat_text").val("");
+				recieve_messages();
+			}
+		});
+	}
+});
+
+$("#button").click(function(){recieve_messages();});
+//Nachrichten empfangen
+function recieve_messages() {
+	recipient = $("#chat_room").data("recipient");
+	msg_id = $("#seen_marker").data("msg_id");
+	$.ajax({
+		type: "POST",
+		url: "scripts/ajax/ajax_nachrichten.php",
+		data: "recieve_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&lng=" + lng,
+		success: function(html){
+			$("#seen_marker").remove();
+			$("#chat_text").before(html);
+		}
+	});
+}
