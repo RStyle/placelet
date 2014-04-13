@@ -3,6 +3,17 @@ function profile_pic($userid) {
 	if(file_exists('pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
 		else return '/img/profil_pic_small.png';
 }
+function email_template($mail, $title, $reviever, $from = 'support@placelet.de'){ //noch ungetestet
+	$content = file_get_contents('text/email/template.php?rechtsoben='.$mail['rechtsoben'].'&anrede='.$mail['anrede'].',&p='.$mail['text'].'&link='.$mail['link'].'&linkname='.$mail['linkname']);
+	$mail_header = "From: Placelet <".$from.">\n";
+	$mail_header .= "MIME-Version: 1.0" . "\n";
+	$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+	$mail_header .= "Content-transfer-encoding: 8bit";
+	$log = file_get_contents('./text/mailtemplate-log.txt')."Try sending mail... ".$title." - ".date('l jS \of F Y h:i:s A')."\n";
+	file_put_contents('./text/mailtemplate-log.txt', $log);
+	mail($reviever, $title, $content, $mail_header);
+	file_put_contents('./text/mailtemplate-log.txt', $log."Mail succesful: ".$title." - ".date('l jS \of F Y h:i:s A')."\n");
+}
 function bridtoids($brid, $inurlform = true){ //Armbandname -> Daten /armband?name=
 	global $db;
 	$sql = "SELECT userid FROM bracelets WHERE name = :brid";
