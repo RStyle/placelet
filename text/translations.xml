@@ -379,7 +379,7 @@
                 <p2> erhalten.</p2>
             </de>
             <en>
-                <p1>You've recieved a new message from </p1>
+                <p1>You've received a new message from </p1>
                 <p2>.</p2>
             </en>
         </new_msg>
@@ -753,6 +753,14 @@
 			<en>Edit your account-details</en>
 			<de>Accountdetails ändern</de>
 		</change_accountdetails>
+		<check_msg>
+            <de>Private Nachrichten lesen</de>
+            <en>Read private messages</en>
+        </check_msg>
+        <write_msg>
+            <de>Private Nachricht schreiben</de>
+            <en>Write private message</en>
+        </write_msg>
 		<notifications>
 			<en>notifications</en>
 			<de>Benachrichtigungen</de>

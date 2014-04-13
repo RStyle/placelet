@@ -45,24 +45,37 @@ if(!isset($_GET['user']) && !$user->login) {
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
 						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
-						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>
-						<?php if($user->login != $username && $user->login) echo '<br><a href="/nachrichten?msg='.$username.'">Nachricht schreiben</a>'; ?>
+						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>						
 					</p>
 				</div>
+<?php
+     if($user->login != $username && $user->login) {
+?>
+                <div class="msg_box" style="width: 280px;"><a href="/nachrichten?msg=<?php echo $username ?>" style="text-decoration: none;">
+                    <img style="float: left; margin-right: 10px;" src="/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->write_msg->$lng; ?></p>
+                </a></div>
+<?php  
+    }
+?>
+				
 <?php 
     if($user->login == $username) {
 ?>        
+				
                 <div class="logged_info">
-                    <p>
-						<?php echo $lang->profil->youremail->$lng; ?>: <?php echo $userdetails['email']; ?>
+                    <p style="float: right; margin-top: 0;">						
+                        <?php echo $lang->profil->youremail->$lng; ?>: <?php echo $userdetails['email']; ?>
 						<ul class="list_style_none" style="padding: 0;">
 							<li><a href="/account?details"><?php echo $lang->profil->change_accountdetails->$lng; ?></a></li>
 							<li><a href="/account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
 							<li><a href="/account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
 							<li><a href="/account?profilpic"><?php echo $lang->account->change_profilpic->$lng; ?></a></li>
 						</ul>
-					</p>
-                </div>      
+					</p>					
+                </div>   
+                <div class="msg_box"><a href="/nachrichten" style="text-decoration: none;">
+                    <img style="float: left; margin-right: 10px;" src="/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->check_msg->$lng; ?></p>
+                </a></div>   
 <?php        
     }
 ?>

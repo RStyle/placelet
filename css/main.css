@@ -798,6 +798,16 @@
 		}
 	/*---Armband SECTION---*/
 	/*+++Profil SECTION+++*/
+	.msg_box {
+	    float: right;
+	    margin-right: 20px;
+        overflow: auto;
+        border-radius: 10px;
+        width: 260px;
+        padding: 0 5px;
+        background-color: #eee;
+        border: solid 1px #222;
+    }
 	.profile_pic {
 	    float: left;
         margin-right: 1em; 
@@ -807,13 +817,13 @@
         overflow: hidden;    
         margin-bottom: 1em; 
         float: left;
-        width: 50%;
+        width: 32%;
     }
         .user_info > h1, .user_info p {
             margin: 0;
         }
     .logged_info {
-        float: right; 
+        float: right;
     }
     .showcases, #showcase_2{
         clear: both;  
