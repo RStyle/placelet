@@ -1,18 +1,3 @@
-		    <div id="msg_notes">
-                <div id="note1" class="note"><a href="/nachrichten?msg=[Benutzer]" style="text-decoration: none;">
-                    <div class="highlighted float_left">+1&nbsp;</div>
-                    <img class="float_left" src="/img/msg_icon.png" style="margin-right: 10px;">
-                    <p style="margin: 0; width: 270px; float: left;"><?php echo $lang->community->new_msg->$lng->p1; ?>*Benutzer*<?php echo $lang->community->new_msg->$lng->p2; ?></p></a>
-                    <div class="del_msg pseudo_link float_right" onclick="note1.parentElement.removeChild(note1);">x</div>
-                </div>
-                <div id="note2" class="note"><a href="/nachrichten?msg=[Benutzer]" style="text-decoration: none;">
-                    <div class="highlighted float_left">+1&nbsp;</div>
-                    <img class="float_left" src="/img/msg_icon.png" style="margin-right: 10px;">
-                    <p style="margin: 0; width: 270px; float: left;"><?php echo $lang->community->new_msg->$lng->p1; ?>*Benutzer*<?php echo $lang->community->new_msg->$lng->p2; ?></p></a>
-                    <div class="del_msg pseudo_link float_right" onclick="note2.parentElement.removeChild(note2);">x</div>
-                </div>
-            </div>
-            
             <div id="connect_leiste">
                 <div class="connect_box connect_box_start" id="stats_box">
                     <h1><?php echo $lang->stats->main[$lng.'-title']; ?></h1>

@@ -17,34 +17,47 @@ if(isset($_SESSION['user'])){
 }
 $statistics = new Statistics($db, $user);
 
-//$return = array('notsent' => 'notsent');
 if($user->login) {
 	if(isset($_POST['send_msg']) && isset($_POST['recipient']) && isset($_POST['message'])) {
+		$messages = $user->messages_read();
 		$user->send_message($_POST['recipient'], $_POST['message']);
-	}elseif(isset($_POST['recieve_msgs'])) {
-		$messages = $user->recieve_messages();
+	}elseif(isset($_POST['receive_msgs'])) {
+		$messages = $user->receive_messages(false, false);
 		if(isset($_POST['recipient'])) $recipient = array('id' => $_POST['recipient'], 'name' => Statistics::id2username($_POST['recipient']));
 		if($_POST['msg_id'] != 'null') $msg_id = $_POST['msg_id'];
 			else $msg_id = 0;
 		foreach($messages as $recipientID => $chat) {
 			if($recipientID == $recipient['id']) {
 				foreach($chat as $key => $msg) {
-					if($key !== 'recipient' && $msg['id'] > $msg_id) {
-						if($recipientID != $user->userid) $seen = $msg['seen'];
-	?>
+					if($key !== 'recipient' && $msg['id'] >= $msg_id) {
+						if($msg['sender']['id'] == $user->userid) $seen = $msg['seen'];
+							else $seen = 0;
+						if($msg['id'] > $msg_id) {
+							$highest_msg_id = $msg['id'];
+?>
 						<div class="post">
-							<img src="/pictures/profiles/pic?user=<?php echo $user->userid; ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
+							<img src="/pictures/profiles/pic?user=<?php echo $msg['sender']['id']; ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
 							<div style="float: left;"><p style="color: #999; margin: 0;">
 								<strong style="color: #b7d300"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
 							<p style="margin: 2px;"><?php echo $msg['message']; ?></p></div>
 						</div>
 	<?php
+						}
 					}
 				}
 			}
 		}
+		if(!isset($highest_msg_id)) $highest_msg_id = $_POST['msg_id'];
+		if(!isset($seen)) {
+			$seen = 0;
+			echo 'lol ne';
+		}
+		if(!isset($seen) && !isset($highest_msg_id)) $messages->read();
+?>
+                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*Gesehen '.date('H:i', $seen); ?></p>
+<?php
+	}elseif(isset($_POST['messages_read'])) {
+		$messages = $user->messages_read();
 	}else echo 'du hast nichts ausgewählt';
 }else echo 'WTF is wrong with you?';
-//echo json_encode($return);
-profile_pic(5);
 ?>

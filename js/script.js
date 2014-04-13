@@ -735,24 +735,51 @@ $('#chat_text').keypress(function(e) {
 			data: "recipient=" + recipient + "&message=" + message + "&send_msg=true",
 			success: function(html){
 				$("#chat_text").val("");
-				recieve_messages();
+				receive_messages();
 			}
 		});
 	}
 });
-
-$("#button").click(function(){recieve_messages();});
+var seen = false;
+$("#button").click(function(){receive_messages();});
 //Nachrichten empfangen
-function recieve_messages() {
+function receive_messages() {
 	recipient = $("#chat_room").data("recipient");
+	console.log(recipient);
 	msg_id = $("#seen_marker").data("msg_id");
+	console.log(msg_id);
 	$.ajax({
 		type: "POST",
 		url: "scripts/ajax/ajax_nachrichten.php",
-		data: "recieve_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&lng=" + lng,
+		data: "receive_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&lng=" + lng,
 		success: function(html){
 			$("#seen_marker").remove();
-			$("#chat_text").before(html);
+			$("#message_box").append(html);
+			if(html == '') seen = true;
+			$('#message_box').scroll();
+			$("#message_box").animate({ scrollTop: 4000 }, 6000);
 		}
 	});
+}
+$(document).ready(function() {
+	$('#message_box').scroll();
+	$("#message_box").animate({ scrollTop: 4000 }, 6000);
+});
+//Alle dreißig Sekunden auf neue Nachrichten überprüfen
+function messages_read() {
+	$.ajax({
+		type: "POST",
+		url: "scripts/ajax/ajax_nachrichten.php",
+		data: "messages_read=true"
+	});
+}
+var intervalID;
+var freqSecs = 15;
+intervalID = setInterval(RepeatCall, freqSecs * 1000 );
+
+function RepeatCall() {
+	var inout = (freqSecs * 1000) / 2;
+	receive_messages();
+	messages_read();
+	console.log("Receiver");
 }

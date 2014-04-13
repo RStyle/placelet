@@ -431,7 +431,7 @@ class User
 		));
 		return true;
 	}
-	public function recieve_notifications() {
+	public function receive_notifications() {
 		$sql = "SELECT brid FROM bracelets WHERE userid = :userid";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array(':userid' => $this->userid));
@@ -568,8 +568,9 @@ class User
 		));
 	}
 	//Nachrichten empfangen
-	public function recieve_messages($only_unseen = true) {
-		$sql = "SELECT id, sender, recipient, sent, seen, message FROM messages WHERE recipient = :userid OR sender = :userid";
+	public function receive_messages($only_unseen, $only_recieved) {
+		$sql = "SELECT id, sender, recipient, sent, seen, message FROM messages WHERE recipient = :userid";
+		if(!$only_recieved) $sql .= " OR sender = :userid";
 		if($only_unseen) $sql .= ' AND seen = 0';
 		//$sql .= " ORDER BY id DESC";
 		$stmt = $this->db->prepare($sql);

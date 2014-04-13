@@ -183,7 +183,7 @@ $navregister['value'] = $lang->misc->nav->register->$lng;
 if($user->logged) {//Wenn man eingeloggt ist erscheint anstatt 'Registrieren' 'Mein Profil'
 	$navregister['href'] = "profil";
 	$navregister['value'] = $lang->misc->nav->profil->$lng;
-	$notifics = $user->recieve_notifications();
+	$notifics = $user->receive_notifications();
 	if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
 		$navregister['value'] = $lang->misc->nav->profil->$lng.' ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';
 	}

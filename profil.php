@@ -10,7 +10,7 @@ if(isset($_GET['user'])) {
 if(isset($username) && Statistics::userexists($username)) {
 	$userdetails = $statistics->userdetails($username);
 	$armbaender = profile_stats($userdetails);
-	$notifications = $user->recieve_notifications();
+	$notifications = $user->receive_notifications();
 }
 /*---------------------------------------------------------*/
 require_once('./index.php');
