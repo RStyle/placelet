@@ -25,6 +25,7 @@ RewriteCond %{REQUEST_FILENAME} !account.*
 RewriteCond %{REQUEST_FILENAME} !admin.*
 RewriteCond %{REQUEST_FILENAME} !armband.*
 RewriteCond %{REQUEST_FILENAME} !community.*
+RewriteCond %{REQUEST_FILENAME} !privacy-policy.*
 RewriteCond %{REQUEST_FILENAME} !error.*
 RewriteCond %{REQUEST_FILENAME} !faq.*
 RewriteCond %{REQUEST_FILENAME} !home.*

@@ -172,6 +172,7 @@ $pagename = array(
 	"login" => $lang->login[$lng.'-title'],
 	"nachrichten" => $lang->nachrichten[$lng.'-title'],
 	"order" => $lang->order[$lng.'-title'],
+	"privacy-policy" => $lang->privacypolicy[$lng.'-title'],
 	"profil" => $lang->profil[$lng.'-title'],
 	"search" => $lang->search[$lng.'-title'],
 	"shop" => "Shop",

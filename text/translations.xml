@@ -30,6 +30,10 @@
 				<en>Admin-Tools</en>
 				<de>Admin-Tools</de>
 			</admin>
+			<datenschutz>
+				<en>privacy policy</en>
+				<de>Datenschutz</de>
+			</datenschutz>
 			<impressum>
 				<en>legal notice</en>
 				<de>Impressum</de>
@@ -742,6 +746,8 @@
 			<de>Gesehen</de>
 		</seen>
 	</nachrichten>
+	<privacypolicy en-title="Privacy Policy" de-title="Datenschutzerklärung">
+	</privacypolicy>
 	<profil en-title="Profile" de-title="Profil">
 		<notlogged>
 			<en><![CDATA[
