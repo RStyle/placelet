@@ -46,8 +46,8 @@ if($user->login) {
 ?>
                     <div class="post">
                         <img src="<?php echo profile_pic($msg['sender']['id']); ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
-                        <div style="float: left;"><p style="color: #999; margin: 0;">
-							<strong style="color: #b7d300"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
+                        <div class="post_rightside"><p style="color: #999; margin: 0;">
+							<strong style="color: #b7d300;"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
                         <p style="margin: 2px;"><?php echo $msg['message']; ?></p></div>
                     </div>
 <?php
@@ -66,7 +66,9 @@ if($user->login) {
 <?php
 	if($new_message || $recipient_known) {
 ?>
-					<textarea id="chat_text" placeholder="<?php echo $lang->nachrichten->antworten->$lng; ?>..."></textarea>
+					<div class="answer_box">
+                        <textarea id="chat_text" placeholder="<?php echo $lang->nachrichten->antworten->$lng; ?>..."></textarea>
+                    </div>
 <?php
 	}elseif(!isset($recipient['name']) && $messages == NULL) echo '<p>'.$lang->nachrichten->select_user->$lng.'</p>';
 	elseif($user->userid == $recipient['id']) echo '<p>'.$lang->nachrichten->selbst_msg->$lng.'</p>';

@@ -37,7 +37,7 @@ if($user->login) {
 ?>
 						<div class="post">
 							<img src="/pictures/profiles/pic?user=<?php echo $msg['sender']['id']; ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
-							<div style="float: left;"><p style="color: #999; margin: 0;">
+							<div class="post_rightside"><p style="color: #999; margin: 0;">
 								<strong style="color: #b7d300"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
 							<p style="margin: 2px;"><?php echo $msg['message']; ?></p></div>
 						</div>

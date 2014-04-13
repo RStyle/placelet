@@ -149,8 +149,8 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
     				<br>
 				    <div style="float: right; width: 800px; text-align: right; font-size:10pt">
     				    <a href="http://odd.de/">http://odd.de/</a>
-    					<a href="http://laserkreativ.de/"><span style="margin-left:140px">http://laserkreativ.de/</span></a>
-    					<a href="http://www.goldschmiede-aurelia.de/"><span style="margin-left:80px;margin-right:90px">http://www.goldschmiede-aurelia.de/</span></a>
+    					<a href="http://laserkreativ.de/"><span style="margin-left:135px">http://laserkreativ.de/</span></a>
+    					<a href="http://www.goldschmiede-aurelia.de/"><span style="margin-left:65px;margin-right:78px">http://www.goldschmiede-aurelia.de/</span></a>
     				</div>
 				</div>
 		

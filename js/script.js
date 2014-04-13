@@ -6,7 +6,7 @@ var Input_password = $('input[name=password]');
 var default_reg_password_value = '!§%$$%\/%§$';
 var default_password_value = '!§%$$%\/%§$';
 var show_login = false;
-var login_return = true;
+var boreturn = true;
 
  pic_br_switch_data = true;
 
@@ -306,20 +306,13 @@ function check_width(){
         $("#fb_plugin").attr("data-height", '190');
     }
 //Login-Box-Positionierung	
-	if(window.innerWidth < 1038){
-		$("#login-box").css({ 'left' : 500 });
+	if(window.innerWidth < 1017){
+		$("#login-box").css({ 'left' : 460 });
 		$("#login-box").css({ 'right' : 'initial' });
 	}   
 	else {
-		if(window.innerWidth > 1560) {
-			$("#login-box").css({ 'right' : '34%' });
+		$("#login-box").css({ 'right' : '350px' });
 		$("#login-box").css({ 'left' : 'initial' });
-		}
-		else {
-
-			$("#login-box").css({ 'left' : '51%' });
-		$("#login-box").css({ 'right' : 'initial' });
-		}
 	}
 	
 }
