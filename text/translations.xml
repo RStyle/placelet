@@ -734,8 +734,8 @@
 			<de>Du musst einen Benutzer auswählen, dem du schreiben möchtest.</de>
 		</select_user>
 		<selbst_msg>
-			<en>You cannot write to yourself.</en>
-			<de>Du kannst dir nicht selbst schreiben.</de>
+			<en>You cannot write to yourself. Please select another user.</en>
+			<de>Du kannst dir nicht selbst schreiben. Bitte wähle einen anderen Benutzer aus.</de>
 		</selbst_msg>
 		<notexisting>
 			<en>The selected user does not exist.</en>
@@ -749,6 +749,10 @@
 			<en>seen</en>
 			<de>Gesehen</de>
 		</seen>
+		<username>
+			<en>username</en>
+			<de>Benutzername</de>
+		</username>
 	</nachrichten>
 	<privacypolicy en-title="Privacy Policy" de-title="Datenschutzerklärung">
 	</privacypolicy>

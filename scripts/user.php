@@ -592,12 +592,13 @@ class User
 		return $messages;
 	}
 	//Nachricht als "gelesen" markieren
-	public function messages_read() {
-		$sql = "UPDATE messages SET seen = :date WHERE recipient = :userid AND seen = 0";
+	public function messages_read($userid) {
+		$sql = "UPDATE messages SET seen = :date WHERE recipient = :userid AND seen = 0 AND sender = :senderid";
 		$q = $this->db->prepare($sql);
 		$q->execute(array(
 			':date' => time(),
-			':userid' => $this->userid
+			':userid' => $this->userid,
+			':senderid' => $userid
 		));
 	}
 }

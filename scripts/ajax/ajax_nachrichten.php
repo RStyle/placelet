@@ -18,8 +18,8 @@ if(isset($_SESSION['user'])){
 $statistics = new Statistics($db, $user);
 
 if($user->login) {
-	if(isset($_POST['send_msg']) && isset($_POST['recipient']) && isset($_POST['message'])) {
-		$messages = $user->messages_read();
+	if(isset($_POST['send_msg']) && isset($_POST['recipient']) && isset($_POST['message']) && isset($_POST['senderid'])) {
+		$messages = $user->messages_read($_POST['senderid']);
 		$user->send_message($_POST['recipient'], $_POST['message']);
 	}elseif(isset($_POST['receive_msgs'])) {
 		$messages = $user->receive_messages(false, false);
@@ -53,8 +53,8 @@ if($user->login) {
 ?>
                     <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
 <?php
-	}elseif(isset($_POST['messages_read'])) {
-		$messages = $user->messages_read();
+	}elseif(isset($_POST['messages_read']) && isset($_POST['senderid'])) {
+		$messages = $user->messages_read($_POST['senderid']);
 	}
 }
 ?>

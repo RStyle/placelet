@@ -61,16 +61,24 @@ if($page == 'home') {
 <?php
 	if($user->login) {
 		$msg_notific = $user->receive_messages(true, true);
+		if($msg_notific != NULL) {
+?>
+		<div id="msg_notes">
+<?php
+		}
 		foreach($msg_notific as $sender => $val) {
 			$sender = array('name' => Statistics::id2username($sender), 'id' => $sender);
 ?>
-		<div id="msg_notes">
 			<div id="note<?php echo $sender['id']; ?>" class="note"><a href="/nachrichten?msg=<?php echo $sender['name']; ?>" style="text-decoration: none;">
 				<div class="highlighted float_left">+1&nbsp;</div>
 				<img class="float_left" src="/img/msg_icon.png" style="margin-right: 10px;">
 				<p style="margin: 0; width: 270px; float: left;"><?php echo $lang->community->new_msg->$lng->p1.$sender['name'].$lang->community->new_msg->$lng->p2; ?></p></a>
 				<div data-del_note="<?php echo $sender['id']; ?>" class="del_msg pseudo_link float_right">x</div>
 			</div>
+<?php
+		}
+		if($msg_notific != NULL) {
+?>
 		</div>
 <?php
 		}

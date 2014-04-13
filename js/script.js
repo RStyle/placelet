@@ -718,23 +718,26 @@ $(document).ready(function(){
 //});
 
 //Nachricht senden
-$('#chat_text').keypress(function(e) {
-	if(e.which == 13) {
-		message = $("#chat_text").val();
-		recipient = $("#chat_room").data("recipient");
-		$.ajax({
-			type: "POST",
-			url: "scripts/ajax/ajax_nachrichten.php",
-			data: "recipient=" + recipient + "&message=" + message + "&send_msg=true&eng=" + lng,
-			success: function(html){
-				$("#chat_text").val("");
-				receive_messages();
-			}
-		});
-	}
+$(document).ready(function() {
+	$('#chat_text').keypress(function(e) {
+		if(e.which == 13) {
+			message = $("#chat_text").val();
+			console.log(message);
+			recipient = $("#chat_room").data("recipient");
+			console.log(recipient);
+			$.ajax({
+				type: "POST",
+				url: "scripts/ajax/ajax_nachrichten.php",
+				data: "recipient=" + recipient + "&message=" + message + "&send_msg=true&eng=" + lng + "&senderid=" + $('#chat_room').data('recipient'),
+				success: function(html){
+					$("#chat_text").val("");
+					receive_messages($('#chat_room').data('recipient'));
+				}
+			});
+		}
+	});
 });
 var seen = false;
-$("#button").click(function(){receive_messages();});
 //Nachrichten empfangen
 function receive_messages() {
 	recipient = $("#chat_room").data("recipient");
@@ -744,7 +747,7 @@ function receive_messages() {
 	$.ajax({
 		type: "POST",
 		url: "scripts/ajax/ajax_nachrichten.php",
-		data: "receive_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&eng=" + lng,
+		data: "receive_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&eng=" + lng + "&senderid=" + $('#chat_room').data('recipient'),
 		success: function(html){
 			$("#seen_marker").remove();
 			$("#message_box").append(html);
@@ -760,26 +763,27 @@ $(document).ready(function() {
 	$("#message_box").animate({ scrollTop: 4000 }, 6000);
 });
 //Alle dreißig Sekunden auf neue Nachrichten überprüfen
-function messages_read() {
+function messages_read(senderid) {
 	$.ajax({
 		type: "POST",
 		url: "scripts/ajax/ajax_nachrichten.php",
-		data: "messages_read=true"
+		data: "messages_read=true&senderid=" + senderid
 	});
 }
 var intervalID;
 var freqSecs = 15;
-if($('#title').data('title') == 'msg') intervalID = setInterval(RepeatCall, freqSecs * 1000 );
+if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0 && $("#seen_marker").data("msg_id") != 0) intervalID = setInterval(RepeatCall, freqSecs * 1000 );
 
 function RepeatCall() {
 	var inout = (freqSecs * 1000) / 2;
 	receive_messages();
-	messages_read();
-	console.log("Receiver");
+	messages_read($('#chat_room').data('recipient'));
+	console.log("Receiver" + $('#chat_room').data('recipient'));
 }
 //Nachrichten-Benachrichtigungen entfernen
 $(document).ready(function() {
-	$('.del_note').click(function() {
-		console.log(this.data("del_note") + "sdafsdf");
+	$('.del_msg').click(function() {
+		messages_read($('.del_msg').data("del_note"));
+		$('#note' + $('.del_msg').data("del_note")).remove();
 	})
 });

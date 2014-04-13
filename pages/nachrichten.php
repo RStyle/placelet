@@ -31,7 +31,7 @@ if($user->login) {
 ?>
                 </ul> 
             </div>
-            <div id="chat_room" data-recipient="<?php echo $recipient['id']; ?>">
+            <div id="chat_room" data-recipient="<?php if(isset($recipient['id'])) echo $recipient['id']; else echo 0;?>">
                 <div id="message_box" style="height: 350px; overflow-y: scroll;">
 <?php
 	$recipient_known = false;
@@ -55,8 +55,10 @@ if($user->login) {
 			}
 		}
 	}
-	if($recipient_known) {
-		$user->messages_read();
+	if(!isset($seen)) $seen = 0;
+	if(!isset($highest_msg_id) && $new_message) $highest_msg_id = 0;
+	if($recipient_known || $new_message) {
+		$user->messages_read($recipient['id']);
 ?>
                     <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
 <?php
@@ -70,9 +72,9 @@ if($user->login) {
                         <textarea id="chat_text" placeholder="<?php echo $lang->nachrichten->antworten->$lng; ?>..."></textarea>
                     </div>
 <?php
-	}elseif(!isset($recipient['name']) && $messages == NULL) echo '<p>'.$lang->nachrichten->select_user->$lng.'</p>';
-	elseif($user->userid == $recipient['id']) echo '<p>'.$lang->nachrichten->selbst_msg->$lng.'</p>';
-	else echo '<p>'.$lang->nachrichten->notexisting->$lng.'</p>';
+	}elseif(!isset($recipient['name']) && $messages == NULL) echo '<p>'.$lang->nachrichten->select_user->$lng.$select_user.'</p>';
+	elseif($user->userid == $recipient['id']) echo '<p>'.$lang->nachrichten->selbst_msg->$lng.$select_user.'</p>';
+	else echo '<p>'.$lang->nachrichten->notexisting->$lng.$select_user.'</p>';
 ?>
             </div>
 <?php
