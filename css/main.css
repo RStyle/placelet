@@ -858,7 +858,32 @@
 		}
 	/*---Profil SECTION---*/
 	/*+++Start SECTION+++*/
-			
+		#msg_notes {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }	
+            .note {
+                overflow: auto;
+                border-radius: 10px;
+                margin-top: 10px;
+                width: 400px; 
+                padding: 10px;
+                background-color: #eee;
+                border: solid 1px #222;
+                    
+            }
+                .note_link {
+                    text-decoration: none;
+                    width: 383px;
+                    display: block;
+                    overflow: auto;
+                }
+                .del_msg { 
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+            
 		.thumb_link {
 			float: left;
 			max-width: 40%;
