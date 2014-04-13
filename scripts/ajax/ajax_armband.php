@@ -24,6 +24,12 @@ if($braceID != NULL) {
 		$bracelet_stats['owners'] = 0;
 		$stats = $bracelet_stats;
 	}
+	$stmt = $db->prepare('SELECT brid FROM bracelets WHERE userid = :ownerid ORDER BY date ASC');
+	$stmt->execute(array(':ownerid' => $statistics->username2id($stats['owner'])));
+	$userfetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	foreach($userfetch as $key => $val) {
+		if($val['brid'] == $braceID) $stats['braceletNR'] = $key + 1;
+	}
 	for ($i = $_GET['q'] - 3; $i < $_GET['q']; $i++) {
 		if(!isset($stats[$i])) break;
 		if($i < $_GET['q']) {
@@ -60,7 +66,7 @@ if($braceID != NULL) {
 		}
 ?>
 					</table>
-						
+					<div class="fb-like" data-href="http://placelet.de/<?php echo $stats['owner'].'/'.$stats['braceletNR'].'/'.$stats[$i]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 					<p class="pic-desc">
 						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
 						<?php echo $stats[$i]['description']; ?>      
