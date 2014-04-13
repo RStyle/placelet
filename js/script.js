@@ -6,7 +6,7 @@ var Input_password = $('input[name=password]');
 var default_reg_password_value = '!§%$$%\/%§$';
 var default_password_value = '!§%$$%\/%§$';
 var show_login = false;
-var boreturn = true;
+var login_return = true;
 
  pic_br_switch_data = true;
 
