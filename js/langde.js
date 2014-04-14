@@ -1,0 +1,16 @@
+lang = new Array();
+lang["showcomment"] = "Kommentare zeigen";
+lang["hidecomment"] = "Kommentare verstecken";
+lang["kommentar_gemeldet"] = "Kommentar gemeldet.";
+lang["bild_gemeldet"] = "Bild gemeldet.";
+lang["passwoerter_unpassend"] = "Die Passwörter passen nicht zusammen.";
+lang["ort_nichtgefunden"] = "Dieser Ort konnte nicht gefunden werden.";
+lang["confirm_date1"] = "Möchtest du den ";
+lang["confirm_date2"] = " als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet.";
+lang["bist_da"] = "Hier bist du :)";
+lang["meinprofil"] = "Mein Profil";
+lang["dasBild"] = "das Bild";
+lang["denKommentar"] = "den Kommentar";
+lang["loeschen"] = "löschen";
+lang["melden"] = "melden";
+lng = "de";
