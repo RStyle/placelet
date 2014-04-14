@@ -24,9 +24,9 @@
                     <h1><?php echo $lang->stats->aktivstebenutzer[$lng.'-title']; ?></h1>
                     <table id="topusers">
     					<tr>
-    						<td style="border-bottom: 1px solid #000;"><?php echo $lang->stats->aktivstebenutzer->benutzername->$lng; ?></td>
-    						<td style="border-bottom: 1px solid #000;"><?php echo $lang->stats->aktivstebenutzer->armbänder->$lng; ?></td>
-    						<td style="border-bottom: 1px solid #000;"><?php echo $lang->stats->aktivstebenutzer->uploads->$lng; ?></td>
+    						<td class="start_topusers_td"><?php echo $lang->stats->aktivstebenutzer->benutzername->$lng; ?></td>
+    						<td class="start_topusers_td"><?php echo $lang->stats->aktivstebenutzer->armbänder->$lng; ?></td>
+    						<td class="start_topusers_td"><?php echo $lang->stats->aktivstebenutzer->uploads->$lng; ?></td>
     					</tr>
     <?php
     /*for ($i = 0; $i < count($systemStats['user_most_bracelets']['user']); $i++) {
@@ -146,7 +146,7 @@
 ?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" class="border999">&nbsp;
                                     <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>">								        
                                         <?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?>
                                     </a></td>
@@ -172,7 +172,7 @@
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->kaeufer->$lng; ?></td>
-								<td><a href="/profil?user=<?php echo $stats[$i]['owner']; ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
+								<td><a href="/profil?user=<?php echo $stats[$i]['owner']; ?>" class="weiss"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->besitzer->$lng; ?></td>
@@ -206,10 +206,10 @@
 					}
 ?>
 					<a href="/community?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-					<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
+					<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['userid']); ?>" width="20" class="border999">&nbsp;
                     <strong><?php if($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
                     <p><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['comment']; ?></p> 
-                    <hr style="border: 1px solid white;">  
+                    <hr class="border_white">  
 <?php 
 				}
 ?>   

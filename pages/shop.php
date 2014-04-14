@@ -3,9 +3,9 @@
 			<article id="shop" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1>Shop</h1></div>
 				
-				<div style="float: left; width: 420px;">
-					<div id="slider1_container" style="position: relative; width: 400px; height: 600px;">
-						<div data-u="slides" class="product_pic" style="cursor: move; overflow: hidden; width: 400px; height: 600px;">
+				<div id="shop_div1">
+					<div id="slider1_container" class="shop_slider">
+						<div data-u="slides" class="product_pic" style="width: 400px; height: 600px;">
 							<div><img data-u="image" src="/cache.php?f=/pictures/shop/thumb-1.jpg" alt="Armband"></div>
 							<div><img data-u="image" src="/cache.php?f=/pictures/shop/thumb-3.jpg" alt="Armband"></div>
 							<div><img data-u="image" src="/cache.php?f=/pictures/shop/thumb-6.jpg" alt="Armband"></div>
@@ -13,11 +13,11 @@
 					</div><br>
 				</div>
 					
-				<div style="float: left; width: 55%; margin-left: 2%;">
+				<div id="shop_div2">
 					<h2><?php echo $lang->shop->reisearmband->$lng; ?></h2>
 					<h3><?php echo $lang->shop->artikelinfo->$lng; ?></h3>
 					<p class="shop_text"><?php echo $lang->shop->description->$lng; ?></p>			
-					<div style="width: 55%; float: left;">
+					<div id="shop_div2_div">
                         <h4><?php echo $lang->shop->size[$lng.'-title']; ?></h4>
     					   <select size="1" name="os0" form="paypal">
                             	<option value="<?php echo $lang->shop->small->$lng; ?>"><?php echo $lang->shop->small->$lng; ?></option>

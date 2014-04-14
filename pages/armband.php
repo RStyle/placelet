@@ -85,8 +85,8 @@ if($braceName !== NULL) {
 		if(!$user_subscribed) {
 ?>
 				<form method="get" action="armband">
-					<input type="submit" name="sub_submit" value="<?php echo $lang->pictures->armband->$lng; ?>" class="float_right sub_inputs" style="display: none;">
-					<input name="sub_code" type="email"  size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" class="float_right sub_inputs" style="display: none;" required>
+					<input type="submit" name="sub_submit" value="<?php echo $lang->pictures->armband->$lng; ?>" class="float_right sub_inputs display_none">
+					<input name="sub_code" type="email"  size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" class="float_right sub_inputs display_none" required>
 					<input type="hidden" name="sub" value="email">
 					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>" id="bracelet_name">
 				</form>
@@ -101,9 +101,9 @@ if($braceName !== NULL) {
 				if($i == 0) $last_pic = 'last';
 					else $last_pic = 'middle';
 	?>
-					<div style="width: 100%; overflow: auto;">
-					<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=<?php echo $last_pic; ?>&amp;delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
-						<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '<img alt="" src="/cache.php?f=/img/pfeil_small.png" width="30" height="20" style="position: relative; top: 2px;"> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+					<div class="width100 overflow_auto">
+					<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=<?php echo $last_pic; ?>&amp;delete_pic=true" class="delete_button float_right mt2" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+						<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '<img alt="" src="/cache.php?f=/img/pfeil_small.png" width="30" height="20" class="pfeil_small"> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 						<a href="/pictures/bracelets/pic<?php echo '-'.$row['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 							<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
 							<img src="/cache.php?f=/pictures/bracelets/thumb-<?php echo $row['id']; ?>.jpg" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
@@ -118,7 +118,7 @@ if($braceName !== NULL) {
 	?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" width="20" class="border999">&nbsp;
                                     <a href="/profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo $stats[$i]['user']; ?></a></td>
 							</tr>
 	<?php
@@ -146,10 +146,10 @@ if($braceName !== NULL) {
 					}
 	?>
 								<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" class="border999">&nbsp;
                                 <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
 								<p><?php echo $stats[$i][$j]['comment']; ?></p> 
-								<hr style="border: 1px solid white;">  
+								<hr class="border_white">  
 	<?php 
 				}
 	?>   
@@ -167,7 +167,7 @@ if($braceName !== NULL) {
 	<?php
 				if(isset($stats[$i + 1]) && $i < $showPics - 1) {
 	?>
-	<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
+	<!--~~~HR~~~~--><hr class="armband_hr">
 	<?php	
 				}
 			}
@@ -181,7 +181,7 @@ if($braceName !== NULL) {
 			</article>
 			<aside class="side_container" id="bracelet_props">
 				<h1><?php echo $lang->armband->statistik->$lng; ?></h1>
-				<table style="width: 100%;">
+				<table class="width100">
 					<tr>
 						<th><?php echo $lang->misc->comments->name->$lng; ?></th>
 						<td><?php echo '<strong>'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
@@ -191,8 +191,8 @@ if($braceName !== NULL) {
 ?> 
 					<form method="post" action="/<?php echo bridtoids($braceName); ?>">
 						<tr>
-							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
-							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs" name="edit_submit" style="display: none;"></td>
+							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs display_none" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
+							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs display_none" name="edit_submit"></td>
 						</tr>
 					</form>
 <?php
@@ -229,14 +229,14 @@ if($braceName !== NULL) {
 <?php
 		if($bracelet_stats['owners'] != 0) {
 ?>
-			<aside id="map_home" class="side_container" style="margin-top: 20px;"><?php echo $lang->misc->activate_js->$lng; ?></aside>
+			<aside id="map_home" class="side_container mt20"><?php echo $lang->misc->activate_js->$lng; ?></aside>
 <?php
 		}
 		$works = true;
 	}
 	/*}else {
 ?>
-			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
+			<article id="armband" class="mainarticles bottom_border_green width100">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falschesarmband->$lng; ?></h1></div>
 				<p>
 					<?php echo $lang->armband->gibtsnicht->$lng; ?>
@@ -253,7 +253,7 @@ if($braceName !== NULL) {
 	}*/
 }if(!$works) {
 ?>
-			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
+			<article id="armband" class="mainarticles bottom_border_green width100">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falscheseite->$lng; ?></h1></div>
 				<p><?php echo $lang->armband->gehweg->$lng; ?></p>
 				<?php echo $lang->armband->odersuchen->armband->$lng; ?>:

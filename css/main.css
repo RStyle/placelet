@@ -1139,6 +1139,9 @@
         float: left;
         margin-right: 10px;
         margin-bottom: 10px;
+		/*Shop, Slider:*/
+		cursor: move;
+		overflow: hidden;
     }
     #preis {
         border: 2px #05EB80 solid;        
@@ -1296,7 +1299,6 @@
 			width:1px;
 			height:1px;
 		}
-		
 		footer{
 			display:block;
 			width:600px;
@@ -1311,53 +1313,88 @@
 		.nonetextdeco{
 			text-decoration: none;
 		}
-		
 		.marginright10{
 			margin-right: 10px;
 		}
-		
 		.newmsg{
 			margin: 0;
 			width: 270px;
 			float: left;
 		}
-		
 		.mainnavlistli1{
 			border-left: 1px #fff solid;
 		}
-		
 		#picupload_login_loading{
 			display: none;
 		}
-		
+		.display_none{
+			display: none;
+		}
 		.border_black{
 			border: 1px solid black;
 		}
-		
+		.border_white{
+			border: 1px solid white;
+		}
 		.border999{
 			border: 1px #999 solid;
 		}
-		
+		.overflow_auto{
+			 overflow: auto;
+		}
 		#kontakt-form{
 			padding-left: 20px;
 			border-left: 4px #BEBEBE solid;
 		}
-		
 		.hr_clear{
 			clear: both;
 		}
-		
 		.width100{
 			width: 100%;
 		}
-		
 		.div70left{
 			width: 70%;
 			float: left;
 		}
-		
 		.mt2{
 			margin-top: 2em;
+		}
+		.mt20{
+			margin-top: 20px;
+		}
+		.weiss {
+			color: #fff;
+		}
+		.start_topusers_td{
+			border-bottom: 1px solid #000;
+		}
+		#shop_div1{
+			float: left;
+			width: 420px;
+		}
+		#shop_div2{
+			float: left;
+			width: 55%;
+			margin-left: 2%;
+		}
+		#shop_div2_div{
+			width: 55%;
+			float: left;
+		}
+		.shop_slider{
+			position: relative;
+			width: 400px;
+			height: 600px;
+		}
+		.pfeil_small{
+			position: relative;
+			top: 2px;
+		}
+		.armband_hr{
+			border-style: solid;
+			height: 0px;
+			border-bottom: 0;
+			clear: both;
 		}
 
 .delete_button {
