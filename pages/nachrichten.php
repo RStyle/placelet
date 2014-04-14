@@ -9,10 +9,12 @@ if($user->login) {
 <?php
 	if($new_message) {
 ?>
-                    <a href="/nachrichten?msg=<?php echo $recipient['name']; ?>" style="text-decoration: none;"><li class="selected">
-                         <strong><?php echo $recipient['name']; ?></strong><br>
-                         <p style="color: #999; margin: 0;">&nbsp;</p>                         
-                    </li></a>
+                    <a href="/nachrichten?msg=<?php echo $recipient['name']; ?>" style="text-decoration: none;">
+						<li class="selected">
+							 <strong><?php echo $recipient['name']; ?></strong><br>
+							 <p style="color: #999; margin: 0;">&nbsp;</p>                         
+						</li>
+					</a>
                     <hr>
 <?php
 	}
@@ -21,15 +23,22 @@ if($user->login) {
 		reset($chat);
 		if(!isset($recipient)) $recipient = array('name' => $chat['recipient']['name'], 'id' => $chat['recipient']['id']);
 ?>
-                    <a href="/nachrichten?msg=<?php echo $chat['recipient']['name']; ?>" style="text-decoration: none;"><li<?php if($chat['recipient']['id'] == $recipient['id']) echo ' class="selected"'; ?>>
-                         <strong><?php echo $chat['recipient']['name']; ?></strong><br>
-                         <p style="color: #999; margin: 0;"><?php echo days_since($latestMSG['sent']).' '.date('H:i d.m.Y', $latestMSG['sent']); ?></p>                         
-                    </li></a>
+                    <a href="/nachrichten?msg=<?php echo $chat['recipient']['name']; ?>" style="text-decoration: none;">
+						<li<?php if($chat['recipient']['id'] == $recipient['id']) echo ' class="selected"'; ?>>
+							 <strong><?php echo $chat['recipient']['name']; ?></strong><br>
+							 <p style="color: #999; margin: 0;"><?php echo days_since($latestMSG['sent']).' '.date('H:i d.m.Y', $latestMSG['sent']); ?></p>                         
+						</li>
+					</a>
                     <hr>
 <?php
 	}
 ?>
-                </ul> 
+					<li>
+						<strong>Neue Nachricht an:</strong><br>
+						<?php echo $select_user; ?>
+					</li>
+                    <hr>
+				</ul>
             </div>
             <div id="chat_room" data-recipient="<?php if(isset($recipient['id'])) echo $recipient['id']; else echo 0;?>">
                 <div id="message_box" style="height: 350px; overflow-y: scroll;">
@@ -48,7 +57,7 @@ if($user->login) {
                         <img src="<?php echo profile_pic($msg['sender']['id']); ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
                         <div class="post_rightside"><p style="color: #999; margin: 0;">
 							<strong style="color: #b7d300;"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
-                        <p style="margin: 2px;"><?php echo $msg['message']; ?></p></div>
+                        <p style="margin: 2px;"><?php echo strtr($msg['message'], $smileys); ?></p></div>
                     </div>
 <?php
 				}

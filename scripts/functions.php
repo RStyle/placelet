@@ -1,4 +1,8 @@
 <?php
+//Smileys
+$smileys = array(
+	':)' => '<img alt=":)" src="/img/laechelnd.gif">', ':D' => '<img alt=":D" src="/img/lachend.gif">', ':P' => '<img alt=":P" src="/img/frech.gif">', ';)' => '<img alt=";)" src="/img/zwinkernd.gif">',
+	':(' => '<img alt=":(" src="/img/traurig.gif">', ':o' => '<img alt=":o" src="/img/schockiert.gif">', ':O' => '<img alt=":O" src="/img/schockiert.gif">');
 function profile_pic($userid) {
 	if(file_exists('pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
 		else return '/img/profil_pic_small.png';
