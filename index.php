@@ -261,7 +261,7 @@ if($page == 'login' && isset($postpic)) {
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
 <?php
 } if ($page != 'community' && $page != 'start') { ?>
-		<br><br><footer <?php if(is_mobile($_SERVER['HTTP_USER_AGENT']) == false && in_array($page,array('shop', 'kontakt', 'faq', 'nachrichten'))){ echo' class="footer_down'; } ?> style="position:relative;bottom:0px;"><small>&copy; 2013-2014 Placelet <span class="headerlist_sub_divider">|</span> <a href="/privacy-policy"><?php echo $lang->misc->nav->datenschutz->$lng; ?></a> <span class="headerlist_sub_divider">|</span> <a href="/impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></small></footer>
+		<br><br><footer <?php if(is_mobile($_SERVER['HTTP_USER_AGENT']) == false && in_array($page,array('shop', 'kontakt', 'faq', 'nachrichten'))){ echo' class="footer_down'; } ?> ><small>&copy; 2013-2014 Placelet <span class="headerlist_sub_divider">|</span> <a href="/privacy-policy"><?php echo $lang->misc->nav->datenschutz->$lng; ?></a> <span class="headerlist_sub_divider">|</span> <a href="/impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></small></footer>
 <?php } 	/*$js.='
 	function header(){
 	if($(window).width() < 1100)
@@ -279,8 +279,9 @@ if($page == 'login' && isset($postpic)) {
 	if((parseInt($("#profil").position().top) + parseInt($("#profil").css("height"))) > $("footer").position().top){ $("footer").css("position","absolute");$("footer").css("top",($(window).height() - 24) + "px");} ';*/
 
 if($js != '<script type="text/javascript">$(document).ready(function(){') {
-	//$js = str_replace(array("\r\n", "\r", "\n"), '', $js);
-	//$js = preg_replace("/\s+/", " ", $js);
+	$js = str_replace(array("\t", '  '), "", $js);
+	$c = '{';
+	$js = str_replace($c, $c.' ', $js);
 	$js .= '});</script>'; echo trim($js);
 }
 ?>
