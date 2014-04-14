@@ -17,8 +17,11 @@ $str_output .= file_get_contents('lightbox.css');
 //$str_output = preg_replace('#//.*#', '', $str_output);
 //$str_output = preg_replace('#\n|\r\n|\r|\t#', '', $str_output);
 //$str_output = str_replace("\n", '', $str_output);
-$str_output = str_replace(array("\r\n", "\r", "\n"), '', $str_output);
 $str_output = preg_replace("/\s+/", " ", $str_output);
+$str_output = str_replace(array("\r\n", "\r", "\n"), '', $str_output);
+$str_output = str_replace('; ', ';', $str_output);
+$str_output = str_replace('*/ ', '*/', $str_output);
+$str_output = str_replace(' /* ', '/*', $str_output);
 //$str_output = preg_replace('#\n|\r\n|\r|\t#', '', $output);*/
 
 echo $str_output;

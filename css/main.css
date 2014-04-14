@@ -296,12 +296,8 @@
 			.headerlist_sub_divider {
 				font-size: 0.8em;
 			}
-			#de_flag {
+			.flag{
 				width: 15px;
-				height: 9px;
-			}
-			#gb_flag {
-				width: 18px;
 				height: 9px;
 			}
 		#headerlogin {
