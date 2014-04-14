@@ -103,7 +103,7 @@ if($user->login) {
 							<span id="picupload_login_errormsg"></span>
 							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
 							<input type="password" size="20" name="picupload_login_password" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
-							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="/cache.php?f=/img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
+							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="/cache.php?f=/img/loading.gif" alt="Laden..." id="picupload_login_loading">
 						<?php /* <!--</form>--> */ ?>
 <?php
 	}
@@ -115,7 +115,7 @@ if($user->login) {
 			<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->account->nocategory->$lng; ?> (<?php echo $user->login ?>)</h1></div>
 			<p>
 				<?php echo $lang->account->category->$lng; ?>:<br>
-				<ul class="list_style_none" style="padding: 0;">
+				<ul class="list_style_none">
 					<li><a href="/account?details"><?php echo $lang->account->details->$lng; ?></a></li>
                 	<li><a href="/account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
                 	<li><a href="/account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
@@ -162,7 +162,7 @@ if($user->login) {
 				<div class="green_line mainarticleheaders line_header"><h1>Account</h1></div>
 					<?php echo $lang->account->ausgeloggt->$lng; ?>
 					<form name="login" action="/account" method="post">
-						<table style="border: 1px solid black">
+						<table class="border_black">
 							<tr>
 								<td><label for="acc_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 								<td><input type="text" name="login" id="acc_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>

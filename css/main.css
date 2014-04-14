@@ -115,6 +115,7 @@
     }
 	.list_style_none li{
 		list-style-type: none;
+		padding: 0;
 	}
 /*---allgemeine Styles---*/
 /*+++Baumdiagramm+++*/
@@ -365,15 +366,7 @@
 		position:  absolute;
 		top: 8px;
 		left: 1%;
-    }
-    #logo {
-	    width: 60px;
-	    height: auto;
-	    
-	    position: relative;
-		left: 11px;
-		top: 15px; 
-	}*/
+    }*/
 /*---LOGO---*/
 /*+++NAV+++*/
 	#mainnav {
@@ -541,8 +534,7 @@
                     .connect_thumbnail {
         			   	padding-right: 1em;
             	        border-right: solid 1px #000;
-            			float: left;
-            			max-height: 400px;            			
+            			float: left;           			
             			max-width: 85%;
             			/* Firefox */
             			max-width: -moz-calc(100% - 50px);
@@ -552,6 +544,7 @@
             			max-width: -o-calc(100% - 50px);
             			/* Standard */
             			max-width: calc(100% - 50px);
+						max-height: 175px;
         			} 
         			.connect_pic-info {
         			    font-size: 1.1em;
@@ -1312,6 +1305,59 @@
 		.footer_down{
 			position:absolute;
 			bottom:0px;
+		}
+		
+		/*inlineStyleweg:*/
+		.nonetextdeco{
+			text-decoration: none;
+		}
+		
+		.marginright10{
+			margin-right: 10px;
+		}
+		
+		.newmsg{
+			margin: 0;
+			width: 270px;
+			float: left;
+		}
+		
+		.mainnavlistli1{
+			border-left: 1px #fff solid;
+		}
+		
+		#picupload_login_loading{
+			display: none;
+		}
+		
+		.border_black{
+			border: 1px solid black;
+		}
+		
+		.border999{
+			border: 1px #999 solid;
+		}
+		
+		#kontakt-form{
+			padding-left: 20px;
+			border-left: 4px #BEBEBE solid;
+		}
+		
+		.hr_clear{
+			clear: both;
+		}
+		
+		.width100{
+			width: 100%;
+		}
+		
+		.div70left{
+			width: 70%;
+			float: left;
+		}
+		
+		.mt2{
+			margin-top: 2em;
 		}
 
 .delete_button {

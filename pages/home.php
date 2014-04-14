@@ -29,7 +29,7 @@ if($systemStats['total_posted'] > 1) {
         					   </div>
                                                            			
         						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
-        						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+        						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail">
         						</a>
         							<table class="connect_pic-info">
         								<tr>

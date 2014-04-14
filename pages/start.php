@@ -71,7 +71,7 @@
     ?>
     					<tr>
     						<td>
-    						    <img src="/cache.php?f=<?php echo profile_pic($val['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+    						    <img src="/cache.php?f=<?php echo profile_pic($val['userid']); ?> " width="20" class="border999">&nbsp;
 								<a href="/profil?user=<?php echo urlencode($key); ?>">								    
 									<?php echo $key; ?>
 								</a>
@@ -125,9 +125,9 @@
 					if($val['brid'] == $bracelets_displayed[$i]) $stats[$i]['braceletNR'] = $key + 1;
 				}
 ?>
-				<div style="width: 100%;">
-					<div style="width: 70%; float: left;">
-						<a href="/community?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+				<div class="width100">
+					<div class="div70left">
+						<a href="/community?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild mt2" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
 						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i][$systemStats['recent_picids'][$i]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; //onclick="return confirmDelete('dasBild');" ?>" class="thumb_link">
 							<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
 							<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="thumbnail">
@@ -227,7 +227,7 @@
 <?php
 				if ($i < count($bracelets_displayed)) {
 ?>
-<!--~~~HR~~~~--><hr style="clear: both;">
+<!--~~~HR~~~~--><hr class="hr_clear">
 <?php
 				}
 			}

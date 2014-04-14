@@ -10,6 +10,7 @@ if($_GET['file'][0] != '/')
 	$_GET['file'][0] = '/'.$_GET['file'][0];
 
 $filename = dirname($_SERVER['SCRIPT_FILENAME']);
+$svg = false;
 
 if(file_exists('.'.$_GET['file'])){
 	$end = '';
@@ -20,8 +21,10 @@ if(file_exists('.'.$_GET['file'])){
 		$mime = 'image/'.$thisend;
 	elseif($thisend == 'ico')
 		$mime = 'image/x-icon';
-	elseif($thisend == 'svg')
+	elseif($thisend == 'svg'){
 		$mime = 'image/svg+xml';
+		$svg = true;
+	}
 }elseif(file_exists('.'.$_GET['file'].'.png')){
 	$end = '.png';
 	$mime = 'image/png';
@@ -40,6 +43,7 @@ if(file_exists('.'.$_GET['file'])){
 }elseif(file_exists('.'.$_GET['file'].'.svg')){
 	$end = '.svg';
 	$mime = 'image/svg+xml';
+	$svg = true;
 }else
 	exit();
 
@@ -49,6 +53,9 @@ header('Pragma: public');
 header('Cache-Control: max-age=31536000');
 header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 31536000));
 header('Content-Type: '.$mime);
+
+if($_GET['file'] == '/img/logo_extended.svg')
+	ob_start("ob_gzhandler"); //Kompression bei dieser großer Datei (Rat von Google, man spart so 49% Traffik bei dieser Datei)
 
 echo file_get_contents('.'.$_GET['file'].$end);
 }
