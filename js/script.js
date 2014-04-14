@@ -1,6 +1,5 @@
 var currentPath = $(location).attr('pathname');
 $(document).ready(function() {
-	// starte wenn DOM geladen ist
 	
 var Input_password = $('input[name=password]');
 var default_reg_password_value = '!§%$$%\/%§$';
@@ -10,7 +9,7 @@ var login_return = true;
 
  pic_br_switch_data = true;
 
-//Login-Box anzeigen
+/*Login-Box anzeigen*/
 $("#headerlogin").click(function(){
 	show_login = !show_login;
 	if(show_login == true) {
@@ -32,7 +31,7 @@ jQuery(document).click(function(e) {
 });
 
 
-//Login
+/*Login*/
 $('.password').on({
     focus:function(){                   
 		if(this.value == default_password_value || this.value == default_reg_password_value) this.value = '';
@@ -40,7 +39,7 @@ $('.password').on({
     blur:function(){
 		if(this.value == '') this.value = default_password_value;
     }
-})
+});
 
 $("#form_login").submit(function() {
 	if ($("#password").val() == default_password_value) {
@@ -69,12 +68,11 @@ $("#form_login").submit(function() {
 });
 
 $(".input_text").blur(function(){
-		if(this.value != $.trim(this.value)) this.value = $.trim(this.value);  //trimt Formualer - außer Passwörter - direkt per JS
-    }
-);
+		if(this.value != $.trim(this.value)) this.value = $.trim(this.value);  /*trimt Formualer - außer Passwörter - direkt per JS*/
+});
 
 
-//Registration
+/*Registration*/
 $("#form_reg").submit(function() {
 	if ($("#reg_password").val() == default_password_value) {
 	$("#reg_password").select();
@@ -87,45 +85,31 @@ $("#form_reg").submit(function() {
 	
 	if ($("#reg_password").val() != $("#reg_password2").val()) {
 		$('#reg_password, #reg_password2').each(function() {
-			this.setCustomValidity(lang['passwoerter_unpassend']) //Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide
+			this.setCustomValidity(lang['passwoerter_unpassend']) /*Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide*/
 			
 		});
 		return false;
 	}
 });
 
-//Emailüberprüfung
-/*
-Klappt irgendwie nicht :'(
-$("#reg_password2").oninput(function() {
-	if ($("#reg_password2").value != $('#reg_email').value) {
-		document.getElementById("reg_password2").setCustomValidity('The two email addresses must match.');
-	} else {
-		// input is valid -- reset the error message
-		document.getElementById("reg_password2").setCustomValidity('');
-	}
-});*/
 
 
 
 
-//
 $('#holder').on(
     'dragover',
     function(e) {
         e.preventDefault();
         e.stopPropagation();
-    }
-)
+    });
 $('#holder').on(
     'dragenter',
     function(e) {
         e.preventDefault();
         e.stopPropagation();
-    }
-)
+    });
 
-//Überprüfung ob Stadt bei Bildupload exestiert bzw. Korrektur
+/*Überprüfung ob Stadt bei Bildupload exestiert bzw. Korrektur*/
 $("form[name=registerpic]").submit(function() {
 	geocoder = new google.maps.Geocoder();
 	var address = $('#registerpic_city').val() + "," + $('#registerpic_country').val();
@@ -147,42 +131,37 @@ $("form[name=registerpic]").submit(function() {
 			return false;
 		}
 	});
-}
-);
+});
 
 
-//Uploadvorschau
+/*Uploadvorschau*/
 $('input[id=upload_pic]').change(function preview() {
 		var active = false;
 		var i_height = 1000; 
 		window.clearInterval(active);
 		$('#image_preview').css("max-height", "0%");
 		var oFReader = new FileReader();
-		//oFReader.readAsDataURL(document.getElementById("registerpic_file").files[0]);
 		oFReader.readAsDataURL($('input[id=upload_pic]').prop("files")[0]);
 	
 		oFReader.onload = function (oFREvent) {
-			//$('#image_preview').css("background-image", "url(" + oFREvent.target.result + ")");  
 		
 			i_height = 0; 
 			active = window.setInterval( function() {
 				if(i_height > 50){
 					window.clearInterval(active);
 				}
-				//$("#image_preview").height( i_height  + "%");
 				$('#image_preview').css("max-height", i_height  + "%");  
 				i_height += 1.25;
 			}, 40);
 			
 			$("#image_preview").attr("src",oFREvent.target.result);
 		};
-	}
-);
+	});
 
-//Datumsabfrage
+/*Datumsabfrage*/
 var someCallback = function(exifObject) {
 	var now = Math.round(+new Date() / 1000);
-	//Format: "yy:MM:dd hh:mm:ss";
+	/*Format: "yy:MM:dd hh:mm:ss";*/
 	var date = exifObject.DateTimeOriginal;
 	myDate = date.split(" ");
 	dayDate = myDate[0].split(":");
@@ -194,8 +173,7 @@ var someCallback = function(exifObject) {
 	}else {
 		$("#registerpic_date").val(now);
 	}
-	//console.log(exifObject);
-}
+} /*1*/ /*<--wichtig!*/
 try {
 	$('#upload_pic').change(function() {
 		$(this).fileExif(someCallback);
@@ -205,84 +183,30 @@ try {
 }
 
 
-/*Drop-Down Text mit Hover-Effekt
-function dropdown(button, content) {
-	var tmp;
-	$('.' + button + "s").click(function (){
-		number = $('.' + button + "s").attr('id').replace(button + '_', '');
-		//Pfeile austauschen
-		$("." + button + "_arrow" + number).toggleClass("arrow_right");
-		$("." + button + "_arrow" + number).toggleClass("arrow_down");
-		//Inhalt sichtbar/unsichtbar
-		//$("#" + content + "_" + number).toggle();
-		tmp = $("#" + content + "_" + number);
-		tmp.stop(true, true);
-		if (tmp.height() <= '1') {
-			tmp.height('100%');
-			var height = tmp.height();
-			tmp.height('1px');
-			tmp.animate({
-				'height': height
-			}, 500);
-			state = 'open';
-		}
-		else if (tmp.height() > '2') {
-			tmp.slideUp(500);
-		}
-	});
-	
-	$('.' + button + "s").hover(function() {
-		var number = $('.' + button + "s").attr('id').replace(button + '_', '');
-		tmp = $("#" + content + "_" + number);
-		if (tmp.is(':hidden')) {
-			tmp.height("1px");
-			tmp.stop(true, true);
-			tmp.slideDown('3s');
-		}
-	},
-	function() {
-		var number = $('.' + button + "s").attr('id').replace(button + '_', '');
-		tmp = $("#" + content + "_" + number);
-		if (tmp.height() <= '1') {
-			tmp.slideUp('3s');
-	
-		}
-	});
-}*/
-//Drop-Down Text
+/*Drop-Down Text*/
 function dropdown(button, content) {
 	$('.' + button + "s").click(function (){
 		number = $(this).attr('id').replace(button + '_', '');
-		//Pfeile austauschen
+		/*Pfeile austauschen*/
 		$("." + button + "_arrow" + number).toggleClass("arrow_right");
 		$("." + button + "_arrow" + number).toggleClass("arrow_down");
-		//Inhalt sichtbar/unsichtbar
+		/*Inhalt sichtbar/unsichtbar*/
 		$("#" + content + "_" + number).toggle(400);
 	});
 }
-//Profil Showcases Ein-/Ausblenden
+/*Profil Showcases Ein-/Ausblenden*/
 dropdown("tab", "showcase");
-//FAQ Fragen Ein-/Ausblenden
+/*FAQ Fragen Ein-/Ausblenden*/
 dropdown("question", "answer");
-//Home Boxen Ein-/Ausblenden
-dropdown("header", "connectbox")
+/*Home Boxen Ein-/Ausblenden*/
+dropdown("header", "connectbox");
 
 function check_width(){   
-//Logo Positionierung 
-    /*if(window.innerWidth < 1240) {
-        $("#round_logo").css({ 'display' : 'none' });    
-    }   
-    if(window.innerWidth > 1500) {
-		$("#section").css({ 'width' : 'calc(100% - 500px)' });
-		$("#mainnavlist").css({ 'width' : 'calc(100% - 500px)' });
-	}else {
-		$("#section").css({ 'width' : '70%' }); 
-		$("#mainnavlist").css({ 'width' : '70%' });
-	}*/
+/*Logo Positionierung */
 	if(window.innerWidth < 1480 && window.innerWidth > 1230){
 		$("#logo").attr("src", '/img/logo.svg');
 		$("#logo").attr("width", '93');
-	}else if(window.innerWidth > 1500) {
+	}/*1*/else if(window.innerWidth > 1500) {
 		$("#section").css({ 'width' : 'calc(100% - 500px)' });
 		$("#mainnavlist").css({ 'width' : 'calc(100% - 500px)' });
 	}else {
@@ -298,14 +222,14 @@ function check_width(){
 		$("#logo").attr("style", 'display: none;');
 	}
 
-//FB-Plugin-Höhe
+/*FB-Plugin-Höhe*/
     if(window.innerWidth < 1587) {
         $("#fb_plugin").attr("data-height", '200');
     }
     else {
         $("#fb_plugin").attr("data-height", '190');
     }
-//Login-Box-Positionierung	
+/*Login-Box-Positionierung*/
 	if(window.innerWidth < 1017){
 		$("#login-box").css({ 'left' : 460 });
 		$("#login-box").css({ 'right' : 'initial' });
@@ -322,17 +246,17 @@ check_width();
 
 });
 
-//---------------------Bildhochladeseite--------------------\\
-//Funktion zum Marker setzen auf der Bildhochladenseite
+/*---------------------Bildhochladeseite--------------------\\*/
+/*Funktion zum Marker setzen auf der Bildhochladenseite*/
 var mapset = false;
 var map;
 var marker;
-function initialize_postpic(coords, this_lat, this_lng) {
-	if(this_lat != false && this_lng != false)
-		var latlng = new google.maps.LatLng(this_lat, this_lng);
-	else
-		var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
-	
+function initialize_postpic(coords, this_lat, this_lng) {/*1*/
+	if(this_lat != false && this_lng != false){
+		var latlng = new google.maps.LatLng(this_lat, this_lng);}
+	else{
+		var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);}
+	/*1*/
 	$.ajax({
 		type: 'GET',
 		dataType: "json",
@@ -356,12 +280,9 @@ function initialize_postpic(coords, this_lat, this_lng) {
 							country = val['long_name'];
 						}
 					}
-					//if (val['types'].indexOf("administrative_area_level_1") >= 0) {
 					if (val['types'] == "administrative_area_level_1,political") {
 						if (val['long_name']!="") {
 							bundesland = val['long_name'];
-						//console.log(i+", " + val['long_name']);
-						//console.log(i+", " + val['types']);
 						}
 					}
 				});
@@ -372,7 +293,7 @@ function initialize_postpic(coords, this_lat, this_lng) {
 			console.log('Success');
 		},
 		error: function () { console.log('error'); } 
-	}); 
+	});
 
 	var myOptions = {
 		zoom: 8,
@@ -396,7 +317,6 @@ function initialize_postpic(coords, this_lat, this_lng) {
 			draggable: true
 		}); 
 		
-		//map.setCenter(marker.position);
 		google.maps.event.addListener(marker, 'dragend', function(evt) {
 			map.setCenter(marker.position);
 			
@@ -419,7 +339,6 @@ function initialize_postpic(coords, this_lat, this_lng) {
 							if (val['types'] == "locality,political") {
 								if (val['long_name']!="") {
 									city = val['long_name'];
-									//return;
 								}
 							}
 							if (val['types'] == "country,political") {
@@ -460,7 +379,6 @@ $('#registerpic_city').on({
 				myString = myString.replace('(', '');
 				myString = myString.replace(')', '');
 				geoData = myString.split(', ');
-				//console.log(geoData[0] + "," + geoData[1]);
 				lat = geoData[0];
 				$("#latitude").val(lat);
 				long = geoData[1];
@@ -480,14 +398,13 @@ function success_postpic(position) {
 	long = position.coords.longitude;
 	$("#longitude").val(long.toString());
 	initialize_postpic(position.coords, false, false);
-	//console.log(position.coords);
 }
 function error_postpic(msg) {
 	console.log(typeof msg == 'string' ? msg : "error123");
 }
-//--------------------^^Bildhochladeseite^^-------------------\\
+/*--------------------^^Bildhochladeseite^^-------------------\\*/
 
-//Kommentare Ein-/Ausblenden
+/*Kommentare Ein-/Ausblenden*/
 function show_comments(obj){
         number = $(obj).attr('id').replace('toggle_comment','');
         $("#comment" + number).toggle();
@@ -502,7 +419,7 @@ $('.toggle_comments').click(function (){
 });
 
 
-//Neuste Bilder Nachladen -start.php
+/*Neuste Bilder Nachladen -start.php*/
 var reload_q = 3;
 
 $(window).scroll(function () {
@@ -543,14 +460,13 @@ function reload_start(plus) {
 		alert( "error" );
 	});
 }
-//Neuste Bilder Nachladen -armband.php
+/*Neuste Bilder Nachladen -armband.php*/
 var reload_q2 = 3;
 
 function reload_armband(braceName, plus) {
 	reload_q2 += plus;
 	var nachlad = $.ajax( "/scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName + "&eng=" + lng)
 		.done(function( data ) {
-		//$("#armband_reload").remove();
 		htmlcode = $("#armband").html();
 		$("#armband").append(data);
 		})
@@ -558,7 +474,7 @@ function reload_armband(braceName, plus) {
 			alert( "error" );
 	}); 
 }
-//Nächstes/Vorheriges Bild
+/*Nächstes/Vorheriges Bild*/
 function change_pic(cv, sv) {
 	$("#loading").toggle();
 	$.post("/scripts/ajax/ajax_home.php", {contentVar: cv, startVal: sv, eng: lng}, function(data) {
@@ -569,7 +485,7 @@ function change_pic(cv, sv) {
 		alert( "error" );
 	}); 
 }
-//Aboformular anzeigen
+/*Aboformular anzeigen*/
 $(document).ready(function(){
 	$('#show_sub').click(function(){
 		$.ajax({
@@ -588,14 +504,14 @@ $(document).ready(function(){
 		});
 	});
 });
-//Armband-Name Formular anzeigen
+/*Armband-Name Formular anzeigen*/
 $(document).ready(function(){
 	$('#edit_name').click(function(){
 		$('.name_inputs').toggle();
 	});
 });
 
-//Löschen von Kommentaren und Bildern bestätigen
+/*Löschen von Kommentaren und Bildern bestätigen*/
 function confirmDelete(type, object) {
 	var braceName = $(object).attr('data-bracelet');
 	var href = $('<a>', { href:$(object).attr("href") } )[0];
@@ -640,7 +556,7 @@ function confirmDelete(type, object) {
 	});
 }
 
-//Den Rest vom Bild-Hochladformular anzeigen, wenn man nicht eingeloggt ist.
+/*Den Rest vom Bild-Hochladformular anzeigen, wenn man nicht eingeloggt ist.*/
 $(document).ready(function(){
 	$('#picupload_nologin').click(function() {
 		$('#registerpic_upload_inputs').toggle();
@@ -648,7 +564,7 @@ $(document).ready(function(){
 	});
 });
 
-//Ajax-Login
+/*Ajax-Login*/
 $(document).ready(function(){
 	$("#picupload_login_submit").click(function(){
 		username = $("#picupload_login_username").val();
@@ -693,7 +609,7 @@ $(document).ready(function(){
 	});
 });
 
-//Benachrichtigungen gelesen
+/*Benachrichtigungen gelesen*/
 $(document).ready(function(){
 	$("#notific_read").click(function(){
 		$.ajax({
@@ -707,17 +623,15 @@ $(document).ready(function(){
 	});
 });
 
-//Zwischen neuesten Bildern und zuletzt geposteten Armbändern wechseln.
-//$(document).ready(function() {
+/*Zwischen neuesten Bildern und zuletzt geposteten Armbändern wechseln.*/
 	$(document).on('click', '#pic_br_switch', function() {
 		if(pic_br_switch_data == true){ $('#pic_br_switch').data('recent_brid_pics', 'false'); pic_br_switch_data = false;}
 			else {$('#pic_br_switch').data('recent_brid_pics', 'true'); pic_br_switch_data = true;}
 		reload_q = 3;
 		reload_start(0);
 	});
-//});
 
-//Nachricht senden
+/*Nachricht senden*/
 $(document).ready(function() {
 	$('#chat_text').keypress(function(e) {
 		if(e.which == 13) {
@@ -738,7 +652,7 @@ $(document).ready(function() {
 	});
 });
 var seen = false;
-//Nachrichten empfangen
+/*Nachrichten empfangen*/
 function receive_messages() {
 	recipient = $("#chat_room").data("recipient");
 	console.log(recipient);
@@ -757,12 +671,12 @@ function receive_messages() {
 		}
 	});
 }
-//Nach unten scrollen in der Nachrichtenbox
+/*Nach unten scrollen in der Nachrichtenbox*/
 $(document).ready(function() {
 	$('#message_box').scroll();
 	$("#message_box").animate({ scrollTop: 4000 }, 6000);
 });
-//Alle dreißig Sekunden auf neue Nachrichten überprüfen
+/*Alle dreißig Sekunden auf neue Nachrichten überprüfen*/
 function messages_read(senderid) {
 	$.ajax({
 		type: "POST",
@@ -780,10 +694,10 @@ function RepeatCall() {
 	messages_read($('#chat_room').data('recipient'));
 	console.log("Receiver" + $('#chat_room').data('recipient'));
 }
-//Nachrichten-Benachrichtigungen entfernen
+/*Nachrichten-Benachrichtigungen entfernen*/
 $(document).ready(function() {
 	$('.del_msg').click(function() {
 		messages_read($('.del_msg').data("del_note"));
 		$('#note' + $('.del_msg').data("del_note")).remove();
-	})
+	});
 });

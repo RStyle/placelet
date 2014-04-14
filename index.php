@@ -10,11 +10,13 @@
 		">
 		<meta name="author" content="Roman S., Daniel S., Julian Z.">
 		<meta name="google-site-verification" content="ZkpZK9hxVHOscD4izd7OXGCCjMkpytJMbuOgjO-AWjI">
-		<link href="/css/main.css" rel="stylesheet" type="text/css">
-		<link href="/css/lightbox.css" rel="stylesheet">
+		<link href="/css/css.php" rel="stylesheet" type="text/css">
 		<!--Google Fonts-->
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis%7COpen+Sans">
 <?php
+/*<link href="/css/main.css" rel="stylesheet" type="text/css"><link href="/css/lightbox.css" rel="stylesheet">*/
+
+
 if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Clients
 ?>
 		<link href="/var/www/virtual/placelet.de/htdocs/css/mobile.css" rel="stylesheet" type="text/css">
@@ -156,7 +158,7 @@ require_once($this_path.'/pages/'.$page.'.php');
 		</section>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <?php 
-		$js.= 'lang = new Array();'."\n";
+		/*$js.= 'lang = new Array();'."\n";
 		foreach($lang->js as $obj) {
 			foreach($obj as $key => $val) {
 				foreach($val as $key_lng => $value) {
@@ -164,10 +166,14 @@ require_once($this_path.'/pages/'.$page.'.php');
 				}
 			}
 		}
-		$js.= 'lng = "'.$lng.'";';
-?>
+		$js.= 'lng = "'.$lng.'";';*/
+		/*
 		<script type="text/javascript" src="/js/exif+jssor+lightbox.js"></script>
+		<script type="text/javascript" src="/js/lang<?php echo $lng; ?>.js"></script>
 		<script type="text/javascript" src="/js/script.js"></script>
+		*/
+?>
+		<script type="text/javascript" src="/js/js.php?lang=<?php echo $lng; ?>"></script>
 <?php
 if($page == 'login' && isset($postpic)) {
 ?>
@@ -184,8 +190,8 @@ if($page == 'login' && isset($postpic)) {
 }elseif($page == 'home'){
 ?>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
-		<script>
 		<?php $eecho = '';
+		
 		$data = getlnlt();
 		$central = '0, 0';
 		$max = array(false, false, false, false, 0);
@@ -199,7 +205,7 @@ if($page == 'login' && isset($postpic)) {
 				$max[2] = $pos['longitude'];
 			if($pos['longitude'] > $max[3] || $max[3] == false)
 				$max[3] = $pos['longitude'];
-			echo '
+			$js.= '
 			var latlng'.$i.' = new google.maps.LatLng('.$pos['latitude'].', '.$pos['longitude'].');';
 			$eecho .= '
 			var marker'.$i.' = new google.maps.Marker({
@@ -236,21 +242,20 @@ if($page == 'login' && isset($postpic)) {
 					$zoom = 3;
 				else if($max[4] < 80)
 					$zoom = 2;
-			?>
+			$js.='
 		function initialize() {
 		  var mapOptions = {
-			zoom: <?php echo $zoom; ?>,
+			zoom: '.$zoom.',
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			center: new google.maps.LatLng(<?php echo $central ?>)
+			center: new google.maps.LatLng('.$central.')
 		  }
-		var map = new google.maps.Map(document.getElementById('map_home'), mapOptions);
+		var map = new google.maps.Map(document.getElementById("map_home"), mapOptions);
 		
-		<?php echo $eecho; ?>
+		'.$eecho.'
 		}
-		google.maps.event.addDomListener(window, 'load', initialize);
-		
-		</script>
-<?php
+		google.maps.event.addDomListener(window, "load", initialize);
+		';
+
 }elseif($page == 'armband'){
 ?>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script>
@@ -274,7 +279,9 @@ if($page == 'login' && isset($postpic)) {
 	if((parseInt($("#profil").position().top) + parseInt($("#profil").css("height"))) > $("footer").position().top){ $("footer").css("position","absolute");$("footer").css("top",($(window).height() - 24) + "px");} ';*/
 
 if($js != '<script type="text/javascript">$(document).ready(function(){') {
-	$js .= '});</script>'; echo $js;
+	//$js = str_replace(array("\r\n", "\r", "\n"), '', $js);
+	//$js = preg_replace("/\s+/", " ", $js);
+	$js .= '});</script>'; echo trim($js);
 }
 ?>
 	</body>
