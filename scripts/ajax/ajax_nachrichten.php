@@ -4,6 +4,10 @@ ini_set('display_errors', true);
 session_start(); //Session starten
 include_once('../connection.php');
 include_once('../functions.php');
+function tprofile_pic($userid) {
+	if(file_exists('../../pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
+		else return '/img/profil_pic_small.png';
+}
 require_once('../user.php');
 $lang = simplexml_load_file('../../text/translations.xml');
 $lng = 'de';
@@ -36,7 +40,7 @@ if($user->login) {
 							$highest_msg_id = $msg['id'];
 ?>
 						<div class="post">
-							<img src="/cache.php?f=/pictures/profiles/pic?user=<?php echo $msg['sender']['id']; ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
+							<img src="/cache.php?f=<?php echo tprofile_pic($msg['sender']['id']); ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
 							<div class="post_rightside"><p style="color: #999; margin: 0;">
 								<strong style="color: #b7d300"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
 							<p style="margin: 2px;"><?php echo strtr($msg['message'], $smileys); ?></p></div>
