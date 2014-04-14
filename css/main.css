@@ -1396,6 +1396,13 @@
 			border-bottom: 0;
 			clear: both;
 		}
+		.verdana_times{
+			font-family: Verdana, Times
+		}
+		.italic000{
+			color: #000;
+			font-style: italic;
+		}
 
 .delete_button {
 	-moz-box-shadow:inset 0px 0px 0px 0px #ffffff;
