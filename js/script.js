@@ -651,7 +651,9 @@ $(document).ready(function() {
 		}
 	});
 });
-var seen = false;
+/*Nach unten scrollen in der Nachrichtenbox*/
+var msg_box    = $('#message_box');
+msg_box.scrollTop(msg_box[0].scrollHeight);
 /*Nachrichten empfangen*/
 function receive_messages() {
 	recipient = $("#chat_room").data("recipient");
@@ -665,17 +667,10 @@ function receive_messages() {
 		success: function(html){
 			$("#seen_marker").remove();
 			$("#message_box").append(html);
-			if(html == '') seen = true;
-			$('#message_box').scroll();
-			$("#message_box").animate({ scrollTop: 4000 }, 6000);
+			msg_box.scrollTop(msg_box[0].scrollHeight);
 		}
 	});
 }
-/*Nach unten scrollen in der Nachrichtenbox*/
-$(document).ready(function() {
-	$('#message_box').scroll();
-	$("#message_box").animate({ scrollTop: 4000 }, 6000);
-});
 /*Alle dreißig Sekunden auf neue Nachrichten überprüfen*/
 function messages_read(senderid) {
 	$.ajax({
