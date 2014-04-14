@@ -96,10 +96,12 @@ if($braceName === false) {
 			if(array_key_exists($braceID, $userdetails['subscriptions'])) $user_subscribed = true;
 	}
 	$stmt = $db->prepare('SELECT brid FROM bracelets WHERE userid = :ownerid ORDER BY date ASC');
-	$stmt->execute(array(':ownerid' => $statistics->username2id($stats['owner'])));
-	$userfetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	foreach($userfetch as $key => $val) {
-		if($val['brid'] == $braceID) $stats['braceletNR'] = $key + 1;
+	if(isset($stats['owner'])){
+		$stmt->execute(array(':ownerid' => $statistics->username2id($stats['owner'])));
+		$userfetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($userfetch as $key => $val) {
+			if($val['brid'] == $braceID) $stats['braceletNR'] = $key + 1;
+		}
 	}
 }
 /*---------------------------------------------------------*/

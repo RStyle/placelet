@@ -1,6 +1,22 @@
 <?php
 error_reporting(E_ALL|E_STRICT);
-ini_set('display_errors', true);
+
+if($_SERVER['SERVER_NAME'] == 'localhost') {
+	$this_path = '';
+	$this_path_html = '';
+}else {
+	$this_path = '/var/www/virtual/placelet.de/htdocs/';
+	$this_path_html = 'http://www.placelet.de/';
+}
+require_once($this_path.'scripts/connection.php');
+
+if(isset($onlineaufftp)){ //initialisiert in connection
+    ini_set('display_errors', 'Off');
+    ini_set('log_errors', 'On');
+    ini_set('error_log', '../fehler.txt');
+}else{
+	ini_set('display_errors', true);
+}
 date_default_timezone_set("Europe/Berlin");
 
 // Hier werden Cookies überprüft gesetzt usw.
@@ -27,15 +43,7 @@ if(!isset($_SESSION['server_SID'])) {
 $ziffern = 6;
 if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) $ziffern = 7;
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
-if($_SERVER['SERVER_NAME'] == 'localhost') {
-	$this_path = '';
-	$this_path_html = '';
-}else {
-	$this_path = '/var/www/virtual/placelet.de/htdocs/';
-	$this_path_html = 'http://www.placelet.de/';
-}
 require_once($this_path.'scripts/recaptchalib.php');
-require_once($this_path.'scripts/connection.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/user.php');
 $lang = simplexml_load_file('./text/translations.xml');

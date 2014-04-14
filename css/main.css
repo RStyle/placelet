@@ -1307,6 +1307,15 @@
 			width:1px;
 			height:1px;
 		}
+		
+		footer{
+			display:block;
+			width:600px;
+		}
+		.footer_down{
+			position:absolute;
+			bottom:0px;
+		}
 
 .delete_button {
 	-moz-box-shadow:inset 0px 0px 0px 0px #ffffff;
