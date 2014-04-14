@@ -1373,7 +1373,7 @@ class Statistics {
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+							//mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 						}
 					}
 				}elseif($key == 'comm_own') {
@@ -1385,7 +1385,7 @@ class Statistics {
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+							//mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
 						}
 					}
 				}elseif($key == 'pic_subs') {
@@ -1397,7 +1397,7 @@ class Statistics {
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+							//mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 							$useremails_pic_subs_informed[] = $user_email;
 						}
 					}
@@ -1427,7 +1427,7 @@ class Statistics {
 								$mail_header .= "MIME-Version: 1.0" . "\n";
 								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 								$mail_header .= "Content-transfer-encoding: 8bit";
-								mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+								//mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
 							}
 						}
 					}
@@ -1447,7 +1447,7 @@ class Statistics {
 						$mail_header .= "MIME-Version: 1.0" . "\n";
 						$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 						$mail_header .= "Content-transfer-encoding: 8bit";
-						mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+						//mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 					}
 				}
 			}

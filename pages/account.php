@@ -46,32 +46,31 @@ if($user->login) {
 							<tr>
 								<td>&nbsp;</td>
 								<td>online</td>
-								<td>E-Mail</td>
+								<?php /*<td>E-Mail</td>*/?>
 							</tr>
 							<tr>
 								<th><?php echo $lang->account->pic_owns->$lng; ?></th>
 								<td><input type="checkbox" name="pic_own_online"<?php if($userdetails['notifications']['pic_own_online']) echo ' checked';?>></td>
-								<td><input type="checkbox" name="pic_own_email"<?php if($userdetails['notifications']['pic_own_email']) echo ' checked';?>></td>
+								<?php /*<td><input type="checkbox" name="pic_own_email"<?php if($userdetails['notifications']['pic_own_email']) echo ' checked';?>></td>*/?>
 							</tr>
 							<tr>
 								<th><?php echo $lang->account->comm_owns->$lng; ?></th>
 								<td><input type="checkbox" name="comm_own_online"<?php if($userdetails['notifications']['comm_own_online']) echo ' checked';?>></td>
-								<td><input type="checkbox" name="comm_own_email"<?php if($userdetails['notifications']['comm_own_email']) echo ' checked';?>></td>
+								<?php /*<td><input type="checkbox" name="comm_own_email"<?php if($userdetails['notifications']['comm_own_email']) echo ' checked';?>></td>*/?>
 							</tr>
 							<tr>
 								<th><?php echo $lang->account->comm_pics->$lng; ?></th>
 								<td><input type="checkbox" name="comm_pic_online"<?php if($userdetails['notifications']['comm_pic_online']) echo ' checked';?>></td>
-								<td><input type="checkbox" name="comm_pic_email"<?php if($userdetails['notifications']['comm_pic_email']) echo ' checked';?>></td>
+								<?php /*<td><input type="checkbox" name="comm_pic_email"<?php if($userdetails['notifications']['comm_pic_email']) echo ' checked';?>></td>*/?>
 							</tr>
 							<tr>
 								<th><?php echo $lang->account->pic_subs->$lng; ?></th>
 								<td><input type="checkbox" name="pic_subs_online"<?php if($userdetails['notifications']['pic_subs_online']) echo ' checked';?>></td>
-								<td><input type="checkbox" name="pic_subs_email"<?php if($userdetails['notifications']['pic_subs_email']) echo ' checked';?>></td>
+								<?php /*<td><input type="checkbox" name="pic_subs_email"<?php if($userdetails['notifications']['pic_subs_email']) echo ' checked';?>></td>*/?>
 							</tr>
 							<tr>
 								<td><?php if(isset($_POST['notification_change'])) echo $lang->form->saved->$lng; else echo '&nbsp;';?></td>
-								<td><input type="submit" name="submit" value="<?php echo $lang->form->speichern->$lng; ?>"></td>
-								<td><input type="hidden" name="notification_change"></td>
+								<td><input type="submit" name="submit" value="<?php echo $lang->form->speichern->$lng; ?>"><input type="hidden" name="notification_change"></td>
 							</tr>
 						</table>
 					</form>

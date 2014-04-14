@@ -69,7 +69,7 @@ if(isset($_POST['submit'])) {
 				$_POST['comm_pic_online'], $_POST['comm_pic_email'],
 				$_POST['pic_subs_online'], $_POST['pic_subs_email']);
 		}
-		$notifics = $user->recieve_notifications();
+		$notifics = $user->receive_notifications();
 		$navregister['value'] = $lang->misc->nav->profil->$lng;
 		if(!($notifics['pic_owns'] == NULL && $notifics['comm_owns'] == NULL && $notifics['comm_pics'] == NULL && $notifics['pic_subs'] == NULL)) {
 			$navregister['value'] = $lang->misc->nav->profil->$lng.' ('.(count($notifics['pic_owns']) + count($notifics['comm_owns']) + count($notifics['comm_pics']) + count($notifics['pic_subs'])).')';

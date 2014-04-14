@@ -68,7 +68,7 @@ if(!isset($_GET['user']) && !$user->login) {
 						<ul class="list_style_none" style="padding: 0;">
 							<li><a href="/account?details"><?php echo $lang->profil->change_accountdetails->$lng; ?></a></li>
 							<li><a href="/account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
-							<li><a href="/account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
+							<?php /*<li><a href="/account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>*/ ?>
 							<li><a href="/account?profilpic"><?php echo $lang->account->change_profilpic->$lng; ?></a></li>
 						</ul>
 					</p>					

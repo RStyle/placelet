@@ -1,109 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--
+ created with Free Online Sitemap Generator www.xml-sitemaps.com 
+-->
 <url>
-  <loc>http://placelet.de/</loc>
-  <changefreq>daily</changefreq>
-  <priority>1.00</priority>
+<loc>http://placelet.de/</loc>
+<changefreq>daily</changefreq>
+<priority>1.00</priority>
 </url>
 <url>
-  <loc>http://placelet.de/account?recoverPassword=yes</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+<loc>http://placelet.de/shop</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>http://placelet.de/impressum</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+<loc>http://placelet.de/home</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>http://placelet.de/kontakt</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+<loc>http://placelet.de/community</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>http://placelet.de/faq</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+<loc>http://placelet.de/kontakt</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>http://placelet.de/home</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+<loc>http://placelet.de/about</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>http://placelet.de/community</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+<loc>http://placelet.de/faq</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>http://placelet.de/about</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
+<loc>http://placelet.de/impressum</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>http://placelet.de/shop</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://placelet.de/login</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://placelet.de/armband?name=Jules%233</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://placelet.de/profil?user=Jules</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://placelet.de/armband?name=Topmodell</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://placelet.de/profil?user=RStyle</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://placelet.de/profil?user=JohnZoidberg</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://placelet.de/login?postpic</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://placelet.de/armband?name=Jules%232</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://placelet.de/title=</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>http://placelet.de/login?postpic=123458</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.51</priority>
-</url>
-<url>
-  <loc>http://placelet.de/login?postpic=123459</loc>
-  <changefreq>daily</changefreq>
-  <priority>0.41</priority>
+<loc>http://placelet.de/login</loc>
+<changefreq>daily</changefreq>
+<priority>0.80</priority>
 </url>
 </urlset>
