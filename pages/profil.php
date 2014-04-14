@@ -41,7 +41,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo $lang->profil->deinprofil->$lng.', '.$user->login; else echo 'Profil von '.$username; ?></h1></div>
 				<div class="user_info">
-					<img class="profile_pic" src="<?php echo profile_pic($userdetails['userid']); ?>" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
+					<img class="profile_pic" src="/cache.php?f=<?php echo profile_pic($userdetails['userid']); ?>" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
 						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
@@ -52,7 +52,7 @@ if(!isset($_GET['user']) && !$user->login) {
      if($user->login != $username && $user->login) {
 ?>
                 <div class="msg_box" style="width: 280px;"><a href="/nachrichten?msg=<?php echo $username ?>" style="text-decoration: none;">
-                    <img style="float: left; margin-right: 10px;" src="/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->write_msg->$lng; ?></p>
+                    <img style="float: left; margin-right: 10px;" src="/cache.php?f=/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->write_msg->$lng; ?></p>
                 </a></div>
 <?php  
     }
@@ -74,7 +74,7 @@ if(!isset($_GET['user']) && !$user->login) {
 					</p>					
                 </div>   
                 <div class="msg_box"><a href="/nachrichten" style="text-decoration: none;">
-                    <img style="float: left; margin-right: 10px;" src="/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->check_msg->$lng; ?></p>
+                    <img style="float: left; margin-right: 10px;" src="/cache.php?f=/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->check_msg->$lng; ?></p>
                 </a></div>   
 <?php        
     }
@@ -106,7 +106,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 							<div class="previews">
 								<a href="/<?php echo bridtoids($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
-									<img alt="latest pic" class="previewpic" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 									<p class="preview_text">
 										<?php echo htmlentities($pic['name'])."\n"; ?>
 										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
@@ -133,7 +133,7 @@ if(!isset($_GET['user']) && !$user->login) {
 ?>
 							<div class="previews">
 								<a href="/<?php echo bridtoids($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
-									<img alt="latest pic" class="previewpic" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 									<p class="preview_text">
 										<?php echo htmlentities($pic['name'])."\n"; ?>
 										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
@@ -211,7 +211,7 @@ if(!isset($_GET['user']) && !$user->login) {
 						$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<a href="/<?php echo bridtoids($key_name); ?>" title="<?php echo urlencode($key); ?>">
-									<img alt="latest pic" class="previewpic" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php	
 					}else {
 					
@@ -220,18 +220,18 @@ if(!isset($_GET['user']) && !$user->login) {
 						$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<a href="/<?php echo bridtoids($key_name); ?>">
-									<img alt="latest pic" class="previewpic" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 					}
 				}elseif($user->login == $username) {
 ?>
 							<a href="/login?postpic=<?php echo urlencode($key); ?>" title="<?php echo urlencode($key); ?>">
-                                    <img alt="no picture available" class="previewpic" src="/img/no_pic2.png"><br>
+                                    <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
 <?php
 				}else {
 ?>
 							<a href="/<?php echo bridtoids($key_name); ?>">
-                                    <img alt="no picture available" class="previewpic" src="/img/no_pic2.png"><br>
+                                    <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
 <?php
 				}
 ?>
@@ -267,11 +267,11 @@ if(!isset($_GET['user']) && !$user->login) {
 					$stmt->execute(array('picid' => $val['picid'], 'brid' => $key));
 					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-								<img alt="latest pic" class="previewpic" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 				}else {
 ?>
-                                <img alt="no picture available" class="previewpic" src="/img/no_pic2.png"><br>
+                                <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
 <?php
 				}
 ?>
@@ -309,18 +309,18 @@ if(!isset($_GET['user']) && !$user->login) {
 					if($user->login == $username) {
 ?>
 							<a href="/<?php echo bridtoids($val['name']); ?>" title="<?php echo $val['brid']; ?>">
-								<img alt="latest pic" class="previewpic" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 					}else {
 ?>
 							<a href="/<?php echo bridtoids($val['name']); ?>">
-								<img alt="latest pic" class="previewpic" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
 <?php
 					}
 				}else { 
 ?>
 							<a href="/<?php echo bridtoids($val['name']); ?>">
-                                <img alt="no picture available" class="previewpic" src="/img/no_pic2.png"><br>
+                                <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
 <?php
 				}//Nicht wirklich nötig.
 ?>

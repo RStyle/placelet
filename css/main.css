@@ -64,10 +64,10 @@
 		text-decoration: none;
 	}
 	.blue_line {
-		background-image: url('../img/header_bg-blue.png');
+		background-image: url('../cache.php?f=/img/header_bg-blue.png');
 	}
 	.green_line {
-		background-image: url('../img/header_bg-green.png');
+		background-image: url('../cache.php?f=/img/header_bg-green.png');
 	}
 	.float_left {
 		float: left;
@@ -1029,9 +1029,9 @@
             transition: opacity 300ms linear;
         }        
         
-        #reg_pic1 {background-image: url(/pictures/register_pic1_small.png);} 
-        #reg_pic2 {background-image: url(/pictures/register_pic2_small.png);}
-        #reg_pic3 {background-image: url("/pictures/register_pic3_small.png");}
+        #reg_pic1 {background-image: url("/cache.php?f=/pictures/register_pic1_small.png");} 
+        #reg_pic2 {background-image: url("/cache.php?f=/pictures/register_pic2_small.png");}
+        #reg_pic3 {background-image: url("/cache.php?f=/pictures/register_pic3_small.png");}
             #reg_pic1:hover .overlay{
                 opacity: 0.8;
             }

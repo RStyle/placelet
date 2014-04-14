@@ -70,7 +70,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<input type="file" name="registerpic_file" accept="image/*" id="upload_pic"><br>
 							<input type="submit" name="registerpic_submit" id="registerpic_submit" value="<?php echo $lang->login->bildupload->$lng; ?>"><br>
 							<?php echo $lang->login->preview->$lng; ?>:<br>
-							<img id="image_preview" src="/img/placeholder.png" alt="preview">
+							<img id="image_preview" src="/cache.php?f=/img/placeholder.png" alt="preview">
 						</div>
 					</form>
 					
@@ -82,7 +82,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<span id="picupload_login_errormsg"></span>
 							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
 							<input type="password" size="20" name="picupload_login_password" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
-							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="/img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
+							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="/cache.php?f=/img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
 						<?php /* <!--</form>--> */ ?>
 <?php
 	}

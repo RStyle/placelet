@@ -56,24 +56,29 @@ RewriteRule ^(.*)$ http://placelet.de/$1 [R=301,L]
 RewriteCond %{HTTP_HOST} ^www.placelet.net$ [NC]
 RewriteRule ^(.*)$ http://placelet.net/$1 [R=301,L]
 
+#RedirectMatch 301 (.*)\.png$ /cache.php?file=$1
+#RedirectMatch 301 (.*)\.jpg$ /cache.php?file=$1
+#RedirectMatch 301 (.*)\.jpeg$ /cache.php?file=$1
+#RedirectMatch 301 (.*)\.svg$ /cache.php?file=$1
+#RedirectMatch 301 (.*)\.ico$ /cache.php?file=$1
+
 # BEGIN Expire headers
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresDefault "access plus 1 seconds"
-  ExpiresByType image/x-icon "access plus 604800 seconds"
-  ExpiresByType image/jpeg "access plus 604800 seconds"
-  ExpiresByType image/png "access plus 604800 seconds"
-  ExpiresByType image/gif "access plus 604800 seconds"
-  ExpiresByType image/svg+xml "access plus 604800 seconds"
-</IfModule>
-# END Expire headers
+#<IfModule mod_expires.c>
+#ExpiresActive On
+#ExpiresDefault "access plus 1 year"
+#ExpiresByType image/x-icon "access plus 1 year"
+#ExpiresByType image/jpeg "access plus 1 year"
+#ExpiresByType image/png "access plus 1 year"
+#ExpiresByType image/gif "access plus 1 year"
+#</IfModule>
+# END Expire headersExpiresByType image/svg+xml "access plus 1 year"
  
 # BEGIN Cache-Control Headers
-<IfModule mod_headers.c>
-  <FilesMatch "\\.(ico|jpe?g|png|gif|svg)$">
-    Header set Cache-Control "max-age=604800, public"
-  </FilesMatch>
-</IfModule>
+#<IfModule mod_headers.c>
+#  <FilesMatch "\.(ico|jpe?g|png|gif|svg)$">
+#    Header set Cache-Control "max-age=31536000, public"
+#  </FilesMatch>
+#</IfModule>
 
 #Error documents
 ErrorDocument 404 /404.php

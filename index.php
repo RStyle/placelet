@@ -73,7 +73,7 @@ if($page == 'home') {
 ?>
 			<div id="note<?php echo $sender['id']; ?>" class="note"><a href="/nachrichten?msg=<?php echo $sender['name']; ?>" style="text-decoration: none;">
 				<div class="highlighted float_left">+1&nbsp;</div>
-				<img class="float_left" src="/img/msg_icon.png" style="margin-right: 10px;">
+				<img class="float_left" src="/cache.php?f=/img/msg_icon.png" style="margin-right: 10px;">
 				<p style="margin: 0; width: 270px; float: left;"><?php echo $lang->community->new_msg->$lng->p1.$sender['name'].$lang->community->new_msg->$lng->p2; ?></p></a>
 				<div data-del_note="<?php echo $sender['id']; ?>" class="del_msg pseudo_link float_right">x</div>
 			</div>
@@ -102,7 +102,7 @@ if($user->logged) {//Wenn man nicht eingeloggt ist, wird Logout angezeigt
 }
 else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 ?>
-			<a href="#" id="headerlogin"><img src="/img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
+			<a href="#" id="headerlogin"><img src="/cache.php?f=/img/login.svg" alt="Login" width="16" height="19" id="login_icon">&nbsp;&nbsp;Login</a>
 			<div id="login-box">
 				<div class="arrow_up"></div>
 				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
@@ -119,9 +119,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 ?>
 			<ul id="headerlist">
 				<?php if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) echo '<li><a href="/test">Auf die öffentliche Seite</a></li>'; ?>
-				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="/img/de_flag.png" alt="Deutsche Flagge" id="de_flag" class="flag"></a></li>
+				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="/cache.php?f=/img/de_flag.png" alt="Deutsche Flagge" id="de_flag" class="flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="/img/gb_flag.png" alt="British Flag" id="gb_flag" class="flag"></a></li>
+				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="/cache.php?f=/img/gb_flag.png" alt="British Flag" id="gb_flag" class="flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="/kontakt"><?php echo $lang->misc->nav->kontakt->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
@@ -131,7 +131,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 			</ul>
 		</header>
 <!--###LOGO###-->
-		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="/img/logo_extended.svg" alt="Placelet" width="206"></a><!--</div>-->
+		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="/cache.php?f=/img/logo_extended.svg" alt="Placelet" width="206"></a><!--</div>-->
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">

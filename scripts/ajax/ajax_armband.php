@@ -2,6 +2,10 @@
 session_start(); //Session starten
 include_once('../connection.php');
 include_once('../functions.php');
+function tprofile_pic($userid) {
+	if(file_exists('../../pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
+		else return '/img/profil_pic_small.png';
+}
 require_once('../user.php');
 $lang = simplexml_load_file('../../text/translations.xml');
 if(isset($_GET['eng'])) $lng = $_GET['eng'];
@@ -46,8 +50,8 @@ if($braceID != NULL) {
 					<a href="/armband?picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=middle&amp;delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="return confirmDelete('dasBild');">X</a>
 					<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if($startPicid == $stats[$i]['picid']) echo '=> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
-						<img src="/img/triangle.png" alt="" class="thumb_triangle">
-						<img src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
+						<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
+						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
 					</a>
 					<table class="pic-info">
 						<tr>
@@ -59,7 +63,7 @@ if($braceID != NULL) {
 ?>
 						<tr>
 							<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-							<td><img src="<?php echo profile_pic($stats[$i]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+							<td><img src="/cache.php?f=<?php echo tprofile_pic($stats[$i]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                 <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['user'])); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
@@ -87,7 +91,7 @@ if($braceID != NULL) {
 			}
 ?>
 							<a href="/armband?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-                            <img src="<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+                            <img src="/cache.php?f=<?php echo tprofile_pic($stats[$i][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                             <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
                             <hr style="border: 1px solid white;">  

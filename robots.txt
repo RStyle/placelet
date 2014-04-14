@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: armband?name=Jules%231&picid=Notice:%20Undefined%20offset:%202%20in%20/var/www/virtual/placelet.de/htdocs/pages/armband.php%20on%20line%2098&last_pic=middle&delete_pic=true
+
+User-agent: *
+Disallow: armband?name=wrzlbrmpft
+
+User-agent: *
+Disallow: admin
+
+User-agent: *
+Disallow: /*?

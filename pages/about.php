@@ -2,7 +2,7 @@
 				<div class="blue_line mainarticleheaders line_header"><h1><?php echo $lang->about[$lng.'-title']; ?></h1></div>
 								
 				<div id="wir">
-    				<a href="/pictures/mitarbeiterklein.JPG" data-lightbox="wir"><img src="/pictures/thumb-mitarbeiterklein.JPG" alt="Mitarbeiter von Placelet"></a>
+    				<a href="/pictures/mitarbeiterklein.JPG" data-lightbox="wir"><img src="/cache.php?f=/pictures/thumb-mitarbeiterklein.JPG" alt="Mitarbeiter von Placelet"></a>
     				<div id="text_box"><?php echo $lang->about->imgtitle->$lng; ?></div>
 				</div>
                 <br>
@@ -141,9 +141,9 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 					<h1><?php echo $lang->about->supported->$lng; ?></h1>
 
     				<div style="float: right; width: 800px">
-    					<img src="/img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
-    					<img src="/img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
-    					<img src="/img/aureliaLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
+    					<img src="/cache.php?f=/img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
+    					<img src="/cache.php?f=/img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
+    					<img src="/cache.php?f=/img/aureliaLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
     				</div>
 
     				<br>

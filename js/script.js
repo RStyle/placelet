@@ -204,13 +204,13 @@ dropdown("header", "connectbox");
 function check_width(){   
 /*Logo Positionierung */
 	if(window.innerWidth < 1480 && window.innerWidth > 1230){
-		$("#logo").attr("src", '/img/logo.svg');
+		$("#logo").attr("src", '/cache.php?f=/img/logo.svg');
 		$("#logo").attr("width", '93');
 	}/*1*/else if(window.innerWidth > 1500) {
 		$("#section").css({ 'width' : 'calc(100% - 500px)' });
 		$("#mainnavlist").css({ 'width' : 'calc(100% - 500px)' });
 	}else {
-		$("#logo").attr("src", '/img/logo_extended.svg');
+		$("#logo").attr("src", '/cache.php?f=/img/logo_extended.svg');
 		$("#logo").attr("width", '206');
 		$("#section").css({ 'width' : '70%' });
 		$("#mainnavlist").css({ 'width' : '70%' });

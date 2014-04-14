@@ -6,9 +6,9 @@
 				<div style="float: left; width: 420px;">
 					<div id="slider1_container" style="position: relative; width: 400px; height: 600px;">
 						<div data-u="slides" class="product_pic" style="cursor: move; overflow: hidden; width: 400px; height: 600px;">
-							<div><img data-u="image" src="/pictures/shop/thumb-1.jpg" alt="Armband"></div>
-							<div><img data-u="image" src="/pictures/shop/thumb-3.jpg" alt="Armband"></div>
-							<div><img data-u="image" src="/pictures/shop/thumb-6.jpg" alt="Armband"></div>
+							<div><img data-u="image" src="/cache.php?f=/pictures/shop/thumb-1.jpg" alt="Armband"></div>
+							<div><img data-u="image" src="/cache.php?f=/pictures/shop/thumb-3.jpg" alt="Armband"></div>
+							<div><img data-u="image" src="/cache.php?f=/pictures/shop/thumb-6.jpg" alt="Armband"></div>
 						</div>
 					</div><br>
 				</div>

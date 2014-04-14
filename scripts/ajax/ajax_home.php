@@ -2,6 +2,10 @@
 session_start(); //Session starten
 include_once('../connection.php');
 include_once('../functions.php');
+function tprofile_pic($userid) {
+	if(file_exists('../../pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
+		else return '/img/profil_pic_small.png';
+}
 require_once('../user.php');
 $lang = simplexml_load_file('../../text/translations.xml');
 if(isset($_POST['eng'])) $lng = $_POST['eng'];
@@ -31,12 +35,12 @@ foreach($bracelets_displayed as $key => $val) {
 $i = $startVal;
 if($i != 1) {
 ?>
-						<div class="pseudo_link float_left" onClick="return false" onMouseDown="javascript:change_pic('-', <?php echo $startVal; ?>);"><img src="/img/prev.png" alt="prev"></div>
+						<div class="pseudo_link float_left" onClick="return false" onMouseDown="javascript:change_pic('-', <?php echo $startVal; ?>);"><img src="/cache.php?f=/img/prev.png" alt="prev"></div>
 <?php
 }
 if(isset($stats[$i + 1][0]['picid'])) {
 ?>
-					    <div class="pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', <?php echo $startVal; ?>);"><img src="/img/next.png" alt="next"></div> 
+					    <div class="pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', <?php echo $startVal; ?>);"><img src="/cache.php?f=/img/next.png" alt="next"></div> 
 <?php
 }		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');
 		$stmt->execute(array('picid' => $stats[$i-1][$systemStats['recent_picids'][$i-1]-1]['picid'], 'brid' => $bracelets_displayed[$i-1]));
@@ -52,12 +56,12 @@ if(isset($stats[$i + 1][0]['picid'])) {
 ?>
 						<div id="central_newest_pic">
                             <div class="more_imgs">
-                                    <?php if(isset($stats[$i-1][$systemStats['recent_picids'][$i-1]-1]['picid'])){?><img class="fake_img pseudo_link" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('-', <?php echo $startVal;?>);"><?php }else { ?><img class="fake_img pseudo_link" src="#" alt="-"><?php } ?><br>
-                                    <?php if(isset($stats[$i][$systemStats['recent_picids'][$i]-1]['picid'])){?><img class="fake_img pseudo_link" src="/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-"><?php } ?><br>
-                                    <?php if(isset($stats[$i+1][$systemStats['recent_picids'][$i+1]-1]['picid'])){?><img class="fake_img pseudo_link" src="/pictures/bracelets/thumb<?php echo '-'.$rowid3['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>);"><?php } ?>
+                                    <?php if(isset($stats[$i-1][$systemStats['recent_picids'][$i-1]-1]['picid'])){?><img class="fake_img pseudo_link" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('-', <?php echo $startVal;?>);"><?php }else { ?><img class="fake_img pseudo_link" src="#" alt="-"><?php } ?><br>
+                                    <?php if(isset($stats[$i][$systemStats['recent_picids'][$i]-1]['picid'])){?><img class="fake_img pseudo_link" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-"><?php } ?><br>
+                                    <?php if(isset($stats[$i+1][$systemStats['recent_picids'][$i+1]-1]['picid'])){?><img class="fake_img pseudo_link" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid3['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>);"><?php } ?>
     					    </div>
                             <a href="/pictures/bracelets/pic<?php echo '-'.$rowid2['id'].'.'.$stats[$i][$systemStats['recent_picids'][$i]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['contry']; ?>" class="connect_thumb_link">
-    							<img src="/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+    							<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
     						</a>
     						
 							<table class="connect_pic-info">
@@ -78,7 +82,7 @@ if(isset($stats[$i + 1][0]['picid'])) {
 	?>
 								<tr>
 									<th>Uploader</th>
-									<td><img src="<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+									<td><img src="/cache.php?f=<?php echo tprofile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                         <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
 								</tr>
 	<?php

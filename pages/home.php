@@ -11,7 +11,7 @@
 <?php
 if($systemStats['total_posted'] > 1) {
 ?>
-                            <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="/img/next.png" alt="next"></div>	
+                            <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="/cache.php?f=/img/next.png" alt="next"></div>	
 <?php
 }		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
 		$stmt->execute(array('picid' => $stats[1][$systemStats['recent_picids'][1]-1]['picid'], 'brid' => $bracelets_displayed[1]));
@@ -24,12 +24,12 @@ if($systemStats['total_posted'] > 1) {
                             <div id="central_newest_pic">
                             	<div class="more_imgs">
                             	    <img class="fake_img pseudo_link" src="#" alt="-"><br>
-                                    <img class="fake_img pseudo_link" src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="-"><br>
-                                    <img class="fake_img pseudo_link" src="/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">
+                                    <img class="fake_img pseudo_link" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="-"><br>
+                                    <img class="fake_img pseudo_link" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">
         					   </div>
                                                            			
         						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
-        						<img src="/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+        						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
         						</a>
         							<table class="connect_pic-info">
         								<tr>
@@ -49,7 +49,7 @@ if($systemStats['total_posted'] > 1) {
 ?>
         								<tr>
         									<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-        									<td><img src="<?php echo profile_pic($stats[1][$systemStats['recent_picids'][1]-1]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
+        									<td><img src="/cache.php?f=<?php echo profile_pic($stats[1][$systemStats['recent_picids'][1]-1]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
                                                 <a href="/profil?user=<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?></a></td>
         								</tr>
 <?php
@@ -93,8 +93,8 @@ if($systemStats['total_posted'] > 1) {
 				var jssor_slider1 = new $JssorSlider$("slider1_container", options);';?>
 				<div id="slider1_container" style="position: relative; width: 492px; height: 272px;">
 						<div data-u="slides" style="cursor: move; overflow: hidden; width: 492px; height: 272px;">
-							<div><img data-u="image" src="http://placelet.de/pictures/thumb-armband3.jpg" alt="Armband"></div>
-							<div><img data-u="image" src="http://placelet.de/pictures/shop/thumb-2.jpg" alt="Armband"></div>
+							<div><img data-u="image" src="/cache.php?f=/pictures/thumb-armband3.jpg" alt="Armband"></div>
+							<div><img data-u="image" src="/cache.php?f=/pictures/shop/thumb-2.jpg" alt="Armband"></div>
 						</div>
 					</div><br>
 				<?php } //491 1920 <a href="/pictures/armband3.jpg" data-lightbox="armbaender" title="Armband"><img src="/pictures/thumb-armband3.jpg" alt="Armband" style="width: 100%;"></a>	?>
@@ -125,7 +125,7 @@ for($i = 0; $i < 6; $i++){
 <!--SIDEBAR-->
 			<aside class="side_container">
 				<?php //<!--<h1>JUNIOR</h1>-->?>
-				<img src="/img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
+				<img src="/cache.php?f=/img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
 				<p><?php echo $lang->home->JUNIOR->$lng; ?></p>
 			</aside>
 			<aside class="side_container" style="margin-top: 20px;">
