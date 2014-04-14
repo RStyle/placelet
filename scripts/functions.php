@@ -1,8 +1,11 @@
 <?php
 //Smileys
-$smileys = array(
-	':)' => '<img alt=":)" src="/cache.php?f=/img/laechelnd.gif">', ':D' => '<img alt=":D" src="/cache.php?f=/img/lachend.gif">', ':P' => '<img alt=":P" src="/cache.php?f=/img/frech.gif">', ';)' => '<img alt=";)" src="/cache.php?f=/img/zwinkernd.gif">',
-	':(' => '<img alt=":(" src="/cache.php?f=/img/traurig.gif">', ':o' => '<img alt=":o" src="/cache.php?f=/img/schockiert.gif">', ':O' => '<img alt=":O" src="/cache.php?f=/img/schockiert.gif">');
+function smileys($text) {
+	$smileys = array(
+		':)' => '<img alt=":)" src="/cache.php?f=/img/laechelnd.gif">', ':D' => '<img alt=":D" src="/cache.php?f=/img/lachend.gif">', ':P' => '<img alt=":P" src="/cache.php?f=/img/frech.gif">', ';)' => '<img alt=";)" src="/cache.php?f=/img/zwinkernd.gif">',
+		':(' => '<img alt=":(" src="/cache.php?f=/img/traurig.gif">', ':o' => '<img alt=":o" src="/cache.php?f=/img/schockiert.gif">', ':O' => '<img alt=":O" src="/cache.php?f=/img/schockiert.gif">');
+	return strtr($text, $smileys);
+}
 function profile_pic($userid) {
 	if(file_exists('pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
 		else return '/img/profil_pic_small.png';

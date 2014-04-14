@@ -635,24 +635,26 @@ $(document).ready(function(){
 $(document).ready(function() {
 	$('#chat_text').keypress(function(e) {
 		if(e.which == 13) {
-			message = $("#chat_text").val();
-			console.log(message);
+			message = $("#chat_text").val().trim();
+			$("#chat_text").val('');
 			recipient = $("#chat_room").data("recipient");
 			console.log(recipient);
-			$.ajax({
-				type: "POST",
-				url: "scripts/ajax/ajax_nachrichten.php",
-				data: "recipient=" + recipient + "&message=" + message + "&send_msg=true&eng=" + lng + "&senderid=" + $('#chat_room').data('recipient'),
-				success: function(html){
-					$("#chat_text").val("");
-					receive_messages($('#chat_room').data('recipient'));
-				}
-			});
+			if(message != '') {
+				$.ajax({
+					type: "POST",
+					url: "scripts/ajax/ajax_nachrichten.php",
+					data: "recipient=" + recipient + "&message=" + message + "&send_msg=true&eng=" + lng + "&senderid=" + $('#chat_room').data('recipient'),
+					success: function(html){
+						$("#chat_text").val("");
+						receive_messages($('#chat_room').data('recipient'));
+					}
+				});
+			}
 		}
 	});
 });
 /*Nach unten scrollen in der Nachrichtenbox*/
-var msg_box    = $('#message_box');
+var msg_box = $('#message_box');
 msg_box.scrollTop(msg_box[0].scrollHeight);
 /*Nachrichten empfangen*/
 function receive_messages() {
