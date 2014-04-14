@@ -122,10 +122,6 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="/img/de_flag.png" alt="Deutsche Flagge" id="de_flag" class="flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="/img/gb_flag.png" alt="British Flag" id="gb_flag" class="flag"></a></li>
-				<li class="headerlist_main_divider">|</li>
-				<li><a href="/privacy-policy"><?php echo $lang->misc->nav->datenschutz->$lng; ?></a></li>
-				<li class="headerlist_sub_divider">|</li>
-				<li><a href="/impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="/kontakt"><?php echo $lang->misc->nav->kontakt->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
@@ -260,8 +256,7 @@ if($page == 'login' && isset($postpic)) {
 ?>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc&amp;sensor=true&amp;v=3.exp"></script><?php
 } if ($page != 'community' && $page != 'start') { ?>
-		<br><br><footer <?php if(is_mobile($_SERVER['HTTP_USER_AGENT']) == false && in_array($page,array('shop', 'kontakt', 'faq', 'nachrichten'))){ echo' class="footer_down'; } ?> ><small>&copy; 2013-2014 Placelet <span class="headerlist_sub_divider">|</span> <a href="/privacy-policy"><?php echo $lang->misc->nav->datenschutz->$lng; ?></a> <span class="headerlist_sub_divider">|</span> <a href="/impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></small></footer>
-<?php } 	/*$js.='
+		<?php } 	/*$js.='
 	function header(){
 	if($(window).width() < 1100)
 		$("#header").css("width", "1100px" );
@@ -276,6 +271,7 @@ if($page == 'login' && isset($postpic)) {
 	parseInt($("#profil").position().top) + parseInt($("#profil").css("height"))
 	if($("footer").position().top < $(window).height() ){ $("footer").css("position","absolute");$("footer").css("top",($(window).height() - 24) + "px");}
 	if((parseInt($("#profil").position().top) + parseInt($("#profil").css("height"))) > $("footer").position().top){ $("footer").css("position","absolute");$("footer").css("top",($(window).height() - 24) + "px");} ';*/
+	if($page != 'start' && $page != 'community'){ ?><br><br><footer <?php if(is_mobile($_SERVER['HTTP_USER_AGENT']) == false && in_array($page,array('shop', 'kontakt', 'faq', 'nachrichten'))){ echo' class="footer_down"'; } ?> ><small>&copy; 2013-2014 Placelet | <a href="/privacy-policy"><?php echo $lang->misc->nav->datenschutz->$lng; ?></a> | <a href="/impressum"><?php echo $lang->misc->nav->impressum->$lng; ?></a></small></footer><?php }
 
 if($js != '<script type="text/javascript">$(document).ready(function(){') {
 	$js = str_replace(array("\t", '  '), "", $js);
