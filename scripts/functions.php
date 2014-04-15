@@ -26,12 +26,14 @@ function bracename2ids($brid, $inurlform = true){ //Armbandname -> Daten /armban
 	$sql = "SELECT userid FROM bracelets WHERE name = :brid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':brid' => $brid));
-	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$q1 = $result1[0];
 	
 	$sql = "SELECT user FROM users WHERE userid = :userid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':userid' => $q1['userid']));
-	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$resultf = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$qf = $resultf[0];
 	
 	//wievieltes armband?
 	$sql = "SELECT name FROM bracelets WHERE userid = :userid ORDER BY date";
@@ -56,17 +58,20 @@ function picidtoids($picid, $inurlform = true){
 	$sql = "SELECT brid, picid FROM pictures WHERE id = :id";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':id' => $picid));
-	$q = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$q = $result[0];
 	
 	$sql = "SELECT userid FROM bracelets WHERE brid = :brid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':brid' => $q['brid']));
-	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$q1 = $result1[0];
 	
 	$sql = "SELECT user FROM users WHERE userid = :userid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':userid' => $q1['userid']));
-	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$resultf = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$qf = $resultf[0];
 	
 	//wievieltes armband?
 	$sql = "SELECT brid FROM bracelets WHERE userid = :userid ORDER BY date";

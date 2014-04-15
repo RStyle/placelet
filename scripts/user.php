@@ -862,8 +862,8 @@ class Statistics {
 		
 	}
 	//Kommentar schreiben
-	public function write_comment($brid, $comment, $picid) {
-		$brid = $brid;
+	public function write_comment($brace_name, $comment, $picid) {
+		$brid = Statistics::brid2name($brace_name);
 		$comment = smileys(clean_input($comment));
 		if(!$this->user->login) $userid = 0;
 			else $userid = $this->user->userid;
@@ -1216,16 +1216,15 @@ class Statistics {
 	}
 	private function delete_pic($input, $picid, $brid) {
 			//Datei löschen
-			$sql = "SELECT fileext FROM pictures WHERE brid = :brid AND picid = :picid";
+			$sql = "SELECT id, fileext FROM pictures WHERE brid = :brid AND picid = :picid";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
 				':picid' => $picid,
 				':brid' => $brid
 			));
 			$result = $q->fetch(PDO::FETCH_ASSOC);
-			$file_path = $brid.'-'.$picid.'.';
-			unlink($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$file_path.$result['fileext']);
-			unlink($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$file_path.'jpg');
+			unlink($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$result['id'].'.'.$result['fileext']);
+			unlink($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$result['id'].'.jpg');
 			//Datenbankeintrag löschen
 			$sql = "DELETE FROM pictures WHERE picid = :picid AND brid = :brid";
 			$q = $this->db->prepare($sql);

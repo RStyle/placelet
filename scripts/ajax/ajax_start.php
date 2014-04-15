@@ -86,7 +86,7 @@ if($_GET['q'] == 3) {
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
 								<td><img src="/cache.php?f=<?php echo tprofile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" class="border999">&nbsp;
-                                <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
+                                <a href="/profil?user=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
 							</tr>
 <?php
                  }
@@ -153,7 +153,7 @@ if($_GET['q'] == 3) {
 						<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-						<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
+						<input type="hidden" name="comment_brace_name[<?php echo $i; ?>]" value="<?php echo htmlentities($statistics->brid2name($bracelets_displayed[$i]));?>">
 						<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>">
 						<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">

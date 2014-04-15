@@ -536,6 +536,7 @@ function confirmDelete(type, object) {
 					url: "/scripts/ajax/ajax_statistics.php",
 					data: getVariables + "&name=" + braceName + "&eng=" + lng,
 					success: function(data){
+						console.log("hallo-" + data);
 						var json = JSON.parse(data);
 						if(json.gemeldet != undefined) {
 							if(json.gemeldet == 'Bild') alert(lang['bild_gemeldet']);
@@ -701,6 +702,7 @@ $(document).ready(function() {
 		$('#note' + $('.del_msg').data("del_note")).remove();
 	});
 /*Armbandname ändern*/
+	$().remove();
 	$('#edit_name_submit').click(function(){
 		if($('#edit_name_input').val() != '') {
 			var new_bracelet_name = $('#edit_name_input').val();
