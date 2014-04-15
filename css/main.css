@@ -949,9 +949,10 @@
 			padding:  20px;
 			padding-bottom: 20px;
 		}      
-			.comments strong {
-				color: #B7D300;
-				font-family: 'Open Sans', Verdana, sans-serif;
+			.comments_name {
+				color: #B7D300 !important;
+				font-family: 'Open Sans', Verdana, sans-serif !important;
+				text-decoration: none !important;
 			}
 			.comments p {
 				margin-top: 10px;

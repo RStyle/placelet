@@ -13,4 +13,5 @@ lang["dasBild"] = "das Bild";
 lang["denKommentar"] = "den Kommentar";
 lang["loeschen"] = "löschen";
 lang["melden"] = "melden";
+lang['edit_br_name2'] = 'Es gibt schon ein Armband mit diesem Namen.';
 lng = "de";

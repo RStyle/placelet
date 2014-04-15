@@ -34,7 +34,14 @@ if(isset($_POST['login'])) {
 			$return = array('flag' => true);
 		}
 	}
-}else {
+}elseif(isset($_POST['brid']) && isset($_POST['new_name']) && isset($_POST['change_name'])) {
+	$change_name = $user->edit_br_name($_POST['brid'], $_POST['new_name']);
+	if($change_name == 1) {
+		$return = array('change_name' => true, 'brace_name' => htmlentities($_POST['new_name']));
+	}elseif($change_name == 2) {
+		$return = array('change_name' => false);
+	}
+}{
 	if(isset($_POST['last_comment']) && isset($_POST['delete_comm']) && isset($_POST['commid']) && isset($_POST['picid']) && isset($_POST['name'])) {//Kommentar löschen
 		$braceID = $statistics->name2brid($_POST['name']);
 		$comment_deleted = $statistics->manage_comment($user->admin, $_POST['last_comment'], $_POST['commid'], $_POST['picid'], $braceID);

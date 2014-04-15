@@ -67,7 +67,7 @@ if(isset($stats[$i + 1][0]['picid'])) {
 							<table class="connect_pic-info">
 								<tr>
 									<th>Armband</th>
-									<td><strong><?php echo '<a href="/'.bridtoids($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
+									<td><strong><?php echo '<a href="/'.bracename2ids($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
 								</tr>
 								<tr>
 									<th>Datum</th>

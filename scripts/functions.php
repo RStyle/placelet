@@ -21,7 +21,7 @@ function email_template($mail, $title, $reviever, $from = 'support@placelet.de')
 	mail($reviever, $title, $content, $mail_header);
 	file_put_contents('./text/mailtemplate-log.txt', $log."Mail succesful: ".$title." - ".date('l jS \of F Y h:i:s A')."\n");
 }
-function bridtoids($brid, $inurlform = true){ //Armbandname -> Daten /armband?name=
+function bracename2ids($brid, $inurlform = true){ //Armbandname -> Daten /armband?name=
 	global $db;
 	$sql = "SELECT userid FROM bracelets WHERE name = :brid";
 	$stmt = $db->prepare($sql);

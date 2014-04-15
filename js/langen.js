@@ -13,4 +13,5 @@ lang["dasBild"] = "picture";
 lang["denKommentar"] = "comment";
 lang["loeschen"] = "delete";
 lang["melden"] = "flag";
+lang['edit_br_name2'] = 'There already exists a bracelet with that name.';
 lng = "en";

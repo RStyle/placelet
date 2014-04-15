@@ -42,17 +42,6 @@ if($braceName === false) {
 	}
 	//Armband Name ändern
 	$owner = false;
-	if(isset($_POST['edit_submit'])) {
-		$change_name = $user->edit_br_name($braceID, $_POST['edit_name']);
-		if($change_name == 1) {
-			header('Location: /armband?name='.urlencode($_POST['edit_name']).'&name_edited='.$change_name);
-		}elseif($change_name == 2) {
-			$js .= 'alert("'.$lang->php->edit_br_name->f2->$lng.'");';
-		}
-	}
-	if(isset($_GET['name_edited'])) {
-		$js .= 'alert("'.$lang->php->edit_br_name->name_edited->$lng.'");';
-	}
 	if($user->login) {
 		//Überprüfen, ob man das Armband gekauft hat.
 		$userdetails = $statistics->userdetails($user->login);

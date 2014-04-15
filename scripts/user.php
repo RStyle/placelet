@@ -864,7 +864,7 @@ class Statistics {
 	//Kommentar schreiben
 	public function write_comment($brid, $comment, $picid) {
 		$brid = $brid;
-		$comment = clean_input($comment);
+		$comment = smileys(clean_input($comment));
 		if(!$this->user->login) $userid = 0;
 			else $userid = $this->user->userid;
 		try {

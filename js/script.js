@@ -85,7 +85,7 @@ $("#form_reg").submit(function() {
 	
 	if ($("#reg_password").val() != $("#reg_password2").val()) {
 		$('#reg_password, #reg_password2').each(function() {
-			this.setCustomValidity(lang['passwoerter_unpassend']) /*Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide*/
+			this.setCustomValidity(lang['passwoerter_unpassend']); /*Errormeldung bei beiden Inputelementen - browserspezifisch, Chrome erkennt nur das erste, Firefox & IE10 beide*/
 			
 		});
 		return false;
@@ -173,7 +173,7 @@ var someCallback = function(exifObject) {
 	}else {
 		$("#registerpic_date").val(now);
 	}
-} /*1*/ /*<--wichtig!*/
+}; /*1*/ /*<--wichtig!*/
 try {
 	$('#upload_pic').change(function() {
 		$(this).fileExif(someCallback);
@@ -252,10 +252,11 @@ var mapset = false;
 var map;
 var marker;
 function initialize_postpic(coords, this_lat, this_lng) {/*1*/
+	var latlng;
 	if(this_lat != false && this_lng != false){
-		var latlng = new google.maps.LatLng(this_lat, this_lng);}
+		latlng = new google.maps.LatLng(this_lat, this_lng);}
 	else{
-		var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);}
+		latlng = new google.maps.LatLng(coords.latitude, coords.longitude);}
 	/*1*/
 	$.ajax({
 		type: 'GET',
@@ -624,12 +625,12 @@ $(document).ready(function(){
 });
 
 /*Zwischen neuesten Bildern und zuletzt geposteten Armbändern wechseln.*/
-	$(document).on('click', '#pic_br_switch', function() {
-		if(pic_br_switch_data == true){ $('#pic_br_switch').data('recent_brid_pics', 'false'); pic_br_switch_data = false;}
-			else {$('#pic_br_switch').data('recent_brid_pics', 'true'); pic_br_switch_data = true;}
-		reload_q = 3;
-		reload_start(0);
-	});
+$(document).on('click', '#pic_br_switch', function() {
+	if(pic_br_switch_data == true){ $('#pic_br_switch').data('recent_brid_pics', 'false'); pic_br_switch_data = false;}
+		else {$('#pic_br_switch').data('recent_brid_pics', 'true'); pic_br_switch_data = true;}
+	reload_q = 3;
+	reload_start(0);
+});
 
 /*Nachricht senden*/
 $(document).ready(function() {
@@ -655,7 +656,10 @@ $(document).ready(function() {
 });
 /*Nach unten scrollen in der Nachrichtenbox*/
 var msg_box = $('#message_box');
-msg_box.scrollTop(msg_box[0].scrollHeight);
+if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0 && $("#seen_marker").data("msg_id") != 0) {
+	intervalID = setInterval(RepeatCall, freqSecs * 1000 );
+	msg_box.scrollTop(msg_box[0].scrollHeight);
+}
 /*Nachrichten empfangen*/
 function receive_messages() {
 	recipient = $("#chat_room").data("recipient");
@@ -669,11 +673,11 @@ function receive_messages() {
 		success: function(html){
 			$("#seen_marker").remove();
 			$("#message_box").append(html);
-			msg_box.scrollTop(msg_box[0].scrollHeight);
+			if('<p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="' + msg_id + '"></p>' != html.trim()) msg_box.scrollTop(msg_box[0].scrollHeight);
 		}
 	});
 }
-/*Alle dreißig Sekunden auf neue Nachrichten überprüfen*/
+/*Alle 5 Sekunden auf neue Nachrichten überprüfen*/
 function messages_read(senderid) {
 	$.ajax({
 		type: "POST",
@@ -682,8 +686,7 @@ function messages_read(senderid) {
 	});
 }
 var intervalID;
-var freqSecs = 15;
-if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0 && $("#seen_marker").data("msg_id") != 0) intervalID = setInterval(RepeatCall, freqSecs * 1000 );
+var freqSecs = 5;
 
 function RepeatCall() {
 	var inout = (freqSecs * 1000) / 2;
@@ -696,5 +699,30 @@ $(document).ready(function() {
 	$('.del_msg').click(function() {
 		messages_read($('.del_msg').data("del_note"));
 		$('#note' + $('.del_msg').data("del_note")).remove();
+	});
+/*Armbandname ändern*/
+	$('#edit_name_submit').click(function(){
+		if($('#edit_name_input').val() != '') {
+			var new_bracelet_name = $('#edit_name_input').val();
+			$.ajax({
+				type: "POST",
+				url: "/scripts/ajax/ajax_statistics.php",
+				data: "change_name=true&eng=" + lng + "&brid=" + $('#edit_name_submit').data('brid') + "&new_name=" + new_bracelet_name,
+				success: function(data){
+					var json = JSON.parse(data);		
+					if(json.change_name == true) {
+						$('#disp_bracelet_name').text(json.brace_name);
+						$('.name_inputs').toggle();
+					}else {
+						alert(lang['edit_br_name2']);
+					}
+					console.log(data);
+				},
+				beforeSend:function()
+				{
+						$('#edit_name_input').val('')
+				}
+			});
+		}
 	});
 });

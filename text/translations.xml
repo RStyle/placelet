@@ -1069,16 +1069,6 @@
 			<en>Picture successfully deleted</en>
 			<de>Bild erfolgreich gelöscht</de>
 		</manage_pic>
-		<edit_br_name>
-			<f2>
-				<en>There already exists a bracelet with that name.</en>
-				<de>Es gibt schon ein Armband mit diesem Namen.</de>
-			</f2>
-			<name_edited>
-				<en>Name changed successfully.</en>
-				<de>Name erfolgreich geändert.</de>
-			</name_edited>
-		</edit_br_name>
 		<manage_subscription>
 			<wahr>
 				<en>Subscription successfully added.</en>
@@ -1302,86 +1292,6 @@
 			</f0>
 		</register>
 	</php>
-	<js>
-		<showcomment>
-			<en>show comments</en>
-			<de>Kommentare zeigen</de>
-		</showcomment>
-		<hidecomment>
-			<en>hide comments</en>
-			<de>Kommentare verstecken</de>
-		</hidecomment>
-		<kommentar_gemeldet>
-			<en>Comment flagged.</en>
-			<de>Kommentar gemeldet.</de>
-		</kommentar_gemeldet>
-		<bild_gemeldet>
-			<en>Picture flagged.</en>
-			<de>Bild gemeldet.</de>
-		</bild_gemeldet>
-		<passwoerter_unpassend>
-			<en>The passwords do not match.</en>
-			<de>Die Passwörter passen nicht zusammen.</de>
-		</passwoerter_unpassend>
-		<ort_nichtgefunden>
-			<en>This city could not be found.</en>
-			<de>Dieser Ort konnte nicht gefunden werden.</de>
-		</ort_nichtgefunden>
-		<confirm_date1>
-			<en>Do you want to use </en>
-			<de>Möchtest du den </de>
-		</confirm_date1>
-		<confirm_date2>
-			<en> as your date?\nIf not, click 'cancel'.</en>
-			<de> als Datum verwenden?\nKlickst du abbrechen, wird das aktuelle verwendet.</de>
-		</confirm_date2>
-		<bist_da>
-			<en>You're here :)</en>
-			<de>Hier bist du :)</de>
-		</bist_da>
-		<ajax_login>
-			<f0>
-				<en>You did not enter anything.</en>
-				<de>Du hast nichts eingegeben.</de>
-			</f0>
-			<f1>
-				<en>Wrong password or username.</en>
-				<de>Falsches Passwort oder Benutzername.</de>
-			</f1>
-			<f2>
-				<en>This user does not exist.</en>
-				<de>Dieser Benutzer existiert nicht.</de>
-			</f2>
-			<f30>
-				<en><![CDATA[Your account has not been confirmed.<br> You haven't received an e-mail? Send it again <a href='login?unvalidated=]]></en>
-				<de><![CDATA[Dein Account wurde noch nicht bestätigt.<br> Keine E-Mail bekommen? Lass dir <a href='login?unvalidated=]]></de>
-			</f30>
-			<f31>
-				<en><![CDATA['>here</a>.]]></en>
-				<de><![CDATA['>hier</a> eine neue zusenden.]]></de>
-			</f31>
-		</ajax_login>
-		<meinprofil>
-			<en>My Profile</en>
-			<de>Mein Profil</de>
-		</meinprofil>
-		<dasBild>
-			<en>picture</en>
-			<de>das Bild</de>
-		</dasBild>
-		<denKommentar>
-			<en>comment</en>
-			<de>den Kommentar</de>
-		</denKommentar>
-		<loeschen>
-			<en>delete</en>
-			<de>löschen</de>
-		</loeschen>
-		<melden>
-			<en>flag</en>
-			<de>melden</de>
-		</melden>
-	</js>
 	<form>
 		<email>
 			<en>e-mail address</en>
