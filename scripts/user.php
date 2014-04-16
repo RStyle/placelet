@@ -862,8 +862,7 @@ class Statistics {
 		
 	}
 	//Kommentar schreiben
-	public function write_comment($brace_name, $comment, $picid) {
-		$brid = Statistics::brid2name($brace_name);
+	public function write_comment($brid, $comment, $picid) {
 		$comment = smileys(clean_input($comment));
 		if(!$this->user->login) $userid = 0;
 			else $userid = $this->user->userid;

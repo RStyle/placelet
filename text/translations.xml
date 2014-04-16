@@ -569,13 +569,13 @@
 				We try our best to send you an e-mail response as quickly as possible.
 			]]></en>
 			<de><![CDATA[
-				Dieses Formular können Sie benutzen, wenn sie Fragen zu unseren Produkten oder Anliegen bezüglich unserer Webseite haben.<br>
-				Wir bemühen uns, Ihnen schnellstmöglich eine Antwort per E-Mail zukommen zu lassen.			
+				Dieses Formular kannst du benutzen, wenn du Fragen zu unseren Produkten oder Anliegen bezüglich unserer Webseite hast.<br>
+				Wir bemühen uns, dir schnellstmöglich eine Antwort per E-Mail zukommen zu lassen.			
 			]]></de>
 		</text>
 		<youremail>
 			<en>Your e-mail address</en>
-			<de>Ihre E-Mail Adresse</de>
+			<de>Deine E-Mail Adresse</de>
 		</youremail>
 		<betreff>
 			<en>subject</en>
@@ -595,7 +595,7 @@
 		</misc>
 		<nachricht>
 			<en>Your message</en>
-			<de>Ihre Nachricht</de>
+			<de>Deine Nachricht</de>
 		</nachricht>
 	</kontakt>
 	<login en-title="Register" de-title="Registrieren">
