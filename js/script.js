@@ -656,8 +656,19 @@ $(document).ready(function() {
 	});
 });
 /*Nach unten scrollen in der Nachrichtenbox*/
+var intervalID;
+var freqSecs = 5;
+var idle = false;
 var msg_box = $('#message_box');
-if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0 && $("#seen_marker").data("msg_id") != 0) {
+function RepeatCall() {
+	var inout = (freqSecs * 1000) / 2;
+	if(!idle) {
+		receive_messages();
+		messages_read($('#chat_room').data('recipient'));
+		console.log("Receiver" + $('#chat_room').data('recipient'));
+	}
+}
+if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0 && $("#seen_marker").data("msg_id") != 0 && msg_box[0] != undefined) {
 	intervalID = setInterval(RepeatCall, freqSecs * 1000 );
 	msg_box.scrollTop(msg_box[0].scrollHeight);
 }
@@ -678,7 +689,6 @@ function receive_messages() {
 		}
 	});
 }
-/*Alle 5 Sekunden auf neue Nachrichten überprüfen*/
 function messages_read(senderid) {
 	$.ajax({
 		type: "POST",
@@ -686,15 +696,8 @@ function messages_read(senderid) {
 		data: "messages_read=true&senderid=" + senderid
 	});
 }
-var intervalID;
-var freqSecs = 5;
+/*Alle 5 Sekunden auf neue Nachrichten überprüfen*/
 
-function RepeatCall() {
-	var inout = (freqSecs * 1000) / 2;
-	receive_messages();
-	messages_read($('#chat_room').data('recipient'));
-	console.log("Receiver" + $('#chat_room').data('recipient'));
-}
 /*Nachrichten-Benachrichtigungen entfernen*/
 $(document).ready(function() {
 	$('.del_msg').click(function() {
@@ -728,3 +731,31 @@ $(document).ready(function() {
 		}
 	});
 });
+/*idle Zeug*/
+idleTime = 0;
+$(document).ready(function () {
+    var idleInterval = setInterval(timerIncrement, 1000); /* 1 Sekunde*/
+    $(this).mousemove(function (e) {
+        idleTime = 0;
+		if(idle) {
+			receive_messages();
+			messages_read($('#chat_room').data('recipient'));
+        	idle = false;
+		}
+    });
+    $(this).keypress(function (e) {
+        idleTime = 0;
+		if(idle) {
+			receive_messages();
+			messages_read($('#chat_room').data('recipient'));
+        	idle = false;
+		}
+    });
+});
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    if(idleTime >= 10) { /* 10 Sekunden*/
+        idle = true;
+		console.log(idle);
+    }
+}
