@@ -7,6 +7,9 @@ if($braceName !== NULL) {
 		$central = '0, 0';
 		$max = array(false, false, false, false, 0);
 		$i = 0;
+		$weg = "var flightPlanCoordinates = [";
+		$count_pos = 1;
+		
 		foreach($data as $pos){
 		
 			if($pos['latitude'] < $max[0] || $max[0] == false)
@@ -17,7 +20,10 @@ if($braceName !== NULL) {
 				$max[2] = $pos['longitude'];
 			if($pos['longitude'] > $max[3] || $max[3] == false)
 				$max[3] = $pos['longitude'];
-				
+
+			$weg.= "\n".'new google.maps.LatLng('.$pos['latitude'].', '.$pos['longitude'].')';
+			if($count_pos < count($data)) $weg.= ',';
+			$count_pos++;
 			$js.= '
 			var latlng'.$i.' = new google.maps.LatLng('.$pos['latitude'].', '.$pos['longitude'].');';
 			$eecho .= '
@@ -27,6 +33,13 @@ if($braceName !== NULL) {
 			});';
 			$i++;
 		}
+		  $weg.= "\n];\n".'var flightPath = new google.maps.Polyline({
+				path: flightPlanCoordinates,
+				strokeColor: "#FE2E2E",
+				strokeOpacity: 0.5,
+				strokeWeight: 2
+			  });
+			    flightPath.setMap(map);'."\n";
 		
 		$central = ($max[0]+($max[1]-$max[0])/2) . ', ' . ($max[2]+($max[3]-$max[2])/2);
 		$max[4] = ($max[1]-$max[0]);
@@ -58,7 +71,8 @@ if($braceName !== NULL) {
 			$zoom = 3;
 		else if($max[4] < 80)
 			$zoom = 2;
-					
+			
+		if(count($data) <= 1) $weg = '';
 		 $js.='
 		function initialize() {
 		  var mapOptions = {
@@ -67,9 +81,9 @@ if($braceName !== NULL) {
 			center: new google.maps.LatLng('.$central.')
 		  }
 		var map = new google.maps.Map(document.getElementById("map_home"), mapOptions);
-		'.$eecho.'
-		}
-		google.maps.event.addDomListener(window, "load", initialize);';
+		'.$weg.$eecho.'
+		}';
+		$js.= "\n".'google.maps.event.addDomListener(window, "load", initialize);';
 		if($startPicid < 3) {
 			if($stats['owners'] == $startPicid + 1) $showPics = $startPicid + 1;
 				elseif($stats['owners'] > $startPicid) $showPics = 3;
@@ -80,13 +94,13 @@ if($braceName !== NULL) {
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1 id="bracelet" data-pics="<?php echo $showPics; ?>"><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
 				<?php if(!$user_subscribed) echo '<span class="pseudo_link float_right" id="show_sub">'.$lang->armband->abonnieren->$lng.'</span>'; ?>
-				<a href="/login?postpic<?php if($user->login && ($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner'])) echo '='.$braceID.'" title="'.$braceID.'';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
+				<a href="/<?php echo 'login?postpic'; if($user->login && ($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner'])) echo '='.$braceID.'" title="'.$braceID.'"';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
 <?php
 		if(!$user_subscribed) {
 ?>
 				<form method="get" action="armband">
-					<input type="submit" name="sub_submit" value="<?php echo $lang->pictures->armband->$lng; ?>" class="float_right sub_inputs display_none">
-					<input name="sub_code" type="email"  size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" class="float_right sub_inputs display_none" required>
+					<input type="submit" name="sub_submit" value="<?php echo $lang->pictures->armband->$lng; ?>" class="float_right sub_inputs" style="display: none;">
+					<input name="sub_code" type="email"  size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" class="float_right sub_inputs" style="display: none;" required>
 					<input type="hidden" name="sub" value="email">
 					<input type="hidden" name="name" value="<?php echo urlencode($braceName); ?>" id="bracelet_name">
 				</form>
@@ -101,9 +115,9 @@ if($braceName !== NULL) {
 				if($i == 0) $last_pic = 'last';
 					else $last_pic = 'middle';
 	?>
-					<div class="width100 overflow_auto">
-					<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=<?php echo $last_pic; ?>&amp;delete_pic=true" class="delete_button float_right mt2" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
-						<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '<img alt="" src="/cache.php?f=/img/pfeil_small.png" width="30" height="20" class="pfeil_small"> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
+					<div style="width: 100%; overflow: auto;">
+					<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=<?php echo $last_pic; ?>&amp;delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+						<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if(!$defaultPicid && $startPicid == $stats[$i]['picid']) echo '<img alt="" src="/cache.php?f=/img/pfeil_small.png" width="30" height="20" style="position: relative; top: 2px;"> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 						<a href="/pictures/bracelets/pic<?php echo '-'.$row['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link">
 							<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
 							<img src="/cache.php?f=/pictures/bracelets/thumb-<?php echo $row['id']; ?>.jpg" alt="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumbnail">
@@ -118,7 +132,7 @@ if($braceName !== NULL) {
 	?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" width="20" class="border999">&nbsp;
+								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
                                     <a href="/profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo $stats[$i]['user']; ?></a></td>
 							</tr>
 	<?php
@@ -146,18 +160,18 @@ if($braceName !== NULL) {
 					}
 	?>
 								<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" class="border999">&nbsp;
-                                <?php if($stats[$i][$j]['user'] == NULL) echo '<strong class="comments_name">Anonym</strong>'; else echo '<strong><a class="comments_name" href="/profil?user='.$stats[$i][$j]['user'].'">'.$stats[$i][$j]['user'].'</a>'; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
+								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+                                <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
 								<p><?php echo $stats[$i][$j]['comment']; ?></p> 
-								<hr class="border_white">  
+								<hr style="border: 1px solid white;">  
 	<?php 
 				}
 	?>   
-							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/<?php echo bracename2ids($braceName); ?>" method="post">
+							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/<?php echo bridtoids($braceName); ?>" method="post">
 								<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 								<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
 								<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-								<input type="hidden" name="comment_brace_name[<?php echo $i; ?>]" value="<?php echo html_entity_decode($braceName); ?>">
+								<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
 								<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
 								<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 								<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
@@ -167,7 +181,7 @@ if($braceName !== NULL) {
 	<?php
 				if(isset($stats[$i + 1]) && $i < $showPics - 1) {
 	?>
-	<!--~~~HR~~~~--><hr class="armband_hr">
+	<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
 	<?php	
 				}
 			}
@@ -181,18 +195,20 @@ if($braceName !== NULL) {
 			</article>
 			<aside class="side_container" id="bracelet_props">
 				<h1><?php echo $lang->armband->statistik->$lng; ?></h1>
-				<table class="width100">
+				<table style="width: 100%;">
 					<tr>
 						<th><?php echo $lang->misc->comments->name->$lng; ?></th>
-						<td><?php echo '<strong id="disp_bracelet_name">'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
+						<td><?php echo '<strong>'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
 		if($owner) {
 ?> 
+					<form method="post" action="/<?php echo bridtoids($braceName); ?>">
 						<tr>
-							<td><input type="text" name="edit_name" id="edit_name_input" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs display_none" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
-							<td><input type="submit" id="edit_name_submit" data-brid="<?php echo $braceID; ?>" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs display_none" name="edit_submit"></td>
+							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
+							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs" name="edit_submit" style="display: none;"></td>
 						</tr>
+					</form>
 <?php
 		}
 ?>
@@ -227,14 +243,14 @@ if($braceName !== NULL) {
 <?php
 		if($bracelet_stats['owners'] != 0) {
 ?>
-			<aside id="map_home" class="side_container mt20"><?php echo $lang->misc->activate_js->$lng; ?></aside>
+			<aside id="map_home" class="side_container" style="margin-top: 20px;"><?php echo $lang->misc->activate_js->$lng; ?></aside>
 <?php
 		}
 		$works = true;
 	}
 	/*}else {
 ?>
-			<article id="armband" class="mainarticles bottom_border_green width100">
+			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falschesarmband->$lng; ?></h1></div>
 				<p>
 					<?php echo $lang->armband->gibtsnicht->$lng; ?>
@@ -251,7 +267,7 @@ if($braceName !== NULL) {
 	}*/
 }if(!$works) {
 ?>
-			<article id="armband" class="mainarticles bottom_border_green width100">
+			<article id="armband" class="mainarticles bottom_border_green" style="width: 100%;">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->armband->falscheseite->$lng; ?></h1></div>
 				<p><?php echo $lang->armband->gehweg->$lng; ?></p>
 				<?php echo $lang->armband->odersuchen->armband->$lng; ?>:
