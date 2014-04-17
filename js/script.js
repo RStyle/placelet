@@ -754,7 +754,7 @@ $(document).ready(function () {
 });
 function timerIncrement() {
     idleTime = idleTime + 1;
-    if(idleTime >= 10) { /* 10 Sekunden*/
+    if(idleTime >= 30) { /* 30 Sekunden*/
         idle = true;
 		console.log(idle);
     }
