@@ -888,7 +888,7 @@ class Statistics {
 				':comment' => $comment,
 				':date' => time()
 			));
-			$this->notify_subscribers($brid, $userid, $picid);
+			$this->notify_subscribers($brid, true);
 			return true;
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -1083,7 +1083,7 @@ class Statistics {
 				if($fileext == 'png')
 					tinypng('pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
 				///E-Mail an die Personen senden, die das Armband abboniert haben
-				$this->notify_subscribers($brid, $this->user->login);
+				$this->notify_subscribers($brid);
 				return 7;//Bild erfolgreich gepostet.
 			} elseif ($file_uploaded == false) {
 				return $picture_file['error'];//Mit dem Bild stimmt etwas nicht. Bitte melde deinen Fall dem Support.
@@ -1373,7 +1373,7 @@ class Statistics {
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							//mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+							mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 						}
 					}
 				}elseif($key == 'comm_own') {
@@ -1385,19 +1385,19 @@ class Statistics {
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							//mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+							mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
 						}
 					}
 				}elseif($key == 'pic_subs') {
 					if($val == 2 || $val == 3) {
-						if($comm) {
+						if(!$comm) {
 							$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
 										Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
 							$mail_header = "From: Placelet <support@placelet.de>\n";
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
-							//mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+							mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 							$useremails_pic_subs_informed[] = $user_email;
 						}
 					}
@@ -1418,8 +1418,6 @@ class Statistics {
 					$user_email = $userdetails['email'];
 					foreach($userProps as $key => $val) {
 						if($key == 'comm_pic') {
-	
-	
 							if($val == 2 || $val == 3) {
 								$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
 											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
@@ -1427,7 +1425,7 @@ class Statistics {
 								$mail_header .= "MIME-Version: 1.0" . "\n";
 								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 								$mail_header .= "Content-transfer-encoding: 8bit";
-								//mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+								mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
 							}
 						}
 					}
