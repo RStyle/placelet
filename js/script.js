@@ -20,7 +20,7 @@ $("#headerlogin").click(function(){
 	}
 });
 
-jQuery(document).click(function(e) {
+$(document).click(function(e) {
     if (e.target.id != 'login-box' && e.target.id != 'login' && e.target.id != 'password' && e.target.id != 'form_login' && e.target.id != 'headerlogin' && e.target.id != 'login_icon'
 		&& e.target.id != 'label_login' && e.target.id != 'label_password' && e.target.id != 'submit_login') {
         if(show_login == true){
@@ -489,17 +489,18 @@ function change_pic(cv, sv) {
 /*Aboformular anzeigen*/
 $(document).ready(function(){
 	$('#show_sub').click(function(){
+		bracelet_name = $('#bracelet_name').val();
 		$.ajax({
 			type: "POST",
 			url: "/scripts/ajax/ajax_statistics.php",
-			data: "login=true&eng=" + lng,
+			data: "subscribe=" + bracelet_name + "&eng=" + lng,
 			success: function(data){
 				var json = JSON.parse(data);		
-				if(json.checklogin == false) {
+				if(json.subscribe == false) {
 					$('.sub_inputs').toggle();
 				}else {
-					bracelet_name = $('#bracelet_name').val();
-					window.location.replace("/armband?sub=username&sub_user=" + json.username + "&name=" + bracelet_name);
+					if(json.subscribe == 'wahr') $('#show_sub').remove();
+					alert(lang['manage_subscription' + json.subscribe]);
 				}
 			}
 		});
@@ -686,6 +687,10 @@ function receive_messages() {
 			$("#seen_marker").remove();
 			$("#message_box").append(html);
 			if('<p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="' + msg_id + '"></p>' != html.trim()) msg_box.scrollTop(msg_box[0].scrollHeight);
+		},
+		beforeSend:function()
+		{
+				idle = false;
 		}
 	});
 }
@@ -725,7 +730,7 @@ $(document).ready(function() {
 				},
 				beforeSend:function()
 				{
-						$('#edit_name_input').val('')
+						$('#edit_name_input').val('');
 				}
 			});
 		}

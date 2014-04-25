@@ -71,10 +71,10 @@ if($page == 'home') {
 		foreach($msg_notific as $sender => $val) {
 			$sender = array('name' => Statistics::id2username($sender), 'id' => $sender);
 ?>
-			<div id="note<?php echo $sender['id']; ?>" class="note"><a href="/nachrichten?msg=<?php echo $sender['name']; ?>" style="text-decoration: none;">
+			<div id="note<?php echo $sender['id']; ?>" class="note nonetextdeco"><a href="/nachrichten?msg=<?php echo $sender['name']; ?>">
 				<div class="highlighted float_left">+1&nbsp;</div>
-				<img class="float_left" src="/cache.php?f=/img/msg_icon.png" style="margin-right: 10px;">
-				<p style="margin: 0; width: 270px; float: left;"><?php echo $lang->community->new_msg->$lng->p1.$sender['name'].$lang->community->new_msg->$lng->p2; ?></p></a>
+				<img class="float_left marginright10" src="/cache.php?f=/img/msg_icon.png">
+				<p class="newmsg"><?php echo $lang->community->new_msg->$lng->p1.$sender['name'].$lang->community->new_msg->$lng->p2; ?></p></a>
 				<div data-del_note="<?php echo $sender['id']; ?>" class="del_msg pseudo_link float_right">x</div>
 			</div>
 <?php
@@ -135,7 +135,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
-				<li style="border-left: 1px #fff solid;" class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'?>"><a href="/home" class="navlinks"><?php echo $lang->misc->nav->home->$lng; ?></a></li>
+				<li class="mainnavlinks<?php if($page == 'home') echo ' mainnavlink_active'; else echo' mainnavlistli1'; ?>"><a href="/home" class="navlinks"><?php echo $lang->misc->nav->home->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'start') echo ' mainnavlink_active'?>"><a href="/community" class="navlinks"><?php echo $lang->misc->nav->community->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'about') echo ' mainnavlink_active'?>"><a href="/about" class="navlinks"><?php echo $lang->misc->nav->about->$lng; ?></a></li>
 				<li class="mainnavlinks<?php if($page == 'shop') echo ' mainnavlink_active'?>"><a href="/shop" class="navlinks"><?php echo $lang->misc->nav->shop->$lng; ?></a></li>

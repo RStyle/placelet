@@ -13,8 +13,7 @@ else
 $str_ouptput;
 $str_output = file_get_contents('exif+jssor+lightbox.js');
 $str_output .= file_get_contents('lang'.$lang.'.js');
-$s1 = file_get_contents('script.js');
-$s = $s1;
+$s = file_get_contents('script.js');
 $s = str_replace("\t", '', $s);
 
 $s = str_replace("\r\n", "\n", $s); # windows -> linux
@@ -34,6 +33,7 @@ $s = str_replace("secccccct", "\n", $s); # mac -> linux
 //$str_output = str_replace("\n", '', $str_output);
 $str_output = str_replace(array("\r\n", "\r", "\n"), '', $str_output);
 //$str_output = preg_replace('#\n|\r\n|\r|\t#', '', $output);*/
+$str_output = preg_replace("/\s+/", " ", $str_output);
 
 echo $str_output.$s;
 ?>

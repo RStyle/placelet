@@ -43,7 +43,7 @@ if($user->login) {
 							<img src="/cache.php?f=<?php echo tprofile_pic($msg['sender']['id']); ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
 							<div class="post_rightside"><p style="color: #999; margin: 0;">
 								<strong style="color: #b7d300"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
-							<p style="margin: 2px;"><?php echo $msg['message']; ?></p></div>
+							<p style="margin: 2px;"><?php echo smileys($msg['message']); ?></p></div>
 						</div>
 	<?php
 						}
@@ -55,7 +55,7 @@ if($user->login) {
 		if(!isset($seen)) $seen = 0;
 		if(!isset($seen) && !isset($highest_msg_id)) $messages->read();
 ?>
-                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
+                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
 <?php
 	}elseif(isset($_POST['messages_read']) && isset($_POST['senderid'])) {
 		$messages = $user->messages_read($_POST['senderid']);

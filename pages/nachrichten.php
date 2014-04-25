@@ -22,11 +22,21 @@ if($user->login) {
 		$latestMSG = end($chat);
 		reset($chat);
 		if(!isset($recipient)) $recipient = array('name' => $chat['recipient']['name'], 'id' => $chat['recipient']['id']);
+		$days_since = days_since($latestMSG['sent']);
 ?>
                     <a href="/nachrichten?msg=<?php echo $chat['recipient']['name']; ?>" style="text-decoration: none;">
 						<li<?php if($chat['recipient']['id'] == $recipient['id']) echo ' class="selected"'; ?>>
 							 <strong><?php echo $chat['recipient']['name']; ?></strong><br>
-							 <p style="color: #999; margin: 0;"><?php echo days_since($latestMSG['sent']).' '.date('H:i d.m.Y', $latestMSG['sent']); ?></p>                         
+							 <p style="color: #999; margin: 0;">
+<?php
+					if($latestMSG['seen'] != 0) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">';
+					echo (strlen($latestMSG['message']) > 20) ? smileys(substr($latestMSG['message'], 0, 20)).'...' : smileys($latestMSG['message']);
+					echo '<span class="float_right">'.$days_since.' (';
+					if($days_since == 'heute' || $days_since == 'today') echo date('H:i', $latestMSG['sent']);
+						else echo date('d.m.y', $latestMSG['sent']);
+					echo ')</span>';
+?>
+							 </p>                         
 						</li>
 					</a>
                     <hr>
@@ -34,7 +44,7 @@ if($user->login) {
 	}
 ?>
 					<li>
-						<strong>Neue Nachricht an:</strong><br>
+						<strong><?php echo $lang->nachrichten->new_message->$lng; ?></strong><br>
 						<?php echo $select_user; ?>
 					</li>
                     <hr>
@@ -56,8 +66,8 @@ if($user->login) {
                     <div class="post">
                         <img src="/cache.php?f=<?php echo profile_pic($msg['sender']['id']); ?>" width="40" style="border: 1px #999 solid; float: left; margin-right: 10px;">
                         <div class="post_rightside"><p style="color: #999; margin: 0;">
-							<strong style="color: #b7d300;"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent'])?></p>
-                        <p style="margin: 2px;"><?php echo $msg['message']; ?></p></div>
+							<strong style="color: #b7d300;"><?php if($msg['sender']['id'] == $user->userid) echo $lang->nachrichten->ich->$lng; else echo $msg['sender']['name']; ?></strong>, <?php echo days_since($msg['sent']).' '.date('H:i d.m.Y', $msg['sent']); ?></p>
+                        <p style="margin: 2px;"><?php echo smileys($msg['message']); ?></p></div>
                     </div>
 <?php
 				}
@@ -69,7 +79,7 @@ if($user->login) {
 	if($recipient_known || $new_message) {
 		$user->messages_read($recipient['id']);
 ?>
-                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '*'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
+                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
 <?php
 	}
 ?>
@@ -81,9 +91,9 @@ if($user->login) {
                         <textarea id="chat_text" placeholder="<?php echo $lang->nachrichten->antworten->$lng; ?>..."></textarea>
                     </div>
 <?php
-	}elseif(!isset($recipient['name']) && $messages == NULL) echo '<p>'.$lang->nachrichten->select_user->$lng.$select_user.'</p>';
-	elseif($user->userid == $recipient['id']) echo '<p>'.$lang->nachrichten->selbst_msg->$lng.$select_user.'</p>';
-	else echo '<p>'.$lang->nachrichten->notexisting->$lng.$select_user.'</p>';
+	}elseif(!isset($recipient['name']) && $messages == NULL) echo '<p>'.$lang->nachrichten->select_user->$lng.'</p>';
+	elseif($user->userid == $recipient['id']) echo '<p>'.$lang->nachrichten->selbst_msg->$lng.'</p>';
+	else echo '<p>'.$lang->nachrichten->notexisting->$lng.'</p>';
 ?>
             </div>
 <?php

@@ -61,13 +61,13 @@ if(isset($stats[$i + 1][0]['picid'])) {
                                     <?php if(isset($stats[$i+1][$systemStats['recent_picids'][$i+1]-1]['picid'])){?><img class="fake_img pseudo_link" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid3['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', <?php echo $startVal;?>);"><?php } ?>
     					    </div>
                             <a href="/pictures/bracelets/pic<?php echo '-'.$rowid2['id'].'.'.$stats[$i][$systemStats['recent_picids'][$i]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['contry']; ?>" class="connect_thumb_link">
-    							<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+    							<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="connect_thumbnail">
     						</a>
     						
 							<table class="connect_pic-info">
 								<tr>
 									<th>Armband</th>
-									<td><strong><?php echo '<a href="/'.bridtoids($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
+									<td><strong><?php echo '<a href="/'.bracename2ids($statistics->brid2name($bracelets_displayed[$i])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[$i])).'</a>'; ?></strong></td>
 								</tr>
 								<tr>
 									<th>Datum</th>
@@ -82,7 +82,7 @@ if(isset($stats[$i + 1][0]['picid'])) {
 	?>
 								<tr>
 									<th>Uploader</th>
-									<td><img src="/cache.php?f=<?php echo tprofile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+									<td><img src="/cache.php?f=<?php echo tprofile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" class="border999">&nbsp;
                                         <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>"><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?></a></td>
 								</tr>
 	<?php

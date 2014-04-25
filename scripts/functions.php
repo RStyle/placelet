@@ -3,8 +3,10 @@
 function smileys($text) {
 	$smileys = array(
 		':)' => '<img alt=":)" src="/cache.php?f=/img/laechelnd.gif">', ':D' => '<img alt=":D" src="/cache.php?f=/img/lachend.gif">', ':P' => '<img alt=":P" src="/cache.php?f=/img/frech.gif">', ';)' => '<img alt=";)" src="/cache.php?f=/img/zwinkernd.gif">',
-		':(' => '<img alt=":(" src="/cache.php?f=/img/traurig.gif">', ':o' => '<img alt=":o" src="/cache.php?f=/img/schockiert.gif">', ':O' => '<img alt=":O" src="/cache.php?f=/img/schockiert.gif">');
-	return strtr($text, $smileys);
+		':(' => '<img alt=":(" src="/cache.php?f=/img/traurig.gif">', ':o' => '<img alt=":o" src="/cache.php?f=/img/schockiert.gif">', ':O' => '<img alt=":O" src="/cache.php?f=/img/schockiert.gif">', '(y)' => '<img alt="(y)" src="/cache.php?f=/img/yes.gif">',
+		'(n)' => '<img alt="(n)" src="/cache.php?f=/img/no.gif">');
+	//return strtr($text, $smileys);
+	return str_ireplace(array_keys($smileys), array_values($smileys), $text);
 }
 function profile_pic($userid) {
 	if(file_exists('pictures/profiles/'.$userid.'.jpg')) return '/pictures/profiles/'.$userid.'.jpg';
@@ -26,12 +28,14 @@ function bridtoids($brid, $inurlform = true){ //Armbandname -> Daten /armband?na
 	$sql = "SELECT userid FROM bracelets WHERE name = :brid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':brid' => $brid));
-	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$q1 = $result1[0];
 	
 	$sql = "SELECT user FROM users WHERE userid = :userid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':userid' => $q1['userid']));
-	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$resultf = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$qf = $resultf[0];
 	
 	//wievieltes armband?
 	$sql = "SELECT name FROM bracelets WHERE userid = :userid ORDER BY date";
@@ -56,17 +60,20 @@ function picidtoids($picid, $inurlform = true){
 	$sql = "SELECT brid, picid FROM pictures WHERE id = :id";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':id' => $picid));
-	$q = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$q = $result[0];
 	
 	$sql = "SELECT userid FROM bracelets WHERE brid = :brid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':brid' => $q['brid']));
-	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$q1 = $result1[0];
 	
 	$sql = "SELECT user FROM users WHERE userid = :userid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':userid' => $q1['userid']));
-	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+	$resultf = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$qf = $resultf[0];
 	
 	//wievieltes armband?
 	$sql = "SELECT brid FROM bracelets WHERE userid = :userid ORDER BY date";

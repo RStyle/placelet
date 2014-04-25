@@ -16,7 +16,7 @@
     					</tr>
     					<tr>
     						<th><?php echo $lang->stats->main->armband->$lng; ?></th>
-    						<td><a href="/<?php echo bridtoids($systemStats['bracelet_most_cities']['name']); ?>"> <?php echo $systemStats['bracelet_most_cities']['name'].'('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
+    						<td><a href="/<?php echo bracename2ids($systemStats['bracelet_most_cities']['name']); ?>"> <?php echo $systemStats['bracelet_most_cities']['name'].'('.$systemStats['bracelet_most_cities']['number'].')'; ?></a></td>
     					</tr>
     				</table>
                 </div>
@@ -24,9 +24,9 @@
                     <h1><?php echo $lang->stats->aktivstebenutzer[$lng.'-title']; ?></h1>
                     <table id="topusers">
     					<tr>
-    						<td style="border-bottom: 1px solid #000;"><?php echo $lang->stats->aktivstebenutzer->benutzername->$lng; ?></td>
-    						<td style="border-bottom: 1px solid #000;"><?php echo $lang->stats->aktivstebenutzer->armbänder->$lng; ?></td>
-    						<td style="border-bottom: 1px solid #000;"><?php echo $lang->stats->aktivstebenutzer->uploads->$lng; ?></td>
+    						<td class="start_topusers_td"><?php echo $lang->stats->aktivstebenutzer->benutzername->$lng; ?></td>
+    						<td class="start_topusers_td"><?php echo $lang->stats->aktivstebenutzer->armbänder->$lng; ?></td>
+    						<td class="start_topusers_td"><?php echo $lang->stats->aktivstebenutzer->uploads->$lng; ?></td>
     					</tr>
     <?php
     /*for ($i = 0; $i < count($systemStats['user_most_bracelets']['user']); $i++) {
@@ -71,7 +71,7 @@
     ?>
     					<tr>
     						<td>
-    						    <img src="/cache.php?f=<?php echo profile_pic($val['userid']); ?> " alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
+    						    <img src="/cache.php?f=<?php echo profile_pic($val['userid']); ?> " width="20" class="border999">&nbsp;
 								<a href="/profil?user=<?php echo urlencode($key); ?>">								    
 									<?php echo $key; ?>
 								</a>
@@ -125,9 +125,9 @@
 					if($val['brid'] == $bracelets_displayed[$i]) $stats[$i]['braceletNR'] = $key + 1;
 				}
 ?>
-				<div style="width: 100%;">
-					<div style="width: 70%; float: left;">
-						<a href="/community?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+				<div class="width100">
+					<div class="div70left">
+						<a href="/community?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild mt2" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
 						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i][$systemStats['recent_picids'][$i]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; //onclick="return confirmDelete('dasBild');" ?>" class="thumb_link">
 							<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
 							<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]-1]['country']; ?>" class="thumbnail">
@@ -146,7 +146,7 @@
 ?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1]['userid']); ?> " width="20" class="border999">&nbsp;
                                     <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i][$systemStats['recent_picids'][$i]-1]['user'])); ?>">								        
                                         <?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['user']; ?>
                                     </a></td>
@@ -172,7 +172,7 @@
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->kaeufer->$lng; ?></td>
-								<td><a href="/profil?user=<?php echo $stats[$i]['owner']; ?>" style="color: #fff;"><?php echo $stats[$i]['owner']; ?></a></td>
+								<td><a href="/profil?user=<?php echo $stats[$i]['owner']; ?>" class="weiss"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->besitzer->$lng; ?></td>
@@ -206,10 +206,10 @@
 					}
 ?>
 					<a href="/community?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['picid']; ?>&amp;comm_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i])); ?>&amp;delete_comm=true" class="delete_button float_right delete_comment" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-					<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
-                    <strong><?php if($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
+					<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['userid']); ?>" width="20" class="border999">&nbsp;
+                    <?php if($stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'] == NULL) echo '<strong class="comments_name">Anonym</strong>'; else echo '<strong><a class="comments_name" href="/profil?user='.$stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'].'">'.$stats[$i][$systemStats['recent_picids'][$i]-1][$j]['user'].'</a>'; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['date']).')';//onclick="return confirmDelete('denKommentar');" ?>
                     <p><?php echo $stats[$i][$systemStats['recent_picids'][$i]-1][$j]['comment']; ?></p> 
-                    <hr style="border: 1px solid white;">  
+                    <hr class="border_white">  
 <?php 
 				}
 ?>   
@@ -217,7 +217,7 @@
 						<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 						<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?></label><br>
 						<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-						<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $bracelets_displayed[$i];?>">
+						<input type="hidden" name="comment_brace_name[<?php echo $i; ?>]" value="<?php echo html_entity_decode($statistics->brid2name($bracelets_displayed[$i])); ?>">
 						<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i][$systemStats['recent_picids'][$i]-1]['picid']; ?>">
 						<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 						<input type="submit" name ="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
@@ -227,7 +227,7 @@
 <?php
 				if ($i < count($bracelets_displayed)) {
 ?>
-<!--~~~HR~~~~--><hr style="clear: both;">
+<!--~~~HR~~~~--><hr class="hr_clear">
 <?php
 				}
 			}

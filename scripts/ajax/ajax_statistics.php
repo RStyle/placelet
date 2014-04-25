@@ -34,13 +34,41 @@ if(isset($_POST['login'])) {
 			$return = array('flag' => true);
 		}
 	}
+}elseif(isset($_POST['brid']) && isset($_POST['new_name']) && isset($_POST['change_name'])) {
+	$change_name = $user->edit_br_name($_POST['brid'], $_POST['new_name']);
+	if($change_name == 1) {
+		$return = array('change_name' => true, 'brace_name' => htmlentities($_POST['new_name']));
+	}elseif($change_name == 2) {
+		$return = array('change_name' => false);
+	}
+}elseif(isset($_POST['subscribe'])) {
+	//Armband abonnieren
+	if($user->login) {
+		$sub_type = 'username';
+		$sub_user = $user->login;
+		$subscribe = true;
+	}elseif(isset($_POST['subscribe_email'])) {
+		$sub_type = 'email';
+		$sub_user = $_POST['subscribe_email'];
+		$subscribe = true;
+	}else {
+		$subscribe = false;
+		$return = array('subscribe' => false);
+	}
+	if($subscribe) {
+		$sub_added = $statistics->manage_subscription($sub_type, $statistics->name2brid($_POST['subscribe']), $sub_user);
+			if($sub_added === true) $return = array('subscribe' => 'wahr');
+				elseif($sub_added == 2) $return = array('subscribe' => '2');
+				elseif($sub_added == 3) $return = array('subscribe' => '3');
+				elseif($sub_added === false) $return = array('subscribe' => 'falsch');
+	}
 }else {
 	if(isset($_POST['last_comment']) && isset($_POST['delete_comm']) && isset($_POST['commid']) && isset($_POST['picid']) && isset($_POST['name'])) {//Kommentar löschen
 		$braceID = $statistics->name2brid($_POST['name']);
 		$comment_deleted = $statistics->manage_comment($user->admin, $_POST['last_comment'], $_POST['commid'], $_POST['picid'], $braceID);
 		if(isset($comment_deleted)) {
 			if($comment_deleted === true ) {
-				$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&amp;comment_deleted=true');
+				$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&comment_deleted=true');
 			}elseif($comment_deleted == 2) {
 				$return = array('gemeldet' => 'Kommentar');
 			}
@@ -49,7 +77,7 @@ if(isset($_POST['login'])) {
 		$braceID = $statistics->name2brid($_POST['name']);
 		$pic_deleted = $statistics->manage_pic($user->admin, $_POST['last_pic'], $_POST['picid'], $braceID);
 		if($pic_deleted === true ) {
-			$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&amp;pic_deleted=true');
+			$return = array('location' => 'armband?name='.urlencode($_POST['name']).'&pic_deleted=true');
 		}elseif($pic_deleted == 2) {
 			$return = array('gemeldet' => 'Bild');
 		}elseif ($pic_deleted == false) {

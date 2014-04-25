@@ -42,17 +42,6 @@ if($braceName === false) {
 	}
 	//Armband Name ändern
 	$owner = false;
-	if(isset($_POST['edit_submit'])) {
-		$change_name = $user->edit_br_name($braceID, $_POST['edit_name']);
-		if($change_name == 1) {
-			header('Location: /armband?name='.urlencode($_POST['edit_name']).'&name_edited='.$change_name);
-		}elseif($change_name == 2) {
-			$js .= 'alert("'.$lang->php->edit_br_name->f2->$lng.'");';
-		}
-	}
-	if(isset($_GET['name_edited'])) {
-		$js .= 'alert("'.$lang->php->edit_br_name->name_edited->$lng.'");';
-	}
 	if($user->login) {
 		//Überprüfen, ob man das Armband gekauft hat.
 		$userdetails = $statistics->userdetails($user->login);
@@ -62,21 +51,13 @@ if($braceName === false) {
 				$owner = true;
 			}
 		}
-		//Armband abonnieren
-		if(isset($_GET['sub']) && isset($_GET['sub_user'])) {
-			$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, $_GET['sub_user']);
-			if(isset($sub_added)) {
-				if($sub_added === true) $js .= 'alert("'.$lang->php->manage_subscription->wahr->$lng.'");';
-					elseif($sub_added == 2) $js .= 'alert("'.$lang->php->manage_subscription->f2->$lng.'");';
-			}
-		}
 	}
 	//Armband abonnieren/deabonnieren
 	if(isset($_GET['sub']) && isset($_GET['sub_code'])) {
 		$sub_added = $statistics->manage_subscription($_GET['sub'], $braceID, urldecode($_GET['sub_code']));
 		if(isset($sub_added)) {
 			if($sub_added === true) $js .= 'alert("'.$lang->php->manage_subscription->wahr->$lng.'");';
-				elseif($sub_added == 2) $js .= 'alert('.$lang->php->manage_subscription->f2->$lng.'");';
+				elseif($sub_added == 2) $js .= 'alert("'.$lang->php->manage_subscription->f2->$lng.'");';
 				elseif($sub_added == 3) $js .= 'alert("'.$lang->php->manage_subscription->f3->$lng.'");';
 				elseif($sub_added === false) $js .= 'alert("'.$lang->php->manage_subscription->falsch->$lng.'");';
 		}

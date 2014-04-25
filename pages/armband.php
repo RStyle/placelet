@@ -88,7 +88,7 @@ if($braceName !== NULL) {
 			if($stats['owners'] == $startPicid + 1) $showPics = $startPicid + 1;
 				elseif($stats['owners'] > $startPicid) $showPics = 3;
 					else $showPics = $startPicid;
-		}else $showPics = $startPicid;
+		}else $showPics = $stats['owners'] - $startPicid + 1;
 		//print_r($stats);
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
@@ -98,7 +98,7 @@ if($braceName !== NULL) {
 <?php
 		if(!$user_subscribed) {
 ?>
-				<form method="get" action="armband">
+				<form method="get" action="/armband">
 					<input type="submit" name="sub_submit" value="<?php echo $lang->pictures->armband->$lng; ?>" class="float_right sub_inputs" style="display: none;">
 					<input name="sub_code" type="email"  size="20" maxlength="100" placeholder="<?php echo $lang->form->email->$lng; ?>" class="float_right sub_inputs" style="display: none;" required>
 					<input type="hidden" name="sub" value="email">
@@ -106,7 +106,7 @@ if($braceName !== NULL) {
 				</form>
 <?php
 		}
-		for($i = 0; $i < count($stats) - 4 && $i < $showPics; $i++) {
+		for($i = 0; $i < $showPics; $i++) {
 			if(isset($stats[$i])) {
 				$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');
 				$stmt->execute(array('picid' => $stats[$i]['picid'], 'brid' => $braceID));
@@ -132,7 +132,7 @@ if($braceName !== NULL) {
 	?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
                                     <a href="/profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo $stats[$i]['user']; ?></a></td>
 							</tr>
 	<?php
@@ -160,18 +160,18 @@ if($braceName !== NULL) {
 					}
 	?>
 								<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
+								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
                                 <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
 								<p><?php echo $stats[$i][$j]['comment']; ?></p> 
 								<hr style="border: 1px solid white;">  
 	<?php 
 				}
 	?>   
-							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/<?php echo bridtoids($braceName); ?>" method="post">
+							<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/<?php echo bracename2ids($braceName); ?>" method="post">
 								<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 								<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
 								<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-								<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
+								<input type="hidden" name="comment_brace_name[<?php echo $i; ?>]" value="<?php echo html_entity_decode($braceName); ?>">
 								<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
 								<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 								<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
@@ -198,12 +198,12 @@ if($braceName !== NULL) {
 				<table style="width: 100%;">
 					<tr>
 						<th><?php echo $lang->misc->comments->name->$lng; ?></th>
-						<td><?php echo '<strong>'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" alt="" id="edit_name" class="pseudo_link"></td><?php } ?>
+						<td><?php echo '<strong>'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
 		if($owner) {
 ?> 
-					<form method="post" action="/<?php echo bridtoids($braceName); ?>">
+					<form method="post" action="/<?php echo bracename2ids($braceName); ?>">
 						<tr>
 							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
 							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs" name="edit_submit" style="display: none;"></td>
@@ -237,30 +237,6 @@ if($braceName !== NULL) {
 					</tr>
 <?php
 		}
-		if($stats['owners'] > 1){
-			$i = 0;
-			$distance = 0;
-			$data2 = $data;
-			
-			foreach($data2 as $l){
-				if($i > 0){
-				$p1 = array('latitude' => $data2[$i-1]['latitude'], 'longitude' => $data2[$i-1]['longitude']);
-				$p2 = array('latitude' => $data2[$i]['latitude'], 'longitude' => $data2[$i]['longitude']);
-				//echo getDistance($p1, $p2);
-				//var_dump($p1);
-				//var_dump($p2);
-					$distance = $distance + getDistance($data2[$i-1], $l);
-				}
-				$i++;
-			}
-			$distance = round($distance)/1000;
-?>
-			<tr>
-						<td><?php echo $lang->armband->distanz->$lng;?></td>
-						<td><?php echo $distance; ?>km</td>
-					</tr>
-<?php
-	}
 ?>
 				</table>
 			</aside>
