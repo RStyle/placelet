@@ -584,11 +584,11 @@ class User
 			if($result[$i]['sender']['id'] == $this->userid) {
 				$messages[$result[$i]['recipient']['id']]['recipient'] = $result[$i]['recipient'];
 				$messages[$result[$i]['recipient']['id']][$i] = $result[$i];
-				$messages[$result[$i]['recipient']['id']][$i]['message'] = smileys(htmlentities($result[$i]['message']));
+				$messages[$result[$i]['recipient']['id']][$i]['message'] = htmlentities($result[$i]['message']);
 			}else {
 				$messages[$result[$i]['sender']['id']]['recipient'] = $result[$i]['sender'];
 				$messages[$result[$i]['sender']['id']][$i] = $result[$i];
-				$messages[$result[$i]['sender']['id']][$i]['message'] = smileys(htmlentities($result[$i]['message']));
+				$messages[$result[$i]['sender']['id']][$i]['message'] = htmlentities($result[$i]['message']);
 			}
 		}
 		return $messages;

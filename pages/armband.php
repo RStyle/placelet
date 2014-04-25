@@ -198,17 +198,15 @@ if($braceName !== NULL) {
 				<table style="width: 100%;">
 					<tr>
 						<th><?php echo $lang->misc->comments->name->$lng; ?></th>
-						<td><?php echo '<strong>'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
+						<td><?php echo '<strong id="disp_bracelet_name">'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
 		if($owner) {
 ?> 
-					<form method="post" action="/<?php echo bracename2ids($braceName); ?>">
 						<tr>
-							<td><input type="text" name="edit_name" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs" style="display: none;" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
-							<td><input type="submit" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs" name="edit_submit" style="display: none;"></td>
+							<td><input type="text" name="edit_name" id="edit_name_input" placeholder="<?php echo $lang->armband->neuername->$lng; ?>" class="name_inputs display_none" size="20" maxlength="18" pattern=".{4,18}" title="Min.4 - Max.18" required></td>
+							<td><input type="submit" id="edit_name_submit" data-brid="<?php echo $braceID; ?>" value="<?php echo $lang->armband->aendern->$lng; ?>" class="name_inputs display_none" name="edit_submit"></td>
 						</tr>
-					</form>
 <?php
 		}
 ?>
@@ -237,6 +235,27 @@ if($braceName !== NULL) {
 					</tr>
 <?php
 		}
+		if($stats['owners'] > 1){
+			$i = 0;
+			$distance = 0;
+			$data2 = $data;
+			
+			foreach($data2 as $l){
+				if($i > 0){
+				$p1 = array('latitude' => $data2[$i-1]['latitude'], 'longitude' => $data2[$i-1]['longitude']);
+				$p2 = array('latitude' => $data2[$i]['latitude'], 'longitude' => $data2[$i]['longitude']);
+					$distance = $distance + getDistance($data2[$i-1], $l);
+				}
+				$i++;
+			}
+			$distance = round($distance)/1000;
+?>
+			<tr>
+						<td><?php echo $lang->armband->distanz->$lng;?></td>
+						<td><?php echo $distance; ?>km</td>
+					</tr>
+<?php
+	}
 ?>
 				</table>
 			</aside>
