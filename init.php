@@ -147,7 +147,15 @@ if($page == 'armband') {
 					$defaultPicid = false;
 				}else $defaultPicid = true;
 			}else $braceName = false;
-		}else $braceName = $_GET['absolute'];
+		}else {
+			$page = 'profil';
+			$username = $_GET['absolute'];
+			if($username != '' && Statistics::userexists($username)) {
+				$userdetails = $statistics->userdetails($username);
+				$armbaender = profile_stats($userdetails);
+				$notifications = $user->receive_notifications();
+			}
+		}
 	}
 	if(isset($_GET['pic'])) {
 		$startPicid = htmlentities($_GET['pic']);

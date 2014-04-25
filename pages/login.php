@@ -8,7 +8,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 				'.$lang->php->notexisting->$lng.'<br><br>';
 ?>
 				<form name="login" id="form_login" action="login" method="post">
-					<table class="border_black">
+					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 							<td><input type="text" name="login" id="login" size="20" maxlength="30" pattern="\w{4,15}" title="Min.4 - Max.15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" required></td>
@@ -32,7 +32,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 ?>
 				<div id="register_pic">
 					<form name="registerpic" action="/login?postpic=<?php echo $postpic; ?>" method="post" enctype="multipart/form-data">
-						<span class="verdana_times"><?php echo $lang->login->bildposten->$lng; ?></span><br><br>
+						<span style="font-family: Verdana, Times"><?php echo $lang->login->bildposten->$lng; ?></span><br><br>
 						
 						<label for="registerpic_brid" class="label_registerpic_brid"><?php echo $lang->login->armbandid->$lng; ?>:</label><br>
 						<input type="text" name="registerpic_brid" maxlength="<?php echo $ziffern; ?>" size="6" pattern="\w{<?php echo $ziffern; ?>}" title="<?php echo $lang->community->sixcharacters->$lng; ?>" id="registerpic_brid" value="<?php if(count($postpic_id) == 1) echo $postpic_id[0]; else if(isset($postpic)) if($postpic != 'true') echo @$_POST['registerpic_brid']; ?>" required><br>
@@ -66,7 +66,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size; ?>">
 						<input type="hidden" name="registerpic_date" id="registerpic_date" value="default">
 						<input type="hidden" name="" value="">
-						<div id="registerpic_upload_inputs"<?php if($user->login == false) echo ' class="display_none"'; ?>>
+						<div id="registerpic_upload_inputs"<?php if($user->login == false) echo ' style="display: none;"'; ?>>
 							<input type="file" name="registerpic_file" accept="image/*" id="upload_pic"><br>
 							<input type="submit" name="registerpic_submit" id="registerpic_submit" value="<?php echo $lang->login->bildupload->$lng; ?>"><br>
 							<?php echo $lang->login->preview->$lng; ?>:<br>
@@ -82,7 +82,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 							<span id="picupload_login_errormsg"></span>
 							<input type="text" size="20" name="picupload_login_username" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" class="picupload_nologin_text" id="picupload_login_username"><br>
 							<input type="password" size="20" name="picupload_login_password" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" class="picupload_nologin_text password" id="picupload_login_password"><br>
-							<input type="submit" value="Login" class="picupload_nologin_text display_none" id="picupload_login_submit"><img src="/cache.php?f=/img/loading.gif" alt="Laden..." id="picupload_login_loading">
+							<input type="submit" value="Login" class="picupload_nologin_text" id="picupload_login_submit"><img src="/cache.php?f=/img/loading.gif" alt="Laden..." id="picupload_login_loading" style="display: none;">
 						<?php /* <!--</form>--> */ ?>
 <?php
 	}
@@ -113,9 +113,9 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 <?php
 	}else {//Wenn man eine Armband ID eingegeben hat, kann man sich einloggen
 ?>
-				<form name="login" id="form_login" action="/login" method="post" class="float_left">
-				<?php echo $lang->login->notlogged_armband1->$lng; if($registerbr != '') echo 'Nr. <span class="italic000">'.$registerbr.'</span> '.$lang->login->notlogged_armband2->$lng; ?>
-					<table class="border_black">
+				<form name="login" id="form_login" action="/login" method="post" style="float: left;">
+				<?php echo $lang->login->notlogged_armband1->$lng; if($registerbr != '') echo 'Nr. <span style="color: #000; font-style: italic;">'.$registerbr.'</span> '.$lang->login->notlogged_armband2->$lng; ?>
+					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="log_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
 							<td><input type="text" name="login" id="log_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
@@ -130,8 +130,8 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						</tr>
 					</table>
 				</form>
-				<form name="reg" id="form_reg" action="/login" method="post" class="float_right"><?php /*<!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!! -->*/ ?>				
-					<table class="border_black">
+				<form name="reg" id="form_reg" action="/login" method="post" style="float: right;"><?php /*<!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM UNTEN AKTUALISIERT WERDEN!!! -->*/ ?>				
+					<table style="border: 1px solid black">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>
 							<td><input type="text" name="reg_login" id="reg_login" class="input_text" size="20" maxlength="30" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
@@ -203,7 +203,7 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
                 <span style="float:left; width: 110px;">&nbsp;</span><span class="arrow_down" style="border-top-color: #FFF;" ></span></p>
                 <hr>
                 
-				<form name="reg" id="form_reg" action="/login" method="post" class="hr_clear"><?php /*<!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!! -->*/ ?>					
+				<form name="reg" id="form_reg" action="/login" method="post" style="clear: both;"><?php /*<!--DIESES FORMULAR MUSS IMMER GLEICHZEITIG MIT DEM OBEN AKTUALISIERT WERDEN!!! -->*/ ?>					
 					<table id="reg_table">
 						<tr>
 							<td><label for="reg_login"><?php echo $lang->form->benutzername->$lng; ?></label></td>

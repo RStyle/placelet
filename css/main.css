@@ -224,40 +224,6 @@
 	.tree_second li {
 		margin-left: -35px;
 	}
-	/*.tree_3 ul {
-		margin-left: 14px;
-	}*/
-	
-	/*.tree_second li::before, .tree_second li::after{
-		content: '';
-		position: absolute; top: 0; right: 70%;
-		border-top: 1px solid #ccc;
-		width: 50%; height: 20px;
-	}
-	.tree_second li::after{
-		right: auto; left: 70%;
-		border-left: 1px solid #ccc;
-	}*/
-	/*
-	.tree_second ul ul::before{
-		content: '';
-		position: absolute; top: 0; left: 105px;
-		border-left: 1px solid #ccc;
-		width: 0; height: 20px;
-	}*/
-	
-	/*Time for some hover effects*/
-	/*We will apply the hover effect the the lineage of the element also*/
-		/*.tree li a:hover, .tree li a:hover+ul li a {
-			background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
-		}*/
-	/*Connector styles on hover*/
-		/*.tree li a:hover+ul li::after, 
-		.tree li a:hover+ul li::before, 
-		.tree li a:hover+ul::before, 
-		.tree li a:hover+ul ul::before{
-			border-color:  #94a0b4;
-		}*/
 /*---Baumdiagramm---*/
 /*+++HEADER+++*/
 	#header {
@@ -949,10 +915,9 @@
 			padding:  20px;
 			padding-bottom: 20px;
 		}      
-			.comments_name {
-				color: #B7D300 !important;
-				font-family: 'Open Sans', Verdana, sans-serif !important;
-				text-decoration: none !important;
+			.comments strong {
+				color: #B7D300;
+				font-family: 'Open Sans', Verdana, sans-serif;
 			}
 			.comments p {
 				margin-top: 10px;
@@ -1403,6 +1368,58 @@
 		.italic000{
 			color: #000;
 			font-style: italic;
+		}
+		#login1{
+			font-style: italic;
+			font-weight: bold;
+		}
+		#login2{
+			margin-top: 25px;
+			border-color: #D340FF;
+		}
+		#login3{
+			width: 300px;
+			height: 300px;
+		}
+		#login4{
+			width: 200px;
+			top: 85px;
+		}
+		#login5{
+			margin-right: 0;
+			margin-top: 25px;
+			border-color: #05EB80;
+		}
+		#login6{
+			left: 40px;
+		}
+		#login7{
+			float:left;
+			width: 110px;
+		}
+		#login8{
+			border-top-color: #FFF;
+		}
+		.text_center{
+			text-align: center;
+		}
+		.ml2{
+			margin-left: 2em;
+		}
+		.width50{
+			width: 50%;
+		}
+		#junior{
+			width: 80%; height: auto;
+		}
+		.border_none{
+			border: none;
+		}
+		.mb0{
+			margin-bottom: 0;
+		}
+		.mto{
+			margin-top: 0;
 		}
 
 .delete_button {

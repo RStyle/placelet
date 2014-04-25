@@ -38,7 +38,6 @@ RewriteCond %{REQUEST_FILENAME} !search.*
 RewriteCond %{REQUEST_FILENAME} !order.*
 RewriteCond %{REQUEST_FILENAME} !shop.*
 RewriteCond %{REQUEST_FILENAME} !start.*
-RewriteCond %{REQUEST_FILENAME} !test.*
 RewriteCond %{REQUEST_URI} !css/.*
 RewriteCond %{REQUEST_URI} !img/.*
 RewriteCond %{REQUEST_URI} !js/.*

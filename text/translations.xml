@@ -216,7 +216,7 @@
 			<de>Neue Kommentare zu den Bildern, die du hochgeladen hast</de>
 		</comm_pics>
 		<pic_subs>
-			<en>new pictures on the pictures you posted</en>
+			<en>new pictures on the bracelets you are subscribed to</en>
 			<de>Neue Bilder zu deinen abonnierten Armbändern</de>
 		</pic_subs>
 		<privacy>
@@ -753,6 +753,10 @@
 			<en>username</en>
 			<de>Benutzername</de>
 		</username>
+		<new_message>
+			<en>New message to:</en>
+			<de>Neue Nachricht an:</de>
+		</new_message>
 	</nachrichten>
 	<privacypolicy en-title="Privacy Policy" de-title="Datenschutzerklärung">
 	</privacypolicy>
@@ -863,10 +867,10 @@
 			<en>User not existing</en>
 			<de>Benutzer existiert nicht</de>
 		</notexists>
-		<notexists>
+		<this_notexists>
 			<en>This user does not exist</en>
 			<de>Dieser Benutzer existiert nicht</de>
-		</notexists>
+		</this_notexists>
 	</profil>
 	<search en-title="Search Results" de-title="Suchergebnisse">
 		<noresults>

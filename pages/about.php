@@ -141,9 +141,9 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 					<h1><?php echo $lang->about->supported->$lng; ?></h1>
 
     				<div style="float: right; width: 800px">
-    					<img src="/cache.php?f=/img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
-    					<img src="/cache.php?f=/img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
-    					<img src="/cache.php?f=/img/aureliaLogo.png" alt="odd - print und medien" style="height: 80px; width: 200px; margin-left: 2.5%; margin-right: 2.5%;">
+    					<img src="/cache.php?f=/img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 176; margin-left: calc(2.5% + 17px); margin-right: calc(2.5% + 17px);">
+    					<img src="/cache.php?f=/img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="height: 80px; width: 160; margin-left: calc(2.5% + 20px); margin-right: calc(2.5% + 20px);">
+    					<img src="/cache.php?f=/img/aureliaLogo.png" alt="odd - print und medien" style="height: 80px; width: 159px; margin-left: calc(2.5% + 20.5px); margin-right: calc(2.5% + 20.5px);">
     				</div>
 
     				<br>

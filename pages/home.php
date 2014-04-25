@@ -29,12 +29,12 @@ if($systemStats['total_posted'] > 1) {
         					   </div>
                                                            			
         						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
-        						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail">
+        						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
         						</a>
         							<table class="connect_pic-info">
         								<tr>
         									<th><?php echo $lang->pictures->armband->$lng; ?></th>
-        									<td><strong><?php echo '<a href="/'.bracename2ids($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
+        									<td><strong><?php echo '<a href="/'.bridtoids($statistics->brid2name($bracelets_displayed[1])).'">'.htmlentities($statistics->brid2name($bracelets_displayed[1])).'</a>'; ?></strong></td>
         								</tr>
         								<tr>
         									<th><?php echo $lang->pictures->datum->$lng; ?></th>
@@ -49,7 +49,7 @@ if($systemStats['total_posted'] > 1) {
 ?>
         								<tr>
         									<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-        									<td><img src="/cache.php?f=<?php echo profile_pic($stats[1][$systemStats['recent_picids'][1]-1]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
+        									<td><img src="/cache.php?f=<?php echo profile_pic($stats[1][$systemStats['recent_picids'][1]-1]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
                                                 <a href="/profil?user=<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?></a></td>
         								</tr>
 <?php

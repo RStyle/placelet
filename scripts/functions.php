@@ -21,19 +21,17 @@ function email_template($mail, $title, $reviever, $from = 'support@placelet.de')
 	mail($reviever, $title, $content, $mail_header);
 	file_put_contents('./text/mailtemplate-log.txt', $log."Mail succesful: ".$title." - ".date('l jS \of F Y h:i:s A')."\n");
 }
-function bracename2ids($brid, $inurlform = true){ //Armbandname -> Daten /armband?name=
+function bridtoids($brid, $inurlform = true){ //Armbandname -> Daten /armband?name=
 	global $db;
 	$sql = "SELECT userid FROM bracelets WHERE name = :brid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':brid' => $brid));
-	$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	$q1 = $result1[0];
+	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 	
 	$sql = "SELECT user FROM users WHERE userid = :userid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':userid' => $q1['userid']));
-	$resultf = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	$qf = $resultf[0];
+	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 	
 	//wievieltes armband?
 	$sql = "SELECT name FROM bracelets WHERE userid = :userid ORDER BY date";
@@ -58,20 +56,17 @@ function picidtoids($picid, $inurlform = true){
 	$sql = "SELECT brid, picid FROM pictures WHERE id = :id";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':id' => $picid));
-	$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	$q = $result[0];
+	$q = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 	
 	$sql = "SELECT userid FROM bracelets WHERE brid = :brid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':brid' => $q['brid']));
-	$result1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	$q1 = $result1[0];
+	$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 	
 	$sql = "SELECT user FROM users WHERE userid = :userid";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array(':userid' => $q1['userid']));
-	$resultf = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	$qf = $resultf[0];
+	$qf = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 	
 	//wievieltes armband?
 	$sql = "SELECT brid FROM bracelets WHERE userid = :userid ORDER BY date";
@@ -416,7 +411,43 @@ function getBrowserLanguage($arrAllowedLanguages, $strDefaultLanguage, $strLangV
     return $strCurrentLanguage;
 }
 
+function rad($x) {
+  return $x * 3.1415926535898 / 180;
+}
 
+function getDistance2($p1, $p2) {
+  $R = 6378137; // Earth’s mean radius in meter
+  $dLat = rad($p2['latitude'] - $p1['latitude']);
+  $dLong = rad($p2['longitude'] - $p1['longitude']);
+  $a = Math.sin($dLat / 2) * Math.sin($dLat / 2) +
+    Math.cos(rad($p1['latitude'])) * Math.cos(rad($p2['latitude'])) *
+    Math.sin($dLong / 2) * Math.sin($dLong / 2);
+	echo $a;
+  $c = 2 * Math.atan2(Math.sqrt($a), Math.sqrt(1 - $a));
+  $d = $R * $c;
+  echo $d;
+  echo 2 * Math.atan2(Math.sqrt($a), Math.sqrt(1 - $a));
+  return $d; // returns the distance in meter
+}
+
+function getDistance($p1, $p2, $earthRadius = 6371000){
+  $latitudeFrom = $p1['latitude'];
+  $longitudeFrom = $p1['longitude'];
+  $latitudeTo = $p2['latitude'];
+  $longitudeTo = $p2['longitude'];
+  // convert from degrees to radians
+  $latFrom = deg2rad($latitudeFrom);
+  $lonFrom = deg2rad($longitudeFrom);
+  $latTo = deg2rad($latitudeTo);
+  $lonTo = deg2rad($longitudeTo);
+
+  $latDelta = $latTo - $latFrom;
+  $lonDelta = $lonTo - $lonFrom;
+
+  $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+    cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+  return $angle * $earthRadius;
+}
 
 //Start - der Funktion is_mobile, welche ermittelt, ob der Besucher ein mobiles Endgerät verwendet
 function is_mobile($useragentmobile){

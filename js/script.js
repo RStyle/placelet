@@ -499,7 +499,7 @@ $(document).ready(function(){
 					$('.sub_inputs').toggle();
 				}else {
 					bracelet_name = $('#bracelet_name').val();
-					window.location.replace("armband?sub=username&sub_user=" + json.username + "&name=" + bracelet_name);
+					window.location.replace("/armband?sub=username&sub_user=" + json.username + "&name=" + bracelet_name);
 				}
 			}
 		});
@@ -542,7 +542,7 @@ function confirmDelete(type, object) {
 							if(json.gemeldet == 'Bild') alert(lang['bild_gemeldet']);
 							if(json.gemeldet == 'Kommentar') alert(lang['kommentar_gemeldet']);
 						}else if(json.location != undefined) {
-							window.location.replace("http://placelet.de/" + json.location);
+							window.location.replace("/" + json.location);
 						}else {
 							alert("Error: " + json.error);
 							console.log(json);

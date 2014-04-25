@@ -1,15 +1,15 @@
 			<article id="profil" class="mainarticles bottom_border_green">
 <?php
-if(!isset($username) && !$user->login) {
+if(!isset($_GET['user']) && !$user->login) {
 ?>
 								<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->profil[$lng.'-title']; ?></h1></div>
                                 <div style="float: left; margin-right: 2em;">
                                         <?php echo $lang->profil->notlogged->$lng; ?>
-                                        <form name="login" action="/profil" method="post">
+                                        <form name="login" action="profil" method="post">
                                                 <table style="border: 1px solid black">
                                                         <tr>
                                                                 <td><label for="profile_login"><?php echo $lang->form->benutzername->$lng; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
-                                                                <td><input type="text" name="login" id="profile_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
+                                                                <td><input type="text" name="login" id="profile_login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
                                                         </tr>
                                                         <tr>
                                                                 <td><label for="profile_password"><?php echo $lang->form->passwort->$lng; ?></label></td>
@@ -24,10 +24,10 @@ if(!isset($username) && !$user->login) {
                                 </div>
                                 <div>
                                         <?php echo $lang->profil->searchprofil->$lng; ?>
-                                        <form action="/profil" method="get">
+                                        <form action="profil" method="get">
                                                 <table style="border: 1px solid black; overflow: auto;">
                                                         <tr>
-                                                                <td><input type="text" name="user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="\w{4,15}" title="Min.4 - Max.15" required></td>
+                                                                <td><input type="text" name="user" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern=".{4,15}" title="Min.4 - Max.15" required></td>
                                                                 <td><input type="submit" value="<?php echo $lang->form->suchen->$lng; ?>"></td>
                                                         </tr>
                                                 </table>
@@ -39,43 +39,29 @@ if(!isset($username) && !$user->login) {
 <?php	
 }elseif($user->login || Statistics::userexists($username)) {
 ?>
-				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo $lang->profil->deinprofil->$lng.', '.$user->login; else echo 'Profil von '.$username; ?></h1></div>
+				<div class="green_line mainarticleheaders line_header"><h1><?php if($user->login == $username) echo $lang->profil->deinprofil->$lng.', '.htmlentities($user->login); else echo 'Profil von '.htmlentities($username); ?></h1></div>
 				<div class="user_info">
-					<img class="profile_pic" src="/cache.php?f=<?php echo profile_pic($userdetails['userid']); ?>" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
+					<img class="profile_pic" src="img/profil_pic_small.png" alt="<?php echo $lang->profil->profilpic->$lng; ?>">           
 					<h1><?php echo $userdetails['user']; ?></h1>
 					<p>
 						<?php echo $lang->profil->registered_since->$lng; ?>: <?php echo date('d.m.Y', $userdetails['registered']); ?><br>
-						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>						
+						Status: <?php if($userdetails['status'] == 2) echo 'Admin'; else echo 'User'; ?>
+						<?php if($user->admin) echo $userdetails['userid']; ?>
 					</p>
 				</div>
-<?php
-     if($user->login != $username && $user->login) {
-?>
-                <div class="msg_box" style="width: 280px;"><a href="/nachrichten?msg=<?php echo $username ?>" style="text-decoration: none;">
-                    <img style="float: left; margin-right: 10px;" src="/cache.php?f=/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->write_msg->$lng; ?></p>
-                </a></div>
-<?php  
-    }
-?>
-				
 <?php 
     if($user->login == $username) {
 ?>        
-				
                 <div class="logged_info">
-                    <p style="float: right; margin-top: 0;">						
-                        <?php echo $lang->profil->youremail->$lng; ?>: <?php echo $userdetails['email']; ?>
+                    <p>
+						<?php echo $lang->profil->youremail->$lng; ?>: <?php echo $userdetails['email']; ?>
 						<ul class="list_style_none" style="padding: 0;">
-							<li><a href="/account?details"><?php echo $lang->profil->change_accountdetails->$lng; ?></a></li>
-							<li><a href="/account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
-							<?php /*<li><a href="/account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>*/ ?>
-							<li><a href="/account?profilpic"><?php echo $lang->account->change_profilpic->$lng; ?></a></li>
+							<li><a href="account?details"><?php echo $lang->profil->change_accountdetails->$lng; ?></a></li>
+							<li><a href="account?notifications"><?php echo $lang->account->notifications->$lng; ?></a></li>
+							<li><a href="account?privacy"><?php echo $lang->account->privacy->$lng; ?></a></li>
 						</ul>
-					</p>					
-                </div>   
-                <div class="msg_box"><a href="/nachrichten" style="text-decoration: none;">
-                    <img style="float: left; margin-right: 10px;" src="/cache.php?f=/img/msg_icon.png"><p style="margin: 0; margin-top: 12px;"><?php echo $lang->profil->check_msg->$lng; ?></p>
-                </a></div>   
+					</p>
+                </div>      
 <?php        
     }
 ?>
@@ -99,14 +85,10 @@ if(!isset($username) && !$user->login) {
 <?php
 				foreach($notifications['pic_owns'] as $pic) {
 					$pic['name'] = $statistics->brid2name($pic['brid']);
-					
-					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-					$stmt->execute(array('picid' => $pic['picid'], 'brid' => $pic['brid']));
-					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<div class="previews">
-								<a href="/<?php echo bracename2ids($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
-									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$pic['brid'].'-'.$pic['picid'].'.jpg'; ?>"><br>
 									<p class="preview_text">
 										<?php echo htmlentities($pic['name'])."\n"; ?>
 										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
@@ -126,14 +108,10 @@ if(!isset($username) && !$user->login) {
 <?php
 				foreach($notifications['pic_subs'] as $pic) {
 					$pic['name'] = $statistics->brid2name($pic['brid']);
-					
-					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-					$stmt->execute(array('picid' => $pic['picid'], 'brid' => $pic['brid']));
-					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 							<div class="previews">
-								<a href="/<?php echo bracename2ids($pic['name']); ?>">
-									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+								<a href="armband?name=<?php echo urlencode($pic['name']); ?>" title="<?php echo urlencode($pic['brid']); ?>">
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$pic['brid'].'-'.$pic['picid'].'.jpg'; ?>"><br>
 									<p class="preview_text">
 										<?php echo htmlentities($pic['name'])."\n"; ?>
 										<span style="float:right;">Bilder: <?php echo $pic['picid']; ?></span>
@@ -180,11 +158,9 @@ if(!isset($username) && !$user->login) {
 				}
 ?>
 						</div>
-<?php
-			}
-?>
 						<span id="notific_read" class="pseudo_link" style="clear: both;"><?php echo $lang->profil->notific_read->$lng; ?></span>
 <?php
+			}
 		}else echo '<p>'.$lang->profil->nonew_notific->$lng.'.</p>';
 ?>
 					</div>
@@ -205,33 +181,25 @@ if(!isset($username) && !$user->login) {
 <?php
 				if($val['picid'] != 0) {
 					if($user->login == $username) {
-					
-						$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-						$stmt->execute(array('picid' => $val['picid'], 'brid' => $key));
-						$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-							<a href="/<?php echo bracename2ids($key_name); ?>" <?php if($user->login == $username) echo 'title="'.urlencode($key).'"'; ?>>
-									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+							<a href="armband?name=<?php echo urlencode($key_name); ?>" title="<?php echo urlencode($key); ?>">
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php	
 					}else {
-					
-						$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-						$stmt->execute(array('picid' => $val['picid'], 'brid' => $key));
-						$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-							<a href="/<?php echo bracename2ids($key_name); ?>">
-									<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+							<a href="armband?name=<?php echo urlencode($key_name); ?>">
+									<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 					}
 				}elseif($user->login == $username) {
 ?>
-							<a href="/login?postpic=<?php echo urlencode($key); ?>" title="<?php echo urlencode($key); ?>">
-                                    <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
+							<a href="login?postpic=<?php echo urlencode($key); ?>" title="<?php echo urlencode($key); ?>">
+                                    <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
 				}else {
 ?>
-							<a href="/<?php echo bracename2ids($key_name); ?>">
-                                    <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
+							<a href="armband?name=<?php echo urlencode($key_name); ?>">
+                                    <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
 				}
 ?>
@@ -259,19 +227,15 @@ if(!isset($username) && !$user->login) {
 				if(!isset($val['picid'])) $val['picid'] = 0;
 ?>
 						<div class="previews">
-							<a href="/<?php echo bracename2ids($val['name']); ?>">
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
 <?php
 				if($val['picid'] != 0) {
-				
-					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-					$stmt->execute(array('picid' => $val['picid'], 'brid' => $key));
-					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-								<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$key.'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 				}else {
 ?>
-                                <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
+                                <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
 				}
 ?>
@@ -280,7 +244,7 @@ if(!isset($username) && !$user->login) {
 									<span style="float:right;"><?php echo $lang->profil->pictures->$lng; ?>: <?php echo $val['picid']; ?></span>
 								</p>
 							</a>
-							<?php if($user->login == $username) { ?><br><a href="/armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_code='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text"><?php echo $lang->profil->unsubscribe->$lng; ?></a><?php } ?>
+							<?php if($user->login == $username) { ?><br><a href="armband?name=<?php echo urlencode($val['name']).'&sub=false&sub_code='.urlencode(PassHash::hash($userdetails['email'])); ?>" class="preview_text"><?php echo $lang->profil->unsubscribe->$lng; ?></a><?php } ?>
 						</div>
 <?php
 			}
@@ -301,26 +265,21 @@ if(!isset($username) && !$user->login) {
 						<div class="previews">
 <?php
 				if($val['picid'] != 0) {
-					
-					$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-					$stmt->execute(array('picid' => $val['picid'], 'brid' => $val['brid']));
-					$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
-					
 					if($user->login == $username) {
 ?>
-							<a href="/<?php echo bracename2ids($val['name']); ?>" <?php if($username == $user->login) echo 'title="'.$val['brid'].'"'; ?>>
-								<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>" title="<?php echo $val['brid']; ?>">
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 					}else {
 ?>
-							<a href="/<?php echo bracename2ids($val['name']); ?>">
-								<img alt="latest pic" class="previewpic" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>"><br>
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
+								<img alt="latest pic" class="previewpic" src="pictures/bracelets/thumb<?php echo '-'.$val['brid'].'-'.$val['picid'].'.jpg'; ?>"><br>
 <?php
 					}
 				}else { 
 ?>
-							<a href="/<?php echo bracename2ids($val['name']); ?>">
-                                <img alt="no picture available" class="previewpic" src="/cache.php?f=/img/no_pic2.png"><br>
+							<a href="armband?name=<?php echo urlencode($val['name']); ?>">
+                                <img alt="no picture available" class="previewpic" src="img/no_pic2.png"><br>
 <?php
 				}//Nicht wirklich nötig.
 ?>

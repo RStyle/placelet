@@ -132,7 +132,7 @@ if($braceName !== NULL) {
 	?>
 							<tr>
 								<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" width="20" style="border: 1px #999 solid;">&nbsp;
+								<td><img src="/cache.php?f=<?php echo profile_pic($stats[$i]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
                                     <a href="/profil?user=<?php echo $stats[$i]['user']; ?>"><?php echo $stats[$i]['user']; ?></a></td>
 							</tr>
 	<?php
@@ -160,7 +160,7 @@ if($braceName !== NULL) {
 					}
 	?>
 								<a href="/armband?name=<?php echo urlencode($braceName); ?>&amp;last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" data-bracelet="<?php echo $braceName; ?>" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?> " width="20" style="border: 1px #999 solid;">&nbsp;
+								<img src="/cache.php?f=<?php echo profile_pic($stats[$i][$j]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
                                 <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
 								<p><?php echo $stats[$i][$j]['comment']; ?></p> 
 								<hr style="border: 1px solid white;">  
@@ -171,7 +171,7 @@ if($braceName !== NULL) {
 								<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 								<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
 								<textarea name="comment_content[<?php echo $i; ?>]" id="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-								<input type="hidden" name="comment_brace_name[<?php echo $i; ?>]" value="<?php echo html_entity_decode($braceName); ?>">
+								<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
 								<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
 								<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 								<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
@@ -198,7 +198,7 @@ if($braceName !== NULL) {
 				<table style="width: 100%;">
 					<tr>
 						<th><?php echo $lang->misc->comments->name->$lng; ?></th>
-						<td><?php echo '<strong>'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
+						<td><?php echo '<strong>'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" alt="" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
 		if($owner) {
@@ -237,6 +237,30 @@ if($braceName !== NULL) {
 					</tr>
 <?php
 		}
+		if($stats['owners'] > 1){
+			$i = 0;
+			$distance = 0;
+			$data2 = $data;
+			
+			foreach($data2 as $l){
+				if($i > 0){
+				$p1 = array('latitude' => $data2[$i-1]['latitude'], 'longitude' => $data2[$i-1]['longitude']);
+				$p2 = array('latitude' => $data2[$i]['latitude'], 'longitude' => $data2[$i]['longitude']);
+				//echo getDistance($p1, $p2);
+				//var_dump($p1);
+				//var_dump($p2);
+					$distance = $distance + getDistance($data2[$i-1], $l);
+				}
+				$i++;
+			}
+			$distance = round($distance)/1000;
+?>
+			<tr>
+						<td><?php echo $lang->armband->distanz->$lng;?></td>
+						<td><?php echo $distance; ?>km</td>
+					</tr>
+<?php
+	}
 ?>
 				</table>
 			</aside>

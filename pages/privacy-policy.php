@@ -24,5 +24,5 @@
 				<p><i>Quellen:<br>
 				<a rel="nofollow" href="http://www.e-recht24.de/muster-datenschutzerklaerung.html" target="_blank">Datenschutzerklärung</a> von eRecht24, dem Portal zum Internetrecht von Rechtsanwalt Sören Siebert<br>
 				Google Maps Formulierung, Auskunfts- &amp; Widerrufsrecht von <a href="http://www.datenschutzerklaerung-online.de">datenschutzerklärung-online.de</a><br>
-				Zugriffsdaten/Server-Logiles, Cookies, Registrierfunktion von <a href="http://rechtsanwalt-schwenke.de/smmr-buch/datenschutz-muster-generator-fuer-webseiten-blogs-und-social-media/" >Datenschutz-Muster von Rechtsanwalt Thomas Schwenke - I LAW it</a></i></p
+				Zugriffsdaten/Server-Logiles, Cookies, Registrierfunktion von <a href="http://rechtsanwalt-schwenke.de/smmr-buch/datenschutz-muster-generator-fuer-webseiten-blogs-und-social-media/" >Datenschutz-Muster von Rechtsanwalt Thomas Schwenke - I LAW it</a></i></p>
 			</article>

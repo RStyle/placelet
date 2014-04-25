@@ -38,7 +38,7 @@ if($braceID != NULL) {
 		if(!isset($stats[$i])) break;
 		if($i < $_GET['q']) {
 ?>
-<!--~~~HR~~~~--><hr class="armband_hr">
+<!--~~~HR~~~~--><hr style="border-style: solid; height: 0px; border-bottom: 0; clear: both;">
 <?php
 		}
 		
@@ -46,8 +46,8 @@ if($braceID != NULL) {
 		$stmt->execute(array('picid' => $stats[$i]['picid'], 'brid' => $braceID));
 		$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
-				<div class="width100 overflow_auto">
-					<a href="/armband?picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=middle&amp;delete_pic=true" class="delete_button float_right mt2" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="return confirmDelete('dasBild');">X</a>
+				<div style="width: 100%; overflow: auto;">
+					<a href="/armband?picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=middle&amp;delete_pic=true" class="delete_button float_right" style="margin-top: 2em;" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="return confirmDelete('dasBild');">X</a>
 					<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php if($startPicid == $stats[$i]['picid']) echo '=> '; echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
 						<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
@@ -63,7 +63,7 @@ if($braceID != NULL) {
 ?>
 						<tr>
 							<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-							<td><img src="/cache.php?f=<?php echo tprofile_pic($stats[$i]['userid']); ?> " width="20" class="border999">&nbsp;
+							<td><img src="/cache.php?f=<?php echo tprofile_pic($stats[$i]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
                                 <a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['user'])); ?>"><?php echo $stats[$i]['user']; ?></a></td>
 						</tr>
 <?php
@@ -91,18 +91,18 @@ if($braceID != NULL) {
 			}
 ?>
 							<a href="/armband?last_comment=<?php echo $last_comment; ?>&amp;commid=<?php echo $stats[$i][$j]['commid']; ?>&amp;picid=<?php echo $stats[$i][$j]['picid']; ?>&amp;delete_comm=true" class="delete_button float_right" title="<?php echo $lang->pictures->deletecomment->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('denKommentar', this); return false;">X</a>
-                            <img src="/cache.php?f=<?php echo tprofile_pic($stats[$i][$j]['userid']); ?> " width="20" class="border999">&nbsp;
-                            <?php if($stats[$i][$j]['user'] == NULL) echo '<strong class="comments_name">Anonym</strong>'; else echo '<strong><a class="comments_name" href="/profil?user='.$stats[$i][$j]['user'].'">'.$stats[$i][$j]['user'].'</a>'; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
+                            <img src="/cache.php?f=<?php echo tprofile_pic($stats[$i][$j]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
+                            <strong><?php if($stats[$i][$j]['user'] == NULL) echo 'Anonym'; else echo $stats[$i][$j]['user']; ?></strong>, <?php echo $x_days_ago.' ('.date('H:i d.m.Y', $stats[$i][$j]['date']).')'; ?>
                             <p><?php echo $stats[$i][$j]['comment']; ?></p> 
-                            <hr class="border_white">  
+                            <hr style="border: 1px solid white;">  
 <?php 
 		}
 ?>   
-						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/<?php echo bracename2ids($braceName); ?>" method="post">
+						<form name="comment[<?php echo $i; ?>]" class="comment_form" action="/<?php echo bridtoids($braceName); ?>" method="post">
 							<?php echo $lang->misc->comments->kommentarschreiben->$lng; ?><br>
 							<label for="comment_content[<?php echo $i; ?>]" class="label_comment_content"><?php echo $lang->misc->comments->deinkommentar->$lng; ?>:</label><br>
 							<textarea name="comment_content[<?php echo $i; ?>]" class="comment_content" rows="6" maxlength="1000" required></textarea><br><br>
-							<input type="hidden" name="comment_brace_name[<?php echo $i; ?>]" value="<?php echo html_entity_decode($braceID); ?>">
+							<input type="hidden" name="comment_brid[<?php echo $i; ?>]" value="<?php echo $braceID;?>">
 							<input type="hidden" name="comment_picid[<?php echo $i; ?>]" value="<?php echo $stats[$i]['picid']; ?>">
 							<input type="hidden" name="comment_form" value="<?php echo $i; ?>">
 							<input type="submit" name="comment_submit[<?php echo $i; ?>]" value="<?php echo $lang->misc->comments->comment_button->$lng; ?>" class="submit_comment">
