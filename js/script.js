@@ -425,25 +425,19 @@ var reload_q = 3;
 
 $(window).scroll(function () {
 	if($(window).scrollTop() + $(window).height() == $(document).height()) {
-		var braceNameReload = $("#bracelet_name").val();
-		console.log(currentPath);
-		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
+		var braceNameReload = $("#disp_bracelet_name").data("url_bracename");
+		if(pic_br_switch_data == true) pic_br_switch_data = false; else pic_br_switch_data = true;
 		if(currentPath == "/community" || currentPath == "/community.php") reload_start(3);
-		if(pic_br_switch_data == true)pic_br_switch_data = false; else pic_br_switch_data = true;
-		if(braceNameReload != undefined) reload_armband(braceNameReload, $('#bracelet').data('pics'));
+		if(pic_br_switch_data == true) pic_br_switch_data = false; else pic_br_switch_data = true;
+		if(braceNameReload != undefined) reload_armband(braceNameReload);
 	}
 });
 
 function reload_start(plus) {
-	console.log('reload: ' + pic_br_switch_data);
 	var displayed_picnr = $('#comment' + reload_q).data('picnr');
 	reload_q += plus;
 	if(reload_q < 3)
 		reload_q = 3;
-		
-	console.log("WHASSUP, BRO?");
-		
-	console.log("/scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr);
 	var nachlad = $.ajax( "/scripts/ajax/ajax_start.php?q=" + reload_q + "&recent_brid_pics=" + pic_br_switch_data + "&eng=" + lng + "&displayed_picnr=" + displayed_picnr)
 		.done(function(data) {
 			if(data != ""){
@@ -458,22 +452,21 @@ function reload_start(plus) {
 			}
 		})
 		.fail(function() {
-		alert( "error" );
+		alert("error");
 	});
 }
 /*Neuste Bilder Nachladen -armband.php*/
-var reload_q2 = 3;
+var reload_q2 = $('#bracelet').data('pics');
 
-function reload_armband(braceName, plus) {
-	reload_q2 += plus;
+function reload_armband(braceName) {
+	reload_q2 += 3;
 	var nachlad = $.ajax( "/scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName + "&eng=" + lng)
-		.done(function( data ) {
-		htmlcode = $("#armband").html();
-		$("#armband").append(data);
+		.done(function(data) {
+			$("#armband").append(data);
 		})
 		.fail(function() {
-			alert( "error" );
-	}); 
+			console.log("error");
+	});
 }
 /*Nächstes/Vorheriges Bild*/
 function change_pic(cv, sv) {

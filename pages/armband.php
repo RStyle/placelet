@@ -84,12 +84,9 @@ if($braceName !== NULL) {
 		'.$weg.$eecho.'
 		}';
 		$js.= "\n".'google.maps.event.addDomListener(window, "load", initialize);';
-		if($startPicid < 3) {
-			if($stats['owners'] == $startPicid + 1) $showPics = $startPicid + 1;
-				elseif($stats['owners'] > $startPicid) $showPics = 3;
-					else $showPics = $startPicid;
-		}else $showPics = $stats['owners'] - $startPicid + 1;
-		//print_r($stats);
+		$showPics = $stats['owners'] - $startPicid + 1;
+		if($showPics < 3) $showPics = 3;
+		if($defaultPicid) $showPics = 3;
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1 id="bracelet" data-pics="<?php echo $showPics; ?>"><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
@@ -198,7 +195,7 @@ if($braceName !== NULL) {
 				<table style="width: 100%;">
 					<tr>
 						<th><?php echo $lang->misc->comments->name->$lng; ?></th>
-						<td><?php echo '<strong id="disp_bracelet_name">'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
+						<td><?php echo '<strong id="disp_bracelet_name" data-url_bracename="'.urlencode($stats['name']).'">'.htmlentities($stats['name']).'</strong>'; if($owner) {?>  <img src="/cache.php?f=/img/edit.png" id="edit_name" class="pseudo_link"></td><?php } ?>
 					</tr>
 <?php
 		if($owner) {

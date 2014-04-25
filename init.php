@@ -143,7 +143,7 @@ if($page == 'armband') {
 					$startPicid = $urlData[2];
 					$js .= "$(document.body).animate({
 								'scrollTop':   $('#pic-".$startPicid."').offset().top
-							}, 2000);";
+							}, 0);";
 					$defaultPicid = false;
 				}else $defaultPicid = true;
 			}else $braceName = false;
@@ -161,10 +161,9 @@ if($page == 'armband') {
 		$startPicid = htmlentities($_GET['pic']);
 		$js .= "$(document.body).animate({
 					'scrollTop': $('#pic-".$startPicid."').offset().top
-				}, 2000);";
+				}, 0);";
 		$defaultPicid = false;
 	}elseif(!isset($startPicid)) {
-		$startPicid = 3;
 		$defaultPicid = true;
 	}
 }
