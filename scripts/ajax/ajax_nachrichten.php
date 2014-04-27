@@ -55,7 +55,14 @@ if($user->login) {
 		if(!isset($seen)) $seen = 0;
 		if(!isset($seen) && !isset($highest_msg_id)) $messages->read();
 ?>
-                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
+                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php
+		if($seen != 0) {
+			$days_since = days_since($seen);
+			echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">'.$lang->nachrichten->seen->$lng.' ';
+			if($days_since == 'heute' || $days_since == 'today') echo date('H:i', $seen);
+							else echo date('d.m.y', $seen);
+		}
+?></p>
 <?php
 	}elseif(isset($_POST['messages_read']) && isset($_POST['senderid'])) {
 		$messages = $user->messages_read($_POST['senderid']);

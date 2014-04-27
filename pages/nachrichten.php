@@ -29,7 +29,7 @@ if($user->login) {
 							 <strong><?php echo $chat['recipient']['name']; ?></strong><br>
 							 <p style="color: #999; margin: 0;">
 <?php
-					if($latestMSG['seen'] != 0) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">';
+					if($latestMSG['seen'] != 0 && $latestMSG['recipient']['name'] != $user->login) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">';
 					echo (strlen($latestMSG['message']) > 20) ? smileys(substr($latestMSG['message'], 0, 20)).'...' : smileys($latestMSG['message']);
 					echo '<span class="float_right">'.$days_since.' (';
 					if($days_since == 'heute' || $days_since == 'today') echo date('H:i', $latestMSG['sent']);
@@ -79,7 +79,14 @@ if($user->login) {
 	if($recipient_known || $new_message) {
 		$user->messages_read($recipient['id']);
 ?>
-                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php if($seen != 0) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">'.$lang->nachrichten->seen->$lng.' '.date('H:i', $seen); ?></p>
+                    <p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="<?php echo $highest_msg_id; ?>"><?php
+		if($seen != 0) {
+			$days_since = days_since($seen);
+			echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">'.$lang->nachrichten->seen->$lng.' ';
+			if($days_since == 'heute' || $days_since == 'today') echo date('H:i', $seen);
+							else echo date('d.m.y', $seen);
+		}
+?></p>
 <?php
 	}
 ?>

@@ -659,7 +659,6 @@ function RepeatCall() {
 	if(!idle) {
 		receive_messages();
 		messages_read($('#chat_room').data('recipient'));
-		console.log("Receiver" + $('#chat_room').data('recipient'));
 	}
 }
 if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0 && $("#seen_marker").data("msg_id") != 0 && msg_box[0] != undefined) {
@@ -669,9 +668,8 @@ if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0
 /*Nachrichten empfangen*/
 function receive_messages() {
 	recipient = $("#chat_room").data("recipient");
-	console.log(recipient);
 	msg_id = $("#seen_marker").data("msg_id");
-	console.log(msg_id);
+	seen_time = $("#seen_marker").html();
 	$.ajax({
 		type: "POST",
 		url: "scripts/ajax/ajax_nachrichten.php",
@@ -679,7 +677,7 @@ function receive_messages() {
 		success: function(html){
 			$("#seen_marker").remove();
 			$("#message_box").append(html);
-			if('<p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="' + msg_id + '"></p>' != html.trim()) msg_box.scrollTop(msg_box[0].scrollHeight);
+			if('<p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="' + msg_id + '">' + seen_time + '</p>' != html.trim()) msg_box.scrollTop(msg_box[0].scrollHeight);
 		},
 		beforeSend:function()
 		{
