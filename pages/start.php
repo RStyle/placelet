@@ -60,7 +60,7 @@
 		$activ[$thisuser['user']] = array('br' => $bracelets, 'up' => $uploads, 'userid' => $thisuser['userid']);
 	}
 	foreach ($activ as $key => $row) {
-		$br[$key]    = $row['br'];
+		$br[$key] = $row['br'];
 		$up[$key] = $row['up'];
 	}
 	array_multisort($up, SORT_DESC, $br, SORT_DESC, $activ);
@@ -175,8 +175,8 @@
 								<td><a href="/profil?user=<?php echo $stats[$i]['owner']; ?>" class="weiss"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
-								<td><?php echo $lang->pictures->besitzer->$lng; ?></td>
-								<td><?php echo $stats[$i]['owners']; ?></td>
+								<td><?php echo $lang->pictures->bilderanzahl->$lng; ?></td>
+								<td><?php echo $stats[$i]['pic_anz']; ?></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->letzterort->$lng; ?></td>

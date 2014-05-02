@@ -84,14 +84,14 @@ if($braceName !== NULL) {
 		'.$weg.$eecho.'
 		}';
 		$js.= "\n".'google.maps.event.addDomListener(window, "load", initialize);';
-		$showPics = $stats['owners'] - $startPicid + 1;
+		$showPics = $stats['pic_anz'] - $startPicid + 1;
 		if($showPics < 3) $showPics = 3;
 		if($defaultPicid) $showPics = 3;
 ?>
 			<article id="armband" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1 id="bracelet" data-pics="<?php echo $showPics; ?>"><?php echo $lang->pictures->armband->$lng; ?> <?php echo htmlentities($braceName); ?></h1></div>
 				<?php if(!$user_subscribed) echo '<span class="pseudo_link float_right" id="show_sub">'.$lang->armband->abonnieren->$lng.'</span>'; ?>
-				<a href="/<?php echo 'login?postpic'; if($user->login && ($user->admin == true || $user->login == @$stats[$stats['owners'] - 1]['user'] || @$user->login == $stats['owner'])) echo '='.$braceID.'" title="'.$braceID.'"';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
+				<a href="/<?php echo 'login?postpic'; if($user->login && ($user->admin == true || $user->login == @$stats[$stats['pic_anz'] - 1]['user'] || @$user->login == $stats['owner'])) echo '='.$braceID.'" title="'.$braceID.'"';?>"><?php echo $lang->armband->bildposten->$lng; ?></a>
 <?php
 		if(!$user_subscribed) {
 ?>
@@ -185,7 +185,7 @@ if($braceName !== NULL) {
 		}
 ?>
 <?php
-		if ($bracelet_stats['owners'] == 0 ) {
+		if ($bracelet_stats['pic_anz'] == 0 ) {
 			echo '<p>'.$lang->armband->nopics->$lng.'</p>';
 		}
 ?>
@@ -216,11 +216,11 @@ if($braceName !== NULL) {
 						<td><?php echo date('d.m.Y', $stats['date']); ?></td>
 					</tr>
 					<tr>
-						<td><?php echo $lang->armband->besitzeranzahl->$lng; ?></td>
-						<td><?php echo $stats['owners']; ?></td>
+						<td><?php echo $lang->pictures->bilderanzahl->$lng; ?></td>
+						<td><?php echo $stats['pic_anz']; ?></td>
 					</tr>
 <?php
-		if($bracelet_stats['owners'] != 0) {
+		if($bracelet_stats['pic_anz'] != 0) {
 ?>
 					<tr>
 						<td><?php echo $lang->pictures->letzterort->$lng; ?></td>
@@ -232,7 +232,7 @@ if($braceName !== NULL) {
 					</tr>
 <?php
 		}
-		if($stats['owners'] > 1){
+		if($stats['pic_anz'] > 1){
 			$i = 0;
 			$distance = 0;
 			$data2 = $data;
@@ -257,7 +257,7 @@ if($braceName !== NULL) {
 				</table>
 			</aside>
 <?php
-		if($bracelet_stats['owners'] != 0) {
+		if($bracelet_stats['pic_anz'] != 0) {
 ?>
 			<aside id="map_home" class="side_container" style="margin-top: 20px;"><?php echo $lang->misc->activate_js->$lng; ?></aside>
 <?php

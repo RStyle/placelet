@@ -628,8 +628,25 @@ $(document).on('click', '#pic_br_switch', function() {
 });
 
 /*Nachricht senden*/
+var enter_down = false;
+var shift_down = false;
 $(document).ready(function() {
+	$('#chat_text').keydown(function(e) {
+		if(e.which == 13) {
+			enter_down = true;
+		}else if(e.which == 16) {
+			shift_down = true;
+		}
+	});
+	$('#chat_text').keyup(function(e) {
+		if(e.which == 13) {
+			enter_down = false;
+		}else if(e.which == 16) {
+			shift_down = false;
+		}
+	});
 	$('#chat_text').keypress(function(e) {
+		if(enter_down && shift_down) return true;
 		if(e.which == 13) {
 			message = $("#chat_text").val().trim();
 			$("#chat_text").val('');
@@ -646,6 +663,7 @@ $(document).ready(function() {
 					}
 				});
 			}
+			return false;
 		}
 	});
 });

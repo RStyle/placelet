@@ -111,16 +111,16 @@ if($_GET['q'] == 3) {
 								<td><a href="/profil?user=<?php echo urlencode(html_entity_decode($stats[$i]['owner'])); ?>" class="weiss"><?php echo $stats[$i]['owner']; ?></a></td>
 							</tr>
 							<tr>
-								<td><?php echo $lang->pictures->besitzer->$lng; ?></td>
-								<td><?php echo $stats[$i]['owners']; ?></td>
+								<td><?php echo $lang->pictures->bilderanzahl->$lng; ?></td>
+								<td><?php echo $stats[$i]['pic_anz']; ?></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->pictures->letzterort->$lng; ?></td>
-								<td><?php echo $stats[$i][0]['city']; ?>,</td>
+								<td><?php echo $stats[$i]['lastcity']; ?>,</td>
 							</tr>
 							<tr>
 								<td></td>
-								<td><?php echo $stats[$i][0]['country']; ?></td>
+								<td><?php echo $stats[$i]['lastcountry']; ?></td>
 							</tr>
 							<tr>
 								<td><?php echo $lang->community->neuestebilder->station->$lng; ?></td>

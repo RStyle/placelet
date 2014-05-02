@@ -815,7 +815,7 @@ class Statistics {
 			$stmt->execute(array('brid' => $brid));
 			$q = $stmt->fetch(PDO::FETCH_ASSOC);
 			if($q != NULL) {
-				$stats['owners'] = $q['picid'];
+				$stats['pic_anz'] = $q['picid'];
 				$stats['lastcity'] = $q['city'];
 				$stats['lastcountry'] = $q['country'];
 			}

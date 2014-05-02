@@ -22,11 +22,11 @@ $braceName = urldecode($_GET['braceName']);
 $braceID = $statistics->name2brid($braceName);
 if($braceID != NULL) {
 	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
-	if(isset($bracelet_stats['owners'])) {
+	if(isset($bracelet_stats['pic_anz'])) {
 		$picture_details = $statistics->picture_details($braceID, true);
 		$stats = array_merge($bracelet_stats, $picture_details);
 	}else {
-		$bracelet_stats['owners'] = 0;
+		$bracelet_stats['pic_anz'] = 0;
 		$stats = $bracelet_stats;
 	}
 	$stmt = $db->prepare('SELECT brid FROM bracelets WHERE userid = :ownerid ORDER BY date ASC');

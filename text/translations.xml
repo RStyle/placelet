@@ -347,7 +347,6 @@
 				<en>uploader</en>
 				<de>Uploader</de>
 			</uploader>
-			
 			<armband>
 				<en>bracelet</en>
 				<de>Armband</de>
@@ -360,13 +359,14 @@
 				<en>owners</en>
 				<de>Anzahl Besitzer</de>
 			</besitzer>
+			<bilderanzahl>
+				<en>picture count</en>
+				<de>Anzahl Bilder</de>
+			</bilderanzahl>
 			<letzterort>
 				<en>last location</en>
 				<de>Letzter Ort</de>
 			</letzterort>
-			
-			
-			
 			<deletepic>
 				<en>delete/report picture</en>
 				<de>Bild löschen/melden</de>
