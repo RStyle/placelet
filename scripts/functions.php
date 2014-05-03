@@ -419,7 +419,7 @@ function getBrowserLanguage($arrAllowedLanguages, $strDefaultLanguage, $strLangV
 }
 
 function rad($x) {
-  return $x * 3.1415926535898 / 180;
+  return $x * M_PI / 180;
 }
 
 function getDistance2($p1, $p2) {

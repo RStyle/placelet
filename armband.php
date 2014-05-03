@@ -3,7 +3,6 @@ $page = 'armband';
 if(isset($_GET['name'])) {
 	$braceName = urldecode($_GET['name']);
 }
-
 require_once('./init.php');
 /*---------------------------------------------------------*/
 if($braceName === false) {

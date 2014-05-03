@@ -42,7 +42,7 @@ RewriteCond %{REQUEST_URI} !css/.*
 RewriteCond %{REQUEST_URI} !img/.*
 RewriteCond %{REQUEST_URI} !js/.*
 RewriteCond %{REQUEST_URI} !pictures/.*
-RewriteRule ^(.*)$ /armband?absolute=$1 [L,B]
+RewriteRule ^(.*)$ /armband?absolute=$1 [L,B,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.php -f

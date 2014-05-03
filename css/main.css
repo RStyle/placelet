@@ -1260,19 +1260,19 @@
 /*---Side Container ASIDE---*/
 @keyframes fadein{from{opacity:0;}to{opacity:1;}}@-moz-keyframes fadein{from{opacity:0;}to{opacity:1;}}@-webkit-keyframes fadein{from{opacity:0;}to{opacity:1;}}@-o-keyframes fadein{from{opacity:0;}to{opacity:1;}}
 
-		.paypal{
+		.paypal {
 			border:0;
 			width:1px;
 			height:1px;
 		}
-		footer{
-			display:block;
-			width:600px;
+		/*footer {
+			display: block;
+			width: 600px;
 			height: 20px;
-		}
-		.footer_down{
-			position:absolute;
-			bottom:0px;
+		}*/
+		.footer_down {
+			position: absolute;
+			bottom: 0px;
 		}
 		
 		/*inlineStyleweg:*/
