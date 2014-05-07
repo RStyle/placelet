@@ -14,11 +14,11 @@ if($systemStats['total_posted'] > 1) {
                             <div class="changepic pseudo_link float_right" onClick="return false" onMouseDown="javascript:change_pic('+', '1');"><img src="/cache.php?f=/img/next.png" alt="next"></div>	
 <?php
 }		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-		$stmt->execute(array('picid' => $stats[1][$systemStats['recent_picids'][1]-1]['picid'], 'brid' => $bracelets_displayed[1]));
+		$stmt->execute(array('picid' => $stats[1][$systemStats['recent_picids'][1]]['picid'], 'brid' => $bracelets_displayed[1]));
 		$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 		
 		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
-		$stmt->execute(array('picid' => $stats[2][$systemStats['recent_picids'][2]-1]['picid'], 'brid' => $bracelets_displayed[2]));
+		$stmt->execute(array('picid' => $stats[2][$systemStats['recent_picids'][2]]['picid'], 'brid' => $bracelets_displayed[2]));
 		$rowid2 = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
                             <div id="central_newest_pic">
@@ -28,8 +28,8 @@ if($systemStats['total_posted'] > 1) {
                                     <img class="fake_img pseudo_link" src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid2['id'].'.jpg'; ?>" alt="-" onMouseDown="javascript:change_pic('+', 1);">
         					   </div>
                                                            			
-        						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]-1]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumb_link">							
-        						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
+        						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[1][$systemStats['recent_picids'][1]]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[1][$systemStats['recent_picids'][1]]['city'].', '.$stats[1][$systemStats['recent_picids'][1]]['country']; ?>" class="connect_thumb_link">							
+        						<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[1][$systemStats['recent_picids'][1]]['city'].', '.$stats[1][$systemStats['recent_picids'][1]]['country']; ?>" class="connect_thumbnail" style="max-height: 175px;">
         						</a>
         							<table class="connect_pic-info">
         								<tr>
@@ -38,19 +38,19 @@ if($systemStats['total_posted'] > 1) {
         								</tr>
         								<tr>
         									<th><?php echo $lang->pictures->datum->$lng; ?></th>
-        									<td><?php echo date('d.m.Y H:i', $stats[1][$systemStats['recent_picids'][1]-1]['date'])." ".$lang->misc->uhr->$lng; ?></td>
+        									<td><?php echo date('d.m.Y H:i', $stats[1][$systemStats['recent_picids'][1]]['date'])." ".$lang->misc->uhr->$lng; ?></td>
         								</tr>
         								<tr>
         									<th><?php echo $lang->pictures->ort->$lng; ?></th>
-        									<td><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['city'].', '.$stats[1][$systemStats['recent_picids'][1]-1]['country']; ?></td>
+        									<td><?php echo $stats[1][$systemStats['recent_picids'][1]]['city'].', '.$stats[1][$systemStats['recent_picids'][1]]['country']; ?></td>
         								</tr>
 <?php
-                                    				if($stats[1][$systemStats['recent_picids'][1]-1]['user'] != NULL) {
+                                    				if($stats[1][$systemStats['recent_picids'][1]]['user'] != NULL) {
 ?>
         								<tr>
         									<th><?php echo $lang->pictures->uploader->$lng; ?></th>
-        									<td><img src="/cache.php?f=<?php echo profile_pic($stats[1][$systemStats['recent_picids'][1]-1]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
-                                                <a href="/profil?user=<?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]-1]['user']; ?></a></td>
+        									<td><img src="/cache.php?f=<?php echo profile_pic($stats[1][$systemStats['recent_picids'][1]]['userid']); ?>" alt="profile pic" width="20" style="border: 1px #999 solid;">&nbsp;
+                                                <a href="/profil?user=<?php echo $stats[1][$systemStats['recent_picids'][1]]['user']; ?>"><?php echo $stats[1][$systemStats['recent_picids'][1]]['user']; ?></a></td>
         								</tr>
 <?php
                                     				 }

@@ -30,7 +30,7 @@ if($user->login) {
 							 <p style="color: #999; margin: 0;">
 <?php
 					if($latestMSG['seen'] != 0 && $latestMSG['recipient']['name'] != $user->login) echo '<img src="/cache.php?f=/img/tick.png" alt="<'.$lang->nachrichten->seen->$lng.'>">';
-					echo (strlen($latestMSG['message']) > 20) ? smileys(substr($latestMSG['message'], 0, 20)).'...' : smileys($latestMSG['message']);
+					echo (strlen($latestMSG['message']) > 20) ? smileys(substr(str_replace('<br>', '', $latestMSG['message']), 0, 20)).'...' : smileys($latestMSG['message']);
 					echo '<span class="float_right">'.$days_since.' (';
 					if($days_since == 'heute' || $days_since == 'today') echo date('H:i', $latestMSG['sent']);
 						else echo date('d.m.y', $latestMSG['sent']);
