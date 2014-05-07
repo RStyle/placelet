@@ -21,7 +21,7 @@ $statistics = new Statistics($db, $user);
 $braceName = urldecode($_GET['braceName']);
 $braceID = $statistics->name2brid($braceName);
 if($braceID != NULL) {
-	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
+	$bracelet_stats = $statistics->bracelet_stats($braceID);
 	if(isset($bracelet_stats['pic_anz'])) {
 		$picture_details = $statistics->picture_details($braceID, true);
 		$stats = array_merge($bracelet_stats, $picture_details);

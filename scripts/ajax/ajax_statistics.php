@@ -27,7 +27,7 @@ if(isset($_POST['login'])) {
 	}elseif($user->admin) {
 		$return = array('flag' => false);
 	}else {
-		$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
+		$bracelet_stats = $statistics->bracelet_stats($braceID);
 		if($user->login == $bracelet_stats['owner']) {
 			$return = array('flag' => false);
 		}else {

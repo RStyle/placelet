@@ -564,7 +564,7 @@ class User
 			":sender" => $this->userid,
 			":recipient" => $recipient,
 			":sent" => time(),
-			":message" => $content
+			":message" => htmlentities($content)
 		));
 	}
 	//Nachrichten empfangen
@@ -584,11 +584,11 @@ class User
 			if($result[$i]['sender']['id'] == $this->userid) {
 				$messages[$result[$i]['recipient']['id']]['recipient'] = $result[$i]['recipient'];
 				$messages[$result[$i]['recipient']['id']][$i] = $result[$i];
-				$messages[$result[$i]['recipient']['id']][$i]['message'] = htmlentities($result[$i]['message']);
+				$messages[$result[$i]['recipient']['id']][$i]['message'] = nl2br($result[$i]['message'], 0);
 			}else {
 				$messages[$result[$i]['sender']['id']]['recipient'] = $result[$i]['sender'];
 				$messages[$result[$i]['sender']['id']][$i] = $result[$i];
-				$messages[$result[$i]['sender']['id']][$i]['message'] = htmlentities($result[$i]['message']);
+				$messages[$result[$i]['sender']['id']][$i]['message'] = nl2br($result[$i]['message'], 0);
 			}
 		}
 		return $messages;
@@ -764,6 +764,11 @@ class Statistics {
 		$stats['bracelet_most_cities']['number'] = $q[0]['number'];
 		
 		//Ermittelt die IDs der neuesten $brid_anz Bilder
+		
+		/*$sql = "SELECT id FROM pictures ORDER BY id DESC";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$stats['recent_brids'] = $q;*/
 		$sql = "SELECT brid, picid FROM pictures ORDER BY id DESC";
 		$stmt = $this->db->query($sql);
 		$q1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -783,6 +788,10 @@ class Statistics {
 			$stats['recent_brids'][$i+1] = $q[$i]['brid'];
 			$stats['recent_picids'][$i+1] = $q[$i]['picid'];
 		}
+		/*foreach($q as $key => $val) {
+			$stats['recent_brids'][$key] = $val['brid'];
+			$stats['recent_picids'][$key] = $val['picid'];
+		}*/
 		return $stats;
 	}
 	//Name von Armband ermitteln
@@ -799,7 +808,7 @@ class Statistics {
 		return $q['brid'];
 	}
 	//Statistik vom Armband abfragen
-	public function bracelet_stats($brid) {
+	public function bracelet_stats($brid, $pic_details = false) {
 		$sql = "SELECT userid, date FROM bracelets WHERE brid = :brid";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array('brid' => $brid));
@@ -807,6 +816,7 @@ class Statistics {
 		if($stmt->rowCount() == 0) {
 			$stats = false;
 		}else {
+			if($pic_details) $stats = $this->picture_details($brid);
 			$stats['name'] = $this->brid2name($brid);
 			$stats['owner'] = self::id2username($q[0]['userid']);
 			$stats['date'] = $q[0]['date'];
@@ -1072,7 +1082,8 @@ class Statistics {
 					'fileext' => $fileext,
 					':latitude' => $latitude,
 					':longitude' => $longitude,
-					':state' => $state
+					':state' => $state,
+					':upload' => time()
 				));
 				$stmt = $this->db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
 				$stmt->execute(array('picid' => $picid, 'brid' => $brid));
@@ -1478,6 +1489,20 @@ class Statistics {
 		$q = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $q['user'];*/
 		return $GLOBALS['usernamelist']['user'][$id];
+	}
+	public function id2pic($id) {
+		$sql = "SELECT brid, picid FROM pictures WHERE id = :id";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array(":id" => $id));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		return array('picid' => $q['picid'], 'brid' => $q['brid']);
+	}
+	public function pic2id($brid, $picid) {
+		$sql = "SELECT id FROM pictures WHERE brid = :brid AND picid = :picid";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array(":brid" => $brid, ':picid' => $picid));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $q['id'];
 	}
 }
 ?>

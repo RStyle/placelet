@@ -61,7 +61,7 @@ if($braceName === false) {
 				elseif($sub_added === false) $js .= 'alert("'.$lang->php->manage_subscription->falsch->$lng.'");';
 		}
 	}
-	$bracelet_stats = $statistics->bracelet_stats($braceID, $db);
+	$bracelet_stats = $statistics->bracelet_stats($braceID);
 	if(isset($bracelet_stats['pic_anz'])) {
 		$picture_details = $statistics->picture_details($braceID, true);
 		$stats = array_merge($bracelet_stats, $picture_details);
