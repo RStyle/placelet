@@ -192,7 +192,7 @@ class User
 
 			if($anz == 0) {
 				return 0;
-			} elseif($bracelet['user'] == NULL ) {
+			}elseif($bracelet['userid'] == 0) {
 				$stmt = $this->db->prepare('SELECT COUNT(*) FROM bracelets WHERE userid = :userid');
 				$stmt->execute(array('userid' => $this->userid));
 				$q2 = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -207,10 +207,10 @@ class User
 					':name' => $this->login.'#'.$number)
 				);
 				return 1;
-			}elseif(Statistics::id2username($bracelet['user']) == $this->login && Statistics::id2username($bracelet['user']) !== false) {
+			}elseif(Statistics::id2username($bracelet['userid']) == $this->login && Statistics::id2username($bracelet['userid']) !== false) {
 				return 2;
 			}else {
-				return array(3, Statistics::id2username($bracelet['user']));
+				return array(3, Statistics::id2username($bracelet['userid']));
 			}
 		} catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -1057,7 +1057,7 @@ class Statistics {
 					//EXIF-Header auslesen und Aufnamedatum bestimmen
 					if($fileext == 'jpg' || $fileext == 'jpeg') {
 						$exif_date = exif_read_data($img_path, 'EXIF', 0);
-						if($exif_date['DateTimeOriginal'] == NULL || preg_match('[^A-Za-z]', $exif_date['DateTimeOriginal'])) {
+						if(@$exif_date['DateTimeOriginal'] == NULL || @preg_match('[^A-Za-z]', $exif_date['DateTimeOriginal'])) {
 							$date = time();
 						}else {
 							$date = strtotime($exif_date['DateTimeOriginal']);
@@ -1068,7 +1068,7 @@ class Statistics {
 				}
 				///////////////////////////
 			
-				$sql = "INSERT INTO pictures (picid, brid, userid, description, date, city, country, title, fileext, latitude, longitude, state) VALUES (:picid, :brid, :userid, :description, :date, :city, :country, :title, :fileext, :latitude, :longitude, :state)";
+				$sql = "INSERT INTO pictures (picid, brid, userid, description, date, city, country, title, fileext, latitude, longitude, state, upload) VALUES (:picid, :brid, :userid, :description, :date, :city, :country, :title, :fileext, :latitude, :longitude, :state, :upload)";
 				$q = $this->db->prepare($sql);
 				$q->execute(array(
 					':picid' => $picid,

@@ -459,6 +459,7 @@ function reload_start(plus) {
 var reload_q2 = $('#bracelet').data('pics');
 
 function reload_armband(braceName) {
+	console.log(reload_q2);
 	reload_q2 += 3;
 	var nachlad = $.ajax( "/scripts/ajax/ajax_armband.php?q=" + reload_q2 + "&braceName=" + braceName + "&eng=" + lng)
 		.done(function(data) {
@@ -626,7 +627,7 @@ $(document).on('click', '#pic_br_switch', function() {
 	reload_q = 3;
 	reload_start(0);
 });
-
+var receiving = false;
 /*Nachricht senden*/
 var enter_down = false;
 var shift_down = false;
@@ -653,11 +654,13 @@ $(document).ready(function() {
 			recipient = $("#chat_room").data("recipient");
 			console.log(recipient);
 			if(message != '') {
+				receiving = true;
 				$.ajax({
 					type: "POST",
 					url: "scripts/ajax/ajax_nachrichten.php",
 					data: "recipient=" + recipient + "&message=" + message + "&send_msg=true&eng=" + lng + "&senderid=" + $('#chat_room').data('recipient'),
 					success: function(html){
+						receiving = false;
 						$("#chat_text").val("");
 						receive_messages($('#chat_room').data('recipient'));
 					}
@@ -674,17 +677,19 @@ var idle = false;
 var msg_box = $('#message_box');
 function RepeatCall() {
 	var inout = (freqSecs * 1000) / 2;
-	if(!idle) {
+	if(!idle && !receiving) {
 		receive_messages();
 		messages_read($('#chat_room').data('recipient'));
 	}
 }
 if($('#title').data('title') == 'msgs' && $('#chat_room').data('recipient') != 0 && $("#seen_marker").data("msg_id") != 0 && msg_box[0] != undefined) {
-	intervalID = setInterval(RepeatCall, freqSecs * 1000 );
+	intervalID = setInterval(RepeatCall, freqSecs * 1000);
 	msg_box.scrollTop(msg_box[0].scrollHeight);
 }
 /*Nachrichten empfangen*/
 function receive_messages() {
+	receiving = true;
+	idle = false;
 	recipient = $("#chat_room").data("recipient");
 	msg_id = $("#seen_marker").data("msg_id");
 	seen_time = $("#seen_marker").html();
@@ -693,13 +698,10 @@ function receive_messages() {
 		url: "scripts/ajax/ajax_nachrichten.php",
 		data: "receive_msgs=true&msg_id=" + msg_id + "&recipient=" + recipient + "&eng=" + lng + "&senderid=" + $('#chat_room').data('recipient'),
 		success: function(html){
+			receiving = false;
 			$("#seen_marker").remove();
 			$("#message_box").append(html);
 			if('<p style="color: #999; margin-bottom: 20px;" id="seen_marker" data-msg_id="' + msg_id + '">' + seen_time + '</p>' != html.trim()) msg_box.scrollTop(msg_box[0].scrollHeight);
-		},
-		beforeSend:function()
-		{
-				idle = false;
 		}
 	});
 }

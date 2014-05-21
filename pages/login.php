@@ -100,8 +100,8 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						echo $lang->php->bracelet_registered->f2->$lng;
 						break;
 					default:
-			if($bracelet_registered[0] == 3)
-				echo $lang->php->bracelet_registered->f3->first->$lng.' <a href="/profil?user='.urlencode($bracelet_registered[1]).'">'.$bracelet_registered[1].'</a> '.$lang->php->bracelet_registered->last->f3->$lng;
+						if($bracelet_registered[0] == 3)
+							echo $lang->php->bracelet_registered->f3->first->$lng.' <a href="/profil?user='.urlencode($bracelet_registered[1]).'">'.$bracelet_registered[1].'</a>'.$lang->php->bracelet_registered->f3->last->$lng;
 			}
 		}
 ?>

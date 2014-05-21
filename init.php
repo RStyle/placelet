@@ -48,7 +48,7 @@ require_once($this_path.'scripts/functions.php');
 require_once($this_path.'scripts/user.php');
 $lang = simplexml_load_file('./text/translations.xml');
 
-
+$maps_api_key = 'AIzaSyAxQBrE59Db_ViT_SlYj7NcItheJ3y_F60';//alter Key: AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc
 $js = '<script type="text/javascript">$(document).ready(function(){';
 
 if(isset($_GET['logout'])) {

@@ -89,3 +89,27 @@ foreach($useremails as $key => $val) {
 	$stmt->execute(array(":userid" => $i, ":pic_own" => 3, ":comm_own" => 1, ":comm_pic" => 1, ":pic_subs" => 3));
 }*/
 ?>
+<?php
+/*Alle Städte ausgeben
+$sql = "SELECT city, country FROM pictures GROUP BY city";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$countries = array();
+foreach($q as $number => $city) {
+	echo $city['city'].', '.$city['country'].'<br>';
+	if(!in_array($city['country'], $countries)) $countries[$number] = $city['country'];
+}
+echo count($q).' St&auml;dte<br>';
+echo count($countries).' L&auml;nder';*/
+?>
+<?php
+//Lücken aus IDs entfernen
+$sql = "SELECT id, filext FROM pictures GROUP BY city";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($q as $number => $city) {
+	echo $city['city'].', '.$city['country'].'<br>';
+}
+?>

@@ -88,6 +88,14 @@
 				<en>yesterday</en>
 				<de>gestern</de>
 			</gestern>
+			<woche>
+				<en>a week ago</en>
+				<de>vor einer Woche</de>
+			</woche>
+			<monat>
+				<en>a month ago</en>
+				<de>vor einem Monat</de>
+			</monat>
 			<kommentarschreiben>
 				<en><![CDATA[<span style="font-family: Verdana, Times">Write a <strong style="color: #000;">comment</strong></span>]]></en>
 				<de><![CDATA[<span style="font-family: Verdana, Times"><strong style="color: #000;">Kommentar</strong> schreiben</span>]]></de>
@@ -1124,8 +1132,8 @@
 					<de>Dieses Armband wurde schon auf </de>
 				</first>
 				<last>
-					<en></en>
-					<de>registriert.</de>
+					<en>.</en>
+					<de> registriert.</de>
 				</last>
 			</f3>
 		</bracelet_registered>
