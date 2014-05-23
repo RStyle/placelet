@@ -33,6 +33,7 @@ RewriteCond %{REQUEST_FILENAME} !impressum.*
 RewriteCond %{REQUEST_FILENAME} !kontakt.*
 RewriteCond %{REQUEST_FILENAME} !login.*
 RewriteCond %{REQUEST_FILENAME} !nachrichten.*
+RewriteCond %{REQUEST_FILENAME} !press.*
 RewriteCond %{REQUEST_FILENAME} !profil.*
 RewriteCond %{REQUEST_FILENAME} !search.*
 RewriteCond %{REQUEST_FILENAME} !order.*

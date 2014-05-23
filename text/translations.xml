@@ -125,7 +125,14 @@
 			<en><![CDATA[You should not be here. Just go to the <span class="pseudo_link" onclick="history.back(-1)">previous</span> page.]]></en>
 			<de><![CDATA[Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span>]]></de>
 		</nope>
+		<banner>
+            <en><![CDATA[<img src="/img/winbanner_corner_ene.png" style="z-index: 100; width: 250px; position: fixed; bottom: 0; right: 0;">]]></en>
+			<de><![CDATA[<img src="/img/winbanner_corner.png" style="z-index: 100; width: 250px; position: fixed; bottom: 0; right: 0;">]]></de>
+        </banner>
 	</misc>
+	<press en-title="Press" de-title="Presse">
+    
+    </press>
 	<error404 en-title="Page not found" de-title="Seite nicht gefunden">
 			<en>The requested page could not be found.</en>
 			<de>Die angeforderte Seite konnte leider nicht gefunden werden.</de>

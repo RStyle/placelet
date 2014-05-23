@@ -86,6 +86,9 @@ if($page == 'home') {
 		}
 	}
 ?>
+<!--###WIN BANNER###-->
+<?php echo $lang->misc->banner->$lng; ?>
+
 <!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">

@@ -187,11 +187,13 @@ $pagename = array(
 	"login" => $lang->login[$lng.'-title'],
 	"nachrichten" => $lang->nachrichten[$lng.'-title'],
 	"order" => $lang->order[$lng.'-title'],
-	"privacy-policy" => $lang->privacypolicy[$lng.'-title'],
+	"press" => $lang->press[$lng.'-title'],
+    "privacy-policy" => $lang->privacypolicy[$lng.'-title'],
 	"profil" => $lang->profil[$lng.'-title'],
 	"search" => $lang->search[$lng.'-title'],
 	"shop" => "Shop",
 	"start" => "Community"
+	
 );
 $navregister['href'] = "login";	
 $navregister['value'] = $lang->misc->nav->register->$lng;

@@ -753,6 +753,34 @@
 			width: 73%;		
 		}
 	/*---Armband SECTION---*/
+	/*+++Press SECTION+++*/
+	.press_article {
+        margin-bottom: 20px;
+        border-top: 2px #666solid; 
+        overflow: hidden;
+    }
+    .press_header {
+        padding: 10px;
+        background-color: #666;
+    }
+        .press_header p {
+            margin: 0;
+            position: relative;
+            left: 10px;
+            
+            color: #fff;
+            font-size: 1.3em;
+        }
+    .trenner {
+        margin: 0;
+        border-width: 3px;
+        border-color: #05EB80;
+    }
+    .press_text {
+        padding: 10px;
+        background-color: #eee;    
+    }
+	/*---Press SECTION---*/
 	/*+++Profil SECTION+++*/
 	.msg_box {
 	    float: right;
