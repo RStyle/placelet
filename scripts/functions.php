@@ -109,16 +109,16 @@ $usernamelist['user'][NULL] = 0;
 //Vergangene Zeit berechnen
 function days_since($unix_time) {
 	$x_days_ago = ceil((strtotime("00:00") - $unix_time) / 86400);
-	if($x_days_ago == 0) 
+	switch($x_days_ago) {
+		case 0:
 			$x_days_ago = $GLOBALS['lang']->misc->comments->heute->$GLOBALS['lng'];
-	elseif($x_days_ago == 1)
-		$x_days_ago = $GLOBALS['lang']->misc->comments->gestern->$GLOBALS['lng'];
-	elseif($x_days_ago >= 7)
-		$x_days_ago = $GLOBALS['lang']->misc->comments->woche->$GLOBALS['lng'];
-	elseif($x_days_ago >= 30)
-		$x_days_ago = $GLOBALS['lang']->misc->comments->monat->$GLOBALS['lng'];
-	else
-		$x_days_ago = $GLOBALS['lang']->misc->comments->tagenstart->$GLOBALS['lng'].' '.$x_days_ago.' '.$GLOBALS['lang']->misc->comments->tagenend->$GLOBALS['lng'];
+			break;
+		case 1:
+			$x_days_ago = $GLOBALS['lang']->misc->comments->gestern->$GLOBALS['lng'];
+			break;
+		default:
+			$x_days_ago = $GLOBALS['lang']->misc->comments->tagenstart->$GLOBALS['lng'].' '.$x_days_ago.' '.$GLOBALS['lang']->misc->comments->tagenend->$GLOBALS['lng'];
+	}
 	return $x_days_ago;
 }
 //Verarbeitet die Profildaten

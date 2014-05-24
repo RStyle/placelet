@@ -159,7 +159,7 @@ $('input[id=upload_pic]').change(function preview() {
 	});
 
 /*Datumsabfrage*/
-var someCallback = function(exifObject) {
+var exifDateCallback = function(exifObject) {
 	var now = Math.round(+new Date() / 1000);
 	/*Format: "yy:MM:dd hh:mm:ss";*/
 	var date = exifObject.DateTimeOriginal;
@@ -174,13 +174,9 @@ var someCallback = function(exifObject) {
 		$("#registerpic_date").val(now);
 	}
 }; /*1*/ /*<--wichtig!*/
-try {
-	$('#upload_pic').change(function() {
-		$(this).fileExif(someCallback);
-	});
-}catch (e) {
-	alert(e);
-}
+$('#upload_pic').change(function() {
+	$(this).fileExif(exifDateCallback);
+});
 
 
 /*Drop-Down Text*/
@@ -452,7 +448,7 @@ function reload_start(plus) {
 			}
 		})
 		.fail(function() {
-		alert("error");
+		alert("Reload Error");
 	});
 }
 /*Neuste Bilder Nachladen -armband.php*/
@@ -477,7 +473,7 @@ function change_pic(cv, sv) {
 		});
 	$.fail(function() {
 		$("#loading").toggle();
-		alert( "error" );
+		alert("Reload Error");
 	}); 
 }
 /*Aboformular anzeigen*/

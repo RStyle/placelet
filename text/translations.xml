@@ -344,6 +344,10 @@
 			<en><![CDATA[You should not be here. Just go <span class="pseudo_link" onclick="history.back(-1)">back</span> one page.]]></en>
 			<de><![CDATA[Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span>]]></de>
 		</gehweg>
+		<distanz>
+			<en>distance</en>
+			<de>Distanz</de>
+		</distanz>
 	</armband>
 	<pictures>
 			<datum>
@@ -1206,8 +1210,8 @@
 				<de>Bitte gib eine korrekte E-Mail Adresse ein.</de>
 			</f3>
 			<f4>
-				<en>There already is a user with this username.</en>
-				<de>Es gibt schon einen Benutzer mit diesem Namen.</de>
+				<en>Either you have uploaded a picture or there already is a user with the username you entered.</en>
+				<de>Entweder du hast schon ein Bild hochgeladen oder es gibt schon einen Benutzer mit dem Namen, den du eingegeben hast.</de>
 			</f4>
 			<falsch>
 				<en>You entered the wrong password and an invalid e-mail address.</en>

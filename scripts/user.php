@@ -242,13 +242,17 @@ class User
 		if($new_username != NULL) {
 			$stmt = $this->db->prepare('SELECT user FROM users WHERE user = :user');
 			$stmt->execute(array('user' => $new_username));
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			if($result == NULL) {//Wenn es noch keinen Benutzer mit selbem Namen gibt
-				rename('pictures/profiles/'.$this->login.'.jpg', 'pictures/profiles/'.$new_username.'.jpg');
-				$sql = "UPDATE users SET user = :newuser WHERE user = :olduser";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(':olduser' => $this->login, ':newuser' => $new_username));
-				$change_username = true;
+			if($stmt->rowCount() == 0) {
+				$stmt = $this->db->prepare('SELECT user FROM users WHERE user = :user');
+				$stmt->execute(array('user' => $new_username));
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				if($result == NULL) {//Wenn es noch keinen Benutzer mit selbem Namen gibt
+					rename('pictures/profiles/'.$this->login.'.jpg', 'pictures/profiles/'.$new_username.'.jpg');
+					$sql = "UPDATE users SET user = :newuser WHERE user = :olduser";
+					$q = $this->db->prepare($sql);
+					$q->execute(array(':olduser' => $this->login, ':newuser' => $new_username));
+					$change_username = true;
+				}else $change_username = false;
 			}else $change_username = false;
 		}else $change_username = true;
 		//Passwort ändern
