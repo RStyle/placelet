@@ -87,7 +87,7 @@ if($page == 'home') {
 	}
 ?>
 <!--###WIN BANNER###-->
-<?php echo $lang->misc->banner->$lng; ?>
+<a href="/press"><?php echo $lang->misc->banner->$lng; ?></a>
 
 <!--###HEADER TAG###-->
 		<header id="header">
@@ -125,7 +125,9 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=de'; else echo '?language=de' ?>" hreflang="de"><img src="/cache.php?f=/img/de_flag.png" alt="Deutsche Flagge" id="de_flag" class="flag"></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="<?php echo $friendly_self_get; if(strpos($friendly_self_get,'?')!==false) echo '&amp;language=en'; else echo '?language=en' ?>" hreflang="en"><img src="/cache.php?f=/img/gb_flag.png" alt="British Flag" id="gb_flag" class="flag"></a></li>
-				<li class="headerlist_sub_divider">|</li>
+	           	<li class="headerlist_sub_divider">|</li>
+				<li><a href="/press"><?php echo $lang->press[$lng.'-title']; ?></a></li>
+                <li class="headerlist_sub_divider">|</li>
 				<li><a href="/kontakt"><?php echo $lang->misc->nav->kontakt->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="/faq"><?php echo $lang->misc->nav->faq->$lng; ?></a></li>
