@@ -127,7 +127,7 @@ $("form[name=registerpic]").submit(function() {
 			alert(lang['ort_nichtgefunden']);
 			return false;
 		} else {
-			alert('Geocode was not successful for the following reason: ' + status);
+			/*alert('Geocode was not successful for the following reason: ' + status);*/
 			return false;
 		}
 	});
@@ -384,7 +384,7 @@ $('#registerpic_city').on({
 			} else if(status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 				alert(lang['ort_nichtgefunden']);
 			} else {
-				alert('Geocode was not successful for the following reason: ' + status);
+				/*alert('Geocode was not successful for the following reason: ' + status);*/
 			}
 		});
 	}
@@ -448,7 +448,7 @@ function reload_start(plus) {
 			}
 		})
 		.fail(function() {
-		alert("Reload Error");
+		/*alert("Reload Error");*/
 	});
 }
 /*Neuste Bilder Nachladen -armband.php*/
@@ -473,7 +473,7 @@ function change_pic(cv, sv) {
 		});
 	$.fail(function() {
 		$("#loading").toggle();
-		alert("Reload Error");
+		/*alert("Reload Error");*/
 	}); 
 }
 /*Aboformular anzeigen*/

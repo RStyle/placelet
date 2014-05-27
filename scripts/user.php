@@ -892,7 +892,10 @@ class Statistics {
 				$commid = 1;
 			}
 			
-			$sql = "INSERT INTO comments (brid, commid, picid, userid, comment, date) VALUES (:brid, :commid, :picid, :userid, :comment, :date)";
+			if(strpos($comment, 'http') !== false || strpos($comment, 'www') !== false) $spam = 1;
+			else $spam = 0;
+			
+			$sql = "INSERT INTO comments (brid, commid, picid, userid, comment, date, spam) VALUES (:brid, :commid, :picid, :userid, :comment, :date, :spam)";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
 				':brid' => $brid,
@@ -900,11 +903,12 @@ class Statistics {
 				':picid' => $picid,
 				':userid' => $userid,
 				':comment' => $comment,
-				':date' => time()
+				':date' => time(),
+				':spam' => $spam
 			));
 			$this->notify_subscribers($brid, true);
 			return true;
-		} catch (PDOException $e) {
+		}catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
 
 				return false;
