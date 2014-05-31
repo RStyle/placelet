@@ -85,10 +85,13 @@ if($page == 'home') {
 <?php
 		}
 	}
+	if(is_mobile($_SERVER['HTTP_USER_AGENT']) == false) {
 ?>
 <!--###WIN BANNER###-->
 <a href="/press"><?php echo $lang->misc->banner->$lng; ?></a>
-
+<?php
+	}
+?>
 <!--###HEADER TAG###-->
 		<header id="header">
 			<div id="headerregisterbr">
@@ -110,7 +113,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<div class="arrow_up"></div>
 				<form name="login" id="form_login" action="<?php echo $friendly_self;?>" method="post">
 					<label for="login" id="label_login"><?php echo $lang->form->benutzername->$lng; ?></label><br>
-					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="(\w{4,15})|(\[Admin\]John)" title="Min.4 - Max.15" required><br>
+					<input type="text" name="login" id="login" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>" pattern="(.{4,15})" title="Min.4 - Max.15" required><br>
 					<label for="password" id="label_password"><?php echo $lang->form->passwort->$lng; ?></label><br>
 					<input type="password" name="password" id="password" class="password"  size="20" maxlength="30" pattern=".{6,30}" title="Min.6 - Max.30" value="!§%$$%\/%§$" required><br>
 					<input type="submit" value="Login" id="submit_login">

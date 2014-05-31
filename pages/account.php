@@ -11,7 +11,7 @@ if($user->login) {
 							<tr>
 								<th><?php echo $lang->form->benutzername->$lng; ?></th>
 								<td><?php echo $userdetails['user']; ?></td>
-								<td><input type="text" name="change_new_name" size="20" maxlength="15" placeholder="<?php echo $lang->form->benutzername->$lng; ?>"></td>
+								<td><input type="text" name="change_new_name" size="20" maxlength="15" pattern="\w{6,30}" placeholder="<?php echo $lang->form->benutzername->$lng; ?>"></td>
 							</tr>
 							<tr>
 								<th><?php echo $lang->form->email->$lng; ?></th>
