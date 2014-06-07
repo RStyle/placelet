@@ -6,6 +6,7 @@ if($user->admin && $checklogin) {
 				<ul>
 					<li><a href="/admin?comments">Kommentare verwalten</a></li>
 					<li><a href="/admin?pictures">Bilder verwalten</a></li>
+					<li><a href="/admin?rotate">Bilder drehen</a></li>
 
 				</ul>
 <?php
@@ -91,6 +92,37 @@ if($user->admin && $checklogin) {
 				<p>Es gibt keine als Spam markierten Bilder.</p>
 <?php
 			}
+		}elseif(isset($_GET['rotate'])) {
+?>
+				<form action="/admin?rotate" method="POST">
+					<table>
+							<tr>
+								<td>Winkel</td>
+								<td><input type="text" name="angle" required></td>
+							</tr>
+							<tr>
+								<td>Bild Nummer</td>
+								<td><input type="text" name="picnr" required></td>
+							</tr>
+							<tr>
+								<td>Nur Thumbnail</td>
+								<td><input type="radio" name="pictype" value="thumb" required></td>
+							</tr>
+							<tr>
+								<td>Nur Originalbild</td>
+								<td><input type="radio" name="pictype" value="pic" required></td>
+							</tr>
+							<tr>
+								<td>Originalbild und Thumbnail</td>
+								<td><input type="radio" name="pictype" value="both" required></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td><input type="submit" value="Drehen"></td>
+							</tr>
+					</table>
+				</form>
+<?php
 		}
 	}
 ?>

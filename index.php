@@ -19,7 +19,7 @@
 
 if(is_mobile($_SERVER['HTTP_USER_AGENT']) == TRUE) {//moblie.css für Mobile Clients
 ?>
-		<link href="/var/www/virtual/placelet.de/htdocs/css/mobile.css" rel="stylesheet" type="text/css">
+		<link href="/mobile.css" rel="stylesheet" type="text/css">
 <?php
 }
 ?>

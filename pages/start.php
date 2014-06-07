@@ -7,8 +7,12 @@
     						<td><?php echo $systemStats['total_registered']?></td>
     					</tr>
     					<tr>
-    						<th><?php echo $lang->stats->main->städte->$lng; ?></th>
+    						<th><?php echo $lang->stats->main->staedte->$lng; ?></th>
     						<td><?php echo $systemStats['city_count']; ?></td>
+    					</tr>
+    					<tr>
+    						<th><?php echo $lang->stats->main->laender->$lng; ?></th>
+    						<td><?php echo $systemStats['country_count']; ?></td>
     					</tr>
     					<tr>
     						<th><?php echo $lang->stats->main->beliebtestestadt->$lng; ?></th>

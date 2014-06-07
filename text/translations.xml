@@ -1055,10 +1055,14 @@
 				<en>Registered bracelets</en>
 				<de>Registrierte Armbänder</de>
 			</regarmbänder>
-			<städte>
+			<staedte>
 				<en>Different cities</en>
 				<de>Verschiedene Städte</de>
-			</städte>
+			</staedte>
+			<laender>
+				<en>Different countries</en>
+				<de>Verschiedene Länder</de>
+			</laender>
 			<beliebtestestadt>
 				<en>Most popular city</en>
 				<de>Beliebteste Stadt</de>
