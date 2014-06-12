@@ -76,16 +76,24 @@ class User
 		if (PassHash::check_password($row['password'], $pw)) {
 			$this->login = $row['user'];
 			$this->userid = $row['userid'];
+			
+			$sql = "SELECT * FROM dynamic_password WHERE userid = :userid LIMIT 1"; 
+            $q = $this->db->prepare($sql); 
+            $q->execute(array(':userid' => $this->userid));
+			$row123 = $stmt->fetch(PDO::FETCH_ASSOC);
+            $anz = $q->rowCount(); 
+			
 			$dynamic_password = PassHash::hash($row['password']);
+			
+			if($anz > 0){
+				$dynamic_password = $row123['password'];
+				//$_SESSION['dynamic_password'] = $row123['password'];
+			}
+			
 			$_SESSION['dynamic_password'] = PassHash::hash(substr($dynamic_password, 0, 15)).PassHash::hash(substr($dynamic_password, 15, 15)).PassHash::hash(substr($dynamic_password, 30, 15)).PassHash::hash(substr($dynamic_password, 45, 15));
 			//4-facher Hash des Hashes - da der Hash ab einer bestimmten Anzahl von Buchstaben das Passwort abschneidet.
 			$_SESSION['user'] = $this->login;
 			$_SESSION['userid'] = $this->userid;
-		
-			$sql = "SELECT * FROM dynamic_password WHERE userid = :userid LIMIT 1"; 
-            $q = $this->db->prepare($sql); 
-            $q->execute(array(':userid' => $this->userid));
-            $anz = $q->rowCount(); 
             if ($anz > 0)
 				{ $sql= "UPDATE dynamic_password SET password=:password WHERE userid = :userid LIMIT 1"; } 
 			else
