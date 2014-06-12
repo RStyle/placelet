@@ -6,43 +6,71 @@ class User
 	public $logged = false; //eingeloggt?
 	public $admin = false; //admin?
 	public $userid;
-	public function __construct($login, $db) {
+	public $android;
+	
+	public function __construct($login, $db, $dynPW = '', $android = false) {
 		$this->db = $db;
-		$this->login = $login;
 		$this->userid = Statistics::username2id($login);
-		if ($login !== false && isset($_SESSION['dynamic_password']) && isset($_SESSION['userid'])){ //prüfen ob eingeloggt
-			try {
+		$this->android = $android;
+		$this->login = $login;
+		if($android) {
+			if(isset($dynPW) && isset($login)){
 				$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE userid = :userid');
-				$stmt->execute(array('userid' =>$_SESSION['userid']));
+				$stmt->execute(array('userid' => $this->userid));
 				$row = $stmt->fetch(PDO::FETCH_ASSOC);
-				if (PassHash::check_password(substr($_SESSION['dynamic_password'], 0, 60), substr($row['password'], 0, 15)) 
-					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 60, 60), substr($row['password'], 15, 15)) 
-					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 120, 60), substr($row['password'], 30, 15)) 
-					&& PassHash::check_password(substr($_SESSION['dynamic_password'], 180, 60), substr($row['password'], 45, 15))
+				if(PassHash::check_password(substr($dynPW, 0, 60), substr($row['password'], 0, 15)) 
+					&& PassHash::check_password(substr($dynPW, 60, 60), substr($row['password'], 15, 15)) 
+					&& PassHash::check_password(substr($dynPW, 120, 60), substr($row['password'], 30, 15)) 
+					&& PassHash::check_password(substr($dynPW, 180, 60), substr($row['password'], 45, 15))
 					//Überprüfung des 4-fachen Hashs des Hashes - müsste unschlagbare Sicherheit bieten ;)
 				){
 					$this->logged = true;
 					//Status abfragen
 					$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
-					$stmt->execute(array('user' => $_SESSION['user']));
+					$stmt->execute(array('user' => $login));
 					$row = $stmt->fetch(PDO::FETCH_ASSOC);
 					if($row['status'] == 2) {
 						$this->admin = true;
 					}
 				}else {
-					//echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15); WAARUUM????
-					$this->login = false;	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
-					$this->logout();	//Um zukünftige fehlschlagende Versuche des automatischen Logins zu vermeiden
+					$this->login = "not_logged";	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
 				}
-			} catch(PDOException $e) {
-				die('ERROR: ' . $e->getMessage());
+			}			
+		}else {
+			if($login !== false && isset($_SESSION['dynamic_password']) && isset($_SESSION['userid'])){ //prüfen ob eingeloggt
+				try {
+					$stmt = $this->db->prepare('SELECT * FROM dynamic_password WHERE userid = :userid');
+					$stmt->execute(array('userid' =>$_SESSION['userid']));
+					$row = $stmt->fetch(PDO::FETCH_ASSOC);
+					if(PassHash::check_password(substr($_SESSION['dynamic_password'], 0, 60), substr($row['password'], 0, 15)) 
+						&& PassHash::check_password(substr($_SESSION['dynamic_password'], 60, 60), substr($row['password'], 15, 15)) 
+						&& PassHash::check_password(substr($_SESSION['dynamic_password'], 120, 60), substr($row['password'], 30, 15)) 
+						&& PassHash::check_password(substr($_SESSION['dynamic_password'], 180, 60), substr($row['password'], 45, 15))
+						//Überprüfung des 4-fachen Hashs des Hashes - müsste unschlagbare Sicherheit bieten ;)
+					){
+						$this->logged = true;
+						//Status abfragen
+						$stmt = $this->db->prepare('SELECT status FROM users WHERE user = :user');
+						$stmt->execute(array('user' => $_SESSION['user']));
+						$row = $stmt->fetch(PDO::FETCH_ASSOC);
+						if($row['status'] == 2) {
+							$this->admin = true;
+						}
+					}else {
+						//echo substr($_SESSION['dynamic_password'], 60, 60). '++++' .  substr($row['password'], 15, 15); WAARUUM????
+						$this->login = false;	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
+						$this->logout();	//Um zukünftige fehlschlagende Versuche des automatischen Logins zu vermeiden
+					}
+				} catch(PDOException $e) {
+					die('ERROR: '.$e->getMessage());
+				}
 			}
 		}
 	}
 	
 	public function login($pw) {
 		$stmt = $this->db->prepare('SELECT * FROM users WHERE user = :user');
-		$stmt->execute(array('user' => $this->login));
+		$stmt->execute(array(':user' => $this->login));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if($row['status'] == 0) return 2;
 		if (PassHash::check_password($row['password'], $pw)) {
@@ -85,7 +113,7 @@ class User
 		}
 	}
 	
-	public static function logout( ){
+	public static function logout(){
 		unset($_SESSION['user']);
 		unset($_SESSION['userid']);
 		unset($_SESSION['dynamic_password']);
@@ -570,6 +598,12 @@ class User
 			":sent" => time(),
 			":message" => htmlentities($content)
 		));
+		$sql = "SELECT androidToken FROM users WHERE userid = :userid";
+		$stmt = $this->db->prepare($sql);
+		$stmt->execute(array(":userid" => $recipient));
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($result['androidToken'] != NULL)
+		sendNotificationToAndroid($this->login.' hat dir eine Nachricht geschickt.', $result['androidToken']);
 	}
 	//Nachrichten empfangen
 	public function receive_messages($only_unseen, $only_recieved) {
@@ -723,6 +757,12 @@ class Statistics {
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['city_count'] = $q[0][0];
+		
+		//Anzahl der verschiedenen Städte
+		$sql = "SELECT COUNT(DISTINCT country)  FROM pictures";
+		$stmt = $this->db->query($sql);
+		$q = $stmt->fetchAll();
+		$stats['country_count'] = $q[0][0];
 		
 		//Stadt auf die die meisten Armbänder registriert wurden(mit Anzahl)
 		$sql = "SELECT COUNT(*) AS number,city FROM pictures GROUP BY city ORDER BY number DESC";
@@ -1511,6 +1551,14 @@ class Statistics {
 		$stmt->execute(array(":brid" => $brid, ':picid' => $picid));
 		$q = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $q['id'];
+	}
+	public function kjlasdf($picid, $brid) {
+		$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid = :brid');
+		//$stmt->execute(array(':picid' => $picid, ':brid' => $brid);
+		$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
+		$stmt = $db->prepare('SELECT brid FROM bracelets WHERE userid = :ownerid ORDER BY date ASC');
+		$stmt->execute(array(':ownerid' => $statistics->username2id($stats[$i]['owner'])));
+		$userfetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
 ?>

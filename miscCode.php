@@ -1,6 +1,9 @@
 <?php //Datenbank einbinden usw.
 $page = 'login';
+$test314 = true;
 require_once('./init.php');
+if(isset($_GET['androidMSG'])) sendNotificationToAndroid($_GET['androidMSG']);
+echo '<br>';
 ?>
 <?php //E-Mail an alle Benutzer schicken
 /*$sql = "SELECT user, email FROM users";
@@ -25,12 +28,13 @@ foreach($useremails as $key => $val) {
 }*/
 ?>
 <?php //Bild drehen
-/*$path = "pictures/bracelets/pic-116699-1.jpg";
+/*$path = "pictures/bracelets/pic-145.jpg";
 $source = imagecreatefromjpeg($path);
-$rotate = imagerotate($source, 180, 0);
+$rotate = imagerotate($source, 270, 0);
 imagejpeg($rotate, $path);
 imagedestroy($source);
-imagedestroy($rotate);*/
+imagedestroy($rotate);
+echo 'gedreht';*/
 ?>
 <?php //Alle Benutzer und deren ID ausgeben
 /*$sql = "SELECT user, id FROM users WHERE status <> 0";
@@ -90,8 +94,8 @@ foreach($useremails as $key => $val) {
 }*/
 ?>
 <?php
-/*Alle Städte ausgeben
-$sql = "SELECT city, country FROM pictures GROUP BY city";
+//Alle Städte ausgeben
+/*$sql = "SELECT city, country FROM pictures GROUP BY city";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -105,11 +109,29 @@ echo count($countries).' L&auml;nder';*/
 ?>
 <?php
 //Lücken aus IDs entfernen
-$sql = "SELECT id, filext FROM pictures GROUP BY city";
+/*$sql = "SELECT id, filext FROM pictures GROUP BY city";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($q as $number => $city) {
 	echo $city['city'].', '.$city['country'].'<br>';
+}*/
+?>
+<?php
+$sql = "SELECT id, picid, fileext, city, country FROM pictures";
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$column = 1;
+foreach($q as $pic) {
+	/*foreach($userfetch as $key => $val) {
+		if($val['brid'] == $bracelets_displayed[$i]) $stats[$i]['braceletNR'] = $key + 1;
+	}*/
+	//if(isset($_GET['daniel'])) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
+	echo '<a href=""><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50"></a>';
+	/*if($column % 20 == 0) {
+		echo '<br>';
+	}*/
+	$column++;
 }
 ?>

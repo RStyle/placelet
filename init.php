@@ -9,8 +9,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path_html = 'http://www.placelet.de/';
 }
 require_once($this_path.'scripts/connection.php');
-
-if(isset($onlineaufftp)){ //initialisiert in connection
+if(isset($onlineaufftp) && !isset($test314)){ //initialisiert in connection
     ini_set('display_errors', 'Off');
     ini_set('log_errors', 'On');
     ini_set('error_log', '../fehler.txt');
@@ -43,9 +42,11 @@ if(!isset($_SESSION['server_SID'])) {
 $ziffern = 6;
 if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) $ziffern = 7;
 //Einbinden der Dateien, die Funktionen, MySQL Daten und PDO Funktionen enthalten
-require_once($this_path.'scripts/recaptchalib.php');
+//require_once($this_path.'scripts/recaptchalib.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/user.php');
+require_once($this_path.'scripts/PushBots.class.php');
+
 $lang = simplexml_load_file('./text/translations.xml');
 
 $maps_api_key = 'AIzaSyAxQBrE59Db_ViT_SlYj7NcItheJ3y_F60';//alter Key: AIzaSyBdaJT9xbPmjQRykuZ7jX6EZ0Poi5ZSmfc

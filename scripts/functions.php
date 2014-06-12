@@ -1,4 +1,55 @@
 <?php
+function sendNotificationToAndroid($msg, $device = NULL) {
+	// Push The notification with parameters
+	$pb = new PushBots();
+	// Application ID
+	$appID = '539986981d0ab1d0048b45f6';
+	// Application Secret
+	$appSecret = 'eeb459d33ad5c6bd81474a7c7484cc06';
+	$pb->App($appID, $appSecret);
+	 
+	$platforms = array(1);
+	$pb->Platform($platforms);
+	 if($device == NULL) {
+		// Notification Settings
+		$pb->Alert($msg);
+		//$pb->Sound($sound);
+		//$pb->Badge($badge);
+		 
+		// Tags Array
+		//$pb->Tags($tags);
+		 
+		// Custom fields
+		//$pb->Payload($customfields);
+		 
+		// Country or state
+		//$pb->Geo($country , $gov);
+		 
+		// Push it !
+		$pb->Push();
+	}else {
+		// Update Alias
+		/**
+		 * set Alias Data
+		 * @param   integer $platform 0=> iOS or 1=> Android.
+		 * @param   String  $token Device Registration ID.
+		 * @param   String  $alias New Alias.
+		 */
+		 
+		$pb->AliasData(1, "APA91bFpQyCCczXC6hz4RTxxxxx", "test");
+		// set Alias on the server
+		$pb->setAlias();
+		 
+		// Push to Single Device
+		// Notification Settings
+		$pb->AlertOne($msg);
+		$pb->PlatformOne($platforms);
+		$pb->TokenOne($device);
+		 
+		//Push to Single Device
+		$pb->PushOne();
+	 }
+}
 //Smileys
 function smileys($text) {
 	$smileys = array(
@@ -215,13 +266,15 @@ function clean_input($input) {
 }
 //Erstellt ein Thumbnail vom Bild
 //$target ist der Pfad vom Ausgangsbild; $thumb der unter dem das Thumbnail gespeichert wird; $w die maximale Breite des Thumbnails; $h die maximale Höhe des Thumbnails; $ext die Endung des Bildes
-function create_thumbnail($target, $thumb, $w, $h, $ext) {
+function create_thumbnail($target, $thumb, $w, $h, $ext, $keepRatio = true) {
 	list($w_orig, $h_orig) = getimagesize($target);
-	$scale_ratio = $w_orig/$h_orig;
-	if(($w / $h) > $scale_ratio) {
-		$w = $h * $scale_ratio;
-	} else {
-		$h = $w / $scale_ratio;
+	if($keepRatio) {
+		$scale_ratio = $w_orig/$h_orig;
+		if(($w / $h) > $scale_ratio) {
+			$w = $h * $scale_ratio;
+		} else {
+			$h = $w / $scale_ratio;
+		}
 	}
 	$ext = strtolower($ext);
 	switch($ext) {
