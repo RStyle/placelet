@@ -63,7 +63,7 @@ if(isset($_POST['androidLogin'])) {
 }elseif(isset($_POST['androidGetMessages'])) {
 	if(Statistics::userexists($_POST['user'])) {
 		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
-		$return = $user->receive_messages(true, true);
+		$return = $user->receive_messages(false, false);
 		//$return = array('login' => $user->login);
 	}
 }elseif(isset($_POST['androidSendMessages'])) {
@@ -78,7 +78,7 @@ if(isset($_POST['androidLogin'])) {
 }elseif(isset($_GET['androidGetMessages'])) {
 	if(Statistics::userexists($_GET['user'])) {
 		$user = new User($_GET['user'], $db, $_GET['dynPW'], true);	
-		$return = $user->receive_messages(true, true);
+		$return = $user->receive_messages(false, false);
 		//$return = array('login' => $user->login);
 	}
 }
@@ -91,12 +91,12 @@ if(isset($_POST['androidProfileInfo'])) {
 		$return = $userdetails;
 	}
 }elseif(isset($_POST['androidGetCommunityPictures'])) {
-	$user_anz = 5;
-	$systemStats = $statistics->systemStats($user_anz, 3);
+	$systemStats = $statistics->systemStats(0, 5, true);
 	//hier werden die Armbänder bestimmt, die angezeigt werden
 	$bracelets_displayed = $systemStats['recent_brids'];
 	foreach($bracelets_displayed as $key => $val) {
 		$stats[$key] = $statistics->bracelet_stats($val, true);
+		$stats[$key]['brid'] = $val;
 	}
 	$return = $stats;
 }elseif(isset($_POST['androidGetBraceletPictures'])) {

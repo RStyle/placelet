@@ -1,6 +1,5 @@
 <?php
-function sendNotificationToAndroid($msg, $device = NULL) {
-	// Push The notification with parameters
+function sendNotificationToAndroid($msg, $sender, $options = NULL) {
 	$pb = new PushBots();
 	// Application ID
 	$appID = '539986981d0ab1d0048b45f6';
@@ -10,22 +9,20 @@ function sendNotificationToAndroid($msg, $device = NULL) {
 	 
 	$platforms = array(1);
 	$pb->Platform($platforms);
-	 if($device == NULL) {
-		// Notification Settings
+	
+	 if($array_key_exists("deviceToken", $optons)) {
 		$pb->Alert($msg);
-		//$pb->Sound($sound);
-		//$pb->Badge($badge);
 		 
-		// Tags Array
-		//$pb->Tags($tags);
+		$tags = array($options['tag']['key'] => $options['tag']['value']);
+		$pb->Tags($tags);
 		 
 		// Custom fields
 		//$pb->Payload($customfields);
-		 
 		// Country or state
 		//$pb->Geo($country , $gov);
-		 
-		// Push it !
+		//$pb->Sound($sound);
+		//$pb->Badge($badge);
+		
 		$pb->Push();
 	}else {
 		// Update Alias
@@ -36,19 +33,32 @@ function sendNotificationToAndroid($msg, $device = NULL) {
 		 * @param   String  $alias New Alias.
 		 */
 		 
-		$pb->AliasData(1, "APA91bFpQyCCczXC6hz4RTxxxxx", "test");
+		//$pb->AliasData(1, "APA91bFpQyCCczXC6hz4RTxxxxx", "test");
 		// set Alias on the server
-		$pb->setAlias();
+		//$pb->setAlias();
 		 
 		// Push to Single Device
 		// Notification Settings
 		$pb->AlertOne($msg);
 		$pb->PlatformOne($platforms);
-		$pb->TokenOne($device);
-		 
-		//Push to Single Device
+		$pb->TokenOne($options['deviceToken']);
+		
 		$pb->PushOne();
 	 }
+}
+function simpleNotific($msg, $token) {
+		$pb = new PushBots();
+		$appID = '539986981d0ab1d0048b45f6';
+		$appSecret = 'eeb459d33ad5c6bd81474a7c7484cc06';
+		$pb->App($appID, $appSecret);
+		 
+		$platforms = array(1);
+		$pb->Platform($platforms);
+		$pb->AlertOne($msg);
+		$pb->PlatformOne($platforms);
+		$pb->TokenOne($token);
+		
+		$pb->PushOne();	
 }
 //Smileys
 function smileys($text) {

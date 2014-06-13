@@ -610,8 +610,16 @@ class User
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array(":userid" => $recipient));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		if($result['androidToken'] != NULL)
-		sendNotificationToAndroid($this->login.' hat dir eine Nachricht geschickt.', $result['androidToken']);
+		$options = array();
+		$options['tag']['key'] = 'sender';
+		$options['tag']['value'] = $this->login;
+		$options['deviceToken'] = $result['androidToken'];
+		if($result['androidToken'] != NULL) simpleNotific($this->login.' hat dir eine Nachricht geschickt.', $result['androidToken']);
+		$File = "../android/android.txt"; 
+		$Handle = fopen($File, 'w');
+		$Data = "written".$result['androidToken']; 
+		fwrite($Handle, $Data);
+		fclose($Handle);
 	}
 	//Nachrichten empfangen
 	public function receive_messages($only_unseen, $only_recieved) {
@@ -808,7 +816,7 @@ class Statistics {
 		//asort($stats['user_most_bracelets']['uploads']);
 		
 		//Armband, das Bilder in den meisten Städten hat(mit Anzahl)
-		$sql = "SELECT COUNT(*) AS number,brid FROM pictures GROUP BY brid ORDER BY number DESC";
+		$sql = "SELECT COUNT(*) AS number, brid FROM pictures GROUP BY brid ORDER BY number DESC";
 		$stmt = $this->db->query($sql);
 		$q = $stmt->fetchAll();
 		$stats['bracelet_most_cities']['brid'] = $q[0]['brid'];
