@@ -1,4 +1,7 @@
 <!--CONNECT-LEISTE-->
+            <marquee scrollamount="4" scrolldelay="0" style="font-family: Arial" onmouseover='this.stop()' onmouseout='this.start()'>
+            <?php echo $lang->home->marqueetext->$lng; ?>
+            </marquee>
             <?php /*<!--<div class="hint">
                 <h1><?php if($lng == 'en') echo 'Notice'; elseif($lng == 'de') echo 'Hinweis';?></h1>
                 <p><?php if($lng == 'en') echo 'Due to technical difficulties we had to temporarily disable the registration. We are intensely working on it. Sorry for the inconveniences.';
@@ -123,16 +126,16 @@ for($i = 0; $i < 6; $i++){
 				<br><?php echo $lang->home->artikel2->articlefooter->$lng; ?>
 			</article>
 <!--SIDEBAR-->
-			<aside class="side_container">
-				<?php //<!--<h1>JUNIOR</h1>-->?>
-				<img src="/cache.php?f=/img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
-				<p><?php echo $lang->home->JUNIOR->$lng; ?></p>
+            <aside id="map_home" class="side_container">
+				Bitte aktivieren sie Javascript um die Weltkarte mit allen Orten sehen zu können.
 			</aside>
 			<aside class="side_container" style="margin-top: 20px;">
 				<h1>facebook</h1>
 				<p><?php echo $lang->home->fbnews->$lng; ?></p>
 				<div id="fb_plugin" class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
 			</aside>
-			<aside id="map_home" class="side_container" style="margin-top: 20px;">
-				Bitte aktivieren sie Javascript um die Weltkarte mit allen Orten sehen zu können.
+			<aside class="side_container" style="margin-top: 20px;">
+				<?php //<!--<h1>JUNIOR</h1>-->?>
+				<img src="/cache.php?f=/img/JUNIOR_Logo.png" alt="JUNIOR" style="width: 80%; height: auto;">
+				<p><?php echo $lang->home->JUNIOR->$lng; ?></p>
 			</aside>

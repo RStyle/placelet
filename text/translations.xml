@@ -126,7 +126,7 @@
 			<de><![CDATA[Du solltest nicht hier sein. Gehe einfach eine Seite <span class="pseudo_link" onclick="history.back(-1)">zurück.</span>]]></de>
 		</nope>
 		<banner>
-            <en><![CDATA[<img src="/cache.php?f=/img/winbanner_corner_en.png" style="z-index: 100; width: 250px; position: fixed; bottom: 0; right: 0;">]]></en>
+ome            <en><![CDATA[<img src="/cache.php?f=/img/winbanner_corner_en.png" style="z-index: 100; width: 250px; position: fixed; bottom: 0; right: 0;">]]></en>
 			<de><![CDATA[<img src="/cache.php?f=/img/winbanner_corner.png" style="z-index: 100; width: 250px; position: fixed; bottom: 0; right: 0;">]]></de>
         </banner>
 	</misc>
@@ -472,6 +472,14 @@
        </answers>
 	</faq>
 	<home>
+	    <marqueetext>
+            <de><![CDATA[
+            +++ Gib uns deine Unterstützung beim <b><a href="http://www.bundes-schuelerfirmen-contest.de/startseite/rheinland-pfalz/gymnasien/placelet" target="_blank">Bundes-Schülerfirmen-Contest</a>!</b> Jede Stimme zählt! Vielen Dank +++
+            ]]></de>
+            <en><![CDATA[
+            +++ Give us your support at the <b><a href="http://www.bundes-schuelerfirmen-contest.de/startseite/rheinland-pfalz/gymnasien/placelet" target="_blank">German Student Company Contest</a>!</b> Every vote counts! Thank you +++
+            ]]></en>
+        </marqueetext>
 		<artikel1 de-title="Das Reisearmband" en-title="The Travel Bracelet">
 			<paragraph>
 				<en><![CDATA[
