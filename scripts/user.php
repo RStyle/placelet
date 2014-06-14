@@ -614,10 +614,10 @@ class User
 		$options['tag']['key'] = 'sender';
 		$options['tag']['value'] = $this->login;
 		$options['deviceToken'] = $result['androidToken'];
-		if($result['androidToken'] != NULL) simpleNotific($this->login.' hat dir eine Nachricht geschickt.', $result['androidToken']);
+		if($result['androidToken'] != NULL) messagePush($this->login, $result['androidToken']);
 		$File = "../android/android.txt"; 
 		$Handle = fopen($File, 'w');
-		$Data = "written".$result['androidToken']; 
+		@$Data = $this->login."written".$result['androidToken']; 
 		fwrite($Handle, $Data);
 		fclose($Handle);
 	}
@@ -1074,7 +1074,7 @@ class Statistics {
 				$picid = 1;
 			}
 			if ($picture_file['size'] < $max_file_size) {
-				$file_uploaded = move_uploaded_file($picture_file['tmp_name'], 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
+				$file_uploaded = move_uploaded_file($picture_file['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext);
 			} else {
 				return 6;//'Wir unterstützen nur Bilder bis 8MB Größe';
 			}
@@ -1082,7 +1082,7 @@ class Statistics {
 				///////////////////////////
 				//Hier werdendie hochgeladenen Dateien modifiziert.
 				//Datei-Pfad:
-			    $img_path = 'pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext;
+			    $img_path = $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext;
 				/*//Bild-Instanz erstellen
 				switch($fileext) {
 					case 'jpeg':
@@ -1115,7 +1115,7 @@ class Statistics {
 				//Thumbnail von dem hochgeladenen Bild erstellen
 				//Die Funktion wird in scripts/functions.php definiert
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
-				$thumb_path = 'pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg';
+				$thumb_path = $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg';
 				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
 				if($date == 'default') {
 					//EXIF-Header auslesen und Aufnamedatum bestimmen
@@ -1153,10 +1153,10 @@ class Statistics {
 				$stmt->execute(array('picid' => $picid, 'brid' => $brid));
 				$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 				//rename muss sein
-				rename('pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext, 'pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
-				rename('pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg', 'pictures/bracelets/thumb-'.$rowid['id'].'.jpg');
-				if($fileext == 'png')
-					tinypng('pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
+				rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext, $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
+				rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg', $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$rowid['id'].'.jpg');
+				if($fileext == 'png') tinypng($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
+				create_thumbnail($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext, $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/mini_thumbs/mini-thumb-'.$rowid['id'].'.jpg', 50, 50, $pic['fileext'], false);
 				///E-Mail an die Personen senden, die das Armband abboniert haben
 				$this->notify_subscribers($brid);
 				return 7;//Bild erfolgreich gepostet.

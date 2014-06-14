@@ -60,6 +60,24 @@ function simpleNotific($msg, $token) {
 		
 		$pb->PushOne();	
 }
+function messagePush($sender, $token) {
+		$pb = new PushBots();
+		$appID = '539986981d0ab1d0048b45f6';
+		$appSecret = 'eeb459d33ad5c6bd81474a7c7484cc06';
+		$pb->App($appID, $appSecret);
+		$data = json_encode(array('sender' => $sender));
+		//$pb->Tags($data);
+		$pb->Payload($data);
+		 
+		$platforms = array(1);
+		$pb->Platform($platforms);
+		$msg = $sender.' hat dir eine Nachricht geschickt.';
+		$pb->AlertOne($msg);
+		$pb->PlatformOne($platforms);
+		$pb->TokenOne($token);
+		
+		$pb->PushOne();	
+}
 //Smileys
 function smileys($text) {
 	$smileys = array(

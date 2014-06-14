@@ -717,7 +717,6 @@ $(document).ready(function() {
 		$('#note' + $('.del_msg').data("del_note")).remove();
 	});
 /*Armbandname ändern*/
-	$().remove();
 	$('#edit_name_submit').click(function(){
 		if($('#edit_name_input').val() != '') {
 			var new_bracelet_name = $('#edit_name_input').val();
