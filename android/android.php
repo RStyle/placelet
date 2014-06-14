@@ -7,6 +7,8 @@ include_once('../scripts/user.php');
 require_once('../scripts/PushBots.class.php');
 define("NOT_EXISTING", 0);
 define("WRONG_PW", 1);
+//Maximale Größe für hochgeladene Bilder
+$max_file_size = 8000000;
 function login($deviceToken, $username, $pw, $db) {
 	//return array('hi' => 'waslos?');
 	$stmt = $db->prepare('SELECT * FROM users WHERE user = :user');
@@ -17,16 +19,24 @@ function login($deviceToken, $username, $pw, $db) {
 		$userid = Statistics::username2id($username);
 		/*$this->login = $row['user'];
 		$this->userid = $row['userid'];*/
+		$sql = "SELECT * FROM dynamic_password WHERE userid = :userid LIMIT 1"; 
+		$q = $db->prepare($sql); 
+		$q->execute(array(':userid' => $userid));
+		$anz = $q->rowCount(); 
+		
 		$dynamic_password = PassHash::hash($row['password']);
+		
+		if($anz > 0){
+				$row123 = $stmt->fetch(PDO::FETCH_ASSOC);
+				$dynamic_password = $row123['password'];
+ 				//$_SESSION['dynamic_password'] = $row123['password'];
+ 		}
+ 
 		$dynpw = PassHash::hash(substr($dynamic_password, 0, 15)).PassHash::hash(substr($dynamic_password, 15, 15)).PassHash::hash(substr($dynamic_password, 30, 15)).PassHash::hash(substr($dynamic_password, 45, 15));
 		//4-facher Hash des Hashes - da der Hash ab einer bestimmten Anzahl von Buchstaben das Passwort abschneidet.
 		/*$_SESSION['user'] = $this->login;
 		$_SESSION['userid'] = $this->userid;*/
 	
-		$sql = "SELECT * FROM dynamic_password WHERE userid = :userid LIMIT 1"; 
-		$q = $db->prepare($sql); 
-		$q->execute(array(':userid' => $userid));
-		$anz = $q->rowCount(); 
 		if ($anz > 0)
 			 $sql= "UPDATE dynamic_password SET password = :password WHERE userid = :userid LIMIT 1";
 		else
@@ -81,6 +91,8 @@ if(isset($_POST['androidLogin'])) {
 		$return = $user->receive_messages(false, false);
 		//$return = array('login' => $user->login);
 	}
+}elseif(isset($_POST['androidUploadPicture'])) {
+	$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
 }
 $statistics = new Statistics($db, $user);
 if(isset($_POST['androidProfileInfo'])) {
@@ -102,8 +114,6 @@ if(isset($_POST['androidProfileInfo'])) {
 }elseif(isset($_POST['androidGetBraceletPictures'])) {
 	$picture_details = $statistics->picture_details($_POST['braceID'], true);
 	$return = $picture_details;
-}elseif(isset($_POST['androidUploadPicture'])) {
-	$return = array("upload" => "true");
 }elseif(isset($_POST['androidText'])) {
 	 $File = "android.txt"; 
 	 $Handle = fopen($File, 'w');
@@ -111,6 +121,19 @@ if(isset($_POST['androidProfileInfo'])) {
 	 fwrite($Handle, $Data); 
 	 $return = array("text" => "true");
 	 fclose($Handle);
+}elseif(isset($_POST['androidUploadPicture'])) {
+	$brid = $_POST['brid'];
+	$description = $_POST['description'];
+	$city = $_POST['city'];
+	$country = $_POST['country'];
+	$state = 'Rheinland-Pfalz';
+	$latitude = 0;
+	$longitude = 0;
+	$title = $_POST['title'];
+	$date = $_POST['date'];
+	$picture_file = $_FILES['uploadPic'];
+	$upload = $statistics->registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size);
+	$return = array("upload" => $upload);
 }
 foreach($_POST as $key => $val) {
 	$return[$key] = $val;
