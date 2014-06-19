@@ -33,7 +33,7 @@ class User
 						$this->admin = true;
 					}
 				}else {
-					$this->login = "not_logged";	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
+					//$this->login = "not_logged";	//Hiermit werden falsch eingeloggte Benutzer nicht mehr mit $this->login Sicherheitslücken umgehen können
 				}
 			}			
 		}else {
@@ -880,7 +880,7 @@ class Statistics {
 			$stats['name'] = $this->brid2name($brid);
 			$stats['owner'] = self::id2username($q[0]['userid']);
 			$stats['date'] = $q[0]['date'];
-			$sql = "SELECT picid, city, country FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
+			$sql = "SELECT id, picid, city, country FROM pictures WHERE brid = :brid ORDER BY  `pictures`.`picid` DESC LIMIT 1";
 			$stmt = $this->db->prepare($sql);
 			$stmt->execute(array('brid' => $brid));
 			$q = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -895,7 +895,7 @@ class Statistics {
 	//Bilderdetails
 	public function picture_details($brid, $desc = false) {
 		$details = array();
-		$sql = "SELECT userid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid ORDER BY picid";
+		$sql = "SELECT id, userid, description, picid, city, country, date, title, fileext, longitude, latitude, state FROM pictures WHERE brid = :brid ORDER BY picid";
 		if($desc) $sql .= " DESC";
 			else $sql .= " ASC";
 		$stmt = $this->db->prepare($sql);
@@ -914,6 +914,7 @@ class Statistics {
 			$details[$val['picid']]['latitude'] = $val['latitude'];
 			$details[$val['picid']]['longitude'] = $val['longitude'];
 			$details[$val['picid']]['state'] = $val['state'];
+			$details[$val['picid']]['id'] = $val['id'];
 		}
 		$sql = "SELECT commid, picid, userid, comment, date FROM comments WHERE brid = :brid";
 		$stmt = $this->db->prepare($sql);

@@ -74,7 +74,7 @@ if(isset($_POST['androidLogin'])) {
 	if(Statistics::userexists($_POST['user'])) {
 		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
 		$return = $user->receive_messages(false, false);
-		//$return = array('login' => $user->login);
+		if(isset($_POST['recipient'])) $return['exists'] = Statistics::userexists($_POST['recipient']);
 	}
 }elseif(isset($_POST['androidSendMessages'])) {
 	if(Statistics::userexists($_POST['user'])) {
@@ -89,10 +89,10 @@ if(isset($_POST['androidLogin'])) {
 	if(Statistics::userexists($_GET['user'])) {
 		$user = new User($_GET['user'], $db, $_GET['dynPW'], true);	
 		$return = $user->receive_messages(false, false);
-		//$return = array('login' => $user->login);
 	}
 }elseif(isset($_POST['androidUploadPicture'])) {
-	$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
+	$user = new User($_POST['user'], $db, @$_POST['dynPW'], true);
+		//$return = array('login' => $user->login);
 }
 $statistics = new Statistics($db, $user);
 if(isset($_POST['androidProfileInfo'])) {
@@ -129,6 +129,10 @@ if(isset($_POST['androidProfileInfo'])) {
 	$state = 'Rheinland-Pfalz';
 	$latitude = 0;
 	$longitude = 0;
+	if(isset($_POST['latitude']) && $_POST['longitude']) {
+		$latitude = $_POST['latitude'];
+		$longitude =  $_POST['longitude'];
+	}
 	$title = $_POST['title'];
 	$date = $_POST['date'];
 	$picture_file = $_FILES['uploadPic'];

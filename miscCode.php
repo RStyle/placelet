@@ -127,9 +127,9 @@ foreach($q as $pic) {
 	/*foreach($userfetch as $key => $val) {
 		if($val['brid'] == $bracelets_displayed[$i]) $stats[$i]['braceletNR'] = $key + 1;
 	}*/
-	//if(isset($_GET['daniel'])) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
+	if(isset($_GET['daniel']) && $column > 100) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
 	echo '<a href=""><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50"></a>';
-	if($column % 20 == 0) {
+	if($column % 15 == 0) {
 		echo '<br>';
 	}
 	$column++;

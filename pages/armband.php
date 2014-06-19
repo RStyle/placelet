@@ -141,12 +141,12 @@ if($braceName !== NULL) {
 							<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
 							<?php echo $stats[$i]['description']; ?>      
 							<br><br>
-							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i])-12 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-12; ?>)</span>
+							<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" data-counts="<?php echo count($stats[$i])-13 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-13; ?>)</span>
 						</p>
 						
 						<div class="comments" id="comment<?php echo $i;?>">
 	<?php
-				for ($j = 1; $j <= count($stats[$i])-12; $j++) {
+				for ($j = 1; $j <= count($stats[$i])-13; $j++) {
 					//Vergangene Zeit seit dem Kommentar berechnen
 					$x_days_ago = days_since($stats[$i][$j]['date']);
 					//Überprüfen, ob das Kommentar, was man löschen will das letzte ist.
