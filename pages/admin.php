@@ -98,11 +98,11 @@ if($user->admin && $checklogin) {
 					<table>
 							<tr>
 								<td>Winkel</td>
-								<td><input type="text" name="angle" required></td>
+								<td><input type="text" name="angle" value="-90" required></td>
 							</tr>
 							<tr>
 								<td>Bild Nummer</td>
-								<td><input type="text" name="picnr" required></td>
+								<td><input type="text" name="picnr" <?php if(isset($_GET['picnr'])) echo 'value="'.$_GET['picnr'].'" '; ?>required></td>
 							</tr>
 							<tr>
 								<td>Nur Thumbnail</td>
@@ -114,7 +114,7 @@ if($user->admin && $checklogin) {
 							</tr>
 							<tr>
 								<td>Originalbild und Thumbnail</td>
-								<td><input type="radio" name="pictype" value="both" required></td>
+								<td><input type="radio" name="pictype" value="both" checked required></td>
 							</tr>
 							<tr>
 								<td>&nbsp;</td>

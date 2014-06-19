@@ -132,6 +132,13 @@
 				<div class="width100">
 					<div class="div70left">
 						<a href="/community?pic_name=<?php echo urlencode($statistics->brid2name($bracelets_displayed[$i]).''); ?>&amp;picid=<?php echo $stats[$i][$systemStats['recent_picids'][$i]]['picid']; ?>&amp;last_pic=last&amp;delete_pic=true" class="delete_button float_right delete_bild mt2" title="<?php echo $lang->pictures->deletepic->$lng; ?>" data-bracelet="<?php echo $braceName; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+<?php
+				if($user->admin) {
+?>
+						<a href="/admin?rotate&amp;picnr=<?php echo $rowid['id']; ?>" class="float_right">O</a>
+<?php
+				}
+?>
 						<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i][$systemStats['recent_picids'][$i]]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i][$systemStats['recent_picids'][$i]]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]]['country']; //onclick="return confirmDelete('dasBild');" ?>" class="thumb_link">
 							<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
 							<img src="/cache.php?f=/pictures/bracelets/thumb<?php echo '-'.$rowid['id'].'.jpg'; ?>" alt="<?php echo $stats[$i][$systemStats['recent_picids'][$i]]['city'].', '.$stats[$i][$systemStats['recent_picids'][$i]]['country']; ?>" class="thumbnail">
