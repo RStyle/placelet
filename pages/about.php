@@ -140,17 +140,19 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 				<div id="partner">
 					<h1><?php echo $lang->about->supported->$lng; ?></h1>
 
-    				<div style="float: right; width: 800px">
-    					<img src="/cache.php?f=/img/oddLogo.png" alt="odd - print und medien" style="height: 80px; width: 176; margin-left: calc(2.5% + 17px); margin-right: calc(2.5% + 17px);">
-    					<img src="/cache.php?f=/img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="height: 80px; width: 160; margin-left: calc(2.5% + 20px); margin-right: calc(2.5% + 20px);">
-    					<img src="/cache.php?f=/img/aureliaLogo.png" alt="odd - print und medien" style="height: 80px; width: 159px; margin-left: calc(2.5% + 20.5px); margin-right: calc(2.5% + 20.5px);">
+    				<div style="float: right; width: 1000px">					
+    					<img src="/cache.php?f=/img/aureliaLogo.png" alt="Aurelia - Goldschmiede" style="float: right; height: 80px; width: 159px; margin-right: 60px;">
+    					<img src="/cache.php?f=/img/laserkreativLogo.png" alt="Laserkreativ - Lasergravur | Laserschneiden | Digitaldruch" style="float: right; height: 80px; width: 160; margin-right: 40px;">
+    					<img src="/cache.php?f=/img/oddLogo.png" alt="odd - print und medien" style="float: right; height: 80px; width: 176; margin-right: 40px;">
+    					<img src="/cache.php?f=/img/uranoLogo.jpg" alt="Urano - IT-Systemhaus" style="float: right; height: 80px; width: 160; margin-right: 40px;">    				
     				</div>
 
     				<br>
-				    <div style="float: right; width: 800px; text-align: right; font-size:10pt">
-    				    <a href="http://odd.de/">http://odd.de/</a>
-    					<a href="http://laserkreativ.de/"><span style="margin-left:135px">http://laserkreativ.de/</span></a>
-    					<a href="http://www.goldschmiede-aurelia.de/"><span style="margin-left:65px;margin-right:78px">http://www.goldschmiede-aurelia.de/</span></a>
+				    <div style="float: right; width: 900px; text-align: right; font-size:10pt">
+				        <a target="_blank" style="float: right; margin-right: 75px;" href="http://www.goldschmiede-aurelia.de/">Goldschmiede Aurelia</a>	    
+    					<a target="_blank" style="float: right; margin-right: 100px;" href="http://laserkreativ.de/">Laser Kreativ</a>
+    					<a target="_blank" style="float: right; margin-right: 100px;" href="http://odd.de/">odd Print & Medien</a>
+    					<a target="_blank" style="float: right; margin-right: 140px;" href="http://urano.de/">Urano IT-Systeme</a>
     				</div>
 				</div>
 		

@@ -1,6 +1,15 @@
 			<article id="impressum" class="mainarticles bottom_border_green">
 				<div class="green_line mainarticleheaders line_header"><h1><?php echo $lang->press[$lng.'-title']; ?></h1></div>
 				<div class="press_article">
+                    <div class="press_pic" style="overflow: hidden; clear: both; float: left; width:250px; height: 250px;"><img style="position: relative; left: -120px; height: 250px;" src="http://www.hanzonline.de/portals/lumen/story_images/012Bildung/2014-06-18_Placelet.jpg"></div>
+                    <div class="press_header"><p>Landessieger "Placelet" vom Röka in Berlin ohne Fortune<span style="font-size: 0.7em; font-style: italic"> - 18.06.2014</span></p></div>
+                    <hr class="trenner" style="border-color: #FF055D;">
+                    <div class="press_text"><div style="height: 170px; width: 15px; float: left;"></div>
+                    <i style="display: block; margin-bottom: 10px;">Die Schülerfirma „Placelet“ vom Röka-Gymnasium in Bad Kreuznach gewann mit ihren Reisearmbändern den JUNIOR-Landeswettbewerb 2014 in Rheinland-Pfalz. Am Dienstag, 17.06.2014, stellten sich die jungen Kreuznacher Unternehmer der Konkurrenz auf Bundesebene. Dort hatten leider andere die Nase vorn. Mit einer innovativen Geschäftsidee und einer ansprechenden Präsentation . . .</i>
+                    <h4 style="margin: 0;"><a target="_blank" href="http://www.hanzonline.de/de/newsintro_startseite/landessieger-placelet-vom-r%C3%B6ka-in-berlin-ohne-fort_hwku42xh.html" class="press_link">hanzonline</a></h4>
+                    </div>
+                </div>
+				<div class="press_article">
                     <div class="press_pic" style="overflow: hidden; clear: both; float: left; width:250px; height: 250px;"><img style="position: relative; left: -105px; height: 250px;" src="http://www.mwkel.rlp.de/icc/internet/med/e12/e120d810-8422-6415-1917-b455e1df7d18,11111111-1111-1111-1111-111111111111.jpg"></div>
                     <div class="press_header"><p>Schülerfirma "Placelet": Landessieger beim Wirtschaftswettbewerb "Junior"<span style="font-size: 0.7em; font-style: italic"> - 21.05.2014</span></p></div>
                     <hr class="trenner" style="border-color: #05A8FF;">
