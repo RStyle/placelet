@@ -37,7 +37,7 @@ function login($deviceToken, $username, $pw, $db) {
 		/*$_SESSION['user'] = $this->login;
 		$_SESSION['userid'] = $this->userid;*/
 	
-		if ($anz > 0)
+		if($anz > 0)
 			 $sql= "UPDATE dynamic_password SET password = :password WHERE userid = :userid LIMIT 1";
 		else
 			$sql = "INSERT INTO dynamic_password (userid, password) VALUES (:userid, :password)";
@@ -103,7 +103,7 @@ if(isset($_POST['androidProfileInfo'])) {
 		$return = $userdetails;
 	}
 }elseif(isset($_POST['androidGetCommunityPictures'])) {
-	$systemStats = $statistics->systemStats(0, 5, true);
+	$systemStats = $statistics->systemStats(0, $_POST['pic_count']);
 	//hier werden die Armbänder bestimmt, die angezeigt werden
 	$bracelets_displayed = $systemStats['recent_brids'];
 	foreach($bracelets_displayed as $key => $val) {
