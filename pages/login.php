@@ -59,6 +59,11 @@ if(isset($loginattempt) || isset($_GET['notexisting'])) {
 						
 						<label for="registerpic_description" class="registerpic_description"><?php echo $lang->login->description->$lng; ?>:</label><br>
 						<textarea name="registerpic_description" id="registerpic_description" class="registerpic_description" rows="8" cols="40" maxlength="1000" required><?php if($postpic != 'true') echo @$_POST['registerpic_description'];?></textarea><br>
+						Drehen:<br>
+						&nbsp;&nbsp;0° <input type="radio" name="rotation" value="0" checked required>
+						&nbsp;90° <input type="radio" name="rotation" value="90" required>
+						180° <input type="radio" name="rotation" value="180" required>
+						270° <input type="radio" name="rotation" value="270" required>
 <?php
 		//$publickey = "6LfIVekSAAAAAJddojA4s0J4TVf8P_gS2v1zv09P";
 		//echo recaptcha_get_html($publickey);

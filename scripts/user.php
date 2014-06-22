@@ -1033,7 +1033,7 @@ class Statistics {
 		return false;
 	}
 	//Postet ein Bild
-	public function registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size) {
+	public function registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size, $rotation = 0) {
 		$submissions_valid = true;
 		if(strlen($country) < 2) {
 			$submissions_valid = false;
@@ -1084,7 +1084,7 @@ class Statistics {
 				//Hier werdendie hochgeladenen Dateien modifiziert.
 				//Datei-Pfad:
 			    $img_path = $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext;
-				/*//Bild-Instanz erstellen
+				//Bild-Instanz erstellen
 				switch($fileext) {
 					case 'jpeg':
 					case 'jpg':
@@ -1098,9 +1098,9 @@ class Statistics {
 						break;
 				}
 				//Interlacing aktivieren
-				imageinterlace($img, true);
+				//imageinterlace($img, true);
 				//Geändertes Bild speichern(altes ersetzen)
-				switch($fileext) {
+				/*switch($fileext) {
 					case 'jpeg':
 					case 'jpg':
 						imagejpeg($img, $img_path);
@@ -1111,13 +1111,17 @@ class Statistics {
 					case 'png':
 						imagepng($img, $img_path);
 						break;
-				}
-				imagedestroy($img);*/
+				}*/
+				$rotate = imagerotate($img, $rotation, 0);
+				imagejpeg($rotate, $img_path);
+				imagedestroy($img);
+				imagedestroy($rotate);
 				//Thumbnail von dem hochgeladenen Bild erstellen
 				//Die Funktion wird in scripts/functions.php definiert
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
 				$thumb_path = $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg';
 				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
+				create_thumbnail($img_path, $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/mini_thumbs/mini-thumb-'.$rowid['id'].'.jpg', 50, 50, $pic['fileext'], false);
 				if($date == 'default') {
 					//EXIF-Header auslesen und Aufnamedatum bestimmen
 					if($fileext == 'jpg' || $fileext == 'jpeg') {
@@ -1157,7 +1161,6 @@ class Statistics {
 				rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext, $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
 				rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg', $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$rowid['id'].'.jpg');
 				if($fileext == 'png') tinypng($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
-				create_thumbnail($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext, $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/mini_thumbs/mini-thumb-'.$rowid['id'].'.jpg', 50, 50, $pic['fileext'], false);
 				///E-Mail an die Personen senden, die das Armband abboniert haben
 				$this->notify_subscribers($brid);
 				return 7;//Bild erfolgreich gepostet.

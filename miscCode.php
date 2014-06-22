@@ -118,17 +118,28 @@ foreach($q as $number => $city) {
 }*/
 ?>
 <?php
-$sql = "SELECT id, picid, fileext, city, country FROM pictures";
+$sql = "SELECT id, picid, fileext, city, country, brid FROM pictures";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $column = 1;
 foreach($q as $pic) {
+	$sql = "SELECT userid FROM bracelets WHERE brid = :brid";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array(':brid' => $pic['brid']));
+	$q2 = $stmt->fetch(PDO::FETCH_ASSOC);
+	$stmt = $db->prepare('SELECT brid FROM bracelets WHERE userid = :ownerid ORDER BY date ASC');
+	$stmt->execute(array(':ownerid' => $q2['userid']));
+	$userfetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	foreach($userfetch as $key => $val) {
+		if($val['brid'] == $pic['brid']) $pic['braceletNR'] = $key + 1;
+	}
+	if(count($userfetch) == 1) $pic['braceletNR'] = 1;
 	/*foreach($userfetch as $key => $val) {
 		if($val['brid'] == $bracelets_displayed[$i]) $stats[$i]['braceletNR'] = $key + 1;
 	}*/
-	if(isset($_GET['daniel']) && $column > 100) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
-	echo '<a href=""><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50"></a>';
+	if(isset($_GET['daniel']) && $column >= 150) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
+	echo '<a href="/'.Statistics::id2username($q2['userid']).'/'.$pic['braceletNR'].'/'.$pic['picid'].'"><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50" style="margin: 1px;"></a>';
 	if($column % 15 == 0) {
 		echo '<br>';
 	}

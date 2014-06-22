@@ -267,17 +267,17 @@ function initialize_postpic(coords, this_lat, this_lng) {/*1*/
 			$('#registerpic_country').val("");
 			$.each( data['results'],function(i, val) {
 				$.each( val['address_components'],function(i, val) {
-					if (val['types'] == "locality,political") {
+					if (val['types'] == "locality, political") {
 						if (val['long_name']!="") {
 							city = val['long_name'];
 						}
 					}
-					if (val['types'] == "country,political") {
+					if (val['types'] == "country, political") {
 						if (val['long_name']!="") {
 							country = val['long_name'];
 						}
 					}
-					if (val['types'] == "administrative_area_level_1,political") {
+					if (val['types'] == "administrative_area_level_1, political") {
 						if (val['long_name']!="") {
 							bundesland = val['long_name'];
 						}

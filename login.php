@@ -35,7 +35,8 @@ if(isset($_POST['registerpic_submit'])) {
 											 $_POST['registerpic_title'],
 											 $_POST['registerpic_date'],
 											 $_FILES['registerpic_file'],
-											 $max_file_size);
+											 $max_file_size,
+											 $_POST['rotation']);
 	//Rückmeldung zu Bild-Posten anzeigen
 	if(isset($pic_registered)) {
 		switch ($pic_registered) {
