@@ -622,7 +622,8 @@ class User
 		fclose($Handle);
 	}
 	//Nachrichten empfangen
-	public function receive_messages($only_unseen, $only_recieved) {
+	public function receive_messages($only_unseen, $only_recieved, $user = false) {
+		
 		$sql = "SELECT id, sender, recipient, sent, seen, message FROM messages WHERE recipient = :userid";
 		if(!$only_recieved) $sql .= " OR sender = :userid";
 		if($only_unseen) $sql .= ' AND seen = 0';
@@ -632,17 +633,21 @@ class User
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$messages = array();
 		for($i = 0; $i < count($result); $i++) {
-			$result[$i]['recipient'] = array('name' => Statistics::id2username($result[$i]['recipient']), 'id' => $result[$i]['recipient']);
-			$result[$i]['sender'] = array('name' => Statistics::id2username($result[$i]['sender']), 'id' => $result[$i]['sender']);
-			
-			if($result[$i]['sender']['id'] == $this->userid) {
-				$messages[$result[$i]['recipient']['id']]['recipient'] = $result[$i]['recipient'];
-				$messages[$result[$i]['recipient']['id']][$i] = $result[$i];
-				$messages[$result[$i]['recipient']['id']][$i]['message'] = nl2br($result[$i]['message'], 0);
-			}else {
-				$messages[$result[$i]['sender']['id']]['recipient'] = $result[$i]['sender'];
-				$messages[$result[$i]['sender']['id']][$i] = $result[$i];
-				$messages[$result[$i]['sender']['id']][$i]['message'] = nl2br($result[$i]['message'], 0);
+			$recipient = Statistics::id2username($result[$i]['recipient']);
+			$sender = Statistics::id2username($result[$i]['sender']);
+			if($user == false || $recipient == $user || $sender == $user) {
+				$result[$i]['recipient'] = array('name' => Statistics::id2username($result[$i]['recipient']), 'id' => $result[$i]['recipient']);
+				$result[$i]['sender'] = array('name' => Statistics::id2username($result[$i]['sender']), 'id' => $result[$i]['sender']);
+				
+				if($result[$i]['sender']['id'] == $this->userid) {
+					$messages[$result[$i]['recipient']['id']]['recipient'] = $result[$i]['recipient'];
+					$messages[$result[$i]['recipient']['id']][$i] = $result[$i];
+					$messages[$result[$i]['recipient']['id']][$i]['message'] = nl2br($result[$i]['message'], 0);
+				}else {
+					$messages[$result[$i]['sender']['id']]['recipient'] = $result[$i]['sender'];
+					$messages[$result[$i]['sender']['id']][$i] = $result[$i];
+					$messages[$result[$i]['sender']['id']][$i]['message'] = nl2br($result[$i]['message'], 0);
+				}
 			}
 		}
 		return $messages;

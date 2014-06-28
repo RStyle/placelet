@@ -118,6 +118,7 @@ foreach($q as $number => $city) {
 }*/
 ?>
 <?php
+//Picture Overview
 $sql = "SELECT id, picid, fileext, city, country, brid FROM pictures";
 $stmt = $db->prepare($sql);
 $stmt->execute();
@@ -135,9 +136,6 @@ foreach($q as $pic) {
 		if($val['brid'] == $pic['brid']) $pic['braceletNR'] = $key + 1;
 	}
 	if(count($userfetch) == 1) $pic['braceletNR'] = 1;
-	/*foreach($userfetch as $key => $val) {
-		if($val['brid'] == $bracelets_displayed[$i]) $stats[$i]['braceletNR'] = $key + 1;
-	}*/
 	if(isset($_GET['daniel']) && $column >= 150) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
 	echo '<a href="/'.Statistics::id2username($q2['userid']).'/'.$pic['braceletNR'].'/'.$pic['picid'].'"><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50" style="margin: 1px;"></a>';
 	if($column % 15 == 0) {
@@ -145,4 +143,18 @@ foreach($q as $pic) {
 	}
 	$column++;
 }
+?>
+<?php
+//Letzten $anzahl Bilder - keine Infos über das Armband
+/*$pic_count = 5;
+
+$sql = "SELECT brid, title, description, city, country, userid, date, id FROM pictures ORDER BY id DESC LIMIT :limit";
+$stmt = $db->prepare($sql);
+$stmt->bindParam(':limit',  $pic_count, PDO::PARAM_INT);
+$stmt->execute();
+$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($q as $key => $pic) {
+	$q[$key]['user'] = Statistics::id2username($pic['userid']);
+}
+print_r($q);*/
 ?>

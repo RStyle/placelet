@@ -73,7 +73,18 @@ if(isset($_POST['androidLogin'])) {
 }elseif(isset($_POST['androidGetMessages'])) {
 	if(Statistics::userexists($_POST['user'])) {
 		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
-		$return = $user->receive_messages(false, false);
+		$messages = $user->receive_messages(false, false);
+		foreach(array_reverse($messages) as $key => $chat) {
+				$latestMSG = end($chat);
+				reset($chat);
+				$news[$chat['recipient']['name']] = $latestMSG;
+		}
+		$return = $news;
+	}
+}elseif(isset($_POST['androidGetIOMessages'])) {
+	if(Statistics::userexists($_POST['user'])) {
+		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
+		$return = $user->receive_messages(false, false, $_POST['recipient']);
 		if(isset($_POST['recipient'])) $return['exists'] = Statistics::userexists($_POST['recipient']);
 	}
 }elseif(isset($_POST['androidSendMessages'])) {
@@ -84,11 +95,6 @@ if(isset($_POST['androidLogin'])) {
 			$user->send_message($recipient, $_POST['content']);
 			$return = array('messageSent' => true);
 		}else $return = array('messageSent' => false, 'error' => NOT_EXISTING);
-	}
-}elseif(isset($_GET['androidGetMessages'])) {
-	if(Statistics::userexists($_GET['user'])) {
-		$user = new User($_GET['user'], $db, $_GET['dynPW'], true);	
-		$return = $user->receive_messages(false, false);
 	}
 }elseif(isset($_POST['androidUploadPicture'])) {
 	$user = new User($_POST['user'], $db, @$_POST['dynPW'], true);
@@ -103,16 +109,18 @@ if(isset($_POST['androidProfileInfo'])) {
 		$return = $userdetails;
 	}
 }elseif(isset($_POST['androidGetCommunityPictures'])) {
-	if(isset($_POST['pic_count'])) $pic_count = $_POST['pic_count'];
+	if(isset($_POST['pic_count'])) $pic_count = (int) $_POST['pic_count'];
 	else $pic_count = 5;
-	$systemStats = $statistics->systemStats(0, $pic_count);
-	//hier werden die Armbänder bestimmt, die angezeigt werden
-	$bracelets_displayed = $systemStats['recent_brids'];
-	foreach($bracelets_displayed as $key => $val) {
-		$stats[$key] = $statistics->bracelet_stats($val, true);
-		$stats[$key]['brid'] = $val;
+
+	$sql = "SELECT brid, title, description, city, country, userid, date, id FROM pictures ORDER BY id DESC LIMIT :limit";
+	$stmt = $db->prepare($sql);
+	$stmt->bindParam(':limit', $pic_count, PDO::PARAM_INT);
+	$stmt->execute();
+	$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	foreach($q as $key => $pic) {
+		$q[$key]['user'] = Statistics::id2username($pic['userid']);
 	}
-	$return = $stats;
+	$return = $q;
 }elseif(isset($_POST['androidGetBraceletPictures'])) {
 	$picture_details = $statistics->picture_details($_POST['braceID'], true);
 	$return = $picture_details;
@@ -128,7 +136,7 @@ if(isset($_POST['androidProfileInfo'])) {
 	$description = $_POST['description'];
 	$city = $_POST['city'];
 	$country = $_POST['country'];
-	$state = '';
+	$state = 'Rheinland-Pfalz';
 	$latitude = 0;
 	$longitude = 0;
 	if(isset($_POST['latitude']) && $_POST['longitude']) {
