@@ -418,16 +418,18 @@ $('.toggle_comments').click(function (){
 
 /*Neuste Bilder Nachladen -start.php*/
 var reload_q = 3;
-
-$(window).scroll(function () {
-	if($(window).scrollTop() + $(window).height() == $(document).height()) {
-		var braceNameReload = $("#disp_bracelet_name").data("url_bracename");
-		if(pic_br_switch_data == true) pic_br_switch_data = false; else pic_br_switch_data = true;
-		if(currentPath == "/community" || currentPath == "/community.php") reload_start(3);
-		if(pic_br_switch_data == true) pic_br_switch_data = false; else pic_br_switch_data = true;
-		if(braceNameReload != undefined) reload_armband(braceNameReload);
-	}
-});
+console.log($("#overview").data("reload") == true);
+if($("#overview").data("reload") != true) {
+	$(window).scroll(function () {
+		if($(window).scrollTop() + $(window).height() == $(document).height()) {
+			var braceNameReload = $("#disp_bracelet_name").data("url_bracename");
+			if(pic_br_switch_data == true) pic_br_switch_data = false; else pic_br_switch_data = true;
+			if(currentPath == "/community" || currentPath == "/community.php") reload_start(3);
+			if(pic_br_switch_data == true) pic_br_switch_data = false; else pic_br_switch_data = true;
+			if(braceNameReload != undefined) reload_armband(braceNameReload);
+		}
+	});
+}
 
 function reload_start(plus) {
 	var displayed_picnr = $('#comment' + reload_q).data('picnr');

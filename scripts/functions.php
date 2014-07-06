@@ -84,7 +84,6 @@ function smileys($text) {
 		':)' => '<img alt=":)" src="/cache.php?f=/img/laechelnd.gif">', ':D' => '<img alt=":D" src="/cache.php?f=/img/lachend.gif">', ':P' => '<img alt=":P" src="/cache.php?f=/img/frech.gif">', ';)' => '<img alt=";)" src="/cache.php?f=/img/zwinkernd.gif">',
 		':(' => '<img alt=":(" src="/cache.php?f=/img/traurig.gif">', ':o' => '<img alt=":o" src="/cache.php?f=/img/schockiert.gif">', '(y)' => '<img alt="(y)" src="/cache.php?f=/img/yes.gif">',
 		'(n)' => '<img alt="(n)" src="/cache.php?f=/img/no.gif">');
-	//return strtr($text, $smileys);
 	return str_ireplace(array_keys($smileys), array_values($smileys), $text);
 }
 function profile_pic($userid) {

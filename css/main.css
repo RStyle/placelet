@@ -117,6 +117,9 @@
 		list-style-type: none;
 		padding: 0;
 	}
+	.underlined {
+		text-decoration: underline !important;
+	}
 /*---allgemeine Styles---*/
 /*+++Baumdiagramm+++*/
 	.tree {
@@ -866,6 +869,16 @@
 		}
 	/*---Profil SECTION---*/
 	/*+++Start SECTION+++*/
+	.community_selection a{
+		color: #234754;
+		text-decoration: none;
+	}
+	.community_selection a:hover {
+		color: #000;
+	}
+	#pic_br_switch {
+		margin-right: 2em;
+	}
 		#msg_notes {
             position: fixed;
             right: 20px;

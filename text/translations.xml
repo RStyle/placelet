@@ -396,6 +396,10 @@ ome            <en><![CDATA[<img src="/cache.php?f=/img/winbanner_corner_en.png"
 			</deletecomment>
 		</pictures>
 	<community>
+		<allebilder>
+			<de>Alle Bilder</de>
+			<en>All pictures</en>
+		</allebilder>
 	    <new_msg>
             <de>
                 <p1>Du hast eine neue Nachricht von </p1>

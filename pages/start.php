@@ -114,7 +114,10 @@
 <!-- UPLOADS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->        
         
 			<article id="recent_pics" class="mainarticles bottom_border_blue">
-			<div class="blue_line mainarticleheaders line_header"><h2 id="pic_br_switch" data-recent_brid_pics="false"><?php if(isset($_GET['overview'])) echo 'Alle Bilder'; else echo $lang->community->neuestebilder[$lng.'-title']; ?></h2></div>
+			<div class="blue_line mainarticleheaders line_header">
+				<h2 id="pic_br_switch" data-recent_brid_pics="false" class="community_selection<?php if(!isset($_GET['overview'])) echo ' underlined'; ?>"><a href="/community"><?php echo $lang->community->neuestebilder[$lng.'-title']; ?></a></h2>
+				<h2 class="community_selection<?php if(isset($_GET['overview'])) echo ' underlined" id="overview" data-reload="true"'; ?>"><a href="/community?overview"><?php echo $lang->community->allebilder->$lng; ?></a></h2>
+			</div>
 <?php
 			if(isset($_GET['overview'])) {
 				$sql = "SELECT id, picid, fileext, city, country, brid FROM pictures";
@@ -122,6 +125,7 @@
 				$stmt->execute();
 				$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				$column = 1;
+				$q = array_reverse($q);
 				foreach($q as $pic) {
 					$sql = "SELECT userid FROM bracelets WHERE brid = :brid";
 					$stmt = $db->prepare($sql);

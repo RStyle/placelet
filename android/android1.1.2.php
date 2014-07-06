@@ -1,4 +1,5 @@
 <?php
+//Android Version 1.1.2 - 1.1.3
 ini_set('display_errors', true);
 $return = array('notsentlol' => 'dudenotsent', 'test' => 'waslos?');
 include_once('../scripts/connection.php');
@@ -85,6 +86,7 @@ if(isset($_POST['androidLogin'])) {
 	if(Statistics::userexists($_POST['user'])) {
 		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
 		$return = $user->receive_messages(false, false, $_POST['recipient']);
+		$user->messages_read(Statistics::username2id($_POST['recipient']));
 		if(isset($_POST['recipient'])) $return['exists'] = Statistics::userexists($_POST['recipient']);
 	}
 }elseif(isset($_POST['androidSendMessages'])) {
@@ -136,7 +138,7 @@ if(isset($_POST['androidProfileInfo'])) {
 	$description = $_POST['description'];
 	$city = $_POST['city'];
 	$country = $_POST['country'];
-	$state = 'Rheinland-Pfalz';
+	$state = '';
 	$latitude = 0;
 	$longitude = 0;
 	if(isset($_POST['latitude']) && $_POST['longitude']) {

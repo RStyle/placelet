@@ -3,7 +3,6 @@ $page = 'login';
 $test314 = true;
 require_once('./init.php');
 if(isset($_GET['androidMSG'])) sendNotificationToAndroid($_GET['androidMSG']);
-echo '<br>';
 ?>
 <?php //E-Mail an alle Benutzer schicken
 /*$sql = "SELECT user, email FROM users";
@@ -124,6 +123,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $column = 1;
+$q = array_reverse($q);
 foreach($q as $pic) {
 	$sql = "SELECT userid FROM bracelets WHERE brid = :brid";
 	$stmt = $db->prepare($sql);
@@ -136,7 +136,7 @@ foreach($q as $pic) {
 		if($val['brid'] == $pic['brid']) $pic['braceletNR'] = $key + 1;
 	}
 	if(count($userfetch) == 1) $pic['braceletNR'] = 1;
-	if(isset($_GET['daniel']) && $column >= 150) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
+	if(isset($_GET['daniel']) && $column >= 90) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
 	echo '<a href="/'.Statistics::id2username($q2['userid']).'/'.$pic['braceletNR'].'/'.$pic['picid'].'"><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50" style="margin: 1px;"></a>';
 	if($column % 15 == 0) {
 		echo '<br>';
@@ -157,4 +157,25 @@ foreach($q as $key => $pic) {
 	$q[$key]['user'] = Statistics::id2username($pic['userid']);
 }
 print_r($q);*/
+?>
+<?php
+/*$return = $statistics->picture_details(588888, true);
+$json =  json_encode($return);
+$json = remove_smileys($json);
+var_dump($json);*/
+?>
+<?php
+//Sucht nach Mustern in einem String
+/*for($j = 0; $j < strlen($data); $j++) {
+	$pattern = '';
+	for($i = $j; $i < strlen($data) - 1; $i++){
+		$pattern .= $data[$i];
+		$count = substr_count($data, $pattern);
+		if($count >= 4 && strlen($pattern) >= 2) {
+			//echo $pattern.' found '.$count.' times-'.$j.'<br>';
+			$result[$pattern] = $count;
+		}
+	}
+}
+print_r($result);*/
 ?>
