@@ -136,7 +136,7 @@ foreach($q as $pic) {
 		if($val['brid'] == $pic['brid']) $pic['braceletNR'] = $key + 1;
 	}
 	if(count($userfetch) == 1) $pic['braceletNR'] = 1;
-	if(isset($_GET['daniel']) && $column >= 90) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
+	if(isset($_GET['daniel']) && $column <= 10) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
 	echo '<a href="/'.Statistics::id2username($q2['userid']).'/'.$pic['braceletNR'].'/'.$pic['picid'].'"><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50" style="margin: 1px;"></a>';
 	if($column % 15 == 0) {
 		echo '<br>';

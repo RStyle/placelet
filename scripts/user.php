@@ -275,22 +275,26 @@ class User
 	//Accountdetails ändern
 	public function change_details($email, $old_pwd, $new_pwd, $new_username) {
 		//Benutzername ändern
+		$change_username = true;
 		if($new_username != NULL) {
 			$stmt = $this->db->prepare('SELECT user FROM users WHERE user = :user');
 			$stmt->execute(array('user' => $new_username));
-			if($stmt->rowCount() == 0) {
-				$stmt = $this->db->prepare('SELECT user FROM users WHERE user = :user');
-				$stmt->execute(array('user' => $new_username));
-				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-				if($result == NULL) {//Wenn es noch keinen Benutzer mit selbem Namen gibt
-					rename('pictures/profiles/'.$this->login.'.jpg', 'pictures/profiles/'.$new_username.'.jpg');
-					$sql = "UPDATE users SET user = :newuser WHERE user = :olduser";
-					$q = $this->db->prepare($sql);
-					$q->execute(array(':olduser' => $this->login, ':newuser' => $new_username));
-					$change_username = true;
-				}else $change_username = false;
+			$stmt2 = $this->db->prepare('SELECT brid FROM bracelets WHERE userid = :userid');
+			$stmt2->execute(array('userid' => $this->userid));
+			$bracelets = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+			foreach($bracelets as $value) {
+				$stmt3 = $this->db->prepare('SELECT userid FROM pictures WHERE brid = :brid');
+				$stmt3->execute(array('brid' => $value['brid']));
+				if($stmt3->rowCount() > 0) $change_username = false;
+				echo $stmt3->rowCount();
+			}
+			if($stmt->rowCount() == 0 && $change_username) {
+				rename('pictures/profiles/'.$this->login.'.jpg', 'pictures/profiles/'.$new_username.'.jpg');
+				$sql = "UPDATE users SET user = :newuser WHERE user = :olduser";
+				$q = $this->db->prepare($sql);
+				$q->execute(array(':olduser' => $this->login, ':newuser' => $new_username));
 			}else $change_username = false;
-		}else $change_username = true;
+		}
 		//Passwort ändern
 		if($old_pwd != NULL && $new_pwd != NULL) $change_password = $this->change_password($old_pwd, $new_pwd);
 			else $change_password = true;
