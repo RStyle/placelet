@@ -1,5 +1,5 @@
 <?php
-//Android Version 1.1.2 - 1.1.6
+//Android Version 1.1.7
 ini_set('display_errors', true);
 $return = array('notsentlol' => 'dudenotsent', 'test' => 'waslos?');
 include_once('../scripts/connection.php');
@@ -95,7 +95,7 @@ if(isset($_POST['androidLogin'])) {
 			$recipient = Statistics::username2id($_POST['recipient']);
 			$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
 			$user->messages_read($_POST['senderid']);
-			$user->send_message($recipient, $_POST['content']);
+			$user->send_message($recipient, urldecode($_POST['content']));
 			$return = $user->receive_messages(false, false, $_POST['recipient']);
 			$return['messageSent'] = true;
 		}else $return = array('messageSent' => false, 'error' => NOT_EXISTING);
@@ -137,9 +137,9 @@ if(isset($_POST['androidProfileInfo'])) {
 	 fclose($Handle);
 }elseif(isset($_POST['androidUploadPicture'])) {
 	$brid = $_POST['brid'];
-	$description = $_POST['description'];
-	$city = $_POST['city'];
-	$country = $_POST['country'];
+	$description = urldecode($_POST['description']);
+	$city = urldecode($_POST['city']);
+	$country = urldecode($_POST['country']);
 	$state = '';
 	$latitude = 0;
 	$longitude = 0;
@@ -147,7 +147,7 @@ if(isset($_POST['androidProfileInfo'])) {
 		$latitude = $_POST['latitude'];
 		$longitude =  $_POST['longitude'];
 	}
-	$title = $_POST['title'];
+	$title = urldecode($_POST['title']);
 	$date = $_POST['date'];
 	$picture_file = $_FILES['uploadPic'];
 	$upload = $statistics->registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size);

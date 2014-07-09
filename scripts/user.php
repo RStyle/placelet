@@ -610,7 +610,7 @@ class User
 			":sent" => time(),
 			":message" => htmlentities($content)
 		));
-		$sql = "SELECT androidToken FROM users WHERE userid = :userid";
+		$sql = "SELECT androidToken, last_login, email FROM users WHERE userid = :userid";
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute(array(":userid" => $recipient));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -618,12 +618,22 @@ class User
 		$options['tag']['key'] = 'sender';
 		$options['tag']['value'] = $this->login;
 		$options['deviceToken'] = $result['androidToken'];
+		if(time() - $result['last_login'] > 3600) {			
+			$content = $this->login.' hat dir eine Nachricht gesendet:<br>"'.$content.'"<br><a href="http://placelet.de/nachrichten?msg='.urlencode($this->login).'">Antworten</a>';
+			$mail_header = "From: Placelet <support@placelet.de>\n";
+			$mail_header .= "MIME-Version: 1.0" . "\n";
+			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+			$mail_header .= "Content-transfer-encoding: 8bit";
+			$mail = mail($result['email'], 'Neue Nachricht auf Placelet', $content, $mail_header);
+			
+			
+			$File = "../../android/android.txt"; 
+			$Handle = fopen($File, 'w');
+			@$Data = $this->login."written".$result['androidToken']."--".$mail."--".(time() - $result['last_login']); 
+			fwrite($Handle, $Data);
+			fclose($Handle);
+		}
 		if($result['androidToken'] != NULL) messagePush($this->login, $result['androidToken']);
-		$File = "../android/android.txt"; 
-		$Handle = fopen($File, 'w');
-		@$Data = $this->login."written".$result['androidToken']; 
-		fwrite($Handle, $Data);
-		fclose($Handle);
 	}
 	//Nachrichten empfangen
 	public function receive_messages($only_unseen, $only_recieved, $user = false) {
@@ -1017,11 +1027,11 @@ class Statistics {
 		$anz = $stmt->rowCount();
 		$bracelet = $stmt->fetch(PDO::FETCH_ASSOC);
 		if ($anz == 0) {
-			return '0';
+			return '0';//Gibt es nicht
 		} elseif ($bracelet['userid'] == 0 ) {
-			return 1;
+			return 1;//Noch nicht registriert
 		} else {
-			return 2;
+			return 2;//Schon registriert
 		}
 	}
 	//Prüft, ob ähnliche Armbänder schon registriert wurden
@@ -1065,8 +1075,9 @@ class Statistics {
 		}
 		//Prüft, ob das Armband schon registriert wurde
 		$bracelet_status = $this->bracelet_status($brid);
-		if($bracelet_status == 1) return 4;
-		elseif($bracelet_status == 0) return 5;
+		//
+		if($bracelet_status == 1) return 4;//Noch nicht registriert
+		elseif($bracelet_status == 0) return 5;//Gibt es nicht
 		//Lädt das Bild hoch und trägt es in die Datenbank ein
 		if ($submissions_valid) {
 			$description = clean_input($description);

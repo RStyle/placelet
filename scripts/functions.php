@@ -65,7 +65,7 @@ function messagePush($sender, $token) {
 		$appID = '539986981d0ab1d0048b45f6';
 		$appSecret = 'eeb459d33ad5c6bd81474a7c7484cc06';
 		$pb->App($appID, $appSecret);
-		$data = json_encode(array('sender' => $sender));
+		$data = array('sender' => $sender, 'type' => 'message');
 		//$pb->Tags($data);
 		$pb->Payload($data);
 		 
