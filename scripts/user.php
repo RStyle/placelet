@@ -179,7 +179,7 @@ class User
 				':pic_subs' => 3
 			));
 			//$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
-			$content = str_replace(array('username', 'code'), array(urlencode($reg['reg_login']), urlencode($code)), file_get_contents('./text/email/basic.html'));
+			$content = str_replace(array('username', 'code'), array(urlencode($reg['reg_login']), urlencode($code)), file_get_contents('/var/www/virtual/placelet.de/htdocs/text/email/basic.html'));
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
 			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";

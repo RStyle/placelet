@@ -70,7 +70,13 @@ function login($deviceToken, $username, $pw, $db) {
 $lang = simplexml_load_file('../text/translations.xml');
 if(isset($_POST['eng'])) $lng = $_POST['eng'];
 if(isset($_POST['androidLogin'])) {
-	$return = login($_POST['deviceToken'], $_POST['user'], $_POST['pasword'], $db);
+	$return = login($_POST['deviceToken'], $_POST['user'], $_POST['password'], $db);
+}elseif(isset($_POST['androidRegister'])) {
+	$input = $_POST;
+	$input['reg_password2'] = $input['reg_password'];
+	$input['lng'] = 'en'; // TODO Richtige Sprache
+	$user = new User(false, $db);
+	$return = array('registered' => User::register($input, $db));
 }elseif(isset($_POST['androidGetMessages'])) {
 	if(Statistics::userexists($_POST['user'])) {
 		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
