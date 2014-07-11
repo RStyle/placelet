@@ -1,5 +1,5 @@
 <?php
-//Android Version 1.1.7
+//Android Version 1.1.7-1.1.8
 ini_set('display_errors', true);
 $return = array('notsentlol' => 'dudenotsent', 'test' => 'waslos?');
 include_once('../scripts/connection.php');
@@ -8,6 +8,7 @@ include_once('../scripts/user.php');
 require_once('../scripts/PushBots.class.php');
 define("NOT_EXISTING", 0);
 define("WRONG_PW", 1);
+define("NOT_LOGGED_IN", "logged_out");
 //Maximale Größe für hochgeladene Bilder
 $max_file_size = 8000000;
 function login($deviceToken, $username, $pw, $db) {
@@ -107,8 +108,11 @@ if(isset($_POST['androidLogin'])) {
 		}else $return = array('messageSent' => false, 'error' => NOT_EXISTING);
 	}
 }elseif(isset($_POST['androidUploadPicture'])) {
-	$user = new User($_POST['user'], $db, @$_POST['dynPW'], true);
-		//$return = array('login' => $user->login);
+	if($_POST['user'] == NOT_LOGGED_IN) {
+		$user = new User(false, $db);
+	}else {
+		$user = new User($_POST['user'], $db, @$_POST['dynPW'], true);
+	}
 }
 $statistics = new Statistics($db, $user);
 if(isset($_POST['androidProfileInfo'])) {
