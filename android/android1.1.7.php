@@ -1,5 +1,5 @@
 <?php
-//Android Version 1.1.7-1.1.8
+//Android Version 1.1.7-1.2.0
 ini_set('display_errors', true);
 $return = array('notsentlol' => 'dudenotsent', 'test' => 'waslos?');
 include_once('../scripts/connection.php');
@@ -91,11 +91,13 @@ if(isset($_POST['androidLogin'])) {
 	}
 }elseif(isset($_POST['androidGetIOMessages'])) {
 	if(Statistics::userexists($_POST['user'])) {
-		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
-		$return = $user->receive_messages(false, false, $_POST['recipient']);
-		$user->messages_read(Statistics::username2id($_POST['recipient']));
-		if(isset($_POST['recipient'])) $return['exists'] = Statistics::userexists($_POST['recipient']);
+		if(Statistics::userexists($_POST['recipient'])) {
+			$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
+			$return = $user->receive_messages(false, false, $_POST['recipient']);
+			$user->messages_read(Statistics::username2id($_POST['recipient']));
+		}
 	}
+	$return['exists'] = Statistics::userexists($_POST['recipient']);
 }elseif(isset($_POST['androidSendMessages'])) {
 	if(Statistics::userexists($_POST['user'])) {
 		if(Statistics::userexists($_POST['recipient'])) {
@@ -114,7 +116,9 @@ if(isset($_POST['androidLogin'])) {
 		$user = new User($_POST['user'], $db, @$_POST['dynPW'], true);
 	}
 }
+
 $statistics = new Statistics($db, $user);
+
 if(isset($_POST['androidProfileInfo'])) {
 	$username = $_POST['user'];
 	if($username != "not_logged") {
@@ -138,6 +142,28 @@ if(isset($_POST['androidProfileInfo'])) {
 }elseif(isset($_POST['androidGetBraceletPictures'])) {
 	$picture_details = $statistics->picture_details($_POST['braceID'], true);
 	$return = $picture_details;
+}elseif(isset($_POST['androidGetBraceletData'])) {
+	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);
+	$return = $picture_details;
+}elseif(isset($_POST['androidGetOwnBracelets'])) {
+	$username = $_POST['user'];
+	$userdetails = $statistics->userdetails($username);
+		if(!is_array($userdetails['brid'])) {
+			$userdetails['brid'] = array($userdetails['brid']);
+		}
+	foreach($userdetails['brid'] as $key => $brid) {
+			$sql = "SELECT id, city, country, title, picid, brid FROM pictures WHERE brid = :brid ORDER BY picid DESC";
+			$stmt = $db->prepare($sql);
+			$stmt->execute(array('brid' => $brid));
+			$q = $stmt->fetch(PDO::FETCH_ASSOC);
+	$return['ownBracelets'][$key] = $q;
+	}
+	
+	$sql = "SELECT id, city, country, title, picid, brid FROM pictures WHERE userid = :user ORDER BY picid DESC";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array('user' => Statistics::username2id($username)));
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$return['pics'] = $result;
 }elseif(isset($_POST['androidText'])) {
 	 $File = "android.txt"; 
 	 $Handle = fopen($File, 'w');

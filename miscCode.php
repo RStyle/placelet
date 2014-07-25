@@ -94,16 +94,16 @@ foreach($useremails as $key => $val) {
 ?>
 <?php
 //Alle Städte ausgeben
-/*$sql = "SELECT city, country FROM pictures GROUP BY city";
+/*$sql = "SELECT DISTINCT country FROM pictures GROUP BY city";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $countries = array();
 foreach($q as $number => $city) {
-	echo $city['city'].', '.$city['country'].'<br>';
+	echo $city['country'].'<br>';
 	if(!in_array($city['country'], $countries)) $countries[$number] = $city['country'];
 }
-echo count($q).' St&auml;dte<br>';
+//echo count($q).' St&auml;dte<br>';
 echo count($countries).' L&auml;nder';*/
 ?>
 <?php
@@ -137,7 +137,7 @@ foreach($q as $pic) {
 	}
 	if(count($userfetch) == 1) $pic['braceletNR'] = 1;
 	if(isset($_GET['daniel']) && $column <= 10) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
-	echo '<a href="/'.Statistics::id2username($q2['userid']).'/'.$pic['braceletNR'].'/'.$pic['picid'].'"><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50" style="margin: 1px;"></a>';
+	//echo '<a href="/'.Statistics::id2username($q2['userid']).'/'.$pic['braceletNR'].'/'.$pic['picid'].'"><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50" style="margin: 1px;"></a>';
 	if($column % 15 == 0) {
 		echo '<br>';
 	}
@@ -178,4 +178,24 @@ var_dump($json);*/
 	}
 }
 print_r($result);*/
+?>
+<?php
+$username = "JohnZoidberg";
+$userdetails = $statistics->userdetails($username);
+	foreach($userdetails['brid'] as $key => $brid) {
+			$sql = "SELECT city, country, title FROM pictures WHERE brid = :brid ORDER BY picid DESC";
+			$stmt = $db->prepare($sql);
+			$stmt->execute(array('brid' => $brid));
+			$q = $stmt->fetch(PDO::FETCH_ASSOC);
+			$return['ownBracelets'][$key] = $q;
+	}
+	$return['ownBracelets'][$key] = $q;
+	
+	$sql = "SELECT city, country, title FROM pictures WHERE userid = :user ORDER BY picid DESC";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array('user' => Statistics::username2id($username)));
+	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$return['pics'] = $result;
+	print_r($return);
+	echo json_encode($return);
 ?>
