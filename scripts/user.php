@@ -1140,8 +1140,9 @@ class Statistics {
 				//Die Funktion wird in scripts/functions.php definiert
 				//create_thumbnail($target, $thumb, $w, $h, $ext)
 				$thumb_path = $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg';
+				$mini_thumb_path = $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/mini_thumbs/mini-thumb-'.$brid.'-'.$picid.'.jpg';;
 				create_thumbnail($img_path, $thumb_path, 400, 500, $fileext);
-				create_thumbnail($img_path, $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/mini_thumbs/mini-thumb-'.$rowid['id'].'.jpg', 50, 50, $pic['fileext'], false);
+				create_thumbnail($img_path, $mini_thumb_path, 50, 50, $fileext, false);
 				if($date == 'default') {
 					//EXIF-Header auslesen und Aufnamedatum bestimmen
 					if($fileext == 'jpg' || $fileext == 'jpeg') {
@@ -1180,6 +1181,7 @@ class Statistics {
 				//rename muss sein
 				rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$brid.'-'.$picid.'.'.$fileext, $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
 				rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$brid.'-'.$picid.'.jpg', $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/thumb-'.$rowid['id'].'.jpg');
+				rename($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/mini_thumbs/mini-thumb-'.$brid.'-'.$picid.'.jpg', $_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/mini_thumbs/mini-thumb-'.$rowid['id'].'.jpg');
 				if($fileext == 'png') tinypng($_SERVER['DOCUMENT_ROOT'].'/pictures/bracelets/pic-'.$rowid['id'].'.'.$fileext);
 				///E-Mail an die Personen senden, die das Armband abboniert haben
 				$this->notify_subscribers($brid);
