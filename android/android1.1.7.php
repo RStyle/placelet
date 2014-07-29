@@ -1,5 +1,5 @@
 <?php
-//Android Version 1.1.7-1.2.0
+//Android Version 1.1.7-1.2.2
 ini_set('display_errors', true);
 $return = array('notsentlol' => 'dudenotsent', 'test' => 'waslos?');
 include_once('../scripts/connection.php');
