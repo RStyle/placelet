@@ -1216,9 +1216,9 @@ class Statistics {
 					':brid' => $brid,
 					':email' => $email
 				));
-				return true;
+				return true;//Erfolgreich abonniert
 			}else {
-				return 2;
+				return 2;//Schon abonniert
 			}
 		}elseif($input == 'false') {//False bedeutet Löschen
 			$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
@@ -1240,7 +1240,7 @@ class Statistics {
 				}
 			}
 			if($unsubscribed) return false;
-				else return 3;
+				else return 3;//E-Mail hat nichts abonniert
 		}
 	}
 	private function delete_comment($input, $commid, $picid, $brid) {

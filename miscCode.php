@@ -139,7 +139,7 @@ foreach($q as $pic) {
 	if(isset($_GET['daniel']) && $column <= 10) create_thumbnail('pictures/bracelets/pic-'.$pic['id'].'.'.$pic['fileext'], 'pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg', 50, 50, $pic['fileext'], false);
 	//echo '<a href="/'.Statistics::id2username($q2['userid']).'/'.$pic['braceletNR'].'/'.$pic['picid'].'"><img src="/cache.php?f=/pictures/bracelets/mini_thumbs/mini-thumb-'.$pic['id'].'.jpg" width="50" height="50" style="margin: 1px;"></a>';
 	if($column % 15 == 0) {
-		echo '<br>';
+		//echo '<br>';
 	}
 	$column++;
 }
@@ -180,7 +180,8 @@ var_dump($json);*/
 print_r($result);*/
 ?>
 <?php
-$username = "JohnZoidberg";
+//MyPlacelet
+/*$username = "JohnZoidberg";
 $userdetails = $statistics->userdetails($username);
 	foreach($userdetails['brid'] as $key => $brid) {
 			$sql = "SELECT city, country, title FROM pictures WHERE brid = :brid ORDER BY picid DESC";
@@ -198,4 +199,34 @@ $userdetails = $statistics->userdetails($username);
 	$return['pics'] = $result;
 	print_r($return);
 	echo json_encode($return);
+*/
+?>
+<?php
+$sql = "SELECT name FROM bracelets";
+$stmt = $db->prepare($sql);
+$stmt->execute(array());
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$total_distance = 0;
+$braceletcount = 0;
+foreach($result as $bracelet) {
+	$data = getlnlt($bracelet['name']);
+	$i = 0;
+	$distance = 0;
+	foreach($data as $l){
+		if($i > 0){
+			$p1 = array('latitude' => $data[$i-1]['latitude'], 'longitude' => $data[$i-1]['longitude']);
+			$p2 = array('latitude' => $data[$i]['latitude'], 'longitude' => $data[$i]['longitude']);
+			$distance = $distance + getDistance($data[$i-1], $l);
+		}
+		$i++;
+	}
+	$distance = round($distance) / 1000;
+	$total_distance += $distance;
+	if($distance) {
+	$braceletcount++;
+		echo '<a href="armband?name='.urlencode($bracelet['name']).'">'.$bracelet['name'].'</a>: '.$distance.'km<br>';
+	}
+}
+echo $total_distance."km";
+echo $braceletcount;
 ?>

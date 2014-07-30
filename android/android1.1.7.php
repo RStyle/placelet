@@ -72,6 +72,12 @@ $lang = simplexml_load_file('../text/translations.xml');
 if(isset($_POST['eng'])) $lng = $_POST['eng'];
 if(isset($_POST['androidLogin'])) {
 	$return = login($_POST['deviceToken'], $_POST['user'], $_POST['password'], $db);
+}elseif(isset($_POST['androidAuthenticate'])) {
+	if(isset($_POST['user']) && isset($_POST['dynPW'])) {
+		$user = new User($_POST['user'], $db, $_POST['dynPW'], true);
+	}else {
+		$return['authentication'] = 'notsent';
+	}
 }elseif(isset($_POST['androidRegister'])) {
 	$input = $_POST;
 	$input['reg_password2'] = $input['reg_password'];
@@ -144,6 +150,9 @@ if(isset($_POST['androidProfileInfo'])) {
 	$return = $picture_details;
 }elseif(isset($_POST['androidGetBraceletData'])) {
 	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);
+	$picture_details['subscribed'] = false;
+	$userdetails = $statistics->userdetails($user->login);
+	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 	$return = $picture_details;
 }elseif(isset($_POST['androidGetOwnBracelets'])) {
 	$username = $_POST['user'];
@@ -188,6 +197,19 @@ if(isset($_POST['androidProfileInfo'])) {
 	$picture_file = $_FILES['uploadPic'];
 	$upload = $statistics->registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size);
 	$return = array("upload" => $upload);
+}elseif(isset($_POST['androidSubscribe'])) {
+	$brid = $_POST['brid'];
+	if($_POST['androidSubscribe'] == 'true') {
+		$input = 'username';
+		$email = $user->login;
+	}elseif($_POST['androidSubscribe'] == 'false') {
+		$input = 'false';
+		$userdetails = $statistics->userdetails($user->login);
+		$email = PassHash::hash($userdetails['email']);
+	}
+		
+	$subscription = $statistics->manage_subscription($input, $brid, $email);
+	$return = array("subscribed" => $subscription);
 }
 foreach($_POST as $key => $val) {
 	$return[$key] = $val;
