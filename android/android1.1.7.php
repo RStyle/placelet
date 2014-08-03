@@ -155,6 +155,7 @@ if(isset($_POST['androidProfileInfo'])) {
 	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 	$return = $picture_details;
 }elseif(isset($_POST['androidGetOwnBracelets'])) {
+	$return = array();
 	$username = $_POST['user'];
 	$userdetails = $statistics->userdetails($username);
 		if(!is_array($userdetails['brid'])) {
@@ -210,6 +211,10 @@ if(isset($_POST['androidProfileInfo'])) {
 		
 	$subscription = $statistics->manage_subscription($input, $brid, $email);
 	$return = array("subscribed" => $subscription);
+}elseif(isset($_POST['androidRegisterBracelet'])) {
+	$registered = $user->registerbr($_POST['brid']);
+	if(is_array($registered)) $registered = $registered[0];
+	$return = array("registered" => $registered);
 }
 foreach($_POST as $key => $val) {
 	$return[$key] = $val;
