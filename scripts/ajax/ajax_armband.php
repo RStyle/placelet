@@ -48,7 +48,7 @@ if($braceID != NULL) {
 		$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 				<div class="width100 overflow_auto">
-					<a href="/armband?picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=middle&amp;delete_pic=true" class="delete_button float_right mt2" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="return confirmDelete('dasBild');">X</a>
+					<a href="/armband?picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=middle&amp;delete_pic=true" class="delete_button float_right mt2" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
 					<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
 						<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
