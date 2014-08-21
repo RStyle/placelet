@@ -411,10 +411,10 @@ function show_comments(obj){
                 $("#toggle_comment" + number).text(lang['hidecomment']);
         }
 }
-$('.toggle_comments').click(function (){
-        show_comments(this);
-});
 
+$('.toggle_comments').click(function() {
+	show_comments(this);
+});
 
 /*Neuste Bilder Nachladen -start.php*/
 var reload_q = 3;
@@ -746,7 +746,7 @@ $(document).ready(function() {
 });
 /*idle Zeug*/
 idleTime = 0;
-$(document).ready(function () {
+$(document).ready(function() {
     var idleInterval = setInterval(timerIncrement, 1000); /* 1 Sekunde*/
     $(this).mousemove(function (e) {
         idleTime = 0;
@@ -771,4 +771,78 @@ function timerIncrement() {
         idle = true;
 		console.log(idle);
     }
+}
+
+/*Bilder bearbeiten*/
+var pic_editing = false;
+function toggle_picedit(obj) {
+	pic_editing = !pic_editing;
+	if(pic_editing) {
+		
+	}else {
+		
+	}
+	console.log("asdf" + $(obj).data('picid'));
+}
+var picid = 0;
+var editVariables = '';
+function edit_pic(obj) {
+	console.log("test");
+	picid = $(obj).data('picid');
+	editVariables = $(obj).data('picturedata');
+	
+	if(!pic_editing) {
+		pic_editing = true;
+		var location = $("#pic-" + picid).text();
+		var title = $("#edit_title-" + picid).text();
+		var description = $("#edit_desc-" + picid).text();
+		$("#pic-" + picid).replaceWith('<input type="text" style="display: block;" id="pic-' + picid + '" value="' + location + '">');
+		$("#edit_title-" + picid).replaceWith('<input type="text" class="desc-header" id="edit_title-' + picid + '" value="' + title + '">');
+		$("#edit_desc-" + picid).replaceWith('<input type="text" style="margin: 0; display: block;" id="edit_desc-' + picid + '" value="' + description + '">');
+
+		if(lng == 'en') {
+			var save = 'Save';
+		}else {
+			var save = 'Speichern';
+		}
+		$(obj).replaceWith('<span class="float_right edit_pic pseudo_link edit_button" style="margin-top: 2em; margin-right: 1em;" data-picturedata="' + editVariables + '" data-picid="' + picid + '" onClick="edit_pic(this);">' + save + '</span>');
+		
+		console.log(location);
+		console.log(title);
+		console.log(description);
+	}else {
+		var location = $("#pic-" + picid).val();
+		var title = $("#edit_title-" + picid).val();
+		var description = $("#edit_desc-" + picid).val();
+		$.ajax({
+			type: "POST",
+			url: "/scripts/ajax/ajax_statistics.php",
+			data: "edit_pic=true&" + editVariables + "&location=" + location + "&title=" + title + "&description=" + description,
+			success: function(data){
+				console.log(data);
+				console.log(picid);
+				var json = JSON.parse(data);		
+				if(json.pic_edited == true) {
+					pic_editing = false;
+					$("#pic-" + picid).replaceWith('<h3 type="text" style="display: block;" id="pic-' + picid + '">' + location + '</span>');
+					$("#edit_title-" + picid).replaceWith('<span type="text" class="desc-header" id="edit_title-' + picid + '">' + title + '</span>');
+					$("#edit_desc-" + picid).replaceWith('<p type="text" style="margin: 0; display: block;" id="edit_desc-' + picid + '">' + description + '</span>');
+					
+					$(obj).replaceWith('<img src="/cache.php?f=/img/edit.png" class="float_right edit_pic pseudo_link edit_button" style="margin-top: 2em; margin-right: 1em;" data-picturedata="' + editVariables + '" data-picid="' + picid + '" onClick="edit_pic(this);">');
+				}else if(json.pic_edited == 'comma_missing'){
+					if(lng == 'en') {
+						alert("Error - Comma with whitespace missing between city and country!");
+					}else {
+						alert("Error - Komma mit Leerzeichen zwischen Ort und Land fehlt!");
+					}
+				}else {
+					if(lng == 'en') {
+						alert("Error - Please contact support@placelet.de");
+					}else {
+						alert("Error - Bitte support@placelet.de kontaktieren");
+					}
+				}
+			}
+		});
+	}
 }

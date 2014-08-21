@@ -676,6 +676,33 @@ class User
 			':senderid' => $userid
 		));
 	}
+	public function edit_pic($name, $picid, $location, $title, $description) {
+		$location = explode(', ', trim($location));
+		if(count($location) != 2) return 'comma_missing';
+		$city = $location[0];
+		$country = $location[1];
+		
+		$stmt = $this->db->prepare("SELECT brid FROM bracelets WHERE name = :name LIMIT 1");
+		$stmt->execute(array('name' => $name));
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$brid = $result['brid'];
+		
+		if($brid != NULL) {
+			$sql = "UPDATE pictures SET city = :city, country = :country, title = :title, description = :description WHERE brid = :brid AND picid = :picid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(
+				':city' => $city,
+				':country' => $country,
+				':title' => $title,
+				':description' => $description,
+				':brid' => $brid,
+				':picid' => $picid
+			));
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
 ?>
 <?php

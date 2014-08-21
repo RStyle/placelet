@@ -41,6 +41,10 @@ if(isset($_POST['login'])) {
 	}elseif($change_name == 2) {
 		$return = array('change_name' => false);
 	}
+}elseif(isset($_POST['edit_pic']) && $_POST['name'] && $_POST['picid'] && $_POST['location'] && $_POST['title'] && $_POST['description']) {
+	$pic_edited = $user->edit_pic($_POST['name'], $_POST['picid'], $_POST['location'], $_POST['title'], $_POST['description']);
+	$return = array('pic_edited' => $pic_edited);
+	//print_r($_POST);
 }elseif(isset($_POST['subscribe'])) {
 	//Armband abonnieren
 	if($user->login) {

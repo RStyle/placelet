@@ -49,6 +49,7 @@ if($braceID != NULL) {
 ?>
 				<div class="width100 overflow_auto">
 					<a href="/armband?picid=<?php echo $stats[$i]['picid']; ?>&amp;last_pic=middle&amp;delete_pic=true" class="delete_button float_right mt2" title="<?php echo $lang->pictures->deletepic->$lng; ?>" onclick="confirmDelete('dasBild', this); return false;">X</a>
+					<img src="/cache.php?f=/img/edit.png" class="float_right edit_pic pseudo_link edit_button" style="margin-top: 2em; margin-right: 1em;" data-picturedata="name=<?php echo urlencode($braceName); ?>&amp;picid=<?php echo $stats[$i]['picid']; ?>" data-picid="<?php echo $stats[$i]['picid']; ?>" onClick="edit_pic(this);">
 					<h3 id="pic-<?php echo $stats[$i]['picid']; ?>"><?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?></h3>
 					<a href="/pictures/bracelets/pic<?php echo '-'.$rowid['id'].'.'.$stats[$i]['fileext']; ?>" data-lightbox="pictures" title="<?php echo $stats[$i]['city'].', '.$stats[$i]['country']; ?>" class="thumb_link" data-bracelet="<?php echo $braceName; ?>">
 						<img src="/cache.php?f=/img/triangle.png" alt="" class="thumb_triangle">
@@ -72,12 +73,12 @@ if($braceID != NULL) {
 ?>
 					</table>
 					<div class="fb-like" data-href="http://placelet.de/<?php echo $stats['owner'].'/'.$stats['braceletNR'].'/'.$stats[$i]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
-					<p class="pic-desc">
-						<span class="desc-header"><?php echo $stats[$i]['title']; ?></span><br>
-						<?php echo $stats[$i]['description']; ?>      
+					<div class="pic-desc">
+							<span class="desc-header" id="edit_title-<?php echo $stats[$i]['picid']; ?>"><?php echo $stats[$i]['title']; ?></span>
+							<p style="margin: 0;" id="edit_desc-<?php echo $stats[$i]['picid']; ?>"><?php echo $stats[$i]['description']; ?></p>     
 						<br><br>
 						<span class="pseudo_link toggle_comments" id="toggle_comment<?php echo $i;?>" onClick="show_comments(this);" data-counts="<?php echo count($stats[$i])-13 ?>"><?php echo $lang->misc->comments->showcomment->$lng; ?> (<?php echo count($stats[$i])-13; ?>)</span>
-					</p>
+					</div>
                     
 					<div class="comments" id="comment<?php echo $i;?>">
 <?php
