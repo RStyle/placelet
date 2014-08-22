@@ -682,12 +682,12 @@ class User
 		$city = $location[0];
 		$country = $location[1];
 		
-		$stmt = $this->db->prepare("SELECT brid FROM bracelets WHERE name = :name LIMIT 1");
+		$stmt = $this->db->prepare("SELECT brid, userid FROM bracelets WHERE name = :name LIMIT 1");
 		$stmt->execute(array('name' => $name));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 		$brid = $result['brid'];
 		
-		if($brid != NULL) {
+		if($brid != NULL && $result['userid'] == $this->userid) {
 			$sql = "UPDATE pictures SET city = :city, country = :country, title = :title, description = :description WHERE brid = :brid AND picid = :picid";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
