@@ -618,7 +618,7 @@ class User
 		$options['tag']['key'] = 'sender';
 		$options['tag']['value'] = $this->login;
 		$options['deviceToken'] = $result['androidToken'];
-		if(time() - $result['last_login'] > 3600) {			
+		if(time() - $result['last_login'] > 3600 * 24) {			
 			$content = $this->login.' hat dir eine Nachricht gesendet:<br>"'.$content.'"<br><a href="http://placelet.de/nachrichten?msg='.urlencode($this->login).'">Antworten</a>';
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
