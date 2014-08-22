@@ -241,3 +241,14 @@ foreach($result as $user) {
 	if($user['last_login'] != 0) echo $user['user'].' - '.date('H:i d.m.Y', $user['last_login']).'<br>';
 }*/
 ?>
+<?php
+$username = "JohnZoidberg";
+$dynPW = "$2a$10$13e962f854323c57def3buDGnjORibJIk/USZ/5ZrO1t6EHFWSAhu";
+
+$brid = "c56eu8";
+$picture_details = $statistics->bracelet_stats($brid, true);
+$picture_details['subscribed'] = false;
+$return = $picture_details;
+$return['update'] = $picture_details[1]['upload'];
+print_r($return);
+?>

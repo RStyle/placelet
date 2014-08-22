@@ -95,12 +95,15 @@ $statistics = new Statistics($db, $user);
 if(isset($_POST['androidGetMessages'])) {
 	if($user->login) {
 		$messages = $user->receive_messages(false, false);
+		$latestMSGDate = 0;
 		foreach(array_reverse($messages) as $key => $chat) {
 				$latestMSG = end($chat);
 				reset($chat);
 				$news[$chat['recipient']['name']] = $latestMSG;
+				if($latestMSG['sent'] > $latestMSGDate) $latestMSGDate = $latestMSG['sent'];
 		}
 		$return = $news;
+		if($_POST['lastUpdate'] > $latestMSGDate) $return = array("update" => "alreadyUpToDate");
 	}else {
 		$return = array('notlogged' => $user->login);
 	}
@@ -109,6 +112,10 @@ if(isset($_POST['androidGetMessages'])) {
 		if(Statistics::userexists($_POST['recipient'])) {
 			$return = $user->receive_messages(false, false, $_POST['recipient']);
 			$user->messages_read(Statistics::username2id($_POST['recipient']));
+			$msgs = end($return);
+			reset($return);
+			$latestMsg = end($msgs);
+			if($_POST['lastUpdate'] > $latestMsg['sent']) $return = array("update" => "alreadyUpToDate");
 		}
 	}else {
 		$return = array('notlogged' => $user->login);
@@ -121,6 +128,10 @@ if(isset($_POST['androidGetMessages'])) {
 			$user->messages_read($_POST['senderid']);
 			$user->send_message($recipient, urldecode($_POST['content']));
 			$return = $user->receive_messages(false, false, $_POST['recipient']);
+			$msgs = end($return);
+			reset($return);
+			$latestMsg = end($msgs);
+			if($_POST['lastUpdate'] > $latestMsg['sent']) $return = array("update" => "alreadyUpToDate");
 			$return['messageSent'] = true;
 		}else $return = array('messageSent' => false, 'error' => NOT_EXISTING);
 	}else {
@@ -137,7 +148,7 @@ if(isset($_POST['androidGetMessages'])) {
 	if(isset($_POST['pic_count'])) $pic_count = (int) $_POST['pic_count'];
 	else $pic_count = 5;
 
-	$sql = "SELECT brid, title, description, city, country, userid, date, id FROM pictures ORDER BY id DESC LIMIT :limit";
+	$sql = "SELECT brid, title, description, city, country, userid, date, id, upload FROM pictures ORDER BY id DESC LIMIT :limit";
 	$stmt = $db->prepare($sql);
 	$stmt->bindParam(':limit', $pic_count, PDO::PARAM_INT);
 	$stmt->execute();
@@ -146,15 +157,14 @@ if(isset($_POST['androidGetMessages'])) {
 		$q[$key]['user'] = Statistics::id2username($pic['userid']);
 	}
 	$return = $q;
-}elseif(isset($_POST['androidGetBraceletPictures'])) {
-	$picture_details = $statistics->picture_details($_POST['braceID'], true);
-	$return = $picture_details;
+	if($_POST['lastUpdate'] > $q[0]['upload']) $return = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidGetBraceletData'])) {
 	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);
 	$picture_details['subscribed'] = false;
 	$userdetails = $statistics->userdetails($user->login);
 	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 	$return = $picture_details;
+	if($_POST['lastUpdate'] > $picture_details[1]['upload']) $return = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidGetOwnBracelets'])) {
 	$return = array();
 	$username = $_POST['user'];
@@ -163,18 +173,19 @@ if(isset($_POST['androidGetMessages'])) {
 			$userdetails['brid'] = array($userdetails['brid']);
 		}
 	foreach($userdetails['brid'] as $key => $brid) {
-			$sql = "SELECT id, city, country, title, picid, brid FROM pictures WHERE brid = :brid ORDER BY picid DESC";
-			$stmt = $db->prepare($sql);
-			$stmt->execute(array('brid' => $brid));
-			$q = $stmt->fetch(PDO::FETCH_ASSOC);
-	$return['ownBracelets'][$key] = $q;
+		$sql = "SELECT id, city, country, title, picid, brid FROM pictures WHERE brid = :brid ORDER BY picid DESC";
+		$stmt = $db->prepare($sql);
+		$stmt->execute(array('brid' => $brid));
+		$q = $stmt->fetch(PDO::FETCH_ASSOC);
+		$return['ownBracelets'][$key] = $q;
 	}
 	
-	$sql = "SELECT id, city, country, title, picid, brid FROM pictures WHERE userid = :user ORDER BY picid DESC";
+	$sql = "SELECT id, city, country, title, picid, brid, upload FROM pictures WHERE userid = :user ORDER BY picid DESC";
 	$stmt = $db->prepare($sql);
 	$stmt->execute(array('user' => Statistics::username2id($username)));
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	$return['pics'] = $result;
+	if($_POST['lastUpdate'] > $result[1]['upload']) $return = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidText'])) {
 	 $File = "android.txt"; 
 	 $Handle = fopen($File, 'w');
@@ -220,6 +231,6 @@ if(isset($_POST['androidGetMessages'])) {
 foreach($_POST as $key => $val) {
 	$return[$key] = $val;
 }
-$return['version'] = '124';
+$return['version'] = '1.2.5';
 echo json_encode($return);
 ?>
