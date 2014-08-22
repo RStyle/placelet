@@ -980,6 +980,15 @@ class Statistics {
 	}
 	//Kommentar schreiben
 	public function write_comment($brid, $comment, $picid) {
+		if(
+			strpos($comment, 'placelet') === false &&
+			(strpos($comment, 'http') !== false
+			|| strpos($comment, 'www') !== false
+			|| strpos($comment, '.com') !== false
+			|| strpos($comment, '.de') !== false
+			|| strpos($comment, '.net') !== false
+			|| strpos($comment, 'www') !== false)
+		) return false;
 		$comment = smileys(clean_input($comment));
 		if(!$this->user->login) $userid = 0;
 			else $userid = $this->user->userid;
@@ -995,10 +1004,7 @@ class Statistics {
 				$commid = 1;
 			}
 			
-			if(strpos($comment, 'http') !== false || strpos($comment, 'www') !== false) $spam = 1;
-			else $spam = 0;
-			
-			$sql = "INSERT INTO comments (brid, commid, picid, userid, comment, date, spam) VALUES (:brid, :commid, :picid, :userid, :comment, :date, :spam)";
+			$sql = "INSERT INTO comments (brid, commid, picid, userid, comment, date) VALUES (:brid, :commid, :picid, :userid, :comment, :date)";
 			$q = $this->db->prepare($sql);
 			$q->execute(array(
 				':brid' => $brid,
@@ -1006,8 +1012,7 @@ class Statistics {
 				':picid' => $picid,
 				':userid' => $userid,
 				':comment' => $comment,
-				':date' => time(),
-				':spam' => $spam
+				':date' => time()
 			));
 			$this->notify_subscribers($brid, true);
 			return true;

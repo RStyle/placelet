@@ -1254,8 +1254,8 @@ ome            <en><![CDATA[<img src="/cache.php?f=/img/winbanner_corner_en.png"
 				<de>Kommentar zu kurz, mindestens 2 Zeichen.</de>
 			</f3>
 			<falsch>
-				<en>Error!</en>
-				<de>Fehler!</de>
+				<en>Links are not allowed!</en>
+				<de>Links sind nicht erlaubt!</de>
 			</falsch>
 		</write_comment>
 		<pic_registered>

@@ -202,7 +202,8 @@ $userdetails = $statistics->userdetails($username);
 */
 ?>
 <?php
-$sql = "SELECT name FROM bracelets";
+//Traveldistance of every bracelet and sum
+/*$sql = "SELECT name FROM bracelets";
 $stmt = $db->prepare($sql);
 $stmt->execute(array());
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -227,6 +228,16 @@ foreach($result as $bracelet) {
 		echo '<a href="armband?name='.urlencode($bracelet['name']).'">'.$bracelet['name'].'</a>: '.$distance.'km<br>';
 	}
 }
-echo $total_distance."km";
-echo $braceletcount;
+echo $total_distance."km<br>";
+echo $braceletcount;*/
+?>
+<?php
+//Datum des letzten Logins von allen Benutzern
+/*$sql = "SELECT last_login, user FROM users ORDER BY last_login DESC";
+$stmt = $db->prepare($sql);
+$stmt->execute(array());
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($result as $user) {
+	if($user['last_login'] != 0) echo $user['user'].' - '.date('H:i d.m.Y', $user['last_login']).'<br>';
+}*/
 ?>
