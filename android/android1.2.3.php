@@ -216,5 +216,6 @@ if(isset($_POST['androidProfileInfo'])) {
 	if(is_array($registered)) $registered = $registered[0];
 	$return = array("registered" => $registered);
 }
+$return[""] = "";
 echo json_encode($return);
 ?>

@@ -189,5 +189,6 @@ if(isset($_POST['androidProfileInfo'])) {
 	$upload = $statistics->registerpic($brid, $description, $city, $country, $state, $latitude, $longitude, $title, $date, $picture_file, $max_file_size);
 	$return = array("upload" => $upload);
 }
+$return[""] = "";
 echo json_encode($return);
 ?>
