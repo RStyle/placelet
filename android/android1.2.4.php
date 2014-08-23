@@ -103,7 +103,7 @@ if(isset($_POST['androidGetMessages'])) {
 				if($latestMSG['sent'] > $latestMSGDate) $latestMSGDate = $latestMSG['sent'];
 		}
 		$return = $news;
-		if($_POST['lastUpdate'] > $latestMSGDate) $return = array("update" => "alreadyUpToDate");
+		if($_POST['lastUpdate'] > $latestMSGDate) $return['update'] = "alreadyUpToDate";// = array("update" => "alreadyUpToDate");
 	}else {
 		$return = array('notlogged' => $user->login);
 	}
@@ -115,7 +115,7 @@ if(isset($_POST['androidGetMessages'])) {
 			$msgs = end($return);
 			reset($return);
 			$latestMsg = end($msgs);
-			if($_POST['lastUpdate'] > $latestMsg['sent']) $return = array("update" => "alreadyUpToDate");
+			if($_POST['lastUpdate'] > $latestMsg['sent']) $return['update'] = "alreadyUpToDate";// = array("update" => "alreadyUpToDate");
 		}
 	}else {
 		$return = array('notlogged' => $user->login);
@@ -131,7 +131,7 @@ if(isset($_POST['androidGetMessages'])) {
 			$msgs = end($return);
 			reset($return);
 			$latestMsg = end($msgs);
-			if($_POST['lastUpdate'] > $latestMsg['sent']) $return = array("update" => "alreadyUpToDate");
+			if($_POST['lastUpdate'] > $latestMsg['sent']) $return['update'] = "alreadyUpToDate";// = array("update" => "alreadyUpToDate");
 			$return['messageSent'] = true;
 		}else $return = array('messageSent' => false, 'error' => NOT_EXISTING);
 	}else {
@@ -157,14 +157,21 @@ if(isset($_POST['androidGetMessages'])) {
 		$q[$key]['user'] = Statistics::id2username($pic['userid']);
 	}
 	$return = $q;
-	if($_POST['lastUpdate'] > $q[0]['upload']) $return = array("update" => "alreadyUpToDate");
+	if($_POST['lastUpdate'] > $q[0]['upload']) $return['update'] = "alreadyUpToDate";// = array("update" => "alreadyUpToDate");
+	// Toast:    array("type" => "toast", "content" => "Hallo");
+	// Dialog:   array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)"
+	// URL:       "action" => "URL", "content" => "http://google.com"
+	// Activity:  "action" => "Activity", "content" => "AboutActivity"
+	// Snooze:    "snooze" => 10
+	// User:      "user" => "JohnZoidberg" or if($_POST['user'] == "JohnZoidberg")
+	$return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10, "user" => "JohnZoidberg");
 }elseif(isset($_POST['androidGetBraceletData'])) {
 	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);
 	$picture_details['subscribed'] = false;
 	$userdetails = $statistics->userdetails($user->login);
 	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 	$return = $picture_details;
-	if($_POST['lastUpdate'] > $picture_details[1]['upload']) $return = array("update" => "alreadyUpToDate");
+	if($_POST['lastUpdate'] > $picture_details[1]['upload']) $return['update'] = "alreadyUpToDate";// = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidGetOwnBracelets'])) {
 	$return = array();
 	$username = $_POST['user'];
@@ -185,7 +192,7 @@ if(isset($_POST['androidGetMessages'])) {
 	$stmt->execute(array('user' => Statistics::username2id($username)));
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	$return['pics'] = $result;
-	if($_POST['lastUpdate'] > $result[1]['upload']) $return = array("update" => "alreadyUpToDate");
+	if($_POST['lastUpdate'] > $result[1]['upload']) $return['update'] = "alreadyUpToDate";// = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidText'])) {
 	 $File = "android.txt"; 
 	 $Handle = fopen($File, 'w');
