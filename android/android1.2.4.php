@@ -163,8 +163,10 @@ if(isset($_POST['androidGetMessages'])) {
 	// URL:       "action" => "URL", "content" => "http://google.com"
 	// Activity:  "action" => "Activity", "content" => "AboutActivity"
 	// Snooze:    "snooze" => 10
-	// User:      "user" => "JohnZoidberg" or if($_POST['user'] == "JohnZoidberg")
-	$return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10, "user" => "JohnZoidberg");
+	// User:      if($_POST['user'] == "JohnZoidberg")
+	if(isset($_POST['user']) && $_POST['user'] == "JohnZoidberg") $return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10);
+	if(isset($_POST['v']) && $_POST['v'] != "1.2.5") $return['u'] = true;
+	
 }elseif(isset($_POST['androidGetBraceletData'])) {
 	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);
 	$picture_details['subscribed'] = false;
@@ -238,6 +240,6 @@ if(isset($_POST['androidGetMessages'])) {
 foreach($_POST as $key => $val) {
 	$return[$key] = $val;
 }
-$return['version'] = '1.2.5';
+$return[""] = "";
 echo json_encode($return);
 ?>
