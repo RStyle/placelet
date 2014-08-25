@@ -68,6 +68,12 @@ function login($deviceToken, $username, $pw, $db) {
 		return array('error' => WRONG_PW, 'success' => false); 
 	}
 }
+function minify_json($json) {
+	$search  = array("recipient", "name", "sender", "sent", "seen", "message", "update", "exists", "brid", "title", "description", "city", "country", "userid", "date", "upload", "user", "user", "ownBracelet", "alreadyUpToDate", "picid", "longitude", "latitude", "state", "commid", "fileext");//id
+	$replace = array("1‡", "2‡", "3‡", "4‡", "5‡", "6‡", "7‡", "8‡", "9‡", "‡10", "‡11", "‡12", "‡13", "‡14", "‡15", "‡16", "‡17", "‡18", "‡19", "‡20", "‡21", "‡22", "‡3", "‡24", "‡25", "‡26");
+	$json = str_replace($search, $replace, $json);
+	return $json;
+}
 $lang = simplexml_load_file('../text/translations.xml');
 if(isset($_POST['eng'])) $lng = $_POST['eng'];
 if(isset($_POST['androidLogin'])) {
@@ -241,5 +247,6 @@ foreach($_POST as $key => $val) {
 	$return[$key] = $val;
 }
 $return[""] = "";
-echo json_encode($return);
+$json = json_encode($return);
+echo minify_json($json);
 ?>
