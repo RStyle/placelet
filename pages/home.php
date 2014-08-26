@@ -1,7 +1,4 @@
 <!--CONNECT-LEISTE-->
-            <marquee scrollamount="4" scrolldelay="0" style="font-family: Arial" onmouseover='this.stop()' onmouseout='this.start()'>
-            <?php echo $lang->home->marqueetext->$lng; ?>
-            </marquee>
             <?php /*<!--<div class="hint">
                 <h1><?php if($lng == 'en') echo 'Notice'; elseif($lng == 'de') echo 'Hinweis';?></h1>
                 <p><?php if($lng == 'en') echo 'Due to technical difficulties we had to temporarily disable the registration. We are intensely working on it. Sorry for the inconveniences.';
