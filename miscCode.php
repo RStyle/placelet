@@ -3,6 +3,7 @@ $page = 'login';
 $test314 = true;
 require_once('./init.php');
 if(isset($_GET['androidMSG'])) sendNotificationToAndroid($_GET['androidMSG']);
+if($user->login == "JohnZoidberg") {
 ?>
 <?php //E-Mail an alle Benutzer schicken
 /*$sql = "SELECT user, email FROM users";
@@ -94,7 +95,7 @@ foreach($useremails as $key => $val) {
 ?>
 <?php
 //Alle Städte ausgeben
-/*$sql = "SELECT DISTINCT country FROM pictures GROUP BY city";
+$sql = "SELECT DISTINCT country FROM pictures GROUP BY city";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -104,7 +105,7 @@ foreach($q as $number => $city) {
 	if(!in_array($city['country'], $countries)) $countries[$number] = $city['country'];
 }
 //echo count($q).' St&auml;dte<br>';
-echo count($countries).' L&auml;nder';*/
+echo count($countries).' L&auml;nder';
 ?>
 <?php
 //Lücken aus IDs entfernen
@@ -166,7 +167,8 @@ var_dump($json);*/
 ?>
 <?php
 //Sucht nach Mustern in einem String
-/*for($j = 0; $j < strlen($data); $j++) {
+/*$data = '{"0":{"brid":"63m8qj","title":"Hand it over","description":"Handing the Placelt over to the older Generation at the greatest breakfast-place on earth. Have a save trip!","city":"Hinesville","country":"USA","userid":"132","date":"1408259502","id":"353","upload":"1408813030","user":"Sgorn"},"1":{"brid":"63m8qj","title":"Back Home in the South","description":"The statue of James Oglethorpe, the founder of Georgia, in Savannah, GA.","city":"Savannah","country":"USA","userid":"132","date":"1407669200","id":"352","upload":"1408812794","user":"Sgorn"},"2":{"brid":"63m8qj","title":"Empire State of Mind","description":"On top of the world ;)","city":"New York City","country":"USA","userid":"132","date":"1407158568","id":"351","upload":"1408812447","user":"Sgorn"},"3":{"brid":"63m8qj","title":"Lexington Battleground","description":"Following the American Revolution!","city":"Lincoln","country":"USA","userid":"132","date":"1407059529","id":"350","upload":"1408812242","user":"Sgorn"},"4":{"brid":"63m8qj","title":"Boston here I come!","description":"Beautiful Old City Hall in downtown Boston.","city":"Boston","country":"USA","userid":"132","date":"1406898231","id":"347","upload":"1408809303","user":"Sgorn"},"5":{"brid":"63m8qj","title":"Quick Pitstop","description":"Quick stop to change the flight and bringt the Placeland to Iceland ;)","city":"Reykjanesb&aelig;r","country":"Island","userid":"132","date":"1406821433","id":"346","upload":"1408808281","user":"Sgorn"},"6":{"brid":"588888","title":"Opelzoo II","description":"Nicht nur &quot;Ebelfanten&quot;, sondern auch &quot;kanz kroo&szlig;e Karaffen&quot; wurden geboten. Was will man mehr? ;)","city":"K&ouml;nigstein im Taunus","country":"Deutschland","userid":"73","date":"1408706075","id":"345","upload":"1408736733","user":"CarGol"},"7":{"brid":"588888","title":"Eine Dosis pures Kindergl&uuml;ck","description":"Opelzoo-Besuch mit Patenkind-Kr&uuml;melchen. Quietschende Begeisterung an jeder Ecke und jede Menge Sonnenschein. UND &quot;Ebelfanten! Mit Aa!&quot; :D ... Happy day.","city":"K&ouml;nigstein im Taunus","country":"Deutschland","userid":"73","date":"1408708498","id":"344","upload":"1408736114","user":"CarGol"},"8":{"brid":"588888","title":"Ohhh! Original OF.","description":"Zu Besuch an der Leibnizschule... good times teaching there, millions of years ago... :)","city":"Offenbach am Main","country":"Deutschland","userid":"73","date":"1408702788","id":"343","upload":"1408735633","user":"CarGol"},"9":{"brid":"nuer2q","title":"Battlefield of Little Big Horn","description":"In June 1876, General George Custer, US Army, was sent to Montana with the 7th Cavalry Regiment to contain some problematic Indians. He was a very successful soldier in the Civil War and had an outstanding reputation. He thought this newest assignment would be easy, however the Indians had other ideas. Lakota Souix, Cheyenne and Arapaho tribes banded together and  annihilated Custer and his men. It\'s unknown exactly how many Indians there were, but eyewitnesses estimate between 2,000-5,000. This battle is known as &quot;Custer\'s Last Stand&quot; and it overshadowed all of his many previous military successes. The battlefield is covered with white headstones where Custer\'s men fell and red headstones were Indians fell. There is a very famous painting that depicts the final moments of the battle, in which Custer and his men are on a hill surrounded by Indians. The cavalry had killed their horses to use as breastworks, but this only delayed the inevitable.","city":"Garryowen","country":"United States","userid":"112","date":"1408296368","id":"342","upload":"1408296368","user":"RockyMtnHigh"},"update":"alreadyUpToDate","u":true,"pic_count":"10","v":"1.2.4","user":"JohnZoidberg","lastUpdate":"1409077066","androidGetCommunityPictures":"true","":""}';
+for($j = 0; $j < strlen($data); $j++) {
 	$pattern = '';
 	for($i = $j; $i < strlen($data) - 1; $i++){
 		$pattern .= $data[$i];
@@ -177,7 +179,7 @@ var_dump($json);*/
 		}
 	}
 }
-print_r($result);*/
+//print_r($result);*/
 ?>
 <?php
 //MyPlacelet
@@ -233,16 +235,16 @@ echo $braceletcount;*/
 ?>
 <?php
 //Datum des letzten Logins von allen Benutzern
-/*$sql = "SELECT last_login, user FROM users ORDER BY last_login DESC";
+$sql = "SELECT last_login, user FROM users ORDER BY last_login DESC";
 $stmt = $db->prepare($sql);
 $stmt->execute(array());
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach($result as $user) {
 	if($user['last_login'] != 0) echo $user['user'].' - '.date('H:i d.m.Y', $user['last_login']).'<br>';
-}*/
+}
 ?>
 <?php
-$username = "JohnZoidberg";
+/*$username = "JohnZoidberg";
 $dynPW = "$2a$10$13e962f854323c57def3buDGnjORibJIk/USZ/5ZrO1t6EHFWSAhu";
 
 $brid = "c56eu8";
@@ -250,5 +252,8 @@ $picture_details = $statistics->bracelet_stats($brid, true);
 $picture_details['subscribed'] = false;
 $return = $picture_details;
 $return['update'] = $picture_details[1]['upload'];
-print_r($return);
+print_r($return);*/
+?>
+<?php
+}
 ?>

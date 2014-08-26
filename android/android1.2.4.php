@@ -69,10 +69,18 @@ function login($deviceToken, $username, $pw, $db) {
 	}
 }
 function minify_json($json) {
-	$search  = array("recipient", "name", "sender", "sent", "seen", "message", "update", "exists", "brid", "title", "description", "city", "country", "userid", "date", "upload", "user", "user", "ownBracelet", "alreadyUpToDate", "picid", "longitude", "latitude", "state", "commid", "fileext");//id
-	$replace = array("1‡", "2‡", "3‡", "4‡", "5‡", "6‡", "7‡", "8‡", "9‡", "‡10", "‡11", "‡12", "‡13", "‡14", "‡15", "‡16", "‡17", "‡18", "‡19", "‡20", "‡21", "‡22", "‡3", "‡24", "‡25", "‡26");
+	$username_json = "John#Zoidberg";
+	if(isset($_POST['user'])) $username_json = $_POST['user'];
+	$search  = array("recipient", "name", "sender", "sent", "seen", "message", "update", "exists", "brid", "title", "description", "city", "country", "userid", "date", "upload", "user", "user", "ownBracelet", "alreadyUpToDate", "picid", "longitude", "latitude", "state", "commid", "fileext", $username_json, "Deutschland", "United States");//id
+	$replace = array("1‡", "2‡", "3‡", "4‡", "5‡", "6‡", "7‡", "8‡", "9‡", "‡10", "‡11", "‡12", "‡13", "‡14", "‡15", "‡16", "‡17", "‡18", "‡19", "‡20", "‡21", "‡22", "‡3", "‡24", "‡25", "‡26", "‡27", "‡28", "‡29");
 	$json = str_replace($search, $replace, $json);
 	return $json;
+}
+function writeToAndroidText($Data) {
+	 $File = "android.txt"; 
+	 $Handle = fopen($File, 'w');
+	 fwrite($Handle, $Data); 
+	 fclose($Handle);
 }
 $lang = simplexml_load_file('../text/translations.xml');
 if(isset($_POST['eng'])) $lng = $_POST['eng'];
@@ -170,7 +178,7 @@ if(isset($_POST['androidGetMessages'])) {
 	// Activity:  "action" => "Activity", "content" => "AboutActivity"
 	// Snooze:    "snooze" => 10
 	// User:      if($_POST['user'] == "JohnZoidberg")
-	if(isset($_POST['user']) && $_POST['user'] == "JohnZoidberg") $return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10);
+	//if(isset($_POST['user']) && $_POST['user'] == "JohnZoidberg") $return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10);
 	if(isset($_POST['v']) && $_POST['v'] != "1.2.5") $return['u'] = true;
 	
 }elseif(isset($_POST['androidGetBraceletData'])) {
@@ -202,12 +210,8 @@ if(isset($_POST['androidGetMessages'])) {
 	$return['pics'] = $result;
 	if($_POST['lastUpdate'] > $result[1]['upload']) $return['update'] = "alreadyUpToDate";// = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidText'])) {
-	 $File = "android.txt"; 
-	 $Handle = fopen($File, 'w');
-	 $Data = $_POST['textContent']; 
-	 fwrite($Handle, $Data); 
+	writeToAndroidText($_POST['androidText']);
 	 $return = array("text" => "true");
-	 fclose($Handle);
 }elseif(isset($_POST['androidUploadPicture'])) {
 	$brid = $_POST['brid'];
 	$description = urldecode($_POST['description']);
@@ -248,5 +252,6 @@ foreach($_POST as $key => $val) {
 }
 $return[""] = "";
 $json = json_encode($return);
+writeToAndroidText($json);
 echo minify_json($json);
 ?>
