@@ -234,16 +234,6 @@ echo $total_distance."km<br>";
 echo $braceletcount;*/
 ?>
 <?php
-//Datum des letzten Logins von allen Benutzern
-$sql = "SELECT last_login, user FROM users ORDER BY last_login DESC";
-$stmt = $db->prepare($sql);
-$stmt->execute(array());
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-foreach($result as $user) {
-	if($user['last_login'] != 0) echo $user['user'].' - '.date('H:i d.m.Y', $user['last_login']).'<br>';
-}
-?>
-<?php
 /*$username = "JohnZoidberg";
 $dynPW = "$2a$10$13e962f854323c57def3buDGnjORibJIk/USZ/5ZrO1t6EHFWSAhu";
 
@@ -256,4 +246,46 @@ print_r($return);*/
 ?>
 <?php
 }
+?>
+<?php
+//Datum des letzten Logins von allen Benutzern
+/*$sql = "SELECT last_login, user FROM users ORDER BY last_login DESC";
+$stmt = $db->prepare($sql);
+$stmt->execute(array());
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($result as $user) {
+	if($user['last_login'] != 0) echo $user['user'].' - '.date('H:i d.m.Y', $user['last_login']).'<br>';
+}*/
+?>
+<?php
+/*$brid = "9tcb66";
+$sql = "SELECT id, city, country, title, picid, brid, latitude, longitude FROM pictures WHERE brid = :brid ORDER BY picid DESC";
+$stmt = $db->prepare($sql);
+$stmt->execute(array('brid' => $brid));
+$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$distance = 0;
+for($i = 1; $i < count($q); $i++) {
+	echo $i.': ';
+	print_r($q[$i]);
+		$distance += getDistance(array("latitude" => $q[$i - 1]['latitude'], "longitude" => $q[$i - 1]['longitude']), array("latitude" => $q[$i]['latitude'], "longitude" => $q[$i]['longitude']));
+}
+echo round($distance) / 1000;*/
+?>
+<?php
+// if x == 10 dann limit 0,10
+// if x >  10 dann limit x - 10, 5
+define("PIC_START", 10);
+define("PIC_LOAD", 5);
+$pic_start = 15;
+if($pic_start > PIC_START) $pic_count = PIC_LOAD;
+		else $pic_count = PIC_START;
+$pic_start -= PIC_LOAD;
+$sql = "SELECT brid, title, description, city, country, userid, date, id, upload FROM pictures ORDER BY id DESC LIMIT :start, :count";
+$stmt = $db->prepare($sql);
+$stmt->bindParam(':start', $pic_start, PDO::PARAM_INT);
+$stmt->bindParam(':count', $pic_count, PDO::PARAM_INT);
+$stmt->execute();
+$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+print_r($q);
+echo "[$pic_start, $pic_count]";
 ?>
