@@ -143,7 +143,7 @@ if(isset($_POST['androidGetMessages'])) {
 	if($user->login) {
 		if(Statistics::userexists($_POST['recipient'])) {
 			$recipient = Statistics::username2id($_POST['recipient']);
-			$user->messages_read($_POST['senderid']);
+			$user->messages_read(Statistics::username2id($_POST['recipient']));
 			$user->send_message($recipient, urldecode($_POST['content']));
 			$return = $user->receive_messages(false, false, $_POST['recipient']);
 			$msgs = end($return);
@@ -266,5 +266,5 @@ $return[''] = '';
 $json = json_encode($return);
 //writeToAndroidText($json);
 $json = minify_json($json);
-echo ($json);
+echo $json;
 ?>
