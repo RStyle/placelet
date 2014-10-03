@@ -1,4 +1,5 @@
-<?php //Datenbank einbinden usw.
+<?php
+//Datenbank einbinden usw.
 $page = 'login';
 $test314 = true;
 require_once('./init.php');

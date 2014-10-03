@@ -198,29 +198,31 @@ if(isset($_POST['androidGetMessages'])) {
 	$username = $_POST['user'];
 	// Own bracelets
 	$userdetails = $statistics->userdetails($username);
+	if(isset($userdetails['brid'])) {
 		if(!is_array($userdetails['brid'])) {
 			$userdetails['brid'] = array($userdetails['brid']);
 		}
-	foreach($userdetails['brid'] as $key => $brid) {
-		$sql = "SELECT id, city, country, title, picid, brid, latitude, longitude FROM pictures WHERE brid = :brid ORDER BY picid DESC";
+		foreach($userdetails['brid'] as $key => $brid) {
+			$sql = "SELECT id, city, country, title, picid, brid, latitude, longitude FROM pictures WHERE brid = :brid ORDER BY picid DESC";
+			$stmt = $db->prepare($sql);
+			$stmt->execute(array('brid' => $brid));
+			$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			// Calculate travelled distance
+			$distance = 0;
+			for($i = 1; $i < count($q); $i++)
+					$distance += getDistance(array('latitude' => $q[$i - 1]['latitude'], 'longitude' => $q[$i - 1]['longitude']), array('latitude' => $q[$i]['latitude'], 'longitude' => $q[$i]['longitude']));
+			$return['ownBracelets'][$key] = $q[0];
+			$return['ownBracelets'][$key]['distance'] = round($distance / 1000);
+			$return['ownBracelets'][$key]['name'] = $statistics->brid2name($brid);
+		}
+		// Own pictures
+		$sql = "SELECT id, city, country, title, picid, brid, upload FROM pictures WHERE userid = :user ORDER BY picid DESC";
 		$stmt = $db->prepare($sql);
-		$stmt->execute(array('brid' => $brid));
-		$q = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		// Calculate travelled distance
-		$distance = 0;
-		for($i = 1; $i < count($q); $i++)
-				$distance += getDistance(array('latitude' => $q[$i - 1]['latitude'], 'longitude' => $q[$i - 1]['longitude']), array('latitude' => $q[$i]['latitude'], 'longitude' => $q[$i]['longitude']));
-		$return['ownBracelets'][$key] = $q[0];
-		$return['ownBracelets'][$key]['distance'] = round($distance / 1000);
-		$return['ownBracelets'][$key]['name'] = $statistics->brid2name($brid);
+		$stmt->execute(array('user' => Statistics::username2id($username)));
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$return['pics'] = $result;
+		if($_POST['lastUpdate'] > $result[1]['upload']) $return = array("update" => "alreadyUpToDate");
 	}
-	// Own pictures
-	$sql = "SELECT id, city, country, title, picid, brid, upload FROM pictures WHERE userid = :user ORDER BY picid DESC";
-	$stmt = $db->prepare($sql);
-	$stmt->execute(array('user' => Statistics::username2id($username)));
-	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-	$return['pics'] = $result;
-	if($_POST['lastUpdate'] > $result[1]['upload']) $return = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidText'])) {
 	writeToAndroidText($_POST['androidText']);
 	 $return = array("text" => "true");
@@ -266,5 +268,9 @@ $return[''] = '';
 $json = json_encode($return);
 //writeToAndroidText($json);
 $json = minify_json($json);
-echo $json;
+$gzipOutput = gzencode($json);
+header('Content-Length: '.strlen($gzipOutput));
+header('Content-Type: text/html; charset=utf-8');
+header('Content-Encoding: gzip');
+echo $gzipOutput;
 ?>
