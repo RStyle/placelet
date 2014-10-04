@@ -192,7 +192,7 @@ if(isset($_POST['androidGetMessages'])) {
 	$userdetails = $statistics->userdetails($user->login);
 	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 	$return = $picture_details;
-	if($_POST['lastUpdate'] > $picture_details[1]['upload']) $return = array("update" => "alreadyUpToDate");
+	if($_POST['lastUpdate'] > $picture_details[$picture_details['pic_anz']]['upload']) $return = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidGetOwnBracelets'])) {
 	$return = array();
 	$username = $_POST['user'];
@@ -221,7 +221,7 @@ if(isset($_POST['androidGetMessages'])) {
 		$stmt->execute(array('user' => Statistics::username2id($username)));
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$return['pics'] = $result;
-		if($_POST['lastUpdate'] > $result[1]['upload']) $return = array("update" => "alreadyUpToDate");
+		if($_POST['lastUpdate'] > $result[0]['upload']) $return = array("update" => "alreadyUpToDate");
 	}
 }elseif(isset($_POST['androidText'])) {
 	writeToAndroidText($_POST['androidText']);
@@ -266,9 +266,12 @@ foreach($_POST as $key => $val) {
 }
 $return[''] = '';
 $json = json_encode($return);
-//writeToAndroidText($json);
-$json = minify_json($json);
-$gzipOutput = gzencode($json);
+$jsonMinified = minify_json($json);
+$gzipOutput = gzencode($jsonMinified, 9);
+writeToAndroidText(
+	strlen($json).'-'.strlen($jsonMinified).'-'.strlen($gzipOutput)."\n".
+	((1 - strlen($jsonMinified) / strlen($json)) * 100).'%-'.((1 - strlen($gzipOutput) / strlen($jsonMinified)) * 100).'%'
+);
 header('Content-Length: '.strlen($gzipOutput));
 header('Content-Type: text/html; charset=utf-8');
 header('Content-Encoding: gzip');

@@ -275,7 +275,7 @@ echo round($distance) / 1000;*/
 <?php
 // if x == 10 dann limit 0,10
 // if x >  10 dann limit x - 10, 5
-define("PIC_START", 10);
+/*define("PIC_START", 10);
 define("PIC_LOAD", 5);
 $pic_start = 15;
 if($pic_start > PIC_START) $pic_count = PIC_LOAD;
@@ -288,5 +288,5 @@ $stmt->bindParam(':count', $pic_count, PDO::PARAM_INT);
 $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 print_r($q);
-echo "[$pic_start, $pic_count]";
+echo "[$pic_start, $pic_count]";*/
 ?>
