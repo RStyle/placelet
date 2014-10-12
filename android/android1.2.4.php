@@ -176,7 +176,7 @@ if(isset($_POST['androidGetMessages'])) {
 	}
 	$return = $q;
 	$return['test'] = array($pic_start, $pic_count);
-	//if($_POST['lastUpdate'] > $q[0]['upload'] && $pic_count != PIC_LOAD_COUNT) $return = array("update" => "alreadyUpToDate");
+	if($_POST['lastUpdate'] > $q[0]['upload'] && $pic_count != PIC_LOAD_COUNT) $return = array("update" => "alreadyUpToDate");
 	// Toast:    array("type" => "toast", "content" => "Hallo");
 	// Dialog:   array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)"
 	// URL:       "action" => "URL", "content" => "http://google.com"

@@ -1226,6 +1226,12 @@ class Statistics {
 		}
 	}
 	public function manage_subscription($input, $brid, $email) {
+		$sql = "SELECT brid FROM bracelets WHERE brid = :brid";
+		$q = $this->db->prepare($sql);
+		$q->execute(array(
+			':brid' => $brid
+		));
+		if($brid == "" || $q->rowCount() == 0) return 4; // Bracelet gibt es nicht
 		if($input == 'email' || $input == 'username') {//Hinzufügen
 			if($input == 'username') {
 				$sql = "SELECT email FROM users WHERE user = :user";
