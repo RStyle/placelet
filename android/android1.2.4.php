@@ -177,13 +177,20 @@ if(isset($_POST['androidGetMessages'])) {
 	$return = $q;
 	$return['test'] = array($pic_start, $pic_count);
 	if($_POST['lastUpdate'] > $q[0]['upload'] && $pic_count != PIC_LOAD_COUNT) $return = array("update" => "alreadyUpToDate");
-	// Toast:    array("type" => "toast", "content" => "Hallo");
-	// Dialog:   array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)"
-	// URL:       "action" => "URL", "content" => "http://google.com"
-	// Activity:  "action" => "Activity", "content" => "AboutActivity"
-	// Snooze:    "snooze" => 10
-	// User:      if($_POST['user'] == "JohnZoidberg")
-	//if(isset($_POST['user']) && $_POST['user'] == "JohnZoidberg") $return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10);
+	// $return['news'] = array();
+	// Change SharedPreferences array("type" => "updatePrefs", "prefKey" => "version", "content" => "1.2.4.1");
+	
+	// Display Toast:    array("type" => "toast", "content" => "Hallo");
+	
+	// Display Dialog:   array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)"
+	//  with URL action:       "action" => "URL", "content" => "http://google.com"
+	//  with activity action:  "action" => "Activity", "content" => "AboutActivity"
+	//  snooze dialog:    "snooze" => 10
+	
+	// Display only for specific user:      if($_POST['user'] == "username")
+	// Display only for specific version:      if($_POST['v'] == "version")
+	//if($_POST['user'] == "JohnZoidberg") $return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10);
+	//$return['news'] = array("type" => "updatePrefs", "prefKey" => "version", "content" => "1.2.4.1");
 	if(isset($_POST['v']) && $_POST['v'] != "1.2.4") $return['u'] = true;
 	
 }elseif(isset($_POST['androidGetBraceletData'])) {
