@@ -95,7 +95,7 @@ foreach($useremails as $key => $val) {
 }*/
 ?>
 <?php
-//Alle Städte ausgeben
+/*Alle Städte ausgeben
 $sql = "SELECT DISTINCT country FROM pictures GROUP BY city";
 $stmt = $db->prepare($sql);
 $stmt->execute();
@@ -106,7 +106,7 @@ foreach($q as $number => $city) {
 	if(!in_array($city['country'], $countries)) $countries[$number] = $city['country'];
 }
 //echo count($q).' St&auml;dte<br>';
-echo count($countries).' L&auml;nder';
+echo count($countries).' L&auml;nder';*/
 ?>
 <?php
 //Lücken aus IDs entfernen
@@ -119,7 +119,7 @@ foreach($q as $number => $city) {
 }*/
 ?>
 <?php
-//Picture Overview
+/*Picture Overview
 $sql = "SELECT id, picid, fileext, city, country, brid FROM pictures";
 $stmt = $db->prepare($sql);
 $stmt->execute();
@@ -144,7 +144,7 @@ foreach($q as $pic) {
 		//echo '<br>';
 	}
 	$column++;
-}
+}*/
 ?>
 <?php
 //Letzten $anzahl Bilder - keine Infos über das Armband
@@ -289,4 +289,9 @@ $stmt->execute();
 $q = $stmt->fetchAll(PDO::FETCH_ASSOC);
 print_r($q);
 echo "[$pic_start, $pic_count]";*/
+?>
+<?php
+messagePush("test314", " custom function", "APA91bHQsrLw5xsddjRh94FzlmUbhxOHH5fcEgS0NWiSlO2X_Eeo0EavRHVytSm5vkCVDqoDXa0wuE7_mpoA9z1Yq94Ocsr3wMnitAMjrAuvQga_dSHB-3VEZfkkh0XE2656dcFpttVIVXBy3-mdyawE9pzk4wVxaQ");
+echo '<br>';
+//pushNotification("blablabla", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA");
 ?>

@@ -5,7 +5,6 @@ $return = array('notsentlol' => 'dudenotsent', 'test' => 'waslos?');
 include_once('../scripts/connection.php');
 include_once('../scripts/functions.php');
 include_once('../scripts/user.php');
-require_once('../scripts/PushBots.class.php');
 define("NOT_EXISTING", 0);
 define("WRONG_PW", 1);
 define("NOT_LOGGED_IN", "logged_out");
@@ -190,8 +189,13 @@ if(isset($_POST['androidGetMessages'])) {
 	// Display only for specific user:      if($_POST['user'] == "username")
 	// Display only for specific version:      if($_POST['v'] == "version")
 	//if($_POST['user'] == "JohnZoidberg") $return['news'] = array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10);
-	//$return['news'] = array("type" => "updatePrefs", "prefKey" => "version", "content" => "1.2.4.1");
-	if(isset($_POST['v']) && $_POST['v'] != "1.2.4") $return['u'] = true;
+	/*$return['news'] = array(
+		array("type" => "toast", "content" => "test", "snooze" => 0),
+		array("type" => "updatePrefs", "prefKey" => "version", "content" => "1.2.4.0", "snooze" => 0),
+		array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)", "action" => "Activity", "content" => "AboutActivity", "snooze" => 10),
+		array("type" => "toast", "content" => "update", "snooze" => 0)
+		);
+	if(isset($_POST['v']) && $_POST['v'] != "1.2.4") $return['u'] = true;*/
 	
 }elseif(isset($_POST['androidGetBraceletData'])) {
 	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);

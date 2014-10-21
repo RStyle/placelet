@@ -633,7 +633,7 @@ class User
 			fwrite($Handle, $Data);
 			fclose($Handle);
 		}
-		if($result['androidToken'] != NULL) messagePush($this->login, $result['androidToken']);
+		if($result['androidToken'] != NULL) messagePush($this->login, $content, $result['androidToken']);
 	}
 	//Nachrichten empfangen
 	public function receive_messages($only_unseen, $only_recieved, $user = false) {
