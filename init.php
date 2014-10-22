@@ -45,7 +45,6 @@ if(isset($_SESSION['testserver'])) if($_SESSION['testserver'] === true) $ziffern
 //require_once($this_path.'scripts/recaptchalib.php');
 require_once($this_path.'scripts/functions.php'); 
 require_once($this_path.'scripts/user.php');
-require_once($this_path.'scripts/PushBots.class.php');
 
 $lang = simplexml_load_file('./text/translations.xml');
 

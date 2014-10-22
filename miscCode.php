@@ -291,7 +291,7 @@ print_r($q);
 echo "[$pic_start, $pic_count]";*/
 ?>
 <?php
-messagePush("test314", " custom function", "APA91bHQsrLw5xsddjRh94FzlmUbhxOHH5fcEgS0NWiSlO2X_Eeo0EavRHVytSm5vkCVDqoDXa0wuE7_mpoA9z1Yq94Ocsr3wMnitAMjrAuvQga_dSHB-3VEZfkkh0XE2656dcFpttVIVXBy3-mdyawE9pzk4wVxaQ");
-echo '<br>';
-//pushNotification("blablabla", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA");
+var_dump(picPush("Jules", "Jules#1", "brid", 109, "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+var_dump(commentPush("Jules", "brid", "picid", "Wunderschönes Bild :o", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+var_dump(messagePush("Jules", 2, "Hi, was geht bei dir?", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
 ?>

@@ -633,7 +633,9 @@ class User
 			fwrite($Handle, $Data);
 			fclose($Handle);
 		}
-		if($result['androidToken'] != NULL) messagePush($this->login, $content, $result['androidToken']);
+		if($result['androidToken'] != NULL) {
+			$notificPushed = messagePush($this->login, $this->userid, $content, $result['androidToken']);
+		}
 	}
 	//Nachrichten empfangen
 	public function receive_messages($only_unseen, $only_recieved, $user = false) {
@@ -719,7 +721,7 @@ class Statistics {
 		$userid = self::username2id($user);
 		$result = array();
 		//Allgemeine Daten
-		$stmt = $this->db->prepare("SELECT userid, user, email, status, date AS registered FROM users WHERE user = :user LIMIT 1");
+		$stmt = $this->db->prepare("SELECT userid, user, email, androidToken, lng, last_login, status, date AS registered FROM users WHERE user = :user LIMIT 1");
 		$stmt->execute(array('user' => $user));
 		$result[0] = $stmt->fetch(PDO::FETCH_ASSOC);
 		//Gekaufte Armbänder
@@ -1016,7 +1018,7 @@ class Statistics {
 				':comment' => $comment,
 				':date' => time()
 			));
-			$this->notify_subscribers($brid, true);
+			$this->notify_subscribers($brid, $comment);
 			return true;
 		}catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -1511,6 +1513,9 @@ class Statistics {
 							$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
 										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
 							$mail_header = "From: Placelet <support@placelet.de>\n";
+							if($userdetails['androidToken'] != NULL) {
+								$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $bracelet_stats['pic_anz']), $userdetails['androidToken']);
+							}
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 							$mail_header .= "Content-transfer-encoding: 8bit";
@@ -1522,6 +1527,9 @@ class Statistics {
 						if($comm) {
 							$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
 										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+							if($userdetails['androidToken'] != NULL) {
+								$notificPushed = commentPush($this->user->login, $brid, $bracelet_stats['pic_anz'], $comm, $userdetails['androidToken']);
+							}
 							$mail_header = "From: Placelet <support@placelet.de>\n";
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
@@ -1534,6 +1542,9 @@ class Statistics {
 						if(!$comm) {
 							$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
 										Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
+							if($userdetails['androidToken'] != NULL) {
+								$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $bracelet_stats['pic_anz']), $userdetails['androidToken']);
+							}
 							$mail_header = "From: Placelet <support@placelet.de>\n";
 							$mail_header .= "MIME-Version: 1.0" . "\n";
 							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
@@ -1562,6 +1573,9 @@ class Statistics {
 							if($val == 2 || $val == 3) {
 								$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
 											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+								if($result['androidToken'] != NULL) {
+								$notificPushed = commentPush($this->user->login, $brid, $bracelet_stats['pic_anz'], $comm, $userdetails['androidToken']);
+								}
 								$mail_header = "From: Placelet <support@placelet.de>\n";
 								$mail_header .= "MIME-Version: 1.0" . "\n";
 								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
