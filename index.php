@@ -87,7 +87,7 @@ if($page == 'home') {
 	}
 	if(is_mobile($_SERVER['HTTP_USER_AGENT']) == false) {
 ?>
-<!--###WIN BANNER###-->
+<!--###BANNER###-->
 <a href="/press"><?php echo $lang->misc->banner->$lng; ?></a>
 <?php
 	}
