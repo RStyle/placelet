@@ -88,7 +88,7 @@ if($page == 'home') {
 	if(is_mobile($_SERVER['HTTP_USER_AGENT']) == false) {
 ?>
 <!--###BANNER###-->
-<a href="/press"><?php echo $lang->misc->banner->$lng; ?></a>
+<a href="https://play.google.com/store/apps/details?id=net.placelet"><?php echo $lang->misc->banner->$lng; ?></a>
 <?php
 	}
 ?>
