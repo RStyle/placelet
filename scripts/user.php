@@ -990,8 +990,7 @@ class Statistics {
 			|| strpos($comment, 'www') !== false
 			|| strpos($comment, '.com') !== false
 			|| strpos($comment, '.de') !== false
-			|| strpos($comment, '.net') !== false
-			|| strpos($comment, 'www') !== false)
+			|| strpos($comment, '.net') !== false)
 		) return false;
 		$comment = smileys(clean_input($comment));
 		if(!$this->user->login) $userid = 0;

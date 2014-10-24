@@ -271,6 +271,15 @@ if(isset($_POST['androidGetMessages'])) {
 	$registered = $user->registerbr($_POST['brid']);
 	if(is_array($registered)) $registered = $registered[0];
 	$return = array("registered" => $registered);
+}elseif(isset($_POST['androidPostComment'])) {
+	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);
+	$picture_details['subscribed'] = false;
+	$userdetails = $statistics->userdetails($user->login);
+	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
+	$return = $picture_details;
+	
+	$return['commentPosted'] = $statistics->write_comment($_POST['braceID'], $_POST['comment'], $_POST['picid']);
+	if($_POST['lastUpdate'] > $picture_details[$picture_details['pic_anz']]['upload']) $return = array("update" => "alreadyUpToDate");	
 }
 foreach($_POST as $key => $val) {
 	$return[$key] = $val;
