@@ -289,7 +289,7 @@ foreach($_POST as $key => $val) {
 }
 $return[''] = '';
 $json = json_encode($return);
-$jsonMinified = minify_json(anti_smileys($json));
+$jsonMinified = minify_json(emojify($json));
 $gzipOutput = gzencode($jsonMinified, 9);
 writeToAndroidText(
 	//strlen($json).'-'.strlen($jsonMinified).'-'.strlen($gzipOutput)."\n".

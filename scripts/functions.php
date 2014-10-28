@@ -152,7 +152,14 @@ function anti_smileys($text) {
 		':)' => '<img alt=":)" src="/cache.php?f=/img/laechelnd.gif">', ':D' => '<img alt=":D" src="/cache.php?f=/img/lachend.gif">', ':P' => '<img alt=":P" src="/cache.php?f=/img/frech.gif">', ';)' => '<img alt=";)" src="/cache.php?f=/img/zwinkernd.gif">',
 		':(' => '<img alt=":(" src="/cache.php?f=/img/traurig.gif">', ':o' => '<img alt=":o" src="/cache.php?f=/img/schockiert.gif">', '(y)' => '<img alt="(y)" src="/cache.php?f=/img/yes.gif">',
 		'(n)' => '<img alt="(n)" src="/cache.php?f=/img/no.gif">');
-	return str_ireplace(array_values($smileys), array_keys($smileys), stripslashes($text));
+	return str_ireplace(array_values($smileys), array_keys($smileys), ($text));
+}
+function emojify($text) {
+	$smileys = array(
+		"\xF0\x9F\x98\x8A" => '<img alt=\":)\" src=\"\/cache.php?f=\/img\/laechelnd.gif\">', "\xF0\x9F\x98\x83" => '<img alt=\":D\" src=\"\/cache.php?f=\/img\/lachend.gif\">', "\xF0\x9F\x98\x9D" => '<img alt=\":P\" src=\"\/cache.php?f=\/img\/frech.gif\">', "\xF0\x9F\x98\x89" => '<img alt="\;)\" src=\"\/cache.php?f=\/img\/zwinkernd.gif\">',
+		"\xF0\x9F\x98\x94" => '<img alt=\":(\" src=\"\/cache.php?f=\/img\/traurig.gif\">', "\xF0\x9F\x98\xB3" => '<img alt=\":o\" src=\"\/cache.php?f=\/img\/schockiert.gif\">', "\xF0\x9F\x91\x8D" => '<img alt=\"(y)\" src=\"\/cache.php?f=\/img\/yes.gif\">',
+		"\xF0\x9F\x91\x8E" => '<img alt=\"(n)\" src=\"\/cache.php?f=\/img\/no.gif\">');
+	return str_ireplace(array_values($smileys), array_keys($smileys), ($text));
 }
 //Smileys
 function smileys($text) {
