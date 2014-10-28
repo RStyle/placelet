@@ -291,7 +291,26 @@ print_r($q);
 echo "[$pic_start, $pic_count]";*/
 ?>
 <?php
-var_dump(picPush("Jules", "Jules#1", "brid", 109, "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
-var_dump(commentPush("Jules", "brid", "picid", "Wunderschönes Bild :o", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
-var_dump(messagePush("Jules", 2, "Hi, was geht bei dir?", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+// Android Notifications Test
+//var_dump(picPush("Jules", "Jules#1", "brid", 109, "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+//var_dump(commentPush("Jules", "brid", "picid", "Wunderschönes Bild :o", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+//var_dump(messagePush("Jules", 2, "Hi, was geht bei dir?", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+?>
+<?php
+function minify_json($json) {
+	$username_json = "John#Zoidberg";
+	if(isset($_POST['user'])) $username_json = $_POST['user'];
+	$search  = array("recipient", "name", "sender", "sent", "seen", "message", "update", "exists", "brid", "title", "description", "city", "country", "userid", "date", "upload", "user", "user", "ownBracelet", "alreadyUpToDate", "picid", "longitude", "latitude", "state", "commid", "fileext", $username_json, "Deutschland", "United States");//id
+	$replace = array("1‡", "2‡", "3‡", "4‡", "5‡", "6‡", "7‡", "8‡", "9‡", "‡10", "‡11", "‡12", "‡13", "‡14", "‡15", "‡16", "‡17", "‡18", "‡19", "‡20", "‡21", "‡22", "‡3", "‡24", "‡25", "‡26", "‡27", "‡28", "‡29");
+	$json = str_replace($search, $replace, $json);
+	return $json;
+}
+$brid = "nuer2q";
+$picture_details = $statistics->bracelet_stats($brid, true);
+$picture_details['subscribed'] = false;
+$userdetails = $statistics->userdetails($user->login);
+if($userdetails['subscriptions'] != NULL) if(array_key_exists($brid, $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
+$json = json_encode($picture_details);
+$jsonMinified = minify_json(anti_smileys($json));
+echo $jsonMinified;
 ?>

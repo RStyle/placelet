@@ -147,6 +147,13 @@ function messagePushBots($sender, $token) {
 		
 		$pb->PushOne();	
 }
+function anti_smileys($text) {
+	$smileys = array(
+		':)' => '<img alt=":)" src="/cache.php?f=/img/laechelnd.gif">', ':D' => '<img alt=":D" src="/cache.php?f=/img/lachend.gif">', ':P' => '<img alt=":P" src="/cache.php?f=/img/frech.gif">', ';)' => '<img alt=";)" src="/cache.php?f=/img/zwinkernd.gif">',
+		':(' => '<img alt=":(" src="/cache.php?f=/img/traurig.gif">', ':o' => '<img alt=":o" src="/cache.php?f=/img/schockiert.gif">', '(y)' => '<img alt="(y)" src="/cache.php?f=/img/yes.gif">',
+		'(n)' => '<img alt="(n)" src="/cache.php?f=/img/no.gif">');
+	return str_ireplace(array_values($smileys), array_keys($smileys), stripslashes($text));
+}
 //Smileys
 function smileys($text) {
 	$smileys = array(

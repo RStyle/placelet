@@ -203,7 +203,10 @@ if(isset($_POST['androidGetMessages'])) {
 	$userdetails = $statistics->userdetails($user->login);
 	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 	$return = $picture_details;
-	if($_POST['lastUpdate'] > $picture_details[$picture_details['pic_anz']]['upload']) $return = array("update" => "alreadyUpToDate");
+	$lastChange = 0;
+	//$lastChange = $var ? $var : $lastChange;
+	$lastChange = $picture_details[$picture_details['pic_anz']]['upload'] > $lastChange ? $picture_details[$picture_details['pic_anz']]['upload'] : $lastChange;
+	if($_POST['lastUpdate'] > $lastChange) $return = array("update" => "alreadyUpToDate");
 }elseif(isset($_POST['androidGetOwnBracelets'])) {
 	$return = array();
 	$username = $_POST['user'];
@@ -286,11 +289,14 @@ foreach($_POST as $key => $val) {
 }
 $return[''] = '';
 $json = json_encode($return);
-$jsonMinified = minify_json($json);
+$jsonMinified = minify_json(anti_smileys($json));
 $gzipOutput = gzencode($jsonMinified, 9);
 writeToAndroidText(
-	strlen($json).'-'.strlen($jsonMinified).'-'.strlen($gzipOutput)."\n".
-	((1 - strlen($jsonMinified) / strlen($json)) * 100).'%-'.((1 - strlen($gzipOutput) / strlen($jsonMinified)) * 100).'%'
+	//strlen($json).'-'.strlen($jsonMinified).'-'.strlen($gzipOutput)."\n".
+	//((1 - strlen($jsonMinified) / strlen($json)) * 100).'%-'.((1 - strlen($gzipOutput) / strlen($jsonMinified)) * 100).'%'
+	$json
+	."<br><br><br>".
+	$jsonMinified
 );
 header('Content-Length: '.strlen($gzipOutput));
 header('Content-Type: text/html; charset=utf-8');
