@@ -625,13 +625,6 @@ class User
 			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
 			$mail = mail($result['email'], 'Neue Nachricht auf Placelet', $content, $mail_header);
-			
-			
-			$File = "../../android/android.txt"; 
-			$Handle = fopen($File, 'w');
-			@$Data = $this->login."written".$result['androidToken']."--".$mail."--".(time() - $result['last_login']); 
-			fwrite($Handle, $Data);
-			fclose($Handle);
 		}
 		if($result['androidToken'] != NULL) {
 			$notificPushed = messagePush($this->login, $this->userid, $content, $result['androidToken']);
