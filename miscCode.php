@@ -311,6 +311,19 @@ $picture_details['subscribed'] = false;
 $userdetails = $statistics->userdetails($user->login);
 if($userdetails['subscriptions'] != NULL) if(array_key_exists($brid, $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 $json = json_encode($picture_details);
-$jsonMinified = minify_json(anti_smileys($json));
-echo $jsonMinified;
+$jsonMinified = minify_json(($json));
+//echo $jsonMinified;
+echo $picture_details[$picture_details['pic_anz']]['upload'].'<br>';
+$lastChange = 0;
+foreach($picture_details as $key => $val) {
+	$i = 1;
+	$exists = true;
+	while($exists) {
+		if(isset($val[$i]['date'])) {
+			$lastChange = $val[$i]['date'] > $lastChange ? $val[$i]['date'] : $lastChange;
+			$i++;
+		}else $exists = false;
+	}
+}
+echo $lastChange;
 ?>
