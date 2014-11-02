@@ -199,7 +199,6 @@ if(isset($_POST['androidGetMessages'])) {
 	
 }elseif(isset($_POST['androidGetBraceletData'])) {
 	$picture_details = $statistics->bracelet_stats($_POST['braceID'], true);
-	$picture_details['subscribed'] = false;
 	$userdetails = $statistics->userdetails($user->login);
 	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $picture_details['subscribed'] = true;
 	$return = $picture_details;
@@ -217,6 +216,7 @@ if(isset($_POST['androidGetMessages'])) {
 		}
 	}
 	if($_POST['lastUpdate'] > $lastChange) $return = array("update" => "alreadyUpToDate");
+	$return['subscribed'] = false;
 	if($userdetails['subscriptions'] != NULL) if(array_key_exists($_POST['braceID'], $userdetails['subscriptions'])) $return['subscribed'] = true;
 }elseif(isset($_POST['androidGetOwnBracelets'])) {
 	$return = array();

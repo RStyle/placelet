@@ -297,7 +297,8 @@ echo "[$pic_start, $pic_count]";*/
 //var_dump(messagePush("Jules", 2, "Hi, was geht bei dir?", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
 ?>
 <?php
-function minify_json($json) {
+// Comments - newest date
+/*function minify_json($json) {
 	$username_json = "John#Zoidberg";
 	if(isset($_POST['user'])) $username_json = $_POST['user'];
 	$search  = array("recipient", "name", "sender", "sent", "seen", "message", "update", "exists", "brid", "title", "description", "city", "country", "userid", "date", "upload", "user", "user", "ownBracelet", "alreadyUpToDate", "picid", "longitude", "latitude", "state", "commid", "fileext", $username_json, "Deutschland", "United States");//id
@@ -325,5 +326,17 @@ foreach($picture_details as $key => $val) {
 		}else $exists = false;
 	}
 }
-echo $lastChange;
+echo $lastChange;*/
+?>
+<?php
+// Update Coordinate of individual picture
+/*$sql = "UPDATE pictures SET latitude = 34.679452, longitude = 138.945286 WHERE brid = :brid AND picid = :picid";
+$stmt = $db->prepare($sql);
+$stmt->execute(array(':brid' => 'g47ts3', ':picid' => '21'));
+
+$sql = "SELECT city, country, latitude, longitude FROM pictures WHERE brid = :brid AND picid = :picid";
+$stmt = $db->prepare($sql);
+$stmt->execute(array(':brid' => 'g47ts3', ':picid' => '21'));
+$q = $stmt->fetch(PDO::FETCH_ASSOC);
+print_r($q);*/
 ?>
