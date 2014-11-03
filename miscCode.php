@@ -292,9 +292,10 @@ echo "[$pic_start, $pic_count]";*/
 ?>
 <?php
 // Android Notifications Test
-//var_dump(picPush("Jules", "Jules#1", "brid", 109, "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
-//var_dump(commentPush("Jules", "brid", "picid", "Wunderschönes Bild :o", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
-//var_dump(messagePush("Jules", 2, "Hi, was geht bei dir?", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+//var_dump(picPush("Jules", "Jules#1", "y5e62h", 109, "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+//var_dump(commentPush("Jules", "y5e62h", "picid", "Wunderschönes Bild :o", "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+var_dump(messagePush("JohnZoidberg", 2, "Hi, was geht bei dir?".time(), "APA91bEtsL8bBVauBL-uXCKoQKhjdZI3kA3NrubUxhECEKehhhBzS9G-4g0RnMNPOv6x7vQz1d3GzwEpkuWowySDiWLJOwHGMxQhnha-EsyNC9lDp0SJ5ECY9EF4ubilfKzVTfTwaQnu_aaqtFV30J6sXgcHz7o2zA"));
+
 ?>
 <?php
 // Comments - newest date
