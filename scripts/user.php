@@ -619,12 +619,12 @@ class User
 		$options['tag']['value'] = $this->login;
 		$options['deviceToken'] = $result['androidToken'];
 		if(time() - $result['last_login'] > 3600 * 24) {			
-			$content = $this->login.' hat dir eine Nachricht gesendet:<br>"'.$content.'"<br><a href="http://placelet.de/nachrichten?msg='.urlencode($this->login).'">Antworten</a>';
+			$mail_content = $this->login.' hat dir eine Nachricht gesendet:<br>"'.$content.'"<br><a href="http://placelet.de/nachrichten?msg='.urlencode($this->login).'">Antworten</a>';
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
 			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 			$mail_header .= "Content-transfer-encoding: 8bit";
-			$mail = mail($result['email'], 'Neue Nachricht auf Placelet', $content, $mail_header);
+			$mail = mail($result['email'], 'Neue Nachricht auf Placelet', $mail_content, $mail_header);
 		}
 		if($result['androidToken'] != NULL) {
 			$notificPushed = messagePush($this->login, $this->userid, $content, $result['androidToken']);
