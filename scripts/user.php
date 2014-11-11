@@ -1010,7 +1010,7 @@ class Statistics {
 				':comment' => $comment,
 				':date' => time()
 			));
-			$this->notify_subscribers($brid, $comment);
+			$this->notify_comments($brid, $picid, $comment);
 			return true;
 		}catch (PDOException $e) {
 				die('ERROR: ' . $e->getMessage());
@@ -1480,10 +1480,75 @@ class Statistics {
 			));			
 		}
 	}
-	private function notify_subscribers($brid, $comm = false) {
+	private function notify_comments($brid, $picid, $comment) {
 		$own_bracelet = false;
 		$bracelet_stats = $this->bracelet_stats($brid);
 		$owner = $bracelet_stats['owner'];
+		if($this->user->login) if($this->user->login == $owner) $own_bracelet = true;
+		
+		if(!$own_bracelet) {
+			$braceName = $this->brid2name($brid);
+			//Benachrichtigungen, wie im Profil festgelegt
+				//Beim Inhaber
+			$sql = "SELECT pic_own, comm_own, comm_pic FROM notifications WHERE userid = :ownerid";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array(':ownerid' => self::username2id($owner)));
+			$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
+			$users_pic_subs_informed = array();
+			$userdetails = $this->userdetails($owner);
+			$user_email = $userdetails['email'];
+			foreach($userProps as $key => $val) {
+				if($key == 'comm_own') {
+					if($val == 2 || $val == 3) {
+						$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+									Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+						if($userdetails['androidToken'] != NULL) {
+							$notificPushed = commentPush($this->user->login, $brid, $picid, $comment, $userdetails['androidToken']);
+						}
+						$mail_header = "From: Placelet <support@placelet.de>\n";
+						$mail_header .= "MIME-Version: 1.0" . "\n";
+						$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+						$mail_header .= "Content-transfer-encoding: 8bit";
+						mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+					}
+				}
+			}
+			//Und beim Bildbesitzer
+			$sql = "SELECT userid FROM pictures WHERE brid = :brid AND picid = :picid";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array(':brid' => $brid, ':picid' => $picid));
+			$picposter = $stmt->fetch();
+			$sql = "SELECT userid, pic_own, comm_own, comm_pic FROM notifications WHERE userid = :picposterid";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array(':picposterid' => $picposter['userid']));
+			$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
+			if($userProps['userid'] != 0) {
+				$userdetails = $this->userdetails(self::id2username($userProps['userid']));
+				$user_email = $userdetails['email'];
+				foreach($userProps as $key => $val) {
+					if($key == 'comm_pic') {
+						if($val == 2 || $val == 3) {
+							$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+							if($result['androidToken'] != NULL) {
+							$notificPushed = commentPush($this->user->login, $brid, $bracelet_stats['pic_anz'], $comm, $userdetails['androidToken']);
+							}
+							$mail_header = "From: Placelet <support@placelet.de>\n";
+							$mail_header .= "MIME-Version: 1.0" . "\n";
+							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+							$mail_header .= "Content-transfer-encoding: 8bit";
+							mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
+						}
+					}
+				}
+			}
+		}
+	}
+	private function notify_pics($brid) {
+		$own_bracelet = false;
+		$bracelet_stats = $this->bracelet_stats($brid);
+		$owner = $bracelet_stats['owner'];
+		$picid = $bracelet_stats['pic_anz'];
 		if($this->user->login) if($this->user->login == $owner) $own_bracelet = true;
 		if(!$own_bracelet) {
 			$braceName = $this->brid2name($brid);
@@ -1503,99 +1568,47 @@ class Statistics {
 			foreach($userProps as $key => $val) {
 				if($key == 'pic_own') {
 					if($val == 2 || $val == 3) {
-						if(!$comm) {
-							$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
-							$mail_header = "From: Placelet <support@placelet.de>\n";
-							if($userdetails['androidToken'] != NULL) {
-								$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $bracelet_stats['pic_anz']), $userdetails['androidToken']);
-							}
-							$mail_header .= "MIME-Version: 1.0" . "\n";
-							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+						$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+									Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+						$mail_header = "From: Placelet <support@placelet.de>\n";
+						if($userdetails['androidToken'] != NULL) {
+							$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $picid), $userdetails['androidToken']);
 						}
-					}
-				}elseif($key == 'comm_own') {
-					if($val == 2 || $val == 3) {
-						if($comm) {
-							$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
-										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
-							if($userdetails['androidToken'] != NULL) {
-								$notificPushed = commentPush($this->user->login, $brid, $bracelet_stats['pic_anz'], $comm, $userdetails['androidToken']);
-							}
-							$mail_header = "From: Placelet <support@placelet.de>\n";
-							$mail_header .= "MIME-Version: 1.0" . "\n";
-							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
-						}
+						$mail_header .= "MIME-Version: 1.0" . "\n";
+						$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+						$mail_header .= "Content-transfer-encoding: 8bit";
+						mail($user_email, 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 					}
 				}elseif($key == 'pic_subs') {
 					if($val == 2 || $val == 3) {
-						if(!$comm) {
-							$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-										Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
-							if($userdetails['androidToken'] != NULL) {
-								$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $bracelet_stats['pic_anz']), $userdetails['androidToken']);
-							}
-							$mail_header = "From: Placelet <support@placelet.de>\n";
-							$mail_header .= "MIME-Version: 1.0" . "\n";
-							$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-							$mail_header .= "Content-transfer-encoding: 8bit";
-							mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
-							$useremails_pic_subs_informed[] = $user_email;
-						}
-					}
-				}
-			}
-				//Und beim Bildbesitzer
-			if($comm) {
-				$sql = "SELECT userid FROM pictures WHERE brid = :brid AND picid = :picid";
-				$stmt = $this->db->prepare($sql);
-				$stmt->execute(array(':brid' => $brid, ':picid' => $comm));
-				$picposter = $stmt->fetch();
-				$sql = "SELECT userid, pic_own, comm_own, comm_pic FROM notifications WHERE userid = :picposterid";
-				$stmt = $this->db->prepare($sql);
-				$stmt->execute(array(':picposterid' => $picposter['userid']));
-				$userProps = $stmt->fetch(PDO::FETCH_ASSOC);
-				if($userProps['userid'] != 0) {
-					$userdetails = $this->userdetails(self::id2username($userProps['userid']));
-					$user_email = $userdetails['email'];
-					foreach($userProps as $key => $val) {
-						if($key == 'comm_pic') {
-							if($val == 2 || $val == 3) {
-								$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
-											Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
-								if($result['androidToken'] != NULL) {
-								$notificPushed = commentPush($this->user->login, $brid, $bracelet_stats['pic_anz'], $comm, $userdetails['androidToken']);
-								}
-								$mail_header = "From: Placelet <support@placelet.de>\n";
-								$mail_header .= "MIME-Version: 1.0" . "\n";
-								$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
-								$mail_header .= "Content-transfer-encoding: 8bit";
-								mail($user_email, 'Neuer Kommentar für Armband '.$braceName, $content, $mail_header);
-							}
-						}
-					}
-				}
-			}
-			//Direkte Abonnenten informieren
-			if(!$comm) {
-				$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
-				$q = $this->db->prepare($sql);
-				$q->execute(array(':brid' => $brid));
-				$q->setFetchMode(PDO::FETCH_ASSOC);
-				while($row = $q->fetch(PDO::FETCH_ASSOC)){
-					if(!in_array($row['email'], $users_pic_subs_informed)) {
 						$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
 									Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
+						if($userdetails['androidToken'] != NULL) {
+							$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $picid), $userdetails['androidToken']);
+						}
 						$mail_header = "From: Placelet <support@placelet.de>\n";
 						$mail_header .= "MIME-Version: 1.0" . "\n";
 						$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
 						$mail_header .= "Content-transfer-encoding: 8bit";
-						//mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+						mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
+						$useremails_pic_subs_informed[] = $user_email;
 					}
+				}
+			}
+			//Direkte Abonnenten informieren
+			$sql = "SELECT email FROM subscriptions WHERE brid = :brid";
+			$q = $this->db->prepare($sql);
+			$q->execute(array(':brid' => $brid));
+			$q->setFetchMode(PDO::FETCH_ASSOC);
+			while($row = $q->fetch(PDO::FETCH_ASSOC)){
+				if(!in_array($row['email'], $users_pic_subs_informed)) {
+					$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+								Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
+					$mail_header = "From: Placelet <support@placelet.de>\n";
+					$mail_header .= "MIME-Version: 1.0" . "\n";
+					$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
+					$mail_header .= "Content-transfer-encoding: 8bit";
+					//mail($row['email'], 'Neues Bild für Armband '.$braceName, $content, $mail_header);
 				}
 			}
 		}
