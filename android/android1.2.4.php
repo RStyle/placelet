@@ -132,7 +132,7 @@ if(isset($_POST['androidGetMessages'])) {
 			$msgs = end($return);
 			reset($return);
 			$latestMsg = end($msgs);
-			if($_POST['lastUpdate'] > $latestMsg['sent']) $return = array("update" => "alreadyUpToDate");
+			if($_POST['lastUpdate'] > $latestMsg['sent'] && $_POST['lastUpdate'] > $latestMsg['seen']) $return = array("update" => "alreadyUpToDate");
 		}
 	}else {
 		$return = array('notlogged' => $user->login);
