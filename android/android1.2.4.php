@@ -122,7 +122,7 @@ if(isset($_POST['androidGetMessages'])) {
 		$return = $news;
 		if($_POST['lastUpdate'] > $latestMSGDate && $_POST['lastUpdate'] > $latestMSGSeen) $return = array("update" => "alreadyUpToDate");
 	}else {
-		$return = array('notlogged' => $user->login);
+		$return = array('notlogged' => $user->login, "update" => "alreadyUpToDate");
 	}
 }elseif(isset($_POST['androidGetIOMessages'])) {
 	if($user->login) {
@@ -135,7 +135,7 @@ if(isset($_POST['androidGetMessages'])) {
 			if($_POST['lastUpdate'] > $latestMsg['sent'] && $_POST['lastUpdate'] > $latestMsg['seen']) $return = array("update" => "alreadyUpToDate");
 		}
 	}else {
-		$return = array('notlogged' => $user->login);
+		$return = array('notlogged' => $user->login, "update" => "alreadyUpToDate");
 	}
 	$return['exists'] = Statistics::userexists($_POST['recipient']);
 }elseif(isset($_POST['androidSendMessages'])) {
@@ -152,7 +152,7 @@ if(isset($_POST['androidGetMessages'])) {
 			$return['messageSent'] = true;
 		}else $return = array('messageSent' => false, 'error' => NOT_EXISTING);
 	}else {
-		$return = array('notlogged' => $user->login);
+		$return = array('notlogged' => $user->login, "update" => "alreadyUpToDate");
 	}
 }elseif(isset($_POST['androidProfileInfo'])) {
 	$username = $_POST['user'];
