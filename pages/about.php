@@ -10,8 +10,8 @@
 				<!--<div id="partner_box">
                     <h1><?php echo $lang->about->partner->$lng; ?></h1>
                     <p><?php echo $lang->about->graffelob->$lng; ?></p>
-                    <a id="graffe_link" href="http://mst-graffe.de/" target="_blank">296
-                        <img src="http://mst-graffe.de/index_htm_files/670.jpg" alt="mstgraffe_logo">
+                    <a id="graffe_link" href="https://mst-graffe.de/" target="_blank">296
+                        <img src="https://mst-graffe.de/index_htm_files/670.jpg" alt="mstgraffe_logo">
                         <p class="partner_name">Maschinen- und Stahlbau-Technik Markus Graffe GMBH</p>
                     </a>
                 </div>-->
@@ -149,10 +149,10 @@ for($i = 1; $i <= count($timeline['title']); $i++) {
 
     				<br>
 				    <div style="float: right; width: 900px; text-align: right; font-size:10pt">
-				        <a target="_blank" style="float: right; margin-right: 75px;" href="http://www.goldschmiede-aurelia.de/">Goldschmiede Aurelia</a>	    
-    					<a target="_blank" style="float: right; margin-right: 100px;" href="http://laserkreativ.de/">Laser Kreativ</a>
-    					<a target="_blank" style="float: right; margin-right: 100px;" href="http://odd.de/">odd Print & Medien</a>
-    					<a target="_blank" style="float: right; margin-right: 140px;" href="http://urano.de/">Urano IT-Systeme</a>
+				        <a target="_blank" style="float: right; margin-right: 75px;" href="https://www.goldschmiede-aurelia.de/">Goldschmiede Aurelia</a>	    
+    					<a target="_blank" style="float: right; margin-right: 100px;" href="https://laserkreativ.de/">Laser Kreativ</a>
+    					<a target="_blank" style="float: right; margin-right: 100px;" href="https://odd.de/">odd Print & Medien</a>
+    					<a target="_blank" style="float: right; margin-right: 140px;" href="https://urano.de/">Urano IT-Systeme</a>
     				</div>
 				</div>
 		

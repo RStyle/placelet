@@ -99,7 +99,7 @@ if($_GET['q'] == 3) {
                  }
 ?>
 						</table> 
-						<div class="fb-like" data-href="http://placelet.de/<?php echo $stats[$i]['owner'].'/'.$stats[$i]['braceletNR'].'/'.$stats[$i][$systemStats['recent_picids'][$i]]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+						<div class="fb-like" data-href="https://placelet.de/<?php echo $stats[$i]['owner'].'/'.$stats[$i]['braceletNR'].'/'.$stats[$i][$systemStats['recent_picids'][$i]]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 					<p class="pic-desc">
 							<span class="desc-header"><?php echo $stats[$i][$systemStats['recent_picids'][$i]]['title']; ?></span><br>
 							<?php echo $stats[$i][$systemStats['recent_picids'][$i]]['description']; ?>      

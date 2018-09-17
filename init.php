@@ -6,7 +6,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost') {
 	$this_path_html = '';
 }else {
 	$this_path = '/var/www/virtual/placelet.de/htdocs/';
-	$this_path_html = 'http://www.placelet.de/';
+	$this_path_html = 'https://www.placelet.de/';
 }
 require_once($this_path.'scripts/connection.php');
 if(isset($onlineaufftp) && !isset($test314)){ //initialisiert in connection

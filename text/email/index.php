@@ -39,7 +39,7 @@ $a=$a[0];
 //$a=strtolower($b[0]);
 if($manialinks[$a]["link"]!=""){
 if($zahl==1)
-return 'http://manialinks.de.vu?prase='.$manialinks[$a]["link"];
+return 'https://manialinks.de.vu?prase='.$manialinks[$a]["link"];
 else
 return $manialinks[$a]["link"];
 }else{
@@ -54,15 +54,15 @@ $a=strtolower(htmlspecialchars(utf8_decode($a)));
 if($a[0]=="h" && $a[1]=="t" && $a[2]=="t" && $a[3]=="p"){
 return $a;
 }else{
-return "http://".$a;
+return "https://".$a;
 }
 }
 }
 if(trim($_GET["praser"])==""){$_GET["praser"]="test";}
 $datei=ml_adresse($_GET["praser"],0);
-$datei='http://rsty.keksml.de/rsty22.php';
+$datei='https://rsty.keksml.de/rsty22.php';
 $xml=simplexml_load_file($datei);
-$order='http://rsty.keksml.de/';
+$order='https://rsty.keksml.de/';
 //echo $datei;
 //---praser
 if($xml->redirect!="" && !isset($_GET["error"])){

@@ -182,7 +182,7 @@ if(isset($_POST['androidGetMessages'])) {
 	// Display Toast:    array("type" => "toast", "content" => "Hallo");
 	
 	// Display Dialog:   array("type" => "dialog", "positiveLabel" => "Yup", "negativeLabel" => "Nah", "title" => "Hey :)"
-	//  with URL action:       "action" => "URL", "content" => "http://google.com"
+	//  with URL action:       "action" => "URL", "content" => "https://google.com"
 	//  with activity action:  "action" => "Activity", "content" => "AboutActivity"
 	//  snooze dialog:    "snooze" => 10
 	

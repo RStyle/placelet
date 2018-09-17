@@ -139,7 +139,7 @@ if($braceName !== NULL) {
 				 }
 	?>
 						</table>
-						<div class="fb-like" data-href="http://placelet.de/<?php echo $stats['owner'].'/'.$stats['braceletNR'].'/'.$stats[$i]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+						<div class="fb-like" data-href="https://placelet.de/<?php echo $stats['owner'].'/'.$stats['braceletNR'].'/'.$stats[$i]['picid']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 						<div class="pic-desc">
 							<span class="desc-header" id="edit_title-<?php echo $stats[$i]['picid']; ?>"><?php echo $stats[$i]['title']; ?></span>
 							<p style="margin: 0;" id="edit_desc-<?php echo $stats[$i]['picid']; ?>"><?php echo $stats[$i]['description']; ?></p>

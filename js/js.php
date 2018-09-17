@@ -4,7 +4,7 @@ header ("cache-control: must-revalidate; max-age: 2592000");
 header ("expires: " . gmdate ("D, d M Y H:i:s", time() + 2592000) . " GMT");
 ob_start("ob_gzhandler");
 
-//ty http://phpperformance.de/performancegewinn-durch-virtuelles-javascript-file/ + http://www.phpgangsta.de/externe-javascript-dateien-zusammenfassen
+//ty https://phpperformance.de/performancegewinn-durch-virtuelles-javascript-file/ + https://www.phpgangsta.de/externe-javascript-dateien-zusammenfassen
 if(isset($_GET['lang']))
 	$lang = $_GET['lang'];
 else

@@ -109,7 +109,7 @@ if($systemStats['total_posted'] > 1) {
 <!--ZWEITER ARTIKEL-->
 			<article id="kollektion" class="mainarticles bottom_border_green">
 				<div class=" mainarticleheaders line_header green_line"><h1><?php echo $lang->home->artikel2[$lng."-title"]; ?></h1></div>
-				<div class="responsive_16-9" style="margin-bottom: 1em;"><iframe width="560" height="315" src="http://www.youtube.com/embed/xtnbzTK2G8I" style="border: none"></iframe></div>
+				<div class="responsive_16-9" style="margin-bottom: 1em;"><iframe width="560" height="315" src="https://www.youtube.com/embed/xtnbzTK2G8I" style="border: none"></iframe></div>
 <?php
 for($i = 0; $i < 6; $i++){
 ?>
@@ -129,7 +129,7 @@ for($i = 0; $i < 6; $i++){
 			<aside class="side_container" style="margin-top: 20px;">
 				<h1>facebook</h1>
 				<p><?php echo $lang->home->fbnews->$lng; ?></p>
-				<div id="fb_plugin" class="fb-like-box" data-href="http://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+				<div id="fb_plugin" class="fb-like-box" data-href="https://www.facebook.com/Placelet" data-width="200" data-height="190" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
 			</aside>
 			<aside class="side_container" style="margin-top: 20px;">
 				<?php //<!--<h1>JUNIOR</h1>-->?>

@@ -21,7 +21,7 @@ if(!isset($_GET['picid']))
 
 $picid = trim($_GET['picid']) + 0;
 if($picid < 1)
-	{echo'Picture-ID to low.';exit;}//http://placelet.de/armband?name='.$rowbrid['name'].'&pic='.$row['picid'].' http: //placelet.de/armband?name=RStyle%231&pic=5
+	{echo'Picture-ID to low.';exit;}//https://placelet.de/armband?name='.$rowbrid['name'].'&pic='.$row['picid'].' https: //placelet.de/armband?name=RStyle%231&pic=5
 
 require_once('scripts/connection.php');
 $stmt = $db->prepare('SELECT * FROM pictures WHERE id = :picid');
@@ -31,9 +31,9 @@ $stmt = $db->prepare('SELECT * FROM bracelets WHERE brid = :brid');
 $stmt->execute(array('brid' =>$row['brid']));
 $rowbrid = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$link = 'http://placelet.de/armband?name='.urlencode($rowbrid['name']).'&pic='.$row['picid'];
+$link = 'https://placelet.de/armband?name='.urlencode($rowbrid['name']).'&pic='.$row['picid'];
 echo '<!DOCTYPE HTML>
-<html><body><img src="http://placelet.de/pictures/bracelets/pic-'.$picid.'.jpg" />
+<html><body><img src="https://placelet.de/pictures/bracelets/pic-'.$picid.'.jpg" />
     <script language="javascript" type="text/javascript">
     <!-- // JavaScript-Bereich für ältere Browser auskommentieren
     window.location.href = "'.$link.'";

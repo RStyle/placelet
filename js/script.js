@@ -257,7 +257,7 @@ function initialize_postpic(coords, this_lat, this_lng) {/*1*/
 	$.ajax({
 		type: 'GET',
 		dataType: "json",
-		url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false&eng=" + lng,
+		url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false&eng=" + lng,
 		data: {},
 		success: function(data) {
 			city = "";
@@ -323,7 +323,7 @@ function initialize_postpic(coords, this_lat, this_lng) {/*1*/
 			$.ajax({
 				type: 'GET',
 				dataType: "json",
-				url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false",
+				url: "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+long+"&sensor=false",
 				data: {},
 				success: function(data) {
 					city = "";

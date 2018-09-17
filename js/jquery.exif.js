@@ -1,8 +1,8 @@
 
 /*
  * Javascript EXIF Reader - jQuery plugin 0.1.3
- * Copyright (c) 2008 Jacob Seidelin, cupboy@gmail.com, http://blog.nihilogic.dk/
- * Licensed under the MPL License [http://www.nihilogic.dk/licenses/mpl-license.txt]
+ * Copyright (c) 2008 Jacob Seidelin, cupboy@gmail.com, https://blog.nihilogic.dk/
+ * Licensed under the MPL License [https://www.nihilogic.dk/licenses/mpl-license.txt]
  */
 
 (function($) {

@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width"/>
@@ -794,7 +794,7 @@ body.outlook p {
                         <table class="twelve columns">
                           <tr>
                             <td class="six sub-columns">
-                              <img src="http://placelet.de/img/logo150x50.png">
+                              <img src="https://placelet.de/img/logo150x50.png">
                             </td>
                             <td class="six sub-columns last" style="text-align:right; vertical-align:middle;">
                               <span class="template-label">Bestätigung</span>
@@ -842,7 +842,7 @@ body.outlook p {
                       <table class="twelve columns">
                         <tr>
                           <td class="panel">
-                            <p>Klicke hierfür auf diesen Link: <a href="http://placelet.de/?regstatuschange_user=username&regstatuschange=code">Bestätigen! »</a></p>
+                            <p>Klicke hierfür auf diesen Link: <a href="https://placelet.de/?regstatuschange_user=username&regstatuschange=code">Bestätigen! »</a></p>
                           </td>
                           <td class="expander"></td>
                         </tr>
@@ -865,7 +865,7 @@ body.outlook p {
                             <table class="tiny-button website">
                               <tr>
                                 <td>
-                                  <a href="http://placelet.de/">Placelet.de</a>
+                                  <a href="https://placelet.de/">Placelet.de</a>
                                 </td>
                               </tr>
                             </table>
@@ -875,7 +875,7 @@ body.outlook p {
                             <table class="tiny-button facebook">
                               <tr>
                                 <td>
-                                  <a href="http://www.facebook.com/Placelet">Facebook</a>
+                                  <a href="https://www.facebook.com/Placelet">Facebook</a>
                                 </td>
                               </tr>
                             </table>
@@ -885,7 +885,7 @@ body.outlook p {
                             <table class="tiny-button youtube">
                               <tr>
                                 <td>
-                                  <a href="http://www.youtube.com/user/Placelet">YouTube</a>
+                                  <a href="https://www.youtube.com/user/Placelet">YouTube</a>
                                 </td>
                               </tr>
                             </table>
@@ -922,7 +922,7 @@ body.outlook p {
                         <tr>
                           <td align="center">
                             <center>
-                              <p style="text-align:center;"><a href="http://placelet.de/impressum">Impressum</a> | <a href="http://placelet.de/faq">FAQ</a></p>
+                              <p style="text-align:center;"><a href="https://placelet.de/impressum">Impressum</a> | <a href="https://placelet.de/faq">FAQ</a></p>
                             </center>
                           </td>
                           <td class="expander"></td>

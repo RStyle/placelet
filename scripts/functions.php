@@ -428,7 +428,7 @@ function tinypng($source){
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HEADER => true,
 			// Uncomment below if you have trouble validating our SSL certificate.
-			// Download cacgit ert.pem from: http://curl.haxx.se/ca/cacert.pem 
+			// Download cacgit ert.pem from: https://curl.haxx.se/ca/cacert.pem 
 			// CURLOPT_CAINFO => __DIR__ . "/cacert.pem",
 			CURLOPT_SSL_VERIFYPEER => false
 		));
@@ -510,7 +510,7 @@ function getlnlt($name = false){
 //Zum überprüfen eines Passworts "if (PassHash::check_password($user['pass_hash'], $_POST['password'])) { eingeloggt } else { falsches Passwort }"
 //	$user['pass_hash'] bezeichnet das gespeicherte verschlüsseltes Passwort, welches in der Datenbank liegt
 class PassHash {  
-	//http://net.tutsplus.com/tutorials/php/understanding-hash-functions-and-keeping-passwords-safe/
+	//https://net.tutsplus.com/tutorials/php/understanding-hash-functions-and-keeping-passwords-safe/
   
     // blowfish  
     private static $algo = '$2a';
@@ -541,7 +541,7 @@ class PassHash {
 }  
 
 
-function getBrowserLanguage($arrAllowedLanguages, $strDefaultLanguage, $strLangVariable = null, $boolStrictMode = true) {//code by:http://burian.appfield.net/entwicklung/php-mysql/php-browsersprache-fur-mehrsprachige-anwendungen-ermitteln.htm
+function getBrowserLanguage($arrAllowedLanguages, $strDefaultLanguage, $strLangVariable = null, $boolStrictMode = true) {//code by:https://burian.appfield.net/entwicklung/php-mysql/php-browsersprache-fur-mehrsprachige-anwendungen-ermitteln.htm
     if (!is_array($arrAllowedLanguages)) {
         if (strpos($arrAllowedLanguages,';')) {
             $array = explode(';',$arrAllowedLanguages);
@@ -655,7 +655,7 @@ $is_t++;
         "xda",  
         "iphone",  
         "android",
-//mehr Clients von http://erikastokes.com/php/how-to-test-if-a-browser-is-mobile.php
+//mehr Clients von https://erikastokes.com/php/how-to-test-if-a-browser-is-mobile.php
 		"acer",
 		"acoon",
 		"acs-",

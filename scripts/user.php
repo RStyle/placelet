@@ -178,7 +178,7 @@ class User
 				':comm_pic' => 1,
 				':pic_subs' => 3
 			));
-			//$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'http://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
+			//$content = "Bitte klicke auf diesen Link, um deinen Account zu bestätigen:\n" . 'https://placelet.de/?regstatuschange_user='.urlencode($reg['reg_login']).'&regstatuschange='.urlencode($code);
 			$content = str_replace(array('username', 'code'), array(urlencode($reg['reg_login']), urlencode($code)), file_get_contents('/var/www/virtual/placelet.de/htdocs/text/email/basic.html'));
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
@@ -352,7 +352,7 @@ class User
 		  $mail_header .= "MIME-Version: 1.0" . "\n";
 		  $mail_header .= "Content-type: text/plain; charset=utf-8" . "\n";
 		  $mail_header .= "Content-transfer-encoding: 8bit";
-		  $content = "Bitte klicken sie auf diesen Link, um das Passwort von Ihrem Placelet.de Account zurückzusetzen.\n http://placelet.de/account?passwordCode=".$code;
+		  $content = "Bitte klicken sie auf diesen Link, um das Passwort von Ihrem Placelet.de Account zurückzusetzen.\n https://placelet.de/account?passwordCode=".$code;
 		  mail($email, 'Placelet - Passwort zurücksetzen', $content, $mail_header);
 		  return true;
 		}else {
@@ -619,7 +619,7 @@ class User
 		$options['tag']['value'] = $this->login;
 		$options['deviceToken'] = $result['androidToken'];
 		if(time() - $result['last_login'] > 3600 * 24) {			
-			$mail_content = $this->login.' hat dir eine Nachricht gesendet:<br>"'.$content.'"<br><a href="http://placelet.de/nachrichten?msg='.urlencode($this->login).'">Antworten</a>';
+			$mail_content = $this->login.' hat dir eine Nachricht gesendet:<br>"'.$content.'"<br><a href="https://placelet.de/nachrichten?msg='.urlencode($this->login).'">Antworten</a>';
 			$mail_header = "From: Placelet <support@placelet.de>\n";
 			$mail_header .= "MIME-Version: 1.0" . "\n";
 			$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";
@@ -1038,7 +1038,7 @@ class Statistics {
 			$q = $GLOBALS['db']->prepare($sql); 
 			$q->bindValue(':userlike', "%{$user}%", PDO::PARAM_STR);
 			$q->bindValue(':user', $user, PDO::PARAM_STR);
-			//DANKE an: http://www.mm-newmedia.de/2009/08/pdo-und-die-vergleichsfunktion-like/ ;)
+			//DANKE an: https://www.mm-newmedia.de/2009/08/pdo-und-die-vergleichsfunktion-like/ ;)
 			$q->execute();
 			$rows = $q->fetchAll(PDO::FETCH_ASSOC);	
 			$anz = $q->rowCount();
@@ -1500,8 +1500,8 @@ class Statistics {
 			foreach($userProps as $key => $val) {
 				if($key == 'comm_own') {
 					if($val == 2 || $val == 3) {
-						$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
-									Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+						$content = "Zu deinem Armband <a href='https://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+									Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='https://placelet.de/profil'>Profil</a>.";
 						if($userdetails['androidToken'] != NULL) {
 							$notificPushed = commentPush($this->user->login, $brid, $picid, $comment, $userdetails['androidToken']);
 						}
@@ -1528,8 +1528,8 @@ class Statistics {
 				foreach($userProps as $key => $val) {
 					if($key == 'comm_pic') {
 						if($val == 2 || $val == 3) {
-							$content = "Zu deinem Bild <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
-										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+							$content = "Zu deinem Bild <a href='https://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neuer Kommentar gepostet.<br>
+										Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='https://placelet.de/profil'>Profil</a>.";
 							if($result['androidToken'] != NULL) {
 							$notificPushed = commentPush($this->user->login, $brid, $bracelet_stats['pic_anz'], $comm, $userdetails['androidToken']);
 							}
@@ -1568,8 +1568,8 @@ class Statistics {
 			foreach($userProps as $key => $val) {
 				if($key == 'pic_own') {
 					if($val == 2 || $val == 3) {
-						$content = "Zu deinem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-									Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='http://placelet.de/profil'>Profil</a>.";
+						$content = "Zu deinem Armband <a href='https://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+									Um deine Benachrichtigungseinstellungen zu ändern, besuche bitte dein <a href='https://placelet.de/profil'>Profil</a>.";
 						$mail_header = "From: Placelet <support@placelet.de>\n";
 						if($userdetails['androidToken'] != NULL) {
 							$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $picid), $userdetails['androidToken']);
@@ -1581,8 +1581,8 @@ class Statistics {
 					}
 				}elseif($key == 'pic_subs') {
 					if($val == 2 || $val == 3) {
-						$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-									Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
+						$content = "Zu dem Armband <a href='https://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+									Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='https://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
 						if($userdetails['androidToken'] != NULL) {
 							$notificPushed = picPush($this->user->login, $braceName, $brid, $this->pic2id($brid, $picid), $userdetails['androidToken']);
 						}
@@ -1602,8 +1602,8 @@ class Statistics {
 			$q->setFetchMode(PDO::FETCH_ASSOC);
 			while($row = $q->fetch(PDO::FETCH_ASSOC)){
 				if(!in_array($row['email'], $users_pic_subs_informed)) {
-					$content = "Zu dem Armband <a href='http://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
-								Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='http://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
+					$content = "Zu dem Armband <a href='https://placelet.de/armband?name=".urlencode($braceName)."'>".$braceName."</a> wurde ein neues Bild gepostet.<br>
+								Um keine Benachrichtigungen für dieses Armband mehr zu erhalten klicke <a href='https://placelet.de/armband?name=".urlencode($braceName)."&sub=false&sub_code=".urlencode(PassHash::hash($row['email']))."'>hier</a>";
 					$mail_header = "From: Placelet <support@placelet.de>\n";
 					$mail_header .= "MIME-Version: 1.0" . "\n";
 					$mail_header .= "Content-type: text/html; charset=utf-8" . "\n";

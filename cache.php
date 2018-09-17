@@ -6,7 +6,7 @@ if (!isset($_GET['file']) && !isset($_GET['f'])) {
 if(!isset($_GET['file']))
 	$_GET['file'] = $_GET['f'];
 	
-function set_eTagHeaders($file, $timestamp) { //dank an: http://blog.franky.ws/php-und-das-caching-via-http-header-etag/
+function set_eTagHeaders($file, $timestamp) { //dank an: https://blog.franky.ws/php-und-das-caching-via-http-header-etag/
     $gmt_mTime = gmdate('r', $timestamp); 
  
     header('Cache-Control: public');

@@ -12,7 +12,7 @@
 		<meta name="google-site-verification" content="ZkpZK9hxVHOscD4izd7OXGCCjMkpytJMbuOgjO-AWjI">
 		<link href="/css/css.php" rel="stylesheet" type="text/css">
 		<!--Google Fonts-->
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis%7COpen+Sans">
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Dosis%7COpen+Sans">
 <?php
 /*<link href="/css/main.css" rel="stylesheet" type="text/css"><link href="/css/lightbox.css" rel="stylesheet">*/
 
@@ -35,7 +35,7 @@ if($page == 'armband' && @!$defaultPicid && isset($startPicid) && isset($braceNa
 	$stmt = $db->prepare('SELECT id FROM pictures WHERE picid = :picid AND brid=:brid');
 	$stmt->execute(array('picid' => $startPicid, 'brid' => $rowbrid['brid']));
 	$rowid = $stmt->fetch(PDO::FETCH_ASSOC);
-	echo '		<link rel="image_src" href="http://placelet.de/pictures/bracelets/thumb-'.$rowid['id'].'.jpg">';
+	echo '		<link rel="image_src" href="https://placelet.de/pictures/bracelets/thumb-'.$rowid['id'].'.jpg">';
 }
 ?>
 		<meta name="msapplication-TileColor" content="#FFF">
@@ -135,11 +135,11 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="/faq"><?php echo $lang->misc->nav->faq->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="http://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
+				<li><a href="https://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
 			</ul>
 		</header>
 <!--###LOGO###-->
-		<!--<div id="round_logo">--><a href="http://placelet.de"><img id="logo" src="/cache.php?f=/img/logo_extended.svg" alt="Placelet" width="206"></a><!--</div>-->
+		<!--<div id="round_logo">--><a href="https://placelet.de"><img id="logo" src="/cache.php?f=/img/logo_extended.svg" alt="Placelet" width="206"></a><!--</div>-->
 <!--###NAV TAG###-->
 		<nav id="mainnav">
 			<ul id="mainnavlist">
@@ -160,7 +160,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 require_once($this_path.'/pages/'.$page.'.php');
 ?>
 		</section>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <?php 
 		/*$js.= 'lang = new Array();'."\n";
 		foreach($lang->js as $obj) {
@@ -181,7 +181,7 @@ require_once($this_path.'/pages/'.$page.'.php');
 <?php
 if($page == 'login' && isset($postpic)) {
 ?>
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=<?php echo $maps_api_key; ?>&amp;sensor=true&amp;v=3.exp"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo $maps_api_key; ?>&amp;sensor=true&amp;v=3.exp"></script>
 		<script>
 		$(document).ready(function() {
 			if (navigator.geolocation) {
@@ -193,7 +193,7 @@ if($page == 'login' && isset($postpic)) {
 <?php
 }elseif($page == 'home'){
 ?>
-		<script src="http://maps.googleapis.com/maps/api/js?key=<?php echo $maps_api_key; ?>&amp;sensor=true&amp;v=3.exp"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $maps_api_key; ?>&amp;sensor=true&amp;v=3.exp"></script>
 		<?php $eecho = '';
 		
 		$data = getlnlt();
@@ -262,7 +262,7 @@ if($page == 'login' && isset($postpic)) {
 
 }elseif($page == 'armband'){
 ?>
-		<script src="http://maps.googleapis.com/maps/api/js?key=<?php echo $maps_api_key; ?>&amp;sensor=true&amp;v=3.exp"></script><?php
+		<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $maps_api_key; ?>&amp;sensor=true&amp;v=3.exp"></script><?php
 } if ($page != 'community' && $page != 'start') { ?>
 		<?php } 	/*$js.='
 	function header(){

@@ -22,12 +22,12 @@
 					<p><?php echo $lang->impressum->creators->$lng; ?></p>
 					<p><?php echo $lang->impressum->validity->$lng; ?></p>
 					<p>
-						<a href="http://validator.w3.org/check?uri=http%3A%2F%2Fplacelet.de" style="text-decoration: none;">
-							<img src="http://www.w3.org/html/logo/badge/html5-badge-h-solo.png" width="63" height="64" alt="HTML5 ist valide">
+						<a href="https://validator.w3.org/check?uri=http%3A%2F%2Fplacelet.de" style="text-decoration: none;">
+							<img src="https://www.w3.org/html/logo/badge/html5-badge-h-solo.png" width="63" height="64" alt="HTML5 ist valide">
 						</a>
 						<!--&nbsp;
-						<a href="http://jigsaw.w3.org/css-validator/validator?uri=placelet.de" style="text-decoration: none;">
-							<img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="CSS ist valide!">
+						<a href="https://jigsaw.w3.org/css-validator/validator?uri=placelet.de" style="text-decoration: none;">
+							<img style="border:0;width:88px;height:31px" src="https://jigsaw.w3.org/css-validator/images/vcss" alt="CSS ist valide!">
 						</a>-->
 					</p>
 				</div>
