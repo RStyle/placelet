@@ -135,7 +135,7 @@ else {//Wenn man jedoch nicht eingeloggt ist, kann man die Login-Box öffnen
 				<li class="headerlist_sub_divider">|</li>
 				<li><a href="/faq"><?php echo $lang->misc->nav->faq->$lng; ?></a></li>
 				<li class="headerlist_sub_divider">|</li>
-				<li><a href="https://www.juniorprojekt.de" target="_blank">JUNIOR</a></li>
+				<li><a href="https://www.junior-programme.de" target="_blank">JUNIOR</a></li>
 			</ul>
 		</header>
 <!--###LOGO###-->
