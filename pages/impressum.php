@@ -9,9 +9,6 @@
 					<?php echo $lang->impressum->deutschland->$lng; ?>
 				</p>
 				<p style="float: left; margin-left: 2em;">
-					<?php echo $lang->impressum->telefon->$lng; ?>17670174562<br>
-					<!--Telefax: 0671 - 64119<br>-->
-					<br>
 					www.placelet.de<br>
 					www.placelet.net<br>
 					<br>

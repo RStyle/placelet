@@ -902,7 +902,6 @@ body.outlook p {
                         <tr>
                           <td class="last right-text-pad">
                             <h5>Kontaktinfo:</h5>
-                            <p>Phone: +49 017670174562</p>
                             <p>Email: <a href="mailto:support@placelet.de">support@placelet.de</a></p>
                           </td>
                           <td class="expander"></td>
